@@ -1,6 +1,6 @@
 import unittest
 
-from runtime.election_loader import ElectionLoader, election_file_path
+from runtime.election_loader import ElectionLoader, election_file_path, load_jsonl
 from runtime.source_registry import FixtureBackend, OfflineBackend, OfflineRetrievalError, SourceRegistry
 from tests.fixtures.helpers import (
     DEFAULT_JURISDICTION,
@@ -89,6 +89,37 @@ class TestElectionLoader(unittest.TestCase):
             result = loader.load_election("county_mayor", 2022, DEFAULT_JURISDICTION, "township_district")
             self.assertEqual(result.status, "complete")
             self.assertEqual(len(adapter.calls), 0)
+
+
+    def test_generated_record_ids_preserve_multiple_townships(self):
+        with temp_repo() as root:
+            records = election_records_for_year("county_mayor", 2022, DEFAULT_JURISDICTION)
+            for record in records:
+                record.pop("record_id", None)
+
+            key = FixtureElectionDataSource.key(
+                "county_mayor", 2022, DEFAULT_JURISDICTION, "township_district"
+            )
+            adapter = FixtureElectionDataSource({key: records})
+            loader = ElectionLoader(
+                root,
+                source_registry=SourceRegistry(adapters=[adapter]),
+                mode="online",
+            )
+            result = loader.load_election(
+                "county_mayor", 2022, DEFAULT_JURISDICTION, "township_district"
+            )
+            self.assertEqual(result.status, "filled")
+
+            path = election_file_path(root, "county_mayor", 2022, DEFAULT_JURISDICTION)
+            persisted = load_jsonl(path)
+            self.assertEqual(len(persisted), 4)
+            self.assertEqual(len({record["record_id"] for record in persisted}), 4)
+            self.assertEqual(
+                {record["jurisdiction"] for record in persisted},
+                {"甲鄉", "乙鄉"},
+            )
+
 
 
 if __name__ == "__main__":
