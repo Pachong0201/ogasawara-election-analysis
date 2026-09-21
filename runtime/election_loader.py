@@ -210,6 +210,8 @@ class ElectionLoader:
         local = self._load_local(query)
         if local.complete:
             return local
+        if local.status == "invalid":
+            return local
 
         if not self.network_allowed():
             return LoadResult(
