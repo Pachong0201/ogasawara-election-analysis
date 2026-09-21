@@ -10,7 +10,7 @@ from typing import Any, Dict, List, Optional
 
 
 SCHEMA_VERSION = "1.1"
-NORMALIZATION_VERSION = "v1.1.0"
+NORMALIZATION_VERSION = "v1.1.1"
 
 
 def utc_now_iso() -> str:
@@ -147,11 +147,12 @@ class ElectionRecord:
         data = {k: payload.get(k) for k in known}
         extra = {k: v for k, v in payload.items() if k not in known}
         if data.get("record_id") is None:
-            data["record_id"] = "{}|{}|{}|{}".format(
+            data["record_id"] = "{}|{}|{}|{}|{}".format(
                 payload.get("election_type", "unknown"),
                 payload.get("election_year", "unknown"),
                 payload.get("parent_jurisdiction") or payload.get("jurisdiction", "unknown"),
-                payload.get("candidate_name", "unknown"),
+                payload.get("jurisdiction", "unknown"),
+                payload.get("candidate_id") or payload.get("candidate_name", "unknown"),
             )
         if data.get("vote_share") is None:
             valid = payload.get("valid_votes")
