@@ -176,22 +176,22 @@ def spatial_variance(
     if method == "coefficient_of_variation":
         value = None if mean == 0 else sd / mean
         metric_method = "coefficient_of_variation"
+        observe = thresholds.get("spatial_cv_observe", 0.25)
+        strong = thresholds.get("spatial_cv_strong_trigger", 0.40)
         if mean < float(thresholds.get("spatial_variance_low_share_threshold", 0.20)):
             warnings.append("mean vote_share is low; CV is auxiliary only; prefer SD/IQR")
     elif method == "iqr":
         value = iqr
         metric_method = "iqr"
+        observe = thresholds.get("spatial_iqr_observe", 0.10)
+        strong = thresholds.get("spatial_iqr_strong_trigger", 0.15)
     else:
         value = sd
         metric_method = "standard_deviation"
+        observe = thresholds.get("spatial_sd_observe", 0.05)
+        strong = thresholds.get("spatial_sd_strong_trigger", 0.08)
 
-    status = "not_evaluated"
-    if metric_method == "coefficient_of_variation":
-        status = _threshold_status(value, thresholds.get("spatial_variance_observe"), thresholds.get("spatial_variance_strong_trigger"))
-    else:
-        # Absolute SD/IQR use the same configured thresholds only when they are meaningful;
-        # otherwise report below/above without over-claiming.
-        status = _threshold_status(value, thresholds.get("spatial_variance_observe"), thresholds.get("spatial_variance_strong_trigger"))
+    status = _threshold_status(value, observe, strong)
     status = "below" if status == "not_evaluated" and value is not None else status
     return MetricResult(
         metric="spatial_variance",
