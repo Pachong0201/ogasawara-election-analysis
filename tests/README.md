@@ -25,3 +25,4 @@ python3 -m unittest discover -s tests -v
 - `test_matrix_builder.py`：历史矩阵、跨层级矩阵、同日分裂票矩阵。
 - `test_metrics.py`：Swing、Local Swing、Split Ticket、Candidate Residual、空间差异与超额集中。
 - `test_analysis_context.py`：统一 Analysis Context 与 `analysis_manifest.json`。
+- `test_pipeline.py`：端到端 readiness → matrix → metrics → knowledge → context 编排，以及资料不足时禁止完整分析。
