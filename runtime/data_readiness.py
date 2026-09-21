@@ -14,7 +14,7 @@ from typing import Any, Dict, Iterable, List, Optional, Set, Tuple
 import yaml
 
 from .election_loader import ElectionLoader, election_file_path
-from .freshness import evaluate_records
+from .freshness import evaluate_records, is_fresh
 from .knowledge_loader import KnowledgeLoader
 from .models import DataQuery, ElectionTask, ReadinessReport, utc_now_iso
 
@@ -136,25 +136,67 @@ class DataReadinessGate:
         return info, found
 
     def _current_candidates_requirement(self, task: ElectionTask) -> Tuple[Dict[str, Any], List[Dict[str, Any]], bool]:
-        candidates: List[Dict[str, Any]] = []
-        if task.candidates:
-            candidates = [{"name": name, "candidate_status": "provided"} for name in task.candidates]
-        else:
-            candidates = self.loader.load_current_candidates(task.jurisdiction)
-            for candidate in candidates:
-                candidate.setdefault("name", candidate.get("candidate_name", ""))
-                candidate.setdefault("candidate_status", candidate.get("status", "announced"))
-        registered = [candidate for candidate in candidates if str(candidate.get("candidate_status") or "").lower() == "registered"]
-        satisfied = bool(candidates)
+        cached = self.loader.load_current_candidates(task.jurisdiction)
+        warnings: List[str] = []
+        candidates: List[Dict[str, Any]] = [dict(item) for item in cached]
+
+        # Names supplied in the user task are only retrieval seeds. They do not
+        # satisfy the hard "current candidate list" gate without sourced,
+        # time-valid candidate records.
+        if not candidates and task.candidates:
+            candidates = [
+                {
+                    "name": name,
+                    "candidate_name": name,
+                    "candidate_status": "provided_unverified",
+                    "source_grade": "",
+                }
+                for name in task.candidates
+            ]
+            warnings.append("task-provided candidate names are unverified seeds and do not satisfy the current candidate gate")
+
+        verified: List[Dict[str, Any]] = []
+        stale_names: List[str] = []
+        rejected_names: List[str] = []
+        for candidate in candidates:
+            candidate.setdefault("name", candidate.get("candidate_name", ""))
+            candidate.setdefault("candidate_status", candidate.get("status", "announced"))
+            grade = str(candidate.get("source_grade") or "").upper()
+            independent = int(candidate.get("independent_source_count") or 0)
+            grade_ok = grade in {"A", "B"} or (grade == "C" and independent >= 2)
+            fresh = is_fresh(candidate, kind="candidate_profile")
+            status = str(candidate.get("candidate_status") or "").lower()
+            status_ok = status in {"registered", "nominated", "announced", "potential"}
+
+            if not fresh:
+                stale_names.append(candidate.get("name") or "unknown")
+            if not grade_ok or not status_ok:
+                rejected_names.append(candidate.get("name") or "unknown")
+            if grade_ok and fresh and status_ok:
+                verified.append(candidate)
+
+        registered = [
+            candidate for candidate in verified
+            if str(candidate.get("candidate_status") or "").lower() == "registered"
+        ]
+        if stale_names:
+            warnings.append("stale candidate records require revalidation: " + ", ".join(sorted(set(stale_names))))
+        if rejected_names:
+            warnings.append("candidate records failed source/status validation: " + ", ".join(sorted(set(rejected_names))))
+
+        satisfied = bool(verified)
         info = {
             "label": "current_candidates",
             "level": HARD,
             "count": len(candidates),
+            "verified_count": len(verified),
             "registered_count": len(registered),
             "candidates": candidates,
+            "verified_candidates": verified,
+            "warnings": warnings,
             "satisfied": satisfied,
         }
-        return info, candidates, satisfied
+        return info, verified, satisfied
 
     def _candidate_profiles_requirement(self, current_candidates: List[Dict[str, Any]]) -> Tuple[Dict[str, Any], bool]:
         has_profile = any(candidate.get("birth_place") or candidate.get("past_constituencies") or candidate.get("offices") for candidate in current_candidates)
@@ -345,8 +387,9 @@ class DataReadinessGate:
         candidate_info, current_candidates, candidates_found = self._current_candidates_requirement(task)
         required["current_candidate_list"] = candidate_info
         available["current_candidates"] = candidate_info
+        warnings.extend(candidate_info.get("warnings", []))
         if not candidates_found:
-            missing.append("current_candidate_list: no current candidates could be confirmed")
+            missing.append("current_candidate_list: no fresh, adequately sourced current candidates could be confirmed")
 
         # Candidate profiles.
         profile_info, profiles_found = self._candidate_profiles_requirement(current_candidates)
