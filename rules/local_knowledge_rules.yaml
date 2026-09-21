@@ -1,0 +1,124 @@
+version: 1.0.0
+name: local_knowledge_rules
+framework: Minimum Sufficient Local Knowledge
+purpose: >
+  不预先建立完整 22 县市知识库。只在票型异常出现后，检索足以解释
+  当前异常的最小充分地方知识，并明确证据界限。
+
+trigger:
+  key: local_explanation_required
+  value: true
+  origin:
+    - config/analysis_thresholds.yaml 的 anomaly_screening 命中
+    - 用户明确要求乡镇、村里或投开票所微观分析
+    - 地方政治资料指向具体基层区域
+  first_action: >
+    先写下需要解释的研究问题，例如“为何该乡候选人残差显著高于邻乡”，
+    不得先写“因为某派系支持”。
+
+search_stages:
+  - stage: 1
+    name: 候选人
+    questions:
+      - 出生地、成长地与户籍地
+      - 过去参选选区与历次得票
+      - 曾任职务与任期
+      - 服务处、竞选总部与长期经营地区
+      - 主要社会关系与专业背景
+    required_fields:
+      - time_scope
+      - last_verified_at
+      - source_grade
+  - stage: 2
+    name: 基层政治
+    questions:
+      - 当前县市议员、乡镇市长、代表会成员
+      - 与候选人的公开支持或竞争关系
+      - 地方政治人物是否公开站台、联署或发表立场
+      - 基层组织的动员范围与公开活动
+    required_fields:
+      - time_scope
+      - last_verified_at
+      - source_grade
+  - stage: 3
+    name: 地方组织
+    questions:
+      - 学术资料确认的地方派系
+      - 农渔会、水利会、地方社团
+      - 历史政治组织及其转型
+    caution: >
+      不得仅凭农渔会、社团或派系名称存在，就推断其支持某候选人。
+    required_fields:
+      - time_scope
+      - last_verified_at
+      - source_grade
+  - stage: 4
+    name: 历史研究
+    questions:
+      - 地方志
+      - 学术论文
+      - 县市政治研究
+      - 乡镇个案研究
+    required_fields:
+      - time_scope
+      - source_grade
+    caution: >
+      历史资料只能说明其在 time_scope 内的影响；不得自动外推当前。
+  - stage: 5
+    name: 当前验证
+    questions:
+      - 近 5—10 年该人物、派系或组织是否仍有公开政治活动
+      - 是否有近期选举、公职、组织职位或公开支持纪录
+      - 是否存在相反证据或组织分裂
+    required_fields:
+      - last_verified_at
+      - source_grade
+      - current_status
+
+evidence_requirements:
+  acceptable_for_structural_explanation:
+    option_a: 一个 A 级或 B 级高质量来源
+    option_b: 两个独立来源，且至少一个为 C 级以上
+  not_acceptable:
+    - 单一 D 级或 E 级来源
+    - 互相转载的多个来源
+    - 仅有历史资料、没有当前验证
+    - 仅因地理位置相邻就推断政治关系
+
+stop_conditions:
+  all_must_be_met: true
+  conditions:
+    - id: STOP-01
+      condition: 已找到至少一种合理解释当前异常的机制。
+    - id: STOP-02
+      condition: 该机制有至少两个独立证据来源，或一个 A 级/B 级高质量来源。
+    - id: STOP-03
+      condition: 没有发现明显相反证据。
+    - id: STOP-04
+      condition: 已能说明解释边界。
+  if_not_met:
+    output: >
+      当前只能确认票型异常，现有公开资料不足以确定原因。
+    allowed_labels:
+      - unknown
+      - weak_evidence
+    forbidden_action: 自行补齐因果链
+
+time_validity:
+  historical_knowledge:
+    time_scope_required: true
+    current_extrapolation_allowed: false
+  current_knowledge:
+    preferred_recency_years: 5
+    maximum_recency_years: 10
+    last_verified_at_required: true
+  stale_example: >
+    1990 年代存在某派系，只能说明该派系在该历史时期具有影响；
+    不能自动写成该派系目前仍主导当地政治。
+
+output_when_triggered:
+  - 记录 local_explanation_required=true。
+  - 说明触发异常的指标与地区。
+  - 列出检索到的候选人、基层政治、组织与历史资料。
+  - 明确哪些解释达到 evidence level，哪些仍为 unknown。
+  - 说明解释边界和仍缺少的资料。

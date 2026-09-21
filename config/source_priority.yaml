@@ -1,0 +1,105 @@
+version: 1.0.0
+name: source_priority
+description: >
+  统一证据来源分级。用于记录资料来源、限制其用途，并防止 D/E 级资料
+  单独形成结构性判断。
+
+grades:
+  A:
+    label: 官方原始资料
+    examples:
+      - 中央选举委员会与地方选举委员会选举资料库
+      - 政府正式统计
+      - 法院公开资料
+      - 官方行政区划与人口统计
+    allowed_uses:
+      - election_fact_baseline
+      - historical_baseline
+      - current_official_event
+      - structural_judgement
+      - local_knowledge_confirmation
+    constraints:
+      - 仍需记录资料版本、抓取日期与适用范围。
+      - 行政区划变更时必须记录边界对应关系。
+  B:
+    label: 学术研究、正式研究报告、方法透明的研究机构资料
+    examples:
+      - 同行评审学术论文
+      - 地方志与正式研究报告
+      - 公开抽样方法的调查机构报告
+    allowed_uses:
+      - historical_context
+      - local_political_structure
+      - poll_calibration
+      - structural_judgement_with_corroboration
+    constraints:
+      - 必须记录作者、年份、研究范围与 time_scope。
+      - 不得将研究中的历史关系直接外推到当前。
+  C:
+    label: 可靠媒体的独立采访、调查或长期地方报道
+    examples:
+      - 具名采访
+      - 长期地方政治报道
+      - 公开的地方议题调查
+    allowed_uses:
+      - local_knowledge_lead
+      - current_event_record
+      - corroboration
+    constraints:
+      - 单一 C 级来源可形成待验证假设，不足以单独形成结构性判断。
+      - 需寻找第二个独立来源或 A/B 级资料交叉验证。
+  D:
+    label: 政党、候选人、竞选团队、相关利益方自行发布
+    examples:
+      - 竞选总部新闻稿
+      - 阵营内部民调
+      - 政党提名公告
+      - 候选人社交媒体正式声明
+    allowed_uses:
+      - campaign_claim
+      - event_lead
+      - verification_lead
+    constraints:
+      - 不得单独形成结构性判断。
+      - 必须标记为 campaign_claim 或阵营主张。
+      - 需寻找独立来源验证。
+  E:
+    label: 社交媒体、匿名消息、未经验证转述
+    examples:
+      - 匿名社群贴文
+      - 未具名转述
+      - 来源不明的截图或传言
+    allowed_uses:
+      - unverified_lead_only
+    constraints:
+      - 不得单独形成结构性判断。
+      - 不得作为事实写入核心判断。
+      - 仅可作为进一步查证方向，输出时必须标注未验证。
+
+hard_rules:
+  - id: SOURCE-01
+    statement: A 级资料优先用于选举事实、行政区划与官方事件。
+  - id: SOURCE-02
+    statement: 结构性判断原则上需要至少一个 A/B 级来源，或两个独立且互不转载的证据来源。
+  - id: SOURCE-03
+    statement: D 级和 E 级资料不得单独形成结构性判断。
+  - id: SOURCE-04
+    statement: 所有历史政治关系必须记录 time_scope。
+  - id: SOURCE-05
+    statement: 所有当前政治关系必须记录 last_verified_at，优先使用近 5—10 年资料。
+  - id: SOURCE-06
+    statement: 同一阵营或同一媒体群的多个转载不视为独立来源。
+  - id: SOURCE-07
+    statement: 来源不足时应输出 unknown，而非以叙事补足因果链。
+
+structural_claim_minimum:
+  option_a:
+    requirement: 一个 A 级或 B 级高质量来源
+    note: 用于事实与结构性解释彼此一致时。
+  option_b:
+    requirement: 两个独立来源
+    note: 两个来源不得互相转载，且至少一个需为 C 级以上。
+  not_sufficient:
+    - 单一 D 级来源
+    - 单一 E 级来源
+    - 多个转载同一 D/E 级来源

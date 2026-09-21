@@ -1,0 +1,91 @@
+version: 1.0.0
+schema_name: local_relationship
+description: >
+  地方政治关系记录。任何关系都必须有 time_scope 与 last_verified_at；
+  历史关系不得自动外推为当前关系。
+
+type: object
+required:
+  - relationship_id
+  - subject
+  - object
+  - relationship_type
+  - time_scope
+  - current_status
+  - source
+  - source_grade
+properties:
+  relationship_id:
+    type: string
+  subject:
+    type: string
+    description: 人物、派系、组织或公职。
+  object:
+    type: string
+  relationship_type:
+    type: string
+    enum:
+      - family
+      - faction
+      - party
+      - electoral_support
+      - organization_membership
+      - patron_client
+      - business
+      - public_endorsement
+      - competition
+      - other
+  region:
+    type: string
+  time_scope:
+    type: string
+    description: 关系存在的时间范围。
+  start_date:
+    type: string
+    format: date
+  end_date:
+    type: string
+    format: date
+  last_verified_at:
+    type: string
+    format: date
+  current_status:
+    type: string
+    enum:
+      - active_verified
+      - historical_only
+      - disputed
+      - unknown
+  verification_evidence:
+    type: array
+    items:
+      type: object
+      properties:
+        source: {type: string}
+        source_grade: {type: string, enum: [A, B, C, D, E]}
+        reference: {type: string}
+        date: {type: string, format: date}
+  independent_source_count:
+    type: integer
+    minimum: 0
+  source:
+    type: string
+  source_grade:
+    type: string
+    enum: [A, B, C, D, E]
+  structural_use:
+    type: string
+    enum:
+      - can_support_current_interpretation
+      - historical_background_only
+      - lead_only
+      - not_allowed
+  notes:
+    type: string
+
+constraints:
+  - current_status=historical_only 时，不得写成当前仍有相同作用。
+  - current_status=active_verified 时，必须有近 5—10 年资料与 last_verified_at。
+  - 不得仅凭农渔会、社团、派系名称存在就推断支持特定候选人。
+  - 不得将地方关系直接外推为个人政治选择。
+  - D/E 级资料只能作为线索，不得单独确认 active_verified。

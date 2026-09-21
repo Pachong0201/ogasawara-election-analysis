@@ -1,0 +1,101 @@
+version: 1.0.0
+schema_name: political_claim
+description: >
+  用于记录政治人物、政党、阵营或地方组织的公开主张、支持、表态与争议。
+  必须区分事实、解释、阵营主张和未验证信息。
+
+type: object
+required:
+  - claim_id
+  - speaker
+  - date
+  - claim_text
+  - claim_type
+  - source
+  - source_grade
+  - verification_status
+properties:
+  claim_id:
+    type: string
+  speaker:
+    type: string
+  speaker_role:
+    type: string
+  organization:
+    type: string
+  date:
+    type: string
+    format: date
+  location:
+    type: string
+  claim_type:
+    type: string
+    enum:
+      - nomination
+      - primary
+      - party_cooperation
+      - alliance_break
+      - endorsement
+      - registration
+      - campaign_office
+      - policy
+      - local_event
+      - judicial_event
+      - controversy
+      - poll
+      - other
+  claim_text:
+    type: string
+  target:
+    type: string
+    description: 主张对象，例如某候选人、政党或行政区。
+  source:
+    type: string
+  source_grade:
+    type: string
+    enum: [A, B, C, D, E]
+  source_reference:
+    type: string
+  independent_sources:
+    type: array
+    description: 独立佐证来源；互相转载不算独立。
+    items:
+      type: object
+      properties:
+        source: {type: string}
+        source_grade: {type: string, enum: [A, B, C, D, E]}
+        reference: {type: string}
+  verification_status:
+    type: string
+    enum:
+      - verified_fact
+      - official_record
+      - campaign_claim
+      - reported_by_media
+      - unverified
+      - disputed
+      - unknown
+  evidence:
+    type: array
+    items: {type: string}
+  time_scope:
+    type: string
+  last_verified_at:
+    type: string
+    format: date
+  structural_use:
+    type: string
+    enum:
+      - allowed_with_corroboration
+      - campaign_claim_only
+      - lead_only
+      - not_allowed
+  notes:
+    type: string
+
+constraints:
+  - D 级资料只能标记为 campaign_claim 或 lead_only。
+  - E 级资料只能标记为 unverified 或 lead_only。
+  - 单一竞选阵营说法不得单独形成结构性判断。
+  - 每项主张必须带日期和来源。
+  - 历史主张必须带 time_scope，不得自动外推当前。

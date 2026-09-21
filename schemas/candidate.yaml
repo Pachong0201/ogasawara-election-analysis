@@ -1,0 +1,135 @@
+version: 1.0.0
+schema_name: candidate
+description: >
+  候选人事实与地方基础档案。历史资料必须带 time_scope；
+  当前资料必须带 last_verified_at，以近 5—10 年资料优先。
+
+type: object
+required:
+  - candidate_id
+  - name
+  - sources
+  - evidence_grade
+properties:
+  candidate_id:
+    type: string
+  name:
+    type: string
+  aliases:
+    type: array
+    items: {type: string}
+  party:
+    type: string
+  party_history:
+    type: array
+    description: 政党变换或联盟关系，每项需有时间范围。
+    items:
+      type: object
+      properties:
+        party: {type: string}
+        start_date: {type: string, format: date}
+        end_date: {type: string, format: date}
+        source_grade: {type: string, enum: [A, B, C, D, E]}
+  birth_place:
+    type: string
+  residence:
+    type: string
+  education:
+    type: array
+    items: {type: string}
+  past_constituencies:
+    type: array
+    description: 历次参选选区及其时间范围。
+    items:
+      type: object
+      properties:
+        election_type: {type: string}
+        region: {type: string}
+        year: {type: integer}
+        result_share: {type: number}
+        elected: {type: boolean}
+        source_grade: {type: string, enum: [A, B, C, D, E]}
+        time_scope: {type: string}
+  offices:
+    type: array
+    description: 曾任与现任公职或政党职务。
+    items:
+      type: object
+      properties:
+        title: {type: string}
+        organization: {type: string}
+        start_date: {type: string, format: date}
+        end_date: {type: string, format: date}
+        current: {type: boolean}
+        time_scope: {type: string}
+        last_verified_at: {type: string, format: date}
+  service_offices:
+    type: array
+    description: 服务处、竞选总部、地方联络点。
+    items:
+      type: object
+      properties:
+        location: {type: string}
+        address: {type: string}
+        active_period: {type: string}
+        current: {type: boolean}
+        last_verified_at: {type: string, format: date}
+  long_term_operation_areas:
+    type: array
+    description: 长期经营地区，必须根据历次选举或公开活动资料，而非印象。
+    items:
+      type: object
+      properties:
+        region: {type: string}
+        reason: {type: string}
+        time_scope: {type: string}
+        source_grade: {type: string, enum: [A, B, C, D, E]}
+  known_organizations:
+    type: array
+    description: 与候选人有公开关联的组织；不得仅凭组织存在推断支持。
+    items:
+      type: object
+      properties:
+        organization: {type: string}
+        relationship_type: {type: string}
+        time_scope: {type: string}
+        last_verified_at: {type: string, format: date}
+        source_grade: {type: string, enum: [A, B, C, D, E]}
+  current_roles:
+    type: array
+    items: {type: string}
+  public_endorsements:
+    type: array
+    description: 候选人获得的公开支持；需记录日期、对象与来源。
+    items:
+      type: object
+      properties:
+        supporter: {type: string}
+        date: {type: string, format: date}
+        occasion: {type: string}
+        source_grade: {type: string, enum: [A, B, C, D, E]}
+  sources:
+    type: array
+    items:
+      type: object
+      properties:
+        source: {type: string}
+        source_grade: {type: string, enum: [A, B, C, D, E]}
+        reference: {type: string}
+        accessed_at: {type: string, format: date}
+  evidence_grade:
+    type: string
+    enum: [A, B, C, D, E]
+  time_scope:
+    type: string
+  last_verified_at:
+    type: string
+    format: date
+  notes:
+    type: string
+
+constraints:
+  - 历史资料不得在没有当前验证的情况下写成“目前仍经营”。
+  - 农渔会、社团或派系名称存在，不等于该组织支持候选人。
+  - 跨党接受度只能由公开支持、投票纪录或调查交叉表验证。
+  - D/E 级资料不得单独支撑候选人地方基础判断。

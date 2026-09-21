@@ -1,0 +1,164 @@
+version: 1.0.0
+name: knowledge_layers
+purpose: >
+  明确 Skill 调用的五层知识，禁止把事实、历史、当前政治、事件与民调
+  混为同一层。历史知识与当前知识必须物理或逻辑分离。
+
+layers:
+  - id: L1
+    name: 选举事实库
+    content:
+      - 历届选举得票
+      - 投票率
+      - 候选人
+      - 政党
+      - 行政区
+      - 投开票所
+    preferred_sources: [A]
+    nature: 事实基准
+    required_fields:
+      - election_type
+      - election_year
+      - jurisdiction
+      - level
+      - candidate_name
+      - party
+      - votes
+      - valid_votes
+      - vote_share
+      - turnout
+      - source
+      - source_grade
+      - boundary_version
+    forbidden:
+      - 用 D/E 级资料替换官方选举事实
+      - 用单一民调替代历届得票
+    schema: schemas/election_record.yaml
+
+  - id: L2
+    name: 历史政治知识库
+    content:
+      - 地方政治形成
+      - 历史地方派系
+      - 政党轮替
+      - 重要政治人物
+      - 重要地方政治事件
+      - 行政区划变化
+      - 长期社会经济变化
+    required_fields:
+      - time_scope
+      - source
+      - source_grade
+    forbidden:
+      - 把历史关系直接当成当前关系
+      - 把历史派系自动写成目前仍主导当地政治
+    example: >
+      1990 年代存在某派系，只能说明该派系在该历史时期具有影响，
+      不能自动写成该派系目前仍主导当地政治。
+    schema: schemas/local_relationship.yaml
+
+  - id: L3
+    name: 当前地方政治知识库
+    content:
+      - 当前地方政治人物
+      - 县市议员
+      - 乡镇市长
+      - 立委
+      - 地方政治组织
+      - 当前可验证的派系关系
+      - 候选人地方服务网络
+      - 公开支持关系
+      - 竞选组织
+      - 当前地方议题
+    recency:
+      preferred_years: 5
+      maximum_years: 10
+    required_fields:
+      - last_verified_at
+      - time_scope
+      - source
+      - source_grade
+    forbidden:
+      - 仅凭历史资料写入当前关系
+      - 仅凭农渔会或社团名称推断支持某候选人
+    schema: schemas/local_relationship.yaml
+
+  - id: L4
+    name: 当前选举事件库
+    content:
+      - 提名
+      - 初选
+      - 蓝白或其他政党合作
+      - 联盟破裂
+      - 地方人物公开支持
+      - 候选人登记
+      - 竞选总部成立
+      - 政策发表
+      - 地方重大事件
+      - 司法事件
+      - 争议
+      - 民调
+    required_fields:
+      - date
+      - claim_type
+      - speaker
+      - source
+      - source_grade
+      - verification_status
+    forbidden:
+      - 将单一竞选阵营说法形成结构性判断
+      - 将未经核实的争议写成事实
+    note: 民调同时应进入 L5，不得以 L4 的事件叙事替代 L5 方法检查。
+    schema: schemas/political_claim.yaml
+
+  - id: L5
+    name: 民调数据库
+    content:
+      - 调查机构
+      - 委托方
+      - 调查日期
+      - 发布日期
+      - 样本数
+      - 电话／手机／网络
+      - 抽样方式
+      - 加权
+      - 抽样误差
+      - 未决定比例
+      - 候选人支持
+      - 地区交叉
+      - 年龄交叉
+      - 政党支持交叉
+      - 投票意愿交叉
+    required_fields:
+      - pollster
+      - commissioner
+      - method
+      - sample_size
+      - field_start
+      - field_end
+      - publish_date
+      - moe
+      - undecided
+      - source
+      - source_grade
+    position: after_historical_structure_and_local_knowledge
+    forbidden:
+      - 不同机构数据直接连成趋势
+      - 电话与网络调查直接计算升降
+      - 未决定票平均分配给候选人
+      - 单一民调形成确定结论
+    schema: schemas/poll.yaml
+
+separation_rules:
+  - id: LAYER-01
+    statement: 五层知识必须分别标记 layer_id，不得混用。
+  - id: LAYER-02
+    statement: 历史政治知识与当前地方政治知识必须物理或逻辑分离。
+  - id: LAYER-03
+    statement: 历史关系不得自动外推到当前；当前关系必须重新验证。
+  - id: LAYER-04
+    statement: 民调数据库位于结构分析与地方知识之后使用。
+  - id: LAYER-05
+    statement: 事件库中的民调记录必须同时满足 L5 的方法要求。
+  - id: LAYER-06
+    statement: D/E 级资料不得单独形成任何层级的结构性判断。

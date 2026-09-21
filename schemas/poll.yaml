@@ -1,0 +1,128 @@
+version: 1.0.0
+schema_name: poll
+description: >
+  民调数据库记录。民调只在历史结构与地方知识之后用于校准。
+  不同机构、不同调查方式的资料不得直接连成趋势线。
+
+type: object
+required:
+  - poll_id
+  - pollster
+  - commissioner
+  - method
+  - sample_size
+  - field_start
+  - field_end
+  - publish_date
+  - moe
+  - undecided
+  - source
+  - source_grade
+properties:
+  poll_id:
+    type: string
+  pollster:
+    type: string
+  commissioner:
+    type: string
+    description: 委托方；自办民调填 self。
+  method:
+    type: string
+    enum:
+      - telephone_landline
+      - telephone_mobile
+      - telephone_mixed
+      - online_closed
+      - face_to_face
+      - mixed
+      - unknown
+  sample_size:
+    type: integer
+    minimum: 1
+  sample_frame:
+    type: string
+  sampling:
+    type: string
+    description: 抽样方法，例如分层随机、电话后四码。
+  weighting:
+    type: string
+    description: 加权方式；无加权时明确写 none。
+  field_start:
+    type: string
+    format: date
+  field_end:
+    type: string
+    format: date
+  publish_date:
+    type: string
+    format: date
+  moe:
+    type: number
+    description: 抽样误差，以百分点表示；例如 2.9。
+  undecided:
+    type: number
+    minimum: 0
+    maximum: 1
+    description: 未决定比例，以小数表示；例如 0.18。
+  question_wording:
+    type: string
+  candidate_support:
+    type: array
+    items:
+      type: object
+      properties:
+        candidate: {type: string}
+        support: {type: number, minimum: 0, maximum: 1}
+        party: {type: string}
+  region_cross_tabs:
+    type: array
+    description: 地区交叉表；小样本时必须标注样本数。
+    items:
+      type: object
+      properties:
+        region: {type: string}
+        sample_size: {type: integer}
+        values: {type: object}
+  age_cross_tabs:
+    type: array
+    items:
+      type: object
+      properties:
+        age_band: {type: string}
+        sample_size: {type: integer}
+        values: {type: object}
+  party_support_cross_tabs:
+    type: array
+    items:
+      type: object
+      properties:
+        party: {type: string}
+        sample_size: {type: integer}
+        values: {type: object}
+  vote_intention_cross_tabs:
+    type: array
+    items:
+      type: object
+      properties:
+        segment: {type: string}
+        sample_size: {type: integer}
+        values: {type: object}
+  campaign_claim:
+    type: boolean
+    description: 阵营内部民调且无公开方法时必须为 true。
+  source:
+    type: string
+  source_grade:
+    type: string
+    enum: [A, B, C, D, E]
+  notes:
+    type: string
+
+constraints:
+  - POLL-01: 不同 pollster 的数据不得直接连成趋势线。
+  - POLL-02: 电话调查与封闭式网络调查不得直接计算上涨或下降。
+  - POLL-03: campaign_claim=true 时只能记录为阵营主张。
+  - POLL-04: 候选人差距在 moe 范围内时，不得写明确领先。
+  - POLL-05: undecided 大于 0.15 时必须单独指出。
+  - POLL-06: 交叉样本小于 100 或未公开样本数时，不得过度解释。
+  - POLL-07: 民调用于检验当前状态是否偏离历史结构，不替代历史结构。

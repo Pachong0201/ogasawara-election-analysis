@@ -1,0 +1,76 @@
+version: 1.0.0
+name: poll_rules
+position: after_historical_structure_and_local_knowledge
+purpose: >
+  民调用于检验当前状态是否偏离历史结构，而不是替代历史结构，
+  也不是单独预测胜负。
+
+required_metadata:
+  - pollster
+  - commissioner
+  - method
+  - sample
+  - sample_size
+  - field_date
+  - publish_date
+  - moe
+  - undecided
+  - weighting
+  - question_wording
+  - cross_tabs_available
+
+rules:
+  - id: POLL-01
+    statement: 不同调查机构的数据不得直接连成趋势线。
+    enforcement: >
+      若需比较，必须说明机构、方法、题目、加权与样本差异，
+      并将差异列为可能解释，而不是画出连续趋势线。
+  - id: POLL-02
+    statement: 电话调查与封闭式网络调查不得直接计算“上涨／下降”。
+    enforcement: >
+      不同调查模式只能并列呈现，并标注不可直接比较。
+  - id: POLL-03
+    statement: 阵营内部民调没有公开方法时，只能记录为 campaign_claim。
+    enforcement: >
+      不得写入事实库，不得作为结构性判断证据。
+  - id: POLL-04
+    statement: 候选人差距在抽样误差范围内，应写：
+    output_expression: 数据没有显示可以明确区分的差距。
+    enforcement: >
+      不得写成领先、落后或趋势变化。
+  - id: POLL-05
+    statement: 未决定比例超过 15% 时，必须单独指出。
+    enforcement: >
+      同时说明未决定比例的统计基础与可能影响，不得把它平均分配给候选人。
+  - id: POLL-06
+    statement: 地区或年龄交叉样本较小时，不得过度解释。
+    enforcement: >
+      样本数小于 100 或未公开样本数时，只可作为待验证线索。
+  - id: POLL-07
+    statement: 民调作用是检验当前状态是否偏离历史结构。
+    enforcement: >
+      不得以民调替代历史基准；民调与结构冲突时，先检查调查方法和结构资料。
+
+module_checks:
+  before_use:
+    - 检查 pollster、commissioner、method、sample、field_date、moe、undecided 是否齐全。
+    - 检查是否为阵营内部民调且未公开方法；若是，标记 campaign_claim。
+    - 检查题目措辞是否与历史民调一致。
+    - 检查调查期间是否有重大事件影响。
+    - 检查未决定比例是否超过 15%。
+  on_conflict:
+    - 先检查调查方法、样本、加权与题目差异。
+    - 检查历史结构是否因候选人结构变化而不再适用。
+    - 不得直接以最新民调推翻长期结构，也不得直接以历史结构否定民调。
+  output:
+    - 明确民调只能验证或偏离当前结构。
+    - 列出方法与交叉表限制。
+    - 不与不同机构数据连成趋势线。
+    - 输出不确定性。
+
+banned_expressions:
+  - 不同机构民调直接连线
+  - 从网络民调直接推导电话民调趋势
+  - 未决定票按比例平均分配给候选人
+  - 单一民调决定胜负
+  - 以民调直接换算县市长票或立委票

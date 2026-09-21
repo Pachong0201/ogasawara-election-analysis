@@ -1,0 +1,112 @@
+version: 1.0.0
+name: writing_rules
+purpose: >
+  统一县市分析的写作结构、语气和事实／解释分界。判断前置，小切口进入，
+  事实嵌入判断，县市总体判断下钻到具体地区。
+
+default_output_sections:
+  - key: core_judgement
+    title: 核心判断
+    length: 150-250字
+    must_answer: 当前选举结构为什么形成。
+    first_sentence_rule: 不得以“某候选人支持度XX%”作为第一句。
+  - key: historical_geography
+    title: 一、历史政治版图如何形成
+    rule: 只写与当前选举有关的历史，标注 time_scope。
+  - key: change_since_last
+    title: 二、与上一轮相比发生了什么变化
+    must_analyze:
+      - 政党票
+      - 地方首长票
+      - 总统票
+      - 立委票
+      - 投票率
+  - key: where_change_happened
+    title: 三、变化主要发生在哪里
+    must_identify: 3—8个关键乡镇市区
+    rule: 说明选择依据，使用明确地名与数据。
+  - key: candidate_local_base
+    title: 四、候选人的地方政治基础
+    must_analyze:
+      - 长期经营
+      - 历次参选
+      - 地方组织
+      - 个人残差
+  - key: third_force
+    title: 五、第三势力和中间票如何重新组合
+    rule: 不得机械加票，不得直接写第三势力票将转给某方。
+  - key: poll_calibration
+    title: 六、当前民调是否验证这种结构
+    must_compare:
+      - 调查方法
+      - 交叉表
+      - 未决定比例
+      - 样本限制
+  - key: structural_factors
+    title: 七、为什么形成当前竞争结构
+    must_reduce_to: 2—4个决定性结构因素
+  - key: watchlist
+    title: 八、后续需要观察什么
+    allowed_items:
+      - 某地区新民调
+      - 第三势力支持者交叉表
+      - 地方人物公开表态
+      - 候选人在关键乡镇活动和组织变化
+      - 新的乡镇或村里级数据
+    forbidden_items:
+      - 某候选人必须拿到多少票才能获胜
+      - 胜负概率
+      - 候选人排名
+
+style:
+  judgment_first: true
+  small_entry_point: true
+  facts_embedded_in_judgement: true
+  drill_down_from_county_to_locality: true
+  use_specific_places_people_data: true
+  distinguish:
+    - fact
+    - interpretation
+    - campaign_claim
+    - unverified_information
+  avoid:
+    - 新闻流水账
+    - 大背景铺陈
+    - 机械罗列民调
+    - “一方面……另一方面……”大量套句
+    - “不是……而是……”高频使用
+    - 将所有解释归结为蓝绿基本盘
+
+fact_expression:
+  historical_baseline: >
+    过去数届同类选举中，该阵营在此地通常维持约某一区间。
+  candidate_residual: >
+    该候选人在此地的得票相对所选政党或票种基准出现正/负残差。
+  unknown: >
+    现有数据可以确认该现象，但尚不能确定原因。
+  alternative_explanations: >
+    当前有两种可能解释，现有证据不足以区分。
+  historical_stale: >
+    历史资料显示过去存在该政治网络，但未找到足够资料确认其在当前选举中仍具有相同作用。
+
+banned_expressions:
+  - XX乡基本盘就是55%
+  - 某候选人有22%个人票
+  - 蓝白合作就有60%
+  - 某候选人一定当选
+  - 某候选人胜率为XX%
+  - 候选人综合评分
+  - 候选人排名
+  - 买票
+  - 做票
+  - 某族群都支持某候选人
+  - 某年龄层都支持某候选人
+
+quality_checks:
+  - 核心判断是否直接回答结构问题，而不是从民调数字开始。
+  - 是否至少使用三届同类型选举建立历史基准。
+  - 是否下钻到乡镇市区，必要时进一步下钻。
+  - 是否分别区分事实、解释、阵营主张和未验证信息。
+  - 是否说明哪些解释证据不足或 unknown。
+  - 是否避免胜负预测、候选人评分或推荐。
+  - 是否记录 time_scope、baseline_method、source_grade。

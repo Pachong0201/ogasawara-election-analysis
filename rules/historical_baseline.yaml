@@ -1,0 +1,89 @@
+version: 1.0.0
+name: historical_baseline
+purpose: >
+  先建立历史正常状态，再寻找异常。历史基准不是永久基本盘，
+  而是用于判断某次选举结构是否明显偏离长期轨迹。
+
+required_inputs:
+  - election_type
+  - jurisdiction
+  - level
+  - election_years
+  - candidate_and_party
+  - valid_vote_share
+  - turnout
+  - source
+  - source_grade
+  - boundary_version
+
+minimum_periods:
+  rule_id: HB-01
+  same_election_type: 3
+  preferred: 4
+  note: >
+    若最近三届内发生行政区划变更、政党重组或主要候选人结构剧变，
+    必须先建立可比区间，不能直接跨届相减。
+
+steps:
+  - id: HB-02
+    action: align_geography
+    detail: >
+      建立同一行政区层级矩阵。县市长分析最低乡镇市区；总统与立委
+      分析对齐到相同乡镇市区，必要时再下钻村里或投开票所。
+  - id: HB-03
+    action: align_election_type
+    detail: >
+      同类型选举与同类型选举比较；不得用总统票替代县市长历史基准。
+  - id: HB-04
+    action: record_turnout
+    detail: >
+      每个地区同时记录投票率，避免把投票率变化误判为政党支持变化。
+  - id: HB-05
+    action: record_candidate_structure
+    detail: >
+      记录每届候选人数量、主要候选人、政党提名方式与是否发生联盟变化。
+  - id: HB-06
+    action: handle_boundary_changes
+    detail: >
+      行政区划变更时记录变更日期、新旧区域对应关系与资料来源；
+      无法对齐时不得直接跨届计算。
+  - id: HB-07
+    action: compute_baseline
+    detail: >
+      对每个行政区记录得票率区间、中位数、平均或典型走势。
+      输出时使用“过去数届同类选举中通常维持约某一区间”。
+  - id: HB-08
+    action: mark_baseline_method
+    detail: >
+      每次使用基准时记录 baseline_method、baseline_periods、
+      boundary_version 与 source_grade。
+
+output_fields:
+  - region_id
+  - region_name
+  - election_type
+  - election_years
+  - party_or_candidate
+  - vote_share_series
+  - turnout_series
+  - baseline_low
+  - baseline_high
+  - baseline_midpoint_or_median
+  - baseline_method
+  - boundary_version
+  - source_grade
+  - caveats
+
+hard_rules:
+  - id: HB-09
+    statement: 输出不得写“XX乡基本盘就是55%”。
+    preferred_expression: >
+      过去数届同类选举中，该阵营在此地通常维持约某一区间。
+  - id: HB-10
+    statement: 不得用一次县市长高票直接定义为政党基本盘。
+  - id: HB-11
+    statement: 不得把总统票直接当作县市长地方选举基本盘。
+  - id: HB-12
+    statement: 不得以历史基准直接推断当前选举结果。
+  - id: HB-13
+    statement: 资料不足三届或无法对齐时，标记 low_confidence 或 unknown。

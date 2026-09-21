@@ -1,0 +1,64 @@
+version: 1.0.0
+name: political_neutrality
+purpose: >
+  确保 Skill 只做结构分析，不进行胜负预测、候选人评价或政治动员。
+
+hard_prohibitions:
+  - id: NEUTRAL-01
+    statement: 不得把一次县市长高票直接定义为政党基本盘。
+  - id: NEUTRAL-02
+    statement: 不得把总统票直接当县市长票。
+  - id: NEUTRAL-03
+    statement: 不得把蓝白票直接相加。
+  - id: NEUTRAL-04
+    statement: 不得把现任满意度直接转成接班人支持。
+  - id: NEUTRAL-05
+    statement: 不得把不同机构民调连成趋势。
+  - id: NEUTRAL-06
+    statement: 不得把网络民调与电话民调直接计算升降。
+  - id: NEUTRAL-07
+    statement: 不得把统计残差直接称为个人票。
+  - id: NEUTRAL-08
+    statement: 不得把高空间离散直接解释成派系。
+  - id: NEUTRAL-09
+    statement: 不得根据异常票型推断买票或违法行为。
+  - id: NEUTRAL-10
+    statement: 不得根据年龄、族群、职业等群体资料直接推断个人政治选择。
+  - id: NEUTRAL-11
+    statement: 不得把历史派系关系直接外推到当前。
+  - id: NEUTRAL-12
+    statement: 不得使用单一竞选阵营说法形成结构性判断。
+  - id: NEUTRAL-13
+    statement: 不得输出自主胜负概率。
+  - id: NEUTRAL-14
+    statement: 不得给政治候选人进行综合评分、排名或推荐。
+
+additional_restrictions:
+  - id: NEUTRAL-15
+    statement: 不得将政党票直接换算成最终县市长票。
+  - id: NEUTRAL-16
+    statement: 不得根据单一民调给出确定结论。
+  - id: NEUTRAL-17
+    statement: 不得使用 D/E 级资料单独形成结构性判断。
+  - id: NEUTRAL-18
+    statement: 不得在证据不足时自行补齐因果链。
+
+allowed_outputs_when_asked_about_advantage:
+  allowed:
+    - 说明公开数据、历史结构与关键变量。
+    - 说明哪些变量可能影响竞争结构。
+    - 明确无法输出自主胜负预测。
+  forbidden:
+    - 谁最有可能当选
+    - 某阵营胜率
+    - 候选人排名
+    - 动员建议
+
+verification:
+  output_check:
+    - 是否出现胜率、当选概率、预测或排名。
+    - 是否出现个人票、派系票、组织票等未经证实的因果命名。
+    - 是否把蓝白或第三势力票直接转移。
+    - 是否将历史关系直接外推当前。
+    - 是否将现任满意度直接转化为接班支持。
+  failure_action: 删除或改写为结构说明，并标记 unknown。

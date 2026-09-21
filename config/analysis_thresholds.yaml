@@ -1,0 +1,100 @@
+version: 1.0.0
+name: analysis_thresholds
+description: >
+  初步筛选阈值，用于决定是否进一步下钻或触发地方知识检索。
+  这些阈值不是统计显著性检验，也不是因果证明；人口少、边界变更、
+  候选人结构不同或资料来源改变时必须先处理可比性。
+
+minimum_data:
+  same_election_type_periods: 3
+  preferred_same_election_type_periods: 4
+  county_mayor_example_for_2026: [2014, 2018, 2022]
+  president_example_for_2026: [2016, 2020, 2024]
+  regional_legislator_example_for_2026: [2016, 2020, 2024]
+  geographic_floor_for_county_mayor: township
+  note: >
+    地方首长分析不得只使用全县市总票。若资料允许，应同时建立总统票、
+    区域立委票与政党票的乡镇市区矩阵。
+
+anomaly_screening:
+  unit: percentage_point
+  caution: >
+    阈值命中只表示需要研究，不表示异常原因。应先检查行政区划、投票率、
+    候选人数量、无效票与资料口径是否可比。
+  swing_gap:
+    observe: 8
+    strong_trigger: 12
+    definition: >
+      某乡镇市区的 Electoral Swing 与全县市平均 Swing 之差的绝对值。
+  neighbor_divergence:
+    observe: 10
+    strong_trigger: 15
+    definition: >
+      相邻乡镇市区之间的得票率变化或候选人残差差异。
+  candidate_residual:
+    observe: 8
+    strong_trigger: 12
+    definition: >
+      候选人得票率与所选 ReferenceBaseline 之差的绝对值。
+  cross_level_gap:
+    observe: 8
+    strong_trigger: 12
+    definition: >
+      同一行政区县市长票、总统票、立委票或政党票之间的长期结构性差距。
+  spatial_variance:
+    method: coefficient_of_variation
+    observe: 0.25
+    strong_trigger: 0.40
+    definition: >
+      乡镇市区层面得票率的标准差除以平均值形成的离散程度。
+      仅作为筛选，不得直接解释为派系或组织票。
+  geographic_concentration:
+    top_area_share_observe: 0.40
+    top_area_share_strong_trigger: 0.55
+    definition: >
+      候选人得票或残差是否高度集中于少数乡镇市区。
+      需与人口规模、行政区数量和候选人地缘基础一起判断。
+  poll_history_deviation:
+    observe: 8
+    strong_trigger: 12
+    definition: >
+      民调结果与历史结构预期之间的差距，仅在民调元数据合格后使用。
+
+down_drill_required_when_any:
+  - 某乡镇市区与历史票型明显不一致
+  - 相邻乡镇市区出现显著不同走势
+  - 某候选人在特定乡镇市区异常强
+  - 地方政治资料指向具体基层区域
+  - 需要验证地方派系或候选人经营基础
+  - 用户明确要求微观选区分析
+  - local_explanation_required 已标记为 true
+
+local_explanation_flag:
+  key: local_explanation_required
+  values: [true, false]
+  set_true_when_any:
+    - swing_gap 命中 observe 或 strong_trigger
+    - neighbor_divergence 命中 observe 或 strong_trigger
+    - candidate_residual 命中 observe 或 strong_trigger
+    - cross_level_gap 命中 observe 或 strong_trigger
+    - spatial_variance 命中 observe 或 strong_trigger
+    - geographic_concentration 命中 observe 或 strong_trigger
+  required_after_flag:
+    - 进入 rules/local_knowledge_rules.yaml
+    - 先提出研究问题，不先假设派系、买票或个人魅力
+
+poll_thresholds:
+  undecided_required_attention: 0.15
+  small_cross_sample_n: 100
+  moe_overlap_expression: >
+    当候选人差距在抽样误差范围内，输出“数据没有显示可以明确区分的差距”。
+  cross_breakdown_caution: >
+    地区、年龄、政党支持或投票意愿交叉样本小于 100 或未提供样本数时，
+    不得过度解释。
+
+calculation_defaults:
+  percentage_decimals: 1
+  change_decimals: 1
+  baseline_method_required: true
+  time_scope_required: true
+  district_boundary_check_required: true

@@ -1,0 +1,120 @@
+version: 1.0.0
+schema_name: election_record
+description: >
+  选举事实库的单条记录。必须优先来自 A 级官方资料；用于建立历史基准、
+  跨届摆动、跨层级比较和空间矩阵。
+
+type: object
+required:
+  - record_id
+  - election_type
+  - election_year
+  - jurisdiction
+  - level
+  - candidate_name
+  - party
+  - votes
+  - valid_votes
+  - vote_share
+  - turnout
+  - source
+  - source_grade
+  - boundary_version
+  - time_scope
+properties:
+  record_id:
+    type: string
+    description: 全局唯一记录 ID，建议格式 election_type-year-region-candidate。
+  election_type:
+    type: string
+    enum:
+      - president
+      - regional_legislator
+      - party_list
+      - county_mayor
+      - county_councilor
+      - township_mayor
+      - village_chief
+      - referendum
+  election_year:
+    type: integer
+    description: 选举年份，例如 2022。
+  election_date:
+    type: string
+    format: date
+  jurisdiction:
+    type: string
+    description: 县市、乡镇市区、村里或选区名称。
+  jurisdiction_code:
+    type: string
+    description: 官方行政区代码；若边界变更需记录版本。
+  parent_jurisdiction:
+    type: string
+    description: 上级行政区，例如乡镇市区所属县市。
+  level:
+    type: string
+    enum:
+      - national
+      - county_city
+      - township_district
+      - village
+      - polling_station
+      - legislative_constituency
+  region_scope:
+    type: string
+    description: 是否为全行政区、部分村里或投开票所集合。
+  candidate_name:
+    type: string
+  candidate_id:
+    type: string
+  party:
+    type: string
+    description: 候选人所属政党；无党籍填无党籍；联盟关系另列。
+  party_alliance:
+    type: string
+    description: 例如蓝白合作、政党支持但未提名等；无则留空。
+  candidate_count:
+    type: integer
+  votes:
+    type: integer
+    minimum: 0
+  valid_votes:
+    type: integer
+    minimum: 0
+  vote_share:
+    type: number
+    minimum: 0
+    maximum: 1
+    description: 以小数表示，例如 0.55。
+  electorate:
+    type: integer
+  turnout:
+    type: number
+    minimum: 0
+    maximum: 1
+  elected:
+    type: boolean
+  source:
+    type: string
+    description: 来源名称、出版物或数据库。
+  source_grade:
+    type: string
+    enum: [A, B, C, D, E]
+  source_reference:
+    type: string
+    description: URL、文件编号、页码或查询日期。
+  boundary_version:
+    type: string
+    description: 行政区划或选区边界版本；跨届比较必须一致。
+  time_scope:
+    type: string
+    description: 该记录适用的时间范围。
+  notes:
+    type: string
+
+constraints:
+  - vote_share 必须由 votes / valid_votes 计算，并记录四舍五入规则。
+  - 同一记录只对应一个选举类型、一届选举和一个行政区层级。
+  - 县市长分析不得只保存全县市总票；必须可聚合到乡镇市区。
+  - 边界变更时不得直接跨届相减；必须记录对应关系。
+  - D/E 级来源不得作为事实基准。

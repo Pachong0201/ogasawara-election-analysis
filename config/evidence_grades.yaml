@@ -1,0 +1,77 @@
+version: 1.0.0
+name: evidence_grades
+description: >
+  用于五类结构机制内部证据管理。等级只描述证据强弱，不得转换成候选人
+  政治评分、胜率、排名或推荐。
+
+levels:
+  strong_evidence:
+    definition: >
+      至少两个独立来源指向同一机制，且其中至少一个为 A 级或 B 级；
+      未发现明显相反证据；机制能够解释主要异常但不能解释全部现象。
+    typical_requirements:
+      - 一个 A/B 级来源加一个独立 C 级以上来源
+      - 或两个相互独立的 B/C 级来源
+    allowed_output: >
+      可写成“较可能”“证据较强”，但不得写成确定因果。
+  moderate_evidence:
+    definition: >
+      有一个 B 级或两个独立 C 级来源支持，但缺乏 A 级直接资料，
+      或存在尚未排除的替代解释。
+    typical_requirements:
+      - 一个 B 级来源
+      - 或两个独立 C 级来源
+      - 或一个 A 级来源但只能支持部分环节
+    allowed_output: >
+      可写成“存在支持该解释的证据”，同时列出替代解释与未验证部分。
+  weak_evidence:
+    definition: >
+      只有单一 C 级来源，或只有 D/E 级线索，或资料与当前选举的
+      时间范围不一致。
+    typical_requirements:
+      - 单一 C 级来源
+      - 只有 D/E 级资料
+      - 历史资料无法确认当前连续性
+    allowed_output: >
+      只能写成待验证假设或研究问题，不得写入核心判断。
+  unknown:
+    definition: >
+      没有足够可靠资料区分不同机制，或现有资料互相矛盾且无法判断。
+    typical_requirements:
+      - 无 A/B/C 级来源
+      - 只有互相转载的 D/E 级资料
+      - 关键时间范围或行政区划无法对齐
+    allowed_output: >
+      “现有数据可以确认 A 现象，但尚不能确定原因。”
+      “当前有两种可能解释，现有证据不足以区分。”
+
+mechanisms:
+  party_structure:
+    label: Party Structure
+    scope: 政党长期基本结构与跨届稳定趋势
+  candidate_effect:
+    label: Candidate Effect
+    scope: 候选人个人经营、知名度与跨党支持
+  local_organization:
+    label: Local Organization
+    scope: 地方公职、政治人物与基层组织
+  third_force_redistribution:
+    label: Third-force Redistribution
+    scope: 第三势力及中间票重新组合
+  issue_governance_effect:
+    label: Issue / Governance Effect
+    scope: 地方治理评价、重大地方议题与政策
+
+rules:
+  - id: EVID-01
+    statement: 五项机制必须分别判断，不得以整体印象替代。
+  - id: EVID-02
+    statement: 证据等级只用于内部管理，不得转换成候选人政治评分或胜负排名。
+  - id: EVID-03
+    statement: D/E 级资料不得单独使任何机制达到 moderate_evidence 或 strong_evidence。
+  - id: EVID-04
+    statement: 历史资料只能支持其 time_scope 内的判断，不能自动支持当前机制。
+  - id: EVID-05
+    statement: 存在明显相反证据时，最高只能标记为 weak_evidence 或 unknown，并列为替代解释。
+  - id: EVID-06
+    statement: 无法达到 weak_evidence 时，必须输出 unknown。

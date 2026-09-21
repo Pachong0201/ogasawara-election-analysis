@@ -1,0 +1,98 @@
+version: 1.0.0
+name: residual_analysis
+purpose: >
+  把“小笠原式方法”工程化为残差分析：先计算偏离，再搜索解释。
+  残差只用于发现问题，不直接构成因果解释。
+
+principles:
+  - id: RES-01
+    statement: 残差表示“偏离基准”，不是“个人票”“派系票”或“组织票”。
+  - id: RES-02
+    statement: 先标记异常，再检索地方知识；不得先假设原因，再寻找支持数据。
+  - id: RES-03
+    statement: 时间、空间、层级、候选人与民调残差必须分别计算并记录。
+  - id: RES-04
+    statement: 任何候选人或跨票种残差必须记录 baseline_method。
+  - id: RES-05
+    statement: 发现残差后设置 local_explanation_required=true。
+  - id: RES-06
+    statement: 高残差不自动等于派系、买票、个人魅力或组织动员。
+  - id: RES-07
+    statement: 无法区分原因时输出 unknown，并列明需要什么资料。
+
+residual_types:
+  time_residual:
+    definition: 当前地区偏离自己的长期轨迹。
+    formula: CurrentVoteShare - HistoricalBaseline
+    baseline_candidates:
+      - 最近三届同类型选举中位数
+      - 最近三届同类型选举平均
+      - 长期趋势外推区间
+  space_residual:
+    definition: 相邻或条件相似行政区出现异常不同票型。
+    formula: VoteShare(i) - VoteShare(j)
+    supporting_metrics:
+      - SpatialVariance
+      - NeighborDivergence
+      - GeographicConcentration
+  level_residual:
+    definition: 总统票与地方首长票或不同层级票种明显不同。
+    formula: CountyMayorVoteShare - PresidentialVoteShare
+    supporting_metrics:
+      - Local-National Gap
+      - PartyListResidual
+  candidate_residual:
+    definition: 候选人明显高于或低于政党基准或其他参考基准。
+    formula: CandidateVoteShare - ReferenceBaseline
+    baseline_candidates:
+      - 同日总统票
+      - 同日政党票
+      - 前后两次总统选举平均
+      - 同党历史平均
+      - 县市整体趋势
+  poll_residual:
+    definition: 当前调查结果明显偏离历史结构。
+    formula: PollSupport - HistoricalStructuralExpectation
+    preconditions:
+      - pollster
+      - commissioner
+      - method
+      - sample
+      - field_date
+      - moe
+      - undecided
+    rules:
+      - 不得将不同机构民调直接连成趋势。
+      - 不得将电话与网络民调直接计算升降。
+      - 未决定比例超过 15% 时必须单独指出。
+      - 差距在抽样误差范围内时，写“数据没有显示可以明确区分的差距”。
+
+interpretation_boundaries:
+  - id: RES-08
+    statement: CandidateResidual 不得直接称为“个人票比例”。
+  - id: RES-09
+    statement: SpatialVariance 高不得直接解释为派系。
+  - id: RES-10
+    statement: SplitTicketResidual 不得直接解释为跨党支持。
+  - id: RES-11
+    statement: 残差不能用于推断买票或违法行为。
+  - id: RES-12
+    statement: 年龄、族群、职业等群体资料不得直接推断个人政治选择。
+
+required_record:
+  residual_id: string
+  residual_type: enum
+  region: string
+  election_type: string
+  period: string
+  observed_value: number
+  baseline_value: number
+  residual: number
+  baseline_method: string
+  baseline_periods: list
+  boundary_version: string
+  source_grade: string
+  local_explanation_required: boolean
+  proposed_questions: list
+  verification_status: enum
+  notes: string
