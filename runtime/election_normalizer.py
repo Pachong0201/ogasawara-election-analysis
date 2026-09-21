@@ -186,7 +186,11 @@ def validate_record(
     if known_regions is not None:
         region = str(record.get("jurisdiction") or "")
         parent = str(record.get("parent_jurisdiction") or "")
-        if region not in known_regions and parent not in known_regions:
+        level = str(record.get("level") or "")
+        if level in {"township_district", "village", "polling_station"}:
+            if region not in known_regions:
+                _add_issue(issues, "UNKNOWN_REGION", f"child region not found in geography registry: {region}", record)
+        elif region not in known_regions and parent not in known_regions:
             _add_issue(issues, "UNKNOWN_REGION", f"region not found in geography registry: {region} / {parent}", record)
 
     errors = [issue for issue in issues if issue.severity == "error"]
