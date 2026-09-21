@@ -21,6 +21,7 @@ from .metrics import (
     split_ticket_residual,
 )
 from .models import ElectionTask
+from .pipeline import AnalysisPipeline
 
 
 def _task_from_args(args: argparse.Namespace) -> ElectionTask:
@@ -121,6 +122,23 @@ def _cmd_context(args: argparse.Namespace) -> int:
     return 0
 
 
+
+def _cmd_run(args: argparse.Namespace) -> int:
+    task = _task_from_args(args)
+    repo_root = Path(args.repo_root).resolve() if args.repo_root else None
+    pipeline = AnalysisPipeline(repo_root=repo_root, mode=args.mode)
+    context = pipeline.run(
+        task,
+        allow_online=args.mode != "offline",
+        write_manifest=args.write_manifest,
+        manifest_path=Path(args.manifest) if args.manifest else None,
+    )
+    print(json.dumps(context.to_dict(), ensure_ascii=False, indent=2))
+    status = context.analysis_context.get("readiness", {}).get("status")
+    print(f"STATUS: {status}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m runtime.cli", description="V1.1 Data & Runtime Layer")
     parser.add_argument("--repo-root", default=None, help="repository root (defaults to runtime parent)")
@@ -173,6 +191,17 @@ def build_parser() -> argparse.ArgumentParser:
     context.add_argument("--write-manifest", action="store_true")
     context.add_argument("--manifest", default="")
     context.set_defaults(func=_cmd_context)
+
+    run = sub.add_parser("run", help="run the end-to-end V1.1.1 preparation pipeline")
+    run.add_argument("--county", required=True)
+    run.add_argument("--year", required=True, type=int)
+    run.add_argument("--type", required=True)
+    run.add_argument("--level", default="township_district")
+    run.add_argument("--candidates", default="")
+    run.add_argument("--mode", choices=["auto", "online", "offline"], default="auto")
+    run.add_argument("--write-manifest", action="store_true")
+    run.add_argument("--manifest", default="")
+    run.set_defaults(func=_cmd_run)
     return parser
 
 
