@@ -1,6 +1,6 @@
-version: 1.0.0
+version: 1.1.1
 name: runtime
-skill_version: 1.1.0
+skill_version: 1.1.1
 
 mode: auto
 
@@ -119,8 +119,16 @@ metrics:
     candidate_residual_strong_trigger: 12.0
     cross_level_gap_observe: 8.0
     cross_level_gap_strong_trigger: 12.0
-    spatial_variance_observe: 0.25
-    spatial_variance_strong_trigger: 0.40
+
+    # Method-specific spatial thresholds. SD/IQR values are vote-share decimals;
+    # CV is unitless. Do not apply one threshold family to all three metrics.
+    spatial_sd_observe: 0.05
+    spatial_sd_strong_trigger: 0.08
+    spatial_iqr_observe: 0.10
+    spatial_iqr_strong_trigger: 0.15
+    spatial_cv_observe: 0.25
+    spatial_cv_strong_trigger: 0.40
+
     geographic_concentration_observe: 0.40
     geographic_concentration_strong_trigger: 0.55
     concentration_excess_min: 0.05
