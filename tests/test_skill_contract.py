@@ -59,6 +59,7 @@ class TestSkillStructure(unittest.TestCase):
             "runtime/knowledge_loader.py",
             "runtime/freshness.py",
             "runtime/analysis_context.py",
+            "runtime/pipeline.py",
             "runtime/cli.py",
             "tests/test_data_readiness.py",
             "tests/test_freshness.py",
@@ -66,6 +67,7 @@ class TestSkillStructure(unittest.TestCase):
             "tests/test_matrix_builder.py",
             "tests/test_metrics.py",
             "tests/test_analysis_context.py",
+            "tests/test_pipeline.py",
             "examples/yilan/test_cases.yaml",
             "examples/yilan/README.md",
             "tests/README.md",
@@ -87,7 +89,7 @@ class TestCoreContract(unittest.TestCase):
     def test_skill_frontmatter_name(self):
         text = read_text("SKILL.md")
         self.assertIn("name: ogasawara-election-analysis", text)
-        self.assertIn("version: 1.1.0", text)
+        self.assertIn("version: 1.1.1", text)
 
     def test_analysis_path_is_historical_first(self):
         text = read_text("SKILL.md")
@@ -127,7 +129,7 @@ class TestCoreContract(unittest.TestCase):
     def test_poll_rules_complete(self):
         poll = load_yaml("rules/poll_rules.yaml")
         ids = [rule["id"] for rule in poll["rules"]]
-        for number in range(1, 8):
+        for number in range(1, 9):
             self.assertIn(f"POLL-{number:02d}", ids)
         self.assertIn("未决定", " ".join(rule["statement"] for rule in poll["rules"]))
 
