@@ -22,6 +22,7 @@ REQUIRED_FIELDS = [
     "party",
     "votes",
     "valid_votes",
+    "turnout",
     "source",
     "source_grade",
     "boundary_version",
@@ -43,6 +44,23 @@ def _to_float(value: Any, default: Optional[float] = None) -> Optional[float]:
         return float(value)
     except (TypeError, ValueError):
         return default
+
+
+def _record_identity(record: Dict[str, Any]) -> str:
+    """Build a stable ID that is unique at the actual geographic record level.
+
+    Parent jurisdiction alone is not enough for township/village records:
+    the same candidate appears in many child regions.  Include both parent
+    and concrete jurisdiction (and candidate_id/name) to avoid persistence
+    deduplication collapsing multiple townships into one record.
+    """
+    return "{}|{}|{}|{}|{}".format(
+        record.get("election_type", "unknown"),
+        record.get("election_year", "unknown"),
+        record.get("parent_jurisdiction") or record.get("jurisdiction", "unknown"),
+        record.get("jurisdiction", "unknown"),
+        record.get("candidate_id") or record.get("candidate_name", "unknown"),
+    )
 
 
 def normalize_record(raw: Dict[str, Any], defaults: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -82,12 +100,7 @@ def normalize_record(raw: Dict[str, Any], defaults: Optional[Dict[str, Any]] = N
             record["parent_jurisdiction"] = record.get("jurisdiction", "")
 
     if not record.get("record_id"):
-        record["record_id"] = "{}|{}|{}|{}".format(
-            record.get("election_type", "unknown"),
-            record.get("election_year", "unknown"),
-            record.get("parent_jurisdiction") or record.get("jurisdiction", "unknown"),
-            record.get("candidate_name", "unknown"),
-        )
+        record["record_id"] = _record_identity(record)
 
     if not record.get("time_scope"):
         record["time_scope"] = str(record.get("election_year", ""))
@@ -149,7 +162,9 @@ def validate_record(
             _add_issue(issues, "VOTE_SHARE_MISMATCH", f"vote_share {share:.6f} != votes/valid_votes {expected:.6f}", record)
 
     turnout = _to_float(record.get("turnout"))
-    if turnout is not None and not (0 <= turnout <= 1):
+    if turnout is None:
+        _add_issue(issues, "MISSING_TURNOUT", "turnout is required", record)
+    elif not (0 <= turnout <= 1):
         _add_issue(issues, "INVALID_TURNOUT", "turnout must be between 0 and 1", record)
 
     if not str(record.get("candidate_name") or "").strip():
@@ -194,9 +209,15 @@ def validate_records(
     require_provenance: bool = False,
 ) -> ValidationReport:
     all_issues: List[DataValidationIssue] = []
+    seen_ids: Set[str] = set()
     for record in records:
         report = validate_record(record, known_regions=known_regions, require_provenance=require_provenance)
         all_issues.extend(report.issues)
+        record_id = str(record.get("record_id") or "")
+        if record_id:
+            if record_id in seen_ids:
+                _add_issue(all_issues, "DUPLICATE_RECORD_ID", f"duplicate record_id: {record_id}", record)
+            seen_ids.add(record_id)
 
     groups: Dict[tuple, List[Dict[str, Any]]] = defaultdict(list)
     for record in records:
@@ -207,7 +228,6 @@ def validate_records(
         valid_votes_values = [value for value in valid_votes_values if value is not None]
         if not valid_votes_values:
             continue
-        # A candidate-level file should have one valid_votes figure per area.
         reference_valid = max(set(valid_votes_values), key=valid_votes_values.count)
         total_votes = sum(_to_int(item.get("votes")) or 0 for item in group)
         tolerance = max(1, int(round(reference_valid * 0.01)))
@@ -244,9 +264,6 @@ def validate_poll_record(record: Dict[str, Any]) -> ValidationReport:
     issues: List[DataValidationIssue] = []
     for field_name in POLL_REQUIRED_FIELDS:
         if record.get(field_name) in (None, ""):
-            # moe is allowed to be null when moe_applicable is false.
-            if field_name == "moe":
-                continue
             _add_issue(issues, "MISSING_POLL_FIELD", f"missing required poll field: {field_name}", record)
 
     method = str(record.get("method") or "").lower()
