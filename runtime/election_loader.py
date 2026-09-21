@@ -5,13 +5,13 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Optional, Set
 
 import yaml
 
 from .election_normalizer import normalize_records, validate_poll_record, validate_records
-from .models import DataQuery, ValidationReport, utc_now_iso
-from .source_registry import ElectionDataSource, OfflineBackend, SourceRegistry
+from .models import DataQuery, ValidationReport
+from .source_registry import OfflineBackend, SourceRegistry
 
 DEFAULT_REPO_ROOT = Path(__file__).resolve().parents[1]
 VALID_MODES = {"auto", "online", "offline"}
@@ -60,7 +60,7 @@ def write_jsonl(path: Path, records: Iterable[Dict[str, Any]]) -> None:
 @dataclass
 class LoadResult:
     records: List[Dict[str, Any]] = field(default_factory=list)
-    status: str = "missing"  # complete | filled | missing | invalid | insufficient
+    status: str = "missing"
     source: str = "local"
     from_cache: bool = False
     persisted: bool = False
@@ -88,8 +88,8 @@ class LoadResult:
 class ElectionLoader:
     """Load local election records first; fetch only when local data is missing.
 
-    The loader never invents records.  If no adapter can supply data, it
-    returns ``status='missing'`` and records remain empty.
+    The loader never invents records. If no adapter can supply data, it
+    returns status=missing and records remain empty.
     """
 
     def __init__(
@@ -115,6 +115,40 @@ class ElectionLoader:
             return True
         return bool(self.source_registry.adapters)
 
+    def _known_regions(self) -> Optional[Set[str]]:
+        """Load the geography registry when present."""
+        base = self.repo_root / "data" / "geography" / "administrative_areas"
+        if not base.exists():
+            return None
+        names: Set[str] = set()
+        for path in sorted(list(base.glob("*.yaml")) + list(base.glob("*.yml")) + list(base.glob("*.json"))):
+            try:
+                if path.suffix == ".json":
+                    payload = json.loads(path.read_text(encoding="utf-8"))
+                else:
+                    payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            if isinstance(payload, dict):
+                payload = payload.get("regions") or payload.get("administrative_areas") or [payload]
+            if not isinstance(payload, list):
+                continue
+            for item in payload:
+                if not isinstance(item, dict):
+                    continue
+                for field_name in ("name", "region_id"):
+                    value = str(item.get(field_name) or "").strip()
+                    if value:
+                        names.add(value)
+        return names or None
+
+    def _validate(self, records: List[Dict[str, Any]], require_provenance: bool = False) -> ValidationReport:
+        return validate_records(
+            records,
+            known_regions=self._known_regions(),
+            require_provenance=require_provenance,
+        )
+
     def _load_local(self, query: DataQuery) -> LoadResult:
         path = election_file_path(self.repo_root, query.election_type, query.year, query.jurisdiction)
         if not path.exists():
@@ -130,7 +164,7 @@ class ElectionLoader:
                 source="local",
                 warnings=[f"local file has no records for level={query.level}: {path}"],
             )
-        validation = validate_records(records, require_provenance=False)
+        validation = self._validate(records, require_provenance=False)
         if not validation.passed:
             return LoadResult(
                 status="invalid",
@@ -148,8 +182,6 @@ class ElectionLoader:
         exact = [record for record in records if record.get("level") == level]
         if exact:
             return exact
-        # Some local files may store county-level aggregates only; allow
-        # national/county records when the caller explicitly asks for them.
         if level in {"national", "county_city"}:
             return [record for record in records if record.get("level") in {level, "national", "county_city"}]
         return exact
@@ -192,7 +224,7 @@ class ElectionLoader:
         for adapter in self.source_registry.sources_for(query):
             try:
                 fetch_result = adapter.fetch(query)
-            except Exception as exc:  # adapters are injected; do not crash the runtime
+            except Exception as exc:
                 warnings.append(f"adapter {getattr(adapter, 'source_id', '?')} fetch failed: {exc}")
                 continue
             raw_records = list(fetch_result.records or [])
@@ -207,11 +239,11 @@ class ElectionLoader:
                 "source_grade": getattr(adapter, "source_grade", "B"),
                 "source_version": fetch_result.source_version or getattr(adapter, "source_version", ""),
                 "raw_reference": fetch_result.raw_reference or "",
-                "normalization_version": "v1.1.0",
+                "normalization_version": "v1.1.1",
             }
             normalized = normalize_records(raw_records, defaults=defaults)
             normalized = [record for record in self._filter_level(normalized, level) if self._matches_query(record, query)]
-            validation = validate_records(normalized, require_provenance=False)
+            validation = self._validate(normalized, require_provenance=False)
             if not validation.passed:
                 errors.extend(issue.message for issue in validation.issues if issue.severity == "error")
                 continue
@@ -237,13 +269,25 @@ class ElectionLoader:
             errors=errors,
         )
 
+    @staticmethod
+    def _persistence_key(record: Dict[str, Any]) -> str:
+        record_id = str(record.get("record_id") or "").strip()
+        if record_id:
+            return record_id
+        return "{}|{}|{}|{}|{}".format(
+            record.get("election_type", "unknown"),
+            record.get("election_year", "unknown"),
+            record.get("parent_jurisdiction") or record.get("jurisdiction", "unknown"),
+            record.get("jurisdiction", "unknown"),
+            record.get("candidate_id") or record.get("candidate_name", "unknown"),
+        )
+
     def _persist(self, query: DataQuery, records: List[Dict[str, Any]]) -> None:
         path = election_file_path(self.repo_root, query.election_type, query.year, query.jurisdiction)
         existing = load_jsonl(path) if path.exists() else []
         merged: Dict[str, Dict[str, Any]] = {}
         for record in existing + records:
-            key = str(record.get("record_id") or f"{record.get('candidate_name')}|{record.get('jurisdiction')}")
-            merged[key] = record
+            merged[self._persistence_key(record)] = record
         write_jsonl(path, merged.values())
 
     def load_current_candidates(self, jurisdiction: str) -> List[Dict[str, Any]]:
