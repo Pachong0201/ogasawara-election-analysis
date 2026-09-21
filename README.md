@@ -62,7 +62,7 @@ ogasawara-election-analysis/
 │  ├─ spatial_divergence.md
 │  ├─ incumbent_transfer.md
 │  └─ third_force.md
-├─ runtime/             # V1.1 数据与运行层
+├─ runtime/             # V1.1.1 数据与运行层
 │  ├─ data_readiness.py
 │  ├─ election_loader.py
 │  ├─ election_normalizer.py
@@ -71,6 +71,7 @@ ogasawara-election-analysis/
 │  ├─ knowledge_loader.py
 │  ├─ freshness.py
 │  ├─ analysis_context.py
+│  ├─ pipeline.py
 │  └─ cli.py
 ├─ data/                # 稳定历史选举事实与行政区版本
 ├─ knowledge/           # 最小充分地方知识缓存
@@ -107,6 +108,7 @@ ogasawara-election-analysis/
 → 地方知识检索
 → Freshness
 → Analysis Context
+→ AnalysisPipeline 统一编排
 → 按 V1.0 输出
 ```
 
@@ -116,6 +118,7 @@ ogasawara-election-analysis/
 python -m runtime.cli readiness --county "宜兰县" --year 2026 --type county_mayor
 python -m runtime.cli build-matrix --county "宜兰县" --year 2026 --type county_mayor
 python -m runtime.cli context --county "宜兰县" --year 2026 --type county_mayor --write-manifest
+python -m runtime.cli run --county "宜兰县" --year 2026 --type county_mayor --mode offline --write-manifest
 ```
 
 ## 最低数据要求
