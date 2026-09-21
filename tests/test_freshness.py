@@ -58,5 +58,30 @@ class TestFreshness(unittest.TestCase):
             self.assertEqual(result["relationships"][0]["current_status"], "historical_only")
 
 
+    def test_historical_claim_alone_is_not_minimum_sufficient_current_knowledge(self):
+        with temp_repo() as root:
+            path = root / "knowledge" / "historical" / "新竹縣" / "claims.jsonl"
+            write_jsonl(
+                path,
+                [
+                    {
+                        "claim_id": "h1",
+                        "region": "甲鄉",
+                        "time_scope": "1990-2000",
+                        "claim": "歷史地方政治資料",
+                        "source_grade": "B",
+                    }
+                ],
+            )
+            loader = KnowledgeLoader(root, mode="offline")
+            result = loader.load_local_knowledge("新竹縣")
+            self.assertFalse(result["sufficient"])
+            self.assertEqual(result["current_evidence_count"], 0)
+            self.assertTrue(
+                any("does not by itself satisfy" in warning for warning in result["warnings"])
+            )
+
+
+
 if __name__ == "__main__":
     unittest.main()
