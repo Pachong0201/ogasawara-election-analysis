@@ -34,15 +34,25 @@ class AnalysisPipeline:
         retrieval_backend: Optional[RetrievalBackend] = None,
     ):
         self.repo_root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[1]
+        self.package_root = Path(__file__).resolve().parents[1]
         self.mode = mode
-        self.source_registry = source_registry or SourceRegistry(self.repo_root / "config" / "data_sources.yaml")
+
+        runtime_config_path = self.repo_root / "config" / "runtime.yaml"
+        if not runtime_config_path.exists():
+            runtime_config_path = self.package_root / "config" / "runtime.yaml"
+        source_config_path = self.repo_root / "config" / "data_sources.yaml"
+        if not source_config_path.exists():
+            source_config_path = self.package_root / "config" / "data_sources.yaml"
+
+        self.runtime_config_path = runtime_config_path
+        self.source_registry = source_registry or SourceRegistry(source_config_path)
         self.loader = ElectionLoader(
             self.repo_root,
             source_registry=self.source_registry,
             retrieval_backend=retrieval_backend,
             mode=mode,
         )
-        self.gate = DataReadinessGate(self.repo_root)
+        self.gate = DataReadinessGate(self.repo_root, runtime_config_path=runtime_config_path)
         self.knowledge_loader = KnowledgeLoader(
             self.repo_root,
             retrieval_backend=retrieval_backend,
@@ -52,7 +62,7 @@ class AnalysisPipeline:
         self.runtime_config = self._load_runtime_config()
 
     def _load_runtime_config(self) -> Dict[str, Any]:
-        path = self.repo_root / "config" / "runtime.yaml"
+        path = self.runtime_config_path
         if not path.exists():
             return {}
         with path.open(encoding="utf-8") as fh:
