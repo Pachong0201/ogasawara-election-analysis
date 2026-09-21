@@ -85,5 +85,19 @@ class TestDataReadiness(unittest.TestCase):
             self.assertTrue(any("current_candidate_list" in item for item in report.missing))
 
 
+    def test_task_candidate_names_do_not_bypass_candidate_verification(self):
+        with temp_repo() as root:
+            populate_full_repo(root, include_current_candidates=False)
+            report = self._gate(root).check(
+                make_task(candidates=["甲候選人", "乙候選人"])
+            )
+            self.assertEqual(report.status, "INSUFFICIENT")
+            self.assertFalse(report.required["current_candidate_list"]["satisfied"])
+            self.assertTrue(
+                any("unverified seeds" in warning for warning in report.warnings)
+            )
+
+
+
 if __name__ == "__main__":
     unittest.main()
