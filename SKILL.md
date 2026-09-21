@@ -1,7 +1,7 @@
 ---
 name: ogasawara-election-analysis
 description: 借鉴小笠原欣幸公开选举研究方法的台湾选举结构化分析 Skill。先建立历史基准，再寻找跨届、跨层级、空间与候选人残差，最后以地方知识与民调校准。不输出胜负预测、胜率或候选人排名。
-version: 1.1.0
+version: 1.1.1
 language: zh-TW
 entrypoint: SKILL.md
 ---
@@ -110,6 +110,7 @@ entrypoint: SKILL.md
 - `runtime/election_normalizer.py`
 - `runtime/freshness.py`
 - `runtime/analysis_context.py`
+- `runtime/pipeline.py`
 - `config/data_sources.yaml`
 - `config/freshness.yaml`
 - `config/runtime.yaml`
@@ -367,7 +368,8 @@ V1.1 数据与运行层增加：
 - Freshness 与动态缓存；
 - 最小充分地方知识检索；
 - Analysis Context 与 analysis_manifest.json；
-- CLI `readiness`、`build-matrix`、`metrics`、`context`。
+- 统一 `AnalysisPipeline` 编排 readiness → loader → matrix → metrics → knowledge → freshness → context；
+- CLI `readiness`、`build-matrix`、`metrics`、`context`、`run`。
 
 第二阶段再增加村里／投票所空间分析、Neighbor Divergence 自动化、地方政治知识图谱、半自动历史知识检索和多县市横向比较。
 
