@@ -6,8 +6,8 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
 from .election_loader import load_jsonl, safe_component, write_jsonl
-from .freshness import historical_relationship_is_current, is_fresh, needs_revalidation
-from .models import parse_date, utc_now_iso
+from .freshness import historical_relationship_is_current, is_fresh
+from .models import utc_now_iso
 from .source_registry import OfflineBackend, OfflineRetrievalError, RetrievalBackend
 
 DEFAULT_REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -32,6 +32,27 @@ class KnowledgeLoader:
     def _load_file(self, path: Path) -> List[Dict[str, Any]]:
         return load_jsonl(path) if path.exists() else []
 
+    @staticmethod
+    def _source_usable(record: Dict[str, Any]) -> bool:
+        grade = str(record.get("source_grade") or "").upper()
+        if grade in {"A", "B"}:
+            return True
+        if grade == "C" and int(record.get("independent_source_count") or 0) >= 2:
+            return True
+        return False
+
+    @staticmethod
+    def _question_coverage(record: Dict[str, Any], research_questions: List[str]) -> bool:
+        if not research_questions:
+            return True
+        linked = record.get("research_questions") or record.get("research_question")
+        if not linked:
+            return False
+        if isinstance(linked, str):
+            linked = [linked]
+        linked_text = " ".join(str(item) for item in linked)
+        return any(question in linked_text or linked_text in question for question in research_questions)
+
     def load_local_knowledge(
         self,
         county: str,
@@ -39,6 +60,7 @@ class KnowledgeLoader:
         research_questions: Optional[Iterable[str]] = None,
     ) -> Dict[str, Any]:
         region_set = {str(region) for region in (regions or []) if str(region).strip()}
+        questions = [str(question) for question in (research_questions or []) if str(question).strip()]
         paths = self._paths(county)
         historical = self._load_file(paths["historical_claims"])
         relationships = self._load_file(paths["relationships"])
@@ -60,25 +82,47 @@ class KnowledgeLoader:
             if record.get("current_status") == "active_verified" and not historical_relationship_is_current(record):
                 record["current_status"] = "historical_only"
                 record["verification_note"] = "active_verified lacked recent last_verified_at; downgraded to historical_only"
-        for record in relationships:
-            if not is_fresh(record, kind="local_relationship"):
-                warnings.append(f"local relationship may need revalidation: {record.get('relationship_id')}")
 
-        sufficient = bool(historical or relationships or candidates or issues)
+        current_evidence: List[Dict[str, Any]] = []
+        for record in relationships:
+            if record.get("current_status") == "active_verified" and self._source_usable(record) and is_fresh(record, kind="local_relationship"):
+                current_evidence.append(record)
+            elif record.get("current_status") == "active_verified":
+                warnings.append(f"local relationship not sufficient for current use: {record.get('relationship_id')}")
+
+        for record in candidates:
+            if self._source_usable(record) and is_fresh(record, kind="candidate_profile"):
+                current_evidence.append(record)
+
+        for record in issues:
+            kind = str(record.get("record_type") or "political_claim")
+            if self._source_usable(record) and is_fresh(record, kind=kind):
+                current_evidence.append(record)
+
+        question_covered = any(self._question_coverage(record, questions) for record in current_evidence) if questions else bool(current_evidence)
+        sufficient = bool(current_evidence) and question_covered
+
+        if historical and not current_evidence:
+            warnings.append("historical knowledge exists but does not by itself satisfy current local explanation")
+        if questions and current_evidence and not question_covered:
+            warnings.append("current evidence exists but is not explicitly linked to the active research question")
+
         result = {
             "county": county,
             "regions": sorted(region_set),
-            "research_questions": list(research_questions or []),
+            "research_questions": questions,
             "historical_claims": historical,
             "relationships": relationships,
             "candidates": candidates,
             "issues": issues,
+            "current_evidence_count": len(current_evidence),
+            "question_covered": question_covered,
             "sufficient": sufficient,
             "warnings": warnings,
             "missing": [],
         }
         if not sufficient:
-            result["missing"].append("no local knowledge records found")
+            result["missing"].append("minimum sufficient current local knowledge not established")
         return result
 
     def build_research_questions(self, anomalies: Iterable[Dict[str, Any]]) -> List[str]:
@@ -149,6 +193,6 @@ class KnowledgeLoader:
         retrieval = self.search_and_cache(county, questions)
         local["retrieval"] = retrieval
         if retrieval.get("leads"):
-            local["sufficient"] = False  # leads are not long-term knowledge until verified
+            local["sufficient"] = False
             local["warnings"].append("retrieved leads are lead_only and were not promoted to long-term knowledge")
         return local
