@@ -1,0 +1,170 @@
+version: 1.0.0
+name: data_acquisition
+purpose: >
+  规定 V1.1 数据获取、本地化、验证、新鲜度与离线行为的统一规则。
+  不改变 V1.0 方法论，只让方法能够稳定运行。
+
+principles:
+  - id: DATA-01
+    statement: 稳定历史选举事实优先本地读取，不每次联网重新抓取。
+  - id: DATA-02
+    statement: 本地缺失且 ONLINE 时，才允许调用已注册来源 Adapter 补齐。
+  - id: DATA-03
+    statement: 历史知识可以缓存，但必须保留 time_scope，不得自动外推当前。
+  - id: DATA-04
+    statement: 当前候选人、民调、公开支持、政党合作、竞选事件属于动态资料，必须记录 retrieved_at、last_verified_at、valid_until、source、source_grade。
+  - id: DATA-05
+    statement: Skill 本体不得假设运行环境一定联网，必须支持 ONLINE 与 OFFLINE 两种模式。
+  - id: DATA-06
+    statement: OFFLINE 不得伪装已完成联网检索；缺失必要资料时输出 analysis_status=insufficient_data。
+  - id: DATA-07
+    statement: 正式分析前必须执行 Data Readiness Check。
+  - id: DATA-08
+    statement: 动态资料过期必须重新验证，不得永久信任。
+  - id: DATA-09
+    statement: 任何写入长期数据或知识库的资料必须满足 A 级/B 级，或两个独立 C 级以上来源交叉确认。
+  - id: DATA-10
+    statement: D/E 级资料只能进入 cache/retrieval，标记 lead_only，不得升级到长期知识库。
+
+source_selection:
+  order:
+    - local_validated_data
+    - cec
+    - local_cec
+    - verified_public_dataset
+    - academic
+    - reliable_media
+    - campaign_claim_only
+  rule: >
+    先查本地已校验数据；本地缺失时才按 config/data_sources.yaml 的
+    priority 与 grade 调用。不得把网页 URL 写死在业务逻辑中。
+
+local_first:
+  required_steps:
+    - 检查 data/elections/<type>/<year>/<jurisdiction>.jsonl 是否存在且校验通过。
+    - 检查记录是否达到分析层级，例如 township_district。
+    - 检查 boundary_version 是否可对齐。
+    - 若完整，直接返回，不触发网络。
+  completeness_definition:
+    - 至少应有目标地区、目标年份、所需层级的记录。
+    - 记录必须通过 election_normalizer 校验。
+    - 记录必须属于允许的事实来源等级或已标记警告。
+
+online_mode:
+  allowed_actions:
+    - 调用已注册 ElectionDataSource.fetch。
+    - 调用已注册 RetrievalBackend.search / fetch 辅助地方知识检索。
+    - 抓取后标准化、校验并写入本地或缓存。
+  forbidden_actions:
+    - 绕过 source registry 直接写死特定网站爬虫。
+    - 每次调用覆盖已验证历史数据。
+    - 将未验证内容直接写入长期知识库。
+
+offline_mode:
+  allowed_actions:
+    - 读取本地历史选举数据。
+    - 读取 knowledge/ 与 cache/ 中仍有时间有效性的资料。
+    - 使用用户在本轮任务中提供的资料。
+  required_outputs:
+    - 明确标记 mode=offline。
+    - 缺失必要资料时输出 MISSING_DATA。
+    - analysis_status=insufficient_data（若硬性数据不足）。
+  forbidden_actions:
+    - 声称已联网查询。
+    - 以模型记忆代替来源。
+
+persistence:
+  long_term:
+    - data/elections/
+    - data/geography/
+    - knowledge/historical/
+    - knowledge/local/
+  dynamic_cache:
+    - cache/candidates/
+    - cache/polls/
+    - cache/events/
+    - cache/retrieval/
+  provenance_required_fields:
+    - retrieved_at
+    - verified_at
+    - source_id
+    - source_version
+    - raw_reference
+    - normalization_version
+
+validation:
+  required_checks:
+    - votes >= 0
+    - valid_votes >= votes
+    - vote_share ≈ votes / valid_votes
+    - 0 <= turnout <= 1
+    - 行政区存在
+    - 政党/候选人非空
+    - source_grade 合法
+    - boundary_version 存在
+    - 按行政区候选人得票总和 ≈ valid_votes
+  on_failure:
+    validation_status: failed
+    action: 不得进入正式分析，并记录 validation_errors。
+
+freshness:
+  policy_file: config/freshness.yaml
+  rule: >
+    动态资料超过 TTL 后必须重新验证；历史选举与历史学术资料可永久保存，
+    但历史学术资料用于当前政治判断时必须重新验证。
+  stale_behavior:
+    - 标记 stale。
+    - 若为 HARD REQUIRED，则 readiness 不得为 READY。
+    - 若为 OPTIONAL，降低结论范围并记录 warning。
+
+boundary_control:
+  rule: >
+    跨届比较前必须检查 administrative_area.yaml 中的 boundary_version、
+    valid_from、valid_to、predecessor_regions、successor_regions。
+  on_incompatible:
+    - 禁止计算 Swing。
+    - 禁止计算 Candidate Residual。
+    - 禁止计算 Neighbor Divergence。
+    - 除非存在明确、可追溯的行政区映射。
+
+current_candidates:
+  preferred_source: official_registration
+  allowed_statuses: [registered, nominated, announced, potential]
+  formal_candidate_status: registered
+  rule: >
+    正式登记前可以使用政党正式提名与公开参选声明，但只能标记为
+    nominated、announced 或 potential，不得当作 registered 正式候选人。
+
+polls:
+  schema: schemas/poll.yaml
+  storage: cache/polls/
+  required_metadata:
+    - pollster
+    - commissioner
+    - method
+    - sample_size
+    - sample_frame
+    - field_start
+    - field_end
+    - publish_date
+    - moe
+    - moe_applicable
+    - undecided
+  rules:
+    - 不得将不同机构民调连成趋势。
+    - 电话调查与封闭网络调查不得直接计算升降。
+    - moe_applicable=false 时不得套用传统随机抽样误差。
+    - 未决定比例超过 15% 时必须单独指出。
+
+data_readiness:
+  statuses: [ready, partial, insufficient]
+  hard_required: 缺失则不得进行完整结构分析。
+  conditional: 发现残差后才需要。
+  optional: 缺失仍可分析，但必须说明限制。
+  output_fields:
+    - status
+    - required
+    - available
+    - missing
+    - stale
+    - warnings

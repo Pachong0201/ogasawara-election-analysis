@@ -37,13 +37,17 @@ ogasawara-election-analysis/
 │  ├─ source_priority.yaml
 │  ├─ evidence_grades.yaml
 │  ├─ analysis_thresholds.yaml
-│  └─ knowledge_layers.yaml
+│  ├─ knowledge_layers.yaml
+│  ├─ data_sources.yaml
+│  ├─ freshness.yaml
+│  └─ runtime.yaml
 ├─ rules/
 │  ├─ historical_baseline.yaml
 │  ├─ residual_analysis.yaml
 │  ├─ poll_rules.yaml
 │  ├─ local_knowledge_rules.yaml
 │  ├─ writing_rules.yaml
+│  ├─ data_acquisition.yaml
 │  └─ political_neutrality.yaml
 ├─ schemas/
 │  ├─ election_record.yaml
@@ -58,6 +62,19 @@ ogasawara-election-analysis/
 │  ├─ spatial_divergence.md
 │  ├─ incumbent_transfer.md
 │  └─ third_force.md
+├─ runtime/             # V1.1 数据与运行层
+│  ├─ data_readiness.py
+│  ├─ election_loader.py
+│  ├─ election_normalizer.py
+│  ├─ matrix_builder.py
+│  ├─ metrics.py
+│  ├─ knowledge_loader.py
+│  ├─ freshness.py
+│  ├─ analysis_context.py
+│  └─ cli.py
+├─ data/                # 稳定历史选举事实与行政区版本
+├─ knowledge/           # 最小充分地方知识缓存
+├─ cache/               # 动态资料缓存
 ├─ references/
 │  └─ ogasawara/
 ├─ examples/
@@ -67,6 +84,8 @@ ogasawara-election-analysis/
 
 ## 使用方式
 
+### V1.0 方法层
+
 1. 将 `SKILL.md` 作为系统指令加载。
 2. 用户提出任务后，读取 `config/analysis_thresholds.yaml` 确认最低数据要求。
 3. 按 `rules/historical_baseline.yaml` 建立历史基准。
@@ -74,6 +93,30 @@ ogasawara-election-analysis/
 5. 命中异常筛选条件后，读取 `rules/local_knowledge_rules.yaml` 触发地方知识检索。
 6. 最后才读取民调资料，按 `rules/poll_rules.yaml` 校准。
 7. 按 `SKILL.md` 的统一模板输出，并明确证据等级和不确定性。
+
+### V1.1 数据与运行层
+
+```text
+用户任务
+→ Data Readiness Check
+→ 本地历史选举数据
+→ 缺失且 ONLINE：ElectionLoader 调用 Source Adapter
+→ 标准化、校验、持久化
+→ Matrix Builder
+→ Metrics
+→ 地方知识检索
+→ Freshness
+→ Analysis Context
+→ 按 V1.0 输出
+```
+
+常用命令：
+
+```bash
+python -m runtime.cli readiness --county "宜兰县" --year 2026 --type county_mayor
+python -m runtime.cli build-matrix --county "宜兰县" --year 2026 --type county_mayor
+python -m runtime.cli context --county "宜兰县" --year 2026 --type county_mayor --write-manifest
+```
 
 ## 最低数据要求
 

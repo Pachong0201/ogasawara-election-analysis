@@ -1,4 +1,4 @@
-version: 1.0.0
+version: 1.1.0
 name: poll_rules
 position: after_historical_structure_and_local_knowledge
 purpose: >
@@ -9,11 +9,13 @@ required_metadata:
   - pollster
   - commissioner
   - method
-  - sample
   - sample_size
-  - field_date
+  - sample_frame
+  - field_start
+  - field_end
   - publish_date
   - moe
+  - moe_applicable
   - undecided
   - weighting
   - question_wording
@@ -34,10 +36,14 @@ rules:
     enforcement: >
       不得写入事实库，不得作为结构性判断证据。
   - id: POLL-04
-    statement: 候选人差距在抽样误差范围内，应写：
-    output_expression: 数据没有显示可以明确区分的差距。
+    statement: >
+      如果调查机构没有提供候选人差值的标准误、区间估计或统计显著性检验，
+      不应仅凭点估计宣称统计上存在明确差距。
+    output_expression: >
+      点估计存在差异，但调查资料不足以确认该差异具有统计上的明确区分意义。
     enforcement: >
-      不得写成领先、落后或趋势变化。
+      不得仅凭点估计写成明确领先、落后或趋势变化；
+      若差距落在已提供的抽样误差范围内，应写“数据没有显示可以明确区分的差距”。
   - id: POLL-05
     statement: 未决定比例超过 15% 时，必须单独指出。
     enforcement: >
@@ -50,10 +56,16 @@ rules:
     statement: 民调作用是检验当前状态是否偏离历史结构。
     enforcement: >
       不得以民调替代历史基准；民调与结构冲突时，先检查调查方法和结构资料。
+  - id: POLL-08
+    statement: moe_applicable=false 时不得套用传统随机抽样误差。
+    enforcement: >
+      封闭式网络调查等方法不得强制填写传统 moe 或据此宣称统计显著；
+      可并列呈现点估计，并说明调查方法限制。
 
 module_checks:
   before_use:
-    - 检查 pollster、commissioner、method、sample、field_date、moe、undecided 是否齐全。
+    - 检查 pollster、commissioner、method、sample_size、sample_frame、field_start、field_end、moe、moe_applicable、undecided 是否齐全。
+    - 若 moe_applicable=false，不得套用传统随机抽样误差。
     - 检查是否为阵营内部民调且未公开方法；若是，标记 campaign_claim。
     - 检查题目措辞是否与历史民调一致。
     - 检查调查期间是否有重大事件影响。
@@ -71,6 +83,7 @@ module_checks:
 banned_expressions:
   - 不同机构民调直接连线
   - 从网络民调直接推导电话民调趋势
+  - 封闭网络调查套用传统随机抽样误差
   - 未决定票按比例平均分配给候选人
   - 单一民调决定胜负
   - 以民调直接换算县市长票或立委票

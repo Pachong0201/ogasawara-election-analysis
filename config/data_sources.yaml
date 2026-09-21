@@ -1,0 +1,84 @@
+version: 1.0.0
+name: data_sources
+purpose: >
+  数据来源注册表。分析逻辑不得写死具体网站 URL；所有来源通过本表
+  或运行时注册的 Adapter 注入。
+
+election_results:
+  primary:
+    - id: cec
+      name: 中央选举委员会
+      grade: A
+      type: official
+      priority: 1
+      adapter: null
+      notes: 官方选举资料优先来源。
+  secondary:
+    - id: local_cec
+      name: 地方选举委员会
+      grade: A
+      type: official
+      priority: 2
+      adapter: null
+      notes: 用于补充或核对中选会未涵盖的地方层级资料。
+  fallback:
+    - id: verified_public_dataset
+      name: 经验证的公开结构化资料集
+      grade: B
+      type: structured
+      priority: 3
+      adapter: null
+      notes: 仅作为官方来源缺失时的替代，必须记录版本与来源。
+
+academic:
+  primary:
+    - id: national_thesis_database
+      name: 台湾博硕士论文知识加值系统
+      grade: B
+      type: academic
+      priority: 1
+    - id: university_repository
+      name: 大学机构典藏
+      grade: B
+      type: academic
+      priority: 2
+  additional:
+    - id: academic_journal
+      name: 学术期刊与专书
+      grade: B
+      type: academic
+      priority: 3
+
+current_news:
+  preferred:
+    - id: reliable_national_media
+      name: 可靠全国性媒体
+      grade: C
+      type: media
+      priority: 1
+    - id: reliable_local_media
+      name: 可靠地方媒体
+      grade: C
+      type: media
+      priority: 2
+
+campaign:
+  grade: D
+  sources:
+    - id: campaign_official
+      name: 政党、候选人、竞选团队与相关利益方正式发布
+      type: campaign
+      priority: 1
+  notes: 只能作为 campaign_claim 或验证线索，不得单独形成结构性判断。
+
+social_unverified:
+  grade: E
+  notes: 只能作为未验证线索，不得单独形成结构性判断。
+
+adapters:
+  # V1.1 只定义接口与 fixtures；真实网站 Adapter 在运行环境外注入。
+  registered: []
+  planned:
+    - cec_open_data_adapter
+    - local_cec_adapter
+    - verified_public_dataset_adapter

@@ -8,11 +8,20 @@
 
 ### Spatial Variance
 
-衡量行政区内部候选人得票离散程度：
+衡量行政区内部候选人得票离散程度。V1.1 实现三种统计量：
+
+- `standard_deviation`
+- `coefficient_of_variation`（CV）
+- `IQR`
+
+规则：
+
+- 得票率较低时，优先参考 SD 或 IQR；
+- CV 只能作为辅助；
+- 必须记录 `metric_method`；
+- 不得因为 CV 高直接触发派系解释。
 
 `CV = standard_deviation(vote_share) / mean(vote_share)`
-
-也可使用标准差、极差、四分位距或变异系数。记录选用的统计量与原因。
 
 ### Neighbor Divergence
 
@@ -28,11 +37,17 @@
 
 ### Geographic Concentration
 
-衡量候选人得票或残差是否高度集中于少数区域：
+V1.1 同时比较：
 
-`Concentration = 票源前 N 个行政区得票 / 候选人总得票`
+- `CandidateVoteShareInArea`：候选人在该区的票源占比；
+- `ElectorateShareInArea`：该区 electorate 占全体 electorate 的比例。
 
-`N` 需明确。可与人口规模、行政区数量和候选人地缘基础一起判断。
+超额集中：
+
+`ExcessConcentration = CandidateVoteShareInArea - ElectorateShareInArea`
+
+避免把人口大区误判为政治集中区。`N`、`Vote Concentration`、`Electorate Concentration`
+与 `ExcessConcentration` 均须记录。
 
 ## 处理顺序
 

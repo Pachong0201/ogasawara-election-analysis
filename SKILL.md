@@ -1,7 +1,7 @@
 ---
 name: ogasawara-election-analysis
 description: 借鉴小笠原欣幸公开选举研究方法的台湾选举结构化分析 Skill。先建立历史基准，再寻找跨届、跨层级、空间与候选人残差，最后以地方知识与民调校准。不输出胜负预测、胜率或候选人排名。
-version: 1.0.0
+version: 1.1.0
 language: zh-TW
 entrypoint: SKILL.md
 ---
@@ -55,7 +55,65 @@ entrypoint: SKILL.md
 
 `最新民调` → `直接判断当前选情`
 
-## 五、执行流程
+## 五、运行模式与执行流程
+
+### 运行模式
+
+#### ONLINE MODE
+
+存在可用联网或搜索工具。允许：
+
+- 调用已注册的 `ElectionDataSource` 补齐缺失的稳定历史选举数据；
+- 调用已注册的 `RetrievalBackend` 进行最小充分地方知识检索；
+- 验证当前候选人、民调、公开支持、政党合作与竞选事件的新鲜度。
+
+禁止：
+
+- 每次调用都覆盖已验证历史数据；
+- 绕过 `runtime/source_registry.py` 直接写死特定网站爬虫；
+- 未经验证就把搜索结果写入长期知识库。
+
+#### OFFLINE MODE
+
+无联网能力。只能使用：
+
+- 本地历史选举数据；
+- 本地 `knowledge/` 知识库；
+- 本地 `cache/` 中仍在有效期内的动态资料；
+- 用户在本轮任务提供的资料。
+
+若必要资料缺失：
+
+- 不得伪装已完成联网检索；
+- 输出 `analysis_status: insufficient_data`；
+- 列出缺失项。
+
+### STEP 0：Data Preparation
+
+在任何完整选举结构分析开始前，先执行 Data Readiness Check。
+
+流程：
+
+1. 识别 `ElectionTask`：选举类型、目标年份、地区、分析层级、候选人。
+2. 调用 `runtime/data_readiness.py` 检查本地数据。
+3. 稳定历史数据优先读取 `data/elections/`；本地缺失且运行环境允许联网时，从 `config/data_sources.yaml` 的高优先级来源补齐并持久化。
+4. 动态资料必须检查 freshness，过期后重新验证。
+5. 数据不足时生成 Data Readiness Report，并标记 `ready`、`partial` 或 `insufficient`。
+6. 若 HARD REQUIRED 数据仍缺失，不得进行完整结构判断。
+7. 分析前生成 `Analysis Context`，LLM 只能基于该 context 生成最终结构分析。
+8. 每次运行生成 `analysis_manifest.json`，记录数据来源、文件、指标基准、新鲜度、缺失与警告。
+
+关联文件：
+
+- `runtime/data_readiness.py`
+- `runtime/election_loader.py`
+- `runtime/election_normalizer.py`
+- `runtime/freshness.py`
+- `runtime/analysis_context.py`
+- `config/data_sources.yaml`
+- `config/freshness.yaml`
+- `config/runtime.yaml`
+- `rules/data_acquisition.yaml`
 
 ### STEP 1：识别选举任务
 
@@ -169,7 +227,7 @@ entrypoint: SKILL.md
 
 民调模块永远放在结构分析之后。使用前按 `rules/poll_rules.yaml` 检查：
 
-`pollster`、`commissioner`、`method`、`sample`、`field_date`、`moe`、`undecided`。
+`pollster`、`commissioner`、`method`、`sample_size`、`sample_frame`、`field_start`、`field_end`、`moe`、`moe_applicable`、`undecided`。
 
 民调只用于检验当前状态是否偏离历史结构，不得替代历史结构。
 
@@ -289,9 +347,9 @@ Skill 调用的知识必须分成五层，禁止混用。完整定义见 `config
 13. 输出自主胜负概率；
 14. 给政治候选人进行综合评分、排名或推荐。
 
-## 十、V1.0 范围
+## 十、V1.0 / V1.1 范围
 
-第一阶段实现：
+V1.0 方法层实现：
 
 - 历史基准；
 - Electoral Swing；
@@ -301,6 +359,16 @@ Skill 调用的知识必须分成五层，禁止混用。完整定义见 `config
 - 民调规则；
 - 统一输出模板。
 
-第二阶段再增加村里／投票所空间分析、Neighbor Divergence、地方政治知识图谱、半自动历史知识检索和多县市横向比较。
+V1.1 数据与运行层增加：
+
+- Data Readiness Gate；
+- 本地优先的 Election Loader、Normalizer；
+- Matrix Builder 与 Metrics 实际计算；
+- Freshness 与动态缓存；
+- 最小充分地方知识检索；
+- Analysis Context 与 analysis_manifest.json；
+- CLI `readiness`、`build-matrix`、`metrics`、`context`。
+
+第二阶段再增加村里／投票所空间分析、Neighbor Divergence 自动化、地方政治知识图谱、半自动历史知识检索和多县市横向比较。
 
 `examples/yilan/` 只作为测试用例，不得成为 Skill 运行依赖。

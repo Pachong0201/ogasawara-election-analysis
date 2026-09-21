@@ -4,3 +4,12 @@ __pycache__/
 .venv/
 venv/
 .env
+
+# Runtime cache: keep directory placeholders and README only.
+cache/**/*.jsonl
+cache/**/*.json
+!cache/**/.gitkeep
+!cache/README.md
+
+# Generated provenance output
+analysis_manifest.json

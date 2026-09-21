@@ -1,4 +1,4 @@
-version: 1.0.0
+version: 1.1.0
 schema_name: election_record
 description: >
   选举事实库的单条记录。必须优先来自 A 级官方资料；用于建立历史基准、
@@ -21,6 +21,12 @@ required:
   - source_grade
   - boundary_version
   - time_scope
+  - retrieved_at
+  - verified_at
+  - source_id
+  - source_version
+  - raw_reference
+  - normalization_version
 properties:
   record_id:
     type: string
@@ -109,6 +115,30 @@ properties:
   time_scope:
     type: string
     description: 该记录适用的时间范围。
+  retrieved_at:
+    type: string
+    format: date-time
+    description: 本地首次取得该记录的日期时间。
+  verified_at:
+    type: string
+    format: date-time
+    description: 最近一次校验该记录的日期时间。
+  source_id:
+    type: string
+    description: 来源注册表中的 source id，例如 cec。
+  source_version:
+    type: string
+    description: 来源资料库或文件版本。
+  raw_reference:
+    type: string
+    description: 原始下载文件、页码、查询条件或纪录编号。
+  normalization_version:
+    type: string
+    description: 标准化逻辑版本。
+  validation_status:
+    type: string
+    enum: [pending, passed, failed]
+    description: 数据校验状态；failed 不得进入正式分析。
   notes:
     type: string
 

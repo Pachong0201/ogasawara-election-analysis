@@ -104,7 +104,7 @@ tests:
   - id: CASE-5
     input: 5 月电话民调 A 35%，8 月网络民调 A 42%，是不是上涨 7 个百分点？
     required_actions:
-      - 检查 pollster、commissioner、method、sample、field_date、moe、undecided。
+      - 检查 pollster、commissioner、method、sample_size、sample_frame、field_start、field_end、moe、moe_applicable、undecided。
       - 区分电话调查与网络调查。
     pass_criteria:
       - 不得直接计算趋势。

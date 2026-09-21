@@ -1,0 +1,7 @@
+version: 1.1.0
+last_verified_at: null
+description: >
+  行政区版本模板。V1.1 不预填未核实的行政区资料；运行前应由官方来源
+  或用户提供资料填充。regions 为空时 Data Readiness Gate 会将 geography
+  标记为缺失。
+regions: []

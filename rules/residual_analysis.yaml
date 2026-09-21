@@ -57,8 +57,10 @@ residual_types:
       - pollster
       - commissioner
       - method
-      - sample
-      - field_date
+      - sample_size
+      - sample_frame
+      - field_start
+      - field_end
       - moe
       - undecided
     rules:

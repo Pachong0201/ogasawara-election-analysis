@@ -22,11 +22,16 @@ class TestSkillStructure(unittest.TestCase):
         required = [
             "SKILL.md",
             "README.md",
+            "requirements.txt",
             "config/source_priority.yaml",
             "config/evidence_grades.yaml",
             "config/analysis_thresholds.yaml",
             "config/knowledge_layers.yaml",
+            "config/data_sources.yaml",
+            "config/freshness.yaml",
+            "config/runtime.yaml",
             "rules/historical_baseline.yaml",
+            "rules/data_acquisition.yaml",
             "rules/residual_analysis.yaml",
             "rules/poll_rules.yaml",
             "rules/local_knowledge_rules.yaml",
@@ -43,6 +48,24 @@ class TestSkillStructure(unittest.TestCase):
             "methods/spatial_divergence.md",
             "methods/incumbent_transfer.md",
             "methods/third_force.md",
+            "runtime/__init__.py",
+            "runtime/models.py",
+            "runtime/data_readiness.py",
+            "runtime/source_registry.py",
+            "runtime/election_loader.py",
+            "runtime/election_normalizer.py",
+            "runtime/matrix_builder.py",
+            "runtime/metrics.py",
+            "runtime/knowledge_loader.py",
+            "runtime/freshness.py",
+            "runtime/analysis_context.py",
+            "runtime/cli.py",
+            "tests/test_data_readiness.py",
+            "tests/test_freshness.py",
+            "tests/test_election_loader.py",
+            "tests/test_matrix_builder.py",
+            "tests/test_metrics.py",
+            "tests/test_analysis_context.py",
             "examples/yilan/test_cases.yaml",
             "examples/yilan/README.md",
             "tests/README.md",
@@ -64,7 +87,7 @@ class TestCoreContract(unittest.TestCase):
     def test_skill_frontmatter_name(self):
         text = read_text("SKILL.md")
         self.assertIn("name: ogasawara-election-analysis", text)
-        self.assertIn("version: 1.0.0", text)
+        self.assertIn("version: 1.1.0", text)
 
     def test_analysis_path_is_historical_first(self):
         text = read_text("SKILL.md")

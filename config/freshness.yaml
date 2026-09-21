@@ -1,0 +1,70 @@
+version: 1.0.0
+name: freshness
+purpose: >
+  定义不同资料的本地信任期限。历史稳定数据可永久保存；
+  动态资料必须定期重新验证。
+
+defaults:
+  now_field: last_verified_at
+  fallback_now_field: retrieved_at
+  stale_status: stale
+  fresh_status: fresh
+  revalidation_status: needs_revalidation
+  unknown_status: unknown
+
+policies:
+  historical_election:
+    ttl: permanent
+    revalidate: false
+    persist: true
+  administrative_boundary:
+    ttl_days: 365
+    revalidate: true
+    persist: true
+  historical_academic:
+    ttl: permanent
+    current_use_requires_revalidation: true
+    persist: true
+  candidate_profile:
+    ttl_days: 90
+    revalidate: true
+    persist: false
+  current_office:
+    ttl_days: 30
+    revalidate: true
+    persist: false
+  endorsement:
+    ttl_days: 30
+    revalidate: true
+    persist: false
+  party_cooperation:
+    ttl_days: 14
+    revalidate: true
+    persist: false
+  campaign_event:
+    ttl_days: 14
+    revalidate: true
+    persist: false
+  poll:
+    ttl_days: 30
+    revalidate: true
+    persist: false
+  candidate_registration:
+    ttl: election_cycle
+    revalidate: true
+    persist: false
+  local_relationship:
+    ttl_days: 365
+    revalidate: true
+    persist: true
+  political_claim:
+    ttl_days: 90
+    revalidate: true
+    persist: false
+
+dynamic_required_fields:
+  - retrieved_at
+  - last_verified_at
+  - expires_at
+  - source_id
+  - source_grade
