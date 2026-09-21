@@ -8,6 +8,7 @@ from tests.fixtures.helpers import (
     election_records_for_year,
     temp_repo,
     write_election_records,
+    write_geography,
 )
 
 
@@ -118,6 +119,28 @@ class TestElectionLoader(unittest.TestCase):
             self.assertEqual(
                 {record["jurisdiction"] for record in persisted},
                 {"甲鄉", "乙鄉"},
+            )
+
+
+
+    def test_unknown_child_region_fails_geography_validation(self):
+        with temp_repo() as root:
+            write_geography(root)
+            records = election_records_for_year("county_mayor", 2022, DEFAULT_JURISDICTION)
+            for record in records:
+                if record["jurisdiction"] == "甲鄉":
+                    record["jurisdiction"] = "不存在鄉"
+                    record["record_id"] = record["record_id"].replace("甲鄉", "不存在鄉")
+            write_election_records(
+                root, "county_mayor", 2022, DEFAULT_JURISDICTION, records
+            )
+            loader = ElectionLoader(root, mode="offline")
+            result = loader.load_election(
+                "county_mayor", 2022, DEFAULT_JURISDICTION, "township_district"
+            )
+            self.assertEqual(result.status, "invalid")
+            self.assertTrue(
+                any("child region not found" in error for error in result.errors)
             )
 
 
