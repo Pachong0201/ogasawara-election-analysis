@@ -1,0 +1,94 @@
+name: Runtime online end-to-end
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "runtime/pipeline.py"
+      - "runtime/data_readiness.py"
+      - "runtime/election_loader.py"
+      - "runtime/cec_open_data.py"
+      - "runtime/cec_current_candidates.py"
+      - "runtime/tvbs_poll_center.py"
+      - "runtime/freshness.py"
+      - "runtime/source_registry.py"
+      - "config/data_sources.yaml"
+      - "config/freshness.yaml"
+      - ".github/workflows/runtime-online-e2e.yml"
+  workflow_dispatch:
+  schedule:
+    - cron: "11 6 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  yilan-online:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run empty-root ONLINE pipeline
+        run: |
+          python - <<'PY'
+          import datetime as dt
+          from pathlib import Path
+          from tempfile import TemporaryDirectory
+
+          from runtime.models import ElectionTask
+          from runtime.pipeline import AnalysisPipeline
+
+          with TemporaryDirectory() as tmp:
+              pipeline = AnalysisPipeline(Path(tmp), mode="online")
+              context = pipeline.run(
+                  ElectionTask(
+                      election_type="county_mayor",
+                      target_year=2026,
+                      jurisdiction="宜兰县",
+                      analysis_level="township_district",
+                  ),
+                  allow_online=True,
+                  write_manifest=True,
+                  manifest_path=Path(tmp) / "analysis_manifest.json",
+              )
+
+              analysis = context.analysis_context
+              readiness = analysis["readiness"]
+
+              assert readiness["status"] == "READY", readiness
+              assert readiness["required"]["historical_same_type"]["found_count"] == 3
+              assert readiness["required"]["presidential"]["found_count"] == 3
+              assert readiness["required"]["regional_legislator"]["found_count"] == 3
+              assert readiness["required"]["current_candidate_list"]["registered_count"] >= 1
+
+              assert analysis["polls"], "TVBS primary poll should be cached and exposed"
+              assert all("freshness_status" in poll for poll in analysis["polls"])
+              assert analysis["evidence_summary"]["fresh_poll_count"] == 0
+              assert analysis["evidence_summary"]["stale_poll_count"] >= 1
+              assert analysis["evidence_summary"]["current_poll_calibration_available"] is False
+              assert any(
+                  "must not calibrate the current state" in item
+                  for item in analysis["unknowns"]
+              )
+
+              manifest = context.analysis_manifest
+              assert manifest["skill_version"] == "1.2.0"
+              assert manifest["files_used"]
+              assert (Path(tmp) / "analysis_manifest.json").exists()
+
+              print("readiness=", readiness["status"])
+              print("historical_periods=", readiness["required"]["historical_same_type"]["found_years"])
+              print("president_periods=", readiness["required"]["presidential"]["found_years"])
+              print("legislator_periods=", readiness["required"]["regional_legislator"]["found_years"])
+              print("registered_candidates=", readiness["required"]["current_candidate_list"]["registered_count"])
+              print("poll_count=", len(analysis["polls"]))
+              print("poll_statuses=", [poll["freshness_status"] for poll in analysis["polls"]])
+              print("current_poll_calibration_available=", analysis["evidence_summary"]["current_poll_calibration_available"])
+          PY
