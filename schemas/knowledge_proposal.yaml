@@ -12,6 +12,7 @@ required:
   - target_record
   - evidence_lead_ids
   - contradiction_check_completed
+  - scope_boundary
 properties:
   proposal_id:
     type: string
