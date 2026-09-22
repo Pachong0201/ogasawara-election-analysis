@@ -27,6 +27,7 @@ class TestSkillStructure(unittest.TestCase):
             "config/evidence_grades.yaml",
             "config/analysis_thresholds.yaml",
             "config/knowledge_layers.yaml",
+            "config/knowledge_promotion.yaml",
             "config/data_sources.yaml",
             "config/freshness.yaml",
             "config/runtime.yaml",
@@ -43,6 +44,8 @@ class TestSkillStructure(unittest.TestCase):
             "schemas/political_claim.yaml",
             "schemas/local_relationship.yaml",
             "schemas/retrieval_lead.yaml",
+            "schemas/knowledge_proposal.yaml",
+            "schemas/knowledge_promotion_receipt.yaml",
             "methods/electoral_swing.md",
             "methods/split_ticket.md",
             "methods/candidate_residual.md",
@@ -61,6 +64,7 @@ class TestSkillStructure(unittest.TestCase):
             "runtime/matrix_builder.py",
             "runtime/metrics.py",
             "runtime/knowledge_loader.py",
+            "runtime/knowledge_builder.py",
             "runtime/host_retrieval.py",
             "runtime/freshness.py",
             "runtime/analysis_context.py",
@@ -77,6 +81,7 @@ class TestSkillStructure(unittest.TestCase):
             "tests/test_analysis_context.py",
             "tests/test_pipeline.py",
             "tests/test_host_retrieval.py",
+            "tests/test_knowledge_builder.py",
             "examples/yilan/test_cases.yaml",
             "examples/yilan/README.md",
             "tests/README.md",
@@ -98,7 +103,7 @@ class TestCoreContract(unittest.TestCase):
     def test_skill_frontmatter_name(self):
         text = read_text("SKILL.md")
         self.assertIn("name: ogasawara-election-analysis", text)
-        self.assertIn("version: 1.2.0", text)
+        self.assertIn("version: 1.3.0", text)
 
     def test_analysis_path_is_historical_first(self):
         text = read_text("SKILL.md")
@@ -171,6 +176,22 @@ class TestCoreContract(unittest.TestCase):
         self.assertEqual(len(conditions), 4)
         self.assertTrue(local["stop_conditions"]["all_must_be_met"])
         self.assertIn("当前只能确认票型异常", local["stop_conditions"]["if_not_met"]["output"])
+
+
+    def test_v13_knowledge_promotion_policy_is_fail_closed(self):
+        policy = load_yaml("config/knowledge_promotion.yaml")
+        grade_policy = policy["source_gate"]["grade_policy"]
+        self.assertFalse(grade_policy["D"]["promotable"])
+        self.assertFalse(grade_policy["E"]["promotable"])
+        self.assertEqual(grade_policy["C"]["minimum_sources"], 2)
+        self.assertTrue(grade_policy["C"]["require_distinct_independence_key"])
+        self.assertEqual(
+            policy["source_gate"]["contradiction_policy"]["verified_ABC_contradiction"],
+            "requires_review",
+        )
+        self.assertFalse(
+            policy["persistence"].get("auto_promote_to_knowledge", False)
+        )
 
     def test_methods_contain_required_concepts(self):
         required = {
