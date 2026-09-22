@@ -1,4 +1,4 @@
-"""End-to-end orchestration for the V1.3 runtime.
+"""End-to-end orchestration for the V1.4 runtime.
 
 The pipeline does not generate a political verdict. It prepares a validated,
 traceable Analysis Context that a report writer may use under SKILL.md rules.
@@ -13,6 +13,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 import yaml
 
 from .analysis_context import AnalysisContextBuilder
+from .campaign_state import CampaignStateBuilder
 from .data_readiness import DataReadinessGate
 from .election_loader import ElectionLoader, election_file_path, load_jsonl
 from .freshness import evaluate_records
@@ -58,7 +59,13 @@ class AnalysisPipeline:
             retrieval_backend=retrieval_backend,
             mode=mode,
         )
-        self.context_builder = AnalysisContextBuilder(self.repo_root, skill_version="1.3.0")
+        self.campaign_state_builder = CampaignStateBuilder(
+            self.repo_root,
+            retrieval_backend=retrieval_backend,
+            mode=mode,
+            config_path=runtime_config_path,
+        )
+        self.context_builder = AnalysisContextBuilder(self.repo_root, skill_version="1.4.0")
         self.runtime_config = self._load_runtime_config()
 
     def _load_runtime_config(self) -> Dict[str, Any]:
@@ -319,58 +326,133 @@ class AnalysisPipeline:
             "candidate_residuals": self._candidate_residuals(task, same_type, president),
             "spatial_anomalies": self._spatial_anomalies(same_type),
         }
-        triggered = self._triggered(metrics)
+        historical_triggers = self._triggered(metrics)
 
-        regions = sorted({
-            str(item.get("region") or "").split("|")[0]
-            for item in triggered
-            if str(item.get("region") or "").strip()
-        })
-        questions = self.knowledge_loader.build_research_questions(triggered) if triggered else []
-        local_knowledge = self.knowledge_loader.load(
-            task.jurisdiction,
-            regions=regions or None,
-            research_questions=questions,
-            allow_online=online and bool(triggered),
-        )
-
+        # V1.4 builds the current campaign state before local-knowledge retrieval.
+        # This makes recent campaign changes a first-class trigger rather than an
+        # appendix added after the historical analysis.
         polls_result = self.loader.load_polls(jurisdiction=task.jurisdiction)
         polls = [dict(item) for item in polls_result.get("records", [])]
-        poll_freshness = evaluate_records(polls, kind="poll") if polls else {"fresh": 0, "stale": 0, "unknown": 0, "records": []}
+        poll_freshness = (
+            evaluate_records(polls, kind="poll")
+            if polls
+            else {"fresh": 0, "stale": 0, "unknown": 0, "records": []}
+        )
         for status in poll_freshness.get("records", []):
             index = int(status.get("index", -1))
             if 0 <= index < len(polls):
                 polls[index]["freshness_status"] = status.get("status")
                 expires_at = status.get("expires_at")
-                polls[index]["freshness_expires_at"] = expires_at.isoformat() if hasattr(expires_at, "isoformat") else expires_at
-        events = self._load_events(task.jurisdiction)
-        current_candidates = readiness.available.get("current_candidates", {}).get("verified_candidates", [])
+                polls[index]["freshness_expires_at"] = (
+                    expires_at.isoformat()
+                    if hasattr(expires_at, "isoformat")
+                    else expires_at
+                )
+
+        cached_events = self._load_events(task.jurisdiction)
+        current_candidates = readiness.available.get(
+            "current_candidates", {}
+        ).get("verified_candidates", [])
+        campaign_settings = self.runtime_config.get("campaign_state", {}) or {}
+        campaign_state = self.campaign_state_builder.build(
+            task,
+            current_candidates=current_candidates,
+            events=cached_events,
+            polls=polls,
+            allow_online=online,
+            persist_snapshot=bool(campaign_settings.get("persist_snapshots", True)),
+        )
+        campaign_triggers = list(campaign_state.get("campaign_change_triggers", []))
+        current_events = list(campaign_state.get("events_30d", []))
+
+        # Historical residuals and live campaign changes can independently
+        # trigger local research. A county-level campaign trigger must not
+        # accidentally filter out all sub-county knowledge.
+        historical_regions = {
+            str(item.get("region") or "").split("|")[0]
+            for item in historical_triggers
+            if str(item.get("region") or "").strip()
+        }
+        campaign_regions = {
+            str(item.get("region") or "").strip()
+            for item in campaign_triggers
+            if str(item.get("region") or "").strip()
+            and str(item.get("region") or "").strip() != task.jurisdiction
+        }
+        regions = sorted(historical_regions | campaign_regions)
+
+        questions: List[str] = []
+        if historical_triggers:
+            questions.extend(
+                self.knowledge_loader.build_research_questions(historical_triggers)
+            )
+        questions.extend(
+            str(item)
+            for item in campaign_state.get("research_questions", [])
+            if str(item).strip()
+        )
+        questions = list(dict.fromkeys(questions))
+
+        combined_trigger_count = len(historical_triggers) + len(campaign_triggers)
+        local_knowledge = self.knowledge_loader.load(
+            task.jurisdiction,
+            regions=regions or None,
+            research_questions=questions,
+            allow_online=online and combined_trigger_count > 0,
+        )
 
         unknowns: List[str] = []
         if readiness.status == "INSUFFICIENT":
-            unknowns.append("hard-required data are incomplete; full structural analysis is not allowed")
-        if triggered and not local_knowledge.get("sufficient"):
-            unknowns.append("local anomalies were detected but minimum sufficient local knowledge was not established")
+            unknowns.append(
+                "hard-required data are incomplete; full structural analysis is not allowed"
+            )
+        if combined_trigger_count and not local_knowledge.get("sufficient"):
+            unknowns.append(
+                "historical/campaign triggers exist but minimum sufficient current local knowledge was not established"
+            )
+        if not current_events:
+            unknowns.append(
+                "no verified campaign event dated within the latest 30-day window is available; current campaign-state interpretation is limited"
+            )
         if not polls:
-            unknowns.append("no validated poll cache is available; poll calibration is omitted")
+            unknowns.append(
+                "no validated poll cache is available; poll calibration is omitted"
+            )
         elif int(poll_freshness.get("fresh", 0)) == 0:
             unknowns.append(
                 "no fresh validated poll is available; stale poll records may be retained as dated campaign-period evidence but must not calibrate the current state"
             )
 
-        warnings = list(readiness.warnings) + load_warnings + list(local_knowledge.get("warnings", []))
+        warnings = (
+            list(readiness.warnings)
+            + load_warnings
+            + list(local_knowledge.get("warnings", []))
+            + list(campaign_state.get("warnings", []))
+        )
         if polls_result.get("invalid"):
-            warnings.append(f"{len(polls_result['invalid'])} cached poll record(s) failed validation")
+            warnings.append(
+                f"{len(polls_result['invalid'])} cached poll record(s) failed validation"
+            )
         if poll_freshness.get("stale"):
-            warnings.append(f"{poll_freshness['stale']} poll record(s) are stale and must not be presented as current polling")
+            warnings.append(
+                f"{poll_freshness['stale']} poll record(s) are stale and must not be presented as current polling"
+            )
 
         baseline_methods = {
             "historical_matrix": "same-type elections at aligned geographic level",
             "candidate_residual": "bracketing president average when both surrounding elections exist",
             "split_ticket": "same-day regional legislator minus president vote share",
+            "campaign_state": "dated 7/14/30-day event windows plus previous-snapshot delta",
+            "poll_trend": "same pollster + method + sample frame + question wording only",
         }
 
-        sources = self._source_summary(records_by_type, current_candidates + polls + events)
+        source_records = (
+            current_candidates
+            + polls
+            + current_events
+            + list(campaign_state.get("retrieval_leads", []))
+        )
+        sources = self._source_summary(records_by_type, source_records)
         context = self.context_builder.build(
             task=task,
             readiness=readiness,
@@ -383,13 +465,27 @@ class AnalysisPipeline:
             metrics=metrics,
             local_knowledge=local_knowledge,
             current_candidates=current_candidates,
-            current_events=events,
+            current_events=current_events,
+            current_campaign_state=campaign_state,
             polls=polls,
             evidence_summary={
-                "triggered_anomaly_count": len(triggered),
+                "triggered_anomaly_count": len(historical_triggers),
+                "campaign_change_trigger_count": len(campaign_triggers),
+                "combined_local_research_trigger_count": combined_trigger_count,
+                "campaign_as_of": campaign_state.get("as_of"),
+                "campaign_window_counts": campaign_state.get("window_counts", {}),
+                "campaign_snapshot_delta": campaign_state.get(
+                    "delta_from_previous_snapshot", {}
+                ),
+                "same_series_poll_trend_count": len(
+                    campaign_state.get("poll_same_series_trends", [])
+                ),
                 "local_knowledge_sufficient": bool(local_knowledge.get("sufficient")),
                 "poll_freshness": poll_freshness,
-                "current_poll_calibration_available": int(poll_freshness.get("fresh", 0)) > 0,
+                "current_poll_calibration_available": int(
+                    poll_freshness.get("fresh", 0)
+                )
+                > 0,
                 "fresh_poll_count": int(poll_freshness.get("fresh", 0)),
                 "stale_poll_count": int(poll_freshness.get("stale", 0)),
             },
