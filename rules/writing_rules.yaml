@@ -5,73 +5,68 @@ purpose: >
   事实嵌入判断，县市总体判断下钻到具体地区。
 
 default_output_sections:
-  - key: core_judgement
+  - key: live_core_judgement
     title: 核心判断
     length: 150-250字
-    must_answer: 截至 as_of 当前选战处于什么阶段、最近发生了什么变化、这些变化是否触及历史结构。
-    first_sentence_rule: 必须从当前竞争结构或最近变化切入，不得从历史沿革或单一民调数字起笔。
-  - key: recent_campaign_delta
-    title: 一、最近30／14／7日选战发生了什么变化
+    must_answer: 截至 as_of，当前选战处于什么状态，最近发生的变化是否触及原有结构。
+    first_sentence_rule: 不得从历史沿革或单一民调数字开始。
+  - key: current_campaign_state
+    title: 一、截至目前选战打到哪里
     must_analyze:
-      - 候选人格局
-      - 竞选组织与地方公职公开支持
-      - 政党合作或联盟变化
-      - 政策、争议、司法与重大地方议题
-      - 新增民调及同源同方法调查变化
-    rule: 先写已验证变化，再说明哪些只是 campaign_claim 或 retrieval lead。
-  - key: historical_geography
-    title: 二、这些变化放回历史结构意味着什么
-    rule: >
-      历史基准作为参照系，不得成为正文主角。至少使用三届同类型选举，
-      说明当前变化是延续、回摆还是尚不足以判断。
-  - key: change_since_last
-    title: 二之一、与上一轮选举及上一快照相比发生了什么变化
-    rule: >
-      同时区分“相对上一届正式选举的结构变化”和“相对上一 Campaign State Snapshot 的近期变化”；
-      不得把二者混为同一种 swing。
-
+      - 当前候选人格局与提名/登记状态
+      - 最近7日、14日、30日可验证变化
+      - 与上一Campaign State Snapshot相比的新变化
+  - key: live_changes
+    title: 二、最近哪些变化真正值得关注
+    must_distinguish:
+      - 已验证事件
+      - 阵营主张
+      - 未验证线索
+      - 同源同方法民调变化
+    rule: 只把变化当作研究触发，不直接当作因果证明。
+  - key: historical_reference
+    title: 三、这些变化相对历史结构意味着什么
+    rule: 历史基准作为参照系，不得取代当前选战叙述。
   - key: where_change_happened
-    title: 三、当前变化主要发生在哪里
-    must_identify: 3—8个关键乡镇市区（资料足够时）
-    rule: 结合历史残差、地方组织与当前事件选择地区，不得只按人口机械排序。
+    title: 四、变化主要发生在哪里
+    must_identify: 3—8个关键乡镇市区或明确说明现阶段尚无区级当前资料。
   - key: candidate_local_base
-    title: 四、候选人的地方政治基础目前如何变化
+    title: 五、候选人及地方组织如何变化
     must_analyze:
       - 长期经营
-      - 历次参选
-      - 地方组织
+      - 竞选组织
+      - 地方公职公开支持
       - 候选人残差
-      - 本轮新增支持或组织变化
+      - 现任交棒或组织移转
   - key: third_force
-    title: 五、第三势力和中间票当前如何重新组合
-    rule: 不得机械加票，不得直接写第三势力票将转给某方。
+    title: 六、第三势力和中间票如何重新组合
+    rule: 不得机械加票，不得预设流向。
   - key: poll_calibration
-    title: 六、最新民调是否验证当前变化
+    title: 七、当前民调是否验证选战变化
     must_compare:
-      - 调查方法
-      - 同一调查系列的跨期变化
-      - 交叉表
+      - 同一调查系列的可比变化
+      - 不同调查方法之间的不可比限制
       - 未决定比例
       - 样本限制
-    rule: 不同调查系列不得拼接成趋势；同源同方法变化也不得直接写成胜负趋势。
-  - key: structural_factors
-    title: 七、当前竞争结构由哪些因素共同形成
-    must_reduce_to: 2—4个决定性结构因素
+  - key: structural_synthesis
+    title: 八、当前竞争结构由哪些因素共同形成
+    must_reduce_to: 2—4个经证据支持的结构因素
   - key: watchlist
-    title: 八、下一阶段需要观察什么
+    title: 九、下一阶段观察什么
     allowed_items:
-      - 同一调查系列的新一轮民调
-      - 第三势力支持者交叉表
+      - 可公开验证的新事件
+      - 同源后续民调
       - 地方人物公开表态
-      - 候选人在关键乡镇活动和组织变化
-      - 新的乡镇或村里级数据
-      - 已发生重大事件是否产生后续组织或议题变化
+      - 竞选组织与政党合作变化
+      - 关键行政区的新资料
     forbidden_items:
       - 某候选人必须拿到多少票才能获胜
       - 胜负概率
       - 候选人排名
 
 style:
+  current_campaign_first: true
+  require_as_of: true
   judgment_first: true
   small_entry_point: true
   facts_embedded_in_judgement: true
@@ -116,7 +111,9 @@ banned_expressions:
   - 某年龄层都支持某候选人
 
 quality_checks:
-  - 核心判断是否直接回答结构问题，而不是从民调数字开始。
+  - 核心判断是否先回答截至 as_of 的当前选战状态，而不是从历史沿革或民调数字开始。
+  - 是否明确区分最近7/14/30天变化与长期历史基准。
+  - 是否说明与上一Campaign State Snapshot相比新增了什么。
   - 是否明确标注 as_of，并先回答当前选战与最近30／14／7日变化。
   - 是否至少使用三届同类型选举建立历史基准。
   - 是否下钻到乡镇市区，必要时进一步下钻。
