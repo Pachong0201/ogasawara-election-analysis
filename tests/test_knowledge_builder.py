@@ -5,6 +5,7 @@ import yaml
 
 from runtime.election_loader import load_jsonl, write_jsonl
 from runtime.knowledge_builder import KnowledgePromotionBuilder
+from runtime.knowledge_loader import KnowledgeLoader
 from tests.fixtures.helpers import temp_repo
 
 
@@ -246,6 +247,15 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
                 record["structural_use"], "can_support_current_interpretation"
             )
             self.assertEqual(len(record["verification_evidence"]), 1)
+
+            local = KnowledgeLoader(root, mode="offline").load_local_knowledge(
+                COUNTY,
+                regions=["甲鄉"],
+                research_questions=[QUESTION],
+            )
+            self.assertTrue(local["sufficient"])
+            self.assertEqual(local["current_evidence_count"], 1)
+            self.assertTrue(local["question_covered"])
 
     def test_missing_structured_fields_is_rejected_without_inference(self):
         with temp_repo() as root:
