@@ -343,6 +343,7 @@ class KnowledgePromotionBuilder:
         county = str(county_override or proposal.get("county") or "").strip()
         target_type = str(proposal.get("target_type") or "").strip()
         target_record = dict(proposal.get("target_record") or {})
+        contradiction_check_completed = proposal.get("contradiction_check_completed") is True
 
         if not proposal_id:
             reasons.append("missing proposal_id")
@@ -368,6 +369,8 @@ class KnowledgePromotionBuilder:
 
         if county_override and proposal.get("county") and str(proposal.get("county")) != county_override:
             reasons.append("proposal county does not match --county")
+        if not contradiction_check_completed:
+            reasons.append("contradiction_check_completed must be true before promotion")
 
         missing = self._required_fields(target_type, target_record)
         if missing:
@@ -438,6 +441,7 @@ class KnowledgePromotionBuilder:
             "reasons": reasons,
             "warnings": warnings,
             "research_questions": research_questions,
+            "scope_boundary": str(proposal.get("scope_boundary") or "").strip(),
             "independent_source_count": int(evidence.get("independent_source_count") or 0),
             "evidence_grades": list(evidence.get("grades") or []),
         }
@@ -463,6 +467,8 @@ class KnowledgePromotionBuilder:
         record["source_reference"] = source_descriptors[0]["reference"]
         record["independent_source_count"] = evaluation["independent_source_count"]
         record["research_questions"] = evaluation["research_questions"]
+        if evaluation.get("scope_boundary"):
+            record["scope_boundary"] = evaluation["scope_boundary"]
         record["promotion_provenance"] = {
             "proposal_id": evaluation["proposal_id"],
             "promoted_at": now,
@@ -625,6 +631,29 @@ class KnowledgePromotionBuilder:
                     decision = "requires_review"
                     evaluation["reasons"].append(str(exc))
 
+        record_hash = (
+            hashlib.sha256(_canonical_record(record).encode("utf-8")).hexdigest()
+            if record
+            else ""
+        )
+        evidence_snapshot = [
+            {
+                "lead_id": str(lead.get("lead_id") or lead.get("url") or ""),
+                "source_grade": str(lead.get("source_grade") or ""),
+                "verification_status": str(lead.get("verification_status") or ""),
+                "url": str(lead.get("url") or ""),
+                "independence_key": str(lead.get("independence_key") or ""),
+            }
+            for lead in evaluation["support_leads"]
+        ]
+        evidence_hash = hashlib.sha256(
+            json.dumps(
+                evidence_snapshot,
+                ensure_ascii=False,
+                sort_keys=True,
+            ).encode("utf-8")
+        ).hexdigest() if evidence_snapshot else ""
+
         receipt = {
             "proposal_id": evaluation["proposal_id"],
             "county": county,
@@ -640,6 +669,8 @@ class KnowledgePromotionBuilder:
             "evidence_grades": evaluation["evidence_grades"],
             "independent_source_count": evaluation["independent_source_count"],
             "research_questions": evaluation["research_questions"],
+            "record_sha256": record_hash,
+            "evidence_snapshot_sha256": evidence_hash,
             "reasons": evaluation["reasons"],
             "warnings": warnings,
             "knowledge_builder_version": BUILDER_VERSION,
