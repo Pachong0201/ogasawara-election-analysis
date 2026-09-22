@@ -44,6 +44,11 @@ properties:
   content:
     type: string
     description: 可选；宿主需要二次处理时提供的短文本片段。
+  independence_key:
+    type: string
+    description: >
+      用于判断来源独立性的显式键。两个 C 级来源只有在 independence_key
+      不同时才可被 Builder 视为独立；不得仅凭不同 URL 推断独立。
   independent_source_count:
     type: integer
     minimum: 0
