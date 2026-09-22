@@ -439,6 +439,7 @@ V1.2 真实历史数据源增加：
 V1.3 知识晋升与地方知识 Builder 增加：
 
 - `KnowledgePromotionBuilder`：确定性执行 evidence、time、freshness、contradiction 与字段门禁；
+- `knowledge-ingest` CLI：将宿主 Web/Search JSON/JSONL 只导入 retrieval staging；
 - `knowledge-promote` CLI：从 JSON/JSONL proposal inbox 晋升知识，支持 dry-run；
 - `knowledge-build` CLI：重建县市知识 package；
 - retrieval lead 与 L1-L5 长期知识之间增加 pre-knowledge staging，不新增第六知识层；
