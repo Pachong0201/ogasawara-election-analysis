@@ -1,0 +1,59 @@
+version: 1.4.0
+name: campaign_snapshot
+type: object
+required:
+  - snapshot_version
+  - task_id
+  - jurisdiction
+  - election_type
+  - target_year
+  - as_of
+  - campaign_stage
+  - candidate_roster
+  - events_7d
+  - events_14d
+  - events_30d
+  - campaign_change_triggers
+  - poll_same_series_trends
+  - delta_from_previous_snapshot
+fields:
+  snapshot_version:
+    type: string
+  task_id:
+    type: string
+  jurisdiction:
+    type: string
+  election_type:
+    type: string
+  target_year:
+    type: integer
+  as_of:
+    type: date
+  campaign_stage:
+    enum:
+      - candidate_formation
+      - nomination_complete
+      - registered_general_campaign
+      - unknown
+  candidate_roster:
+    type: array
+  events_7d:
+    type: array
+  events_14d:
+    type: array
+  events_30d:
+    type: array
+  retrieval_leads:
+    type: array
+  campaign_change_triggers:
+    type: array
+  research_questions:
+    type: array
+  poll_same_series_trends:
+    type: array
+  delta_from_previous_snapshot:
+    type: object
+rules:
+  - lead_only 不得写成 verified event。
+  - 无 event/publish date 的资料不得进入 7/14/30 日窗口。
+  - 快照只描述当前状态与变化，不输出胜负概率、候选人排名或推荐。
