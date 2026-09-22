@@ -1,4 +1,4 @@
-"""End-to-end orchestration for the V1.1.1 runtime.
+"""End-to-end orchestration for the V1.2 runtime.
 
 The pipeline does not generate a political verdict. It prepares a validated,
 traceable Analysis Context that a report writer may use under SKILL.md rules.
@@ -58,7 +58,7 @@ class AnalysisPipeline:
             retrieval_backend=retrieval_backend,
             mode=mode,
         )
-        self.context_builder = AnalysisContextBuilder(self.repo_root, skill_version="1.1.1")
+        self.context_builder = AnalysisContextBuilder(self.repo_root, skill_version="1.2.0")
         self.runtime_config = self._load_runtime_config()
 
     def _load_runtime_config(self) -> Dict[str, Any]:
