@@ -1,4 +1,4 @@
-version: 1.0.0
+version: 1.3.0
 name: local_knowledge_rules
 framework: Minimum Sufficient Local Knowledge
 purpose: >
@@ -74,6 +74,34 @@ search_stages:
       - last_verified_at
       - source_grade
       - current_status
+
+promotion_stage:
+  position: after_retrieval_before_long_term_use
+  input:
+    - cache/retrieval/<county>.jsonl
+    - structured knowledge proposal
+  output:
+    - knowledge/historical/<county>/claims.jsonl
+    - knowledge/local/<county>/relationships.jsonl
+    - knowledge/local/<county>/candidates.jsonl
+    - knowledge/local/<county>/issues.jsonl
+    - cache/knowledge_promotion/<county>.jsonl
+  hard_gates:
+    - proposal 必须显式声明 target_type 与完整 target_record；Builder 不从摘要自动补齐关系。
+    - evidence lead 必须 verification_status=verified 且有可追溯 URL/reference。
+    - A/B 可单源满足基础门槛；C 必须两个独立 independence_key；D/E 不可晋升。
+    - contradiction_check_completed=true。
+    - scope_boundary 非空。
+    - 已验证 A/B/C 相反证据存在时 decision=requires_review。
+    - 当前 L3 记录必须通过 freshness。
+  idempotence:
+    rule: 同一 record_id 重跑不得重复写入。
+    conflict: 同 ID 内容变化且无法证明新记录更新时，转 requires_review。
+  package_builder:
+    path: knowledge/counties/<county>/
+    rule: >
+      package_manifest、evidence_index、unresolved_questions 与 political_ecology
+      只从已晋升结构化记录生成索引，不得创建新政治事实或因果判断。
 
 evidence_requirements:
   acceptable_for_structural_explanation:
