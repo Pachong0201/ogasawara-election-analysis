@@ -42,6 +42,7 @@ class TestSkillStructure(unittest.TestCase):
             "schemas/candidate.yaml",
             "schemas/poll.yaml",
             "schemas/political_claim.yaml",
+            "schemas/historical_claim.yaml",
             "schemas/local_relationship.yaml",
             "schemas/retrieval_lead.yaml",
             "schemas/knowledge_proposal.yaml",
