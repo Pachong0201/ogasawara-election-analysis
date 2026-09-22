@@ -1,1 +1,2 @@
 PyYAML>=6.0
+pdfplumber>=0.11,<1.0
