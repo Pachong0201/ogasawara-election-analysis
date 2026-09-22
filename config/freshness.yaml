@@ -34,19 +34,23 @@ policies:
     revalidate: true
     persist: false
   endorsement:
-    ttl_days: 30
+    ttl_days: 14
     revalidate: true
     persist: false
   party_cooperation:
-    ttl_days: 14
+    ttl_days: 7
     revalidate: true
     persist: false
   campaign_event:
-    ttl_days: 14
+    ttl_days: 7
     revalidate: true
     persist: false
   poll:
     ttl_days: 30
+    revalidate: true
+    persist: false
+  campaign_snapshot:
+    ttl_days: 1
     revalidate: true
     persist: false
   candidate_registration:
