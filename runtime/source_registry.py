@@ -128,6 +128,24 @@ class SourceRegistry:
         if adapters:
             for adapter in adapters:
                 self.register(adapter)
+        self._register_configured_builtin_adapters()
+
+
+    def _register_configured_builtin_adapters(self) -> None:
+        """Instantiate built-in adapters declared in data_sources.yaml."""
+        configured = self.config.get("adapters", {}).get("registered", []) or []
+        if "cec_open_data_adapter" not in configured:
+            return
+        if any(getattr(adapter, "source_id", "") == "cec_open_data" for adapter in self.adapters):
+            return
+
+        from .cec_open_data import CECOpenDataAdapter
+
+        if self.config_path:
+            repo_root = self.config_path.resolve().parents[1]
+        else:
+            repo_root = Path(__file__).resolve().parents[1]
+        self.register(CECOpenDataAdapter(cache_dir=repo_root / "cache" / "raw" / "cec"))
 
     def register(self, adapter: ElectionDataSource) -> None:
         self.adapters.append(adapter)
