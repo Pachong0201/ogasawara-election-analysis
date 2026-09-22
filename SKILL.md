@@ -1,7 +1,7 @@
 ---
 name: ogasawara-election-analysis
 description: 借鉴小笠原欣幸公开选举研究方法的台湾选举结构化分析 Skill。先建立历史基准，再寻找跨届、跨层级、空间与候选人残差，最后以地方知识与民调校准。不输出胜负预测、胜率或候选人排名。
-version: 1.2.0
+version: 1.3.0
 language: zh-TW
 entrypoint: SKILL.md
 ---
@@ -115,7 +115,11 @@ entrypoint: SKILL.md
 - `runtime/analysis_context.py`
 - `runtime/pipeline.py`
 - `runtime/host_retrieval.py`
+- `runtime/knowledge_builder.py`
 - `schemas/retrieval_lead.yaml`
+- `schemas/knowledge_proposal.yaml`
+- `schemas/knowledge_promotion_receipt.yaml`
+- `config/knowledge_promotion.yaml`
 - `config/data_sources.yaml`
 - `config/freshness.yaml`
 - `config/runtime.yaml`
@@ -234,6 +238,42 @@ entrypoint: SKILL.md
 - A/B 级或两个独立 C 级来源仍需完成结构化 claim/relationship、时间范围与当前有效性校验。
 
 停止条件见 `rules/local_knowledge_rules.yaml`。无法满足时，输出 `unknown` 或“现有公开资料不足以确定原因”。
+
+### STEP 8A：知识晋升与地方知识 Builder
+
+retrieval lead 不得直接进入长期知识。只有宿主已经完成结构化 proposal 后，才允许调用 `KnowledgePromotionBuilder`。
+
+固定流程：
+
+`retrieval lead → structured proposal → evidence gate → contradiction/time/freshness gate → promotion receipt → knowledge/ → county package`
+
+硬规则：
+
+- Builder 不得从摘要自动推断 subject、object、relationship_type、current_status 或因果关系；
+- proposal 必须填写 `contradiction_check_completed=true` 和非空 `scope_boundary`；
+- A/B 级 verified 来源可满足基础晋升门槛；
+- C 级必须至少两个 verified 且 `independence_key` 不同的独立来源；
+- D/E 级不得晋升；
+- 已验证 A/B/C 相反证据存在时必须转 `requires_review`；
+- 当前地方关系、候选人档案、当前议题必须同时通过 freshness；
+- 每次晋升生成可审计 receipt，并记录 record/evidence SHA-256；
+- 重复晋升同一记录必须幂等；同 ID 内容冲突且无法证明新记录更新时转 `requires_review`。
+
+晋升后的权威记录写入：
+
+- `knowledge/historical/<county>/claims.jsonl`
+- `knowledge/local/<county>/relationships.jsonl`
+- `knowledge/local/<county>/candidates.jsonl`
+- `knowledge/local/<county>/issues.jsonl`
+
+地方知识 Builder 生成：
+
+- `knowledge/counties/<county>/package_manifest.yaml`
+- `knowledge/counties/<county>/evidence_index.jsonl`
+- `knowledge/counties/<county>/unresolved_questions.jsonl`
+- `knowledge/counties/<county>/political_ecology.md`
+
+这些 generated files 只是索引，不得产生新的政治事实或因果判断。分析仍以原始 `knowledge/historical/` 与 `knowledge/local/` 记录为权威来源。
 
 ### STEP 9：民调校准
 
@@ -359,7 +399,7 @@ Skill 调用的知识必须分成五层，禁止混用。完整定义见 `config
 13. 输出自主胜负概率；
 14. 给政治候选人进行综合评分、排名或推荐。
 
-## 十、V1.0 / V1.1 范围
+## 十、版本范围
 
 V1.0 方法层实现：
 
@@ -395,6 +435,18 @@ V1.2 真实历史数据源增加：
 - 民调 freshness 依据调查结束/发布日期，不依据最近抓取时间；重新下载旧民调不得使其变成当前民调；旧民调必须标记 stale，且不得作为当前状态校准；
 - 增加宿主 Web 检索 inbox 桥；搜索结果保持 lead-only，不自动晋升为长期地方政治知识；
 - 第三方整理资料不得替代上述官方历史事实源，除非官方源明确缺失且按证据规则降级处理。
+
+V1.3 知识晋升与地方知识 Builder 增加：
+
+- `KnowledgePromotionBuilder`：确定性执行 evidence、time、freshness、contradiction 与字段门禁；
+- `knowledge-promote` CLI：从 JSON/JSONL proposal inbox 晋升知识，支持 dry-run；
+- `knowledge-build` CLI：重建县市知识 package；
+- retrieval lead 与 L1-L5 长期知识之间增加 pre-knowledge staging，不新增第六知识层；
+- 支持 `historical_claim / local_relationship / candidate_profile / current_issue` 四类晋升；
+- C 级来源必须显式提供两个不同 `independence_key`；
+- 每次决策保留 promotion receipt 与 SHA-256 审计哈希；
+- 同 ID 幂等写入与冲突保护；
+- county package 自动生成证据索引、未解决问题与政治生态索引；生成文件只做索引，不创造事实。
 
 后续阶段再增加村里／投票所空间分析、Neighbor Divergence 自动化、地方政治知识图谱、半自动历史知识检索和多县市横向比较。
 
