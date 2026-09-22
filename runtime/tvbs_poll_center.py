@@ -438,7 +438,7 @@ class TVBSPollCenterAdapter(PollSource):
     def _sample_size(text: str) -> Optional[int]:
         patterns = [
             r"(?:最後)?成功訪問(?:有效樣本)?\s*[:：]?\s*([0-9,]+)\s*(?:位|人|份)?",
-            r"有效樣本(?:數|為|共)?\s*[:：]?\s*([0-9,]+)\s*(?:位|人|份)?",
+            r"有效樣本(?:數|為|共)?\s*(?:[:：｜|])?\s*([0-9,]+)\s*(?:位|人|份)?",
             r"完成\s*([0-9,]+)\s*份?有效樣本",
         ]
         for pattern in patterns:
