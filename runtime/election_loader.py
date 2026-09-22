@@ -113,7 +113,11 @@ class ElectionLoader:
             return False
         if self.mode == "online":
             return True
-        return bool(self.source_registry.adapters or self.source_registry.candidate_adapters)
+        return bool(
+            self.source_registry.adapters
+            or self.source_registry.candidate_adapters
+            or self.source_registry.poll_adapters
+        )
 
     def _known_regions(self) -> Optional[Set[str]]:
         """Load the geography registry when present."""
@@ -480,6 +484,95 @@ class ElectionLoader:
             warnings=warnings or [
                 f"no registered current-candidate source supports {jurisdiction} {election_type} {target_year}"
             ],
+        )
+
+    def refresh_polls(
+        self,
+        jurisdiction: str,
+        election_type: str,
+        target_year: int,
+    ) -> LoadResult:
+        """Refresh poll cache from registered primary poll sources.
+
+        Invalid or method-incomplete records are not persisted.
+        """
+        if not self.network_allowed():
+            return LoadResult(
+                status="missing",
+                source="offline",
+                warnings=["OFFLINE mode: poll refresh was not performed"],
+            )
+
+        warnings: List[str] = []
+        collected: List[Dict[str, Any]] = []
+        source_names: List[str] = []
+
+        for adapter in self.source_registry.poll_sources_for(
+            jurisdiction, election_type, int(target_year)
+        ):
+            try:
+                fetched = adapter.fetch(jurisdiction, election_type, int(target_year))
+            except Exception as exc:
+                warnings.append(
+                    f"poll adapter {getattr(adapter, 'source_id', '?')} fetch failed: {exc}"
+                )
+                continue
+
+            warnings.extend(list(fetched.warnings or []))
+            for raw in fetched.records or []:
+                record = dict(raw)
+                record.setdefault("source_id", getattr(adapter, "source_id", ""))
+                record.setdefault("source_grade", getattr(adapter, "source_grade", "C"))
+                record.setdefault("retrieved_at", fetched.retrieved_at)
+                record.setdefault("last_verified_at", fetched.retrieved_at)
+                record.setdefault("jurisdiction", jurisdiction)
+                record.setdefault("election_type", election_type)
+                record.setdefault("election_year", int(target_year))
+                report = validate_poll_record(record)
+                if not report.passed:
+                    warnings.append(
+                        "poll record failed validation "
+                        + str(record.get("poll_id") or "?")
+                        + ": "
+                        + "; ".join(
+                            issue.message
+                            for issue in report.issues
+                            if issue.severity == "error"
+                        )
+                    )
+                    continue
+                collected.append(record)
+            if fetched.records:
+                source_names.append(fetched.source_id or getattr(adapter, "source_id", ""))
+
+        if not collected:
+            return LoadResult(
+                status="missing",
+                source="online_no_data",
+                warnings=warnings or [
+                    f"no registered poll source returned valid records for {jurisdiction}"
+                ],
+            )
+
+        base = self.repo_root / "cache" / "polls"
+        base.mkdir(parents=True, exist_ok=True)
+        path = base / f"{safe_component(jurisdiction)}.jsonl"
+        existing = load_jsonl(path) if path.exists() else []
+
+        merged: Dict[str, Dict[str, Any]] = {}
+        for item in existing + collected:
+            key = str(item.get("poll_id") or "").strip()
+            if not key:
+                continue
+            merged[key] = item
+        write_jsonl(path, merged.values())
+
+        return LoadResult(
+            records=collected,
+            status="filled",
+            source=",".join(sorted(set(source_names))) or "poll_adapter",
+            persisted=True,
+            warnings=warnings,
         )
 
     def load_polls(self, jurisdiction: Optional[str] = None) -> Dict[str, List[Dict[str, Any]]]:
