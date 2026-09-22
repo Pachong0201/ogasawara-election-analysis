@@ -222,3 +222,22 @@ live_campaign_state:
     - retrieval_lead_count
   trigger_semantics: >
     trigger 只表示需要进一步研究，不代表某候选人受益、受损、领先或更可能当选。
+
+
+campaign_state:
+  required_in_online_mode: true
+  as_of_required: true
+  windows_days: [7, 14, 30]
+  active_inputs:
+    - current_candidates
+    - current_events
+    - current_local_relationships
+    - polls
+  trigger_conditions:
+    - verified_recent_campaign_event
+    - candidate_field_change
+    - same_series_poll_change
+    - new_event_since_previous_snapshot
+  rule: >
+    触发只表示需要进一步研究，不表示事件已经改变胜负格局，也不得据此输出候选人排名、
+    胜率或结果预测。
