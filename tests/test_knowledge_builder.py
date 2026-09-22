@@ -49,6 +49,8 @@ def historical_proposal(evidence_ids, claim_id="h1", text="歷史地方政治結
         "target_type": "historical_claim",
         "research_questions": [QUESTION],
         "evidence_lead_ids": evidence_ids,
+        "contradiction_check_completed": True,
+        "scope_boundary": "仅用于解释1990-2000年甲鄉历史结构，不外推当前。",
         "target_record": {
             "claim_id": claim_id,
             "claim": text,
@@ -66,6 +68,8 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
             result = builder.promote(historical_proposal(["b1"]))
 
             self.assertEqual(result["receipt"]["decision"], "promoted")
+            self.assertEqual(len(result["receipt"]["record_sha256"]), 64)
+            self.assertEqual(len(result["receipt"]["evidence_snapshot_sha256"]), 64)
             claim_path = root / "knowledge" / "historical" / COUNTY / "claims.jsonl"
             claims = load_jsonl(claim_path)
             self.assertEqual(len(claims), 1)
@@ -116,6 +120,7 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
                 "target_type": "local_relationship",
                 "research_questions": [QUESTION],
                 "evidence_lead_ids": ["c1", "c2"],
+                "contradiction_check_completed": True,
                 "target_record": {
                     "relationship_id": "r1",
                     "subject": "甲人物",
@@ -192,6 +197,7 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
                 "target_type": "local_relationship",
                 "research_questions": [QUESTION],
                 "evidence_lead_ids": ["b1"],
+                "contradiction_check_completed": True,
                 "target_record": {
                     "relationship_id": "active-r1",
                     "subject": "甲人物",
@@ -219,6 +225,7 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
                 "target_type": "local_relationship",
                 "research_questions": [QUESTION],
                 "evidence_lead_ids": ["a1"],
+                "contradiction_check_completed": True,
                 "target_record": {
                     "relationship_id": "active-r2",
                     "subject": "甲人物",
@@ -249,6 +256,7 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
                 "target_type": "local_relationship",
                 "research_questions": [QUESTION],
                 "evidence_lead_ids": ["b1"],
+                "contradiction_check_completed": True,
                 "target_record": {
                     "relationship_id": "bad-r",
                     "time_scope": "2026",
@@ -322,6 +330,22 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
             self.assertEqual(len(unresolved), 1)
             self.assertEqual(unresolved[0]["query"], unused_question)
             self.assertEqual(unresolved[0]["lead_ids"], ["unused"])
+
+
+    def test_missing_contradiction_check_is_rejected(self):
+        with temp_repo() as root:
+            write_jsonl(retrieval_path(root), [lead("b1", grade="B")])
+            proposal = historical_proposal(["b1"])
+            proposal.pop("contradiction_check_completed", None)
+            result = KnowledgePromotionBuilder(root).promote(proposal)
+            self.assertEqual(result["receipt"]["decision"], "rejected")
+            self.assertTrue(
+                any(
+                    "contradiction_check_completed" in reason
+                    for reason in result["receipt"]["reasons"]
+                )
+            )
+
 
 
 if __name__ == "__main__":
