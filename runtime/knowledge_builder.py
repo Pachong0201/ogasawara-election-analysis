@@ -17,7 +17,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 import yaml
 
 from .election_loader import load_jsonl, safe_component, write_jsonl
-from .freshness import historical_relationship_is_current
+from .freshness import historical_relationship_is_current, is_fresh
 from .models import parse_date, utc_now_iso
 
 
@@ -175,13 +175,23 @@ class KnowledgePromotionBuilder:
     def _evidence_gate(leads: List[Dict[str, Any]]) -> Tuple[bool, List[str], Dict[str, Any]]:
         reasons: List[str] = []
         verified: List[Dict[str, Any]] = []
+        missing_reference = 0
         for lead in leads:
             grade = KnowledgePromotionBuilder._verified_grade(lead)
-            if grade:
-                verified.append(lead)
+            if not grade:
+                continue
+            if not str(lead.get("url") or "").strip():
+                missing_reference += 1
+                continue
+            verified.append(lead)
+
+        if missing_reference:
+            reasons.append(
+                f"{missing_reference} verified evidence lead(s) lack a source URL/reference"
+            )
 
         if not verified:
-            reasons.append("no verified evidence lead")
+            reasons.append("no verified evidence lead with a source reference")
             return False, reasons, {
                 "verified": [],
                 "grades": [],
@@ -208,6 +218,16 @@ class KnowledgePromotionBuilder:
             lead for lead in verified
             if str(lead.get("source_grade") or "").upper() == "C"
         ]
+        if not verified_c and all(
+            str(lead.get("source_grade") or "").upper() in {"D", "E"}
+            for lead in verified
+        ):
+            reasons.append("D/E-grade evidence is not promotable to long-term knowledge")
+            return False, reasons, {
+                "verified": verified,
+                "grades": grades,
+                "independent_source_count": 0,
+            }
         if len(verified_c) < 2:
             reasons.append("C-grade evidence requires at least two verified independent sources")
             return False, reasons, {
@@ -275,6 +295,56 @@ class KnowledgePromotionBuilder:
         return sorted(set(missing))
 
     @staticmethod
+    def _semantic_gate(target_type: str, record: Dict[str, Any]) -> Tuple[bool, List[str]]:
+        reasons: List[str] = []
+        if target_type == "local_relationship":
+            allowed_types = {
+                "family",
+                "faction",
+                "party",
+                "electoral_support",
+                "organization_membership",
+                "patron_client",
+                "business",
+                "public_endorsement",
+                "competition",
+                "other",
+            }
+            relation = str(record.get("relationship_type") or "")
+            if relation not in allowed_types:
+                reasons.append(f"unsupported relationship_type={relation!r}")
+        elif target_type == "current_issue":
+            allowed_claim_types = {
+                "nomination",
+                "primary",
+                "party_cooperation",
+                "alliance_break",
+                "endorsement",
+                "registration",
+                "campaign_office",
+                "policy",
+                "local_event",
+                "judicial_event",
+                "controversy",
+                "poll",
+                "other",
+            }
+            claim_type = str(record.get("claim_type") or "")
+            if claim_type not in allowed_claim_types:
+                reasons.append(f"unsupported claim_type={claim_type!r}")
+            status = str(record.get("verification_status") or "")
+            if status not in {
+                "verified_fact",
+                "official_record",
+                "reported_by_media",
+                "disputed",
+            }:
+                reasons.append(
+                    "current_issue verification_status is not eligible for long-term current knowledge"
+                )
+        return not reasons, reasons
+
+    @staticmethod
     def _time_gate(target_type: str, record: Dict[str, Any]) -> Tuple[bool, List[str]]:
         reasons: List[str] = []
         if target_type == "historical_claim":
@@ -291,9 +361,20 @@ class KnowledgePromotionBuilder:
                     reasons.append(
                         "active_verified relationship requires a recent last_verified_at within five years"
                     )
-        elif target_type in {"candidate_profile", "current_issue"}:
+                if not is_fresh(probe, kind="local_relationship"):
+                    reasons.append(
+                        "active_verified relationship is stale under the local_relationship freshness policy"
+                    )
+        elif target_type == "candidate_profile":
             if parse_date(record.get("last_verified_at")) is None:
-                reasons.append(f"{target_type} requires parseable last_verified_at")
+                reasons.append("candidate_profile requires parseable last_verified_at")
+            elif not is_fresh(record, kind="candidate_profile"):
+                reasons.append("candidate_profile is stale under the candidate_profile freshness policy")
+        elif target_type == "current_issue":
+            if parse_date(record.get("last_verified_at")) is None:
+                reasons.append("current_issue requires parseable last_verified_at")
+            elif not is_fresh(record, kind="political_claim"):
+                reasons.append("current_issue is stale under the political_claim freshness policy")
         return not reasons, reasons
 
     @staticmethod
@@ -371,6 +452,8 @@ class KnowledgePromotionBuilder:
             reasons.append("proposal county does not match --county")
         if not contradiction_check_completed:
             reasons.append("contradiction_check_completed must be true before promotion")
+        if not str(proposal.get("scope_boundary") or "").strip():
+            reasons.append("scope_boundary is required before promotion")
 
         missing = self._required_fields(target_type, target_record)
         if missing:
@@ -395,6 +478,9 @@ class KnowledgePromotionBuilder:
 
         evidence_ok, evidence_reasons, evidence = self._evidence_gate(support_leads)
         reasons.extend(evidence_reasons)
+
+        semantic_ok, semantic_reasons = self._semantic_gate(target_type, target_record)
+        reasons.extend(semantic_reasons)
 
         time_ok, time_reasons = self._time_gate(target_type, target_record)
         reasons.extend(time_reasons)
@@ -424,6 +510,7 @@ class KnowledgePromotionBuilder:
         passed = (
             not reasons
             and evidence_ok
+            and semantic_ok
             and time_ok
             and question_ok
             and not requires_review
@@ -740,6 +827,24 @@ class KnowledgePromotionBuilder:
             if str(lead_id).strip()
         }
 
+    @staticmethod
+    def _current_use_status(target_type: str, record: Dict[str, Any]) -> str:
+        if target_type == "historical_claim":
+            return "historical_only"
+        if target_type == "local_relationship":
+            if (
+                record.get("current_status") == "active_verified"
+                and historical_relationship_is_current(record)
+                and is_fresh(record, kind="local_relationship")
+            ):
+                return "current_usable"
+            return "historical_or_stale"
+        if target_type == "candidate_profile":
+            return "current_usable" if is_fresh(record, kind="candidate_profile") else "stale"
+        if target_type == "current_issue":
+            return "current_usable" if is_fresh(record, kind="political_claim") else "stale"
+        return "unknown"
+
     def build_county_package(self, county: str) -> Dict[str, Any]:
         paths = self._paths(county)
         package_root = paths["package_root"]
@@ -763,6 +868,7 @@ class KnowledgePromotionBuilder:
                         "region": record.get("region") or record.get("jurisdiction") or county,
                         "time_scope": record.get("time_scope", ""),
                         "current_status": record.get("current_status", ""),
+                        "current_use_status": self._current_use_status(target_type, record),
                         "source": record.get("source", ""),
                         "source_grade": record.get("source_grade") or record.get("evidence_grade") or "",
                         "independent_source_count": int(record.get("independent_source_count") or 0),
@@ -847,15 +953,15 @@ class KnowledgePromotionBuilder:
             for item in collections["historical_claim"]
         ]
         relationship_lines = [
-            f"- {item.get('relationship_id')}: {item.get('subject')} → {item.get('relationship_type')} → {item.get('object')}；status={item.get('current_status')}；time_scope={item.get('time_scope')}"
+            f"- {item.get('relationship_id')}: {item.get('subject')} → {item.get('relationship_type')} → {item.get('object')}；status={item.get('current_status')}；current_use={self._current_use_status('local_relationship', item)}；time_scope={item.get('time_scope')}"
             for item in collections["local_relationship"]
         ]
         candidate_lines = [
-            f"- {item.get('candidate_id')}: {item.get('name')}；time_scope={item.get('time_scope')}；last_verified_at={item.get('last_verified_at')}"
+            f"- {item.get('candidate_id')}: {item.get('name')}；current_use={self._current_use_status('candidate_profile', item)}；time_scope={item.get('time_scope')}；last_verified_at={item.get('last_verified_at')}"
             for item in collections["candidate_profile"]
         ]
         issue_lines = [
-            f"- {item.get('claim_id')}: {item.get('claim_text')}；date={item.get('date')}；time_scope={item.get('time_scope')}"
+            f"- {item.get('claim_id')}: {item.get('claim_text')}；current_use={self._current_use_status('current_issue', item)}；date={item.get('date')}；time_scope={item.get('time_scope')}"
             for item in collections["current_issue"]
         ]
         unresolved_lines = [
