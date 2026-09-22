@@ -108,7 +108,8 @@ def _poll_values(record: Dict[str, Any]) -> Dict[str, float]:
         if isinstance(container, dict):
             for name, value in container.items():
                 try:
-                    out[str(name)] = float(value)
+                    numeric = float(value)
+                    out[str(name)] = numeric * 100.0 if abs(numeric) <= 1.0 else numeric
                 except (TypeError, ValueError):
                     continue
     candidates = record.get("candidates")
@@ -121,7 +122,8 @@ def _poll_values(record: Dict[str, Any]) -> Dict[str, float]:
             if name is None or value is None:
                 continue
             try:
-                out[str(name)] = float(value)
+                numeric = float(value)
+                out[str(name)] = numeric * 100.0 if abs(numeric) <= 1.0 else numeric
             except (TypeError, ValueError):
                 continue
     return out
