@@ -21,6 +21,7 @@ from .metrics import (
     split_ticket_residual,
 )
 from .host_retrieval import HostRetrievalBackend
+from .knowledge_builder import KnowledgePromotionBuilder
 from .models import ElectionTask
 from .pipeline import AnalysisPipeline
 
@@ -149,6 +150,32 @@ def _cmd_run(args: argparse.Namespace) -> int:
     return 0
 
 
+
+def _cmd_knowledge_promote(args: argparse.Namespace) -> int:
+    builder = KnowledgePromotionBuilder(
+        Path(args.repo_root).resolve() if args.repo_root else None
+    )
+    result = builder.promote_inbox(
+        proposal_inbox=Path(args.proposal_inbox).resolve(),
+        county_override=args.county or None,
+        dry_run=args.dry_run,
+        build_package=not args.no_build_package,
+    )
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    if result["counts"]["requires_review"] or result["counts"]["rejected"]:
+        return 2
+    return 0
+
+
+def _cmd_knowledge_build(args: argparse.Namespace) -> int:
+    builder = KnowledgePromotionBuilder(
+        Path(args.repo_root).resolve() if args.repo_root else None
+    )
+    result = builder.build_county_package(args.county)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m runtime.cli", description="V1.2 Data & Runtime Layer")
     parser.add_argument("--repo-root", default=None, help="repository root (defaults to runtime parent)")
@@ -217,6 +244,24 @@ def build_parser() -> argparse.ArgumentParser:
         help="JSON/JSONL host-web retrieval inbox for local-knowledge research questions",
     )
     run.set_defaults(func=_cmd_run)
+
+    promote = sub.add_parser(
+        "knowledge-promote",
+        help="validate and promote structured V1.3 knowledge proposals",
+    )
+    promote.add_argument("--county", default="")
+    promote.add_argument("--proposal-inbox", required=True)
+    promote.add_argument("--dry-run", action="store_true")
+    promote.add_argument("--no-build-package", action="store_true")
+    promote.set_defaults(func=_cmd_knowledge_promote)
+
+    build = sub.add_parser(
+        "knowledge-build",
+        help="rebuild the generated county knowledge package indexes",
+    )
+    build.add_argument("--county", required=True)
+    build.set_defaults(func=_cmd_knowledge_build)
+
     return parser
 
 
