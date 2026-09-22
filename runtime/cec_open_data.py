@@ -73,6 +73,49 @@ PATH_FAMILIES: Dict[Tuple[str, int], Sequence[str]] = {
 
 ZERO_TOKENS = {"", "0", "00", "000", "0000", "00000"}
 
+JURISDICTION_ALIASES = {
+    "台北市": "臺北市",
+    "臺北市": "臺北市",
+    "新北市": "新北市",
+    "桃园市": "桃園市",
+    "桃園市": "桃園市",
+    "台中市": "臺中市",
+    "臺中市": "臺中市",
+    "台南市": "臺南市",
+    "臺南市": "臺南市",
+    "高雄市": "高雄市",
+    "宜兰县": "宜蘭縣",
+    "宜蘭縣": "宜蘭縣",
+    "新竹县": "新竹縣",
+    "新竹縣": "新竹縣",
+    "苗栗县": "苗栗縣",
+    "苗栗縣": "苗栗縣",
+    "彰化县": "彰化縣",
+    "彰化縣": "彰化縣",
+    "南投县": "南投縣",
+    "南投縣": "南投縣",
+    "云林县": "雲林縣",
+    "雲林縣": "雲林縣",
+    "嘉义县": "嘉義縣",
+    "嘉義縣": "嘉義縣",
+    "屏东县": "屏東縣",
+    "屏東縣": "屏東縣",
+    "台东县": "臺東縣",
+    "臺東縣": "臺東縣",
+    "花莲县": "花蓮縣",
+    "花蓮縣": "花蓮縣",
+    "澎湖县": "澎湖縣",
+    "澎湖縣": "澎湖縣",
+    "基隆市": "基隆市",
+    "新竹市": "新竹市",
+    "嘉义市": "嘉義市",
+    "嘉義市": "嘉義市",
+    "金门县": "金門縣",
+    "金門縣": "金門縣",
+    "连江县": "連江縣",
+    "連江縣": "連江縣",
+}
+
 
 class CECOpenDataError(RuntimeError):
     """Raised when the official archive cannot be downloaded or parsed safely."""
@@ -371,7 +414,8 @@ class CECOpenDataAdapter(ElectionDataSource):
             for row in parties if len(row) >= 2 and _clean(row[0])
         }
 
-        area_info = self._build_area_info(base, query.jurisdiction)
+        official_jurisdiction = JURISDICTION_ALIASES.get(query.jurisdiction, query.jurisdiction)
+        area_info = self._build_area_info(base, official_jurisdiction)
         county_codes: set[Tuple[str, str]] = area_info["county_codes"]
         if not county_codes:
             return []
@@ -443,6 +487,7 @@ class CECOpenDataAdapter(ElectionDataSource):
                     "election_date": ELECTION_DATES[(query.election_type, int(query.year))],
                     "jurisdiction": region_name,
                     "parent_jurisdiction": query.jurisdiction,
+                    "official_parent_jurisdiction": official_jurisdiction,
                     "level": level,
                     "candidate_id": cand_id,
                     "candidate_name": candidate["name"],
