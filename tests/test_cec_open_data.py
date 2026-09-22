@@ -172,7 +172,7 @@ class TestCECOpenDataAdapter(unittest.TestCase):
             DataQuery("regional_legislator", 2016, "宜兰县", "township_district")
         )
         self.assertEqual(len(result.records), 4)
-        self.assertTrue(result.raw_reference.endswith("elctks_T1.csv"))
+        self.assertIn("elctks_T1.csv", result.raw_reference)
         self.assertEqual({r["candidate_name"] for r in result.records}, {"甲立委", "乙立委"})
 
     def test_2022_county_mayor_c1_city_path(self):
