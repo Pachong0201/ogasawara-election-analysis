@@ -299,13 +299,21 @@ class TVBSPollCenterAdapter(PollSource):
         method = self._method(body)
         support, undecided, scenario, question_context = self._support_scenario(body)
 
+        weighting = self._weighting(body)
+        sampling = self._sampling(body)
+        sample_frame = self._sample_frame(body, official_jurisdiction)
+
         required = {
             "field_dates": field_dates,
             "sample_size": sample_size,
             "moe": moe,
             "method": method,
+            "sample_frame": sample_frame,
+            "sampling": sampling,
+            "weighting": weighting,
             "support": support,
             "undecided": undecided,
+            "question_context": question_context,
         }
         if any(value in (None, "", [], ()) for value in required.values()):
             return None
@@ -320,9 +328,6 @@ class TVBSPollCenterAdapter(PollSource):
             expires_at = ""
 
         now = utc_now_iso()
-        weighting = self._weighting(body)
-        sampling = self._sampling(body)
-        sample_frame = self._sample_frame(body, official_jurisdiction)
 
         poll_id_seed = f"{pdf_url}|{scenario}|{official_jurisdiction}"
         poll_id = "tvbs-" + hashlib.sha1(poll_id_seed.encode("utf-8")).hexdigest()[:20]
@@ -465,7 +470,7 @@ class TVBSPollCenterAdapter(PollSource):
             match = re.search(pattern, text)
             if match:
                 return _compact(match.group(1))
-        return f"20歲以上{official_jurisdiction}民眾"
+        return ""
 
     @staticmethod
     def _publish_date(pdf_url: str, listing_date: str) -> str:
