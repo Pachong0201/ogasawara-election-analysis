@@ -11,6 +11,7 @@ required:
   - target_type
   - target_record
   - evidence_lead_ids
+  - contradiction_check_completed
 properties:
   proposal_id:
     type: string
@@ -36,6 +37,14 @@ properties:
     type: array
     uniqueItems: true
     items: {type: string}
+  contradiction_check_completed:
+    type: boolean
+    description: >
+      宿主是否已针对同一命题主动查找相反证据。true 不代表不存在相反证据，
+      只表示该检查步骤已经执行。
+  scope_boundary:
+    type: string
+    description: 该知识对象允许支持的范围与不得外推的边界。
   research_questions:
     type: array
     items: {type: string}
@@ -53,5 +62,6 @@ constraints:
   - A/B 级 verified lead 可满足基本晋升门槛；C 级必须至少两个独立来源。
   - C 级来源的独立性必须依赖不同 independence_key，不得仅凭不同 URL 推断独立。
   - D/E 级 lead 永远不能单独晋升长期知识。
+  - contradiction_check_completed 不为 true 时不得晋升。
   - 已验证 contradictory lead 存在时不得自动晋升。
   - 当前关系必须具有 time_scope 与 last_verified_at；历史关系不得自动转为 active_verified。
