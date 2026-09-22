@@ -5,7 +5,7 @@ purpose: >
   事实嵌入判断，县市总体判断下钻到具体地区。
 
 default_output_sections:
-  - key: live_core_judgement
+  - key: core_judgement
     title: 核心判断
     length: 150-250字
     must_answer: 截至 as_of，当前选战处于什么状态，最近发生的变化是否触及原有结构。
@@ -16,7 +16,7 @@ default_output_sections:
       - 当前候选人格局与提名/登记状态
       - 最近7日、14日、30日可验证变化
       - 与上一Campaign State Snapshot相比的新变化
-  - key: live_changes
+  - key: change_since_last
     title: 二、最近哪些变化真正值得关注
     must_distinguish:
       - 已验证事件
@@ -24,7 +24,7 @@ default_output_sections:
       - 未验证线索
       - 同源同方法民调变化
     rule: 只把变化当作研究触发，不直接当作因果证明。
-  - key: historical_reference
+  - key: historical_geography
     title: 三、这些变化相对历史结构意味着什么
     rule: 历史基准作为参照系，不得取代当前选战叙述。
   - key: where_change_happened
@@ -48,7 +48,7 @@ default_output_sections:
       - 不同调查方法之间的不可比限制
       - 未决定比例
       - 样本限制
-  - key: structural_synthesis
+  - key: structural_factors
     title: 八、当前竞争结构由哪些因素共同形成
     must_reduce_to: 2—4个经证据支持的结构因素
   - key: watchlist
