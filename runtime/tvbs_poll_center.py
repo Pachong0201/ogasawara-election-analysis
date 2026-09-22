@@ -386,14 +386,14 @@ class TVBSPollCenterAdapter(PollSource):
     def _field_dates(text: str, default_year: int) -> Optional[Tuple[str, str]]:
         patterns = [
             re.compile(
-                r"(\\d{2,4})\\s*年\\s*(\\d{1,2})\\s*月\\s*(\\d{1,2})\\s*日?\\s*"
-                r"(?:至|到|－|-|~|～)\\s*(?:(\\d{2,4})\\s*年\\s*)?"
-                r"(?:(\\d{1,2})\\s*月\\s*)?(\\d{1,2})\\s*日?"
+                r"(\d{2,4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日?\s*"
+                r"(?:至|到|－|-|~|～)\s*(?:(\d{2,4})\s*年\s*)?"
+                r"(?:(\d{1,2})\s*月\s*)?(\d{1,2})\s*日?"
             ),
             re.compile(
-                r"(\\d{2,4})[./-](\\d{1,2})[./-](\\d{1,2})\\s*"
-                r"(?:至|到|－|-|~|～)\\s*(?:(\\d{2,4})[./-])?"
-                r"(?:(\\d{1,2})[./-])?(\\d{1,2})"
+                r"(\d{2,4})[./-](\d{1,2})[./-](\d{1,2})\s*"
+                r"(?:至|到|－|-|~|～)\s*(?:(\d{2,4})[./-])?"
+                r"(?:(\d{1,2})[./-])?(\d{1,2})"
             ),
         ]
         for pattern in patterns:
@@ -419,8 +419,8 @@ class TVBSPollCenterAdapter(PollSource):
         # In that case use the election/report year supplied by the adapter;
         # month/day still must be explicitly present in the primary PDF.
         match = re.search(
-            r"(?:於|自|調查時間[:：]?)?\\s*(\\d{1,2})\\s*月\\s*(\\d{1,2})\\s*日?\\s*"
-            r"(?:至|到|－|-|~|～)\\s*(?:(\\d{1,2})\\s*月\\s*)?(\\d{1,2})\\s*日?",
+            r"(?:於|自|調查時間[:：]?)?\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日?\s*"
+            r"(?:至|到|－|-|~|～)\s*(?:(\d{1,2})\s*月\s*)?(\d{1,2})\s*日?",
             text,
         )
         if match:
@@ -437,9 +437,9 @@ class TVBSPollCenterAdapter(PollSource):
     @staticmethod
     def _sample_size(text: str) -> Optional[int]:
         patterns = [
-            r"(?:最後)?成功訪問(?:有效樣本)?\\s*[:：]?\\s*([0-9,]+)\\s*(?:位|人|份)?",
-            r"有效樣本(?:數|為|共)?\\s*[:：]?\\s*([0-9,]+)\\s*(?:位|人|份)?",
-            r"完成\\s*([0-9,]+)\\s*份?有效樣本",
+            r"(?:最後)?成功訪問(?:有效樣本)?\s*[:：]?\s*([0-9,]+)\s*(?:位|人|份)?",
+            r"有效樣本(?:數|為|共)?\s*[:：]?\s*([0-9,]+)\s*(?:位|人|份)?",
+            r"完成\s*([0-9,]+)\s*份?有效樣本",
         ]
         for pattern in patterns:
             match = re.search(pattern, text)
@@ -497,8 +497,8 @@ class TVBSPollCenterAdapter(PollSource):
     def _sample_frame(text: str, official_jurisdiction: str) -> str:
         escaped = re.escape(official_jurisdiction)
         patterns = [
-            rf"(\\d{{2}}\\s*歲以上\\s*{escaped}\\s*(?:民眾|民)?)",
-            rf"(戶籍[^。]{{0,60}}{escaped}[^。]{{0,60}}\\d{{2}}\\s*歲以上[^。]{{0,40}})",
+            rf"(\d{{2}}\s*歲以上\s*{escaped}\s*(?:民眾|民)?)",
+            rf"(戶籍[^。]{{0,60}}{escaped}[^。]{{0,60}}\d{{2}}\s*歲以上[^。]{{0,40}})",
         ]
         for pattern in patterns:
             match = re.search(pattern, text)
