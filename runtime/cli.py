@@ -151,6 +151,19 @@ def _cmd_run(args: argparse.Namespace) -> int:
 
 
 
+
+def _cmd_knowledge_ingest(args: argparse.Namespace) -> int:
+    builder = KnowledgePromotionBuilder(
+        Path(args.repo_root).resolve() if args.repo_root else None
+    )
+    result = builder.ingest_retrieval_inbox(
+        county=args.county,
+        inbox_path=Path(args.retrieval_inbox).resolve(),
+    )
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if result["rejected_count"] == 0 else 2
+
+
 def _cmd_knowledge_promote(args: argparse.Namespace) -> int:
     builder = KnowledgePromotionBuilder(
         Path(args.repo_root).resolve() if args.repo_root else None
@@ -244,6 +257,14 @@ def build_parser() -> argparse.ArgumentParser:
         help="JSON/JSONL host-web retrieval inbox for local-knowledge research questions",
     )
     run.set_defaults(func=_cmd_run)
+
+    ingest = sub.add_parser(
+        "knowledge-ingest",
+        help="import host Web/Search JSON/JSONL into retrieval staging only",
+    )
+    ingest.add_argument("--county", required=True)
+    ingest.add_argument("--retrieval-inbox", required=True)
+    ingest.set_defaults(func=_cmd_knowledge_ingest)
 
     promote = sub.add_parser(
         "knowledge-promote",
