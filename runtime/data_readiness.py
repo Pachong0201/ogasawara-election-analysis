@@ -497,6 +497,17 @@ class DataReadinessGate:
                 int(task.target_year),
             )
 
+        # Polls are optional. Fill an empty cache when a primary poll source is
+        # registered, but never make readiness depend on a poll being available.
+        poll_req = initial.required.get("current_polls", {})
+        if int(poll_req.get("count") or 0) == 0:
+            attempts.append(f"current_polls:{task.target_year}")
+            loader.refresh_polls(
+                task.jurisdiction,
+                task.election_type,
+                int(task.target_year),
+            )
+
         refreshed = self.check(task)
         if attempts:
             refreshed.warnings.append("data preparation attempted fills: " + ", ".join(attempts))
