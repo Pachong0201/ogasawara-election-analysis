@@ -22,7 +22,7 @@ class TestAnalysisPipeline(unittest.TestCase):
             self.assertGreater(len(analysis["candidate_residuals"]), 0)
             self.assertIn("triggered_anomaly_count", analysis["evidence_summary"])
             self.assertGreater(len(manifest["files_used"]), 0)
-            self.assertEqual(manifest["skill_version"], "1.1.1")
+            self.assertEqual(manifest["skill_version"], "1.2.0")
 
     def test_pipeline_keeps_insufficient_status_and_does_not_invent_data(self):
         with temp_repo() as root:
