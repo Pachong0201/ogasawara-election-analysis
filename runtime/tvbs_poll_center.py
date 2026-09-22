@@ -463,7 +463,7 @@ class TVBSPollCenterAdapter(PollSource):
     def _sample_frame(text: str, official_jurisdiction: str) -> str:
         escaped = re.escape(official_jurisdiction)
         patterns = [
-            rf"(\d{{2}}歲以上{escaped}(?:縣民|市民|民眾)?)",
+            rf"(\d{{2}}歲以上{escaped}(?:民眾|民)?)",
             rf"(戶籍[^。]{{0,50}}{escaped}[^。]{{0,50}}\d{{2}}歲以上[^。]{{0,30}})",
         ]
         for pattern in patterns:
