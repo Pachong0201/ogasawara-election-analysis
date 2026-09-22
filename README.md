@@ -55,6 +55,7 @@ ogasawara-election-analysis/
 │  ├─ candidate.yaml
 │  ├─ poll.yaml
 │  ├─ political_claim.yaml
+│  ├─ historical_claim.yaml
 │  ├─ local_relationship.yaml
 │  ├─ retrieval_lead.yaml
 │  ├─ knowledge_proposal.yaml
