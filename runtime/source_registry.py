@@ -82,6 +82,30 @@ class CurrentCandidateSource(ABC):
         }
 
 
+class PollSource(ABC):
+    """Adapter interface for public opinion poll sources."""
+
+    source_id: str = "unknown"
+    source_grade: str = "C"
+    priority: int = 100
+
+    @abstractmethod
+    def supports(self, jurisdiction: str, election_type: str, target_year: int) -> bool:
+        """Return True when this source can supply relevant public polls."""
+
+    @abstractmethod
+    def fetch(self, jurisdiction: str, election_type: str, target_year: int) -> SourceFetchResult:
+        """Fetch normalized poll records from the source."""
+
+    def metadata(self) -> Dict[str, Any]:
+        return {
+            "source_id": self.source_id,
+            "source_grade": self.source_grade,
+            "priority": self.priority,
+            "data_kind": "polls",
+        }
+
+
 class RetrievalBackend(ABC):
     """Abstract search/fetch backend injected by the running environment."""
 
@@ -147,11 +171,13 @@ class SourceRegistry:
         config_path: Optional[Path] = None,
         adapters: Optional[Iterable[ElectionDataSource]] = None,
         candidate_adapters: Optional[Iterable[CurrentCandidateSource]] = None,
+        poll_adapters: Optional[Iterable[PollSource]] = None,
     ):
         self.config_path = Path(config_path) if config_path else None
         self.config: Dict[str, Any] = {}
         self.adapters: List[ElectionDataSource] = []
         self.candidate_adapters: List[CurrentCandidateSource] = []
+        self.poll_adapters: List[PollSource] = []
         if self.config_path and self.config_path.exists():
             with self.config_path.open(encoding="utf-8") as fh:
                 self.config = yaml.safe_load(fh) or {}
@@ -161,6 +187,9 @@ class SourceRegistry:
         if candidate_adapters:
             for adapter in candidate_adapters:
                 self.register_candidate(adapter)
+        if poll_adapters:
+            for adapter in poll_adapters:
+                self.register_poll(adapter)
         self._register_configured_builtin_adapters()
 
 
@@ -168,6 +197,7 @@ class SourceRegistry:
         """Instantiate built-in adapters declared in data_sources.yaml."""
         configured = self.config.get("adapters", {}).get("registered", []) or []
         configured_candidates = self.config.get("adapters", {}).get("registered_candidate_adapters", []) or []
+        configured_polls = self.config.get("adapters", {}).get("registered_poll_adapters", []) or []
 
         if self.config_path:
             repo_root = self.config_path.resolve().parents[1]
@@ -191,11 +221,39 @@ class SourceRegistry:
             from .cec_current_candidates import CECCurrentCandidateAdapter
             self.register_candidate(CECCurrentCandidateAdapter())
 
+        if (
+            "tvbs_poll_center_adapter" in configured_polls
+            and not any(
+                getattr(adapter, "source_id", "") == "tvbs_poll_center"
+                for adapter in self.poll_adapters
+            )
+        ):
+            from .tvbs_poll_center import TVBSPollCenterAdapter
+            self.register_poll(TVBSPollCenterAdapter())
+
     def register(self, adapter: ElectionDataSource) -> None:
         self.adapters.append(adapter)
 
     def register_candidate(self, adapter: CurrentCandidateSource) -> None:
         self.candidate_adapters.append(adapter)
+
+    def register_poll(self, adapter: PollSource) -> None:
+        self.poll_adapters.append(adapter)
+
+    def poll_sources_for(
+        self,
+        jurisdiction: str,
+        election_type: str,
+        target_year: int,
+    ) -> List[PollSource]:
+        supported = [
+            adapter
+            for adapter in self.poll_adapters
+            if getattr(adapter, "supports", lambda *_: False)(
+                jurisdiction, election_type, int(target_year)
+            )
+        ]
+        return sorted(supported, key=lambda adapter: getattr(adapter, "priority", 100))
 
     def current_candidate_sources_for(
         self,
@@ -219,10 +277,12 @@ class SourceRegistry:
     def metadata(self) -> Dict[str, Any]:
         registered = [adapter.metadata() for adapter in self.adapters]
         candidate_registered = [adapter.metadata() for adapter in self.candidate_adapters]
+        poll_registered = [adapter.metadata() for adapter in self.poll_adapters]
         return {
             "source_registry_version": self.config.get("version"),
             "registered_adapters": registered,
             "registered_candidate_adapters": candidate_registered,
+            "registered_poll_adapters": poll_registered,
             "configured_election_sources": self.config.get("election_results", {}),
             "adapters": self.config.get("adapters", {}),
         }
