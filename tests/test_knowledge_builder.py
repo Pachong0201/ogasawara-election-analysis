@@ -122,6 +122,7 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
                 "research_questions": [QUESTION],
                 "evidence_lead_ids": ["c1", "c2"],
                 "contradiction_check_completed": True,
+                "scope_boundary": "仅用于2018-2022年甲鄉组织关系的历史说明，不外推当前。",
                 "target_record": {
                     "relationship_id": "r1",
                     "subject": "甲人物",
@@ -199,6 +200,7 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
                 "research_questions": [QUESTION],
                 "evidence_lead_ids": ["b1"],
                 "contradiction_check_completed": True,
+                "scope_boundary": "仅用于检验该公开支持关系是否仍可视为当前有效。",
                 "target_record": {
                     "relationship_id": "active-r1",
                     "subject": "甲人物",
@@ -227,6 +229,7 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
                 "research_questions": [QUESTION],
                 "evidence_lead_ids": ["a1"],
                 "contradiction_check_completed": True,
+                "scope_boundary": "仅支持该公开支持关系在已验证时间范围内存在，不推断选民行为。",
                 "target_record": {
                     "relationship_id": "active-r2",
                     "subject": "甲人物",
@@ -267,6 +270,7 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
                 "research_questions": [QUESTION],
                 "evidence_lead_ids": ["b1"],
                 "contradiction_check_completed": True,
+                "scope_boundary": "仅用于测试字段门禁。",
                 "target_record": {
                     "relationship_id": "bad-r",
                     "time_scope": "2026",
