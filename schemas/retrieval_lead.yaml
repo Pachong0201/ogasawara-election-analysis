@@ -1,0 +1,56 @@
+version: 1.2.0
+schema_name: retrieval_lead
+description: >
+  宿主 Agent/Web 工具返回的地方知识检索结果。该对象默认只是 lead，
+  不得自动写入长期 knowledge/ 事实库。缺失或非法 source_grade 必须降级为 E。
+
+type: object
+required:
+  - query
+  - url
+  - source_grade
+  - verification_status
+properties:
+  query:
+    type: string
+    description: 触发该结果的 research question，必须与 Skill 生成的问题对应。
+  research_questions:
+    type: array
+    items: {type: string}
+  title:
+    type: string
+  summary:
+    type: string
+  url:
+    type: string
+  source_id:
+    type: string
+  source_grade:
+    type: string
+    enum: [A, B, C, D, E]
+  verification_status:
+    type: string
+    enum: [lead_only, verified]
+    default: lead_only
+  published_at:
+    type: string
+    format: date
+  retrieved_at:
+    type: string
+  evidence:
+    type: string
+    description: >
+      宿主提取的有限证据摘要。不得长篇复制来源内容，不得以此替代原始 URL。
+  content:
+    type: string
+    description: 可选；宿主需要二次处理时提供的短文本片段。
+  independent_source_count:
+    type: integer
+    minimum: 0
+
+constraints:
+  - 缺失 source_grade 时运行时必须降级为 E。
+  - verification_status=verified 只表示宿主已核对来源，不代表可自动晋升为知识库事实。
+  - 任何 retrieval lead 默认只写入 cache/retrieval/。
+  - A/B 级或两个独立 C 级来源仍需经过结构化 claim/relationship 校验后才能进入 knowledge/。
+  - D/E 级 retrieval lead 不得单独形成结构性判断。
