@@ -113,7 +113,7 @@ class ElectionLoader:
             return False
         if self.mode == "online":
             return True
-        return bool(self.source_registry.adapters)
+        return bool(self.source_registry.adapters or self.source_registry.candidate_adapters)
 
     def _known_regions(self) -> Optional[Set[str]]:
         """Load the geography registry when present."""
@@ -390,6 +390,97 @@ class ElectionLoader:
         if not path.exists():
             return []
         return load_jsonl(path)
+
+    @staticmethod
+    def _candidate_record_valid(record: Dict[str, Any]) -> bool:
+        return all(
+            [
+                str(record.get("name") or record.get("candidate_name") or "").strip(),
+                str(record.get("candidate_status") or "").strip(),
+                str(record.get("source_grade") or "").strip(),
+                str(record.get("last_verified_at") or "").strip(),
+                str(record.get("election_type") or "").strip(),
+                record.get("election_year") is not None,
+            ]
+        )
+
+    def refresh_current_candidates(
+        self,
+        jurisdiction: str,
+        election_type: str,
+        target_year: int,
+    ) -> LoadResult:
+        """Refresh the current candidate cache from registered official sources."""
+        if not self.network_allowed():
+            return LoadResult(
+                status="missing",
+                source="offline",
+                warnings=["OFFLINE mode: current candidate refresh was not performed"],
+            )
+
+        warnings: List[str] = []
+        for adapter in self.source_registry.current_candidate_sources_for(
+            jurisdiction, election_type, int(target_year)
+        ):
+            try:
+                fetched = adapter.fetch(jurisdiction, election_type, int(target_year))
+            except Exception as exc:
+                warnings.append(
+                    f"candidate adapter {getattr(adapter, 'source_id', '?')} fetch failed: {exc}"
+                )
+                continue
+
+            warnings.extend(list(fetched.warnings or []))
+            normalized: List[Dict[str, Any]] = []
+            for raw in fetched.records or []:
+                record = dict(raw)
+                record.setdefault("source_id", getattr(adapter, "source_id", ""))
+                record.setdefault("source_grade", getattr(adapter, "source_grade", "C"))
+                record.setdefault("evidence_grade", record.get("source_grade"))
+                record.setdefault("retrieved_at", fetched.retrieved_at)
+                record.setdefault("last_verified_at", fetched.retrieved_at)
+                record.setdefault("election_type", election_type)
+                record.setdefault("election_year", int(target_year))
+                record.setdefault("jurisdiction", jurisdiction)
+                record.setdefault("candidate_status", "announced")
+                record.setdefault("name", record.get("candidate_name", ""))
+                record.setdefault("candidate_name", record.get("name", ""))
+                if self._candidate_record_valid(record):
+                    normalized.append(record)
+                else:
+                    warnings.append(
+                        f"candidate record failed minimum validation: {record.get('name') or record.get('candidate_name') or '?'}"
+                    )
+
+            if not normalized:
+                continue
+
+            path = current_candidates_path(self.repo_root, jurisdiction)
+            existing = load_jsonl(path) if path.exists() else []
+            keep = [
+                item
+                for item in existing
+                if not (
+                    str(item.get("election_type") or "") == election_type
+                    and int(item.get("election_year") or 0) == int(target_year)
+                )
+            ]
+            write_jsonl(path, keep + normalized)
+            return LoadResult(
+                records=normalized,
+                status="filled",
+                source=fetched.source_id or getattr(adapter, "source_id", "candidate_adapter"),
+                persisted=True,
+                warnings=warnings,
+            )
+
+        return LoadResult(
+            status="missing",
+            source="online_no_data",
+            warnings=warnings or [
+                f"no registered current-candidate source supports {jurisdiction} {election_type} {target_year}"
+            ],
+        )
 
     def load_polls(self, jurisdiction: Optional[str] = None) -> Dict[str, List[Dict[str, Any]]]:
         """Load and validate cached polls; invalid records are marked failed."""
