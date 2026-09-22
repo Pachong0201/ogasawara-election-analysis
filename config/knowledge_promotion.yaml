@@ -33,8 +33,7 @@ target_rules:
       - claim_id
       - claim
       - time_scope
-      - source
-      - source_grade
+    builder_derived_fields: [source, source_grade, source_reference, independent_source_count]
     current_extrapolation_forbidden: true
   local_relationship:
     layer_id: L3
@@ -46,8 +45,7 @@ target_rules:
       - relationship_type
       - time_scope
       - current_status
-      - source
-      - source_grade
+    builder_derived_fields: [source, source_grade, source_reference, independent_source_count, verification_evidence]
     active_verified_requires:
       - last_verified_at
       - verification_evidence
@@ -59,9 +57,9 @@ target_rules:
       - candidate_id
       - name
       - sources
-      - evidence_grade
       - time_scope
       - last_verified_at
+    builder_derived_fields: [sources, evidence_grade, source, source_grade, source_reference, independent_source_count]
   current_issue:
     layer_id: L3
     storage: knowledge/local/<county>/issues.jsonl
