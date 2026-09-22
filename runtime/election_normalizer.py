@@ -253,11 +253,16 @@ POLL_REQUIRED_FIELDS = [
     "commissioner",
     "method",
     "sample_size",
+    "sample_frame",
+    "sampling",
+    "weighting",
     "field_start",
     "field_end",
     "publish_date",
     "moe_applicable",
     "undecided",
+    "question_wording",
+    "cross_tabs_available",
     "source",
     "source_grade",
 ]
@@ -280,6 +285,10 @@ def validate_poll_record(record: Dict[str, Any]) -> ValidationReport:
     else:
         if record.get("moe") in (None, "") and moe_applicable is True:
             _add_issue(issues, "MISSING_MOE", "moe_applicable=true requires a moe value", record)
+
+    sample_size = _to_int(record.get("sample_size"))
+    if sample_size is None or sample_size <= 0:
+        _add_issue(issues, "INVALID_SAMPLE_SIZE", "sample_size must be a positive integer", record)
 
     undecided = _to_float(record.get("undecided"))
     if undecided is None or not (0 <= undecided <= 1):
