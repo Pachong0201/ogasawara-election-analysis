@@ -1,4 +1,4 @@
-version: 1.2.0
+version: 1.3.0
 schema_name: retrieval_lead
 description: >
   宿主 Agent/Web 工具返回的地方知识检索结果。该对象默认只是 lead，
