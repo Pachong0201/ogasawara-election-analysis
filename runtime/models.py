@@ -1,4 +1,4 @@
-"""Shared runtime data models for V1.3."""
+"""Shared runtime data models for V1.4."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
 
-SCHEMA_VERSION = "1.3"
+SCHEMA_VERSION = "1.4"
 NORMALIZATION_VERSION = "v1.2.0"
 
 

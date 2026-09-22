@@ -1,4 +1,4 @@
-version: 1.3.0
+version: 1.4.0
 name: knowledge_layers
 purpose: >
   明确 Skill 调用的五层知识，禁止把事实、历史、当前政治、事件与民调
@@ -103,6 +103,7 @@ layers:
 
   - id: L4
     name: 当前选举事件库
+    runtime_role: live_campaign_state_core_input
     content:
       - 提名
       - 初选
@@ -126,7 +127,10 @@ layers:
     forbidden:
       - 将单一竞选阵营说法形成结构性判断
       - 将未经核实的争议写成事实
-    note: 民调同时应进入 L5，不得以 L4 的事件叙事替代 L5 方法检查。
+    note: >
+      民调同时应进入 L5，不得以 L4 的事件叙事替代 L5 方法检查。
+      V1.4 的 Campaign State Snapshot 是 L4/L5 动态资料的时间索引，不新增第六知识层，
+      也不得把 snapshot 自身当成新的政治事实。
     schema: schemas/political_claim.yaml
 
   - id: L5
@@ -180,3 +184,7 @@ separation_rules:
     statement: 事件库中的民调记录必须同时满足 L5 的方法要求。
   - id: LAYER-06
     statement: D/E 级资料不得单独形成任何层级的结构性判断。
+  - id: LAYER-07
+    statement: 当前选战分析必须带 as_of；L4 事件与 L5 民调需按时间窗口进入 Campaign State Snapshot。
+  - id: LAYER-08
+    statement: 历史异常不是唯一检索触发器；已验证的当前竞选变化也可以触发 Minimum Sufficient Local Knowledge。

@@ -1,4 +1,4 @@
-version: 1.3.0
+version: 1.4.0
 name: runtime
 skill_version: 1.3.0
 
@@ -137,3 +137,32 @@ metrics:
   spatial_variance_primary_method: standard_deviation
   spatial_variance_low_share_threshold: 0.20
   concentration_top_n: 3
+
+
+campaign_state:
+  enabled: true
+  persist_snapshots: true
+  windows_days: [7, 14, 30]
+  retrieval_recency_days: 30
+  same_series_poll_change_observe_pp: 3.0
+  trigger_event_types:
+    - nomination
+    - candidate_registration
+    - candidate_withdrawal
+    - endorsement
+    - party_cooperation
+    - alliance
+    - alliance_break
+    - campaign_org
+    - campaign_headquarters
+    - debate
+    - policy
+    - major_issue
+    - judicial_event
+    - controversy
+  retrieval_queries:
+    - "{jurisdiction} {year} 選舉 候選人 最新動態"
+    - "{jurisdiction} {year} 選舉 地方人物 支持 組織"
+    - "{jurisdiction} {year} 選舉 政黨合作 競選總部"
+    - "{jurisdiction} {year} 選舉 政策 爭議 地方議題"
+    - "{jurisdiction} {year} 選舉 民調"

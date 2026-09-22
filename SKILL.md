@@ -1,7 +1,7 @@
 ---
 name: ogasawara-election-analysis
-description: 借鉴小笠原欣幸公开选举研究方法的台湾选举结构化分析 Skill。先建立历史基准，再寻找跨届、跨层级、空间与候选人残差，最后以地方知识与民调校准。不输出胜负预测、胜率或候选人排名。
-version: 1.3.0
+description: 借鉴小笠原欣幸公开选举研究方法的台湾选举结构化分析 Skill。以历史结构为基准，同时建立带 as_of 的选战进行时快照，识别最近30／14／7日变化并以地方知识与民调校准。不输出胜负预测、胜率或候选人排名。
+version: 1.4.0
 language: zh-TW
 entrypoint: SKILL.md
 ---
@@ -18,7 +18,7 @@ entrypoint: SKILL.md
 >
 > 民调用于校准当前状态，而不是替代历史结构。不同调查机构、不同调查方式的数据不得未经说明直接计算趋势。
 >
-> 最终分析应回答当前选举结构如何形成、哪些选票或地区正在变化、有哪些解释得到证据支持、哪些仍无法确认。不得输出自主的胜负概率、候选人评分或政治推荐。
+> 完整分析必须明确 as_of，先回答截至当前选战打到什么阶段、最近30／14／7日发生了哪些可验证变化、这些变化是否触及历史结构，再用历史基准解释。不得输出自主的胜负概率、候选人评分或政治推荐。
 
 ## 二、适用任务
 
@@ -49,11 +49,15 @@ entrypoint: SKILL.md
 
 所有分析必须遵循：
 
-`历史基准` → `跨届变化` → `跨层级差异` → `空间异常` → `候选人残差` → `地方知识验证` → `民调校准` → `结构判断`
+`历史基准` → `当前候选人格局` → `Campaign State Snapshot(as_of)` → `最近30／14／7日变化` → `历史／当前双触发地方知识检索` → `同源民调校准` → `当前竞争结构`
 
 不得采用：
 
 `最新民调` → `直接判断当前选情`
+
+也不得采用：
+
+`历史票型` → `忽略本轮选战最新变化`
 
 ## 五、运行模式与执行流程
 
@@ -103,8 +107,10 @@ entrypoint: SKILL.md
 4. 动态资料必须检查 freshness，过期后重新验证。
 5. 数据不足时生成 Data Readiness Report，并标记 `ready`、`partial` 或 `insufficient`。
 6. 若 HARD REQUIRED 数据仍缺失，不得进行完整结构判断。
-7. 分析前生成 `Analysis Context`，LLM 只能基于该 context 生成最终结构分析。
-8. 每次运行生成 `analysis_manifest.json`，记录数据来源、文件、指标基准、新鲜度、缺失与警告。
+7. ONLINE 当前周期分析必须生成 `Campaign State Snapshot`，记录 `as_of`、7/14/30日事件窗口、同源民调变化与上一快照差异。
+8. 历史异常和当前选战变化均可触发地方知识检索；不得要求先出现历史票型异常。
+9. 分析前生成 `Analysis Context`，LLM 只能基于该 context 生成最终结构分析。
+10. 每次运行生成 `analysis_manifest.json`，记录数据来源、文件、指标基准、新鲜度、选战快照、缺失与警告。
 
 关联文件：
 
@@ -113,6 +119,7 @@ entrypoint: SKILL.md
 - `runtime/election_normalizer.py`
 - `runtime/freshness.py`
 - `runtime/analysis_context.py`
+- `runtime/campaign_state.py`
 - `runtime/pipeline.py`
 - `runtime/host_retrieval.py`
 - `runtime/knowledge_builder.py`
@@ -137,6 +144,27 @@ entrypoint: SKILL.md
 - 可用资料的时间范围与证据等级。
 
 读取 `config/analysis_thresholds.yaml` 确认最低数据要求。
+
+### STEP 1A：Live Campaign State Snapshot
+
+在进入历史解释前，先建立当前选战快照：
+
+1. 明确 `as_of`，不得使用“目前”“近期”而无具体时点；
+2. 读取当前候选人、登记／提名状态、竞选组织与已验证当前事件；
+3. ONLINE MODE 主动检索最近 30 日资料，并分别形成 7 日、14 日、30 日窗口；
+4. 与上一份 Campaign State Snapshot 比较候选人格局、新事件与新民调；
+5. 对同一 pollster、commissioner、method、sample_frame、question_wording 的连续调查计算 same-series point-estimate change；
+6. 出现候选人格局变化、已验证重要竞选事件、同源民调明显变化或上一快照后的新增事件时，设置 `campaign_change_trigger=true`；
+7. `campaign_change_trigger` 与历史票型异常具有同等“触发研究”资格，可进入 Minimum Sufficient Local Knowledge；
+8. 任何 campaign trigger 都只表示“需要进一步验证”，不得直接解释为胜负变化或因果证明。
+
+关联文件：
+
+- `runtime/campaign_state.py`
+- `config/runtime.yaml`
+- `config/freshness.yaml`
+- `rules/data_acquisition.yaml`
+- `rules/poll_rules.yaml`
 
 ### STEP 2：建立历史政治基准
 
@@ -219,7 +247,7 @@ entrypoint: SKILL.md
 
 `local_explanation_required=true`
 
-然后进入 `rules/local_knowledge_rules.yaml` 的最小充分地方知识检索流程。
+V1.4 起，即使没有历史票型异常，只要 `campaign_change_trigger=true`，也进入 `rules/local_knowledge_rules.yaml` 的最小充分地方知识检索流程。
 
 ### STEP 8：地方知识检索
 
@@ -275,6 +303,18 @@ retrieval lead 不得直接进入长期知识。只有宿主已经完成结构�
 
 这些 generated files 只是索引，不得产生新的政治事实或因果判断。分析仍以原始 `knowledge/historical/` 与 `knowledge/local/` 记录为权威来源。
 
+### STEP 8B：Live Campaign State
+
+V1.4 在地方知识与民调最终解释前建立选战进行时快照：
+
+1. 明确 `as_of`；
+2. 汇总最近 30／14／7 日已验证竞选事件；
+3. 比较候选人格局与上一快照；
+4. 只在 pollster、commissioner、method、sample_frame、question_wording 一致时计算 same-series poll delta；
+5. 当前候选人变化、组织／支持变化、政党合作、重大议题、争议、司法事件或同源民调变化均可触发 `campaign_change_trigger`；
+6. trigger 只产生研究问题，不代表任何候选人受益、受损、领先或更可能当选；
+7. 宿主检索的 lead_only 线索不得作为已确认事实。
+
 ### STEP 9：民调校准
 
 民调模块永远放在结构分析之后。使用前按 `rules/poll_rules.yaml` 检查：
@@ -282,6 +322,8 @@ retrieval lead 不得直接进入长期知识。只有宿主已经完成结构�
 `pollster`、`commissioner`、`method`、`sample_size`、`sample_frame`、`field_start`、`field_end`、`moe`、`moe_applicable`、`undecided`。
 
 民调只用于检验当前状态是否偏离历史结构，不得替代历史结构。
+
+V1.4 允许对“同一调查系列”计算相邻波次点估计变化，但必须同时满足调查机构、委托方、方法、样本框与题型可比；该变化只能作为当前选战变化信号，不得自动写成统计显著、胜负逆转或当选概率变化。
 
 ### STEP 10：形成结构判断
 
@@ -299,45 +341,49 @@ retrieval lead 不得直接进入长期知识。只有宿主已经完成结构�
 
 ## 六、默认输出格式
 
-县市分析采用以下结构。核心判断 150—250 字，第一句不得是“某候选人支持度 XX%”。
+县市分析采用“当前选战优先”结构。核心判断 150—250 字，必须标明 `as_of`。
 
 ## 【县市名称】
 
 ### 核心判断
 
-直接回答当前选举结构为什么形成。
+第一句直接回答截至当前选战处于什么状态，以及最近变化是否触及原有结构；不得从历史沿革或单一民调数字开始。
 
-### 一、历史政治版图如何形成
+### 一、截至目前选战打到哪里
 
-只写与当前选举有关的历史，标明时间范围。
+说明当前候选人格局、提名／登记状态，以及最近 7／14／30 日可验证的重要变化。
 
-### 二、与上一轮相比发生了什么变化
+### 二、最近哪些变化真正值得关注
 
-分析政党票、地方首长票、总统票、立委票与投票率。
+比较上一 Campaign State Snapshot，区分已验证事件、竞选阵营主张、未验证线索与同源民调变化。
 
-### 三、变化主要发生在哪里
+### 三、这些变化相对历史结构意味着什么
 
-识别 3—8 个关键乡镇市区，说明选择依据。
+调用最近至少三届同类选举、总统与立委资料作为参照；历史只用于解释当前，不得把过去直接外推为今天。
 
-### 四、候选人的地方政治基础
+### 四、变化主要发生在哪里
 
-分析长期经营、历次参选、地方组织、个人残差。
+识别 3—8 个关键乡镇市区；若当前没有区级动态资料，应明确说明，不能用历史票型伪装成当前变化。
 
-### 五、第三势力和中间票如何重新组合
+### 五、候选人及地方组织如何变化
 
-不得机械加票，不得直接写“第三势力票将转给某方”。
+分析长期经营、竞选组织、公开支持、现任交棒、候选人残差及其近期变化。
 
-### 六、当前民调是否验证这种结构
+### 六、第三势力和中间票如何重新组合
 
-比较调查方法及交叉表，指出未决定比例和样本限制。
+不得机械加票，不得预设第三势力票流向。
 
-### 七、为什么形成当前竞争结构
+### 七、当前民调是否验证选战变化
 
-归纳 2—4 个决定性结构因素。
+优先观察同一调查系列；不同机构、方法或题型只能并列说明，不得直接连成趋势。
 
-### 八、后续需要观察什么
+### 八、当前竞争结构由哪些因素共同形成
 
-只列可公开验证的变量。不得写“某候选人必须拿到多少票才能获胜”。
+归纳 2—4 个经证据支持的结构因素，并明确哪些判断仍为 unknown。
+
+### 九、下一阶段观察什么
+
+只列可公开验证变量，不得写胜率、必胜票数、候选人排名或政治推荐。
 
 写作规范见 `rules/writing_rules.yaml`。
 
@@ -450,5 +496,17 @@ V1.3 知识晋升与地方知识 Builder 增加：
 - county package 自动生成证据索引、未解决问题与政治生态索引；生成文件只做索引，不创造事实。
 
 后续阶段再增加村里／投票所空间分析、Neighbor Divergence 自动化、地方政治知识图谱、半自动历史知识检索和多县市横向比较。
+
+V1.4 Live Campaign State 增加：
+
+- 新增 `runtime/campaign_state.py`，生成带 `as_of` 的当前选战快照；
+- 固定观察最近 7／14／30 日竞选变化；
+- 保存上一快照并计算候选人格局、新事件、新民调差异；
+- 当前选战变化可独立触发地方知识检索；
+- ONLINE 模式主动向宿主 RetrievalBackend 提出当前选战检索问题；
+- 宿主结果默认保持 lead_only，未验证不得写成事实；
+- 同一调查系列允许计算 same-series poll delta，不同系列仍禁止拼接；
+- 默认写作顺序改为“当前态势 → 最近变化 → 历史参照 → 地方结构 → 民调校准”；
+- Campaign State Snapshot 只是 L4/L5 的动态时间索引，不新增第六知识层。
 
 `examples/yilan/` 只作为测试用例，不得成为 Skill 运行依赖。

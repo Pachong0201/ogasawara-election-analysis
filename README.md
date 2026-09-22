@@ -1,6 +1,6 @@
 # 小笠原选举分析 Skill
 
-`ogasawara-election-analysis` 是一个面向台湾选举的结构化分析 Skill。它借鉴小笠原欣幸公开展示的选举研究方法，重点回答“当前选举结构为什么形成”，而不是预测谁当选。
+`ogasawara-election-analysis` 是一个面向台湾选举的结构化分析 Skill。它借鉴小笠原欣幸公开展示的选举研究方法，以历史结构为基准，同时追踪选战进行时的最新变化，重点回答“截至今天，这场选战打成什么结构、最近发生了什么变化、这些变化是否触及历史结构”，而不是预测谁当选。
 
 ## 核心原则
 
@@ -8,9 +8,9 @@
 
 分析路径固定为：
 
-`历史基准 → 跨届变化 → 跨层级差异 → 空间异常 → 候选人残差 → 地方知识验证 → 民调校准 → 结构判断`
+`历史基准 → 当前候选人格局 → Campaign State Snapshot(as_of) → 最近30／14／7日变化 → 历史／当前双触发地方知识检索 → 同源民调校准 → 当前竞争结构`
 
-禁止把“最新民调 → 直接判断当前选情”当作主要路径。
+禁止把“最新民调 → 直接判断当前选情”当作主要路径，也禁止只用历史票型解释本轮选战而忽略最新变化。
 
 ## 适用输出
 
@@ -67,7 +67,7 @@ ogasawara-election-analysis/
 │  ├─ spatial_divergence.md
 │  ├─ incumbent_transfer.md
 │  └─ third_force.md
-├─ runtime/             # V1.3 数据、运行与知识晋升层
+├─ runtime/             # V1.4 数据、运行、知识晋升与Live Campaign State
 │  ├─ cec_open_data.py   # 中选会官方 votedata.zip Adapter
 │  ├─ cec_current_candidates.py # 2026候选人登记名册 Adapter
 │  ├─ tvbs_poll_center.py # TVBS民调中心原始PDF Adapter
@@ -78,6 +78,7 @@ ogasawara-election-analysis/
 │  ├─ metrics.py
 │  ├─ knowledge_loader.py
 │  ├─ knowledge_builder.py # V1.3知识晋升与县市package Builder
+│  ├─ campaign_state.py # V1.4选战快照、7/14/30日变化与同源民调delta
 │  ├─ host_retrieval.py  # 宿主Web检索JSON/JSONL桥
 │  ├─ freshness.py
 │  ├─ analysis_context.py
@@ -106,6 +107,34 @@ ogasawara-election-analysis/
 6. 最后才读取民调资料，按 `rules/poll_rules.yaml` 校准。
 7. 按 `SKILL.md` 的统一模板输出，并明确证据等级和不确定性。
 
+### V1.4 Live Campaign State
+
+V1.4 解决“历史结构很强、当前战况很弱”的问题。完整分析在历史数据之外，必须生成一个可审计的当前选战快照：
+
+```text
+as_of
+→ 当前候选人格局
+→ 最近30／14／7日竞选事件
+→ 与上一Campaign State Snapshot比较
+→ 同一调查系列跨期变化
+→ campaign_change_trigger
+→ 当前地方政治与组织检索
+→ 历史结构对照
+→ 当前竞争结构
+```
+
+核心规则：
+
+- Snapshot 明确记录 `as_of`，不得把不同日期资料混成“当前”；
+- 最近 7／14／30 日分别承担近端、活跃变化与背景窗口；
+- 当前候选人变化、公开支持／组织变化、政党合作、重大议题、争议、司法事件等可独立触发地方知识检索；
+- 不再要求必须先出现历史票型异常；
+- ONLINE 模式会通过宿主 `RetrievalBackend` 主动提出当前选战检索问题；
+- 宿主检索结果默认 `lead_only`，未经验证不得当作事实；
+- 只有同一 `pollster / commissioner / method / sample_frame / question_wording` 的调查才计算 same-series delta；
+- same-series delta 只描述点估计变化，不代表胜负趋势，也不自行宣告统计显著；
+- Snapshot 只存入 `cache/campaign_state/`，属于 L4/L5 动态索引，不是新的知识层。
+
 ### V1.3 数据、运行与知识晋升层
 
 ```text
@@ -122,6 +151,7 @@ ogasawara-election-analysis/
 → KnowledgePromotionBuilder 门禁与 receipt
 → knowledge/ + county package
 → Freshness
+→ Campaign State Snapshot（as_of + 7/14/30日变化）
 → Analysis Context
 → AnalysisPipeline 统一编排
 → 按 V1.0 输出

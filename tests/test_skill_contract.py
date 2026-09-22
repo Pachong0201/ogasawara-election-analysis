@@ -108,13 +108,16 @@ class TestCoreContract(unittest.TestCase):
     def test_skill_frontmatter_name(self):
         text = read_text("SKILL.md")
         self.assertIn("name: ogasawara-election-analysis", text)
-        self.assertIn("version: 1.3.0", text)
+        self.assertIn("version: 1.4.0", text)
 
-    def test_analysis_path_is_historical_first(self):
+    def test_analysis_path_keeps_history_and_adds_live_campaign_state(self):
         text = read_text("SKILL.md")
-        path = "历史基准` → `跨届变化` → `跨层级差异` → `空间异常` → `候选人残差` → `地方知识验证` → `民调校准` → `结构判断"
-        self.assertIn(path, text)
+        self.assertIn("历史基准", text)
+        self.assertIn("Campaign State Snapshot(as_of)", text)
+        self.assertIn("最近30／14／7日变化", text)
+        self.assertIn("历史／当前双触发地方知识检索", text)
         self.assertIn("最新民调` → `直接判断当前选情", text)
+        self.assertIn("历史票型` → `忽略本轮选战最新变化", text)
 
     def test_output_sections_exist(self):
         writing = load_yaml("rules/writing_rules.yaml")

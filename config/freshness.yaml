@@ -1,4 +1,4 @@
-version: 1.0.0
+version: 1.4.0
 name: freshness
 purpose: >
   定义不同资料的本地信任期限。历史稳定数据可永久保存；
@@ -34,19 +34,23 @@ policies:
     revalidate: true
     persist: false
   endorsement:
-    ttl_days: 30
+    ttl_days: 14
     revalidate: true
     persist: false
   party_cooperation:
-    ttl_days: 14
+    ttl_days: 7
     revalidate: true
     persist: false
   campaign_event:
-    ttl_days: 14
+    ttl_days: 7
     revalidate: true
     persist: false
   poll:
     ttl_days: 30
+    revalidate: true
+    persist: false
+  campaign_snapshot:
+    ttl_days: 1
     revalidate: true
     persist: false
   candidate_registration:
@@ -68,3 +72,11 @@ dynamic_required_fields:
   - expires_at
   - source_id
   - source_grade
+
+
+campaign_state_windows:
+  near_term_days: 7
+  active_change_days: 14
+  context_days: 30
+  rule: >
+    7／14／30日是选战态势观察窗口，不改变原始事件的证据等级和真实性判断。

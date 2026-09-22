@@ -34,6 +34,7 @@ class TestAnalysisContext(unittest.TestCase):
                 "current_candidates",
                 "current_events",
                 "polls",
+                "campaign_state",
                 "evidence_summary",
                 "unknowns",
                 "warnings",
