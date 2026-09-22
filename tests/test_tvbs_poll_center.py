@@ -93,7 +93,7 @@ class TestTVBSPollCenterAdapter(unittest.TestCase):
         )
         result = self.adapter(text=text).fetch("宜兰县", "county_mayor", 2026)
         self.assertEqual(result.records, [])
-        self.assertTrue(any("lacked required poll metadata" in warning for warning in result.warnings))
+        self.assertTrue(any("missing required poll metadata" in warning for warning in result.warnings))
 
     def test_loader_refreshes_valid_poll_cache(self):
         with temp_repo() as root:
