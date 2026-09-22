@@ -231,6 +231,16 @@ proposal 最小示例：
 }
 ```
 
+先把宿主 Web/Search 结果导入 staging：
+
+```bash
+python -m runtime.cli knowledge-ingest \
+  --county "宜兰县" \
+  --retrieval-inbox retrieval/yilan.jsonl
+```
+
+该命令只写入 `cache/retrieval/`，不会触发任何知识晋升。
+
 晋升前预检：
 
 ```bash
