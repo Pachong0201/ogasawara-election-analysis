@@ -10,7 +10,7 @@ from typing import Any, Dict, List, Optional
 
 
 SCHEMA_VERSION = "1.1"
-NORMALIZATION_VERSION = "v1.1.1"
+NORMALIZATION_VERSION = "v1.2.0"
 
 
 def utc_now_iso() -> str:
