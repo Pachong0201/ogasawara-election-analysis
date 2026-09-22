@@ -1,7 +1,7 @@
 ---
 name: ogasawara-election-analysis
 description: 借鉴小笠原欣幸公开选举研究方法的台湾选举结构化分析 Skill。先建立历史基准，再寻找跨届、跨层级、空间与候选人残差，最后以地方知识与民调校准。不输出胜负预测、胜率或候选人排名。
-version: 1.1.1
+version: 1.2.0
 language: zh-TW
 entrypoint: SKILL.md
 ---
@@ -64,6 +64,7 @@ entrypoint: SKILL.md
 存在可用联网或搜索工具。允许：
 
 - 调用已注册的 `ElectionDataSource` 补齐缺失的稳定历史选举数据；
+- 对 2014—2024 核心历史选举，优先使用内置 `cec_open_data` Adapter 读取中选会官方 `votedata.zip`；首次下载后使用本地缓存，不得每次重复抓取；
 - 调用已注册的 `RetrievalBackend` 进行最小充分地方知识检索；
 - 验证当前候选人、民调、公开支持、政党合作与竞选事件的新鲜度。
 
@@ -371,6 +372,16 @@ V1.1 数据与运行层增加：
 - 统一 `AnalysisPipeline` 编排 readiness → loader → matrix → metrics → knowledge → freshness → context；
 - CLI `readiness`、`build-matrix`、`metrics`、`context`、`run`。
 
-第二阶段再增加村里／投票所空间分析、Neighbor Divergence 自动化、地方政治知识图谱、半自动历史知识检索和多县市横向比较。
+V1.2 真实历史数据源增加：
+
+- 内置中选会 `cec_open_data` A 级 Adapter；
+- 官方来源：政府资料开放平台「选举资料库（含选举区资料）」及中选会 `votedata.zip`；
+- 当前正式支持：2014/2018/2022 县市长、2016/2020/2024 总统、2016/2020/2024 区域立委；
+- 最低支持乡镇市区层级，并保留官方原始 ZIP SHA-256、成员路径和取数时间；
+- 首次 ONLINE 下载官方 ZIP，之后本地缓存复用；OFFLINE 不下载；
+- 从已验证中选会结果同步最小行政区资料，供 Readiness Gate 使用；
+- 第三方整理资料不得替代上述官方历史事实源，除非官方源明确缺失且按证据规则降级处理。
+
+后续阶段再增加村里／投票所空间分析、Neighbor Divergence 自动化、地方政治知识图谱、半自动历史知识检索和多县市横向比较。
 
 `examples/yilan/` 只作为测试用例，不得成为 Skill 运行依赖。
