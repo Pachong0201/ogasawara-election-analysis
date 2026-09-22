@@ -54,7 +54,8 @@ ogasawara-election-analysis/
 │  ├─ candidate.yaml
 │  ├─ poll.yaml
 │  ├─ political_claim.yaml
-│  └─ local_relationship.yaml
+│  ├─ local_relationship.yaml
+│  └─ retrieval_lead.yaml
 ├─ methods/
 │  ├─ electoral_swing.md
 │  ├─ split_ticket.md
@@ -72,6 +73,7 @@ ogasawara-election-analysis/
 │  ├─ matrix_builder.py
 │  ├─ metrics.py
 │  ├─ knowledge_loader.py
+│  ├─ host_retrieval.py  # 宿主Web检索JSON/JSONL桥
 │  ├─ freshness.py
 │  ├─ analysis_context.py
 │  ├─ pipeline.py
@@ -124,6 +126,8 @@ python -m runtime.cli build-matrix --county "宜兰县" --year 2026 --type count
 python -m runtime.cli context --county "宜兰县" --year 2026 --type county_mayor --write-manifest
 python -m runtime.cli run --county "宜兰县" --year 2026 --type county_mayor --mode offline --write-manifest
 python -m runtime.cli readiness --county "宜兰县" --year 2026 --type county_mayor --mode online
+python -m runtime.cli run --county "宜兰县" --year 2026 --type county_mayor --mode online \
+  --retrieval-inbox cache/retrieval/inbox/yilan.jsonl --write-manifest
 ```
 
 
@@ -156,6 +160,27 @@ ONLINE 首次缺历史资料时会下载官方 ZIP；之后直接复用本地缓
 - freshness 以 `publish_date/field_end` 为基准。旧报告今天重新下载仍然是旧报告。
 
 `question_wording_is_verbatim=false` 表示来源只公开报告情境摘要而非问卷逐字题目，系统不得把摘要改写成“原始问卷”。
+
+
+### V1.2 宿主 Web 检索桥
+
+地方政治、学术论文、地方人物关系等资料来源高度分散，Skill 不内置通用搜索引擎，也不通过脆弱的搜索结果页抓取来假装“自动联网”。ONLINE 模式采用宿主检索桥：
+
+1. Skill 先根据票型异常生成明确的 research question；
+2. ChatGPT、Codex 或其他宿主 Agent 使用自身 Web/Search 工具检索；
+3. 宿主把结果写成 JSON/JSONL，至少包含 `query / url / source_grade / summary`；
+4. 通过 CLI 的 `--retrieval-inbox` 交给 `HostRetrievalBackend`；
+5. Skill 只把这些结果写入 `cache/retrieval/` 作为 lead；
+6. 即使宿主标记 `verification_status=verified`，也不会自动晋升为长期 `knowledge/` 事实。
+
+示例 JSONL：
+
+```json
+{"query":"为什么 罗东镇 出现 candidate_residual 异常？","title":"地方政治研究","summary":"研究讨论该地长期地方组织与选举结构。","url":"https://example.org/source","source_id":"host_web","source_grade":"B","verification_status":"verified"}
+```
+
+若 `source_grade` 缺失或非法，运行时自动降为 E。A/B 级或两个独立 C 级来源仍须经过结构化 claim/relationship、`time_scope` 与当前有效性检查后，才能进入长期知识库。
+
 
 ## 最低数据要求
 
