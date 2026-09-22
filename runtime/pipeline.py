@@ -415,6 +415,7 @@ class AnalysisPipeline:
             current_candidates=current_candidates,
             current_events=events,
             polls=polls,
+            campaign_state=campaign_state,
             evidence_summary={
                 "triggered_anomaly_count": len(triggered),
                 "campaign_change_trigger": bool(campaign_state.get("campaign_change_trigger")),
