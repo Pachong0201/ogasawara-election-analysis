@@ -335,8 +335,14 @@ class AnalysisPipeline:
         )
 
         polls_result = self.loader.load_polls(jurisdiction=task.jurisdiction)
-        polls = polls_result.get("records", [])
+        polls = [dict(item) for item in polls_result.get("records", [])]
         poll_freshness = evaluate_records(polls, kind="poll") if polls else {"fresh": 0, "stale": 0, "unknown": 0, "records": []}
+        for status in poll_freshness.get("records", []):
+            index = int(status.get("index", -1))
+            if 0 <= index < len(polls):
+                polls[index]["freshness_status"] = status.get("status")
+                expires_at = status.get("expires_at")
+                polls[index]["freshness_expires_at"] = expires_at.isoformat() if hasattr(expires_at, "isoformat") else expires_at
         events = self._load_events(task.jurisdiction)
         current_candidates = readiness.available.get("current_candidates", {}).get("verified_candidates", [])
 
@@ -346,13 +352,17 @@ class AnalysisPipeline:
         if triggered and not local_knowledge.get("sufficient"):
             unknowns.append("local anomalies were detected but minimum sufficient local knowledge was not established")
         if not polls:
-            unknowns.append("no validated current poll cache is available; poll calibration is omitted")
+            unknowns.append("no validated poll cache is available; poll calibration is omitted")
+        elif int(poll_freshness.get("fresh", 0)) == 0:
+            unknowns.append(
+                "no fresh validated poll is available; stale poll records may be retained as dated campaign-period evidence but must not calibrate the current state"
+            )
 
         warnings = list(readiness.warnings) + load_warnings + list(local_knowledge.get("warnings", []))
         if polls_result.get("invalid"):
             warnings.append(f"{len(polls_result['invalid'])} cached poll record(s) failed validation")
         if poll_freshness.get("stale"):
-            warnings.append(f"{poll_freshness['stale']} poll record(s) are stale and should be revalidated")
+            warnings.append(f"{poll_freshness['stale']} poll record(s) are stale and must not be presented as current polling")
 
         baseline_methods = {
             "historical_matrix": "same-type elections at aligned geographic level",
@@ -379,6 +389,9 @@ class AnalysisPipeline:
                 "triggered_anomaly_count": len(triggered),
                 "local_knowledge_sufficient": bool(local_knowledge.get("sufficient")),
                 "poll_freshness": poll_freshness,
+                "current_poll_calibration_available": int(poll_freshness.get("fresh", 0)) > 0,
+                "fresh_poll_count": int(poll_freshness.get("fresh", 0)),
+                "stale_poll_count": int(poll_freshness.get("stale", 0)),
             },
             unknowns=unknowns,
             warnings=warnings,
