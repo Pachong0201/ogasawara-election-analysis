@@ -2,7 +2,8 @@ import unittest
 
 from runtime.data_readiness import DataReadinessGate
 from runtime.election_loader import ElectionLoader, election_file_path
-from runtime.source_registry import SourceRegistry
+from runtime.models import SourceFetchResult
+from runtime.source_registry import PollSource, SourceRegistry
 from tests.fixtures.helpers import (
     AREA_A,
     AREA_B,
@@ -95,6 +96,71 @@ class TestDataReadiness(unittest.TestCase):
             self.assertFalse(report.required["current_candidate_list"]["satisfied"])
             self.assertTrue(
                 any("unverified seeds" in warning for warning in report.warnings)
+            )
+
+
+
+    def test_prepare_ready_state_still_refreshes_optional_poll_data(self):
+        class FixturePollSource(PollSource):
+            source_id = "fixture_poll"
+            source_grade = "C"
+            priority = 1
+
+            def supports(self, jurisdiction, election_type, target_year):
+                return jurisdiction == DEFAULT_JURISDICTION and election_type == "county_mayor" and int(target_year) == 2026
+
+            def fetch(self, jurisdiction, election_type, target_year):
+                return SourceFetchResult(
+                    source_id=self.source_id,
+                    source_grade=self.source_grade,
+                    records=[
+                        {
+                            "poll_id": "fixture-poll-1",
+                            "pollster": "Fixture Pollster",
+                            "commissioner": "Fixture",
+                            "jurisdiction": jurisdiction,
+                            "election_type": election_type,
+                            "election_year": int(target_year),
+                            "method": "telephone_landline",
+                            "sample_size": 1000,
+                            "sample_frame": "20歲以上居民",
+                            "sampling": "RDD",
+                            "weighting": "性別年齡地區加權",
+                            "field_start": "2026-09-18",
+                            "field_end": "2026-09-19",
+                            "publish_date": "2026-09-20",
+                            "moe": 3.1,
+                            "moe_applicable": True,
+                            "undecided": 0.20,
+                            "question_wording": "若明天投票，您支持哪一位候選人？",
+                            "cross_tabs_available": False,
+                            "source": "fixture",
+                            "source_grade": "C",
+                            "retrieved_at": "2026-09-20T00:00:00+00:00",
+                            "last_verified_at": "2026-09-20T00:00:00+00:00",
+                        }
+                    ],
+                )
+
+        with temp_repo() as root:
+            populate_full_repo(root)
+            gate = self._gate(root)
+            initial = gate.check(make_task())
+            self.assertEqual(initial.status, "READY")
+            self.assertEqual(initial.required["current_polls"]["fresh_count"], 0)
+
+            loader = ElectionLoader(
+                root,
+                source_registry=SourceRegistry(poll_adapters=[FixturePollSource()]),
+                mode="online",
+            )
+            prepared = gate.prepare(make_task(), loader=loader, allow_online=True)
+
+            self.assertEqual(prepared.status, "READY")
+            self.assertEqual(prepared.required["current_polls"]["fresh_count"], 1)
+            self.assertTrue(prepared.required["current_polls"]["satisfied"])
+            self.assertTrue(
+                any("current_polls:2026" in warning for warning in prepared.warnings)
             )
 
 
