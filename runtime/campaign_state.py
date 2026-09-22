@@ -194,11 +194,11 @@ class CampaignStateBuilder:
 
     def build_retrieval_queries(self, jurisdiction: str, target_year: int) -> List[str]:
         templates = self._campaign_config().get("retrieval_queries") or [
-            "{jurisdiction} {year} 市長選舉 候選人 最新動態",
-            "{jurisdiction} {year} 市長選舉 地方人物 支持 組織",
-            "{jurisdiction} {year} 市長選舉 政黨合作 競選總部",
-            "{jurisdiction} {year} 市長選舉 政策 爭議 地方議題",
-            "{jurisdiction} {year} 市長選舉 民調",
+            "{jurisdiction} {year} 選舉 候選人 最新動態",
+            "{jurisdiction} {year} 選舉 地方人物 支持 組織",
+            "{jurisdiction} {year} 選舉 政黨合作 競選總部",
+            "{jurisdiction} {year} 選舉 政策 爭議 地方議題",
+            "{jurisdiction} {year} 選舉 民調",
         ]
         return [
             str(template).format(jurisdiction=jurisdiction, year=target_year)
@@ -375,6 +375,12 @@ class CampaignStateBuilder:
             if int(days) <= 14:
                 verified_trigger_events.extend(verified)
 
+        verified_retrieval_leads = [
+            lead
+            for lead in retrieval_leads
+            if _source_usable_for_current_event(lead) and _event_date(lead)
+        ]
+
         poll_changes = self.same_series_poll_changes(polls)
         previous = self.store.load_latest(jurisdiction)
         snapshot_delta = self.compare_snapshots(previous, current_candidates, current_events, polls)
@@ -382,6 +388,8 @@ class CampaignStateBuilder:
         reasons: List[str] = []
         if verified_trigger_events:
             reasons.append("verified_recent_campaign_event")
+        if verified_retrieval_leads:
+            reasons.append("verified_current_retrieval")
         if any(item.get("change_observed") for item in poll_changes):
             reasons.append("same_series_poll_change")
         if snapshot_delta.get("candidate_changes"):
@@ -406,6 +414,8 @@ class CampaignStateBuilder:
             "campaign_change_trigger": bool(reasons),
             "campaign_change_reasons": reasons,
             "retrieval_lead_count": len(retrieval_leads),
+            "verified_retrieval_lead_count": len(verified_retrieval_leads),
+            "verified_retrieval_leads": verified_retrieval_leads,
             "retrieval_leads": retrieval_leads,
             "interpretation_boundary": (
                 "campaign-state signals trigger further research; they do not rank candidates, "
@@ -428,6 +438,8 @@ def campaign_research_questions(snapshot: Dict[str, Any]) -> List[str]:
     reasons = set(snapshot.get("campaign_change_reasons") or [])
     if "verified_recent_campaign_event" in reasons:
         questions.append(f"{jurisdiction} 最近14天的竞选事件是否改变地方组织、候选人整合或议题结构？")
+    if "verified_current_retrieval" in reasons:
+        questions.append(f"{jurisdiction} 最新已核实公开资料反映了哪些当前竞选变化，其结构意义能否被独立证据确认？")
     if "same_series_poll_change" in reasons:
         questions.append(f"{jurisdiction} 同一调查系列出现变化时，是否有同期竞选事件或组织变化可验证其背景？")
     if "candidate_field_change" in reasons:
