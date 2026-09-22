@@ -39,24 +39,6 @@ jobs:
 
           adapter = TVBSPollCenterAdapter()
 
-          # Short diagnostics for primary-PDF layout drift. These print only
-          # small methodology snippets, never the full report.
-          page = adapter.fetcher(adapter.index_url).decode("utf-8", errors="replace")
-          entries = [
-              entry for entry in adapter._parse_index(page)
-              if adapter._entry_matches(entry, "宜蘭縣")
-          ]
-          assert entries, "Yilan TVBS poll entry not found"
-          pdf_url = entries[0]["href"]
-          if not pdf_url.startswith("http"):
-              from urllib.parse import urljoin
-              pdf_url = urljoin(adapter.index_url, pdf_url)
-          pdf_text = adapter.pdf_text_parser(adapter.fetcher(pdf_url))
-          for term in ("有效樣本", "加權", "權數", "性別", "教育程度"):
-              idx = pdf_text.find(term)
-              if idx >= 0:
-                  print("diagnostic_", term, "=", repr(pdf_text[max(0, idx-100):idx+240]))
-
           result = adapter.fetch("宜兰县", "county_mayor", 2026)
           assert result.records, result.warnings
 
@@ -72,6 +54,7 @@ jobs:
           assert poll["sampling"], poll
           assert poll["weighting"], poll
           assert poll["question_wording"], poll
+          assert poll["question_wording_is_verbatim"] is True, poll
           assert poll["source_grade"] == "C", poll
 
           support = {item["candidate"]: item["support"] for item in poll["candidate_support"]}
