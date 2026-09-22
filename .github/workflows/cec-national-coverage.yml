@@ -44,8 +44,14 @@ jobs:
 
           for jurisdiction in jurisdictions:
               for election_type, year in [
+                  ("county_mayor", 2014),
+                  ("county_mayor", 2018),
                   ("county_mayor", 2022),
+                  ("president", 2016),
+                  ("president", 2020),
                   ("president", 2024),
+                  ("regional_legislator", 2016),
+                  ("regional_legislator", 2020),
                   ("regional_legislator", 2024),
               ]:
                   result = adapter.fetch(
@@ -80,5 +86,5 @@ jobs:
                   ]
                   print("DIAGNOSTIC_SPECIAL_MEMBERS=", diagnostic[:300])
               raise AssertionError(f"CEC national coverage failures: {failures}")
-          print("NATIONAL_COVERAGE=22/22")
+          print("NATIONAL_COVERAGE=22/22_ALL_9_PERIODS")
           PY
