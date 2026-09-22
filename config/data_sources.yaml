@@ -80,6 +80,8 @@ social_unverified:
 adapters:
   registered:
     - cec_open_data_adapter
+  registered_candidate_adapters:
+    - cec_current_candidate_adapter
   builtin:
     cec_open_data_adapter:
       source_id: cec_open_data
@@ -99,6 +101,21 @@ adapters:
         - 使用中选会官方选举资料库 ZIP，不抓取第三方整理页。
         - ZIP 文件名需按 CP950/Big5 元数据处理。
         - 2016 总统/立委文件采用特殊后缀，Adapter 自动发现。
+  candidate_builtin:
+    cec_current_candidate_adapter:
+      source_id: cec_current_candidates
+      grade: A
+      priority: 1
+      page_url: https://web.cec.gov.tw/central/article/64733
+      supported_elections:
+        county_mayor: [2026]
+      status_semantics:
+        candidate_status: registered
+        notes: 登记名册仅证明已办理登记，不代表资格审定结果。
+      notes:
+        - 读取中选会115年地方公职人员选举候选人登记名册页面。
+        - 自动定位1-1直辖市长与3-1县市长登记汇总表PDF。
+        - PDF表格字段包括选举区、登记日期、姓名、推荐政党、备注。
   planned:
     - local_cec_adapter
     - verified_public_dataset_adapter
