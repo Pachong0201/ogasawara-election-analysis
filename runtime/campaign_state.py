@@ -97,37 +97,49 @@ def _poll_series_key(record: Dict[str, Any]) -> Tuple[str, ...]:
 
 
 def _poll_values(record: Dict[str, Any]) -> Dict[str, float]:
-    """Extract candidate point estimates without inventing missing fields."""
+    """Extract candidate point estimates and normalize them to percentage points."""
+
+    def normalize(value: Any) -> Optional[float]:
+        try:
+            number = float(value)
+        except (TypeError, ValueError):
+            return None
+        # Poll adapters store vote shares as decimals (0.44); host-provided
+        # records may already use percentage points (44.0). Normalize both.
+        return number * 100.0 if -1.0 <= number <= 1.0 else number
+
+    out: Dict[str, float] = {}
     containers = [
         record.get("candidate_support"),
         record.get("support"),
         record.get("results"),
     ]
-    out: Dict[str, float] = {}
     for container in containers:
         if isinstance(container, dict):
             for name, value in container.items():
-                try:
-                    numeric = float(value)
-                    out[str(name)] = numeric * 100.0 if abs(numeric) <= 1.0 else numeric
-                except (TypeError, ValueError):
+                normalized = normalize(value)
+                if normalized is not None:
+                    out[str(name)] = normalized
+        elif isinstance(container, list):
+            for item in container:
+                if not isinstance(item, dict):
                     continue
-    candidates = record.get("candidate_support")
-    if not isinstance(candidates, list):
-        candidates = record.get("candidates")
+                name = item.get("candidate") or item.get("name")
+                value = item.get("support") if "support" in item else item.get("value")
+                normalized = normalize(value)
+                if name is not None and normalized is not None:
+                    out[str(name)] = normalized
+
+    candidates = record.get("candidates")
     if isinstance(candidates, list):
         for item in candidates:
             if not isinstance(item, dict):
                 continue
             name = item.get("candidate") or item.get("name")
             value = item.get("support") if "support" in item else item.get("value")
-            if name is None or value is None:
-                continue
-            try:
-                numeric = float(value)
-                out[str(name)] = numeric * 100.0 if abs(numeric) <= 1.0 else numeric
-            except (TypeError, ValueError):
-                continue
+            normalized = normalize(value)
+            if name is not None and normalized is not None:
+                out[str(name)] = normalized
     return out
 
 
