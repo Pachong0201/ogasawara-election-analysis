@@ -112,7 +112,9 @@ def _poll_values(record: Dict[str, Any]) -> Dict[str, float]:
                     out[str(name)] = numeric * 100.0 if abs(numeric) <= 1.0 else numeric
                 except (TypeError, ValueError):
                     continue
-    candidates = record.get("candidates")
+    candidates = record.get("candidate_support")
+    if not isinstance(candidates, list):
+        candidates = record.get("candidates")
     if isinstance(candidates, list):
         for item in candidates:
             if not isinstance(item, dict):
