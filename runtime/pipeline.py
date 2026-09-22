@@ -1,4 +1,4 @@
-"""End-to-end orchestration for the V1.3 runtime.
+"""End-to-end orchestration for the V1.4 runtime.
 
 The pipeline does not generate a political verdict. It prepares a validated,
 traceable Analysis Context that a report writer may use under SKILL.md rules.
@@ -13,6 +13,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 import yaml
 
 from .analysis_context import AnalysisContextBuilder
+from .campaign_state import CampaignStateBuilder, campaign_research_questions
 from .data_readiness import DataReadinessGate
 from .election_loader import ElectionLoader, election_file_path, load_jsonl
 from .freshness import evaluate_records
@@ -36,6 +37,7 @@ class AnalysisPipeline:
         self.repo_root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[1]
         self.package_root = Path(__file__).resolve().parents[1]
         self.mode = mode
+        self.retrieval_backend = retrieval_backend
 
         runtime_config_path = self.repo_root / "config" / "runtime.yaml"
         if not runtime_config_path.exists():
@@ -58,8 +60,14 @@ class AnalysisPipeline:
             retrieval_backend=retrieval_backend,
             mode=mode,
         )
-        self.context_builder = AnalysisContextBuilder(self.repo_root, skill_version="1.3.0")
+        self.context_builder = AnalysisContextBuilder(self.repo_root, skill_version="1.4.0")
         self.runtime_config = self._load_runtime_config()
+        self.campaign_state_builder = CampaignStateBuilder(
+            self.repo_root,
+            retrieval_backend=retrieval_backend,
+            config=self.runtime_config,
+            mode=mode,
+        )
 
     def _load_runtime_config(self) -> Dict[str, Any]:
         path = self.runtime_config_path
@@ -321,19 +329,9 @@ class AnalysisPipeline:
         }
         triggered = self._triggered(metrics)
 
-        regions = sorted({
-            str(item.get("region") or "").split("|")[0]
-            for item in triggered
-            if str(item.get("region") or "").strip()
-        })
-        questions = self.knowledge_loader.build_research_questions(triggered) if triggered else []
-        local_knowledge = self.knowledge_loader.load(
-            task.jurisdiction,
-            regions=regions or None,
-            research_questions=questions,
-            allow_online=online and bool(triggered),
-        )
-
+        # V1.4: build the current campaign state before deciding whether local
+        # knowledge retrieval is needed. Current campaign change can now trigger
+        # research independently of historical vote-pattern anomalies.
         polls_result = self.loader.load_polls(jurisdiction=task.jurisdiction)
         polls = [dict(item) for item in polls_result.get("records", [])]
         poll_freshness = evaluate_records(polls, kind="poll") if polls else {"fresh": 0, "stale": 0, "unknown": 0, "records": []}
@@ -346,11 +344,44 @@ class AnalysisPipeline:
         events = self._load_events(task.jurisdiction)
         current_candidates = readiness.available.get("current_candidates", {}).get("verified_candidates", [])
 
+        campaign_leads, campaign_retrieval_warnings = self.campaign_state_builder.retrieve_current_leads(
+            task.jurisdiction,
+            task.target_year,
+            allow_online=online,
+        )
+        campaign_state = self.campaign_state_builder.build(
+            jurisdiction=task.jurisdiction,
+            target_year=task.target_year,
+            current_candidates=current_candidates,
+            current_events=events,
+            campaign_state=campaign_state,
+            polls=polls,
+            retrieval_leads=campaign_leads,
+        )
+
+        regions = sorted({
+            str(item.get("region") or "").split("|")[0]
+            for item in triggered
+            if str(item.get("region") or "").strip()
+        })
+        historical_questions = self.knowledge_loader.build_research_questions(triggered) if triggered else []
+        live_questions = campaign_research_questions(campaign_state)
+        questions = list(dict.fromkeys(historical_questions + live_questions))
+        research_triggered = bool(triggered) or bool(campaign_state.get("campaign_change_trigger")) or bool(campaign_leads)
+        local_knowledge = self.knowledge_loader.load(
+            task.jurisdiction,
+            regions=regions or None,
+            research_questions=questions,
+            allow_online=online and research_triggered,
+        )
+
         unknowns: List[str] = []
         if readiness.status == "INSUFFICIENT":
             unknowns.append("hard-required data are incomplete; full structural analysis is not allowed")
         if triggered and not local_knowledge.get("sufficient"):
             unknowns.append("local anomalies were detected but minimum sufficient local knowledge was not established")
+        if campaign_state.get("campaign_change_trigger") and not local_knowledge.get("sufficient"):
+            unknowns.append("current campaign change was detected but minimum sufficient current local knowledge was not established")
         if not polls:
             unknowns.append("no validated poll cache is available; poll calibration is omitted")
         elif int(poll_freshness.get("fresh", 0)) == 0:
@@ -358,7 +389,7 @@ class AnalysisPipeline:
                 "no fresh validated poll is available; stale poll records may be retained as dated campaign-period evidence but must not calibrate the current state"
             )
 
-        warnings = list(readiness.warnings) + load_warnings + list(local_knowledge.get("warnings", []))
+        warnings = list(readiness.warnings) + load_warnings + campaign_retrieval_warnings + list(local_knowledge.get("warnings", []))
         if polls_result.get("invalid"):
             warnings.append(f"{len(polls_result['invalid'])} cached poll record(s) failed validation")
         if poll_freshness.get("stale"):
@@ -370,7 +401,7 @@ class AnalysisPipeline:
             "split_ticket": "same-day regional legislator minus president vote share",
         }
 
-        sources = self._source_summary(records_by_type, current_candidates + polls + events)
+        sources = self._source_summary(records_by_type, current_candidates + polls + events + campaign_leads)
         context = self.context_builder.build(
             task=task,
             readiness=readiness,
@@ -387,6 +418,9 @@ class AnalysisPipeline:
             polls=polls,
             evidence_summary={
                 "triggered_anomaly_count": len(triggered),
+                "campaign_change_trigger": bool(campaign_state.get("campaign_change_trigger")),
+                "campaign_change_reasons": campaign_state.get("campaign_change_reasons", []),
+                "campaign_retrieval_lead_count": len(campaign_leads),
                 "local_knowledge_sufficient": bool(local_knowledge.get("sufficient")),
                 "poll_freshness": poll_freshness,
                 "current_poll_calibration_available": int(poll_freshness.get("fresh", 0)) > 0,
