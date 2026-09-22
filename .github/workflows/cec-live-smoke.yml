@@ -34,6 +34,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           from runtime.cec_open_data import CECOpenDataAdapter
+          from runtime.cec_current_candidates import CECCurrentCandidateAdapter
           from runtime.models import DataQuery
 
           adapter = CECOpenDataAdapter(cache_dir=Path("cache/raw/cec"))
@@ -56,4 +57,12 @@ jobs:
               assert all(0 <= row["turnout"] <= 1 for row in result.records)
               print(query.to_dict(), "records=", len(result.records), "regions=", len(regions))
               print("source_version=", result.source_version)
+
+          candidate_adapter = CECCurrentCandidateAdapter()
+          candidates = candidate_adapter.fetch("宜兰县", "county_mayor", 2026)
+          assert candidates.records, candidates.warnings
+          assert all(row["candidate_status"] == "registered" for row in candidates.records)
+          assert all(row["source_grade"] == "A" for row in candidates.records)
+          print("current_candidates=", len(candidates.records))
+          print("candidate_names=", sorted(row["name"] for row in candidates.records))
           PY
