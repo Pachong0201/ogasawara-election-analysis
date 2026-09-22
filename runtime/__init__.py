@@ -1,3 +1,3 @@
-"""V1.1 Data & Runtime Layer for ogasawara-election-analysis."""
+"""V1.2 Data & Runtime Layer for ogasawara-election-analysis."""
 
-__version__ = "1.1.1"
+__version__ = "1.2.0"
