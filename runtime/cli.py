@@ -1,4 +1,4 @@
-"""Command line entry point for the V1.3 data/runtime/knowledge layer."""
+"""Command line entry point for the V1.4 data/runtime/campaign layer."""
 
 from __future__ import annotations
 
@@ -190,7 +190,7 @@ def _cmd_knowledge_build(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="python -m runtime.cli", description="V1.3 Data, Runtime & Knowledge Layer")
+    parser = argparse.ArgumentParser(prog="python -m runtime.cli", description="V1.4 Data, Runtime, Knowledge & Live Campaign Layer")
     parser.add_argument("--repo-root", default=None, help="repository root (defaults to runtime parent)")
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -242,7 +242,7 @@ def build_parser() -> argparse.ArgumentParser:
     context.add_argument("--manifest", default="")
     context.set_defaults(func=_cmd_context)
 
-    run = sub.add_parser("run", help="run the end-to-end V1.3 preparation pipeline")
+    run = sub.add_parser("run", help="run the end-to-end V1.4 live campaign preparation pipeline")
     run.add_argument("--county", required=True)
     run.add_argument("--year", required=True, type=int)
     run.add_argument("--type", required=True)
@@ -254,7 +254,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument(
         "--retrieval-inbox",
         default="",
-        help="JSON/JSONL host-web retrieval inbox for local-knowledge research questions",
+        help="JSON/JSONL host-web retrieval inbox for live campaign events and local-knowledge research questions",
     )
     run.set_defaults(func=_cmd_run)
 
