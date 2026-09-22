@@ -1,4 +1,4 @@
-version: 1.3.0
+version: 1.4.0
 name: data_acquisition
 purpose: >
   规定 V1.3 数据获取、本地化、验证、新鲜度、知识晋升与离线行为的统一规则。
@@ -35,6 +35,12 @@ principles:
     statement: 晋升前必须显式完成相反证据检查并填写 scope_boundary；存在已验证 A/B/C 级相反证据时转 requires_review。
   - id: DATA-15
     statement: 每次晋升必须生成 receipt，记录 proposal、证据 lead、哈希、决策、目标路径与 Builder 版本。
+  - id: DATA-16
+    statement: ONLINE 完整分析必须先生成带 as_of 的 Campaign State Snapshot，并主动检查最近30／14／7日选战变化。
+  - id: DATA-17
+    statement: 当前选战变化可以独立触发地方知识检索，不得要求必须先出现历史票型异常。
+  - id: DATA-18
+    statement: 宿主检索结果进入当前选战层前必须保留 verification_status 与 source_grade；lead_only 不得写成已确认事实。
 
 source_selection:
   order:
@@ -201,3 +207,18 @@ data_readiness:
     - missing
     - stale
     - warnings
+
+
+live_campaign_state:
+  storage: cache/campaign_state/
+  required_for_online_current_cycle_analysis: true
+  windows_days: [7, 14, 30]
+  required_outputs:
+    - as_of
+    - campaign_change_trigger
+    - campaign_change_reasons
+    - snapshot_delta
+    - same_series_poll_changes
+    - retrieval_lead_count
+  trigger_semantics: >
+    trigger 只表示需要进一步研究，不代表某候选人受益、受损、领先或更可能当选。
