@@ -64,6 +64,7 @@ ogasawara-election-analysis/
 │  └─ third_force.md
 ├─ runtime/             # V1.2 数据与运行层
 │  ├─ cec_open_data.py   # 中选会官方 votedata.zip Adapter
+│  ├─ cec_current_candidates.py # 2026候选人登记名册 Adapter
 │  ├─ data_readiness.py
 │  ├─ election_loader.py
 │  ├─ election_normalizer.py
