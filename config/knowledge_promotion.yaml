@@ -75,6 +75,10 @@ target_rules:
       - verification_status
 
 persistence:
+  auto_promote_to_knowledge: false
+  require_explicit_proposal: true
+  require_contradiction_check: true
+  require_scope_boundary: true
   idempotent_key_by_target:
     historical_claim: claim_id
     local_relationship: relationship_id
