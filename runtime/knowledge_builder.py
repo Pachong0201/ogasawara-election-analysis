@@ -18,6 +18,7 @@ import yaml
 
 from .election_loader import load_jsonl, safe_component, write_jsonl
 from .freshness import historical_relationship_is_current, is_fresh
+from .host_retrieval import HostRetrievalBackend
 from .models import parse_date, utc_now_iso
 
 
@@ -154,6 +155,79 @@ class KnowledgePromotionBuilder:
     def _load_leads(self, county: str) -> List[Dict[str, Any]]:
         path = self._paths(county)["retrieval"]
         return load_jsonl(path) if path.exists() else []
+
+    def ingest_retrieval_inbox(
+        self,
+        county: str,
+        inbox_path: Path,
+    ) -> Dict[str, Any]:
+        """Import host Web/Search results directly into retrieval staging.
+
+        This performs no knowledge promotion. Records are normalized by
+        HostRetrievalBackend, assigned a county, deduplicated by lead_id/query,
+        and persisted only to cache/retrieval/.
+        """
+        county = str(county or "").strip()
+        if not county:
+            raise KnowledgePromotionError("county is required for retrieval ingest")
+
+        backend = HostRetrievalBackend(inbox_path=Path(inbox_path))
+        accepted: List[Dict[str, Any]] = []
+        rejected: List[Dict[str, Any]] = []
+        for raw in backend.records:
+            item = dict(raw)
+            declared_county = str(item.get("county") or "").strip()
+            if declared_county and declared_county != county:
+                rejected.append(
+                    {
+                        "lead_id": item.get("lead_id") or item.get("url") or "",
+                        "reason": "lead county does not match target county",
+                    }
+                )
+                continue
+            query = str(item.get("query") or "").strip()
+            url = str(item.get("url") or "").strip()
+            if not query or not url:
+                rejected.append(
+                    {
+                        "lead_id": item.get("lead_id") or item.get("url") or "",
+                        "reason": "lead requires query and url",
+                    }
+                )
+                continue
+            item["county"] = county
+            item["lead_id"] = str(
+                item.get("lead_id")
+                or url
+                or f"lead-{hashlib.sha1((query + url).encode('utf-8')).hexdigest()[:16]}"
+            )
+            accepted.append(item)
+
+        path = self._paths(county)["retrieval"]
+        existing = load_jsonl(path) if path.exists() else []
+        merged: Dict[str, Dict[str, Any]] = {}
+        for item in existing + accepted:
+            key = "|".join(
+                [
+                    str(item.get("lead_id") or item.get("url") or ""),
+                    str(item.get("query") or ""),
+                ]
+            )
+            if not key.strip("|"):
+                continue
+            merged[key] = item
+        if accepted or existing:
+            write_jsonl(path, merged.values())
+
+        return {
+            "county": county,
+            "inbox": str(Path(inbox_path)),
+            "accepted_count": len(accepted),
+            "rejected_count": len(rejected),
+            "cache_count": len(merged),
+            "rejected": rejected,
+            "cache_path": str(path.relative_to(self.repo_root)),
+        }
 
     @staticmethod
     def _lead_map(leads: Iterable[Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
