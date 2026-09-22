@@ -103,6 +103,7 @@ layers:
 
   - id: L4
     name: 当前选举事件库
+    runtime_role: live_campaign_state_core_input
     content:
       - 提名
       - 初选
@@ -183,3 +184,7 @@ separation_rules:
     statement: 事件库中的民调记录必须同时满足 L5 的方法要求。
   - id: LAYER-06
     statement: D/E 级资料不得单独形成任何层级的结构性判断。
+  - id: LAYER-07
+    statement: 当前选战分析必须带 as_of；L4 事件与 L5 民调需按时间窗口进入 Campaign State Snapshot。
+  - id: LAYER-08
+    statement: 历史异常不是唯一检索触发器；已验证的当前竞选变化也可以触发 Minimum Sufficient Local Knowledge。
