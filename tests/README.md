@@ -19,6 +19,7 @@ python3 -m unittest discover -s tests -v
 
 ### V1.1 / V1.2 Data & Runtime
 
+- `test_cec_current_candidates.py`：2026中选会县市长登记名册、登记状态语义、缓存与 Readiness 自动刷新。
 - `test_cec_open_data.py`：中选会官方 ZIP 结构、2016 特殊后缀、简繁体县市名称、缓存复用及 geography 持久化。
 - `test_data_readiness.py`：数据不足 INSUFFICIENT、完整数据 READY、缺立委 PARTIAL、边界不一致拒绝、ONLINE 补齐后重检。
 - `test_election_loader.py`：本地优先、缺失补齐并写回、OFFLINE 不联网。
