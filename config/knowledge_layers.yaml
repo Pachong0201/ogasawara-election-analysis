@@ -4,6 +4,22 @@ purpose: >
   明确 Skill 调用的五层知识，禁止把事实、历史、当前政治、事件与民调
   混为同一层。历史知识与当前知识必须物理或逻辑分离。
 
+pre_knowledge_staging:
+  name: Retrieval / Promotion Staging
+  nature: 非知识层；仅用于检索线索、结构化 proposal 与晋升审计。
+  paths:
+    - cache/retrieval/
+    - cache/knowledge_promotion/
+  schemas:
+    - schemas/retrieval_lead.yaml
+    - schemas/knowledge_proposal.yaml
+    - schemas/knowledge_promotion_receipt.yaml
+  rules:
+    - staging 不属于 L1-L5，任何 lead/proposal 在 promoted 前不得作为长期知识事实。
+    - verification_status=verified 只表示来源已核对，不等于知识已晋升。
+    - 只有 KnowledgePromotionBuilder 通过证据、时间、相反证据与字段门禁后，才可写入 L2/L3。
+    - rejected 与 requires_review 记录必须保留审计 receipt，不得静默丢弃。
+
 layers:
   - id: L1
     name: 选举事实库
