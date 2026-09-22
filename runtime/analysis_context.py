@@ -10,7 +10,7 @@ from .models import AnalysisContext, ElectionTask, ReadinessReport, as_jsonable,
 
 
 class AnalysisContextBuilder:
-    def __init__(self, repo_root: Optional[Path] = None, skill_version: str = "1.2.0"):
+    def __init__(self, repo_root: Optional[Path] = None, skill_version: str = "1.3.0"):
         self.repo_root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[1]
         self.skill_version = skill_version
 
