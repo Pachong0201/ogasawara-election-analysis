@@ -1,0 +1,81 @@
+version: 1.4.0
+name: campaign_state
+purpose: >
+  将“当前选举事件”从报告附件升级为选战进行时核心输入。每次完整分析都必须
+  形成带 as_of 的当前选战快照，并说明最近 7/14/30 日发生了什么变化、这些变化
+  是否触发地方知识验证，以及与上一快照相比新增了什么。
+
+principles:
+  - 历史结构是参照系，当前选战状态是分析对象。
+  - 当前事件先回答“发生了什么变化”，再讨论是否改变既有结构。
+  - D/E 级资料可触发验证问题，但不得单独形成结构性判断。
+  - 单一事件不得直接推导胜负、胜率、选民整体流向或候选人排名。
+  - 快照必须保留 as_of，禁止把数周前的事件写成“当前最新”。
+
+windows:
+  required_days: [7, 14, 30]
+  meaning:
+    7: 最新短期变化
+    14: 近期组织与议题变化
+    30: 当前阶段背景与累积变化
+
+campaign_change_trigger:
+  event_types:
+    - nomination
+    - primary_result
+    - candidate_registration
+    - candidate_withdrawal
+    - party_cooperation
+    - alliance_change
+    - endorsement
+    - organization_change
+    - campaign_hq
+    - campaign_personnel
+    - policy_launch
+    - major_issue
+    - controversy
+    - judicial_event
+    - local_major_event
+    - debate
+  action:
+    - local_explanation_required=true
+    - 生成与该事件直接相关的 research_question
+    - 将 research_question 与历史票型异常问题合并后进入地方知识检索
+  evidence_boundary:
+    - A/B 级 verified 可进入结构解释。
+    - C 级形成结构性判断仍需至少两个独立来源。
+    - D/E 级只可记录阵营主张或待验证线索。
+
+snapshot_delta:
+  compare:
+    - candidate_roster
+    - campaign_stage
+    - events_30d
+    - poll_same_series_trends
+  output:
+    - candidate_added
+    - candidate_removed
+    - new_events
+    - poll_series_updated
+    - campaign_stage_changed
+
+online_mode:
+  required_behavior:
+    - 完整选战中分析应主动请求最近 7/14/30 日当前事件资料。
+    - 宿主 Web/Search 结果必须带 event/publish date；没有日期的结果不得进入当前快照。
+    - lead_only 结果只进入 retrieval_leads，不得伪装成已验证事件。
+    - verified 结果可写入 cache/events，但不得因此自动晋升为长期 L2/L3 知识。
+
+offline_mode:
+  rule: >
+    只使用 cache/events、有效动态缓存和用户本轮资料。若没有近期事件，
+    必须明确说明“当前选战动态资料不足”，不得用历史资料冒充最新动态。
+
+reporting:
+  required_order:
+    - 当前选战处于什么阶段
+    - 最近 7/14/30 日发生了什么变化
+    - 哪些变化可能触及既有结构
+    - 历史结构如何解释或无法解释这些变化
+    - 同源民调是否验证变化
+    - 后续需要公开验证什么
