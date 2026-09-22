@@ -1,4 +1,4 @@
-version: 1.0.0
+version: 1.3.0
 name: knowledge_layers
 purpose: >
   明确 Skill 调用的五层知识，禁止把事实、历史、当前政治、事件与民调
