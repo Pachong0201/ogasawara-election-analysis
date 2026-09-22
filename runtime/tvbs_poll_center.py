@@ -517,6 +517,21 @@ class TVBSPollCenterAdapter(PollSource):
                 party = match.group(1) or ""
                 name = _compact(match.group(2))
                 value = float(match.group(3))
+
+                # Regex optionality can occasionally absorb a party prefix into
+                # the candidate token (e.g. "國民黨吳宗憲"). Normalize that
+                # deterministically rather than storing a malformed person name.
+                if not party:
+                    for prefix in party_names:
+                        pos = name.find(prefix)
+                        if pos in {0, 1}:
+                            remainder = name[pos + len(prefix):]
+                            if len(remainder) >= 2:
+                                party = prefix
+                                name = remainder
+                                break
+                name = re.sub(r"^(?:而|由|為)", "", name)
+
                 if not (0 <= value <= 100):
                     continue
                 if any(token in name for token in ("選民", "民眾", "支持度", "候選人", "縣長", "市長")):
