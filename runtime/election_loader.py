@@ -261,8 +261,10 @@ class ElectionLoader:
                 continue
             name = str(record.get("jurisdiction") or "").strip()
             region_id = str(record.get("region_id") or "").strip()
-            if not name or not region_id:
+            if not name:
                 continue
+            if not region_id:
+                region_id = f"observed:{safe_component(query.jurisdiction)}:{safe_component(name)}"
             item = {
                 "region_id": region_id,
                 "name": name,
