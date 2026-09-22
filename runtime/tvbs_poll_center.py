@@ -293,7 +293,7 @@ class TVBSPollCenterAdapter(PollSource):
         pdf_sha: str,
     ) -> Optional[Dict[str, Any]]:
         body = _compact(text)
-        field_dates = self._field_dates(body)
+        field_dates = self._field_dates(body, default_year=2026)
         sample_size = self._sample_size(body)
         moe = self._moe(body)
         method = self._method(body)
@@ -383,13 +383,21 @@ class TVBSPollCenterAdapter(PollSource):
         }
 
     @staticmethod
-    def _field_dates(text: str) -> Optional[Tuple[str, str]]:
+    def _field_dates(text: str, default_year: int) -> Optional[Tuple[str, str]]:
         patterns = [
-            r"(\d{2,4})年\s*(\d{1,2})月\s*(\d{1,2})日\s*(?:至|到|－|-|~|～)\s*(?:(\d{2,4})年\s*)?(?:(\d{1,2})月\s*)?(\d{1,2})日?",
-            r"(\d{2,4})[./-](\d{1,2})[./-](\d{1,2})\s*(?:至|到|－|-|~|～)\s*(?:(\d{2,4})[./-])?(?:(\d{1,2})[./-])?(\d{1,2})",
+            re.compile(
+                r"(\\d{2,4})\\s*年\\s*(\\d{1,2})\\s*月\\s*(\\d{1,2})\\s*日?\\s*"
+                r"(?:至|到|－|-|~|～)\\s*(?:(\\d{2,4})\\s*年\\s*)?"
+                r"(?:(\\d{1,2})\\s*月\\s*)?(\\d{1,2})\\s*日?"
+            ),
+            re.compile(
+                r"(\\d{2,4})[./-](\\d{1,2})[./-](\\d{1,2})\\s*"
+                r"(?:至|到|－|-|~|～)\\s*(?:(\\d{2,4})[./-])?"
+                r"(?:(\\d{1,2})[./-])?(\\d{1,2})"
+            ),
         ]
         for pattern in patterns:
-            match = re.search(pattern, text)
+            match = pattern.search(text)
             if not match:
                 continue
             y1, m1, d1, y2, m2, d2 = match.groups()
@@ -405,14 +413,33 @@ class TVBSPollCenterAdapter(PollSource):
                 )
             except ValueError:
                 continue
+
+        # TVBS PDF methodology pages sometimes omit the ROC/Gregorian year
+        # in the sentence because the report header already establishes it.
+        # In that case use the election/report year supplied by the adapter;
+        # month/day still must be explicitly present in the primary PDF.
+        match = re.search(
+            r"(?:於|自|調查時間[:：]?)?\\s*(\\d{1,2})\\s*月\\s*(\\d{1,2})\\s*日?\\s*"
+            r"(?:至|到|－|-|~|～)\\s*(?:(\\d{1,2})\\s*月\\s*)?(\\d{1,2})\\s*日?",
+            text,
+        )
+        if match:
+            m1, d1, m2, d2 = match.groups()
+            try:
+                return (
+                    _iso_date(default_year, int(m1), int(d1)),
+                    _iso_date(default_year, int(m2) if m2 else int(m1), int(d2)),
+                )
+            except ValueError:
+                pass
         return None
 
     @staticmethod
     def _sample_size(text: str) -> Optional[int]:
         patterns = [
-            r"(?:最後)?成功訪問(?:有效樣本)?\s*([0-9,]+)\s*位",
-            r"有效樣本\s*([0-9,]+)\s*位",
-            r"完成\s*([0-9,]+)\s*份有效樣本",
+            r"(?:最後)?成功訪問(?:有效樣本)?\\s*[:：]?\\s*([0-9,]+)\\s*(?:位|人|份)?",
+            r"有效樣本(?:數|為|共)?\\s*[:：]?\\s*([0-9,]+)\\s*(?:位|人|份)?",
+            r"完成\\s*([0-9,]+)\\s*份?有效樣本",
         ]
         for pattern in patterns:
             match = re.search(pattern, text)
@@ -456,8 +483,9 @@ class TVBSPollCenterAdapter(PollSource):
     @staticmethod
     def _weighting(text: str) -> str:
         patterns = [
-            r"(所有資料並依[^。]{1,160}加權[^。]{0,40})",
-            r"(資料[^。]{0,60}(?:性別|年齡)[^。]{0,140}加權[^。]{0,40})",
+            r"((?:所有)?資料[^。]{0,120}(?:性別|年齡)[^。]{0,220}加權[^。]{0,60})",
+            r"((?:性別|年齡)[^。]{0,220}(?:加權|權數)[^。]{0,80})",
+            r"([^。]{0,80}(?:性別|年齡)[^。]{0,180}(?:母體|結構)[^。]{0,100}加權[^。]{0,60})",
         ]
         for pattern in patterns:
             match = re.search(pattern, text)
@@ -469,8 +497,8 @@ class TVBSPollCenterAdapter(PollSource):
     def _sample_frame(text: str, official_jurisdiction: str) -> str:
         escaped = re.escape(official_jurisdiction)
         patterns = [
-            rf"(\d{{2}}歲以上{escaped}(?:民眾|民)?)",
-            rf"(戶籍[^。]{{0,50}}{escaped}[^。]{{0,50}}\d{{2}}歲以上[^。]{{0,30}})",
+            rf"(\\d{{2}}\\s*歲以上\\s*{escaped}\\s*(?:民眾|民)?)",
+            rf"(戶籍[^。]{{0,60}}{escaped}[^。]{{0,60}}\\d{{2}}\\s*歲以上[^。]{{0,40}})",
         ]
         for pattern in patterns:
             match = re.search(pattern, text)
