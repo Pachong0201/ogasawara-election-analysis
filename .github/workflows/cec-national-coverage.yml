@@ -70,6 +70,15 @@ jobs:
 
           if failures:
               print("FAILURES=", failures)
+              with adapter.archive.open(adapter.archive.ensure().path) as zf:
+                  diagnostic = [
+                      name for name in zf.namelist()
+                      if (
+                          ("嘉義" in name or "重行" in name or "另行" in name)
+                          and name.lower().endswith(".csv")
+                      )
+                  ]
+                  print("DIAGNOSTIC_SPECIAL_MEMBERS=", diagnostic[:300])
               raise AssertionError(f"CEC national coverage failures: {failures}")
           print("NATIONAL_COVERAGE=22/22")
           PY
