@@ -58,6 +58,30 @@ class ElectionDataSource(ABC):
         }
 
 
+class CurrentCandidateSource(ABC):
+    """Adapter interface for time-sensitive current candidate registries."""
+
+    source_id: str = "unknown"
+    source_grade: str = "C"
+    priority: int = 100
+
+    @abstractmethod
+    def supports(self, jurisdiction: str, election_type: str, target_year: int) -> bool:
+        """Return True when this source can supply the current candidate list."""
+
+    @abstractmethod
+    def fetch(self, jurisdiction: str, election_type: str, target_year: int) -> SourceFetchResult:
+        """Fetch current candidate records."""
+
+    def metadata(self) -> Dict[str, Any]:
+        return {
+            "source_id": self.source_id,
+            "source_grade": self.source_grade,
+            "priority": self.priority,
+            "data_kind": "current_candidates",
+        }
+
+
 class RetrievalBackend(ABC):
     """Abstract search/fetch backend injected by the running environment."""
 
@@ -118,37 +142,75 @@ class FixtureBackend(RetrievalBackend):
 class SourceRegistry:
     """Loads ``config/data_sources.yaml`` and stores runtime adapters."""
 
-    def __init__(self, config_path: Optional[Path] = None, adapters: Optional[Iterable[ElectionDataSource]] = None):
+    def __init__(
+        self,
+        config_path: Optional[Path] = None,
+        adapters: Optional[Iterable[ElectionDataSource]] = None,
+        candidate_adapters: Optional[Iterable[CurrentCandidateSource]] = None,
+    ):
         self.config_path = Path(config_path) if config_path else None
         self.config: Dict[str, Any] = {}
         self.adapters: List[ElectionDataSource] = []
+        self.candidate_adapters: List[CurrentCandidateSource] = []
         if self.config_path and self.config_path.exists():
             with self.config_path.open(encoding="utf-8") as fh:
                 self.config = yaml.safe_load(fh) or {}
         if adapters:
             for adapter in adapters:
                 self.register(adapter)
+        if candidate_adapters:
+            for adapter in candidate_adapters:
+                self.register_candidate(adapter)
         self._register_configured_builtin_adapters()
 
 
     def _register_configured_builtin_adapters(self) -> None:
         """Instantiate built-in adapters declared in data_sources.yaml."""
         configured = self.config.get("adapters", {}).get("registered", []) or []
-        if "cec_open_data_adapter" not in configured:
-            return
-        if any(getattr(adapter, "source_id", "") == "cec_open_data" for adapter in self.adapters):
-            return
-
-        from .cec_open_data import CECOpenDataAdapter
+        configured_candidates = self.config.get("adapters", {}).get("registered_candidate_adapters", []) or []
 
         if self.config_path:
             repo_root = self.config_path.resolve().parents[1]
         else:
             repo_root = Path(__file__).resolve().parents[1]
-        self.register(CECOpenDataAdapter(cache_dir=repo_root / "cache" / "raw" / "cec"))
+
+        if (
+            "cec_open_data_adapter" in configured
+            and not any(getattr(adapter, "source_id", "") == "cec_open_data" for adapter in self.adapters)
+        ):
+            from .cec_open_data import CECOpenDataAdapter
+            self.register(CECOpenDataAdapter(cache_dir=repo_root / "cache" / "raw" / "cec"))
+
+        if (
+            "cec_current_candidate_adapter" in configured_candidates
+            and not any(
+                getattr(adapter, "source_id", "") == "cec_current_candidates"
+                for adapter in self.candidate_adapters
+            )
+        ):
+            from .cec_current_candidates import CECCurrentCandidateAdapter
+            self.register_candidate(CECCurrentCandidateAdapter())
 
     def register(self, adapter: ElectionDataSource) -> None:
         self.adapters.append(adapter)
+
+    def register_candidate(self, adapter: CurrentCandidateSource) -> None:
+        self.candidate_adapters.append(adapter)
+
+    def current_candidate_sources_for(
+        self,
+        jurisdiction: str,
+        election_type: str,
+        target_year: int,
+    ) -> List[CurrentCandidateSource]:
+        supported = [
+            adapter
+            for adapter in self.candidate_adapters
+            if getattr(adapter, "supports", lambda *_: False)(
+                jurisdiction, election_type, int(target_year)
+            )
+        ]
+        return sorted(supported, key=lambda adapter: getattr(adapter, "priority", 100))
 
     def sources_for(self, query: DataQuery) -> List[ElectionDataSource]:
         supported = [adapter for adapter in self.adapters if getattr(adapter, "supports", lambda q: False)(query)]
@@ -156,9 +218,11 @@ class SourceRegistry:
 
     def metadata(self) -> Dict[str, Any]:
         registered = [adapter.metadata() for adapter in self.adapters]
+        candidate_registered = [adapter.metadata() for adapter in self.candidate_adapters]
         return {
             "source_registry_version": self.config.get("version"),
             "registered_adapters": registered,
+            "registered_candidate_adapters": candidate_registered,
             "configured_election_sources": self.config.get("election_results", {}),
             "adapters": self.config.get("adapters", {}),
         }
