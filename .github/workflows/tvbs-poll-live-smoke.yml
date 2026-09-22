@@ -1,0 +1,78 @@
+name: TVBS poll live smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "runtime/tvbs_poll_center.py"
+      - "runtime/source_registry.py"
+      - "runtime/election_loader.py"
+      - "runtime/freshness.py"
+      - "config/data_sources.yaml"
+      - ".github/workflows/tvbs-poll-live-smoke.yml"
+  workflow_dispatch:
+  schedule:
+    - cron: "23 5 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  primary-poll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Parse TVBS primary Yilan poll report
+        run: |
+          python - <<'PY'
+          import datetime as dt
+          from runtime.freshness import evaluate_records
+          from runtime.tvbs_poll_center import TVBSPollCenterAdapter
+
+          adapter = TVBSPollCenterAdapter()
+          result = adapter.fetch("宜兰县", "county_mayor", 2026)
+          assert result.records, result.warnings
+
+          poll = result.records[0]
+          assert poll["pollster"] == "TVBS民意調查中心", poll
+          assert poll["method"] == "telephone_landline", poll
+          assert poll["sample_size"] == 1042, poll
+          assert poll["field_start"] == "2026-03-13", poll
+          assert poll["field_end"] == "2026-03-19", poll
+          assert poll["moe"] == 3.0, poll
+          assert abs(poll["undecided"] - 0.31) < 1e-9, poll
+          assert poll["sample_frame"], poll
+          assert poll["sampling"], poll
+          assert poll["weighting"], poll
+          assert poll["question_wording"], poll
+          assert poll["source_grade"] == "C", poll
+
+          support = {item["candidate"]: item["support"] for item in poll["candidate_support"]}
+          assert abs(support["林國漳"] - 0.33) < 1e-9, support
+          assert abs(support["吳宗憲"] - 0.28) < 1e-9, support
+          assert abs(support["陳琬惠"] - 0.08) < 1e-9, support
+
+          freshness = evaluate_records(
+              [poll],
+              kind="poll",
+              now=dt.date(2026, 9, 22),
+          )
+          assert freshness["fresh"] == 0, freshness
+          assert freshness["stale"] == 1, freshness
+
+          print("poll_id=", poll["poll_id"])
+          print("field_period=", poll["field_start"], poll["field_end"])
+          print("sample_size=", poll["sample_size"])
+          print("moe=", poll["moe"])
+          print("undecided=", poll["undecided"])
+          print("candidate_count=", len(poll["candidate_support"]))
+          print("freshness=", freshness["records"][0]["status"])
+          PY
