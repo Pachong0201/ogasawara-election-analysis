@@ -13,7 +13,7 @@ election_results:
       priority: 1
       adapter: cec_open_data_adapter
       dataset_page: https://data.gov.tw/dataset/13119
-      download_url: https://data.cec.gov.tw/选举资料库/votedata.zip
+      download_url: https://data.cec.gov.tw/選舉資料庫/votedata.zip
       notes: 官方选举资料优先来源；V1.2 已接入 votedata.zip Adapter。
   secondary:
     - id: local_cec
