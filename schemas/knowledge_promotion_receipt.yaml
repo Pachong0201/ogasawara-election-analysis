@@ -32,4 +32,6 @@ properties:
   warnings:
     type: array
     items: {type: string}
+  record_sha256: {type: string}
+  evidence_snapshot_sha256: {type: string}
   knowledge_builder_version: {type: string}
