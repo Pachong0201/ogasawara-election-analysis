@@ -82,6 +82,7 @@ class TestSkillStructure(unittest.TestCase):
             "tests/test_pipeline.py",
             "tests/test_host_retrieval.py",
             "tests/test_knowledge_builder.py",
+            "tests/test_cli_knowledge.py",
             "examples/yilan/test_cases.yaml",
             "examples/yilan/README.md",
             "tests/README.md",
