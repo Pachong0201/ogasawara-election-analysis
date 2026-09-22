@@ -77,6 +77,21 @@ social_unverified:
   grade: E
   notes: 只能作为未验证线索，不得单独形成结构性判断。
 
+host_retrieval_bridge:
+  type: host_injected
+  backend: HostRetrievalBackend
+  schema: schemas/retrieval_lead.yaml
+  default_verification_status: lead_only
+  missing_grade_policy: downgrade_to_E
+  persistence:
+    destination: cache/retrieval/
+    auto_promote_to_knowledge: false
+  notes:
+    - ChatGPT、Codex 或其他宿主 Agent 可使用自身 Web/Search 工具检索地方知识。
+    - 宿主将结构化 JSON/JSONL 结果通过 --retrieval-inbox 交给 Skill。
+    - 即使 verification_status=verified，也不得自动晋升为长期知识事实。
+    - 长期知识仍须经过 evidence grade、time_scope 与 research question 覆盖校验。
+
 adapters:
   registered:
     - cec_open_data_adapter
