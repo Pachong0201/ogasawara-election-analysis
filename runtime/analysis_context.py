@@ -25,7 +25,6 @@ class AnalysisContextBuilder:
         current_events: Optional[List[Dict[str, Any]]] = None,
         campaign_state: Optional[Dict[str, Any]] = None,
         polls: Optional[List[Dict[str, Any]]] = None,
-        campaign_state: Optional[Dict[str, Any]] = None,
         evidence_summary: Optional[Dict[str, Any]] = None,
         unknowns: Optional[List[str]] = None,
         warnings: Optional[List[str]] = None,
@@ -41,7 +40,6 @@ class AnalysisContextBuilder:
         current_events = current_events or []
         campaign_state = campaign_state or {}
         polls = polls or []
-        campaign_state = campaign_state or {}
         evidence_summary = evidence_summary or {}
         unknowns = unknowns or []
         warnings = warnings or []
@@ -63,7 +61,6 @@ class AnalysisContextBuilder:
             "current_events": current_events,
             "campaign_state": campaign_state,
             "polls": polls,
-            "campaign_state": campaign_state,
             "evidence_summary": evidence_summary,
             "unknowns": unknowns,
             "warnings": warnings,
