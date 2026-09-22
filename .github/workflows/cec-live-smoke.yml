@@ -33,16 +33,24 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          from tempfile import TemporaryDirectory
           from runtime.cec_open_data import CECOpenDataAdapter
           from runtime.cec_current_candidates import CECCurrentCandidateAdapter
-          from runtime.models import DataQuery
+          from runtime.models import DataQuery, ElectionTask
+          from runtime.pipeline import AnalysisPipeline
 
           adapter = CECOpenDataAdapter(cache_dir=Path("cache/raw/cec"))
 
           checks = [
+              DataQuery("county_mayor", 2014, "宜兰县", "township_district"),
+              DataQuery("county_mayor", 2018, "宜兰县", "township_district"),
+              DataQuery("county_mayor", 2022, "宜兰县", "township_district"),
+              DataQuery("president", 2016, "宜兰县", "township_district"),
+              DataQuery("president", 2020, "宜兰县", "township_district"),
               DataQuery("president", 2024, "宜兰县", "township_district"),
               DataQuery("regional_legislator", 2016, "宜兰县", "township_district"),
-              DataQuery("county_mayor", 2022, "宜兰县", "township_district"),
+              DataQuery("regional_legislator", 2020, "宜兰县", "township_district"),
+              DataQuery("regional_legislator", 2024, "宜兰县", "township_district"),
           ]
 
           for query in checks:
@@ -65,4 +73,26 @@ jobs:
           assert all(row["source_grade"] == "A" for row in candidates.records)
           print("current_candidates=", len(candidates.records))
           print("candidate_names=", sorted(row["name"] for row in candidates.records))
+
+          # End-to-end: empty runtime root must be able to prepare all historical
+          # periods + official current candidates and pass the hard readiness gate.
+          with TemporaryDirectory() as tmp:
+              pipeline = AnalysisPipeline(Path(tmp), mode="online")
+              context = pipeline.run(
+                  ElectionTask(
+                      election_type="county_mayor",
+                      target_year=2026,
+                      jurisdiction="宜兰县",
+                      analysis_level="township_district",
+                  ),
+                  allow_online=True,
+              )
+              readiness = context.analysis_context["readiness"]
+              assert readiness["status"] == "READY", readiness
+              assert readiness["required"]["historical_same_type"]["found_count"] == 3
+              assert readiness["required"]["presidential"]["found_count"] == 3
+              assert readiness["required"]["regional_legislator"]["found_count"] == 3
+              assert readiness["required"]["current_candidate_list"]["registered_count"] >= 1
+              print("pipeline_readiness=", readiness["status"])
+              print("pipeline_candidates=", readiness["required"]["current_candidate_list"]["registered_count"])
           PY
