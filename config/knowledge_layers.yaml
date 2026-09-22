@@ -71,7 +71,9 @@ layers:
     example: >
       1990 年代存在某派系，只能说明该派系在该历史时期具有影响，
       不能自动写成该派系目前仍主导当地政治。
-    schema: schemas/local_relationship.yaml
+    schemas:
+      - schemas/historical_claim.yaml
+      - schemas/local_relationship.yaml
 
   - id: L3
     name: 当前地方政治知识库
