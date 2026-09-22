@@ -105,7 +105,7 @@ def is_fresh(record: Dict[str, Any], kind: Optional[str] = None, now: Optional[d
 
     expires = compute_expires_at(record, record_kind, config_path)
     if expires is not None:
-        return now < expires
+        return now <= expires
 
     if policy.get("ttl") == "permanent":
         return True
