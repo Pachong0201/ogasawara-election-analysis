@@ -161,8 +161,8 @@ campaign_state:
     - judicial_event
     - controversy
   retrieval_queries:
-    - "{jurisdiction} {year} 市長選舉 候選人 最新動態"
-    - "{jurisdiction} {year} 市長選舉 地方人物 支持 組織"
-    - "{jurisdiction} {year} 市長選舉 政黨合作 競選總部"
-    - "{jurisdiction} {year} 市長選舉 政策 爭議 地方議題"
-    - "{jurisdiction} {year} 市長選舉 民調"
+    - "{jurisdiction} {year} 選舉 候選人 最新動態"
+    - "{jurisdiction} {year} 選舉 地方人物 支持 組織"
+    - "{jurisdiction} {year} 選舉 政黨合作 競選總部"
+    - "{jurisdiction} {year} 選舉 政策 爭議 地方議題"
+    - "{jurisdiction} {year} 選舉 民調"
