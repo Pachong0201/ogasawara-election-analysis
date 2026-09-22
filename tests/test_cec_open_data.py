@@ -135,6 +135,32 @@ def build_archive(path: Path):
             mayor_votes,
         )
 
+        # 2022 Chiayi City mayor rerun uses special cand.csv + prof.csv.
+        special_prefix = "votedata/votedata/2022年_嘉義市長重行選舉"
+        zf.writestr(
+            f"{special_prefix}/cand.csv",
+            csv_bytes([
+                ["號次", "名字", "政黨名稱"],
+                ["1", "黃候選人", "中國國民黨"],
+                ["2", "李候選人", "民主進步黨"],
+            ]),
+        )
+        zf.writestr(
+            f"{special_prefix}/prof.csv",
+            csv_bytes([
+                [
+                    "行政區別", "村里別", "號次1", "號次2",
+                    "有效票數A（A＝1＋2＋…＋N）", "無效票數B",
+                    "投票數C（C＝A＋B）", "選舉人數(原領票數)G（G＝E＋F）",
+                ],
+                ["東區", "甲里", "100", "80", "180", "2", "182", "300"],
+                ["東區", "乙里", "120", "100", "220", "3", "223", "350"],
+                ["西區", "丙里", "110", "90", "200", "2", "202", "320"],
+                ["西區", "丁里", "130", "120", "250", "3", "253", "380"],
+            ]),
+        )
+
+
 
 class TestCECOpenDataAdapter(unittest.TestCase):
     def setUp(self):
@@ -182,6 +208,26 @@ class TestCECOpenDataAdapter(unittest.TestCase):
         self.assertEqual(len(result.records), 4)
         self.assertEqual({r["candidate_name"] for r in result.records}, {"甲縣長", "乙縣長"})
         self.assertTrue(any("C1/city" in r["raw_reference"] for r in result.records))
+
+    def test_2022_chiayi_city_rerun_special_csvs(self):
+        result = self.adapter().fetch(
+            DataQuery("county_mayor", 2022, "嘉义市", "township_district")
+        )
+        self.assertEqual(len(result.records), 4)
+        self.assertEqual({r["jurisdiction"] for r in result.records}, {"東區", "西區"})
+        self.assertEqual({r["candidate_name"] for r in result.records}, {"黃候選人", "李候選人"})
+        self.assertTrue(all(r["special_election"] for r in result.records))
+        self.assertEqual({r["election_date"] for r in result.records}, {"2022-12-18"})
+
+        east = [r for r in result.records if r["jurisdiction"] == "東區"]
+        west = [r for r in result.records if r["jurisdiction"] == "西區"]
+        self.assertEqual(sum(r["votes"] for r in east), 400)
+        self.assertTrue(all(r["valid_votes"] == 400 for r in east))
+        self.assertAlmostEqual(east[0]["turnout"], 405 / 650, places=7)
+        self.assertEqual(sum(r["votes"] for r in west), 450)
+        self.assertTrue(all(r["valid_votes"] == 450 for r in west))
+        self.assertAlmostEqual(west[0]["turnout"], 455 / 700, places=7)
+        self.assertIn("2022年_嘉義市長重行選舉/prof.csv", result.raw_reference)
 
     def test_archive_cache_reused_without_network(self):
         calls = []
