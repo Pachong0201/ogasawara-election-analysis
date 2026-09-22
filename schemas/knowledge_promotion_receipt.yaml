@@ -4,12 +4,14 @@ description: 知识晋升门禁与持久化结果，供审计、重跑和 county
 
 type: object
 required:
+  - receipt_id
   - proposal_id
   - county
   - target_type
   - decision
   - checked_at
 properties:
+  receipt_id: {type: string}
   proposal_id: {type: string}
   county: {type: string}
   target_type: {type: string}
