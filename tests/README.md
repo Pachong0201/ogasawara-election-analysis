@@ -1,6 +1,6 @@
 # 测试
 
-本目录包含 Skill V1.0 契约测试与 V1.1 Data & Runtime 行为测试。
+本目录包含 Skill V1.0 契约测试与 V1.1/V1.2 Data & Runtime 行为测试。
 
 ## 运行
 
@@ -17,8 +17,9 @@ python3 -m unittest discover -s tests -v
 - `test_skill_contract.py`
 - 推荐文件结构、YAML 可解析性、核心分析路径、14 条硬性禁止规则、POLL-01 至 POLL-08、输出模板、宜兰测试用例与运行依赖隔离。
 
-### V1.1 Data & Runtime
+### V1.1 / V1.2 Data & Runtime
 
+- `test_cec_open_data.py`：中选会官方 ZIP 结构、2016 特殊后缀、简繁体县市名称、缓存复用及 geography 持久化。
 - `test_data_readiness.py`：数据不足 INSUFFICIENT、完整数据 READY、缺立委 PARTIAL、边界不一致拒绝、ONLINE 补齐后重检。
 - `test_election_loader.py`：本地优先、缺失补齐并写回、OFFLINE 不联网。
 - `test_freshness.py`：历史永久资料、30 天民调过期、封闭网络调查 MOE、1996 关系时间有效性。
