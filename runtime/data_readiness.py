@@ -164,8 +164,9 @@ class DataReadinessGate:
             grade = str(candidate.get("source_grade") or "").upper()
             independent = int(candidate.get("independent_source_count") or 0)
             grade_ok = grade in {"A", "B"} or (grade == "C" and independent >= 2)
-            fresh = is_fresh(candidate, kind="candidate_profile")
             status = str(candidate.get("candidate_status") or "").lower()
+            freshness_kind = "candidate_registration" if status == "registered" else "candidate_profile"
+            fresh = is_fresh(candidate, kind=freshness_kind)
             status_ok = status in {"registered", "nominated", "announced", "potential"}
 
             if not fresh:
@@ -220,7 +221,8 @@ class DataReadinessGate:
             "invalid_count": len(invalid),
             "fresh_count": freshness.get("fresh", 0),
             "stale_count": freshness.get("stale", 0),
-            "satisfied": len(records) > 0,
+            "available": len(records) > 0,
+            "satisfied": int(freshness.get("fresh", 0)) > 0,
             "freshness": freshness,
             "invalid": invalid,
         }
@@ -460,7 +462,7 @@ class DataReadinessGate:
         supply a missing period, the refreshed report remains INSUFFICIENT.
         """
         initial = self.check(task)
-        if initial.status == "READY" or not allow_online:
+        if not allow_online:
             return initial
 
         loader = loader or ElectionLoader(self.repo_root, mode="online")
@@ -497,10 +499,11 @@ class DataReadinessGate:
                 int(task.target_year),
             )
 
-        # Polls are optional. Fill an empty cache when a primary poll source is
-        # registered, but never make readiness depend on a poll being available.
+        # Polls are optional. Refresh when there is no fresh poll calibration
+        # record. A stale cached poll remains usable as historical campaign-period
+        # evidence, but it must not satisfy the current-poll calibration flag.
         poll_req = initial.required.get("current_polls", {})
-        if int(poll_req.get("count") or 0) == 0:
+        if int(poll_req.get("fresh_count") or 0) == 0:
             attempts.append(f"current_polls:{task.target_year}")
             loader.refresh_polls(
                 task.jurisdiction,
