@@ -1,0 +1,59 @@
+name: CEC live smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "runtime/cec_open_data.py"
+      - "runtime/source_registry.py"
+      - "runtime/election_loader.py"
+      - "config/data_sources.yaml"
+      - ".github/workflows/cec-live-smoke.yml"
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  official-cec:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Fetch and parse official CEC archive
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from runtime.cec_open_data import CECOpenDataAdapter
+          from runtime.models import DataQuery
+
+          adapter = CECOpenDataAdapter(cache_dir=Path("cache/raw/cec"))
+
+          checks = [
+              DataQuery("president", 2024, "宜兰县", "township_district"),
+              DataQuery("regional_legislator", 2016, "宜兰县", "township_district"),
+              DataQuery("county_mayor", 2022, "宜兰县", "township_district"),
+          ]
+
+          for query in checks:
+              result = adapter.fetch(query)
+              assert result.source_id == "cec_open_data", result
+              assert result.source_grade == "A", result
+              assert result.records, (query, result.warnings)
+              regions = {row["jurisdiction"] for row in result.records}
+              assert len(regions) >= 10, (query, len(regions), sorted(regions), result.warnings)
+              assert all(row["votes"] >= 0 for row in result.records)
+              assert all(0 <= row["vote_share"] <= 1 for row in result.records)
+              assert all(0 <= row["turnout"] <= 1 for row in result.records)
+              print(query.to_dict(), "records=", len(result.records), "regions=", len(regions))
+              print("source_version=", result.source_version)
+          PY
