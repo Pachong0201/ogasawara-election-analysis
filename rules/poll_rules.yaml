@@ -1,4 +1,4 @@
-version: 1.1.0
+version: 1.4.0
 name: poll_rules
 position: after_historical_structure_and_local_knowledge
 purpose: >
@@ -87,3 +87,17 @@ banned_expressions:
   - 未决定票按比例平均分配给候选人
   - 单一民调决定胜负
   - 以民调直接换算县市长票或立委票
+
+
+  - id: POLL-09
+    statement: 同一调查系列在方法口径稳定时，可以描述跨期点估计变化。
+    enforcement: >
+      只有 pollster、commissioner、method、sample_frame 与 question_wording
+      一致时，才可计算 same-series delta；必须同时保留调查期、未决定比例、
+      样本与误差限制。该 delta 只用于识别当前状态变化，不得写成胜负趋势，
+      也不得据此自行判断统计显著。
+  - id: POLL-10
+    statement: 不同调查系列仍不得拼接成单一走势。
+    enforcement: >
+      跨机构、跨方法或题目变化的数据只能并列用于结构校准；
+      不得把 same-series 规则扩张为跨系列趋势线。
