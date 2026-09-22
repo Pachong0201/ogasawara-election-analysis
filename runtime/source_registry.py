@@ -1,4 +1,4 @@
-"""Source registry and retrieval backends for V1.1.
+"""Source registry and retrieval backends for V1.2.
 
 The runtime deliberately does not hard-code web APIs.  Concrete web/search
 capabilities are injected by the host environment as data-source adapters or
