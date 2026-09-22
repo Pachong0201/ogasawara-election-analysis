@@ -354,7 +354,6 @@ class AnalysisPipeline:
             target_year=task.target_year,
             current_candidates=current_candidates,
             current_events=events,
-            campaign_state=campaign_state,
             polls=polls,
             retrieval_leads=campaign_leads,
         )
