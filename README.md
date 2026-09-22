@@ -62,7 +62,8 @@ ogasawara-election-analysis/
 │  ├─ spatial_divergence.md
 │  ├─ incumbent_transfer.md
 │  └─ third_force.md
-├─ runtime/             # V1.1.1 数据与运行层
+├─ runtime/             # V1.2 数据与运行层
+│  ├─ cec_open_data.py   # 中选会官方 votedata.zip Adapter
 │  ├─ data_readiness.py
 │  ├─ election_loader.py
 │  ├─ election_normalizer.py
@@ -95,14 +96,15 @@ ogasawara-election-analysis/
 6. 最后才读取民调资料，按 `rules/poll_rules.yaml` 校准。
 7. 按 `SKILL.md` 的统一模板输出，并明确证据等级和不确定性。
 
-### V1.1 数据与运行层
+### V1.2 数据与运行层
 
 ```text
 用户任务
 → Data Readiness Check
 → 本地历史选举数据
-→ 缺失且 ONLINE：ElectionLoader 调用 Source Adapter
-→ 标准化、校验、持久化
+→ 缺失且 ONLINE：ElectionLoader 优先调用中选会官方 cec_open_data Adapter
+→ 首次下载 votedata.zip，随后复用本地 cache/raw/cec/
+→ 标准化、校验、同步最小行政区资料、持久化
 → Matrix Builder
 → Metrics
 → 地方知识检索
@@ -119,7 +121,25 @@ python -m runtime.cli readiness --county "宜兰县" --year 2026 --type county_m
 python -m runtime.cli build-matrix --county "宜兰县" --year 2026 --type county_mayor
 python -m runtime.cli context --county "宜兰县" --year 2026 --type county_mayor --write-manifest
 python -m runtime.cli run --county "宜兰县" --year 2026 --type county_mayor --mode offline --write-manifest
+python -m runtime.cli readiness --county "宜兰县" --year 2026 --type county_mayor --mode online
 ```
+
+
+### V1.2 官方历史数据源
+
+历史稳定选举事实优先使用中央选举委员会官方开放资料：
+
+- 数据集：政府资料开放平台「选举资料库（含选举区资料）」；
+- 原始下载：`https://data.cec.gov.tw/選舉資料庫/votedata.zip`；
+- 来源等级：A；
+- 当前支持：2014/2018/2022 县市长、2016/2020/2024 总统、2016/2020/2024 区域立委；
+- 当前最低粒度：`township_district`；
+- 2016 特殊 `_P1/_T1` 文件后缀由 Adapter 自动发现；
+- ZIP 文件名按 CP950/Big5 元数据处理；
+- 原始 ZIP 只放运行时缓存，`.gitignore` 排除，不提交仓库；
+- 每条持久化记录保留官方来源、ZIP SHA-256、原始成员路径、取数与验证时间。
+
+ONLINE 首次缺历史资料时会下载官方 ZIP；之后直接复用本地缓存。OFFLINE 不发起网络请求。第三方整理数据不得替代官方历史事实源，除非官方资料明确缺失且按证据等级规则降级。
 
 ## 最低数据要求
 
