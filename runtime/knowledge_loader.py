@@ -166,7 +166,18 @@ class KnowledgeLoader:
         if leads:
             cache_path = self._paths(county)["retrieval_cache"]
             existing = self._load_file(cache_path)
-            write_jsonl(cache_path, existing + leads)
+            merged: Dict[str, Dict[str, Any]] = {}
+            for item in existing + leads:
+                key = "|".join(
+                    [
+                        str(item.get("lead_id") or item.get("url") or ""),
+                        str(item.get("query") or ""),
+                    ]
+                )
+                if not key.strip("|"):
+                    key = f"anonymous-{len(merged) + 1}"
+                merged[key] = item
+            write_jsonl(cache_path, merged.values())
         return {"leads": leads, "warnings": warnings, "questions": questions}
 
     @staticmethod
@@ -194,5 +205,5 @@ class KnowledgeLoader:
         local["retrieval"] = retrieval
         if retrieval.get("leads"):
             local["sufficient"] = False
-            local["warnings"].append("retrieved leads are lead_only and were not promoted to long-term knowledge")
+            local["warnings"].append("retrieved results remain retrieval leads and were not promoted to long-term knowledge")
         return local
