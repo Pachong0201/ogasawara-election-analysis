@@ -1,7 +1,7 @@
-version: 1.0.0
+version: 1.3.0
 name: data_acquisition
 purpose: >
-  规定 V1.1 数据获取、本地化、验证、新鲜度与离线行为的统一规则。
+  规定 V1.3 数据获取、本地化、验证、新鲜度、知识晋升与离线行为的统一规则。
   不改变 V1.0 方法论，只让方法能够稳定运行。
 
 principles:
@@ -25,6 +25,16 @@ principles:
     statement: 任何写入长期数据或知识库的资料必须满足 A 级/B 级，或两个独立 C 级以上来源交叉确认。
   - id: DATA-10
     statement: D/E 级资料只能进入 cache/retrieval，标记 lead_only，不得升级到长期知识库。
+  - id: DATA-11
+    statement: retrieval lead 不属于长期知识；verified 只代表来源已核对，不代表事实已晋升。
+  - id: DATA-12
+    statement: 知识晋升必须由结构化 knowledge proposal 显式触发，运行时不得从摘要自动猜测政治关系。
+  - id: DATA-13
+    statement: C 级资料晋升必须有至少两个已验证且 independence_key 不同的独立来源。
+  - id: DATA-14
+    statement: 晋升前必须显式完成相反证据检查并填写 scope_boundary；存在已验证 A/B/C 级相反证据时转 requires_review。
+  - id: DATA-15
+    statement: 每次晋升必须生成 receipt，记录 proposal、证据 lead、哈希、决策、目标路径与 Builder 版本。
 
 source_selection:
   order:
@@ -72,6 +82,29 @@ offline_mode:
   forbidden_actions:
     - 声称已联网查询。
     - 以模型记忆代替来源。
+
+knowledge_promotion:
+  policy_file: config/knowledge_promotion.yaml
+  proposal_schema: schemas/knowledge_proposal.yaml
+  receipt_schema: schemas/knowledge_promotion_receipt.yaml
+  builder: runtime/knowledge_builder.py
+  allowed_targets:
+    - historical_claim
+    - local_relationship
+    - candidate_profile
+    - current_issue
+  decisions:
+    - promoted
+    - rejected
+    - requires_review
+    - dry_run_pass
+  rules:
+    - A/B 级 verified 来源可满足基础晋升门槛。
+    - C 级必须至少两个 verified 且 independence_key 不同的独立来源。
+    - D/E 级不得晋升。
+    - active_verified 当前关系必须同时通过关系 freshness。
+    - candidate_profile 与 current_issue 必须通过各自 freshness。
+    - generated county package 只做索引，不生成新的政治事实。
 
 persistence:
   long_term:
