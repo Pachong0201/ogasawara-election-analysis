@@ -537,6 +537,7 @@ class TVBSPollCenterAdapter(PollSource):
                                 name = remainder
                                 break
                 name = re.sub(r"^(?:而|由|為)", "", name)
+                name = re.sub(r"(?:則)$", "", name)
 
                 if not (0 <= value <= 100):
                     continue
