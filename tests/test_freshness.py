@@ -22,6 +22,16 @@ class TestFreshness(unittest.TestCase):
         self.assertFalse(is_fresh(record))
         self.assertTrue(needs_revalidation(record))
 
+    def test_old_poll_stays_stale_even_if_reverified_today(self):
+        record = {
+            "record_type": "poll",
+            "publish_date": "2026-03-23",
+            "field_end": "2026-03-19",
+            "last_verified_at": dt.date.today().isoformat(),
+        }
+        self.assertFalse(is_fresh(record, now=dt.date(2026, 9, 22)))
+        self.assertTrue(needs_revalidation(record, now=dt.date(2026, 9, 22)))
+
     def test_closed_online_poll_does_not_apply_traditional_moe(self):
         record = {"method": "online_closed", "moe": None, "moe_applicable": False}
         self.assertFalse(poll_moe_applicable(record))
