@@ -202,7 +202,7 @@ class CECArchive:
             request = urllib.request.Request(
                 _quoted_url(self.source_url),
                 headers={
-                    "User-Agent": "ogasawara-election-analysis/1.2",
+                    "User-Agent": "ogasawara-election-analysis/1.3",
                     "Accept": "application/zip,application/octet-stream,*/*",
                 },
             )
