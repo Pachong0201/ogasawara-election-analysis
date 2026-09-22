@@ -66,13 +66,15 @@ entrypoint: SKILL.md
 - 调用已注册的 `ElectionDataSource` 补齐缺失的稳定历史选举数据；
 - 对 2014—2024 核心历史选举，优先使用内置 `cec_open_data` Adapter 读取中选会官方 `votedata.zip`；首次下载后使用本地缓存，不得每次重复抓取；
 - 调用已注册的 `RetrievalBackend` 进行最小充分地方知识检索；
+- 若宿主具备 Web/Search 工具，可将搜索结果按 `schemas/retrieval_lead.yaml` 写入 JSON/JSONL，并通过 `HostRetrievalBackend` 注入；
 - 验证当前候选人、民调、公开支持、政党合作与竞选事件的新鲜度。
 
 禁止：
 
 - 每次调用都覆盖已验证历史数据；
 - 绕过 `runtime/source_registry.py` 直接写死特定网站爬虫；
-- 未经验证就把搜索结果写入长期知识库。
+- 未经验证就把搜索结果写入长期知识库；
+- 将 host retrieval lead（包括 verification_status=verified）自动升级成长期政治事实。
 
 #### OFFLINE MODE
 
@@ -112,6 +114,8 @@ entrypoint: SKILL.md
 - `runtime/freshness.py`
 - `runtime/analysis_context.py`
 - `runtime/pipeline.py`
+- `runtime/host_retrieval.py`
+- `schemas/retrieval_lead.yaml`
 - `config/data_sources.yaml`
 - `config/freshness.yaml`
 - `config/runtime.yaml`
@@ -222,6 +226,12 @@ entrypoint: SKILL.md
 3. 地方组织：学术资料确认的地方派系、农渔会、地方社团、历史政治组织；
 4. 历史研究：地方志、学术论文、县市政治研究、乡镇个案；
 5. 当前验证：对历史人物、派系和组织寻找近 5—10 年资料，确认政治连续性。
+
+当宿主 Agent 执行 Web/Search 时，应将结果按 `schemas/retrieval_lead.yaml` 送入 `HostRetrievalBackend`。检索结果默认只进入 `cache/retrieval/`：
+- 缺失或非法 `source_grade` 自动降为 E；
+- `verification_status=verified` 仅表示宿主已核对来源，不代表已成为知识库事实；
+- 不得自动写入 `knowledge/`；
+- A/B 级或两个独立 C 级来源仍需完成结构化 claim/relationship、时间范围与当前有效性校验。
 
 停止条件见 `rules/local_knowledge_rules.yaml`。无法满足时，输出 `unknown` 或“现有公开资料不足以确定原因”。
 
@@ -382,7 +392,8 @@ V1.2 真实历史数据源增加：
 - 从已验证中选会结果同步最小行政区资料，供 Readiness Gate 使用；
 - 2026 县市长民调可通过已注册 PollSource 补充；首个内置来源为 TVBS 民调中心原始 PDF，来源等级 C，仅用于结构校准；
 - 民调必须保留调查方法、样本框、抽样、加权、调查期、误差、未决定比例与原始报告引用；关键方法字段缺失则拒绝入库；
-- 民调 freshness 依据调查结束/发布日期，不依据最近抓取时间；重新下载旧民调不得使其变成当前民调；
+- 民调 freshness 依据调查结束/发布日期，不依据最近抓取时间；重新下载旧民调不得使其变成当前民调；旧民调必须标记 stale，且不得作为当前状态校准；
+- 增加宿主 Web 检索 inbox 桥；搜索结果保持 lead-only，不自动晋升为长期地方政治知识；
 - 第三方整理资料不得替代上述官方历史事实源，除非官方源明确缺失且按证据规则降级处理。
 
 后续阶段再增加村里／投票所空间分析、Neighbor Divergence 自动化、地方政治知识图谱、半自动历史知识检索和多县市横向比较。
