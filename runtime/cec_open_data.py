@@ -18,6 +18,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import io
+import re
 import shutil
 import ssl
 import urllib.parse
@@ -328,6 +329,26 @@ class CECOpenDataAdapter(ElectionDataSource):
                     records.extend(part_records)
                     used_members.extend(file_map.values())
 
+            # 2022 Chiayi City mayor voting was held separately on 2022-12-18.
+            # The official ZIP stores it in a special two-file CSV format rather
+            # than the normal C1 five-table family.
+            official_jurisdiction = JURISDICTION_ALIASES.get(query.jurisdiction, query.jurisdiction)
+            if (
+                not records
+                and query.election_type == "county_mayor"
+                and int(query.year) == 2022
+                and official_jurisdiction == "嘉義市"
+                and query.level == "township_district"
+            ):
+                try:
+                    special_records, special_members = self._parse_chiayi_2022_special(
+                        zf, query, names, archive_info.sha256
+                    )
+                    records.extend(special_records)
+                    used_members.extend(special_members)
+                except CECOpenDataError as exc:
+                    warnings.append(f"2022 Chiayi City special election: {exc}")
+
         # Duplicate rows can occur only if two path families both contain the same
         # target jurisdiction; dedupe on region/candidate, but fail later in normalizer
         # if a genuine duplicate record still survives.
@@ -395,6 +416,169 @@ class CECOpenDataAdapter(ElectionDataSource):
             return _decode_csv(zf.read(member))
         except KeyError as exc:
             raise CECOpenDataError(f"archive member missing: {member}") from exc
+
+    @staticmethod
+    def _csv_dict_rows(content: bytes) -> List[Dict[str, str]]:
+        rows = _decode_csv(content)
+        if not rows:
+            return []
+        headers = [_clean(value) for value in rows[0]]
+        result: List[Dict[str, str]] = []
+        for row in rows[1:]:
+            if not any(_clean(value) for value in row):
+                continue
+            padded = list(row) + [""] * max(0, len(headers) - len(row))
+            result.append({headers[i]: _clean(padded[i]) for i in range(len(headers))})
+        return result
+
+    def _parse_chiayi_2022_special(
+        self,
+        zf: zipfile.ZipFile,
+        query: DataQuery,
+        names: Sequence[str],
+        archive_sha: str,
+    ) -> Tuple[List[Dict[str, Any]], List[str]]:
+        folder = "votedata/votedata/2022年_嘉義市長重行選舉"
+        cand_options = [name for name in names if name.endswith(folder + "/cand.csv")]
+        prof_options = [name for name in names if name.endswith(folder + "/prof.csv")]
+        if not cand_options or not prof_options:
+            raise CECOpenDataError("special cand.csv/prof.csv members were not found")
+
+        cand_member = cand_options[0]
+        prof_member = prof_options[0]
+        candidates_raw = self._csv_dict_rows(zf.read(cand_member))
+        profile_raw = self._csv_dict_rows(zf.read(prof_member))
+        if not candidates_raw or not profile_raw:
+            raise CECOpenDataError("special cand.csv/prof.csv were empty")
+
+        candidates: Dict[str, Dict[str, str]] = {}
+        for row in candidates_raw:
+            no = _clean(row.get("號次") or row.get("no"))
+            name = _clean(row.get("名字") or row.get("name"))
+            party = _clean(row.get("政黨名稱") or row.get("party")) or "無黨籍及未經政黨推薦"
+            if no and name:
+                candidates[no] = {"name": name, "party": party}
+        if not candidates:
+            raise CECOpenDataError("special cand.csv contained no candidate mapping")
+
+        headers = list(profile_raw[0].keys())
+        vote_cols: Dict[str, str] = {}
+        for header in headers:
+            match = re.fullmatch(r"號次(\d+)", _clean(header))
+            if match:
+                vote_cols[match.group(1)] = header
+        if not vote_cols:
+            raise CECOpenDataError("special prof.csv contained no candidate vote columns")
+
+        district_key = next((h for h in headers if "行政區別" in h), None)
+        village_key = next((h for h in headers if "村里別" in h or "村里" == h), None)
+        valid_key = next((h for h in headers if "有效票" in h and "無效" not in h), None)
+        cast_key = next((h for h in headers if "投票數" in h and "已領" not in h), None)
+        electors_key = next((h for h in headers if "選舉人數" in h), None)
+        if not district_key:
+            raise CECOpenDataError("special prof.csv lacked 行政區別")
+
+        has_village_rows = bool(
+            village_key and any(_clean(row.get(village_key)) for row in profile_raw)
+        )
+        usable_rows: List[Dict[str, str]] = []
+        for row in profile_raw:
+            district = _clean(row.get(district_key))
+            if not district or "合計" in district or "總計" in district:
+                continue
+            if has_village_rows:
+                village = _clean(row.get(village_key)) if village_key else ""
+                if not village or "合計" in village or "總計" in village:
+                    continue
+            usable_rows.append(row)
+        if not usable_rows:
+            raise CECOpenDataError("special prof.csv contained no usable district/village rows")
+
+        aggregated: Dict[str, Dict[str, Any]] = {}
+        for row in usable_rows:
+            district = _clean(row.get(district_key))
+            bucket = aggregated.setdefault(
+                district,
+                {
+                    "votes": {no: 0 for no in candidates},
+                    "valid_votes": 0,
+                    "total_cast": 0,
+                    "electors": 0,
+                    "rows": 0,
+                },
+            )
+            bucket["rows"] += 1
+            for no in candidates:
+                col = vote_cols.get(no)
+                if col:
+                    bucket["votes"][no] += self._int(row.get(col)) or 0
+            if valid_key:
+                bucket["valid_votes"] += self._int(row.get(valid_key)) or 0
+            if cast_key:
+                bucket["total_cast"] += self._int(row.get(cast_key)) or 0
+            if electors_key:
+                bucket["electors"] += self._int(row.get(electors_key)) or 0
+
+        records: List[Dict[str, Any]] = []
+        official_parent = "嘉義市"
+        for district, bucket in sorted(aggregated.items()):
+            candidate_valid = sum(int(v) for v in bucket["votes"].values())
+            valid_votes = int(bucket["valid_votes"] or candidate_valid)
+            if valid_votes <= 0:
+                continue
+            if candidate_valid != valid_votes:
+                raise CECOpenDataError(
+                    f"special prof.csv candidate votes {candidate_valid} != valid votes {valid_votes} for {district}"
+                )
+            total_cast = int(bucket["total_cast"] or valid_votes)
+            electors = int(bucket["electors"] or 0)
+            if electors <= 0 or total_cast > electors:
+                raise CECOpenDataError(
+                    f"special prof.csv invalid turnout denominator for {district}: cast={total_cast}, electors={electors}"
+                )
+            turnout = total_cast / electors
+
+            region_id = f"cec-special:嘉義市:{district}"
+            for no, candidate in sorted(candidates.items(), key=lambda item: item[0]):
+                vote_count = int(bucket["votes"].get(no) or 0)
+                cand_id = f"cec:2022:county_mayor:嘉義市:{no}:{candidate['name']}"
+                records.append(
+                    {
+                        "record_id": f"cec|county_mayor|2022|{region_id}|{cand_id}",
+                        "election_type": "county_mayor",
+                        "election_year": 2022,
+                        "election_date": "2022-12-18",
+                        "jurisdiction": district,
+                        "parent_jurisdiction": query.jurisdiction,
+                        "official_parent_jurisdiction": official_parent,
+                        "level": "township_district",
+                        "candidate_id": cand_id,
+                        "candidate_name": candidate["name"],
+                        "party": candidate["party"],
+                        "votes": vote_count,
+                        "valid_votes": valid_votes,
+                        "vote_share": round(vote_count / valid_votes, 8),
+                        "turnout": round(turnout, 8),
+                        "source": CEC_DATASET_PAGE,
+                        "source_id": self.source_id,
+                        "source_grade": self.source_grade,
+                        "source_version": f"sha256:{archive_sha}",
+                        "raw_reference": prof_member,
+                        "source_reference": self.archive.source_url,
+                        "retrieved_at": utc_now_iso(),
+                        "verified_at": utc_now_iso(),
+                        "boundary_version": "cec-township-2014-2024-v1",
+                        "time_scope": "2022",
+                        "normalization_version": "v1.2.0",
+                        "region_id": region_id,
+                        "special_election": True,
+                        "special_election_kind": "重行選舉",
+                    }
+                )
+
+        if not records:
+            raise CECOpenDataError("special prof.csv produced no township records")
+        return records, [cand_member, prof_member]
 
     def _parse_family(
         self,
