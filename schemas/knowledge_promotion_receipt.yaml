@@ -1,0 +1,35 @@
+version: 1.3.0
+schema_name: knowledge_promotion_receipt
+description: 知识晋升门禁与持久化结果，供审计、重跑和 county package manifest 使用。
+
+type: object
+required:
+  - proposal_id
+  - county
+  - target_type
+  - decision
+  - checked_at
+properties:
+  proposal_id: {type: string}
+  county: {type: string}
+  target_type: {type: string}
+  decision:
+    type: string
+    enum: [promoted, rejected, requires_review, dry_run_pass]
+  checked_at: {type: string}
+  target_path: {type: string}
+  record_id: {type: string}
+  evidence_lead_ids:
+    type: array
+    items: {type: string}
+  evidence_grades:
+    type: array
+    items: {type: string}
+  independent_source_count: {type: integer}
+  reasons:
+    type: array
+    items: {type: string}
+  warnings:
+    type: array
+    items: {type: string}
+  knowledge_builder_version: {type: string}
