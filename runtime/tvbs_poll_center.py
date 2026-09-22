@@ -298,6 +298,11 @@ class TVBSPollCenterAdapter(PollSource):
         moe = self._moe(body)
         method = self._method(body)
         support, undecided, scenario, question_context = self._support_scenario(body)
+        verbatim_question = self._verbatim_question(
+            body, [item.get("candidate", "") for item in support]
+        )
+        if verbatim_question:
+            question_context = verbatim_question
 
         weighting = self._weighting(body)
         sampling = self._sampling(body)
@@ -361,7 +366,7 @@ class TVBSPollCenterAdapter(PollSource):
             "confidence_level": 0.95,
             "undecided": round(float(undecided), 6),
             "question_wording": question_context,
-            "question_wording_is_verbatim": False,
+            "question_wording_is_verbatim": bool(verbatim_question),
             "candidate_support": support,
             "cross_tabs_available": ("交叉分析" in body or "交叉表" in body),
             "campaign_claim": False,
@@ -483,9 +488,9 @@ class TVBSPollCenterAdapter(PollSource):
     @staticmethod
     def _weighting(text: str) -> str:
         patterns = [
-            r"((?:所有)?資料[^。]{0,120}(?:性別|年齡)[^。]{0,220}加權[^。]{0,60})",
-            r"((?:性別|年齡)[^。]{0,220}(?:加權|權數)[^。]{0,80})",
-            r"([^。]{0,80}(?:性別|年齡)[^。]{0,180}(?:母體|結構)[^。]{0,100}加權[^。]{0,60})",
+            r"((?:所有)?資料[^。]{0,120}(?:性別|年齡)[^。]{0,220}加\s*權[^。]{0,60})",
+            r"((?:性別|年齡)[^。]{0,220}(?:加\s*權|權數)[^。]{0,80})",
+            r"([^。]{0,80}(?:性別|年齡)[^。]{0,180}(?:母體|結構)[^。]{0,100}加\s*權[^。]{0,60})",
         ]
         for pattern in patterns:
             match = re.search(pattern, text)
@@ -516,6 +521,20 @@ class TVBSPollCenterAdapter(PollSource):
             except ValueError:
                 pass
         return listing_date
+
+    @staticmethod
+    def _verbatim_question(text: str, candidate_names: List[str]) -> str:
+        """Extract the exact questionnaire item when the PDF exposes it."""
+        if not candidate_names:
+            return ""
+        normalized = _compact(text)
+        # TVBS analysis pages use "表 N、...？" before the response table.
+        for match in re.finditer(r"表\s*\d+、([^？?]{10,500}[？?])", normalized):
+            question = _compact(match.group(1))
+            hits = sum(1 for name in candidate_names if name and name in question)
+            if hits >= min(2, len(candidate_names)):
+                return question
+        return ""
 
     @staticmethod
     def _support_scenario(
