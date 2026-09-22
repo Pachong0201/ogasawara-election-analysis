@@ -1,4 +1,4 @@
-"""Command line entry point for the V1.1 data runtime."""
+"""Command line entry point for the V1.3 data/runtime/knowledge layer."""
 
 from __future__ import annotations
 
@@ -177,7 +177,7 @@ def _cmd_knowledge_build(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="python -m runtime.cli", description="V1.2 Data & Runtime Layer")
+    parser = argparse.ArgumentParser(prog="python -m runtime.cli", description="V1.3 Data, Runtime & Knowledge Layer")
     parser.add_argument("--repo-root", default=None, help="repository root (defaults to runtime parent)")
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -229,7 +229,7 @@ def build_parser() -> argparse.ArgumentParser:
     context.add_argument("--manifest", default="")
     context.set_defaults(func=_cmd_context)
 
-    run = sub.add_parser("run", help="run the end-to-end V1.2 preparation pipeline")
+    run = sub.add_parser("run", help="run the end-to-end V1.3 preparation pipeline")
     run.add_argument("--county", required=True)
     run.add_argument("--year", required=True, type=int)
     run.add_argument("--type", required=True)
