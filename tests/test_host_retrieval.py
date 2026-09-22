@@ -83,7 +83,15 @@ class TestHostRetrievalBackend(unittest.TestCase):
             self.assertEqual(leads[0]["source_grade"], "B")
             self.assertEqual(leads[0]["verification_status"], "verified")
             self.assertTrue(
-                any("lead_only" in warning for warning in result["warnings"])
+                any("retrieval leads" in warning for warning in result["warnings"])
+            )
+
+            # Re-running the same research question must not duplicate the cache.
+            loader.load(
+                "新竹縣",
+                regions=["甲乡"],
+                research_questions=[question],
+                allow_online=True,
             )
 
             cache = root / "cache" / "retrieval" / "新竹縣.jsonl"
