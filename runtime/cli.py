@@ -20,6 +20,7 @@ from .metrics import (
     spatial_variance,
     split_ticket_residual,
 )
+from .host_retrieval import HostRetrievalBackend
 from .models import ElectionTask
 from .pipeline import AnalysisPipeline
 
@@ -126,7 +127,16 @@ def _cmd_context(args: argparse.Namespace) -> int:
 def _cmd_run(args: argparse.Namespace) -> int:
     task = _task_from_args(args)
     repo_root = Path(args.repo_root).resolve() if args.repo_root else None
-    pipeline = AnalysisPipeline(repo_root=repo_root, mode=args.mode)
+    retrieval_backend = None
+    if getattr(args, "retrieval_inbox", ""):
+        retrieval_backend = HostRetrievalBackend(
+            inbox_path=Path(args.retrieval_inbox).resolve()
+        )
+    pipeline = AnalysisPipeline(
+        repo_root=repo_root,
+        mode=args.mode,
+        retrieval_backend=retrieval_backend,
+    )
     context = pipeline.run(
         task,
         allow_online=args.mode != "offline",
@@ -140,7 +150,7 @@ def _cmd_run(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="python -m runtime.cli", description="V1.1 Data & Runtime Layer")
+    parser = argparse.ArgumentParser(prog="python -m runtime.cli", description="V1.2 Data & Runtime Layer")
     parser.add_argument("--repo-root", default=None, help="repository root (defaults to runtime parent)")
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -192,7 +202,7 @@ def build_parser() -> argparse.ArgumentParser:
     context.add_argument("--manifest", default="")
     context.set_defaults(func=_cmd_context)
 
-    run = sub.add_parser("run", help="run the end-to-end V1.1.1 preparation pipeline")
+    run = sub.add_parser("run", help="run the end-to-end V1.2 preparation pipeline")
     run.add_argument("--county", required=True)
     run.add_argument("--year", required=True, type=int)
     run.add_argument("--type", required=True)
@@ -201,6 +211,11 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--mode", choices=["auto", "online", "offline"], default="auto")
     run.add_argument("--write-manifest", action="store_true")
     run.add_argument("--manifest", default="")
+    run.add_argument(
+        "--retrieval-inbox",
+        default="",
+        help="JSON/JSONL host-web retrieval inbox for local-knowledge research questions",
+    )
     run.set_defaults(func=_cmd_run)
     return parser
 
