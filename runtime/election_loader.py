@@ -333,7 +333,7 @@ class ElectionLoader:
                 "source_grade": getattr(adapter, "source_grade", "B"),
                 "source_version": fetch_result.source_version or getattr(adapter, "source_version", ""),
                 "raw_reference": fetch_result.raw_reference or "",
-                "normalization_version": "v1.1.1",
+                "normalization_version": "v1.2.0",
             }
             normalized = normalize_records(raw_records, defaults=defaults)
             normalized = [record for record in self._filter_level(normalized, level) if self._matches_query(record, query)]
