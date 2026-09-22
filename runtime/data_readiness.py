@@ -485,6 +485,18 @@ class DataReadinessGate:
                     attempts.append(f"regional_legislator:{year}")
                     loader.load_election("regional_legislator", int(year), task.jurisdiction, task.analysis_level)
 
+        # Current candidates are a hard, time-sensitive requirement. Task-provided
+        # names are retrieval seeds only; refresh from a registered official source
+        # when the verified/fresh cache is absent.
+        candidate_req = initial.required.get("current_candidate_list", {})
+        if not candidate_req.get("satisfied", False):
+            attempts.append(f"current_candidates:{task.target_year}")
+            loader.refresh_current_candidates(
+                task.jurisdiction,
+                task.election_type,
+                int(task.target_year),
+            )
+
         refreshed = self.check(task)
         if attempts:
             refreshed.warnings.append("data preparation attempted fills: " + ", ".join(attempts))
