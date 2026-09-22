@@ -56,7 +56,7 @@ def _download_bytes(url: str) -> bytes:
     request = urllib.request.Request(
         encoded,
         headers={
-            "User-Agent": "ogasawara-election-analysis/1.2",
+            "User-Agent": "ogasawara-election-analysis/1.3",
             "Accept": "text/html,application/pdf,*/*",
         },
     )
