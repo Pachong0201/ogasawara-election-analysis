@@ -193,47 +193,53 @@ class KnowledgePromotionBuilder:
         if not verified:
             reasons.append("no verified evidence lead with a source reference")
             return False, reasons, {
-                "verified": [],
+                "qualified": [],
                 "grades": [],
                 "independent_source_count": 0,
             }
 
-        grades = [str(lead.get("source_grade") or "").upper() for lead in verified]
-        strong = [
+        eligible = [
             lead for lead in verified
+            if str(lead.get("source_grade") or "").upper() in {"A", "B", "C"}
+        ]
+        ignored_low_grade_count = len(verified) - len(eligible)
+        grades = [str(lead.get("source_grade") or "").upper() for lead in eligible]
+
+        strong = [
+            lead for lead in eligible
             if str(lead.get("source_grade") or "").upper() in {"A", "B"}
         ]
         if strong:
             independence = _dedupe_strings(
                 lead.get("independence_key") or lead.get("source_id") or lead.get("url")
-                for lead in strong
+                for lead in eligible
             )
             return True, reasons, {
-                "verified": verified,
+                "qualified": eligible,
                 "grades": grades,
                 "independent_source_count": max(1, len(independence)),
+                "ignored_low_grade_count": ignored_low_grade_count,
             }
 
         verified_c = [
-            lead for lead in verified
+            lead for lead in eligible
             if str(lead.get("source_grade") or "").upper() == "C"
         ]
-        if not verified_c and all(
-            str(lead.get("source_grade") or "").upper() in {"D", "E"}
-            for lead in verified
-        ):
+        if not eligible:
             reasons.append("D/E-grade evidence is not promotable to long-term knowledge")
             return False, reasons, {
-                "verified": verified,
-                "grades": grades,
+                "qualified": [],
+                "grades": [],
                 "independent_source_count": 0,
+                "ignored_low_grade_count": ignored_low_grade_count,
             }
         if len(verified_c) < 2:
             reasons.append("C-grade evidence requires at least two verified independent sources")
             return False, reasons, {
-                "verified": verified,
-                "grades": grades,
+                "qualified": verified_c,
+                "grades": [str(lead.get("source_grade") or "").upper() for lead in verified_c],
                 "independent_source_count": len(verified_c),
+                "ignored_low_grade_count": ignored_low_grade_count,
             }
 
         keys = _dedupe_strings(lead.get("independence_key") for lead in verified_c)
@@ -242,15 +248,17 @@ class KnowledgePromotionBuilder:
                 "C-grade promotion requires at least two explicit distinct independence_key values"
             )
             return False, reasons, {
-                "verified": verified,
-                "grades": grades,
+                "qualified": verified_c,
+                "grades": [str(lead.get("source_grade") or "").upper() for lead in verified_c],
                 "independent_source_count": len(keys),
+                "ignored_low_grade_count": ignored_low_grade_count,
             }
 
         return True, reasons, {
-            "verified": verified,
-            "grades": grades,
+            "qualified": verified_c,
+            "grades": [str(lead.get("source_grade") or "").upper() for lead in verified_c],
             "independent_source_count": len(keys),
+            "ignored_low_grade_count": ignored_low_grade_count,
         }
 
     @staticmethod
@@ -478,6 +486,11 @@ class KnowledgePromotionBuilder:
 
         evidence_ok, evidence_reasons, evidence = self._evidence_gate(support_leads)
         reasons.extend(evidence_reasons)
+        qualified_leads = list(evidence.get("qualified") or [])
+        if int(evidence.get("ignored_low_grade_count") or 0):
+            warnings.append(
+                f"{evidence['ignored_low_grade_count']} verified D/E support lead(s) were excluded from promotion evidence"
+            )
 
         semantic_ok, semantic_reasons = self._semantic_gate(target_type, target_record)
         reasons.extend(semantic_reasons)
@@ -486,7 +499,7 @@ class KnowledgePromotionBuilder:
         reasons.extend(time_reasons)
 
         question_ok, question_reasons, research_questions = self._question_gate(
-            proposal, support_leads
+            proposal, qualified_leads
         )
         reasons.extend(question_reasons)
 
@@ -523,7 +536,8 @@ class KnowledgePromotionBuilder:
             "county": county,
             "target_type": target_type,
             "record": target_record,
-            "support_leads": support_leads,
+            "support_leads": qualified_leads,
+            "all_support_leads": support_leads,
             "contradictions": contradictions,
             "reasons": reasons,
             "warnings": warnings,
@@ -663,19 +677,14 @@ class KnowledgePromotionBuilder:
     def _write_receipt(self, county: str, receipt: Dict[str, Any]) -> None:
         path = self._paths(county)["receipts"]
         existing = load_jsonl(path) if path.exists() else []
-        key = (
-            str(receipt.get("proposal_id") or ""),
-            str(receipt.get("decision") or ""),
-            str(receipt.get("record_id") or ""),
-        )
-        merged: Dict[Tuple[str, str, str], Dict[str, Any]] = {}
+        merged: Dict[str, Dict[str, Any]] = {}
         for item in existing + [receipt]:
-            item_key = (
-                str(item.get("proposal_id") or ""),
-                str(item.get("decision") or ""),
-                str(item.get("record_id") or ""),
-            )
-            merged[item_key] = item
+            receipt_id = str(item.get("receipt_id") or "").strip()
+            if not receipt_id:
+                receipt_id = "legacy-" + hashlib.sha256(
+                    json.dumps(item, ensure_ascii=False, sort_keys=True, default=str).encode("utf-8")
+                ).hexdigest()[:24]
+            merged[receipt_id] = item
         write_jsonl(path, merged.values())
 
     def promote(
@@ -688,7 +697,7 @@ class KnowledgePromotionBuilder:
         evaluation = self._evaluate(proposal, county_override=county_override)
         county = evaluation["county"]
         target_type = evaluation["target_type"]
-        checked_at = utc_now_iso()
+        checked_at = dt.datetime.now(dt.timezone.utc).isoformat(timespec="microseconds")
 
         if evaluation["requires_review"]:
             decision = "requires_review"
@@ -741,7 +750,15 @@ class KnowledgePromotionBuilder:
             ).encode("utf-8")
         ).hexdigest() if evidence_snapshot else ""
 
+        receipt_id = "promotion-" + hashlib.sha256(
+            (
+                f"{evaluation['proposal_id']}|{checked_at}|{decision}|"
+                f"{record_hash}|{evidence_hash}"
+            ).encode("utf-8")
+        ).hexdigest()[:24]
+
         receipt = {
+            "receipt_id": receipt_id,
             "proposal_id": evaluation["proposal_id"],
             "county": county,
             "target_type": target_type,
