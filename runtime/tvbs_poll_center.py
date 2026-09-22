@@ -315,8 +315,14 @@ class TVBSPollCenterAdapter(PollSource):
             "undecided": undecided,
             "question_context": question_context,
         }
-        if any(value in (None, "", [], ()) for value in required.values()):
-            return None
+        missing = [
+            key for key, value in required.items()
+            if value in (None, "", [], ())
+        ]
+        if missing:
+            raise TVBSPollError(
+                "missing required poll metadata: " + ", ".join(missing)
+            )
 
         field_start, field_end = field_dates
         publish_date = self._publish_date(pdf_url, listing_date) or field_end
