@@ -199,6 +199,96 @@ class ElectionLoader:
         parent = str(record.get("parent_jurisdiction") or "")
         return query.jurisdiction in {region, parent}
 
+
+    def _sync_geography_from_records(self, query: DataQuery, records: List[Dict[str, Any]]) -> None:
+        """Persist minimal official geography discovered from validated election records.
+
+        The geography layer stores every observed official name as a time-scoped
+        record. This allows harmless renames (for example 鎮→市) to coexist
+        across historical terms without making older cached election files fail
+        validation on later runs.
+        """
+        if not records:
+            return
+        base = self.repo_root / "data" / "geography" / "administrative_areas"
+        base.mkdir(parents=True, exist_ok=True)
+        path = base / f"cec_{safe_component(query.jurisdiction)}.yaml"
+
+        existing: Dict[str, Any] = {"version": "1.2.0", "source": "cec_open_data", "regions": []}
+        if path.exists():
+            try:
+                existing = yaml.safe_load(path.read_text(encoding="utf-8")) or existing
+            except Exception:
+                existing = {"version": "1.2.0", "source": "cec_open_data", "regions": []}
+
+        rows = list(existing.get("regions") or [])
+        seen = {
+            (
+                str(item.get("name") or ""),
+                str(item.get("region_id") or ""),
+                str(item.get("valid_from") or ""),
+            )
+            for item in rows
+            if isinstance(item, dict)
+        }
+
+        boundary_version = str(records[0].get("boundary_version") or "cec-township-2014-2024-v1")
+        source_version = str(records[0].get("source_version") or "")
+        verified_at = str(records[0].get("verified_at") or "")
+        official_parent = str(records[0].get("official_parent_jurisdiction") or query.jurisdiction)
+
+        county_entry = {
+            "region_id": f"cec-parent:{query.jurisdiction}",
+            "name": query.jurisdiction,
+            "official_name": official_parent,
+            "level": "county_city",
+            "parent": "TW",
+            "valid_from": f"{query.year}-01-01",
+            "valid_to": None,
+            "boundary_version": boundary_version,
+            "source_id": "cec_open_data",
+            "source_grade": "A",
+            "source_version": source_version,
+            "last_verified_at": verified_at,
+        }
+        key = (county_entry["name"], county_entry["region_id"], county_entry["valid_from"])
+        if key not in seen:
+            rows.append(county_entry)
+            seen.add(key)
+
+        for record in records:
+            if record.get("level") != "township_district":
+                continue
+            name = str(record.get("jurisdiction") or "").strip()
+            region_id = str(record.get("region_id") or "").strip()
+            if not name or not region_id:
+                continue
+            item = {
+                "region_id": region_id,
+                "name": name,
+                "level": "township_district",
+                "parent": query.jurisdiction,
+                "valid_from": f"{query.year}-01-01",
+                "valid_to": None,
+                "boundary_version": str(record.get("boundary_version") or boundary_version),
+                "source_id": "cec_open_data",
+                "source_grade": "A",
+                "source_version": str(record.get("source_version") or source_version),
+                "last_verified_at": str(record.get("verified_at") or verified_at),
+            }
+            key = (item["name"], item["region_id"], item["valid_from"])
+            if key not in seen:
+                rows.append(item)
+                seen.add(key)
+
+        payload = {
+            "version": "1.2.0",
+            "source": "cec_open_data",
+            "jurisdiction": query.jurisdiction,
+            "regions": rows,
+        }
+        path.write_text(yaml.safe_dump(payload, allow_unicode=True, sort_keys=False), encoding="utf-8")
+
     def load_election(
         self,
         election_type: str,
@@ -253,6 +343,7 @@ class ElectionLoader:
             persist = bool(normalized) and self.mode != "offline"
             if persist:
                 self._persist(query, normalized)
+                self._sync_geography_from_records(query, normalized)
             return LoadResult(
                 records=normalized,
                 status="filled",
