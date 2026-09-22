@@ -65,6 +65,7 @@ ogasawara-election-analysis/
 ├─ runtime/             # V1.2 数据与运行层
 │  ├─ cec_open_data.py   # 中选会官方 votedata.zip Adapter
 │  ├─ cec_current_candidates.py # 2026候选人登记名册 Adapter
+│  ├─ tvbs_poll_center.py # TVBS民调中心原始PDF Adapter
 │  ├─ data_readiness.py
 │  ├─ election_loader.py
 │  ├─ election_normalizer.py
@@ -141,6 +142,20 @@ python -m runtime.cli readiness --county "宜兰县" --year 2026 --type county_m
 - 每条持久化记录保留官方来源、ZIP SHA-256、原始成员路径、取数与验证时间。
 
 ONLINE 首次缺历史资料时会下载官方 ZIP；之后直接复用本地缓存。OFFLINE 不发起网络请求。第三方整理数据不得替代官方历史事实源，除非官方资料明确缺失且按证据等级规则降级。
+
+### V1.2 民调真实来源
+
+民调层与历史选举事实层分开管理。首个内置真实来源为 TVBS 民调中心：
+
+- 索引：`https://www.tvbs.com.tw/poll-center`；
+- 只读取民调中心索引及其原始 PDF，不以新闻二次报道替代原始报告；
+- 来源等级：C；用途仅为当前结构校准，不得替代中选会 A 级历史选举事实；
+- 入库必须抽取 `pollster / commissioner / method / sample_size / sample_frame / sampling / weighting / field_start / field_end / publish_date / moe / undecided / question_wording`；
+- 方法字段不完整时 fail closed，不写入有效民调缓存；
+- 不同机构、不同方法的民调仍不得自动连成趋势；
+- freshness 以 `publish_date/field_end` 为基准。旧报告今天重新下载仍然是旧报告。
+
+`question_wording_is_verbatim=false` 表示来源只公开报告情境摘要而非问卷逐字题目，系统不得把摘要改写成“原始问卷”。
 
 ## 最低数据要求
 
