@@ -5,7 +5,7 @@ purpose: >
   事实嵌入判断，县市总体判断下钻到具体地区。
 
 default_output_sections:
-  - key: current_campaign_state
+  - key: core_judgement
     title: 核心判断
     length: 150-250字
     must_answer: 截至 as_of 当前选战处于什么阶段、最近发生了什么变化、这些变化是否触及历史结构。
@@ -19,11 +19,17 @@ default_output_sections:
       - 政策、争议、司法与重大地方议题
       - 新增民调及同源同方法调查变化
     rule: 先写已验证变化，再说明哪些只是 campaign_claim 或 retrieval lead。
-  - key: historical_reference
+  - key: historical_geography
     title: 二、这些变化放回历史结构意味着什么
     rule: >
       历史基准作为参照系，不得成为正文主角。至少使用三届同类型选举，
       说明当前变化是延续、回摆还是尚不足以判断。
+  - key: change_since_last
+    title: 二之一、与上一轮选举及上一快照相比发生了什么变化
+    rule: >
+      同时区分“相对上一届正式选举的结构变化”和“相对上一 Campaign State Snapshot 的近期变化”；
+      不得把二者混为同一种 swing。
+
   - key: where_change_happened
     title: 三、当前变化主要发生在哪里
     must_identify: 3—8个关键乡镇市区（资料足够时）
