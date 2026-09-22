@@ -38,6 +38,7 @@ ogasawara-election-analysis/
 │  ├─ evidence_grades.yaml
 │  ├─ analysis_thresholds.yaml
 │  ├─ knowledge_layers.yaml
+│  ├─ knowledge_promotion.yaml
 │  ├─ data_sources.yaml
 │  ├─ freshness.yaml
 │  └─ runtime.yaml
@@ -55,7 +56,9 @@ ogasawara-election-analysis/
 │  ├─ poll.yaml
 │  ├─ political_claim.yaml
 │  ├─ local_relationship.yaml
-│  └─ retrieval_lead.yaml
+│  ├─ retrieval_lead.yaml
+│  ├─ knowledge_proposal.yaml
+│  └─ knowledge_promotion_receipt.yaml
 ├─ methods/
 │  ├─ electoral_swing.md
 │  ├─ split_ticket.md
@@ -63,7 +66,7 @@ ogasawara-election-analysis/
 │  ├─ spatial_divergence.md
 │  ├─ incumbent_transfer.md
 │  └─ third_force.md
-├─ runtime/             # V1.2 数据与运行层
+├─ runtime/             # V1.3 数据、运行与知识晋升层
 │  ├─ cec_open_data.py   # 中选会官方 votedata.zip Adapter
 │  ├─ cec_current_candidates.py # 2026候选人登记名册 Adapter
 │  ├─ tvbs_poll_center.py # TVBS民调中心原始PDF Adapter
@@ -73,6 +76,7 @@ ogasawara-election-analysis/
 │  ├─ matrix_builder.py
 │  ├─ metrics.py
 │  ├─ knowledge_loader.py
+│  ├─ knowledge_builder.py # V1.3知识晋升与县市package Builder
 │  ├─ host_retrieval.py  # 宿主Web检索JSON/JSONL桥
 │  ├─ freshness.py
 │  ├─ analysis_context.py
@@ -100,7 +104,7 @@ ogasawara-election-analysis/
 6. 最后才读取民调资料，按 `rules/poll_rules.yaml` 校准。
 7. 按 `SKILL.md` 的统一模板输出，并明确证据等级和不确定性。
 
-### V1.2 数据与运行层
+### V1.3 数据、运行与知识晋升层
 
 ```text
 用户任务
@@ -112,6 +116,9 @@ ogasawara-election-analysis/
 → Matrix Builder
 → Metrics
 → 地方知识检索
+→ structured proposal（仅宿主显式提供时）
+→ KnowledgePromotionBuilder 门禁与 receipt
+→ knowledge/ + county package
 → Freshness
 → Analysis Context
 → AnalysisPipeline 统一编排
@@ -180,6 +187,81 @@ ONLINE 首次缺历史资料时会下载官方 ZIP；之后直接复用本地缓
 ```
 
 若 `source_grade` 缺失或非法，运行时自动降为 E。A/B 级或两个独立 C 级来源仍须经过结构化 claim/relationship、`time_scope` 与当前有效性检查后，才能进入长期知识库。
+
+### V1.3 知识晋升与地方知识 Builder
+
+V1.3 将“已检索资料”和“可复用知识”彻底分开。宿主搜索结果只进入 `cache/retrieval/`；只有结构化 proposal 通过 Builder 门禁后，才写入 `knowledge/`。
+
+晋升链：
+
+```text
+retrieval lead
+→ host structured proposal
+→ source / independence gate
+→ contradiction check
+→ time_scope / freshness gate
+→ idempotence / conflict gate
+→ promotion receipt
+→ knowledge/historical 或 knowledge/local
+→ knowledge/counties/<county>/ generated package
+```
+
+proposal 最小示例：
+
+```json
+{
+  "proposal_id": "example-r1",
+  "county": "宜兰县",
+  "target_type": "local_relationship",
+  "research_questions": ["为什么 某乡 出现 candidate_residual 异常？"],
+  "evidence_lead_ids": ["lead-a", "lead-b"],
+  "contradiction_check_completed": true,
+  "contradictory_lead_ids": [],
+  "scope_boundary": "只确认公开关系在所列时间范围内存在，不推断选民行为。",
+  "target_record": {
+    "relationship_id": "r1",
+    "subject": "人物A",
+    "object": "组织B",
+    "relationship_type": "organization_membership",
+    "region": "某乡",
+    "time_scope": "2025-2026",
+    "current_status": "active_verified",
+    "last_verified_at": "2026-09-22"
+  }
+}
+```
+
+晋升前预检：
+
+```bash
+python -m runtime.cli knowledge-promote \
+  --county "宜兰县" \
+  --proposal-inbox proposals/yilan.jsonl \
+  --dry-run
+```
+
+正式晋升并自动重建县市 package：
+
+```bash
+python -m runtime.cli knowledge-promote \
+  --county "宜兰县" \
+  --proposal-inbox proposals/yilan.jsonl
+```
+
+单独重建 package：
+
+```bash
+python -m runtime.cli knowledge-build --county "宜兰县"
+```
+
+晋升结果只有四种：`promoted / rejected / requires_review / dry_run_pass`。存在已验证 A/B/C 级相反证据时不会自动选择一方，必须进入 `requires_review`。
+
+县市 package 包含：
+
+- `package_manifest.yaml`：计数、权威源文件与生成规则；
+- `evidence_index.jsonl`：已晋升记录的来源、时间、research question 与 current-use 状态索引；
+- `unresolved_questions.jsonl`：尚未被晋升知识覆盖的 retrieval questions；
+- `political_ecology.md`：结构化知识的可读索引，明确不得新增政治事实或因果判断。
 
 
 ## 最低数据要求
