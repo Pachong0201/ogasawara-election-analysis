@@ -1,4 +1,4 @@
-version: 1.0.0
+version: 1.2.0
 name: data_sources
 purpose: >
   数据来源注册表。分析逻辑不得写死具体网站 URL；所有来源通过本表
@@ -11,8 +11,10 @@ election_results:
       grade: A
       type: official
       priority: 1
-      adapter: null
-      notes: 官方选举资料优先来源。
+      adapter: cec_open_data_adapter
+      dataset_page: https://data.gov.tw/dataset/13119
+      download_url: https://data.cec.gov.tw/选举资料库/votedata.zip
+      notes: 官方选举资料优先来源；V1.2 已接入 votedata.zip Adapter。
   secondary:
     - id: local_cec
       name: 地方选举委员会
@@ -76,9 +78,27 @@ social_unverified:
   notes: 只能作为未验证线索，不得单独形成结构性判断。
 
 adapters:
-  # V1.1 只定义接口与 fixtures；真实网站 Adapter 在运行环境外注入。
-  registered: []
-  planned:
+  registered:
     - cec_open_data_adapter
+  builtin:
+    cec_open_data_adapter:
+      source_id: cec_open_data
+      grade: A
+      priority: 1
+      cache_path: cache/raw/cec/votedata.zip
+      supported_elections:
+        president: [2016, 2020, 2024]
+        regional_legislator: [2016, 2020, 2024]
+        county_mayor: [2014, 2018, 2022]
+      supported_levels: [township_district, county_city]
+      network_behavior:
+        download_once: true
+        reuse_cached_archive: true
+        max_archive_bytes: 536870912
+      notes:
+        - 使用中选会官方选举资料库 ZIP，不抓取第三方整理页。
+        - ZIP 文件名需按 CP950/Big5 元数据处理。
+        - 2016 总统/立委文件采用特殊后缀，Adapter 自动发现。
+  planned:
     - local_cec_adapter
     - verified_public_dataset_adapter
