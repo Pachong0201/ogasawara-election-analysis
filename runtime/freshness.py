@@ -45,6 +45,20 @@ def _timestamp(record: Dict[str, Any]) -> Optional[dt.date]:
     return None
 
 
+def _timestamp_for_kind(record: Dict[str, Any], kind: str) -> Optional[dt.date]:
+    """Choose the event timestamp relevant to a record's freshness.
+
+    Re-fetching an old poll today must not make the poll itself current.
+    """
+    if kind == "poll":
+        for field in ("publish_date", "field_end", "field_start"):
+            parsed = parse_date(record.get(field))
+            if parsed is not None:
+                return parsed
+        return None
+    return _timestamp(record)
+
+
 def compute_expires_at(record: Dict[str, Any], kind: Optional[str] = None, config_path: Optional[Path] = None) -> Optional[dt.date]:
     """Return the expiry date for a record, or None when it never expires."""
     config = _load_policy(config_path)
@@ -71,7 +85,7 @@ def compute_expires_at(record: Dict[str, Any], kind: Optional[str] = None, confi
     ttl_days = policy.get("ttl_days")
     if ttl_days is None:
         return None
-    base = _timestamp(record)
+    base = _timestamp_for_kind(record, record_kind)
     if base is None:
         return None
     return base + dt.timedelta(days=int(ttl_days))
