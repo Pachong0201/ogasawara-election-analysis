@@ -89,7 +89,8 @@ ogasawara-election-analysis/
 ├─ references/
 │  └─ ogasawara/
 ├─ examples/
-│  └─ yilan/            # 只作为测试用例，不是运行依赖
+│  ├─ yilan/            # 只作为测试用例，不是运行依赖
+│  └─ knowledge_promotion/ # V1.3合成 lead/proposal 示例
 └─ tests/
 ```
 
