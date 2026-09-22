@@ -300,6 +300,11 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
             self.assertTrue(
                 any("idempotent" in warning for warning in second["receipt"]["warnings"])
             )
+            receipts = load_jsonl(
+                root / "cache" / "knowledge_promotion" / f"{COUNTY}.jsonl"
+            )
+            self.assertEqual(len(receipts), 2)
+            self.assertEqual(len({item["receipt_id"] for item in receipts}), 2)
 
     def test_conflicting_same_id_without_newer_verification_requires_review(self):
         with temp_repo() as root:
@@ -356,6 +361,99 @@ class TestKnowledgePromotionBuilder(unittest.TestCase):
             self.assertTrue(
                 any(
                     "contradiction_check_completed" in reason
+                    for reason in result["receipt"]["reasons"]
+                )
+            )
+
+
+
+    def test_unverified_a_lead_cannot_raise_verified_b_record_to_a(self):
+        with temp_repo() as root:
+            write_jsonl(
+                retrieval_path(root),
+                [
+                    lead("a-unverified", grade="A", verification_status="lead_only"),
+                    lead("b-verified", grade="B", verification_status="verified"),
+                ],
+            )
+            proposal = historical_proposal(["a-unverified", "b-verified"], claim_id="h-grade")
+            result = KnowledgePromotionBuilder(root).promote(proposal)
+            self.assertEqual(result["receipt"]["decision"], "promoted")
+            self.assertEqual(result["receipt"]["evidence_grades"], ["B"])
+            self.assertEqual(result["receipt"]["evidence_lead_ids"], ["b-verified"])
+            record = load_jsonl(
+                root / "knowledge" / "historical" / COUNTY / "claims.jsonl"
+            )[0]
+            self.assertEqual(record["source_grade"], "B")
+            self.assertEqual(
+                record["promotion_provenance"]["evidence_lead_ids"],
+                ["b-verified"],
+            )
+
+    def test_scope_boundary_is_required(self):
+        with temp_repo() as root:
+            write_jsonl(retrieval_path(root), [lead("b1", grade="B")])
+            proposal = historical_proposal(["b1"], claim_id="h-boundary")
+            proposal.pop("scope_boundary", None)
+            result = KnowledgePromotionBuilder(root).promote(proposal)
+            self.assertEqual(result["receipt"]["decision"], "rejected")
+            self.assertTrue(
+                any("scope_boundary" in reason for reason in result["receipt"]["reasons"])
+            )
+
+    def test_stale_candidate_profile_is_rejected(self):
+        with temp_repo() as root:
+            write_jsonl(retrieval_path(root), [lead("b1", grade="B")])
+            proposal = {
+                "proposal_id": "candidate-old",
+                "county": COUNTY,
+                "target_type": "candidate_profile",
+                "research_questions": [QUESTION],
+                "evidence_lead_ids": ["b1"],
+                "contradiction_check_completed": True,
+                "scope_boundary": "只用于候选人地方经历档案，不推断当前支持度。",
+                "target_record": {
+                    "candidate_id": "candidate-old",
+                    "name": "甲候選人",
+                    "region": "甲鄉",
+                    "time_scope": "2018-2020",
+                    "last_verified_at": "2020-01-01",
+                },
+            }
+            result = KnowledgePromotionBuilder(root).promote(proposal)
+            self.assertEqual(result["receipt"]["decision"], "rejected")
+            self.assertTrue(
+                any("candidate_profile is stale" in reason for reason in result["receipt"]["reasons"])
+            )
+
+    def test_unverified_current_issue_status_is_rejected(self):
+        with temp_repo() as root:
+            write_jsonl(retrieval_path(root), [lead("b1", grade="B")])
+            today = dt.date.today().isoformat()
+            proposal = {
+                "proposal_id": "issue-1",
+                "county": COUNTY,
+                "target_type": "current_issue",
+                "research_questions": [QUESTION],
+                "evidence_lead_ids": ["b1"],
+                "contradiction_check_completed": True,
+                "scope_boundary": "只记录该事件本身，不推断其选举效果。",
+                "target_record": {
+                    "claim_id": "issue-1",
+                    "claim_text": "地方事件测试。",
+                    "claim_type": "local_event",
+                    "date": today,
+                    "region": "甲鄉",
+                    "time_scope": today,
+                    "last_verified_at": today,
+                    "verification_status": "unverified",
+                },
+            }
+            result = KnowledgePromotionBuilder(root).promote(proposal)
+            self.assertEqual(result["receipt"]["decision"], "rejected")
+            self.assertTrue(
+                any(
+                    "verification_status is not eligible" in reason
                     for reason in result["receipt"]["reasons"]
                 )
             )
