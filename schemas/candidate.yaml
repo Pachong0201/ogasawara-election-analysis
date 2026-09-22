@@ -1,4 +1,4 @@
-version: 1.0.0
+version: 1.2.0
 schema_name: candidate
 description: >
   候选人事实与地方基础档案。历史资料必须带 time_scope；
@@ -20,6 +20,34 @@ properties:
     items: {type: string}
   party:
     type: string
+  election_type:
+    type: string
+    description: 当前候选人所对应的选举类型。
+  election_year:
+    type: integer
+  jurisdiction:
+    type: string
+  official_jurisdiction:
+    type: string
+    description: 官方资料中的行政区名称，用于简繁体或别名对齐。
+  candidate_status:
+    type: string
+    enum: [registered, qualified, nominated, announced, potential, withdrawn]
+    description: >
+      候选人当前状态。registered 仅表示完成登记，不代表资格审定通过；
+      qualified 只有在主管选举机关正式审定后才可使用。
+  registration_date:
+    type: string
+    format: date
+  recommended_by_party:
+    type: string
+    description: 官方登记资料中的推荐政党；为空表示未由政党推荐。
+  published_at:
+    type: string
+    format: date
+  valid_until:
+    type: string
+    format: date
   party_history:
     type: array
     description: 政党变换或联盟关系，每项需有时间范围。
@@ -129,6 +157,7 @@ properties:
     type: string
 
 constraints:
+  - registered 与 qualified 必须严格区分；登记名册不得被解释为资格审定结果。
   - 历史资料不得在没有当前验证的情况下写成“目前仍经营”。
   - 农渔会、社团或派系名称存在，不等于该组织支持候选人。
   - 跨党接受度只能由公开支持、投票纪录或调查交叉表验证。
