@@ -1,0 +1,98 @@
+version: 1.3.0
+name: knowledge_promotion
+purpose: >
+  将宿主检索 lead 晋升为可复用地方知识的确定性门禁。禁止 Builder
+  根据摘要自行补齐政治关系；晋升只处理宿主已经结构化的 proposal。
+
+source_gate:
+  require_verified: true
+  grade_policy:
+    A:
+      minimum_sources: 1
+    B:
+      minimum_sources: 1
+    C:
+      minimum_sources: 2
+      require_distinct_independence_key: true
+    D:
+      promotable: false
+    E:
+      promotable: false
+  mixed_source_rule: >
+    只要存在一个 verified A/B 来源即可达到基础晋升门槛；
+    否则至少需要两个 verified C 来源且 independence_key 不同。
+  contradiction_policy:
+    verified_ABC_contradiction: requires_review
+    D_E_contradiction: warning_only
+
+target_rules:
+  historical_claim:
+    layer_id: L2
+    storage: knowledge/historical/<county>/claims.jsonl
+    required_fields:
+      - claim_id
+      - claim
+      - time_scope
+      - source
+      - source_grade
+    current_extrapolation_forbidden: true
+  local_relationship:
+    layer_id: L3
+    storage: knowledge/local/<county>/relationships.jsonl
+    required_fields:
+      - relationship_id
+      - subject
+      - object
+      - relationship_type
+      - time_scope
+      - current_status
+      - source
+      - source_grade
+    active_verified_requires:
+      - last_verified_at
+      - verification_evidence
+    historical_only_allowed_without_current_validation: true
+  candidate_profile:
+    layer_id: L3
+    storage: knowledge/local/<county>/candidates.jsonl
+    required_fields:
+      - candidate_id
+      - name
+      - sources
+      - evidence_grade
+      - time_scope
+      - last_verified_at
+  current_issue:
+    layer_id: L3
+    storage: knowledge/local/<county>/issues.jsonl
+    required_fields:
+      - claim_id
+      - claim_text
+      - claim_type
+      - date
+      - time_scope
+      - last_verified_at
+      - source
+      - source_grade
+      - verification_status
+
+persistence:
+  idempotent_key_by_target:
+    historical_claim: claim_id
+    local_relationship: relationship_id
+    candidate_profile: candidate_id
+    current_issue: claim_id
+  overwrite_policy: newer_verified_only
+  receipts: cache/knowledge_promotion/<county>.jsonl
+  package_manifest: knowledge/counties/<county>/package_manifest.yaml
+  never_delete_on_build: true
+
+builder:
+  package_root: knowledge/counties/<county>/
+  generated_files:
+    - package_manifest.yaml
+    - evidence_index.jsonl
+    - unresolved_questions.jsonl
+    - political_ecology.md
+  source_files_are_authoritative: true
+  generated_files_are_indexes_not_new_facts: true
