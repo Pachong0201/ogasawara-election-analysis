@@ -82,6 +82,8 @@ adapters:
     - cec_open_data_adapter
   registered_candidate_adapters:
     - cec_current_candidate_adapter
+  registered_poll_adapters:
+    - tvbs_poll_center_adapter
   builtin:
     cec_open_data_adapter:
       source_id: cec_open_data
@@ -117,6 +119,37 @@ adapters:
         - 读取中选会115年地方公职人员选举候选人登记名册页面。
         - 自动定位1-1直辖市长与3-1县市长登记汇总表PDF。
         - PDF表格字段包括选举区、登记日期、姓名、推荐政党、备注。
+  poll_builtin:
+    tvbs_poll_center_adapter:
+      source_id: tvbs_poll_center
+      grade: C
+      priority: 20
+      index_url: https://www.tvbs.com.tw/poll-center
+      supported_elections:
+        county_mayor: [2026]
+      source_policy:
+        require_primary_pdf: true
+        allow_news_rewrite_as_data_source: false
+        role: poll_calibration_only
+      required_method_fields:
+        - pollster
+        - commissioner
+        - method
+        - sample_size
+        - sample_frame
+        - sampling
+        - weighting
+        - field_start
+        - field_end
+        - publish_date
+        - moe
+        - moe_applicable
+        - undecided
+      notes:
+        - 只读取 TVBS 民调中心索引及原始 PDF 报告。
+        - 来源等级为 C；即使是原始民调报告，也不得替代历史选举事实。
+        - 不同机构、不同方法的民调不得自动连成趋势。
+        - PDF 关键方法字段缺失时拒绝入库，不进行猜测补值。
   planned:
     - local_cec_adapter
     - verified_public_dataset_adapter
