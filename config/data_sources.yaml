@@ -101,6 +101,7 @@ adapters:
         - 使用中选会官方选举资料库 ZIP，不抓取第三方整理页。
         - ZIP 文件名需按 CP950/Big5 元数据处理。
         - 2016 总统/立委文件采用特殊后缀，Adapter 自动发现。
+        - 2022 嘉義市長重行選舉使用 cand.csv/prof.csv 特殊格式，Adapter 单独解析。
   candidate_builtin:
     cec_current_candidate_adapter:
       source_id: cec_current_candidates
