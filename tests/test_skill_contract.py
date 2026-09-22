@@ -52,6 +52,7 @@ class TestSkillStructure(unittest.TestCase):
             "runtime/models.py",
             "runtime/data_readiness.py",
             "runtime/source_registry.py",
+            "runtime/cec_open_data.py",
             "runtime/election_loader.py",
             "runtime/election_normalizer.py",
             "runtime/matrix_builder.py",
@@ -61,6 +62,7 @@ class TestSkillStructure(unittest.TestCase):
             "runtime/analysis_context.py",
             "runtime/pipeline.py",
             "runtime/cli.py",
+            "tests/test_cec_open_data.py",
             "tests/test_data_readiness.py",
             "tests/test_freshness.py",
             "tests/test_election_loader.py",
@@ -89,7 +91,7 @@ class TestCoreContract(unittest.TestCase):
     def test_skill_frontmatter_name(self):
         text = read_text("SKILL.md")
         self.assertIn("name: ogasawara-election-analysis", text)
-        self.assertIn("version: 1.1.1", text)
+        self.assertIn("version: 1.2.0", text)
 
     def test_analysis_path_is_historical_first(self):
         text = read_text("SKILL.md")
