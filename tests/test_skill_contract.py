@@ -86,6 +86,9 @@ class TestSkillStructure(unittest.TestCase):
             "tests/test_cli_knowledge.py",
             "examples/yilan/test_cases.yaml",
             "examples/yilan/README.md",
+            "examples/knowledge_promotion/README.md",
+            "examples/knowledge_promotion/retrieval.example.jsonl",
+            "examples/knowledge_promotion/proposal.example.jsonl",
             "tests/README.md",
         ]
         for rel in required:
