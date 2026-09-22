@@ -79,7 +79,7 @@ jobs:
               )
 
               manifest = context.analysis_manifest
-              assert manifest["skill_version"] == "1.3.0"
+              assert manifest["skill_version"] == "1.4.0"
               assert manifest["files_used"]
               assert (Path(tmp) / "analysis_manifest.json").exists()
 
