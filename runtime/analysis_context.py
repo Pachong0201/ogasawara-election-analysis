@@ -10,7 +10,7 @@ from .models import AnalysisContext, ElectionTask, ReadinessReport, as_jsonable,
 
 
 class AnalysisContextBuilder:
-    def __init__(self, repo_root: Optional[Path] = None, skill_version: str = "1.3.0"):
+    def __init__(self, repo_root: Optional[Path] = None, skill_version: str = "1.4.0"):
         self.repo_root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[1]
         self.skill_version = skill_version
 
@@ -23,6 +23,7 @@ class AnalysisContextBuilder:
         local_knowledge: Optional[Dict[str, Any]] = None,
         current_candidates: Optional[List[Dict[str, Any]]] = None,
         current_events: Optional[List[Dict[str, Any]]] = None,
+        current_campaign_state: Optional[Dict[str, Any]] = None,
         polls: Optional[List[Dict[str, Any]]] = None,
         evidence_summary: Optional[Dict[str, Any]] = None,
         unknowns: Optional[List[str]] = None,
@@ -37,6 +38,7 @@ class AnalysisContextBuilder:
         local_knowledge = local_knowledge or {}
         current_candidates = current_candidates or []
         current_events = current_events or []
+        current_campaign_state = current_campaign_state or {}
         polls = polls or []
         evidence_summary = evidence_summary or {}
         unknowns = unknowns or []
@@ -57,6 +59,7 @@ class AnalysisContextBuilder:
             "local_knowledge": local_knowledge,
             "current_candidates": current_candidates,
             "current_events": current_events,
+            "current_campaign_state": current_campaign_state,
             "polls": polls,
             "evidence_summary": evidence_summary,
             "unknowns": unknowns,
@@ -75,6 +78,7 @@ class AnalysisContextBuilder:
             "freshness": {
                 "readiness_status": readiness.status,
                 "stale": readiness.stale,
+                "campaign_as_of": current_campaign_state.get("as_of"),
             },
             "missing_data": readiness.missing,
             "unknowns": unknowns,
