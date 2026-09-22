@@ -85,6 +85,19 @@ jobs:
                       )
                   ]
                   print("DIAGNOSTIC_SPECIAL_MEMBERS=", diagnostic[:300])
+                  for member in diagnostic:
+                      if "2022年_嘉義市長重行選舉/" not in member:
+                          continue
+                      raw = zf.read(member)
+                      text_blob = None
+                      for enc in ("utf-8-sig", "utf-8", "cp950", "big5"):
+                          try:
+                              text_blob = raw.decode(enc)
+                              break
+                          except UnicodeDecodeError:
+                              pass
+                      print("DIAGNOSTIC_MEMBER=", member)
+                      print("DIAGNOSTIC_HEAD=", "\\n".join((text_blob or "").splitlines()[:12]))
               raise AssertionError(f"CEC national coverage failures: {failures}")
           print("NATIONAL_COVERAGE=22/22_ALL_9_PERIODS")
           PY
