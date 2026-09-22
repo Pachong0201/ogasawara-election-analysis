@@ -31,4 +31,4 @@ python3 -m unittest discover -s tests -v
 - `test_host_retrieval.py`：宿主 Web 检索 inbox、research question 匹配、缺失等级降为 E、lead-only 不自动晋升长期知识。
 
 - `test_knowledge_builder.py`：V1.3 proposal 晋升、证据独立性、相反证据、freshness、幂等、receipt 与 county package Builder。
-- `test_cli_knowledge.py`：`knowledge-promote --dry-run`、正式晋升、`knowledge-build` 与拒绝状态退出码。
+- `test_cli_knowledge.py`：`knowledge-ingest` staging 边界、`knowledge-promote --dry-run`、正式晋升、`knowledge-build` 与拒绝状态退出码。
