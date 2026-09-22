@@ -158,5 +158,87 @@ class TestKnowledgeCLI(unittest.TestCase):
             self.assertEqual(result["counts"]["rejected"], 1)
 
 
+    def test_knowledge_ingest_only_writes_retrieval_staging(self):
+        with temp_repo() as root:
+            inbox = root / "retrieval.jsonl"
+            inbox.write_text(
+                json.dumps(
+                    {
+                        "lead_id": "lead-stage-1",
+                        "county": COUNTY,
+                        "query": QUESTION,
+                        "title": "研究資料",
+                        "summary": "測試來源",
+                        "url": "https://example.test/stage-1",
+                        "source_id": "fixture",
+                        "source_grade": "B",
+                        "verification_status": "verified",
+                        "independence_key": "fixture-stage",
+                    },
+                    ensure_ascii=False,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            code, output = self.run_cli(
+                [
+                    "--repo-root",
+                    str(root),
+                    "knowledge-ingest",
+                    "--county",
+                    COUNTY,
+                    "--retrieval-inbox",
+                    str(inbox),
+                ]
+            )
+            self.assertEqual(code, 0)
+            payload = json.loads(output)
+            self.assertEqual(payload["accepted_count"], 1)
+            self.assertEqual(payload["rejected_count"], 0)
+
+            staged = load_jsonl(
+                root / "cache" / "retrieval" / f"{COUNTY}.jsonl"
+            )
+            self.assertEqual(len(staged), 1)
+            self.assertEqual(staged[0]["lead_id"], "lead-stage-1")
+            self.assertFalse((root / "knowledge").exists())
+
+    def test_knowledge_ingest_rejects_cross_county_lead(self):
+        with temp_repo() as root:
+            inbox = root / "retrieval.jsonl"
+            inbox.write_text(
+                json.dumps(
+                    {
+                        "lead_id": "lead-other",
+                        "county": "宜蘭縣",
+                        "query": QUESTION,
+                        "url": "https://example.test/other",
+                        "source_grade": "B",
+                        "verification_status": "verified",
+                    },
+                    ensure_ascii=False,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            code, output = self.run_cli(
+                [
+                    "--repo-root",
+                    str(root),
+                    "knowledge-ingest",
+                    "--county",
+                    COUNTY,
+                    "--retrieval-inbox",
+                    str(inbox),
+                ]
+            )
+            self.assertEqual(code, 2)
+            payload = json.loads(output)
+            self.assertEqual(payload["accepted_count"], 0)
+            self.assertEqual(payload["rejected_count"], 1)
+
+
+
 if __name__ == "__main__":
     unittest.main()
