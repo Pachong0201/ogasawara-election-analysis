@@ -1,0 +1,75 @@
+name: CEC national coverage
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "runtime/cec_open_data.py"
+      - ".github/workflows/cec-national-coverage.yml"
+  workflow_dispatch:
+  schedule:
+    - cron: "41 4 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  national-coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Validate all 22 jurisdictions against official CEC archive
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from runtime.cec_open_data import CECOpenDataAdapter
+          from runtime.models import DataQuery
+
+          jurisdictions = [
+              "臺北市", "新北市", "桃園市", "臺中市", "臺南市", "高雄市",
+              "基隆市", "新竹市", "嘉義市",
+              "宜蘭縣", "新竹縣", "苗栗縣", "彰化縣", "南投縣", "雲林縣",
+              "嘉義縣", "屏東縣", "花蓮縣", "臺東縣", "澎湖縣", "金門縣", "連江縣",
+          ]
+          adapter = CECOpenDataAdapter(cache_dir=Path("cache/raw/cec"))
+          failures = []
+
+          for jurisdiction in jurisdictions:
+              for election_type, year in [
+                  ("county_mayor", 2022),
+                  ("president", 2024),
+                  ("regional_legislator", 2024),
+              ]:
+                  result = adapter.fetch(
+                      DataQuery(election_type, year, jurisdiction, "township_district")
+                  )
+                  regions = {row["jurisdiction"] for row in result.records}
+                  if not result.records or not regions:
+                      failures.append(
+                          {
+                              "jurisdiction": jurisdiction,
+                              "election_type": election_type,
+                              "year": year,
+                              "warnings": result.warnings,
+                          }
+                      )
+                  else:
+                      print(
+                          jurisdiction, election_type, year,
+                          "records=", len(result.records),
+                          "regions=", len(regions),
+                      )
+
+          if failures:
+              print("FAILURES=", failures)
+              raise AssertionError(f"CEC national coverage failures: {failures}")
+          print("NATIONAL_COVERAGE=22/22")
+          PY
