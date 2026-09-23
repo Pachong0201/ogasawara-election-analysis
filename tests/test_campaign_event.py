@@ -182,6 +182,8 @@ class TestCampaignEventStateIntegration(unittest.TestCase):
                 "高雄市",
                 {
                     "as_of": "2026-09-20T00:00:00+08:00",
+                    "target_year": 2026,
+                    "election": {"election_type": "unspecified", "target_year": 2026},
                     "candidate_keys": ["賴瑞隆"],
                     "event_ids": [],
                     "poll_ids": [],
