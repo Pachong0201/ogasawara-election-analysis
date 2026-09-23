@@ -4,6 +4,9 @@ from pathlib import Path
 
 from runtime.campaign_event import CampaignEventResolver
 from runtime.campaign_state import CampaignStateBuilder, CampaignStateStore
+from runtime.pipeline import AnalysisPipeline
+from runtime.source_registry import RetrievalBackend, SourceRegistry
+from tests.fixtures.helpers import make_task, populate_full_repo, temp_repo
 
 
 def lead(domain, slug, title, content, page_date="2026-09-22T09:00:00+08:00"):
@@ -205,6 +208,66 @@ class TestCampaignEventStateIntegration(unittest.TestCase):
         self.assertEqual(
             snapshot["snapshot_delta"]["new_retrieval_lead_ids"],
             ["new-lead"],
+        )
+
+
+class BodyBackend(RetrievalBackend):
+    def search(self, query, **kwargs):
+        return [
+            lead(
+                "cna.com.tw",
+                "pipeline-a",
+                "賴瑞隆鳳山後援會成立",
+                "賴瑞隆在鳳山區成立後援會，地方人士參與，團隊展開組織動員。",
+            ),
+            lead(
+                "udn.com",
+                "pipeline-b",
+                "鳳山後援會成立 賴瑞隆出席",
+                "賴瑞隆出席鳳山區後援會成立活動，地方組織開始後續動員。",
+            ),
+        ]
+
+    def fetch(self, url):
+        return None
+
+    def metadata(self):
+        return {"backend": "fixture_body_backend", "lead_only": True, "available": True}
+
+
+class TestPipelineCampaignEventIntegration(unittest.TestCase):
+    def test_pipeline_resolves_bodies_before_campaign_state_and_context(self):
+        with temp_repo() as root:
+            populate_full_repo(root)
+            backend = BodyBackend()
+            registry = SourceRegistry(config_path=root / "config" / "no-adapters.yaml")
+            context = AnalysisPipeline(
+                root,
+                mode="online",
+                retrieval_backend=backend,
+                source_registry=registry,
+            ).run(
+                make_task(jurisdiction="高雄市"),
+                allow_online=True,
+            ).to_dict()
+
+        analysis = context["analysis_context"]
+        resolution = analysis["campaign_event_resolution"]
+        self.assertEqual(resolution["stats"]["corroborated_event_count"], 1)
+        self.assertEqual(len(resolution["events"]), 1)
+        self.assertTrue(
+            any(
+                event.get("verification_status") == "corroborated_media"
+                for event in analysis["current_events"]
+            )
+        )
+        self.assertIn(
+            "corroborated_recent_campaign_event",
+            analysis["campaign_state"]["campaign_change_reasons"],
+        )
+        self.assertEqual(
+            analysis["evidence_summary"]["campaign_event_resolution"]["corroborated_event_count"],
+            1,
         )
 
 
