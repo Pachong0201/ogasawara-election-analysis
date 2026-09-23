@@ -252,7 +252,7 @@ campaign_state:
     胜率或结果预测。
 
 campaign_event_resolution:
-  schema: schemas/campaign_event.yaml
+  schema: schemas/campaign_media_event.yaml
   runtime: runtime/campaign_event.py
   input_order:
     - retrieval_lead
