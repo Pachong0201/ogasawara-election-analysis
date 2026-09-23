@@ -1,38 +1,32 @@
 $schema: "https://json-schema.org/draft/2020-12/schema"
 title: CampaignEvent
-description: >
-  V1.4 L4 当前选举事件统一结构。既支持已核验的标准化事件，也支持由公开文章正文
-  经确定性抽取和跨来源聚类形成的媒体研究事件。媒体相互印证不得自动升级为 A/B 级事实。
 type: object
 required:
   - event_id
   - jurisdiction
   - date
+  - claim_type
+  - speaker
+  - subject
+  - affected_dimension
+  - source
   - source_grade
   - verification_status
+  - reference
+  - retrieved_at
+  - last_verified_at
 properties:
   event_id: {type: string, minLength: 1}
-  record_type: {type: string}
   jurisdiction: {type: string, minLength: 1}
   date: {type: string, format: date}
-  event_date: {type: string, format: date}
-  date_basis:
-    enum: [media_report_date_proxy, official_event_date, verified_event_date, publisher_page_date, first_seen_at]
-  claim_type: {type: string}
+  claim_type: {type: string, minLength: 1}
   event_type: {type: string}
   affected_dimension:
     enum: [candidate_field, organization, coalition, campaign_operations, issue, legal_judicial, polling, other]
   speaker: {type: string}
   subject: {type: string}
   claim: {type: string}
-  claim_value: {type: string}
   summary: {type: string}
-  candidate_entities:
-    type: array
-    items: {type: string}
-  locations:
-    type: array
-    items: {type: string}
   source_id: {type: string}
   source: {type: string}
   reference: {type: string}
@@ -41,65 +35,15 @@ properties:
     enum: [A, B, C, D, E]
   verification_status:
     type: string
-    enum:
-      - verified
-      - confirmed
-      - verified_fact
-      - official_record
-      - lead_only
-      - campaign_claim
-      - unverified
-      - contradicted
-      - disputed
-      - single_source_media
-      - corroborated_media
-  layer_id: {const: L4}
+    enum: [verified, confirmed, verified_fact, official_record, lead_only, campaign_claim, unverified, contradicted, disputed]
+  layer_id:
+    const: L4
   event_fingerprint: {type: string}
-  independent_source_count: {type: integer, minimum: 0}
-  independence_keys:
-    type: array
-    items: {type: string}
   evidence_refs:
     type: array
     items: {type: object}
-  evidence_status:
-    enum:
-      - requires_review
-      - resolved
-      - single_source_report
-      - cross_source_corroborated
-      - verified_fact
-  structural_use:
-    enum: [context_only, research_trigger_only, verified_event]
-  usable_for_trigger: {type: boolean}
-  source_urls:
-    type: array
-    items: {type: string}
-  sources:
-    type: array
-    items:
-      type: object
-      properties:
-        title: {type: string}
-        url: {type: string}
-        domain: {type: string}
-        page_date: {type: string}
-        first_seen_at: {type: string}
-        body_status: {type: string}
-        content_sha256: {type: string}
-        evidence_excerpt: {type: string}
-  evidence_excerpt: {type: string}
-  interpretation_limit: {type: string}
+  evidence_status: {enum: [requires_review, resolved]}
   retrieved_at: {type: string}
   last_verified_at: {type: string}
+  usable_for_trigger: {type: boolean}
 additionalProperties: true
-
-constraints:
-  - 已验证标准事件继续服从 A/B/C 来源、freshness、as_of 和冲突隔离门禁。
-  - single_source_media 只能作为 context_only，不得独立触发结构研究。
-  - corroborated_media 至少需要两个 independence_key 不同且正文已读取的公开来源。
-  - corroborated_media 只能作为 research_trigger_only，不得自动升级为 A/B 级事实。
-  - 跨来源相互印证只表示多家独立媒体正文对同一事件描述一致，不等于官方或原始证据核实。
-  - D/E 级原始线索不得自动写入 knowledge/。
-  - event_date 来自媒体报道日期代理时必须保留 date_basis。
-  - 任何 campaign event 都不得单独用于胜负预测、候选人排名或政治推荐。
