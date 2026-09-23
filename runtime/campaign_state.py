@@ -252,9 +252,9 @@ class CampaignStateBuilder:
             return [], []
         leads: List[Dict[str, Any]] = []
         warnings: List[str] = []
-        cutoff = parse_date(as_of) if as_of else None
         seen_urls: set = set()
         query_rows: List[List[Dict[str, Any]]] = []
+        cutoff = parse_date(as_of) if as_of else None
         candidate_names = [
             _candidate_key(row)
             for row in (current_candidates or [])
@@ -284,7 +284,7 @@ class CampaignStateBuilder:
                 published = _event_date(lead)
                 if cutoff and published and published > cutoff:
                     continue
-                url = str(lead.get("url") or "")
+                url = str(lead.get("url") or "").strip()
                 if url and url in seen_urls:
                     continue
                 if url:
@@ -300,8 +300,8 @@ class CampaignStateBuilder:
                 rows.append(lead)
             query_rows.append(rows)
 
-        # Interleave topics so a limited article-body budget does not get consumed
-        # by only the first campaign query.
+        # Interleave topics so a bounded body-reading budget is not consumed by
+        # the first query alone.
         for index in range(max((len(rows) for rows in query_rows), default=0)):
             for rows in query_rows:
                 if index < len(rows):
@@ -310,33 +310,32 @@ class CampaignStateBuilder:
         enrich = getattr(self.retrieval_backend, "enrich", None)
         if callable(enrich) and leads:
             try:
-                enriched = enrich(leads)
-                if enriched is not None:
-                    leads = list(enriched)
+                leads = list(enrich(leads) or [])
             except Exception as exc:
                 warnings.append(f"article body retrieval failed: {type(exc).__name__}")
 
-        # Retrieval results remain leads even after body reading. Preserve any
-        # backend-reported status separately, but never auto-promote them.
-        filtered: List[Dict[str, Any]] = []
-        for raw in leads:
-            if not isinstance(raw, dict):
-                continue
-            lead = dict(raw)
-            published = _event_date(lead)
+        # Search/body results remain discovery material even if the backend
+        # labels a page as read or verified. Preserve that status separately,
+        # then fail closed to lead_only before Campaign State consumes it.
+        normalized: List[Dict[str, Any]] = []
+        for lead in leads:
+            row = dict(lead)
+            published = _event_date(row)
             if cutoff and published and published > cutoff:
                 continue
-            lead.setdefault("query", "")
-            lead.setdefault("jurisdiction", jurisdiction)
-            lead.setdefault("layer_id", "L4")
-            lead["as_of"] = as_of
-            if "reported_verification_status" not in lead:
-                lead["reported_verification_status"] = lead.get("verification_status")
-            lead["verification_status"] = "lead_only"
-            lead.setdefault("retrieved_at", utc_now_iso())
-            lead.setdefault("lead_id", _stable_id(lead, "campaign-lead"))
-            filtered.append(lead)
-        return filtered, warnings
+            row.setdefault("query", "")
+            row.setdefault("jurisdiction", jurisdiction)
+            row.setdefault("layer_id", "L4")
+            row["as_of"] = as_of
+            row["reported_verification_status"] = (
+                row.get("reported_verification_status")
+                or row.get("verification_status")
+            )
+            row["verification_status"] = "lead_only"
+            row.setdefault("retrieved_at", utc_now_iso())
+            row.setdefault("lead_id", _stable_id(row, "campaign-lead"))
+            normalized.append(row)
+        return normalized, warnings
 
     @staticmethod
     def _window_events(
@@ -602,6 +601,11 @@ def campaign_research_questions(snapshot: Dict[str, Any]) -> List[str]:
     reasons = set(snapshot.get("campaign_change_reasons") or [])
     if "verified_recent_campaign_event" in reasons:
         questions.append(f"{jurisdiction} 最近14天的竞选事件是否改变地方组织、候选人整合或议题结构？")
+    if "corroborated_recent_campaign_event" in reasons:
+        questions.append(
+            f"{jurisdiction} 最近14天经多家独立媒体正文相互印证的竞选事件，"
+            "哪些还需要官方资料、当事人原始声明或更高等级来源进一步确认？"
+        )
     if "corroborated_recent_campaign_event" in reasons:
         questions.append(
             f"{jurisdiction} 最近14天经多家独立媒体正文相互印证的竞选事件，"
