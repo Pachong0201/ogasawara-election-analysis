@@ -483,7 +483,7 @@ class CampaignEventResolver:
                     "verification_status": (
                         "corroborated_media" if corroborated else "single_source_media"
                     ),
-                    "source_grade": "D",
+                    "source_grade": "C",
                     "source_id": "campaign_event_resolver",
                     "evidence_status": (
                         "cross_source_corroborated" if corroborated else "single_source_report"
