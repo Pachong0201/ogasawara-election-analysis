@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - "runtime/pipeline.py"
+      - "runtime/campaign_state.py"
+      - "runtime/campaign_events.py"
+      - "runtime/campaign_delta.py"
+      - "runtime/analysis_context.py"
       - "runtime/data_readiness.py"
       - "runtime/election_loader.py"
       - "runtime/cec_open_data.py"
@@ -12,8 +16,29 @@ on:
       - "runtime/tvbs_poll_center.py"
       - "runtime/freshness.py"
       - "runtime/source_registry.py"
+      - "runtime/host_retrieval.py"
       - "config/data_sources.yaml"
       - "config/freshness.yaml"
+      - "config/campaign_state.yaml"
+      - ".github/workflows/runtime-online-e2e.yml"
+  pull_request:
+    paths:
+      - "runtime/pipeline.py"
+      - "runtime/campaign_state.py"
+      - "runtime/campaign_events.py"
+      - "runtime/campaign_delta.py"
+      - "runtime/analysis_context.py"
+      - "runtime/data_readiness.py"
+      - "runtime/election_loader.py"
+      - "runtime/cec_open_data.py"
+      - "runtime/cec_current_candidates.py"
+      - "runtime/tvbs_poll_center.py"
+      - "runtime/freshness.py"
+      - "runtime/source_registry.py"
+      - "runtime/host_retrieval.py"
+      - "config/data_sources.yaml"
+      - "config/freshness.yaml"
+      - "config/campaign_state.yaml"
       - ".github/workflows/runtime-online-e2e.yml"
   workflow_dispatch:
   schedule:
@@ -35,28 +60,38 @@ jobs:
           python-version: "3.11"
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
-      - name: Run empty-root ONLINE pipeline
+      - name: Run empty-root ONLINE pipeline and Live Campaign State E2E
         run: |
           python - <<'PY'
           import datetime as dt
           from pathlib import Path
           from tempfile import TemporaryDirectory
 
+          from runtime.election_loader import write_jsonl
+          from runtime.host_retrieval import HostRetrievalBackend
           from runtime.models import ElectionTask
           from runtime.pipeline import AnalysisPipeline
 
+          as_of = dt.date.today().isoformat()
+          task = ElectionTask(
+              election_type="county_mayor",
+              target_year=2026,
+              jurisdiction="宜兰县",
+              analysis_level="township_district",
+          )
+
           with TemporaryDirectory() as tmp:
-              pipeline = AnalysisPipeline(Path(tmp), mode="online")
+              root = Path(tmp)
+
+              # Pass 1: prove an empty runtime root can fetch official historical
+              # facts/current candidates online and build the baseline snapshot.
+              pipeline = AnalysisPipeline(root, mode="online")
               context = pipeline.run(
-                  ElectionTask(
-                      election_type="county_mayor",
-                      target_year=2026,
-                      jurisdiction="宜兰县",
-                      analysis_level="township_district",
-                  ),
+                  task,
                   allow_online=True,
                   write_manifest=True,
-                  manifest_path=Path(tmp) / "analysis_manifest.json",
+                  manifest_path=root / "analysis_manifest.json",
+                  as_of=as_of,
               )
 
               analysis = context.analysis_context
@@ -81,7 +116,60 @@ jobs:
               manifest = context.analysis_manifest
               assert manifest["skill_version"] == "1.4.0"
               assert manifest["files_used"]
-              assert (Path(tmp) / "analysis_manifest.json").exists()
+              assert (root / "analysis_manifest.json").exists()
+              assert analysis["campaign_state"]["snapshot_delta"]["change_status"] == "baseline_created"
+
+              # Pass 2: exercise the V1.4 live path. A host-retrieval result that
+              # reports itself verified must still be demoted to lead_only. A
+              # separately verified L4 event is allowed to enter Campaign State.
+              event_path = root / "cache" / "events" / "ci-live.jsonl"
+              write_jsonl(event_path, [{
+                  "jurisdiction": "宜兰县",
+                  "date": as_of,
+                  "claim_type": "endorsement",
+                  "speaker": "CI验证主体",
+                  "subject": "CI候选人",
+                  "claim_value": "support",
+                  "source": "ci_verified_fixture",
+                  "source_grade": "A",
+                  "verification_status": "verified",
+                  "last_verified_at": as_of,
+                  "url": "https://example.test/ci-verified-event",
+              }])
+
+              retrieval = HostRetrievalBackend(records=[{
+                  "query": "*",
+                  "title": "CI host retrieval lead",
+                  "summary": "Synthetic host lead used only to verify lead-only gating.",
+                  "url": "https://example.test/ci-host-lead",
+                  "source_id": "ci_host",
+                  "source_grade": "A",
+                  "verification_status": "verified",
+                  "date": as_of,
+              }])
+              live_pipeline = AnalysisPipeline(
+                  root,
+                  mode="online",
+                  retrieval_backend=retrieval,
+              )
+              live_context = live_pipeline.run(
+                  task,
+                  allow_online=True,
+                  as_of=as_of,
+              )
+              live = live_context.analysis_context
+              state = live["campaign_state"]
+
+              assert live["campaign_state_status"] == "current", state
+              assert live["campaign_change_trigger"] is True, state
+              assert "verified_recent_campaign_event" in live["campaign_change_reasons"], state
+              assert state["retrieval_lead_count"] >= 1, state
+              assert state["verified_retrieval_lead_count"] == 0, state
+              assert state["retrieval_leads"], state
+              assert all(item["verification_status"] == "lead_only" for item in state["retrieval_leads"])
+              assert state["snapshot_delta"]["previous_snapshot_available"] is True, state
+              assert state["snapshot_delta"]["new_event_ids"], state
+              assert live["local_knowledge"]["research_questions"], live["local_knowledge"]
 
               print("readiness=", readiness["status"])
               print("historical_periods=", readiness["required"]["historical_same_type"]["found_years"])
@@ -91,4 +179,8 @@ jobs:
               print("poll_count=", len(analysis["polls"]))
               print("poll_statuses=", [poll["freshness_status"] for poll in analysis["polls"]])
               print("current_poll_calibration_available=", analysis["evidence_summary"]["current_poll_calibration_available"])
+              print("campaign_state_status=", live["campaign_state_status"])
+              print("campaign_change_reasons=", live["campaign_change_reasons"])
+              print("retrieval_lead_count=", state["retrieval_lead_count"])
+              print("new_event_ids=", state["snapshot_delta"]["new_event_ids"])
           PY
