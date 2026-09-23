@@ -108,7 +108,7 @@ class IntentRouter:
             text=cleaned,
             focus=focus,
             window_days=_window(cleaned),
-            refresh=any(token in cleaned for token in ("更新", "最新", "现在", "現在", "重新")),
+            refresh=(\n                intent == CAMPAIGN_UPDATE\n                or any(token in cleaned for token in ("更新", "最新", "现在", "現在", "重新"))\n            ),
         )
 
 
