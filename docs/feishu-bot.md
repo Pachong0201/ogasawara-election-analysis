@@ -1,4 +1,4 @@
-# 飞书选情机器人 v0.2（实时新闻检索）
+# 飞书选情机器人 v0.3（实时事件解析链）
 
 ## 目标
 
@@ -34,7 +34,7 @@ v0.1 实现最小可运行闭环：
 - “更新一下”“最近7天有什么变化”重新运行当前分析；
 - “民调怎么看”“给我看依据”优先复用当前线程 Context；
 - “最新民调怎么看”会刷新 Context；
-- 在线分析通过 GDELT DOC 2.0 发现近 30 天新闻，再读取公开文章正文；结果进入 Campaign State 的待核实线索；
+- 在线分析通过 GDELT DOC 2.0 发现近 30 天新闻，再读取公开文章正文；正文先经过证据摘录、候选人／地点实体识别与跨来源聚类，生成结构化 Campaign Event 后进入 Campaign State；
 - 没有 OpenAI API Key 时仍可运行，返回确定性结构化摘要；
 - 配置 OpenAI API Key 后，通过 Responses API 生成自然语言研判；
 - 飞书 App Secret / OpenAI API Key 只从环境变量读取，不写入仓库。
@@ -84,6 +84,37 @@ GDELT 返回标题、链接和首次发现时间，**不提供文章正文或核
 默认允许的来源域名在 `runtime/article_body.py` 中维护。对不在名单上的来源，正文状态为 `unsupported_domain`；应审查其公开访问规则后再扩充域名。检索未命中或正文读取失败，都不能推断近期没有选战变化。
 
 本地以模拟接口测试适配器；上线前需在部署机检查网络可达性和真实县市查询结果。无需额外搜索 API 密钥；LLM 仍只用于表达。
+
+## 实时事件解析链
+
+当前在线链路固定为：
+
+```text
+GDELT Discovery
+→ ArticleBodyFetcher
+→ CampaignEventResolver
+→ evidence excerpt
+→ candidate / location entity resolution
+→ cross-source clustering
+→ single_source_media / corroborated_media
+→ Campaign State 7/14/30 windows
+→ Snapshot Delta
+→ campaign_change_trigger
+→ local knowledge research
+→ Analysis Context
+→ LLM Writer
+```
+
+证据边界：
+
+- 未成功读取正文的标题不会生成 Campaign Event；
+- 单一媒体正文生成 `single_source_media`，只进入上下文，不独立触发结构研究；
+- 两个以上独立域名的正文若在日期、事件类型、候选人／地点及文本特征上相互匹配，可形成 `corroborated_media`；
+- `corroborated_media` 仍保持 D 级、`research_trigger_only`，只能触发进一步查证，不能写成 A/B 级已核实事实；
+- 7/14/30 窗口会同时统计 verified event 与 corroborated media event；
+- Snapshot Delta 分别记录新增 event、poll、retrieval lead 与 corroborated event；
+- 地方知识检索会优先带入事件中识别出的行政区和候选人，减少泛化搜索；
+- 最终 OpenAI Writer 不再接收整篇正文，只接收结构化事件、有限证据摘录、来源和核验状态。
 
 ## 启动
 
@@ -194,7 +225,7 @@ API 请求设置 `store=False`。
 
 后续工作：
 
-1. 扩充受支持来源，结合官方资料或独立媒体完成报道内容的交叉核验；当前已经读取公开正文，但不自动验证其中的事实。
+1. 扩充官方原始资料 Adapter，使 corroborated_media 能进一步被 A/B/C 级来源确认；当前多媒体正文相互印证只具有 research_trigger_only 资格。
 2. 飞书交互卡片按钮。
 3. 任务级缓存锁和同县市并发合并。
 4. “简单历史数字查询”直查数据库的 Quick QA 快路径。
