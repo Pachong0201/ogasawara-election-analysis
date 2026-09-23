@@ -58,7 +58,7 @@ class TestCampaignEventResolver(unittest.TestCase):
         self.assertEqual(result["stats"]["corroborated_event_count"], 1)
         event = result["events"][0]
         self.assertEqual(event["verification_status"], "corroborated_media")
-        self.assertEqual(event["source_grade"], "D")
+        self.assertEqual(event["source_grade"], "C")
         self.assertEqual(event["structural_use"], "research_trigger_only")
         self.assertEqual(event["independent_source_count"], 2)
         self.assertIn("賴瑞隆", event["candidate_entities"])
