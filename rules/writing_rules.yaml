@@ -20,6 +20,8 @@ default_output_sections:
     title: 二、最近哪些变化真正值得关注
     must_distinguish:
       - 已验证事件
+      - 跨来源相互印证但仍待高等级来源确认的媒体事件
+      - 单一媒体报道
       - 阵营主张
       - 未验证线索
       - 同源同方法民调变化
@@ -75,6 +77,8 @@ style:
   distinguish:
     - fact
     - interpretation
+    - corroborated_media
+    - single_source_media
     - campaign_claim
     - unverified_information
   avoid:
@@ -121,3 +125,15 @@ quality_checks:
   - 是否说明哪些解释证据不足或 unknown。
   - 是否避免胜负预测、候选人评分或推荐。
   - 是否记录 time_scope、baseline_method、source_grade。
+
+
+media_event_expression:
+  corroborated_media: >
+    可写为“多家独立媒体正文对该事件出现相互印证的报道”，并同时说明仍需官方资料、
+    当事人原始声明或更高等级来源确认；不得简称“已核实事件”。
+  single_source_media: >
+    只能写为“某媒体报道”或“单一公开来源显示”，不得据此形成结构性判断。
+  forbidden_inference:
+    - 把媒体报道一致直接写成事实已获官方证实。
+    - 把报道数量写成候选人声势、优势或胜率变化。
+    - 把正文中的阵营说法转述成独立事实。
