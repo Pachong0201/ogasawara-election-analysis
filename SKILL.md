@@ -126,6 +126,7 @@ entrypoint: SKILL.md
 - `runtime/knowledge_builder.py`
 - `schemas/retrieval_lead.yaml`
 - `schemas/campaign_event.yaml`
+- `schemas/campaign_media_event.yaml`
 - `schemas/knowledge_proposal.yaml`
 - `schemas/knowledge_promotion_receipt.yaml`
 - `config/knowledge_promotion.yaml`
@@ -153,7 +154,7 @@ entrypoint: SKILL.md
 
 1. 明确 `as_of`，不得使用“目前”“近期”而无具体时点；
 2. 读取当前候选人、登记／提名状态、竞选组织与已验证当前事件；
-3. ONLINE MODE 主动检索最近 30 日资料；公开新闻检索结果若能读取正文，必须先经过 evidence extraction、候选人／地点实体识别与跨来源聚类，再形成 Campaign Event；
+3. ONLINE MODE 主动检索最近 30 日资料；公开新闻检索结果若能读取正文，必须先经过 evidence extraction、候选人／地点实体识别与跨来源聚类，再形成 media Campaign Event；该对象服从 `schemas/campaign_media_event.yaml`，不得替代严格标准事件 `schemas/campaign_event.yaml`；
 4. 单一媒体正文只保留为 single_source_media；两个以上独立来源正文对同一事件相互印证时可形成 corroborated_media，但只具有 research_trigger_only 资格，不得称为 A/B 级已核实事实；
 5. 将已验证事件与结构化 Campaign Event 一并放入 7 日、14 日、30 日窗口；
 6. 与上一份 Campaign State Snapshot 比较候选人格局、新事件、新检索线索与新民调；
