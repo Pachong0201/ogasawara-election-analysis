@@ -1,4 +1,4 @@
-version: 1.3.0
+version: 1.4.0
 name: local_knowledge_rules
 framework: Minimum Sufficient Local Knowledge
 purpose: >
@@ -10,11 +10,15 @@ trigger:
   value: true
   origin:
     - config/analysis_thresholds.yaml 的 anomaly_screening 命中
+    - Campaign State 出现 campaign_change_trigger=true
     - 用户明确要求乡镇、村里或投开票所微观分析
     - 地方政治资料指向具体基层区域
   first_action: >
-    先写下需要解释的研究问题，例如“为何该乡候选人残差显著高于邻乡”，
-    不得先写“因为某派系支持”。
+    先写下需要解释的研究问题，例如“为何该乡候选人残差显著高于邻乡”或
+    “最近14日新增公开支持是否反映地方组织关系变化”，不得先写“因为某派系支持”。
+  trigger_union_rule: >
+    历史结构异常与当前选战变化具有同等研究触发资格；二者都只触发检索，
+    不直接证明因果，也不代表任何候选人受益、受损、领先或更可能当选。
 
 search_stages:
   - stage: 1
