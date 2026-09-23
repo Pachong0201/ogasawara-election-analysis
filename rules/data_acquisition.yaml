@@ -1,7 +1,7 @@
 version: 1.4.0
 name: data_acquisition
 purpose: >
-  规定 V1.3 数据获取、本地化、验证、新鲜度、知识晋升与离线行为的统一规则。
+  规定 V1.4 数据获取、本地化、验证、新鲜度、知识晋升、实时选战事件解析与离线行为的统一规则。
   不改变 V1.0 方法论，只让方法能够稳定运行。
 
 principles:
@@ -41,6 +41,12 @@ principles:
     statement: 当前选战变化可以独立触发地方知识检索，不得要求必须先出现历史票型异常。
   - id: DATA-18
     statement: 宿主检索结果进入当前选战层前必须保留 verification_status 与 source_grade；lead_only 不得写成已确认事实。
+  - id: DATA-19
+    statement: 公开新闻正文必须先经过 evidence extraction 与 entity resolution，未读取正文的标题不得自动生成 Campaign Event。
+  - id: DATA-20
+    statement: 两个以上 independence_key 不同且正文已读取的媒体来源可以形成 corroborated_media 事件，但仅可作为 research_trigger_only，不得自动升级为 A/B 级事实。
+  - id: DATA-21
+    statement: Campaign State 的 7／14／30 日窗口与 snapshot_delta 必须纳入结构化 Campaign Event；原始 retrieval lead 与结构化事件必须分别保留。
 
 source_selection:
   order:
@@ -231,13 +237,35 @@ campaign_state:
   active_inputs:
     - current_candidates
     - current_events
+    - resolved_campaign_events
     - current_local_relationships
     - polls
+    - retrieval_leads
   trigger_conditions:
     - verified_recent_campaign_event
+    - corroborated_recent_campaign_event
     - candidate_field_change
     - same_series_poll_change
     - new_event_since_previous_snapshot
   rule: >
     触发只表示需要进一步研究，不表示事件已经改变胜负格局，也不得据此输出候选人排名、
     胜率或结果预测。
+
+
+campaign_event_resolution:
+  schema: schemas/campaign_event.yaml
+  runtime: runtime/campaign_event.py
+  input_order:
+    - retrieval_lead
+    - article_body
+    - evidence_excerpt
+    - entity_resolution
+    - cross_source_clustering
+    - campaign_event
+  rules:
+    - 只有 body_status=read 且存在正文的 lead 才可进入事件解析。
+    - 候选人实体优先依据当前官方候选人清单进行精确映射，不得从模型记忆补全。
+    - page_date 或 first_seen_at 仅作为媒体报道日期代理；不得伪装成已核实事件发生时间。
+    - single_source_media 只进入上下文，不触发结构研究。
+    - corroborated_media 至少两个独立来源，可触发进一步研究与 Snapshot Delta，但不得自动形成结构性结论。
+    - verified/confirmed 仍必须遵守既有 A/B/C 来源等级和验证规则。
