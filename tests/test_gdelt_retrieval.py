@@ -56,6 +56,23 @@ class TestGDELTNewsBackend(unittest.TestCase):
         self.assertEqual(params["mode"], ["artlist"])
         self.assertIn('"Kaohsiung"', params["query"][0])
 
+    def test_candidate_names_narrow_relevant_campaign_queries(self):
+        requests = []
+        def opener(request, timeout):
+            requests.append(request.full_url)
+            return Response(json.dumps({"articles": []}).encode())
+        backend = GDELTNewsBackend(opener=opener)
+        backend.search(
+            "高雄市 2026 選舉 候選人 最新動態",
+            jurisdiction="高雄市",
+            candidate_names=["賴瑞隆", "柯志恩"],
+        )
+        params = parse_qs(urlparse(requests[0]).query)
+        query = params["query"][0]
+        self.assertIn('"Kaohsiung"', query)
+        self.assertIn('"賴瑞隆"', query)
+        self.assertIn('"柯志恩"', query)
+
     def test_timeout_circuits_request_then_recovers(self):
         calls = []
         def opener(request, timeout):
