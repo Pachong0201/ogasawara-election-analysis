@@ -36,7 +36,8 @@ def _inbound(message: Any) -> InboundMessage:
 def build_service(config: BotConfig) -> ElectionBotService:
     store = ConversationStore(config.conversation_db)
     router = IntentRouter(default_target_year=config.default_target_year)
-    retrieval = GDELTNewsBackend() if config.retrieval_provider == "gdelt" and config.skill_mode != "offline" else None
+    retrieval = (GDELTNewsBackend(max_body_fetches=config.max_article_fetches)
+                 if config.retrieval_provider == "gdelt" and config.skill_mode != "offline" else None)
     skill = SkillService(repo_root=config.repo_root, mode=config.skill_mode, retrieval_backend=retrieval)
     writer = build_report_writer(
         api_key=config.openai_api_key,

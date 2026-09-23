@@ -3,3 +3,4 @@ pdfplumber>=0.11,<1.0
 
 openai>=1.76.0
 lark-channel-sdk==1.4.0
+trafilatura>=2.1,<3

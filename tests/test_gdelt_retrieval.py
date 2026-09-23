@@ -113,7 +113,7 @@ class TestRetrievalPresentation(unittest.IsolatedAsyncioTestCase):
                 "title": "高雄選舉新聞", "url": "https://news.test/story", "first_seen_at": "2026-09-23T01:02:03+00:00",
             }]}, "evidence_summary": {"retrieval": {"backend": "gdelt_doc_news", "available": True}}}}
         output = await writer.write(request, context)
-        self.assertIn("待核实标题线索", output)
+        self.assertIn("已读取正文0条", output)
         self.assertIn("https://news.test/story", output)
         self.assertIn("首次发现", output)
 

@@ -216,6 +216,7 @@ class CampaignStateBuilder:
         leads: List[Dict[str, Any]] = []
         warnings: List[str] = []
         seen_urls: set = set()
+        query_rows: List[List[Dict[str, Any]]] = []
         for query in self.build_retrieval_queries(jurisdiction, target_year):
             try:
                 results = self.retrieval_backend.search(
@@ -230,6 +231,7 @@ class CampaignStateBuilder:
             except Exception as exc:  # retrieval is optional; fail closed
                 warnings.append(f"campaign retrieval failed for {query!r}: {exc}")
                 continue
+            rows: List[Dict[str, Any]] = []
             for result in results or []:
                 if not isinstance(result, dict):
                     result = {"summary": str(result)}
@@ -244,7 +246,20 @@ class CampaignStateBuilder:
                 lead.setdefault("layer_id", "L4")
                 lead.setdefault("verification_status", "lead_only")
                 lead.setdefault("lead_id", _stable_id(lead, "campaign-lead"))
-                leads.append(lead)
+                rows.append(lead)
+            query_rows.append(rows)
+        # Interleave topics so the limited body-reading budget does not go
+        # entirely to the first campaign query.
+        for index in range(max((len(rows) for rows in query_rows), default=0)):
+            for rows in query_rows:
+                if index < len(rows):
+                    leads.append(rows[index])
+        enrich = getattr(self.retrieval_backend, "enrich", None)
+        if callable(enrich) and leads:
+            try:
+                leads = enrich(leads)
+            except Exception as exc:
+                warnings.append(f"article body retrieval failed: {type(exc).__name__}")
         return leads, warnings
 
     @staticmethod

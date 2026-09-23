@@ -389,8 +389,8 @@ python3 -m unittest discover -s tests -v
 
 - 群聊默认只有 @机器人时响应，私聊直接响应；
 - “分析高雄选情”执行完整 V1.4；
-- “更新一下”沿用线程中的县市与选举 Focus 并重新生成 Snapshot，在线模式检索当前新闻标题线索；
-- 新闻检索默认使用 GDELT DOC 2.0；结果标记为待核实，附链接和首次发现时间，可通过 `OGASAWARA_BOT_RETRIEVAL=disabled` 关闭；
+- “更新一下”沿用线程中的县市与选举 Focus 并重新生成 Snapshot，在线模式检索新闻并读取可访问的原文；
+- 新闻发现默认使用 GDELT DOC 2.0，随后读取支持站点的公开正文（默认最多 6 篇）；报道内容标记为待核实，附来源链接和时间，可通过 `OGASAWARA_BOT_RETRIEVAL=disabled` 关闭；
 - “为什么凤山重要”一类追问优先复用上一轮 Analysis Context；
 - OpenAI API 未配置时仍可使用确定性结构化摘要；
 - API Secret 仅从环境变量读取。

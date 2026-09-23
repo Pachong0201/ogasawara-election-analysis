@@ -1,7 +1,7 @@
 """Public GDELT DOC 2.0 news discovery for the Feishu bot.
 
-ArticleList supplies headlines, URLs and first-seen timestamps, not verified
-article contents. Every result stays a lead; no target website is fetched.
+ArticleList supplies headlines, URLs and first-seen timestamps. Selected public
+article pages are then read by ArticleBodyFetcher. Prose remains unverified.
 """
 
 from __future__ import annotations
@@ -15,6 +15,7 @@ from urllib.request import Request, urlopen
 
 from .models import utc_now_iso
 from .source_registry import OfflineRetrievalError, RetrievalBackend
+from .article_body import ArticleBodyFetcher
 
 
 ENDPOINT = "https://api.gdeltproject.org/api/v2/doc/doc"
@@ -75,15 +76,20 @@ def _first_seen(raw: Any) -> str:
 
 
 class GDELTNewsBackend(RetrievalBackend):
-    """Bounded live headline retrieval, with no content fetch or fact promotion."""
+    """Live news discovery and bounded public body reading, without promotion."""
 
     def __init__(self, timeout: float = 6.0, max_records: int = 10,
-                 opener: Optional[Callable[..., Any]] = None):
+                 opener: Optional[Callable[..., Any]] = None,
+                 body_fetcher: Optional[ArticleBodyFetcher] = None,
+                 max_body_fetches: int = 6):
         self.timeout = max(1.0, min(float(timeout), 15.0))
         self.max_records = max(1, min(int(max_records), 25))
         self.opener = opener or urlopen
+        self.body_fetcher = body_fetcher or ArticleBodyFetcher()
+        self.max_body_fetches = max(0, min(int(max_body_fetches), 12))
         self._cooldown_until = 0.0
         self._seen: Dict[str, Dict[str, Any]] = {}
+        self._last_enrichment: Dict[str, int] = {"attempted": 0, "read": 0}
 
     def search(self, query: str, **kwargs: Any) -> List[Dict[str, Any]]:
         if time.monotonic() < self._cooldown_until:
@@ -136,9 +142,46 @@ class GDELTNewsBackend(RetrievalBackend):
         return records
 
     def fetch(self, url: str) -> Any:
-        # The DOC API has no article body. Never fetch untrusted article URLs.
-        return dict(self._seen[url]) if url in self._seen else None
+        # Only search-returned URLs can reach the public body reader.
+        record = self._seen.get(url)
+        if record is None:
+            return None
+        if "body_status" not in record:
+            try:
+                record.update(self.body_fetcher.fetch(url))
+            except Exception:
+                record["body_status"] = "fetch_failed"
+            if record.get("body_status") == "read":
+                record["verification_status"] = "body_read_unverified"
+                record["evidence"] = "Publisher page body extracted; factual claims not independently verified"
+        return dict(record)
+
+    def enrich(self, leads: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Read a bounded, cross-topic sample after searches are deduplicated."""
+        enriched: List[Dict[str, Any]] = []
+        body_hashes: Dict[str, str] = {}
+        attempted = read = 0
+        for lead in leads:
+            url = str(lead.get("url") or "")
+            if not self.body_fetcher.supports(url):
+                row = {**lead, "body_status": "unsupported_domain"}
+            elif attempted < self.max_body_fetches and url in self._seen:
+                attempted += 1
+                row = {**(self.fetch(url) or dict(lead)), "query": lead.get("query", "")}
+                if row.get("body_status") == "read":
+                    read += 1
+                    digest = str(row.get("content_sha256") or "")
+                    if digest in body_hashes:
+                        row["duplicate_of"] = body_hashes[digest]
+                    else:
+                        body_hashes[digest] = url
+            else:
+                row = {**lead, "body_status": "not_fetched_budget"}
+            enriched.append(row)
+        self._last_enrichment = {"attempted": attempted, "read": read}
+        return enriched
 
     def metadata(self) -> Dict[str, Any]:
-        return {"backend": "gdelt_doc_news", "scope": "recent_news_headlines",
-                "lead_only": True, "available": time.monotonic() >= self._cooldown_until}
+        return {"backend": "gdelt_doc_news", "scope": "recent_news_and_public_bodies",
+                "lead_only": True, "available": time.monotonic() >= self._cooldown_until,
+                "body_fetch": dict(self._last_enrichment)}
