@@ -315,12 +315,12 @@ V1.4 在地方知识与民调最终解释前建立选战进行时快照：
 
 1. 明确 `as_of`；
 2. 对公开新闻执行“发现 → 正文读取 → 证据摘录 → 实体识别 → 跨来源聚类 → Campaign Event”；
-3. 汇总最近 30／14／7 日已验证竞选事件与结构化媒体事件，并严格区分 verified 与 corroborated_media；
-3. 比较候选人格局与上一快照；
-4. 只在 pollster、commissioner、method、sample_frame、question_wording 一致时计算 same-series poll delta；
-5. 当前候选人变化、组织／支持变化、政党合作、重大议题、争议、司法事件或同源民调变化均可触发 `campaign_change_trigger`；
-6. trigger 只产生研究问题，不代表任何候选人受益、受损、领先或更可能当选；
-7. 宿主检索的 lead_only 线索不得作为已确认事实。
+3. 汇总最近 30／14／7 日已验证竞选事件与结构化媒体事件，并严格区分 verified、corroborated_media 与 single_source_media；
+4. 比较候选人格局、结构化事件、retrieval lead 与上一快照；
+5. 只在 pollster、commissioner、method、sample_frame、question_wording 一致时计算 same-series poll delta；
+6. 当前候选人变化、已验证事件、corroborated_media 事件、组织／支持变化、政党合作、重大议题、争议、司法事件或同源民调变化均可触发 `campaign_change_trigger`；
+7. trigger 只产生研究问题，不代表任何候选人受益、受损、领先或更可能当选；
+8. lead_only 与 single_source_media 不得作为已确认事实；corroborated_media 也必须明确写明仍待官方资料、当事人原始声明或更高等级来源确认。
 
 ### STEP 9：民调校准
 
