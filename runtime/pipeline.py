@@ -374,7 +374,7 @@ class AnalysisPipeline:
         for event in cached_events + resolved_events:
             event_id = str(event.get("event_id") or event.get("record_id") or "").strip()
             if event_id:
-                events_by_id[event_id] = event
+                events_by_id.setdefault(event_id, event)
             else:
                 anonymous_events.append(event)
         events = list(events_by_id.values()) + anonymous_events
