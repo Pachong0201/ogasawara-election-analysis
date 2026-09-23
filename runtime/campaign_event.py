@@ -517,3 +517,26 @@ class CampaignEventResolver:
                 "ignored": ignored,
             },
         }
+
+
+
+def campaign_event_research_questions(
+    events: Iterable[Dict[str, Any]],
+    jurisdiction: str,
+) -> List[str]:
+    """Create focused follow-up questions only from corroborated media events."""
+    questions: List[str] = []
+    for event in events or []:
+        if str(event.get("verification_status") or "") != "corroborated_media":
+            continue
+        event_type = str(event.get("event_type") or "campaign_update")
+        date = str(event.get("event_date") or event.get("date") or "")
+        candidates = [str(value) for value in (event.get("candidate_entities") or []) if str(value)]
+        locations = [str(value) for value in (event.get("locations") or []) if str(value)]
+        subject = "、".join(candidates[:3]) or "相关候选人"
+        place = "、".join(locations[:3]) or jurisdiction
+        questions.append(
+            f"{jurisdiction} {date} 关于{subject}在{place}的{event_type}媒体报道，"
+            "是否存在官方资料、当事人原始声明或其他高等级来源可进一步确认？"
+        )
+    return list(dict.fromkeys(questions))
