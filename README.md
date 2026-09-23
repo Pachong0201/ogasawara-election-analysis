@@ -407,6 +407,8 @@ python3 -m unittest discover -s tests -v
 
 完整部署说明见 `docs/feishu-bot.md`。
 
+当前统一整合分支 GitHub Actions 验证：`158 passed, 146 subtests passed, 0 failed`，`Runtime online end-to-end` 同时通过。
+
 启动：
 
 ```bash
