@@ -367,3 +367,38 @@ python3 -m unittest discover -s tests -v
 ## 边界声明
 
 本 Skill 不提供选举预测、候选人推荐或政治动员。所有结构性判断必须附带证据等级、时间范围和不确定性说明。无法解释时应输出 `unknown`，不得自行补齐因果链。
+
+
+## 飞书选情机器人
+
+机器人开发已进入 `feature/feishu-election-bot-v0.1` 阶段。v0.1 采用飞书官方 `lark-channel-sdk` 长连接，把群聊自然语言请求映射到现有 V1.4 `AnalysisPipeline`。
+
+当前交互闭环：
+
+```text
+飞书群 @机器人
+→ thread级 Conversation State
+→ Intent Router
+→ 小笠原 AnalysisPipeline
+→ Analysis Context
+→ OpenAI Writer（可选）
+→ 飞书线程回复
+```
+
+主要行为：
+
+- 群聊默认只有 @机器人时响应，私聊直接响应；
+- “分析高雄选情”执行完整 V1.4；
+- “更新一下”沿用线程中的县市与选举 Focus 并重新生成 Snapshot；
+- “为什么凤山重要”一类追问优先复用上一轮 Analysis Context；
+- OpenAI API 未配置时仍可使用确定性结构化摘要；
+- API Secret 仅从环境变量读取。
+
+完整部署和交互说明见 `docs/feishu-bot.md`。
+
+启动：
+
+```bash
+python -m pip install -r requirements.txt
+python -m bot
+```
