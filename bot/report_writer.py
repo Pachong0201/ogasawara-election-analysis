@@ -102,7 +102,7 @@ class DeterministicReportWriter(BaseReportWriter):
             return help_text()
         if request.intent == VERSION:
             version = context.get("analysis_manifest", {}).get("skill_version") or "1.4.0"
-            return f"小笠原选情分析 Skill：**v{version}**。飞书机器人开发版：**v0.2**。"
+            return f"小笠原选情分析 Skill：**v{version}**。飞书机器人统一整合版：**v1.4-integration**。"
 
         payload = _analysis_payload(context)
         state = payload.get("campaign_state") or {}
