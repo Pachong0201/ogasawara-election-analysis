@@ -13,6 +13,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 import yaml
 
 from .analysis_context import AnalysisContextBuilder
+from .campaign_event import CampaignEventResolver, campaign_event_research_questions
 from .campaign_events import CampaignEventLoader
 from .campaign_state import CampaignStateBuilder, campaign_research_questions
 from .data_readiness import DataReadinessGate
@@ -75,6 +76,11 @@ class AnalysisPipeline:
             retrieval_backend=retrieval_backend,
             config=self.runtime_config,
             mode=mode,
+        )
+        event_config = self.runtime_config.get("campaign_event_resolution", {}) or {}
+        self.campaign_event_resolver = CampaignEventResolver(
+            corroboration_min_sources=int(event_config.get("corroboration_min_sources", 2)),
+            max_excerpt_chars=int(event_config.get("max_excerpt_chars", 900)),
         )
 
     def _load_runtime_config(self) -> Dict[str, Any]:
@@ -343,7 +349,7 @@ class AnalysisPipeline:
                 expires_at = status.get("expires_at")
                 polls[index]["freshness_expires_at"] = expires_at.isoformat() if hasattr(expires_at, "isoformat") else expires_at
         event_report = self.campaign_event_loader.load_cache(task.jurisdiction, as_of=as_of)
-        events = list(event_report.get("events", []))
+        cached_events = list(event_report.get("events", []))
         files_used.extend(event_report.get("files", []))
         current_candidates = readiness.available.get("current_candidates", {}).get("verified_candidates", [])
 
@@ -352,7 +358,27 @@ class AnalysisPipeline:
             task.target_year,
             allow_online=online,
             as_of=as_of,
+            current_candidates=current_candidates,
         )
+        campaign_event_resolution = self.campaign_event_resolver.extract(
+            campaign_leads,
+            jurisdiction=task.jurisdiction,
+            current_candidates=current_candidates,
+        )
+        resolved_events = list(campaign_event_resolution.get("events") or [])
+
+        # Keep canonical verified/cache events and media-body research events distinct,
+        # while deduplicating only when they expose the same explicit event id.
+        events_by_id: Dict[str, Dict[str, Any]] = {}
+        anonymous_events: List[Dict[str, Any]] = []
+        for event in cached_events + resolved_events:
+            event_id = str(event.get("event_id") or event.get("record_id") or "").strip()
+            if event_id:
+                events_by_id[event_id] = event
+            else:
+                anonymous_events.append(event)
+        events = list(events_by_id.values()) + anonymous_events
+
         campaign_state = self.campaign_state_builder.build(
             jurisdiction=task.jurisdiction,
             target_year=task.target_year,
@@ -366,20 +392,38 @@ class AnalysisPipeline:
             as_of=as_of,
         )
 
-        regions = sorted({
+        historical_regions = {
             str(item.get("region") or "").split("|")[0]
             for item in triggered
             if str(item.get("region") or "").strip()
-        })
+        }
+        campaign_regions = {
+            str(location)
+            for event in resolved_events
+            if str(event.get("verification_status") or "") == "corroborated_media"
+            for location in (event.get("locations") or [])
+            if str(location).strip()
+        }
+        regions = sorted(historical_regions | campaign_regions)
         historical_questions = self.knowledge_loader.build_research_questions(triggered) if triggered else []
         live_questions = campaign_research_questions(campaign_state)
-        questions = list(dict.fromkeys(historical_questions + live_questions))
-        research_triggered = bool(triggered) or bool(campaign_state.get("campaign_change_trigger")) or bool(campaign_leads)
+        event_questions = campaign_event_research_questions(
+            resolved_events,
+            jurisdiction=task.jurisdiction,
+        )
+        questions = list(dict.fromkeys(historical_questions + live_questions + event_questions))
+        research_triggered = bool(triggered) or bool(campaign_state.get("campaign_change_trigger"))
         local_knowledge = self.knowledge_loader.load(
             task.jurisdiction,
             regions=regions or None,
             research_questions=questions,
             allow_online=online and research_triggered,
+        )
+        retrieval_metadata = (
+            self.retrieval_backend.metadata()
+            if online and self.retrieval_backend is not None
+            and callable(getattr(self.retrieval_backend, "metadata", None))
+            else {"backend": "disabled", "lead_only": True}
         )
 
         unknowns: List[str] = []
@@ -426,6 +470,7 @@ class AnalysisPipeline:
             local_knowledge=local_knowledge,
             current_candidates=current_candidates,
             current_events=events,
+            campaign_event_resolution=campaign_event_resolution,
             polls=polls,
             campaign_state=campaign_state,
             evidence_summary={
@@ -436,7 +481,9 @@ class AnalysisPipeline:
                 "campaign_event_conflict_count": len(event_report.get("conflicts", [])),
                 "campaign_event_raw_count": int(event_report.get("raw_count", 0)),
                 "campaign_event_deduplicated_count": int(event_report.get("deduplicated_count", 0)),
+                "campaign_event_resolution": campaign_event_resolution.get("stats", {}),
                 "campaign_retrieval_lead_count": len(campaign_leads),
+                "retrieval": retrieval_metadata,
                 "local_knowledge_sufficient": bool(local_knowledge.get("sufficient")),
                 "poll_freshness": poll_freshness,
                 "current_poll_calibration_available": int(campaign_state.get("fresh_verified_poll_count", 0)) > 0,
