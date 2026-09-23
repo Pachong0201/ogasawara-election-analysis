@@ -173,6 +173,48 @@ class CampaignStateTests(unittest.TestCase):
             self.assertTrue(all(item["verification_status"] == "lead_only" for item in leads))
             self.assertTrue(all(item["layer_id"] == "L4" for item in leads))
 
+    def test_current_data_status_distinguishes_verified_unverified_and_missing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            builder = CampaignStateBuilder(root, config={"campaign_state": {"persist_snapshots": False}})
+
+            available = builder.build(
+                "新竹縣",
+                2026,
+                current_candidates=[{"candidate_name": "甲"}],
+                current_events=[],
+                polls=[],
+                as_of="2026-09-23T00:00:00+08:00",
+                persist=False,
+                online_expected=True,
+            )
+            self.assertEqual(available["campaign_state_status"], "current_data_available")
+
+            unverified = builder.build(
+                "新竹縣",
+                2026,
+                current_candidates=[],
+                current_events=[],
+                polls=[],
+                retrieval_leads=[{"lead_id": "l1", "verification_status": "lead_only"}],
+                as_of="2026-09-23T00:00:00+08:00",
+                persist=False,
+                online_expected=True,
+            )
+            self.assertEqual(unverified["campaign_state_status"], "current_data_unverified")
+
+            missing = builder.build(
+                "新竹縣",
+                2026,
+                current_candidates=[],
+                current_events=[],
+                polls=[],
+                as_of="2026-09-23T00:00:00+08:00",
+                persist=False,
+                online_expected=False,
+            )
+            self.assertEqual(missing["campaign_state_status"], "insufficient_current_data")
+
 
 if __name__ == "__main__":
     unittest.main()
