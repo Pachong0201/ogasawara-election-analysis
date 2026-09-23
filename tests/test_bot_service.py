@@ -117,6 +117,14 @@ class TestElectionBotService(unittest.IsolatedAsyncioTestCase):
         )
         self.assertEqual(len(self.skill.calls), 1)
 
+    async def test_latest_poll_refreshes_existing_context(self):
+        first = await self.service.handle_message(inbound("分析高雄选情", message_id="m1"))
+        self.service.link_outbound_message("bot1", first.conversation_key)
+        await self.service.handle_message(
+            inbound("最新民调怎么看", message_id="m2", reply_to="bot1")
+        )
+        self.assertEqual(len(self.skill.calls), 2)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -13,6 +13,8 @@ from .router import CAMPAIGN_UPDATE, FULL_ANALYSIS, HELP, POLL_ANALYSIS, SOURCES
 SYSTEM_INSTRUCTIONS = """你是“小笠原选情分析机器人”的报告写作层。
 你只能根据提供的 Analysis Context 和用户问题回答，不得自行补充未在 Context 中出现的政治事实。
 必须区分事实、分析、竞选阵营主张与未知信息；资料不足时明确写 unknown/资料不足。
+GDELT 检索只返回新闻标题、链接及首次发现时间；lead_only 标题不能当作已核实事件、文章内容或民调数字。
+说明实时检索是否可用；引用当前线索时附原始链接与发现时间，明确仍待核实。
 不得输出自主胜负预测、当选概率、候选人排名、政治推荐或投票建议。
 完整分析先写截至 as_of 的当前选战状态和最近变化，再用历史结构解释；不要从历史沿革开始。
 不同机构、不同方法或不同题型的民调不得拼接成趋势。
@@ -72,7 +74,7 @@ class DeterministicReportWriter(BaseReportWriter):
             return help_text()
         if request.intent == VERSION:
             version = context.get("analysis_manifest", {}).get("skill_version") or "1.4.0"
-            return f"小笠原选情分析 Skill：**v{version}**。飞书机器人开发版：**v0.1**。"
+            return f"小笠原选情分析 Skill：**v{version}**。飞书机器人开发版：**v0.2**。"
 
         payload = _analysis_payload(context)
         state = payload.get("campaign_state") or {}
@@ -97,6 +99,22 @@ class DeterministicReportWriter(BaseReportWriter):
         if candidates:
             lines.append(f"当前候选人记录：{len(candidates)}条")
         polls = payload.get("polls") or []
+        retrieval = (payload.get("evidence_summary") or {}).get("retrieval") or {}
+        leads = state.get("retrieval_leads") or []
+        if retrieval.get("backend") == "gdelt_doc_news":
+            if not retrieval.get("available", True):
+                lines.append("实时新闻检索：本次未成功；以下不代表最新选情。")
+            elif leads:
+                lines.append(f"实时新闻检索：发现{len(leads)}条待核实标题线索（非已证实选战事件）。")
+                for item in leads[:5]:
+                    lines.append(
+                        f"- {item.get('title') or '无标题'}｜首次发现："
+                        f"{item.get('first_seen_at') or '未知'}｜{item.get('url') or ''}"
+                    )
+            else:
+                lines.append("实时新闻检索：未发现匹配标题；不能据此断定近期没有选战变化。")
+        elif retrieval.get("backend") == "disabled":
+            lines.append("实时新闻检索：未启用；当前摘要不能代表最新新闻全貌。")
         if request.intent == POLL_ANALYSIS:
             lines.append(f"民调记录：{len(polls)}份")
             lines.append(

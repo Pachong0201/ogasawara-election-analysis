@@ -215,12 +215,14 @@ class CampaignStateBuilder:
             return [], []
         leads: List[Dict[str, Any]] = []
         warnings: List[str] = []
+        seen_urls: set = set()
         for query in self.build_retrieval_queries(jurisdiction, target_year):
             try:
                 results = self.retrieval_backend.search(
                     query,
                     recency_days=int(self._campaign_config().get("retrieval_recency_days", 30)),
                     purpose="live_campaign_state",
+                    jurisdiction=jurisdiction,
                 )
             except OfflineRetrievalError as exc:
                 warnings.append(str(exc))
@@ -232,6 +234,11 @@ class CampaignStateBuilder:
                 if not isinstance(result, dict):
                     result = {"summary": str(result)}
                 lead = dict(result)
+                url = str(lead.get("url") or "")
+                if url and url in seen_urls:
+                    continue
+                if url:
+                    seen_urls.add(url)
                 lead.setdefault("query", query)
                 lead.setdefault("jurisdiction", jurisdiction)
                 lead.setdefault("layer_id", "L4")

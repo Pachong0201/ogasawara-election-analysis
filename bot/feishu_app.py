@@ -13,6 +13,7 @@ from .report_writer import build_report_writer
 from .router import IntentRouter, looks_long_running
 from .service import ElectionBotService
 from .skill_service import SkillService
+from runtime.gdelt_retrieval import GDELTNewsBackend
 
 
 LOG = logging.getLogger("ogasawara.feishu")
@@ -35,7 +36,8 @@ def _inbound(message: Any) -> InboundMessage:
 def build_service(config: BotConfig) -> ElectionBotService:
     store = ConversationStore(config.conversation_db)
     router = IntentRouter(default_target_year=config.default_target_year)
-    skill = SkillService(repo_root=config.repo_root, mode=config.skill_mode)
+    retrieval = GDELTNewsBackend() if config.retrieval_provider == "gdelt" and config.skill_mode != "offline" else None
+    skill = SkillService(repo_root=config.repo_root, mode=config.skill_mode, retrieval_backend=retrieval)
     writer = build_report_writer(
         api_key=config.openai_api_key,
         model=config.openai_writer_model,
@@ -67,6 +69,8 @@ async def run() -> None:
         inbound = _inbound(message)
         if not inbound.message_id or not inbound.chat_id:
             LOG.warning("ignored malformed inbound message")
+            return
+        if config.require_mention and inbound.chat_type in {"group", "topic"} and not inbound.mentioned_bot:
             return
         try:
             ack_key = service.store.resolve_key(inbound)

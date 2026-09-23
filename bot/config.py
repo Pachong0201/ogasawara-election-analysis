@@ -20,6 +20,7 @@ class BotConfig:
     openai_router_model: str = "gpt-5.6-luna"
     openai_writer_model: str = "gpt-5.6-sol"
     skill_mode: str = "online"
+    retrieval_provider: str = "gdelt"
     require_mention: bool = True
     conversation_db: Path = Path("cache/bot/conversations.sqlite3")
     default_target_year: int = 2026
@@ -42,6 +43,7 @@ class BotConfig:
             openai_router_model=os.getenv("OPENAI_ROUTER_MODEL", "gpt-5.6-luna").strip(),
             openai_writer_model=os.getenv("OPENAI_WRITER_MODEL", "gpt-5.6-sol").strip(),
             skill_mode=os.getenv("OGASAWARA_BOT_MODE", "online").strip().lower(),
+            retrieval_provider=os.getenv("OGASAWARA_BOT_RETRIEVAL", "gdelt").strip().lower(),
             require_mention=os.getenv("FEISHU_REQUIRE_MENTION", "true").strip().lower()
             not in {"0", "false", "no", "off"},
             conversation_db=db_path,
@@ -49,6 +51,8 @@ class BotConfig:
         )
         if config.skill_mode not in {"online", "offline", "auto"}:
             raise ValueError("OGASAWARA_BOT_MODE must be online, offline, or auto")
+        if config.retrieval_provider not in {"gdelt", "disabled"}:
+            raise ValueError("OGASAWARA_BOT_RETRIEVAL must be gdelt or disabled")
         if require_feishu and (not config.lark_app_id or not config.lark_app_secret):
             raise RuntimeError("LARK_APP_ID and LARK_APP_SECRET are required")
         return config

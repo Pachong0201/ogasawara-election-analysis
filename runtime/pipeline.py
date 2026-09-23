@@ -373,6 +373,12 @@ class AnalysisPipeline:
             research_questions=questions,
             allow_online=online and research_triggered,
         )
+        retrieval_metadata = (
+            self.retrieval_backend.metadata()
+            if online and self.retrieval_backend is not None
+            and callable(getattr(self.retrieval_backend, "metadata", None))
+            else {"backend": "disabled", "lead_only": True}
+        )
 
         unknowns: List[str] = []
         if readiness.status == "INSUFFICIENT":
@@ -421,6 +427,7 @@ class AnalysisPipeline:
                 "campaign_change_trigger": bool(campaign_state.get("campaign_change_trigger")),
                 "campaign_change_reasons": campaign_state.get("campaign_change_reasons", []),
                 "campaign_retrieval_lead_count": len(campaign_leads),
+                "retrieval": retrieval_metadata,
                 "local_knowledge_sufficient": bool(local_knowledge.get("sufficient")),
                 "poll_freshness": poll_freshness,
                 "current_poll_calibration_available": int(poll_freshness.get("fresh", 0)) > 0,

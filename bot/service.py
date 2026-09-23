@@ -71,7 +71,7 @@ class ElectionBotService:
                 and state.focus.election_type == request.focus.election_type
                 and state.focus.target_year == request.focus.target_year
             )
-            if state.analysis_context and same_focus:
+            if state.analysis_context and same_focus and not request.refresh:
                 context = state.analysis_context
             elif request.focus.jurisdiction:
                 context = await self.skill_service.run(request.focus)

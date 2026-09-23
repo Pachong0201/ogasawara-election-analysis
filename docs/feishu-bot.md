@@ -1,4 +1,4 @@
-# 飞书选情机器人 v0.1
+# 飞书选情机器人 v0.2（实时新闻检索）
 
 ## 目标
 
@@ -33,6 +33,8 @@ v0.1 实现最小可运行闭环：
 - “分析高雄选情”运行完整 V1.4 Pipeline；
 - “更新一下”“最近7天有什么变化”重新运行当前分析；
 - “民调怎么看”“给我看依据”优先复用当前线程 Context；
+- “最新民调怎么看”会刷新 Context；
+- 在线分析通过 GDELT DOC 2.0 检索近 30 天新闻标题，结果进入 Campaign State 的待核实线索；
 - 没有 OpenAI API Key 时仍可运行，返回确定性结构化摘要；
 - 配置 OpenAI API Key 后，通过 Responses API 生成自然语言研判；
 - 飞书 App Secret / OpenAI API Key 只从环境变量读取，不写入仓库。
@@ -59,6 +61,7 @@ export LARK_APP_SECRET="..."
 export OPENAI_API_KEY="..."        # 可选
 export OPENAI_WRITER_MODEL="gpt-5.6-sol"
 export OGASAWARA_BOT_MODE="online"
+export OGASAWARA_BOT_RETRIEVAL="gdelt"
 export FEISHU_REQUIRE_MENTION="true"
 ```
 
@@ -67,6 +70,15 @@ export FEISHU_REQUIRE_MENTION="true"
 - ChatGPT Plus 订阅不能替代 OpenAI API Key；
 - 不要把真实密钥写入 `.env.example`、README 或 Git；
 - 若未配置 `OPENAI_API_KEY`，机器人仍能运行，只是使用结构化模板回答。
+- `OGASAWARA_BOT_RETRIEVAL=disabled` 可关闭新闻检索；`OGASAWARA_BOT_MODE=offline` 也不会调用检索接口。
+
+## 实时新闻检索
+
+机器人通过 [GDELT DOC 2.0 ArticleList](https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/) 查询县市选情新闻。每次按县市、主题和近 30 天窗口检索；限时 6 秒，单次至多接收 10 条，跨主题按链接去重。接口失败时，分析继续运行，并在输出中标示本次检索未成功；60 秒后允许重试。
+
+GDELT 返回标题、链接和首次发现时间，**不是文章正文或核实后的发表时间**。结果一律为 `source_grade=E`、`verification_status=lead_only`，不能单独触发“已核实竞选事件”，也不能充当候选人登记或民调数据。输出可展示最多 5 条标题线索及原始链接，并明确待核实。现有中选会和民调适配器仍按原有验证规则运行。本阶段的公开检索覆盖新闻索引；尚不覆盖一般网页全文，不能以搜索未命中推断无选情变化。
+
+本地以模拟接口测试适配器；上线前需在部署机检查网络可达性和真实县市查询结果。无需额外搜索 API 密钥；LLM 仍只用于表达。
 
 ## 启动
 
@@ -177,15 +189,14 @@ API 请求设置 `store=False`。
 
 v0.1 尚未完成：
 
-1. 通用实时 Web Search RetrievalBackend。
-   现有 Skill 可继续使用中选会、候选人登记与已注册民调 Adapter，但离开 ChatGPT 宿主后，通用新闻/网页实时检索仍需单独接入。
+1. 一般网页全文检索和新闻原文核验；当前只有公开新闻标题发现。
 2. 飞书交互卡片按钮。
 3. 任务级缓存锁和同县市并发合并。
 4. “简单历史数字查询”直查数据库的 Quick QA 快路径。
 5. LLM Intent Router；目前使用可审计的规则路由。
 6. 生产级可观测性、限流、权限白名单与管理员命令。
 
-这些属于 v0.2 / Phase 2，不应通过让 LLM 自行搜索绕过。
+这些后续工作不应通过让 LLM 自行搜索绕过。
 
 ## 测试
 
