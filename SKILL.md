@@ -120,10 +120,12 @@ entrypoint: SKILL.md
 - `runtime/freshness.py`
 - `runtime/analysis_context.py`
 - `runtime/campaign_state.py`
+- `runtime/campaign_event.py`
 - `runtime/pipeline.py`
 - `runtime/host_retrieval.py`
 - `runtime/knowledge_builder.py`
 - `schemas/retrieval_lead.yaml`
+- `schemas/campaign_event.yaml`
 - `schemas/knowledge_proposal.yaml`
 - `schemas/knowledge_promotion_receipt.yaml`
 - `config/knowledge_promotion.yaml`
@@ -151,16 +153,20 @@ entrypoint: SKILL.md
 
 1. 明确 `as_of`，不得使用“目前”“近期”而无具体时点；
 2. 读取当前候选人、登记／提名状态、竞选组织与已验证当前事件；
-3. ONLINE MODE 主动检索最近 30 日资料，并分别形成 7 日、14 日、30 日窗口；
-4. 与上一份 Campaign State Snapshot 比较候选人格局、新事件与新民调；
-5. 对同一 pollster、commissioner、method、sample_frame、question_wording 的连续调查计算 same-series point-estimate change；
-6. 出现候选人格局变化、已验证重要竞选事件、同源民调明显变化或上一快照后的新增事件时，设置 `campaign_change_trigger=true`；
-7. `campaign_change_trigger` 与历史票型异常具有同等“触发研究”资格，可进入 Minimum Sufficient Local Knowledge；
-8. 任何 campaign trigger 都只表示“需要进一步验证”，不得直接解释为胜负变化或因果证明。
+3. ONLINE MODE 主动检索最近 30 日资料；公开新闻检索结果若能读取正文，必须先经过 evidence extraction、候选人／地点实体识别与跨来源聚类，再形成 Campaign Event；
+4. 单一媒体正文只保留为 single_source_media；两个以上独立来源正文对同一事件相互印证时可形成 corroborated_media，但只具有 research_trigger_only 资格，不得称为 A/B 级已核实事实；
+5. 将已验证事件与结构化 Campaign Event 一并放入 7 日、14 日、30 日窗口；
+6. 与上一份 Campaign State Snapshot 比较候选人格局、新事件、新检索线索与新民调；
+7. 对同一 pollster、commissioner、method、sample_frame、question_wording 的连续调查计算 same-series point-estimate change；
+8. 出现候选人格局变化、已验证重要竞选事件、corroborated_media 事件、同源民调明显变化或上一快照后的新增事件时，设置 `campaign_change_trigger=true`；
+9. `campaign_change_trigger` 与历史票型异常具有同等“触发研究”资格，可进入 Minimum Sufficient Local Knowledge；
+10. 任何 campaign trigger 都只表示“需要进一步验证”，不得直接解释为胜负变化或因果证明。
 
 关联文件：
 
 - `runtime/campaign_state.py`
+- `runtime/campaign_event.py`
+- `schemas/campaign_event.yaml`
 - `config/runtime.yaml`
 - `config/freshness.yaml`
 - `rules/data_acquisition.yaml`
@@ -308,7 +314,8 @@ retrieval lead 不得直接进入长期知识。只有宿主已经完成结构�
 V1.4 在地方知识与民调最终解释前建立选战进行时快照：
 
 1. 明确 `as_of`；
-2. 汇总最近 30／14／7 日已验证竞选事件；
+2. 对公开新闻执行“发现 → 正文读取 → 证据摘录 → 实体识别 → 跨来源聚类 → Campaign Event”；
+3. 汇总最近 30／14／7 日已验证竞选事件与结构化媒体事件，并严格区分 verified 与 corroborated_media；
 3. 比较候选人格局与上一快照；
 4. 只在 pollster、commissioner、method、sample_frame、question_wording 一致时计算 same-series poll delta；
 5. 当前候选人变化、组织／支持变化、政党合作、重大议题、争议、司法事件或同源民调变化均可触发 `campaign_change_trigger`；
