@@ -219,6 +219,7 @@ class CampaignStateBuilder:
         jurisdiction: str,
         target_year: int,
         allow_online: bool,
+        current_candidates: Optional[Iterable[Dict[str, Any]]] = None,
     ) -> Tuple[List[Dict[str, Any]], List[str]]:
         if not allow_online or self.mode == "offline" or self.retrieval_backend is None:
             return [], []
@@ -226,6 +227,11 @@ class CampaignStateBuilder:
         warnings: List[str] = []
         seen_urls: set = set()
         query_rows: List[List[Dict[str, Any]]] = []
+        candidate_names = [
+            _candidate_key(row)
+            for row in (current_candidates or [])
+            if _candidate_key(row)
+        ]
         for query in self.build_retrieval_queries(jurisdiction, target_year):
             try:
                 results = self.retrieval_backend.search(
@@ -233,6 +239,7 @@ class CampaignStateBuilder:
                     recency_days=int(self._campaign_config().get("retrieval_recency_days", 30)),
                     purpose="live_campaign_state",
                     jurisdiction=jurisdiction,
+                    candidate_names=candidate_names,
                 )
             except OfflineRetrievalError as exc:
                 warnings.append(str(exc))
