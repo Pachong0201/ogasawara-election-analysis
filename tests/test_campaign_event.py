@@ -39,13 +39,13 @@ class TestCampaignEventResolver(unittest.TestCase):
             lead(
                 "cna.com.tw",
                 "a",
-                "賴瑞隆鳳山後援會成立",
+                "甲候選人甲鄉後援會成立",
                 "賴瑞隆在鳳山區成立後援會，地方人士出席活動。後援會表示將持續進行地方組織工作。",
             ),
             lead(
                 "udn.com",
                 "b",
-                "鳳山後援會成立 賴瑞隆出席",
+                "甲鄉後援會成立 甲候選人出席",
                 "賴瑞隆出席鳳山區後援會成立活動，現場多名地方人士參與。團隊表示後續將強化組織。",
             ),
         ]
@@ -134,14 +134,14 @@ class TestCampaignEventStateIntegration(unittest.TestCase):
                 lead(
                     "cna.com.tw",
                     "a",
-                    "賴瑞隆鳳山後援會成立",
-                    "賴瑞隆在鳳山區成立後援會，地方人士參與，團隊展開組織動員。",
+                    "甲候選人甲鄉後援會成立",
+                    "甲候選人在甲鄉成立後援會，地方人士參與，團隊展開組織動員。",
                 ),
                 lead(
                     "udn.com",
                     "b",
                     "鳳山後援會成立",
-                    "賴瑞隆出席鳳山區後援會成立活動，地方組織開始後續動員。",
+                    "甲候選人出席甲鄉後援會成立活動，地方組織開始後續動員。",
                 ),
             ],
             jurisdiction="高雄市",
@@ -217,14 +217,14 @@ class BodyBackend(RetrievalBackend):
             lead(
                 "cna.com.tw",
                 "pipeline-a",
-                "賴瑞隆鳳山後援會成立",
-                "賴瑞隆在鳳山區成立後援會，地方人士參與，團隊展開組織動員。",
+                "甲候選人甲鄉後援會成立",
+                "甲候選人在甲鄉成立後援會，地方人士參與，團隊展開組織動員。",
             ),
             lead(
                 "udn.com",
                 "pipeline-b",
-                "鳳山後援會成立 賴瑞隆出席",
-                "賴瑞隆出席鳳山區後援會成立活動，地方組織開始後續動員。",
+                "甲鄉後援會成立 甲候選人出席",
+                "甲候選人出席甲鄉後援會成立活動，地方組織開始後續動員。",
             ),
         ]
 
@@ -238,7 +238,7 @@ class BodyBackend(RetrievalBackend):
 class TestPipelineCampaignEventIntegration(unittest.TestCase):
     def test_pipeline_resolves_bodies_before_campaign_state_and_context(self):
         with temp_repo() as root:
-            populate_full_repo(root)
+            populate_full_repo(root, jurisdiction="高雄市")
             backend = BodyBackend()
             registry = SourceRegistry(config_path=root / "config" / "no-adapters.yaml")
             context = AnalysisPipeline(
