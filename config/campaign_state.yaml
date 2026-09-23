@@ -1,0 +1,72 @@
+version: 1.4.0
+name: campaign_state
+purpose: >
+  规范 Live Campaign State 的观察窗口、当前数据充分性、事件门禁、
+  快照比较与同源民调变化。该配置只描述运行规则，不评价候选人优劣。
+
+windows_days: [7, 14, 30]
+retrieval_recency_days: 30
+persist_snapshots: true
+
+current_data_status:
+  available: current
+  partial: partial_current_data
+  insufficient: insufficient_current_data
+  rule: >
+    current 要求新鲜可核候选人及近期可核事件。只有一类资料时为
+    partial_current_data。离线、仅有线索或动态资料全部过期时为
+    insufficient_current_data。民调可辅助校准，不能替代事件核验。
+
+event_gate:
+  trigger_source_grades: [A, B, C]
+  c_requires_verified: true
+  d_e_trigger_allowed: false
+  conflict_behavior: requires_review
+  deduplicate: true
+
+trigger_event_types:
+  - nomination
+  - candidate_registration
+  - candidate_withdrawal
+  - endorsement
+  - party_cooperation
+  - alliance
+  - alliance_break
+  - campaign_org
+  - campaign_headquarters
+  - debate
+  - policy
+  - major_issue
+  - judicial_event
+  - controversy
+
+poll:
+  same_series_change_observe_pp: 3.0
+  signature_fields:
+    - pollster
+    - commissioner
+    - method
+    - sample_frame
+    - question_wording
+  rule: >
+    不同 series_signature 不计算趋势；同一系列只描述点估计变化，
+    不自行判断统计显著，不转化为胜负概率。
+
+snapshot:
+  storage: cache/campaign_state/
+  compare_fields:
+    - candidate_keys
+    - event_ids
+    - poll_ids
+  allowed_change_status: [baseline_created, changed, unchanged, uncertain, contradictory]
+
+retrieval_queries:
+  - "{jurisdiction} {year} 選舉 候選人 提名 登記"
+  - "{jurisdiction} {year} 選舉 最近活動 辯論"
+  - "{jurisdiction} {year} 選舉 地方人物 公開支持"
+  - "{jurisdiction} {year} 選舉 政黨合作 聯盟"
+  - "{jurisdiction} {year} 選舉 競選總部 團隊 組織"
+  - "{jurisdiction} {year} 選舉 地方重大議題"
+  - "{jurisdiction} {year} 選舉 政策 政見"
+  - "{jurisdiction} {year} 選舉 爭議 司法"
+  - "{jurisdiction} {year} 選舉 民調"

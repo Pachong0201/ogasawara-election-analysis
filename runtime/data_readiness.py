@@ -8,6 +8,7 @@ fetch and persist data before the gate is re-run.
 from __future__ import annotations
 
 import json
+import datetime as dt
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple
 
@@ -16,7 +17,7 @@ import yaml
 from .election_loader import ElectionLoader, election_file_path
 from .freshness import evaluate_records, is_fresh
 from .knowledge_loader import KnowledgeLoader
-from .models import DataQuery, ElectionTask, ReadinessReport, utc_now_iso
+from .models import DataQuery, ElectionTask, ReadinessReport, parse_date, utc_now_iso
 
 
 DEFAULT_REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -135,7 +136,7 @@ class DataReadinessGate:
         }
         return info, found
 
-    def _current_candidates_requirement(self, task: ElectionTask) -> Tuple[Dict[str, Any], List[Dict[str, Any]], bool]:
+    def _current_candidates_requirement(self, task: ElectionTask, now: Optional[dt.date] = None) -> Tuple[Dict[str, Any], List[Dict[str, Any]], bool]:
         cached = self.loader.load_current_candidates(task.jurisdiction)
         warnings: List[str] = []
         candidates: List[Dict[str, Any]] = [dict(item) for item in cached]
@@ -166,7 +167,9 @@ class DataReadinessGate:
             grade_ok = grade in {"A", "B"} or (grade == "C" and independent >= 2)
             status = str(candidate.get("candidate_status") or "").lower()
             freshness_kind = "candidate_registration" if status == "registered" else "candidate_profile"
-            fresh = is_fresh(candidate, kind=freshness_kind)
+            verified_date = parse_date(candidate.get("last_verified_at") or candidate.get("retrieved_at"))
+            fresh = is_fresh(candidate, kind=freshness_kind, now=now) and (
+                now is None or verified_date is None or verified_date <= now)
             status_ok = status in {"registered", "nominated", "announced", "potential"}
 
             if not fresh:
@@ -209,11 +212,11 @@ class DataReadinessGate:
         }
         return info, has_profile
 
-    def _polls_requirement(self, task: ElectionTask) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    def _polls_requirement(self, task: ElectionTask, now: Optional[dt.date] = None) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         loaded = self.loader.load_polls(jurisdiction=task.jurisdiction)
         records = loaded.get("records", [])
         invalid = loaded.get("invalid", [])
-        freshness = evaluate_records(records, kind="poll") if records else {"fresh": 0, "stale": 0, "unknown": 0, "records": []}
+        freshness = evaluate_records(records, kind="poll", now=now) if records else {"fresh": 0, "stale": 0, "unknown": 0, "records": []}
         info = {
             "label": "current_polls",
             "level": OPTIONAL,
@@ -279,7 +282,7 @@ class DataReadinessGate:
                 return True, sorted(versions)
         return False, sorted(versions)
 
-    def check(self, task: ElectionTask) -> ReadinessReport:
+    def check(self, task: ElectionTask, now: Optional[dt.date] = None) -> ReadinessReport:
         self.requirements = self._requirements_for_task_type(task.election_type)
         required: Dict[str, Any] = {}
         available: Dict[str, Any] = {}
@@ -386,7 +389,7 @@ class DataReadinessGate:
             missing.extend(grade_errors)
 
         # Current candidates.
-        candidate_info, current_candidates, candidates_found = self._current_candidates_requirement(task)
+        candidate_info, current_candidates, candidates_found = self._current_candidates_requirement(task, now=now)
         required["current_candidate_list"] = candidate_info
         available["current_candidates"] = candidate_info
         warnings.extend(candidate_info.get("warnings", []))
@@ -406,7 +409,7 @@ class DataReadinessGate:
             warnings.append("local_knowledge: no cached local knowledge; residual explanations will require retrieval or remain unknown")
 
         # Polls are optional for readiness; stale polls are reported but do not block.
-        poll_info, poll_freshness = self._polls_requirement(task)
+        poll_info, poll_freshness = self._polls_requirement(task, now=now)
         required["current_polls"] = poll_info
         available["current_polls"] = poll_info
         for item in poll_freshness.get("records", []):
@@ -454,6 +457,7 @@ class DataReadinessGate:
         task: ElectionTask,
         loader: Optional[ElectionLoader] = None,
         allow_online: bool = True,
+        now: Optional[dt.date] = None,
     ) -> ReadinessReport:
         """Run readiness, attempt to fill missing historical periods, then re-check.
 
@@ -461,7 +465,7 @@ class DataReadinessGate:
         injected adapter layer.  It does not invent data: if no adapter can
         supply a missing period, the refreshed report remains INSUFFICIENT.
         """
-        initial = self.check(task)
+        initial = self.check(task, now=now)
         if not allow_online:
             return initial
 
@@ -511,7 +515,7 @@ class DataReadinessGate:
                 int(task.target_year),
             )
 
-        refreshed = self.check(task)
+        refreshed = self.check(task, now=now)
         if attempts:
             refreshed.warnings.append("data preparation attempted fills: " + ", ".join(attempts))
         return refreshed

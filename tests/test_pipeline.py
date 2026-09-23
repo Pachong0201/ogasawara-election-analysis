@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 from runtime.election_loader import write_jsonl
 from runtime.pipeline import AnalysisPipeline
@@ -86,6 +87,34 @@ class TestAnalysisPipeline(unittest.TestCase):
             self.assertTrue(
                 any("must not calibrate the current state" in item for item in analysis["unknowns"])
             )
+
+    def test_campaign_trigger_reaches_local_research_without_structural_anomaly(self):
+        with temp_repo() as root:
+            populate_full_repo(root)
+            write_jsonl(root / "cache" / "events" / "sample.jsonl", [{
+                "jurisdiction": "新竹縣", "date": "2026-09-22",
+                "claim_type": "endorsement", "speaker": "地方人士", "subject": "候選人",
+                "claim_value": "support", "source_grade": "A",
+                "source": "fixture", "url": "https://example.test/endorsement",
+                "verification_status": "verified", "last_verified_at": "2026-09-22",
+            }])
+            pipeline = AnalysisPipeline(root, mode="auto")
+            with patch.object(pipeline, "_triggered", return_value=[]):
+                analysis = pipeline.run(make_task(), allow_online=False,
+                                        as_of="2026-09-23").analysis_context
+            self.assertEqual(analysis["evidence_summary"]["triggered_anomaly_count"], 0)
+            self.assertTrue(analysis["campaign_change_trigger"])
+            self.assertTrue(analysis["local_knowledge"]["research_questions"])
+            self.assertEqual(analysis["campaign_state_status"], "current")
+
+    def test_offline_structural_analysis_is_separate_from_current_state(self):
+        with temp_repo() as root:
+            populate_full_repo(root)
+            analysis = AnalysisPipeline(root, mode="offline").run(
+                make_task(), allow_online=False).analysis_context
+            self.assertIn("historical_matrix", analysis["historical_baseline"])
+            self.assertEqual(analysis["campaign_state_status"], "insufficient_current_data")
+            self.assertFalse(analysis["campaign_change_trigger"])
 
 
 

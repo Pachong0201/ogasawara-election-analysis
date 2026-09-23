@@ -21,6 +21,9 @@ class CampaignStateTests(unittest.TestCase):
                     "claim_type": "endorsement",
                     "source_grade": "C",
                     "verification_status": "verified",
+                    "source": "fixture",
+                    "url": "https://example.test/e1",
+                    "last_verified_at": "2026-09-22",
                 },
                 {
                     "event_id": "e2",
@@ -130,6 +133,8 @@ class CampaignStateTests(unittest.TestCase):
                 "高雄市",
                 {
                     "as_of": "2026-09-20T00:00:00+08:00",
+                    "target_year": 2026,
+                    "election": {"election_type": "unspecified", "target_year": 2026},
                     "candidate_keys": ["甲"],
                     "event_ids": ["old-event"],
                     "poll_ids": ["old-poll"],
@@ -172,6 +177,48 @@ class CampaignStateTests(unittest.TestCase):
             self.assertGreaterEqual(len(leads), 1)
             self.assertTrue(all(item["verification_status"] == "lead_only" for item in leads))
             self.assertTrue(all(item["layer_id"] == "L4" for item in leads))
+
+    def test_current_data_status_distinguishes_verified_unverified_and_missing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            builder = CampaignStateBuilder(root, config={"campaign_state": {"persist_snapshots": False}})
+
+            available = builder.build(
+                "新竹縣",
+                2026,
+                current_candidates=[{"candidate_name": "甲", "source_grade": "A", "last_verified_at": "2026-09-22"}],
+                current_events=[],
+                polls=[],
+                as_of="2026-09-23T00:00:00+08:00",
+                persist=False,
+                online_expected=True,
+            )
+            self.assertEqual(available["campaign_state_status"], "partial_current_data")
+
+            unverified = builder.build(
+                "新竹縣",
+                2026,
+                current_candidates=[],
+                current_events=[],
+                polls=[],
+                retrieval_leads=[{"lead_id": "l1", "verification_status": "lead_only"}],
+                as_of="2026-09-23T00:00:00+08:00",
+                persist=False,
+                online_expected=True,
+            )
+            self.assertEqual(unverified["campaign_state_status"], "insufficient_current_data")
+
+            missing = builder.build(
+                "新竹縣",
+                2026,
+                current_candidates=[],
+                current_events=[],
+                polls=[],
+                as_of="2026-09-23T00:00:00+08:00",
+                persist=False,
+                online_expected=False,
+            )
+            self.assertEqual(missing["campaign_state_status"], "insufficient_current_data")
 
 
 if __name__ == "__main__":

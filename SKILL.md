@@ -343,6 +343,8 @@ V1.4 允许对“同一调查系列”计算相邻波次点估计变化，但必
 
 县市分析采用“当前选战优先”结构。核心判断 150—250 字，必须标明 `as_of`。
 
+先读取 Analysis Context 的 `campaign_state_status`。只有 `current` 才可对当前选战作完整判断；`partial_current_data` 必须逐项限定已核资料范围；`insufficient_current_data` 只写历史结构与当前资料缺口，不得以历史票型充当现时选情。检索结果即使自称 verified 仍按 lead_only 处理，需经独立核验后进入 L4 缓存。相反事件进入 requires_review，不得择一当作事实。所有具体政治事实必须来自 Analysis Context 所列证据。
+
 ## 【县市名称】
 
 ### 核心判断

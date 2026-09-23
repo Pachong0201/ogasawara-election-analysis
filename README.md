@@ -41,6 +41,7 @@ ogasawara-election-analysis/
 │  ├─ knowledge_promotion.yaml
 │  ├─ data_sources.yaml
 │  ├─ freshness.yaml
+│  ├─ campaign_state.yaml
 │  └─ runtime.yaml
 ├─ rules/
 │  ├─ historical_baseline.yaml
@@ -79,6 +80,8 @@ ogasawara-election-analysis/
 │  ├─ knowledge_loader.py
 │  ├─ knowledge_builder.py # V1.3知识晋升与县市package Builder
 │  ├─ campaign_state.py # V1.4选战快照、7/14/30日变化与同源民调delta
+│  ├─ campaign_events.py # 唯一L4事件标准化、去重及冲突审计入口
+│  ├─ campaign_delta.py # 连续快照的可观察变化
 │  ├─ host_retrieval.py  # 宿主Web检索JSON/JSONL桥
 │  ├─ freshness.py
 │  ├─ analysis_context.py
@@ -126,12 +129,15 @@ as_of
 核心规则：
 
 - Snapshot 明确记录 `as_of`，不得把不同日期资料混成“当前”；
+- `current` 要求新鲜可核的候选人及近期事件；仅有一类资料为 `partial_current_data`。离线、仅有 lead_only 或全部过期为 `insufficient_current_data`，仍可输出历史结构；
 - 最近 7／14／30 日分别承担近端、活跃变化与背景窗口；
+- 事件由 `campaign_events.py` 统一归并，保留各来源证据；相反主张进入 `requires_review`，不得单独触发；
+- 快照按县市、选举类型及年份存档；同一 `as_of` 重跑保留两个版本，比较始终先读取上一版本；
 - 当前候选人变化、公开支持／组织变化、政党合作、重大议题、争议、司法事件等可独立触发地方知识检索；
 - 不再要求必须先出现历史票型异常；
 - ONLINE 模式会通过宿主 `RetrievalBackend` 主动提出当前选战检索问题；
 - 宿主检索结果默认 `lead_only`，未经验证不得当作事实；
-- 只有同一 `pollster / commissioner / method / sample_frame / question_wording` 的调查才计算 same-series delta；
+- 只有同一 `pollster / commissioner / method / sample_frame / question_wording` 的调查才计算 same-series delta；已披露的加权与抽样口径也必须一致；
 - same-series delta 只描述点估计变化，不代表胜负趋势，也不自行宣告统计显著；
 - Snapshot 只存入 `cache/campaign_state/`，属于 L4/L5 动态索引，不是新的知识层。
 
@@ -163,11 +169,13 @@ as_of
 python -m runtime.cli readiness --county "宜兰县" --year 2026 --type county_mayor
 python -m runtime.cli build-matrix --county "宜兰县" --year 2026 --type county_mayor
 python -m runtime.cli context --county "宜兰县" --year 2026 --type county_mayor --write-manifest
-python -m runtime.cli run --county "宜兰县" --year 2026 --type county_mayor --mode offline --write-manifest
+python -m runtime.cli run --county "宜兰县" --year 2026 --type county_mayor --mode offline --as-of 2026-09-23 --write-manifest
 python -m runtime.cli readiness --county "宜兰县" --year 2026 --type county_mayor --mode online
 python -m runtime.cli run --county "宜兰县" --year 2026 --type county_mayor --mode online \
   --retrieval-inbox cache/retrieval/inbox/yilan.jsonl --write-manifest
 ```
+
+`run --as-of` 以指定日期评价候选人、事件及民调新鲜度；ONLINE 查询结果仍是线索，需核验并写入本项目的 L4 动态缓存后才可作为当前事件。没有宿主 RetrievalBackend 或可信当前事件时，报告必须显示当前资料不足。CI 在 PR 上运行全量 `python -m pytest -q`。
 
 
 ### V1.2 官方历史数据源
