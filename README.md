@@ -59,6 +59,7 @@ ogasawara-election-analysis/
 │  ├─ historical_claim.yaml
 │  ├─ local_relationship.yaml
 │  ├─ retrieval_lead.yaml
+│  ├─ campaign_event.yaml
 │  ├─ knowledge_proposal.yaml
 │  └─ knowledge_promotion_receipt.yaml
 ├─ methods/
@@ -82,6 +83,9 @@ ogasawara-election-analysis/
 │  ├─ campaign_state.py # V1.4选战快照、7/14/30日变化与同源民调delta
 │  ├─ campaign_events.py # 唯一L4事件标准化、去重及冲突审计入口
 │  ├─ campaign_delta.py # 连续快照的可观察变化
+│  ├─ campaign_event.py # 正文证据摘录、实体解析、跨来源聚类与Campaign Event
+│  ├─ gdelt_retrieval.py # 近期新闻发现与正文读取编排
+│  ├─ article_body.py # 受控公开网页正文读取
 │  ├─ host_retrieval.py  # 宿主Web检索JSON/JSONL桥
 │  ├─ freshness.py
 │  ├─ analysis_context.py
@@ -117,6 +121,7 @@ V1.4 解决“历史结构很强、当前战况很弱”的问题。完整分析
 ```text
 as_of
 → 当前候选人格局
+→ 公开新闻正文解析为 Campaign Event
 → 最近30／14／7日竞选事件
 → 与上一Campaign State Snapshot比较
 → 同一调查系列跨期变化
@@ -375,3 +380,36 @@ python3 -m unittest discover -s tests -v
 ## 边界声明
 
 本 Skill 不提供选举预测、候选人推荐或政治动员。所有结构性判断必须附带证据等级、时间范围和不确定性说明。无法解释时应输出 `unknown`，不得自行补齐因果链。
+
+## 飞书选情机器人
+
+统一整合分支为 `feature/feishu-election-bot-v1.4-integration`。机器人采用飞书长连接，将群聊自然语言请求映射到 V1.4 `AnalysisPipeline`。
+
+```text
+飞书群 @机器人
+→ thread级 Conversation State
+→ Intent Router
+→ 小笠原 AnalysisPipeline
+→ GDELT 新闻发现 + 公开正文读取
+→ Campaign Event / Campaign State
+→ Analysis Context
+→ OpenAI Writer（可选）
+→ 飞书线程回复
+```
+
+- 群聊默认仅在 @机器人 时响应，私聊直接响应；
+- “分析高雄选情”执行完整 V1.4；
+- “更新一下”沿用线程 Election Focus 并重新生成 Snapshot；
+- 新闻正文经实体识别和跨来源聚类后形成 Campaign Event；
+- single_source_media 仅作上下文，corroborated_media 仅可触发进一步研究，不等于官方核验事实；
+- OpenAI API 未配置时仍可返回确定性结构化摘要；
+- App Secret / API Key 仅从环境变量读取。
+
+完整部署说明见 `docs/feishu-bot.md`。
+
+启动：
+
+```bash
+python -m pip install -r requirements.txt
+python -m bot
+```
