@@ -13,6 +13,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 import yaml
 
 from .analysis_context import AnalysisContextBuilder
+from .campaign_event import CampaignEventResolver
 from .campaign_state import CampaignStateBuilder, campaign_research_questions
 from .data_readiness import DataReadinessGate
 from .election_loader import ElectionLoader, election_file_path, load_jsonl
@@ -67,6 +68,13 @@ class AnalysisPipeline:
             retrieval_backend=retrieval_backend,
             config=self.runtime_config,
             mode=mode,
+        )
+        event_config = self.runtime_config.get("campaign_event_resolution", {}) or {}
+        self.campaign_event_resolver = CampaignEventResolver(
+            corroboration_min_sources=int(
+                event_config.get("corroboration_min_sources", 2)
+            ),
+            max_excerpt_chars=int(event_config.get("max_excerpt_chars", 900)),
         )
 
     def _load_runtime_config(self) -> Dict[str, Any]:
@@ -341,7 +349,7 @@ class AnalysisPipeline:
                 polls[index]["freshness_status"] = status.get("status")
                 expires_at = status.get("expires_at")
                 polls[index]["freshness_expires_at"] = expires_at.isoformat() if hasattr(expires_at, "isoformat") else expires_at
-        events = self._load_events(task.jurisdiction)
+        cached_events = self._load_events(task.jurisdiction)
         current_candidates = readiness.available.get("current_candidates", {}).get("verified_candidates", [])
 
         campaign_leads, campaign_retrieval_warnings = self.campaign_state_builder.retrieve_current_leads(
@@ -349,6 +357,22 @@ class AnalysisPipeline:
             task.target_year,
             allow_online=online,
         )
+        campaign_event_resolution = self.campaign_event_resolver.extract(
+            campaign_leads,
+            jurisdiction=task.jurisdiction,
+            current_candidates=current_candidates,
+        )
+        resolved_events = list(campaign_event_resolution.get("events") or [])
+        events_by_id: Dict[str, Dict[str, Any]] = {}
+        anonymous_events: List[Dict[str, Any]] = []
+        for event in list(cached_events) + resolved_events:
+            event_id = str(event.get("event_id") or event.get("record_id") or "").strip()
+            if event_id:
+                events_by_id[event_id] = event
+            else:
+                anonymous_events.append(event)
+        events = list(events_by_id.values()) + anonymous_events
+
         campaign_state = self.campaign_state_builder.build(
             jurisdiction=task.jurisdiction,
             target_year=task.target_year,
@@ -422,8 +446,10 @@ class AnalysisPipeline:
             current_events=events,
             polls=polls,
             campaign_state=campaign_state,
+            campaign_event_resolution=campaign_event_resolution,
             evidence_summary={
                 "triggered_anomaly_count": len(triggered),
+                "campaign_event_resolution": campaign_event_resolution.get("stats", {}),
                 "campaign_change_trigger": bool(campaign_state.get("campaign_change_trigger")),
                 "campaign_change_reasons": campaign_state.get("campaign_change_reasons", []),
                 "campaign_retrieval_lead_count": len(campaign_leads),
