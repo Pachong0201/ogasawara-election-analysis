@@ -14,6 +14,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
+from .campaign_delta import compare_campaign_snapshots
 from .election_loader import safe_component
 from .models import parse_date, utc_now_iso
 from .source_registry import OfflineRetrievalError, RetrievalBackend
@@ -348,10 +349,13 @@ class CampaignStateBuilder:
         retrieval_leads: Optional[List[Dict[str, Any]]] = None,
         as_of: Optional[str] = None,
         persist: Optional[bool] = None,
+        online_expected: bool = False,
+        event_conflicts: Optional[List[Dict[str, Any]]] = None,
     ) -> Dict[str, Any]:
         as_of = as_of or utc_now_iso()
         as_of_date = parse_date(as_of) or dt.datetime.now(dt.timezone.utc).date()
         retrieval_leads = retrieval_leads or []
+        event_conflicts = event_conflicts or []
         windows = self._campaign_config().get("windows_days") or list(DEFAULT_WINDOWS)
 
         window_payload: Dict[str, Any] = {}
@@ -383,7 +387,7 @@ class CampaignStateBuilder:
 
         poll_changes = self.same_series_poll_changes(polls)
         previous = self.store.load_latest(jurisdiction)
-        snapshot_delta = self.compare_snapshots(previous, current_candidates, current_events, polls)
+        snapshot_delta = compare_campaign_snapshots(previous, current_candidates, current_events, polls)
 
         reasons: List[str] = []
         if verified_trigger_events:
@@ -396,12 +400,27 @@ class CampaignStateBuilder:
             reasons.append("candidate_field_change")
         if snapshot_delta.get("new_event_ids"):
             reasons.append("new_event_since_previous_snapshot")
+        if event_conflicts:
+            reasons.append("conflicting_current_evidence")
+
+        verified_30d = int(window_payload.get("30d", {}).get("verified_trigger_event_count", 0))
+        fresh_poll_count = sum(
+            1 for poll in polls
+            if str(poll.get("freshness_status") or "").lower() == "fresh"
+        )
+        if current_candidates or verified_30d or fresh_poll_count:
+            campaign_state_status = "current_data_available"
+        elif online_expected and retrieval_leads:
+            campaign_state_status = "current_data_unverified"
+        else:
+            campaign_state_status = "insufficient_current_data"
 
         snapshot = {
             "snapshot_version": "1.4.0",
             "as_of": as_of,
             "jurisdiction": jurisdiction,
             "target_year": int(target_year),
+            "campaign_state_status": campaign_state_status,
             "candidate_count": len(current_candidates),
             "candidate_keys": sorted(
                 {_candidate_key(row) for row in current_candidates if _candidate_key(row)}
@@ -411,6 +430,7 @@ class CampaignStateBuilder:
             "windows": window_payload,
             "same_series_poll_changes": poll_changes,
             "snapshot_delta": snapshot_delta,
+            "event_conflicts": event_conflicts,
             "campaign_change_trigger": bool(reasons),
             "campaign_change_reasons": reasons,
             "retrieval_lead_count": len(retrieval_leads),
