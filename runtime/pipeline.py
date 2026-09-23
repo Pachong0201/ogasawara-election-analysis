@@ -13,7 +13,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 import yaml
 
 from .analysis_context import AnalysisContextBuilder
-from .campaign_event import CampaignEventResolver
+from .campaign_event import CampaignEventResolver, campaign_event_research_questions
 from .campaign_state import CampaignStateBuilder, campaign_research_questions
 from .data_readiness import DataReadinessGate
 from .election_loader import ElectionLoader, election_file_path, load_jsonl
@@ -383,15 +383,27 @@ class AnalysisPipeline:
             retrieval_leads=campaign_leads,
         )
 
-        regions = sorted({
+        historical_regions = {
             str(item.get("region") or "").split("|")[0]
             for item in triggered
             if str(item.get("region") or "").strip()
-        })
+        }
+        campaign_regions = {
+            str(location)
+            for event in resolved_events
+            if str(event.get("verification_status") or "") == "corroborated_media"
+            for location in (event.get("locations") or [])
+            if str(location).strip()
+        }
+        regions = sorted(historical_regions | campaign_regions)
         historical_questions = self.knowledge_loader.build_research_questions(triggered) if triggered else []
         live_questions = campaign_research_questions(campaign_state)
-        questions = list(dict.fromkeys(historical_questions + live_questions))
-        research_triggered = bool(triggered) or bool(campaign_state.get("campaign_change_trigger")) or bool(campaign_leads)
+        event_questions = campaign_event_research_questions(
+            resolved_events,
+            jurisdiction=task.jurisdiction,
+        )
+        questions = list(dict.fromkeys(historical_questions + live_questions + event_questions))
+        research_triggered = bool(triggered) or bool(campaign_state.get("campaign_change_trigger"))
         local_knowledge = self.knowledge_loader.load(
             task.jurisdiction,
             regions=regions or None,
