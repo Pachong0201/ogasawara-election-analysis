@@ -151,11 +151,15 @@ class TestArticleBodyFetcher(unittest.TestCase):
             registry = SourceRegistry(config_path=root / 'config' / 'no-adapters.yaml')
             context = AnalysisPipeline(root, mode='online', retrieval_backend=backend,
                                        source_registry=registry).run(make_task(jurisdiction='高雄市'), allow_online=True).to_dict()
-        analysis = _analysis_payload(context)
-        lead = analysis['campaign_state']['retrieval_leads'][0]
+        raw_lead = context['analysis_context']['campaign_state']['retrieval_leads'][0]
+        self.assertEqual(raw_lead['body_status'], 'read')
+        self.assertIn(PARAGRAPH, raw_lead['content'])
+
+        writer_payload = _analysis_payload(context)
+        lead = writer_payload['campaign_state']['retrieval_leads'][0]
         self.assertEqual(lead['body_status'], 'read')
-        self.assertIn(PARAGRAPH, lead['content'])
-        self.assertEqual(analysis['campaign_state']['verified_retrieval_lead_count'], 0)
+        self.assertNotIn('content', lead)
+        self.assertEqual(writer_payload['campaign_state']['verified_retrieval_lead_count'], 0)
 
 
 if __name__ == '__main__':
