@@ -1,0 +1,35 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: CampaignStateSnapshot
+type: object
+required:
+  - snapshot_version
+  - as_of
+  - jurisdiction
+  - target_year
+  - campaign_state_status
+  - windows
+  - campaign_change_trigger
+  - campaign_change_reasons
+  - snapshot_delta
+properties:
+  snapshot_version: {type: string}
+  as_of: {type: string}
+  jurisdiction: {type: string}
+  target_year: {type: integer}
+  campaign_state_status:
+    type: string
+    enum: [current_data_available, current_data_unverified, insufficient_current_data]
+  windows: {type: object}
+  campaign_change_trigger: {type: boolean}
+  campaign_change_reasons:
+    type: array
+    items: {type: string}
+  snapshot_delta: {type: object}
+  same_series_poll_changes:
+    type: array
+    items: {type: object}
+  event_conflicts:
+    type: array
+    items: {type: object}
+  interpretation_boundary: {type: string}
+additionalProperties: true
