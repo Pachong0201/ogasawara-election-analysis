@@ -1,4 +1,4 @@
-# 飞书选情机器人 v0.3（实时事件解析链）
+# 飞书选情机器人 × 小笠原 Skill v1.4（统一部署版）
 
 ## 目标
 
@@ -11,7 +11,7 @@
 
 ## 当前阶段
 
-v0.1 实现最小可运行闭环：
+统一整合分支 `feature/feishu-election-bot-v1.4-integration` 已将飞书机器人、实时新闻正文解析链与验收通过的 V1.4 Live Campaign State 合并。当前闭环：
 
 ```text
 飞书群 @机器人
@@ -49,7 +49,7 @@ v0.1 实现最小可运行闭环：
 4. 授予机器人收发消息所需权限，例如 `im:message`、`im:message:send_as_bot`。
 5. 将应用安装到目标企业并把机器人加入群聊。
 
-本项目采用 `lark-channel-sdk`，无需为 v0.1 暴露公网 Webhook。
+本项目采用 `lark-channel-sdk` 长连接，无需暴露公网 Webhook。
 
 ## 环境变量
 
@@ -83,7 +83,7 @@ GDELT 返回标题、链接和首次发现时间，**不提供文章正文或核
 
 默认允许的来源域名在 `runtime/article_body.py` 中维护。对不在名单上的来源，正文状态为 `unsupported_domain`；应审查其公开访问规则后再扩充域名。检索未命中或正文读取失败，都不能推断近期没有选战变化。
 
-本地以模拟接口测试适配器；上线前需在部署机检查网络可达性和真实县市查询结果。无需额外搜索 API 密钥；LLM 仍只用于表达。
+本地以模拟接口测试适配器；GitHub Actions 已同时通过全量测试和 Runtime ONLINE E2E。实际部署机仍需检查到飞书、GDELT、新闻站点、中选会及 OpenAI（如启用）的网络可达性。GDELT 检索无需额外搜索 API 密钥；LLM 仍只用于表达。
 
 ## 实时事件解析链
 
@@ -110,7 +110,7 @@ GDELT Discovery
 - 未成功读取正文的标题不会生成 Campaign Event；
 - 单一媒体正文生成 `single_source_media`，只进入上下文，不独立触发结构研究；
 - 两个以上独立域名的正文若在日期、事件类型、候选人／地点及文本特征上相互匹配，可形成 `corroborated_media`；
-- `corroborated_media` 仍保持 D 级、`research_trigger_only`，只能触发进一步查证，不能写成 A/B 级已核实事实；
+- `corroborated_media` 在结构化事件层标记为 C 级媒体证据、`research_trigger_only`；它只表示两个以上独立媒体正文相互印证，仍不能写成 A/B 级或官方已核实事实，也不能绕过知识晋升门禁；
 - 7/14/30 窗口会同时统计 verified event 与 corroborated media event；
 - Snapshot Delta 分别记录新增 event、poll、retrieval lead 与 corroborated event；
 - 地方知识检索会优先带入事件中识别出的行政区和候选人，减少泛化搜索；
@@ -236,8 +236,12 @@ API 请求设置 `store=False`。
 
 ## 测试
 
+统一整合分支当前 GitHub Actions 验证结果：`158 passed, 146 subtests passed, 0 failed`，`Runtime online end-to-end` 同时通过。
+
+本地可运行：
+
 ```bash
-python -m unittest discover -s tests -v
+python -m pytest -q
 ```
 
 机器人测试覆盖：
