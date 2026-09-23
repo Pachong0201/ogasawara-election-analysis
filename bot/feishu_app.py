@@ -76,7 +76,7 @@ async def run() -> None:
                     {"markdown": "收到，正在读取最新选情资料并运行结构分析……"},
                     {
                         "reply_to": inbound.message_id,
-                        "reply_in_thread": bool(inbound.thread_id),
+                        "reply_in_thread": inbound.chat_type in {"group", "topic"},
                         "receive_id_type": "chat_id",
                         "uuid": f"ogasawara-ack-{inbound.message_id}",
                     },
@@ -93,7 +93,7 @@ async def run() -> None:
                 {"markdown": reply.text},
                 {
                     "reply_to": inbound.message_id,
-                    "reply_in_thread": bool(inbound.thread_id),
+                    "reply_in_thread": inbound.chat_type in {"group", "topic"},
                     "receive_id_type": "chat_id",
                     "uuid": f"ogasawara-final-{inbound.message_id}",
                 },
