@@ -1,0 +1,32 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: CampaignEvent
+type: object
+required:
+  - event_id
+  - jurisdiction
+  - date
+  - claim_type
+  - source_grade
+  - verification_status
+properties:
+  event_id: {type: string, minLength: 1}
+  jurisdiction: {type: string, minLength: 1}
+  date: {type: string, format: date}
+  claim_type: {type: string, minLength: 1}
+  speaker: {type: string}
+  subject: {type: string}
+  claim: {type: string}
+  summary: {type: string}
+  source_id: {type: string}
+  source: {type: string}
+  source_grade:
+    type: string
+    enum: [A, B, C, D, E]
+  verification_status:
+    type: string
+    enum: [verified, confirmed, lead_only, campaign_claim, unverified, contradicted]
+  layer_id:
+    const: L4
+  event_fingerprint: {type: string}
+  usable_for_trigger: {type: boolean}
+additionalProperties: true
