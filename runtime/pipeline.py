@@ -13,6 +13,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 import yaml
 
 from .analysis_context import AnalysisContextBuilder
+from .campaign_event_loader import CampaignEventLoader
 from .campaign_state import CampaignStateBuilder, campaign_research_questions
 from .data_readiness import DataReadinessGate
 from .election_loader import ElectionLoader, election_file_path, load_jsonl
@@ -61,6 +62,7 @@ class AnalysisPipeline:
             mode=mode,
         )
         self.context_builder = AnalysisContextBuilder(self.repo_root, skill_version="1.4.0")
+        self.campaign_event_loader = CampaignEventLoader(self.repo_root)
         self.runtime_config = self._load_runtime_config()
         self.campaign_state_builder = CampaignStateBuilder(
             self.repo_root,
@@ -341,7 +343,9 @@ class AnalysisPipeline:
                 polls[index]["freshness_status"] = status.get("status")
                 expires_at = status.get("expires_at")
                 polls[index]["freshness_expires_at"] = expires_at.isoformat() if hasattr(expires_at, "isoformat") else expires_at
-        events = self._load_events(task.jurisdiction)
+        event_report = self.campaign_event_loader.load_cache(task.jurisdiction)
+        events = list(event_report.get("events", []))
+        files_used.extend(event_report.get("files", []))
         current_candidates = readiness.available.get("current_candidates", {}).get("verified_candidates", [])
 
         campaign_leads, campaign_retrieval_warnings = self.campaign_state_builder.retrieve_current_leads(
@@ -356,6 +360,8 @@ class AnalysisPipeline:
             current_events=events,
             polls=polls,
             retrieval_leads=campaign_leads,
+            online_expected=online,
+            event_conflicts=list(event_report.get("conflicts", [])),
         )
 
         regions = sorted({
@@ -381,6 +387,10 @@ class AnalysisPipeline:
             unknowns.append("local anomalies were detected but minimum sufficient local knowledge was not established")
         if campaign_state.get("campaign_change_trigger") and not local_knowledge.get("sufficient"):
             unknowns.append("current campaign change was detected but minimum sufficient current local knowledge was not established")
+        if campaign_state.get("campaign_state_status") == "insufficient_current_data":
+            unknowns.append("current campaign data are insufficient; output may describe historical structure but must not be labeled a current campaign-state assessment")
+        elif campaign_state.get("campaign_state_status") == "current_data_unverified":
+            unknowns.append("current retrieval produced only unverified campaign leads; they may guide research but must not be stated as current facts")
         if not polls:
             unknowns.append("no validated poll cache is available; poll calibration is omitted")
         elif int(poll_freshness.get("fresh", 0)) == 0:
@@ -388,7 +398,7 @@ class AnalysisPipeline:
                 "no fresh validated poll is available; stale poll records may be retained as dated campaign-period evidence but must not calibrate the current state"
             )
 
-        warnings = list(readiness.warnings) + load_warnings + campaign_retrieval_warnings + list(local_knowledge.get("warnings", []))
+        warnings = list(readiness.warnings) + load_warnings + campaign_retrieval_warnings + list(event_report.get("warnings", [])) + list(local_knowledge.get("warnings", []))
         if polls_result.get("invalid"):
             warnings.append(f"{len(polls_result['invalid'])} cached poll record(s) failed validation")
         if poll_freshness.get("stale"):
@@ -418,8 +428,12 @@ class AnalysisPipeline:
             campaign_state=campaign_state,
             evidence_summary={
                 "triggered_anomaly_count": len(triggered),
+                "campaign_state_status": campaign_state.get("campaign_state_status"),
                 "campaign_change_trigger": bool(campaign_state.get("campaign_change_trigger")),
                 "campaign_change_reasons": campaign_state.get("campaign_change_reasons", []),
+                "campaign_event_conflict_count": len(event_report.get("conflicts", [])),
+                "campaign_event_raw_count": int(event_report.get("raw_count", 0)),
+                "campaign_event_deduplicated_count": int(event_report.get("deduplicated_count", 0)),
                 "campaign_retrieval_lead_count": len(campaign_leads),
                 "local_knowledge_sufficient": bool(local_knowledge.get("sufficient")),
                 "poll_freshness": poll_freshness,
