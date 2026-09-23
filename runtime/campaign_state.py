@@ -355,6 +355,7 @@ class CampaignStateBuilder:
                 "new_event_ids": [],
                 "new_poll_ids": [],
                 "new_retrieval_lead_ids": [],
+                "new_corroborated_event_ids": [],
             }
 
         previous_candidates = set(previous.get("candidate_keys") or [])
@@ -364,6 +365,12 @@ class CampaignStateBuilder:
         previous_polls = set(previous.get("poll_ids") or [])
         poll_ids = {_stable_id(row, "poll") for row in polls}
         previous_retrieval = set(previous.get("retrieval_lead_ids") or [])
+        previous_corroborated = set(previous.get("corroborated_event_ids") or [])
+        corroborated_ids = {
+            _stable_id(row, "event")
+            for row in current_events
+            if _corroborated_media_event(row)
+        }
         retrieval_ids = {
             _stable_id(row, "campaign-lead")
             for row in (retrieval_leads or [])
@@ -382,6 +389,9 @@ class CampaignStateBuilder:
             "new_event_ids": sorted(event_ids - previous_events),
             "new_poll_ids": sorted(poll_ids - previous_polls),
             "new_retrieval_lead_ids": sorted(retrieval_ids - previous_retrieval),
+            "new_corroborated_event_ids": sorted(
+                corroborated_ids - previous_corroborated
+            ),
         }
 
     def build(
@@ -472,6 +482,13 @@ class CampaignStateBuilder:
             "poll_ids": sorted({_stable_id(row, "poll") for row in polls}),
             "retrieval_lead_ids": sorted(
                 {_stable_id(row, "campaign-lead") for row in retrieval_leads}
+            ),
+            "corroborated_event_ids": sorted(
+                {
+                    _stable_id(row, "event")
+                    for row in current_events
+                    if _corroborated_media_event(row)
+                }
             ),
             "windows": window_payload,
             "same_series_poll_changes": poll_changes,
