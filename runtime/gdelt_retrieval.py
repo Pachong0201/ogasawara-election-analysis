@@ -54,6 +54,26 @@ def _topic(query: str, purpose: str) -> str:
     return "(mayor OR election OR campaign)"
 
 
+def _candidate_clause(query: str, candidate_names: Any) -> str:
+    if not candidate_names:
+        return ""
+    if not any(
+        token in query
+        for token in ("候選人", "候选人", "支持", "組織", "组织", "競選", "竞选", "民調", "民调")
+    ):
+        return ""
+    names: List[str] = []
+    for raw in candidate_names:
+        name = str(raw or "").strip()
+        if 2 <= len(name) <= 20 and name not in names:
+            names.append(name)
+        if len(names) >= 8:
+            break
+    if not names:
+        return ""
+    return "(" + " OR ".join(f'"{name}"' for name in names) + ")"
+
+
 def _canonical_url(raw: Any) -> str:
     try:
         parsed = urlparse(str(raw or ""))
@@ -98,7 +118,16 @@ class GDELTNewsBackend(RetrievalBackend):
         if not county:
             return []  # No jurisdiction: refuse to search unrelated news.
         days = max(1, min(int(kwargs.get("recency_days") or 30), 90))
-        gdelt_query = f'"{county}" {_topic(query, str(kwargs.get("purpose") or ""))}'
+        candidate_clause = _candidate_clause(query, kwargs.get("candidate_names") or [])
+        gdelt_query = " ".join(
+            value
+            for value in (
+                f'"{county}"',
+                _topic(query, str(kwargs.get("purpose") or "")),
+                candidate_clause,
+            )
+            if value
+        )
         params = {
             "query": gdelt_query, "mode": "artlist", "format": "json",
             "sort": "datedesc", "timespan": f"{days}d",
