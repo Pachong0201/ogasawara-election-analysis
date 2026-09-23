@@ -71,7 +71,7 @@ class ConversationStore:
         linked = self._linked_key(message.reply_to_message_id)
         if linked:
             return linked
-        return f"group:{message.chat_id}:{message.message_id}"
+        # Group roots use the future thread root id so replies carrying\n        # conversation.thread_id resolve to exactly the same key.\n        return f"thread:{message.chat_id}:{message.message_id}"
 
     def load(self, key: str) -> ConversationState:
         with self._lock, self._connect() as con:
