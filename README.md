@@ -59,7 +59,8 @@ ogasawara-election-analysis/
 │  ├─ historical_claim.yaml
 │  ├─ local_relationship.yaml
 │  ├─ retrieval_lead.yaml
-│  ├─ campaign_event.yaml
+│  ├─ campaign_event.yaml          # 已验证/标准化L4事件严格合同
+│  ├─ campaign_media_event.yaml    # 正文聚类媒体研究事件合同
 │  ├─ knowledge_proposal.yaml
 │  └─ knowledge_promotion_receipt.yaml
 ├─ methods/
@@ -83,7 +84,8 @@ ogasawara-election-analysis/
 │  ├─ campaign_state.py # V1.4选战快照、7/14/30日变化与同源民调delta
 │  ├─ campaign_events.py # 唯一L4事件标准化、去重及冲突审计入口
 │  ├─ campaign_delta.py # 连续快照的可观察变化
-│  ├─ campaign_event.py # 正文证据摘录、实体解析、跨来源聚类与Campaign Event
+│  ├─ campaign_event.py # 正文证据摘录、实体解析、跨来源聚类；只生成媒体研究事件
+│  ├─ campaign_events.py # 标准L4事件归一化、去重与冲突审计
 │  ├─ gdelt_retrieval.py # 近期新闻发现与正文读取编排
 │  ├─ article_body.py # 受控公开网页正文读取
 │  ├─ host_retrieval.py  # 宿主Web检索JSON/JSONL桥
