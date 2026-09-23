@@ -109,6 +109,17 @@ class LiveCampaignContractTests(unittest.TestCase):
         self.assertEqual(result["snapshot_delta"]["candidate_changes"], [])
         self.assertEqual(result["snapshot_delta"]["change_status"], "uncertain")
 
+    def test_same_jurisdiction_year_different_elections_have_separate_history(self):
+        first = self.builder.build(REGION, 2026, [], [], [], as_of=AS_OF,
+                                   election_type="county_mayor", persist=True)
+        second = self.builder.build(REGION, 2026, [], [], [], as_of=AS_OF,
+                                    election_type="regional_legislator", persist=True)
+        self.assertNotEqual(first["snapshot_path"], second["snapshot_path"])
+        self.assertEqual(second["snapshot_delta"]["change_status"], "baseline_created")
+        third = self.builder.build(REGION, 2026, [], [], [], as_of=AS_OF,
+                                   election_type="county_mayor", persist=False)
+        self.assertTrue(third["snapshot_delta"]["previous_snapshot_available"])
+
     def test_new_event_stable_id_and_future_exclusion(self):
         old = self.loader.audit([event()], REGION, AS_OF)["events"]
         self.builder.store.save(REGION, self.build(old))

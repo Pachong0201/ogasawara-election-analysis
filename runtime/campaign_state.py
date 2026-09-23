@@ -164,12 +164,16 @@ class CampaignStateStore:
     def __init__(self, repo_root: Path):
         self.repo_root = Path(repo_root)
 
-    def _base(self, jurisdiction: str, target_year: Optional[int] = None) -> Path:
+    def _base(self, jurisdiction: str, target_year: Optional[int] = None,
+              election_type: Optional[str] = None) -> Path:
         base = self.repo_root / "cache" / "campaign_state" / safe_component(jurisdiction)
+        if election_type is not None:
+            base = base / safe_component(election_type)
         return base / str(target_year) if target_year is not None else base
 
-    def load_latest(self, jurisdiction: str, target_year: Optional[int] = None) -> Optional[Dict[str, Any]]:
-        path = self._base(jurisdiction, target_year) / "latest.json"
+    def load_latest(self, jurisdiction: str, target_year: Optional[int] = None,
+                    election_type: Optional[str] = None) -> Optional[Dict[str, Any]]:
+        path = self._base(jurisdiction, target_year, election_type) / "latest.json"
         if not path.exists():
             return None
         try:
@@ -179,7 +183,9 @@ class CampaignStateStore:
         return payload if isinstance(payload, dict) else None
 
     def save(self, jurisdiction: str, snapshot: Dict[str, Any]) -> Path:
-        base = self._base(jurisdiction, snapshot.get("target_year"))
+        election = snapshot.get("election") or {}
+        base = self._base(jurisdiction, snapshot.get("target_year"),
+                          election.get("election_type") or "unspecified")
         base.mkdir(parents=True, exist_ok=True)
         stamp = safe_component(str(snapshot.get("as_of") or utc_now_iso())).replace(":", "").replace("+", "_")
         archive = base / f"{stamp}.json"
@@ -398,8 +404,12 @@ class CampaignStateBuilder:
             if is_fresh(next(p for p in polls if _stable_id(p, "poll") == row["current_poll_id"]),
                         kind="poll", now=as_of_date)
         ]
-        previous = self.store.load_latest(jurisdiction, target_year) or self.store.load_latest(jurisdiction)
-        if previous and previous.get("target_year") not in (None, target_year):
+        previous = (self.store.load_latest(jurisdiction, target_year, election_type)
+                    or self.store.load_latest(jurisdiction, target_year)
+                    or self.store.load_latest(jurisdiction))
+        previous_type = (previous or {}).get("election", {}).get("election_type")
+        if previous and (previous.get("target_year") not in (None, target_year)
+                         or previous_type not in (None, election_type)):
             previous = None
         snapshot_delta = compare_campaign_snapshots(previous, current_candidates, current_events, polls)
 
