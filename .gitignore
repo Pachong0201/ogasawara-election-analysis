@@ -16,3 +16,6 @@ analysis_manifest.json
 
 # Official raw archives are runtime cache only
 cache/raw/
+
+# Bot conversation state
+cache/**/*.sqlite3

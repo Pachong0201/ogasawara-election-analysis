@@ -142,10 +142,13 @@ class KnowledgeLoader:
 
         for question in questions:
             try:
-                results = self.retrieval_backend.search(question)
+                results = self.retrieval_backend.search(question, jurisdiction=county, purpose="local_knowledge")
             except OfflineRetrievalError as exc:
                 warnings.append(str(exc))
-                continue
+                break
+            except Exception as exc:
+                warnings.append(f"local knowledge retrieval failed: {type(exc).__name__}")
+                break
             for result in results or []:
                 if not isinstance(result, dict):
                     result = {"summary": str(result)}

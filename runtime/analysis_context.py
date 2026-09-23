@@ -23,6 +23,7 @@ class AnalysisContextBuilder:
         local_knowledge: Optional[Dict[str, Any]] = None,
         current_candidates: Optional[List[Dict[str, Any]]] = None,
         current_events: Optional[List[Dict[str, Any]]] = None,
+        campaign_event_resolution: Optional[Dict[str, Any]] = None,
         campaign_state: Optional[Dict[str, Any]] = None,
         polls: Optional[List[Dict[str, Any]]] = None,
         evidence_summary: Optional[Dict[str, Any]] = None,
@@ -38,6 +39,7 @@ class AnalysisContextBuilder:
         local_knowledge = local_knowledge or {}
         current_candidates = current_candidates or []
         current_events = current_events or []
+        campaign_event_resolution = campaign_event_resolution or {}
         campaign_state = campaign_state or {}
         polls = polls or []
         evidence_summary = evidence_summary or {}
@@ -59,6 +61,7 @@ class AnalysisContextBuilder:
             "local_knowledge": local_knowledge,
             "current_candidates": current_candidates,
             "current_events": current_events,
+            "campaign_event_resolution": campaign_event_resolution,
             "campaign_state": campaign_state,
             "polls": polls,
             "evidence_summary": evidence_summary,
@@ -83,6 +86,7 @@ class AnalysisContextBuilder:
             "missing_data": readiness.missing,
             "unknowns": unknowns,
             "warnings": warnings,
+            "campaign_event_resolution": campaign_event_resolution.get("stats", {}),
         }
         return AnalysisContext(analysis_context=context, analysis_manifest=manifest)
 
