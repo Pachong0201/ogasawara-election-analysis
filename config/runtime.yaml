@@ -166,3 +166,10 @@ campaign_state:
     - "{jurisdiction} {year} 選舉 政黨合作 競選總部"
     - "{jurisdiction} {year} 選舉 政策 爭議 地方議題"
     - "{jurisdiction} {year} 選舉 民調"
+
+
+campaign_event_resolution:
+  corroboration_min_sources: 2
+  max_excerpt_chars: 900
+  evidence_boundary: research_trigger_only
+  date_policy: publisher_page_date_then_first_seen
