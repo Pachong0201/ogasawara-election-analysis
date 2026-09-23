@@ -145,6 +145,19 @@ class LiveCampaignContractTests(unittest.TestCase):
                     self.assertEqual(result[0]["candidate_deltas"], {"甲": 4.0})
                     self.assertIn("series_id", result[0])
 
+    def test_nested_poll_threshold_policy_is_honored(self):
+        builder = CampaignStateBuilder(
+            self.root,
+            config={"campaign_state": {"poll": {"same_series_change_observe_pp": 4.5}}},
+        )
+        changes = builder.same_series_poll_changes([
+            poll("p1", "2026-09-10"),
+            poll("p2", "2026-09-22"),
+        ])
+        self.assertEqual(len(changes), 1)
+        self.assertEqual(changes[0]["observe_threshold_pp"], 4.5)
+        self.assertFalse(changes[0]["change_observed"])
+
     def test_stale_poll_does_not_calibrate_or_trigger(self):
         older = poll("p1", "2026-05-01")
         later = poll("p2", "2026-06-01")
