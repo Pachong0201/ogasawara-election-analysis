@@ -303,7 +303,14 @@ class CampaignStateBuilder:
             grouped[key].append(poll)
 
         changes: List[Dict[str, Any]] = []
-        observe_pp = float(self._campaign_config().get("same_series_poll_change_observe_pp", 3.0))
+        campaign_config = self._campaign_config()
+        poll_config = campaign_config.get("poll") or {}
+        observe_pp = float(
+            poll_config.get(
+                "same_series_change_observe_pp",
+                campaign_config.get("same_series_poll_change_observe_pp", 3.0),
+            )
+        )
         for key, rows in grouped.items():
             rows.sort(key=lambda row: (_event_date(row) or dt.date.min, str(row.get("publish_date") or "")))
             if len(rows) < 2:
