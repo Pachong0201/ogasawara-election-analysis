@@ -39,7 +39,7 @@ DEFAULT_TRIGGER_TYPES = {
 
 
 def _event_date(record: Dict[str, Any]) -> Optional[dt.date]:
-    for key in ("date", "event_date", "publish_date", "published_at", "field_end"):
+    for key in ("date", "event_date", "page_date", "publish_date", "published_at", "first_seen_at", "field_end"):
         parsed = parse_date(record.get(key))
         if parsed:
             return parsed
@@ -84,6 +84,15 @@ def _source_usable_for_current_event(record: Dict[str, Any]) -> bool:
     # D/E may still be retained as campaign claims, but may not independently
     # trigger a structural interpretation.
     return False
+
+
+def _corroborated_media_event(record: Dict[str, Any]) -> bool:
+    return (
+        str(record.get("record_type") or "") == "campaign_event"
+        and str(record.get("verification_status") or "") == "corroborated_media"
+        and int(record.get("independent_source_count") or 0) >= 2
+        and str(record.get("structural_use") or "") == "research_trigger_only"
+    )
 
 
 def _poll_series_key(record: Dict[str, Any]) -> Tuple[str, ...]:
@@ -330,6 +339,7 @@ class CampaignStateBuilder:
         current_candidates: List[Dict[str, Any]],
         current_events: List[Dict[str, Any]],
         polls: List[Dict[str, Any]],
+        retrieval_leads: Optional[List[Dict[str, Any]]] = None,
     ) -> Dict[str, Any]:
         if not previous:
             return {
@@ -337,6 +347,7 @@ class CampaignStateBuilder:
                 "candidate_changes": [],
                 "new_event_ids": [],
                 "new_poll_ids": [],
+                "new_retrieval_lead_ids": [],
             }
 
         previous_candidates = set(previous.get("candidate_keys") or [])
@@ -345,6 +356,11 @@ class CampaignStateBuilder:
         event_ids = {_stable_id(row, "event") for row in current_events}
         previous_polls = set(previous.get("poll_ids") or [])
         poll_ids = {_stable_id(row, "poll") for row in polls}
+        previous_retrieval = set(previous.get("retrieval_lead_ids") or [])
+        retrieval_ids = {
+            _stable_id(row, "campaign-lead")
+            for row in (retrieval_leads or [])
+        }
 
         changes: List[Dict[str, Any]] = []
         for key in sorted(candidate_keys - previous_candidates):
@@ -358,6 +374,7 @@ class CampaignStateBuilder:
             "candidate_changes": changes,
             "new_event_ids": sorted(event_ids - previous_events),
             "new_poll_ids": sorted(poll_ids - previous_polls),
+            "new_retrieval_lead_ids": sorted(retrieval_ids - previous_retrieval),
         }
 
     def build(
@@ -382,6 +399,7 @@ class CampaignStateBuilder:
             for value in (self._campaign_config().get("trigger_event_types") or DEFAULT_TRIGGER_TYPES)
         }
         verified_trigger_events: List[Dict[str, Any]] = []
+        corroborated_trigger_events: List[Dict[str, Any]] = []
         for days in windows:
             rows = self._window_events(current_events, as_of_date, int(days))
             verified = [
@@ -389,13 +407,20 @@ class CampaignStateBuilder:
                 if _source_usable_for_current_event(row)
                 and (_event_type(row) in trigger_types or not _event_type(row))
             ]
+            corroborated = [
+                row for row in rows
+                if _corroborated_media_event(row)
+                and (_event_type(row) in trigger_types or not _event_type(row))
+            ]
             window_payload[f"{int(days)}d"] = {
                 "event_count": len(rows),
                 "verified_trigger_event_count": len(verified),
+                "corroborated_media_event_count": len(corroborated),
                 "event_ids": [_stable_id(row, "event") for row in rows],
             }
             if int(days) <= 14:
                 verified_trigger_events.extend(verified)
+                corroborated_trigger_events.extend(corroborated)
 
         verified_retrieval_leads = [
             lead
@@ -405,11 +430,19 @@ class CampaignStateBuilder:
 
         poll_changes = self.same_series_poll_changes(polls)
         previous = self.store.load_latest(jurisdiction)
-        snapshot_delta = self.compare_snapshots(previous, current_candidates, current_events, polls)
+        snapshot_delta = self.compare_snapshots(
+            previous,
+            current_candidates,
+            current_events,
+            polls,
+            retrieval_leads=retrieval_leads,
+        )
 
         reasons: List[str] = []
         if verified_trigger_events:
             reasons.append("verified_recent_campaign_event")
+        if corroborated_trigger_events:
+            reasons.append("corroborated_recent_campaign_event")
         if verified_retrieval_leads:
             reasons.append("verified_current_retrieval")
         if any(item.get("change_observed") for item in poll_changes):
@@ -430,6 +463,9 @@ class CampaignStateBuilder:
             ),
             "event_ids": sorted({_stable_id(row, "event") for row in current_events}),
             "poll_ids": sorted({_stable_id(row, "poll") for row in polls}),
+            "retrieval_lead_ids": sorted(
+                {_stable_id(row, "campaign-lead") for row in retrieval_leads}
+            ),
             "windows": window_payload,
             "same_series_poll_changes": poll_changes,
             "snapshot_delta": snapshot_delta,
@@ -437,6 +473,13 @@ class CampaignStateBuilder:
             "campaign_change_reasons": reasons,
             "retrieval_lead_count": len(retrieval_leads),
             "verified_retrieval_lead_count": len(verified_retrieval_leads),
+            "corroborated_media_event_count": len(
+                {
+                    _stable_id(row, "event")
+                    for row in current_events
+                    if _corroborated_media_event(row)
+                }
+            ),
             "verified_retrieval_leads": verified_retrieval_leads,
             "retrieval_leads": retrieval_leads,
             "interpretation_boundary": (
@@ -462,6 +505,11 @@ def campaign_research_questions(snapshot: Dict[str, Any]) -> List[str]:
         questions.append(f"{jurisdiction} 最近14天的竞选事件是否改变地方组织、候选人整合或议题结构？")
     if "verified_current_retrieval" in reasons:
         questions.append(f"{jurisdiction} 最新已核实公开资料反映了哪些当前竞选变化，其结构意义能否被独立证据确认？")
+    if "corroborated_recent_campaign_event" in reasons:
+        questions.append(
+            f"{jurisdiction} 最近14天经多家独立媒体正文相互印证的竞选事件，"
+            "哪些还需要官方资料、当事人原始声明或更高等级来源进一步确认？"
+        )
     if "same_series_poll_change" in reasons:
         questions.append(f"{jurisdiction} 同一调查系列出现变化时，是否有同期竞选事件或组织变化可验证其背景？")
     if "candidate_field_change" in reasons:
