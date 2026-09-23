@@ -21,6 +21,9 @@ class CampaignStateTests(unittest.TestCase):
                     "claim_type": "endorsement",
                     "source_grade": "C",
                     "verification_status": "verified",
+                    "source": "fixture",
+                    "url": "https://example.test/e1",
+                    "last_verified_at": "2026-09-22",
                 },
                 {
                     "event_id": "e2",
@@ -181,14 +184,14 @@ class CampaignStateTests(unittest.TestCase):
             available = builder.build(
                 "新竹縣",
                 2026,
-                current_candidates=[{"candidate_name": "甲"}],
+                current_candidates=[{"candidate_name": "甲", "source_grade": "A", "last_verified_at": "2026-09-22"}],
                 current_events=[],
                 polls=[],
                 as_of="2026-09-23T00:00:00+08:00",
                 persist=False,
                 online_expected=True,
             )
-            self.assertEqual(available["campaign_state_status"], "current_data_available")
+            self.assertEqual(available["campaign_state_status"], "partial_current_data")
 
             unverified = builder.build(
                 "新竹縣",
@@ -201,7 +204,7 @@ class CampaignStateTests(unittest.TestCase):
                 persist=False,
                 online_expected=True,
             )
-            self.assertEqual(unverified["campaign_state_status"], "current_data_unverified")
+            self.assertEqual(unverified["campaign_state_status"], "insufficient_current_data")
 
             missing = builder.build(
                 "新竹縣",

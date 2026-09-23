@@ -105,6 +105,18 @@ class TestSkillStructure(unittest.TestCase):
 
 
 class TestCoreContract(unittest.TestCase):
+    def test_v14_runtime_and_policy_versions_agree(self):
+        from runtime import __version__
+        from runtime.models import SCHEMA_VERSION
+        self.assertEqual(__version__, "1.4.0")
+        self.assertEqual(SCHEMA_VERSION, "1.4.0")
+        for rel in ("config/runtime.yaml", "config/campaign_state.yaml",
+                    "config/freshness.yaml", "config/knowledge_layers.yaml",
+                    "rules/data_acquisition.yaml", "rules/local_knowledge_rules.yaml",
+                    "rules/poll_rules.yaml", "rules/writing_rules.yaml"):
+            self.assertEqual(str(load_yaml(rel)["version"]), "1.4.0")
+        self.assertEqual(str(load_yaml("config/runtime.yaml")["skill_version"]), "1.4.0")
+
     def test_skill_frontmatter_name(self):
         text = read_text("SKILL.md")
         self.assertIn("name: ogasawara-election-analysis", text)

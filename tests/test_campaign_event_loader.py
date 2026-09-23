@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from runtime.campaign_event_loader import CampaignEventLoader
+from runtime.campaign_events import CampaignEventLoader
 from runtime.election_loader import write_jsonl
 
 
@@ -58,7 +58,8 @@ class CampaignEventLoaderTests(unittest.TestCase):
             self.assertEqual(result["deduplicated_count"], 2)
             self.assertEqual(len(result["conflicts"]), 1)
             self.assertTrue(all(row["layer_id"] == "L4" for row in result["events"]))
-            self.assertTrue(all(row["usable_for_trigger"] for row in result["events"]))
+            self.assertTrue(all(not row["usable_for_trigger"] for row in result["events"]))
+            self.assertTrue(all(row["evidence_status"] == "requires_review" for row in result["events"]))
 
     def test_foreign_jurisdiction_and_missing_date_are_dropped(self):
         loader = CampaignEventLoader(Path("."))

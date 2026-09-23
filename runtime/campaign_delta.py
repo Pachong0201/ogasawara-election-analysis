@@ -46,6 +46,7 @@ def compare_campaign_snapshots(
             "removed_event_ids": [],
             "new_poll_ids": [],
             "removed_poll_ids": [],
+            "dimension_changes": {},
             "change_status": "baseline_created",
         }
 
@@ -59,14 +60,23 @@ def compare_campaign_snapshots(
     candidate_changes: List[Dict[str, str]] = []
     for key in sorted(now_candidates - before_candidates):
         candidate_changes.append({"change": "candidate_added", "candidate_key": key})
-    for key in sorted(before_candidates - now_candidates):
-        candidate_changes.append({"change": "candidate_removed", "candidate_key": key})
+    if now_candidates:
+        for key in sorted(before_candidates - now_candidates):
+            candidate_changes.append({"change": "candidate_removed", "candidate_key": key})
 
     new_events = sorted(now_events - before_events)
     removed_events = sorted(before_events - now_events)
     new_polls = sorted(now_polls - before_polls)
     removed_polls = sorted(before_polls - now_polls)
+    missing_candidates = bool(before_candidates and not now_candidates)
     changed = bool(candidate_changes or new_events or removed_events or new_polls or removed_polls)
+    dimensions: Dict[str, List[str]] = {}
+    for row in current_events:
+        event_id = str(row.get("event_id") or "")
+        if event_id in new_events:
+            dimension = str(row.get("affected_dimension") or "other")
+            dimensions.setdefault(dimension, []).append(event_id)
+    conflicts = [row for row in current_events if row.get("evidence_status") == "requires_review"]
 
     return {
         "previous_snapshot_available": True,
@@ -76,6 +86,8 @@ def compare_campaign_snapshots(
         "removed_event_ids": removed_events,
         "new_poll_ids": new_polls,
         "removed_poll_ids": removed_polls,
-        "change_status": "changed" if changed else "unchanged",
+        "dimension_changes": dimensions,
+        "removed_event_interpretation": "absence from current input; resolution requires verification" if removed_events else "",
+        "change_status": "contradictory" if conflicts else "uncertain" if removed_events or missing_candidates else "changed" if changed else "unchanged",
         "interpretation_boundary": "delta records observable input changes only; no candidate ranking or outcome inference",
     }

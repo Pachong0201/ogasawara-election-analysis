@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
 
-SCHEMA_VERSION = "1.4"
+SCHEMA_VERSION = "1.4.0"
 NORMALIZATION_VERSION = "v1.2.0"
 
 

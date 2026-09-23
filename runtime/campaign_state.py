@@ -16,6 +16,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 from .campaign_delta import compare_campaign_snapshots
 from .election_loader import safe_component
+from .freshness import is_fresh
 from .models import parse_date, utc_now_iso
 from .source_registry import OfflineRetrievalError, RetrievalBackend
 
@@ -76,15 +77,26 @@ def _event_type(record: Dict[str, Any]) -> str:
 
 
 def _source_usable_for_current_event(record: Dict[str, Any]) -> bool:
+    if record.get("usable_for_trigger") is False or record.get("evidence_status") == "requires_review":
+        return False
+    if not (record.get("source") or record.get("source_id")) or not (
+        record.get("url") or record.get("reference") or record.get("source_reference")
+    ):
+        return False
     grade = str(record.get("source_grade") or "").upper()
     verification = str(record.get("verification_status") or "").lower()
     if grade in {"A", "B"}:
-        return verification in {"", "verified", "confirmed"}
+        return verification in {"verified", "confirmed", "official_record", "verified_fact"}
     if grade == "C":
-        return verification in {"verified", "confirmed"}
+        return verification in {"verified", "confirmed", "official_record", "verified_fact"}
     # D/E may still be retained as campaign claims, but may not independently
     # trigger a structural interpretation.
     return False
+
+
+def _verified_by_as_of(record: Dict[str, Any], as_of: dt.date) -> bool:
+    verified_at = parse_date(record.get("last_verified_at") or record.get("verified_at"))
+    return verified_at is not None and verified_at <= as_of
 
 
 def _poll_series_key(record: Dict[str, Any]) -> Tuple[str, ...]:
@@ -94,6 +106,8 @@ def _poll_series_key(record: Dict[str, Any]) -> Tuple[str, ...]:
         str(record.get("method") or ""),
         str(record.get("sample_frame") or ""),
         str(record.get("question_wording") or record.get("question") or ""),
+        str(record.get("weighting") or ""),
+        str(record.get("sampling") or ""),
     )
 
 
@@ -150,11 +164,12 @@ class CampaignStateStore:
     def __init__(self, repo_root: Path):
         self.repo_root = Path(repo_root)
 
-    def _base(self, jurisdiction: str) -> Path:
-        return self.repo_root / "cache" / "campaign_state" / safe_component(jurisdiction)
+    def _base(self, jurisdiction: str, target_year: Optional[int] = None) -> Path:
+        base = self.repo_root / "cache" / "campaign_state" / safe_component(jurisdiction)
+        return base / str(target_year) if target_year is not None else base
 
-    def load_latest(self, jurisdiction: str) -> Optional[Dict[str, Any]]:
-        path = self._base(jurisdiction) / "latest.json"
+    def load_latest(self, jurisdiction: str, target_year: Optional[int] = None) -> Optional[Dict[str, Any]]:
+        path = self._base(jurisdiction, target_year) / "latest.json"
         if not path.exists():
             return None
         try:
@@ -164,10 +179,14 @@ class CampaignStateStore:
         return payload if isinstance(payload, dict) else None
 
     def save(self, jurisdiction: str, snapshot: Dict[str, Any]) -> Path:
-        base = self._base(jurisdiction)
+        base = self._base(jurisdiction, snapshot.get("target_year"))
         base.mkdir(parents=True, exist_ok=True)
-        stamp = str(snapshot.get("as_of") or utc_now_iso()).replace(":", "").replace("+", "_")
+        stamp = safe_component(str(snapshot.get("as_of") or utc_now_iso())).replace(":", "").replace("+", "_")
         archive = base / f"{stamp}.json"
+        sequence = 1
+        while archive.exists():
+            archive = base / f"{stamp}.{sequence}.json"
+            sequence += 1
         text = json.dumps(snapshot, ensure_ascii=False, indent=2, default=str)
         archive.write_text(text, encoding="utf-8")
         (base / "latest.json").write_text(text, encoding="utf-8")
@@ -211,12 +230,15 @@ class CampaignStateBuilder:
         jurisdiction: str,
         target_year: int,
         allow_online: bool,
+        as_of: Optional[str] = None,
     ) -> Tuple[List[Dict[str, Any]], List[str]]:
         if not allow_online or self.mode == "offline" or self.retrieval_backend is None:
             return [], []
         leads: List[Dict[str, Any]] = []
         warnings: List[str] = []
-        for query in self.build_retrieval_queries(jurisdiction, target_year):
+        cutoff = parse_date(as_of) if as_of else None
+        for base_query in self.build_retrieval_queries(jurisdiction, target_year):
+            query = f"{base_query} 截至{cutoff.isoformat()}" if cutoff else base_query
             try:
                 results = self.retrieval_backend.search(
                     query,
@@ -233,10 +255,16 @@ class CampaignStateBuilder:
                 if not isinstance(result, dict):
                     result = {"summary": str(result)}
                 lead = dict(result)
+                published = _event_date(lead)
+                if cutoff and published and published > cutoff:
+                    continue
                 lead.setdefault("query", query)
                 lead.setdefault("jurisdiction", jurisdiction)
                 lead.setdefault("layer_id", "L4")
-                lead.setdefault("verification_status", "lead_only")
+                lead["as_of"] = as_of
+                lead["reported_verification_status"] = lead.get("verification_status")
+                lead["verification_status"] = "lead_only"
+                lead.setdefault("retrieved_at", utc_now_iso())
                 lead.setdefault("lead_id", _stable_id(lead, "campaign-lead"))
                 leads.append(lead)
         return leads, warnings
@@ -247,7 +275,7 @@ class CampaignStateBuilder:
         as_of_date: dt.date,
         days: int,
     ) -> List[Dict[str, Any]]:
-        lower = as_of_date - dt.timedelta(days=days)
+        lower = as_of_date - dt.timedelta(days=days - 1)
         rows: List[Dict[str, Any]] = []
         for event in events:
             date = _event_date(event)
@@ -263,7 +291,10 @@ class CampaignStateBuilder:
             date = _event_date(poll)
             if not date:
                 continue
-            grouped[_poll_series_key(poll)].append(poll)
+            key = _poll_series_key(poll)
+            if not all(key[:5]):
+                continue
+            grouped[key].append(poll)
 
         changes: List[Dict[str, Any]] = []
         observe_pp = float(self._campaign_config().get("same_series_poll_change_observe_pp", 3.0))
@@ -287,7 +318,10 @@ class CampaignStateBuilder:
                         "method": key[2],
                         "sample_frame": key[3],
                         "question_wording": key[4],
+                        "weighting": key[5],
+                        "sampling": key[6],
                     },
+                    "series_id": hashlib.sha256(json.dumps(key, ensure_ascii=False).encode()).hexdigest()[:16],
                     "previous_poll_id": _stable_id(previous, "poll"),
                     "current_poll_id": _stable_id(current, "poll"),
                     "previous_date": str(_event_date(previous)),
@@ -303,42 +337,6 @@ class CampaignStateBuilder:
             )
         return changes
 
-    @staticmethod
-    def compare_snapshots(
-        previous: Optional[Dict[str, Any]],
-        current_candidates: List[Dict[str, Any]],
-        current_events: List[Dict[str, Any]],
-        polls: List[Dict[str, Any]],
-    ) -> Dict[str, Any]:
-        if not previous:
-            return {
-                "previous_snapshot_available": False,
-                "candidate_changes": [],
-                "new_event_ids": [],
-                "new_poll_ids": [],
-            }
-
-        previous_candidates = set(previous.get("candidate_keys") or [])
-        candidate_keys = {_candidate_key(row) for row in current_candidates if _candidate_key(row)}
-        previous_events = set(previous.get("event_ids") or [])
-        event_ids = {_stable_id(row, "event") for row in current_events}
-        previous_polls = set(previous.get("poll_ids") or [])
-        poll_ids = {_stable_id(row, "poll") for row in polls}
-
-        changes: List[Dict[str, Any]] = []
-        for key in sorted(candidate_keys - previous_candidates):
-            changes.append({"change": "candidate_added", "candidate_key": key})
-        for key in sorted(previous_candidates - candidate_keys):
-            changes.append({"change": "candidate_removed", "candidate_key": key})
-
-        return {
-            "previous_snapshot_available": True,
-            "previous_as_of": previous.get("as_of"),
-            "candidate_changes": changes,
-            "new_event_ids": sorted(event_ids - previous_events),
-            "new_poll_ids": sorted(poll_ids - previous_polls),
-        }
-
     def build(
         self,
         jurisdiction: str,
@@ -351,13 +349,18 @@ class CampaignStateBuilder:
         persist: Optional[bool] = None,
         online_expected: bool = False,
         event_conflicts: Optional[List[Dict[str, Any]]] = None,
+        election_type: str = "unspecified",
     ) -> Dict[str, Any]:
         as_of = as_of or utc_now_iso()
-        as_of_date = parse_date(as_of) or dt.datetime.now(dt.timezone.utc).date()
+        as_of_date = parse_date(as_of)
+        if as_of_date is None:
+            raise ValueError("as_of must be an ISO date or timestamp")
         retrieval_leads = retrieval_leads or []
         event_conflicts = event_conflicts or []
         windows = self._campaign_config().get("windows_days") or list(DEFAULT_WINDOWS)
 
+        current_events = [row for row in current_events if _event_date(row) and _event_date(row) <= as_of_date]
+        polls = [row for row in polls if _event_date(row) and _event_date(row) <= as_of_date]
         window_payload: Dict[str, Any] = {}
         trigger_types = {
             str(value).lower()
@@ -369,6 +372,8 @@ class CampaignStateBuilder:
             verified = [
                 row for row in rows
                 if _source_usable_for_current_event(row)
+                and _verified_by_as_of(row, as_of_date)
+                and is_fresh(row, kind="campaign_event", now=as_of_date)
                 and (_event_type(row) in trigger_types or not _event_type(row))
             ]
             window_payload[f"{int(days)}d"] = {
@@ -379,39 +384,67 @@ class CampaignStateBuilder:
             if int(days) <= 14:
                 verified_trigger_events.extend(verified)
 
-        verified_retrieval_leads = [
-            lead
-            for lead in retrieval_leads
-            if _source_usable_for_current_event(lead) and _event_date(lead)
-        ]
+        # Search results are discovery leads even if a backend claims verification.
+        verified_retrieval_leads: List[Dict[str, Any]] = []
 
-        poll_changes = self.same_series_poll_changes(polls)
-        previous = self.store.load_latest(jurisdiction)
+        verified_polls = [
+            row for row in polls
+            if str(row.get("source_grade") or "").upper() in {"A", "B", "C"}
+            and str(row.get("verification_status") or "").lower()
+            in {"verified", "confirmed", "official_record", "verified_fact"}
+        ]
+        poll_changes = [
+            row for row in self.same_series_poll_changes(verified_polls)
+            if is_fresh(next(p for p in polls if _stable_id(p, "poll") == row["current_poll_id"]),
+                        kind="poll", now=as_of_date)
+        ]
+        previous = self.store.load_latest(jurisdiction, target_year) or self.store.load_latest(jurisdiction)
+        if previous and previous.get("target_year") not in (None, target_year):
+            previous = None
         snapshot_delta = compare_campaign_snapshots(previous, current_candidates, current_events, polls)
 
         reasons: List[str] = []
         if verified_trigger_events:
             reasons.append("verified_recent_campaign_event")
-        if verified_retrieval_leads:
-            reasons.append("verified_current_retrieval")
         if any(item.get("change_observed") for item in poll_changes):
             reasons.append("same_series_poll_change")
-        if snapshot_delta.get("candidate_changes"):
+        if snapshot_delta.get("candidate_changes") and self.mode != "offline" and any(
+            _verified_by_as_of(row, as_of_date)
+            and
+            is_fresh(row, kind="candidate_profile", now=as_of_date)
+            and str(row.get("source_grade") or "").upper() in {"A", "B", "C"}
+            for row in current_candidates
+        ):
             reasons.append("candidate_field_change")
-        if snapshot_delta.get("new_event_ids"):
+        if snapshot_delta.get("new_event_ids") and any(
+            row["event_id"] in snapshot_delta["new_event_ids"]
+            and _source_usable_for_current_event(row)
+            and _verified_by_as_of(row, as_of_date)
+            and is_fresh(row, kind="campaign_event", now=as_of_date)
+            for row in current_events
+        ):
             reasons.append("new_event_since_previous_snapshot")
-        if event_conflicts:
-            reasons.append("conflicting_current_evidence")
 
         verified_30d = int(window_payload.get("30d", {}).get("verified_trigger_event_count", 0))
-        fresh_poll_count = sum(
-            1 for poll in polls
-            if str(poll.get("freshness_status") or "").lower() == "fresh"
-        )
-        if current_candidates or verified_30d or fresh_poll_count:
-            campaign_state_status = "current_data_available"
-        elif online_expected and retrieval_leads:
-            campaign_state_status = "current_data_unverified"
+        fresh_poll_count = sum(1 for poll in polls if is_fresh(poll, kind="poll", now=as_of_date)
+                               and str(poll.get("source_grade") or "").upper() in {"A", "B", "C"}
+                               and str(poll.get("verification_status") or "").lower() in
+                               {"verified", "confirmed", "official_record", "verified_fact"})
+        fresh_candidates = [row for row in current_candidates
+                            if (str(row.get("source_grade") or "").upper() in {"A", "B"}
+                                or (str(row.get("source_grade") or "").upper() == "C"
+                                    and int(row.get("independent_source_count") or 0) >= 2))
+                            and _verified_by_as_of(row, as_of_date)
+                            and is_fresh(row, kind="candidate_registration" if
+                                         str(row.get("candidate_status") or "").lower() == "registered"
+                                         else "candidate_profile", now=as_of_date)]
+        if self.mode == "offline":
+            campaign_state_status = "insufficient_current_data"
+            reasons = []
+        elif verified_30d and fresh_candidates:
+            campaign_state_status = "current"
+        elif verified_30d or fresh_candidates or fresh_poll_count:
+            campaign_state_status = "partial_current_data"
         else:
             campaign_state_status = "insufficient_current_data"
 
@@ -420,13 +453,18 @@ class CampaignStateBuilder:
             "as_of": as_of,
             "jurisdiction": jurisdiction,
             "target_year": int(target_year),
+            "election": {"election_type": election_type, "target_year": int(target_year)},
             "campaign_state_status": campaign_state_status,
+            "current_candidates": current_candidates,
+            "current_events": current_events,
+            "polls": polls,
             "candidate_count": len(current_candidates),
             "candidate_keys": sorted(
                 {_candidate_key(row) for row in current_candidates if _candidate_key(row)}
             ),
             "event_ids": sorted({_stable_id(row, "event") for row in current_events}),
             "poll_ids": sorted({_stable_id(row, "poll") for row in polls}),
+            "fresh_verified_poll_count": fresh_poll_count,
             "windows": window_payload,
             "same_series_poll_changes": poll_changes,
             "snapshot_delta": snapshot_delta,
@@ -437,6 +475,8 @@ class CampaignStateBuilder:
             "verified_retrieval_lead_count": len(verified_retrieval_leads),
             "verified_retrieval_leads": verified_retrieval_leads,
             "retrieval_leads": retrieval_leads,
+            "evidence": [ref for row in current_events for ref in row.get("evidence_refs", [])],
+            "provenance": {"as_of": as_of, "source": "campaign_event_cache_and_host_retrieval"},
             "interpretation_boundary": (
                 "campaign-state signals trigger further research; they do not rank candidates, "
                 "predict the winner, or turn campaign claims into facts"
@@ -458,8 +498,6 @@ def campaign_research_questions(snapshot: Dict[str, Any]) -> List[str]:
     reasons = set(snapshot.get("campaign_change_reasons") or [])
     if "verified_recent_campaign_event" in reasons:
         questions.append(f"{jurisdiction} 最近14天的竞选事件是否改变地方组织、候选人整合或议题结构？")
-    if "verified_current_retrieval" in reasons:
-        questions.append(f"{jurisdiction} 最新已核实公开资料反映了哪些当前竞选变化，其结构意义能否被独立证据确认？")
     if "same_series_poll_change" in reasons:
         questions.append(f"{jurisdiction} 同一调查系列出现变化时，是否有同期竞选事件或组织变化可验证其背景？")
     if "candidate_field_change" in reasons:

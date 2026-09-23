@@ -6,27 +6,44 @@ required:
   - jurisdiction
   - date
   - claim_type
+  - speaker
+  - subject
+  - affected_dimension
+  - source
   - source_grade
   - verification_status
+  - reference
+  - retrieved_at
+  - last_verified_at
 properties:
   event_id: {type: string, minLength: 1}
   jurisdiction: {type: string, minLength: 1}
   date: {type: string, format: date}
   claim_type: {type: string, minLength: 1}
+  event_type: {type: string}
+  affected_dimension:
+    enum: [candidate_field, organization, coalition, campaign_operations, issue, legal_judicial, polling, other]
   speaker: {type: string}
   subject: {type: string}
   claim: {type: string}
   summary: {type: string}
   source_id: {type: string}
   source: {type: string}
+  reference: {type: string}
   source_grade:
     type: string
     enum: [A, B, C, D, E]
   verification_status:
     type: string
-    enum: [verified, confirmed, lead_only, campaign_claim, unverified, contradicted]
+    enum: [verified, confirmed, verified_fact, official_record, lead_only, campaign_claim, unverified, contradicted, disputed]
   layer_id:
     const: L4
   event_fingerprint: {type: string}
+  evidence_refs:
+    type: array
+    items: {type: object}
+  evidence_status: {enum: [requires_review, resolved]}
+  retrieved_at: {type: string}
+  last_verified_at: {type: string}
   usable_for_trigger: {type: boolean}
 additionalProperties: true

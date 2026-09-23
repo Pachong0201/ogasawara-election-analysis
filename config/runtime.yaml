@@ -143,28 +143,3 @@ metrics:
 campaign_state:
   enabled: true
   policy_file: config/campaign_state.yaml
-  persist_snapshots: true
-  windows_days: [7, 14, 30]
-  retrieval_recency_days: 30
-  same_series_poll_change_observe_pp: 3.0
-  trigger_event_types:
-    - nomination
-    - candidate_registration
-    - candidate_withdrawal
-    - endorsement
-    - party_cooperation
-    - alliance
-    - alliance_break
-    - campaign_org
-    - campaign_headquarters
-    - debate
-    - policy
-    - major_issue
-    - judicial_event
-    - controversy
-  retrieval_queries:
-    - "{jurisdiction} {year} 選舉 候選人 最新動態"
-    - "{jurisdiction} {year} 選舉 地方人物 支持 組織"
-    - "{jurisdiction} {year} 選舉 政黨合作 競選總部"
-    - "{jurisdiction} {year} 選舉 政策 爭議 地方議題"
-    - "{jurisdiction} {year} 選舉 民調"

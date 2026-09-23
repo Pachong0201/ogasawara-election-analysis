@@ -67,6 +67,10 @@ default_output_sections:
 style:
   current_campaign_first: true
   require_as_of: true
+  current_data_gate:
+    current: 可在证据范围内分析当前态势
+    partial_current_data: 逐项注明现时证据缺口，不作完整当前态势判断
+    insufficient_current_data: 仅可分析历史结构及待核线索，不得称当前选战已掌握
   judgment_first: true
   small_entry_point: true
   facts_embedded_in_judgement: true

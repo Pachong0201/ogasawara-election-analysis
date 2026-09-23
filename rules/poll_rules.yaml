@@ -66,7 +66,8 @@ rules:
     statement: 同一调查系列在方法口径稳定时，可以描述跨期点估计变化。
     enforcement: >
       只有 pollster、commissioner、method、sample_frame 与 question_wording
-      一致时，才可计算 same-series delta；必须同时保留调查期、未决定比例、
+      一致时，才可计算 same-series delta；已披露 weighting、sampling 也须一致。
+      必须同时保留调查期、未决定比例、
       样本与误差限制。该 delta 只用于识别当前状态变化，不得写成胜负趋势，
       也不得据此自行判断统计显著。
   - id: POLL-10

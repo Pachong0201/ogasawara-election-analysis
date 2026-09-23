@@ -18,7 +18,11 @@ properties:
   target_year: {type: integer}
   campaign_state_status:
     type: string
-    enum: [current_data_available, current_data_unverified, insufficient_current_data]
+    enum: [current, partial_current_data, insufficient_current_data]
+  election: {type: object}
+  current_candidates: {type: array, items: {type: object}}
+  current_events: {type: array, items: {type: object}}
+  polls: {type: array, items: {type: object}}
   windows: {type: object}
   campaign_change_trigger: {type: boolean}
   campaign_change_reasons:
@@ -32,4 +36,6 @@ properties:
     type: array
     items: {type: object}
   interpretation_boundary: {type: string}
+  evidence: {type: array, items: {type: object}}
+  provenance: {type: object}
 additionalProperties: true

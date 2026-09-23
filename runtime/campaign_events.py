@@ -1,188 +1,154 @@
-"""Normalize, deduplicate and audit live campaign events for V1.4.0."""
+"""Canonical L4 campaign event ingestion, evidence retention and conflict audit."""
 
 from __future__ import annotations
 
-import datetime as dt
 import hashlib
 import json
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from pathlib import Path
+from typing import Any, Dict, Iterable, List, Optional
 
+from .election_loader import load_jsonl
 from .models import parse_date
 
-SOURCE_RANK = {"A": 5, "B": 4, "C": 3, "D": 2, "E": 1, "": 0}
-VERIFICATION_RANK = {
-    "official_record": 6,
-    "verified_fact": 6,
-    "verified": 6,
-    "confirmed": 6,
-    "reported_by_media": 4,
-    "campaign_claim": 2,
-    "lead_only": 1,
-    "unverified": 1,
-    "unknown": 0,
-    "disputed": 0,
-}
-
-TYPE_ALIASES = {
-    "registration": "candidate_registration",
-    "campaign_office": "campaign_headquarters",
-    "primary": "nomination",
-    "local_event": "major_issue",
-}
-
-DIMENSION_BY_TYPE = {
-    "nomination": "candidate_field",
-    "candidate_registration": "candidate_field",
-    "candidate_withdrawal": "candidate_field",
-    "endorsement": "organization",
-    "party_cooperation": "coalition",
-    "alliance": "coalition",
-    "alliance_break": "coalition",
-    "campaign_org": "campaign_operations",
-    "campaign_headquarters": "campaign_operations",
-    "debate": "issue",
-    "policy": "issue",
-    "major_issue": "issue",
-    "judicial_event": "legal_judicial",
-    "controversy": "issue",
-    "poll": "polling",
-}
+TYPES = set("nomination candidate_registration candidate_withdrawal endorsement party_cooperation alliance alliance_break campaign_org campaign_headquarters debate policy major_issue judicial_event controversy poll other".split())
+ALIASES = {"registration": "candidate_registration", "campaign_office": "campaign_headquarters", "primary": "nomination", "local_event": "major_issue"}
+DIMENSIONS = dict.fromkeys(("nomination", "candidate_registration", "candidate_withdrawal"), "candidate_field")
+DIMENSIONS.update(endorsement="organization", party_cooperation="coalition", alliance="coalition", alliance_break="coalition", campaign_org="campaign_operations", campaign_headquarters="campaign_operations", debate="issue", policy="issue", major_issue="issue", controversy="issue", judicial_event="legal_judicial", poll="polling")
+GRADE = {"A": 5, "B": 4, "C": 3, "D": 2, "E": 1}
+VERIFIED = {"verified", "confirmed", "verified_fact", "official_record"}
 
 
-def _text(record: Dict[str, Any], *keys: str) -> str:
-    for key in keys:
-        value = record.get(key)
-        if value is not None and str(value).strip():
-            return str(value).strip()
-    return ""
+def _get(row: Dict[str, Any], *keys: str) -> str:
+    return next((str(row[k]).strip() for k in keys if row.get(k) is not None and str(row[k]).strip()), "")
 
 
-def _event_type(record: Dict[str, Any]) -> str:
-    raw = _text(record, "claim_type", "event_type", "type").lower()
-    return TYPE_ALIASES.get(raw, raw or "other")
+def _identity(row: Dict[str, Any]) -> str:
+    # Source URLs and supplied IDs identify evidence, not the underlying event.
+    fields = ("jurisdiction", "date", "claim_type", "speaker", "subject", "claim_value")
+    seed = json.dumps([str(row.get(k) or "").strip().casefold() for k in fields], ensure_ascii=False)
+    return "campaign-event-" + hashlib.sha256(seed.encode()).hexdigest()[:20]
 
 
-def _event_date(record: Dict[str, Any]) -> Optional[dt.date]:
-    for key in ("date", "event_date", "publish_date", "published_at"):
-        parsed = parse_date(record.get(key))
-        if parsed:
-            return parsed
-    return None
-
-
-def _quality(record: Dict[str, Any]) -> Tuple[int, int]:
-    grade = _text(record, "source_grade").upper()
-    verification = _text(record, "verification_status").lower()
-    return VERIFICATION_RANK.get(verification, 0), SOURCE_RANK.get(grade, 0)
-
-
-def _fingerprint(record: Dict[str, Any], jurisdiction: str) -> str:
-    explicit = _text(record, "event_id", "record_id")
-    if explicit:
-        return explicit
-    payload = {
-        "jurisdiction": jurisdiction,
-        "date": str(_event_date(record) or ""),
-        "type": _event_type(record),
-        "speaker": _text(record, "speaker", "actor", "candidate_name"),
-        "target": _text(record, "target", "subject"),
-        "title": _text(record, "title", "claim_text", "summary"),
-    }
-    seed = json.dumps(payload, ensure_ascii=False, sort_keys=True)
-    return "campaign-event-" + hashlib.sha256(seed.encode("utf-8")).hexdigest()[:16]
-
-
-def _evidence_ref(record: Dict[str, Any]) -> Dict[str, str]:
+def _evidence(row: Dict[str, Any]) -> Dict[str, Any]:
     return {
-        "source": _text(record, "source", "source_id"),
-        "source_grade": _text(record, "source_grade").upper(),
-        "verification_status": _text(record, "verification_status").lower(),
-        "reference": _text(record, "url", "source_reference", "raw_reference"),
+        "source": _get(row, "source", "source_id"),
+        "source_grade": _get(row, "source_grade").upper(),
+        "verification_status": _get(row, "verification_status").lower(),
+        "reference": _get(row, "url", "reference", "source_reference", "raw_reference"),
+        "retrieved_at": _get(row, "retrieved_at"),
+        "last_verified_at": _get(row, "last_verified_at"),
+        "independent_source_count": row.get("independent_source_count", 0),
+        "original_event_id": _get(row, "event_id", "record_id"),
     }
 
 
-def standardize_campaign_events(
-    records: Iterable[Dict[str, Any]],
-    jurisdiction: str,
-    as_of: Optional[str] = None,
-) -> Dict[str, Any]:
-    """Return canonical L4 events plus dedupe/conflict audit metadata."""
+def _usable(row: Dict[str, Any]) -> bool:
+    return (row.get("source_grade") in {"A", "B", "C"}
+            and row.get("verification_status") in VERIFIED
+            and bool(row.get("source") or row.get("source_id"))
+            and bool(row.get("reference") or row.get("url") or row.get("source_reference")))
 
-    as_of_date = parse_date(as_of) if as_of else None
-    selected: Dict[str, Dict[str, Any]] = {}
-    evidence: Dict[str, List[Dict[str, str]]] = {}
-    duplicate_count = 0
-    excluded_future = 0
-    invalid_count = 0
-    contradiction_pairs: List[Dict[str, str]] = []
 
-    for raw in records:
-        if not isinstance(raw, dict):
-            invalid_count += 1
-            continue
-        date = _event_date(raw)
-        if not date:
-            invalid_count += 1
-            continue
-        if as_of_date and date > as_of_date:
-            excluded_future += 1
-            continue
+class CampaignEventLoader:
+    """Normalize once, deduplicate same claims and quarantine conflicting claims."""
 
-        event_id = _fingerprint(raw, jurisdiction)
-        event_type = _event_type(raw)
-        canonical = dict(raw)
-        canonical.update(
-            {
-                "event_id": event_id,
-                "jurisdiction": _text(raw, "jurisdiction", "county", "region") or jurisdiction,
-                "date": date.isoformat(),
-                "claim_type": event_type,
-                "speaker": _text(raw, "speaker", "actor", "candidate_name"),
-                "source_grade": _text(raw, "source_grade").upper(),
-                "verification_status": _text(raw, "verification_status").lower() or "unknown",
-                "affected_dimension": _text(raw, "affected_dimension")
-                or DIMENSION_BY_TYPE.get(event_type, "other"),
-            }
-        )
+    def __init__(self, repo_root: Path):
+        self.repo_root = Path(repo_root)
 
-        evidence.setdefault(event_id, []).append(_evidence_ref(raw))
-        previous = selected.get(event_id)
-        if previous is None:
-            selected[event_id] = canonical
-        else:
-            duplicate_count += 1
-            if _quality(canonical) > _quality(previous):
-                selected[event_id] = canonical
+    def normalize(self, record: Dict[str, Any], jurisdiction: str, source_kind: str = "cache") -> Optional[Dict[str, Any]]:
+        if not isinstance(record, dict):
+            return None
+        region = _get(record, "jurisdiction", "county", "region") or jurisdiction
+        date = next((parsed for key in ("date", "event_date", "publish_date", "published_at")
+                     if (parsed := parse_date(record.get(key)))), None)
+        if region != jurisdiction or not date:
+            return None
+        raw_type = _get(record, "claim_type", "event_type", "type").lower()
+        kind = ALIASES.get(raw_type, raw_type)
+        kind = kind if kind in TYPES else "other"
+        row = dict(record)
+        row.update(jurisdiction=jurisdiction, date=date.isoformat(), claim_type=kind,
+                   speaker=_get(record, "speaker", "actor", "candidate_name"),
+                   subject=_get(record, "subject", "target"),
+                   source=_get(record, "source", "source_id"),
+                   reference=_get(record, "url", "reference", "source_reference", "raw_reference"),
+                   retrieved_at=_get(record, "retrieved_at"),
+                   last_verified_at=_get(record, "last_verified_at"),
+                   claim_value=_get(record, "claim_value", "position", "support_status", "claim", "summary", "title"),
+                   source_grade=_get(record, "source_grade").upper() or "E",
+                   verification_status=_get(record, "verification_status").lower() or "lead_only",
+                   affected_dimension=_get(record, "affected_dimension") or DIMENSIONS.get(kind, "other"),
+                   layer_id="L4", source_kind=source_kind)
+        row["event_id"] = _identity(row)
+        row["event_fingerprint"] = row["event_id"]
+        row["usable_for_trigger"] = _usable(row)
+        return row
 
-        contradicted = _text(raw, "contradicts_event_id", "contradiction_of")
-        if contradicted:
-            contradiction_pairs.append(
-                {
-                    "event_id": event_id,
-                    "contradicts_event_id": contradicted,
-                }
-            )
+    def audit(self, records: Iterable[Dict[str, Any]], jurisdiction: str, as_of: Optional[str] = None) -> Dict[str, Any]:
+        raw = list(records)
+        cutoff = parse_date(as_of) if as_of else None
+        selected: Dict[str, Dict[str, Any]] = {}
+        evidence: Dict[str, List[Dict[str, Any]]] = {}
+        normalized_count = excluded_future = 0
+        for record in raw:
+            row = self.normalize(record, jurisdiction)
+            if row is None:
+                continue
+            if cutoff and parse_date(row["date"]) > cutoff:
+                excluded_future += 1
+                continue
+            normalized_count += 1
+            key = row["event_id"]
+            evidence.setdefault(key, []).append(_evidence(record))
+            quality = lambda item: (int(item["verification_status"] in VERIFIED), GRADE.get(item["source_grade"], 0))
+            if key not in selected or quality(row) > quality(selected[key]):
+                selected[key] = row
+        groups: Dict[tuple[str, ...], List[Dict[str, Any]]] = {}
+        original_ids: Dict[str, str] = {}
+        for key, row in selected.items():
+            row["evidence_refs"] = list({json.dumps(ref, sort_keys=True): ref for ref in evidence[key]}.values())
+            row["evidence_count"] = len(row["evidence_refs"])
+            row["usable_for_trigger"] = any(_usable(ref) for ref in evidence[key])
+            for ref in evidence[key]:
+                if ref["original_event_id"]:
+                    original_ids[ref["original_event_id"]] = key
+            group = tuple(row[field] for field in ("jurisdiction", "date", "claim_type", "speaker", "subject"))
+            groups.setdefault(group, []).append(row)
+        conflicts: List[Dict[str, Any]] = []
+        disputed: set[str] = set()
+        for rows in groups.values():
+            values = {row["claim_value"] for row in rows if row["claim_value"]}
+            if len(values) > 1:
+                ids = sorted(row["event_id"] for row in rows)
+                conflicts.append({"event_ids": ids, "claim_values": sorted(values), "resolution": "requires_review"})
+                disputed.update(ids)
+        for record in raw:
+            if not isinstance(record, dict):
+                continue
+            a = original_ids.get(_get(record, "event_id", "record_id"))
+            b = original_ids.get(_get(record, "contradicts_event_id", "contradiction_of"))
+            if a and b and a != b:
+                ids = sorted((a, b))
+                if not any(item["event_ids"] == ids for item in conflicts):
+                    conflicts.append({"event_ids": ids, "resolution": "requires_review"})
+                disputed.update(ids)
+        for key in disputed:
+            selected[key]["usable_for_trigger"] = False
+            selected[key]["evidence_status"] = "requires_review"
+        events = sorted(selected.values(), key=lambda row: (row["date"], row["event_id"]))
+        return {"events": events, "conflicts": conflicts, "raw_count": len(raw),
+                "normalized_count": normalized_count, "deduplicated_count": len(events),
+                "excluded_future": excluded_future,
+                "warnings": [f"{len(conflicts)} campaign event conflict set(s) require review"] if conflicts else []}
 
-    normalized = []
-    for event_id, event in selected.items():
-        refs = []
-        seen_refs = set()
-        for ref in evidence.get(event_id, []):
-            key = tuple(ref.values())
-            if key not in seen_refs:
-                refs.append(ref)
-                seen_refs.add(key)
-        event["evidence_refs"] = refs
-        event["evidence_count"] = len(refs)
-        normalized.append(event)
-
-    normalized.sort(key=lambda row: (row.get("date", ""), row.get("event_id", "")))
-    return {
-        "records": normalized,
-        "input_count": len(list(records)) if isinstance(records, list) else len(normalized) + duplicate_count + invalid_count + excluded_future,
-        "output_count": len(normalized),
-        "duplicates_removed": duplicate_count,
-        "invalid_count": invalid_count,
-        "future_events_excluded": excluded_future,
-        "contradictions": contradiction_pairs,
-    }
+    def load_cache(self, jurisdiction: str, as_of: Optional[str] = None) -> Dict[str, Any]:
+        files: List[str] = []
+        raw: List[Dict[str, Any]] = []
+        for path in sorted((self.repo_root / "cache" / "events").glob("*.jsonl")):
+            rows = load_jsonl(path)
+            if rows:
+                files.append(str(path))
+                raw.extend(rows)
+        report = self.audit(raw, jurisdiction, as_of=as_of)
+        report["files"] = files
+        return report
