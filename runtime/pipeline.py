@@ -356,6 +356,7 @@ class AnalysisPipeline:
             task.jurisdiction,
             task.target_year,
             allow_online=online,
+            current_candidates=current_candidates,
         )
         campaign_event_resolution = self.campaign_event_resolver.extract(
             campaign_leads,
