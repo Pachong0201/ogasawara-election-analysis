@@ -10,6 +10,7 @@ import datetime as dt
 import json
 import time
 from typing import Any, Callable, Dict, List, Optional
+from urllib.error import HTTPError
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 from urllib.request import Request, urlopen
 
@@ -101,12 +102,14 @@ class GDELTNewsBackend(RetrievalBackend):
     def __init__(self, timeout: float = 6.0, max_records: int = 10,
                  opener: Optional[Callable[..., Any]] = None,
                  body_fetcher: Optional[ArticleBodyFetcher] = None,
-                 max_body_fetches: int = 6):
+                 max_body_fetches: int = 6,
+                 rate_limit_retry_delay: float = 6.0):
         self.timeout = max(1.0, min(float(timeout), 15.0))
         self.max_records = max(1, min(int(max_records), 25))
         self.opener = opener or urlopen
         self.body_fetcher = body_fetcher or ArticleBodyFetcher()
         self.max_body_fetches = max(0, min(int(max_body_fetches), 12))
+        self.rate_limit_retry_delay = max(0.0, min(float(rate_limit_retry_delay), 15.0))
         self._cooldown_until = 0.0
         self._seen: Dict[str, Dict[str, Any]] = {}
         self._last_enrichment: Dict[str, int] = {"attempted": 0, "read": 0}
@@ -137,17 +140,30 @@ class GDELTNewsBackend(RetrievalBackend):
             ENDPOINT + "?" + urlencode(params),
             headers={"User-Agent": "ogasawara-election-analysis/1.4 (+public-news-discovery)", "Accept": "application/json"},
         )
-        try:
-            with self.opener(request, timeout=self.timeout) as response:
-                body = response.read(2_000_001)
-            if len(body) > 2_000_000:
-                raise ValueError("GDELT response too large")
-            payload = json.loads(body)
-            if not isinstance(payload, dict) or not isinstance(payload.get("articles", []), list):
-                raise ValueError("invalid GDELT ArticleList response")
-        except (OSError, ValueError, TypeError) as exc:
-            self._cooldown_until = time.monotonic() + 60
-            raise OfflineRetrievalError(f"GDELT news retrieval unavailable: {type(exc).__name__}") from exc
+        # GDELT DOC enforces roughly one request per five seconds and answers
+        # violations with HTTP 429. A single spaced retry absorbs the soft
+        # limit; every other failure stays fail-fast.
+        attempts = 2
+        for attempt in range(attempts):
+            try:
+                with self.opener(request, timeout=self.timeout) as response:
+                    body = response.read(2_000_001)
+                if len(body) > 2_000_000:
+                    raise ValueError("GDELT response too large")
+                payload = json.loads(body)
+                if not isinstance(payload, dict) or not isinstance(payload.get("articles", []), list):
+                    raise ValueError("invalid GDELT ArticleList response")
+                break
+            except HTTPError as exc:
+                detail = f"{type(exc).__name__}({exc.code})"
+                if exc.code == 429 and attempt + 1 < attempts:
+                    time.sleep(self.rate_limit_retry_delay)
+                    continue
+                self._cooldown_until = time.monotonic() + 60
+                raise OfflineRetrievalError(f"GDELT news retrieval unavailable: {detail}") from exc
+            except (OSError, ValueError, TypeError) as exc:
+                self._cooldown_until = time.monotonic() + 60
+                raise OfflineRetrievalError(f"GDELT news retrieval unavailable: {type(exc).__name__}") from exc
 
         records: List[Dict[str, Any]] = []
         for row in payload.get("articles", [])[:self.max_records]:

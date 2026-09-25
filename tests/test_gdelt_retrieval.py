@@ -26,6 +26,46 @@ class Response(io.BytesIO):
 
 
 class TestGDELTNewsBackend(unittest.TestCase):
+    def test_rate_limit_429_retries_once_then_recovers(self):
+        import urllib.error
+
+        calls = []
+        attempts = {"count": 0}
+
+        def opener(request, timeout):
+            attempts["count"] += 1
+            calls.append(request)
+            if attempts["count"] == 1:
+                raise urllib.error.HTTPError(
+                    request.full_url, 429, "Too Many Requests", {}, io.BytesIO(b"limited"))
+            return Response(json.dumps({"articles": [
+                {"url": "https://news.test/story", "title": "高雄選舉新聞", "seendate": "20260923T010203Z"},
+            ]}).encode())
+
+        backend = GDELTNewsBackend(
+            opener=opener, max_body_fetches=0, rate_limit_retry_delay=0)
+        rows = backend.search("高雄市 選舉", jurisdiction="高雄市")
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(len(rows), 1)
+        self.assertTrue(backend.metadata()["available"])
+
+    def test_rate_limit_429_twice_enters_cooldown(self):
+        import urllib.error
+
+        calls = []
+
+        def opener(request, timeout):
+            calls.append(request)
+            raise urllib.error.HTTPError(
+                request.full_url, 429, "Too Many Requests", {}, io.BytesIO(b"limited"))
+
+        backend = GDELTNewsBackend(
+            opener=opener, max_body_fetches=0, rate_limit_retry_delay=0)
+        with self.assertRaises(OfflineRetrievalError) as ctx:
+            backend.search("高雄市 選舉", jurisdiction="高雄市")
+        self.assertEqual(len(calls), 2)
+        self.assertIn("HTTPError(429)", str(ctx.exception))
+
     def test_campaign_queries_return_deduplicated_unverified_headlines(self):
         requests = []
         def opener(request, timeout):

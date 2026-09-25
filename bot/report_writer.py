@@ -158,7 +158,18 @@ class DeterministicReportWriter(BaseReportWriter):
                     lines.append("证据摘录：" + str(item.get("evidence_excerpt"))[:420])
         if retrieval.get("backend") == "gdelt_doc_news":
             if not retrieval.get("available", True):
-                lines.append("实时新闻检索：本次未成功；以下不代表最新选情。")
+                reason = next(
+                    (
+                        warning
+                        for warning in payload.get("warnings") or []
+                        if "GDELT news retrieval unavailable" in str(warning)
+                    ),
+                    None,
+                )
+                if reason:
+                    lines.append(f"实时新闻检索失败（{reason}）；以下不代表最新选情。")
+                else:
+                    lines.append("实时新闻检索：本次未成功；以下不代表最新选情。")
             if leads:
                 read_count = sum(item.get("body_status") == "read" for item in leads)
                 lines.append(f"检索线索{len(leads)}条，已读取正文{read_count}条；报道内容仍待交叉核实。")
