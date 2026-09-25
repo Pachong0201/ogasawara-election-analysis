@@ -19,3 +19,9 @@ cache/raw/
 
 # Bot conversation state
 cache/**/*.sqlite3
+
+# Local dependency target used when the host Python is externally managed
+.deps/
+
+# Bot runtime log
+cache/**/*.log
