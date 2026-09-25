@@ -11,6 +11,21 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
+def _load_dotenv(path: Path) -> None:
+    """Load a local .env file if present; real environment variables win."""
+    if not path.is_file():
+        return
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip().strip("'\"")
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
 @dataclass(frozen=True)
 class BotConfig:
     repo_root: Path
@@ -31,6 +46,7 @@ class BotConfig:
         repo_root = Path(
             os.getenv("OGASAWARA_REPO_ROOT") or Path(__file__).resolve().parents[1]
         ).resolve()
+        _load_dotenv(repo_root / ".env")
         db_raw = os.getenv("FEISHU_BOT_CONVERSATION_DB", "cache/bot/conversations.sqlite3")
         db_path = Path(db_raw)
         if not db_path.is_absolute():

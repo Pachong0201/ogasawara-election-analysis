@@ -123,6 +123,14 @@ python -m pip install -r requirements.txt
 python -m bot
 ```
 
+宿主 Python 受外部管理（无法 pip install）时，依赖已装入 `.deps/`，用启动脚本即可：
+
+```bash
+./scripts/run_feishu_bot.sh
+```
+
+脚本会注入 `PYTHONPATH=.deps` 并使用系统 Python。启动前先在仓库根目录创建 `.env`（已被 .gitignore 忽略）填写 `LARK_APP_ID` / `LARK_APP_SECRET`；`bot/config.py` 会自动加载 `.env`，真实环境变量优先于 `.env`。
+
 启动成功后，SDK 会建立飞书长连接。
 
 ## 交互示例

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import logging
 from typing import Any
 
@@ -17,6 +18,12 @@ from runtime.gdelt_retrieval import GDELTNewsBackend
 
 
 LOG = logging.getLogger("ogasawara.feishu")
+
+
+def _send_uuid(prefix: str, message_id: str) -> str:
+    """Deterministic idempotency key within Feishu's 50-char uuid limit."""
+    digest = hashlib.md5(message_id.encode("utf-8")).hexdigest()
+    return f"{prefix}-{digest}"
 
 
 def _inbound(message: Any) -> InboundMessage:
@@ -52,22 +59,50 @@ def build_service(config: BotConfig) -> ElectionBotService:
     )
 
 
-async def run() -> None:
+async def run(feishu_channel_cls: Any = None, inbound_config: Any = None) -> None:
     config = BotConfig.from_env(require_feishu=True)
 
     # Import lazily so the core bot package and tests remain usable without the
-    # Feishu SDK installed in lightweight/offline environments.
-    from lark_channel import FeishuChannel
+    # Feishu SDK installed in lightweight/offline environments.  The class is
+    # normally loaded by main() *before* asyncio.run(); importing it while the
+    # loop is already running makes the SDK cache the running loop and fail
+    # later with "This event loop is already running".
+    if feishu_channel_cls is None:
+        from lark_channel import FeishuChannel, InboundConfig
+
+        feishu_channel_cls = FeishuChannel
+        inbound_config = inbound_config or InboundConfig(emit_raw_events=True)
 
     service = build_service(config)
-    channel = FeishuChannel(
+    channel = feishu_channel_cls(
         app_id=config.lark_app_id,
         app_secret=config.lark_app_secret,
-        require_mention=config.require_mention,
+        inbound=inbound_config,
     )
+
+    async def on_raw(data: Any) -> None:
+        LOG.info("feishu raw event: %r", str(data)[:800])
+
+    channel.on("raw", on_raw)
+
+    async def on_raw_message_event(payload: Any) -> None:
+        LOG.info("feishu unwrapped im.message.receive_v1: %r", str(payload)[:1200])
+
+    try:
+        channel.on_raw_event("im.message.receive_v1", on_raw_message_event)
+    except Exception:
+        LOG.exception("failed to install unwrapped message-event debug hook")
 
     async def on_message(message: Any) -> None:
         inbound = _inbound(message)
+        LOG.info(
+            "feishu inbound event: id=%s chat=%s type=%s mentioned_bot=%s text=%r",
+            inbound.message_id,
+            inbound.chat_id,
+            inbound.chat_type,
+            inbound.mentioned_bot,
+            (inbound.text or "")[:120],
+        )
         if not inbound.message_id or not inbound.chat_id:
             LOG.warning("ignored malformed inbound message")
             return
@@ -83,7 +118,7 @@ async def run() -> None:
                         "reply_to": inbound.message_id,
                         "reply_in_thread": inbound.chat_type in {"group", "topic"},
                         "receive_id_type": "chat_id",
-                        "uuid": f"ogasawara-ack-{inbound.message_id}",
+                        "uuid": _send_uuid("ogasawara-ack", inbound.message_id),
                     },
                 )
                 ack_id = str(getattr(ack, "message_id", "") or "")
@@ -100,9 +135,23 @@ async def run() -> None:
                     "reply_to": inbound.message_id,
                     "reply_in_thread": inbound.chat_type in {"group", "topic"},
                     "receive_id_type": "chat_id",
-                    "uuid": f"ogasawara-final-{inbound.message_id}",
+                    "uuid": _send_uuid("ogasawara-final", inbound.message_id),
                 },
             )
+            if not result.success:
+                LOG.warning(
+                    "final reply send failed (%s); retrying as plain text",
+                    result.error,
+                )
+                result = await channel.send(
+                    inbound.chat_id,
+                    {"text": reply.text},
+                    {
+                        "reply_to": inbound.message_id,
+                        "receive_id_type": "chat_id",
+                        "uuid": _send_uuid("ogasawara-final-text", inbound.message_id),
+                    },
+                )
             result_id = str(getattr(result, "message_id", "") or "")
             if result_id:
                 service.link_outbound_message(result_id, reply.conversation_key)
@@ -131,7 +180,11 @@ def main() -> None:
         level=logging.INFO,
         format="%(asctime)s %(levelname)s %(name)s %(message)s",
     )
-    asyncio.run(run())
+    # Load the SDK synchronously so its websocket client captures a loop that
+    # is not currently running; then start the asyncio entry point.
+    from lark_channel import FeishuChannel, InboundConfig
+
+    asyncio.run(run(FeishuChannel, InboundConfig(emit_raw_events=True)))
 
 
 if __name__ == "__main__":
