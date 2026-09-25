@@ -366,6 +366,10 @@ class AnalysisPipeline:
             current_candidates=current_candidates,
         )
         resolved_events = list(campaign_event_resolution.get("events") or [])
+        resolve_events = getattr(self.retrieval_backend, "resolve_events", None)
+        if callable(resolve_events):
+            resolved_events = resolve_events(resolved_events, task.jurisdiction, task.target_year, task.election_type, as_of)
+            campaign_event_resolution["events"] = resolved_events
 
         # Keep canonical verified/cache events and media-body research events distinct,
         # while deduplicating only when they expose the same explicit event id.
@@ -418,10 +422,11 @@ class AnalysisPipeline:
             regions=regions or None,
             research_questions=questions,
             allow_online=online and research_triggered,
+            as_of=as_of,
         )
         retrieval_metadata = (
             self.retrieval_backend.metadata()
-            if online and self.retrieval_backend is not None
+            if self.retrieval_backend is not None
             and callable(getattr(self.retrieval_backend, "metadata", None))
             else {"backend": "disabled", "lead_only": True}
         )

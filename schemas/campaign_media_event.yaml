@@ -37,12 +37,12 @@ properties:
     type: array
     items: {type: string}
   verification_status:
-    enum: [single_source_media, corroborated_media]
+    enum: [single_source_media, corroborated_media, requires_review]
   source_grade:
     enum: [C]
   source_id: {type: string}
   evidence_status:
-    enum: [single_source_report, cross_source_corroborated]
+    enum: [single_source_report, cross_source_corroborated, conflict_or_correction]
   structural_use:
     enum: [context_only, research_trigger_only]
   source_urls:

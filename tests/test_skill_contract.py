@@ -128,7 +128,7 @@ class TestCoreContract(unittest.TestCase):
         self.assertNotIn("corroborated_media", canonical_status)
         self.assertNotIn("single_source_media", canonical_status)
         media_status = set(media["properties"]["verification_status"]["enum"])
-        self.assertEqual(media_status, {"single_source_media", "corroborated_media"})
+        self.assertEqual(media_status, {"single_source_media", "corroborated_media", "requires_review"})
         self.assertEqual(set(media["properties"]["structural_use"]["enum"]),
                          {"context_only", "research_trigger_only"})
 

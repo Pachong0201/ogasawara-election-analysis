@@ -163,7 +163,9 @@ class ArticleBodyFetcher:
                 break
             except HTTPError as exc:
                 if exc.code not in (301, 302, 303, 307, 308):
-                    return {"body_status": f"http_{exc.code}"}
+                    from .news_utils import retry_seconds
+                    return {"body_status": f"http_{exc.code}",
+                            "retry_after_seconds": retry_seconds(exc.headers.get("Retry-After"))}
                 if redirects == 2:
                     return {"body_status": "redirect_limit"}
                 target = urljoin(current_url, str(exc.headers.get("Location") or ""))

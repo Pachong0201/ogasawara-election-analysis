@@ -34,7 +34,7 @@
 - “更新一下”“最近7天有什么变化”重新运行当前分析；
 - “民调怎么看”“给我看依据”优先复用当前线程 Context；
 - “最新民调怎么看”会刷新 Context；
-- 在线分析通过 GDELT DOC 2.0 发现近 30 天新闻，再读取公开文章正文；正文先经过证据摘录、候选人／地点实体识别与跨来源聚类，生成结构化 Campaign Event 后进入 Campaign State；
+- 默认由独立多源采集器持续收集新闻，分析查询本地库；正文先经过证据摘录、候选人／地点实体识别与跨来源聚类，生成结构化 Campaign Event 后进入 Campaign State；
 - 没有 OpenAI API Key 时仍可运行，返回确定性结构化摘要；
 - 配置 OpenAI API Key 后，通过 Responses API 生成自然语言研判；
 - 飞书 App Secret / OpenAI API Key 只从环境变量读取，不写入仓库。
@@ -61,7 +61,7 @@ export LARK_APP_SECRET="..."
 export OPENAI_API_KEY="..."        # 可选
 export OPENAI_WRITER_MODEL="gpt-5.6-sol"
 export OGASAWARA_BOT_MODE="online"
-export OGASAWARA_BOT_RETRIEVAL="gdelt"
+export OGASAWARA_BOT_RETRIEVAL="local"
 export OGASAWARA_MAX_ARTICLE_FETCHES="6"
 export FEISHU_REQUIRE_MENTION="true"
 ```
@@ -75,22 +75,17 @@ export FEISHU_REQUIRE_MENTION="true"
 
 ## 实时新闻检索
 
-机器人通过 [GDELT DOC 2.0 ArticleList](https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/) 查询县市选情新闻。每次按县市、主题和近 30 天窗口检索；限时 6 秒，单次至多接收 10 条，跨主题按链接去重。接口失败时，分析继续运行，并在输出中标示本次检索未成功；60 秒后允许重试。
+默认使用持久本地新闻库，必须独立运行 `python -m runtime.news_collector`。旧 `.env` 显式写了 `gdelt` 的部署需改成 `local`。采集配置、Windows运行方式、首次补采和错误诊断见 [多源新闻采集](news-collection.md)。
 
-GDELT 返回标题、链接和首次发现时间，**不提供文章正文或核实后的发表时间**。机器人对检索结果按主题轮流取样，默认最多读取 6 篇公开原网页正文；只访问内置的台湾新闻及官方站点，按 robots.txt 判断是否允许访问，限制文件大小与超时，只读取公开 HTML，不发送登录凭据、不跳过付费墙。普通站内跳转最多两次，跳转后的域名也会重新检查。不支持的站点及被拒绝的页面会标明读取状态。正文提取使用 Trafilatura；仅在网页明确标注发布时间时记录 `page_date`。全文上限 25,000 字符，超出时标为 `content_truncated`。
-
-读取成功的结果标记 `body_status=read`、`verification_status=body_read_unverified`，仍保持 `source_grade=E`；读取失败的结果保留标题但不提供正文。机器人可据正文说明**媒体报道了什么**，不得仅凭单篇报道将说法写成已证实竞选事件，也不能把标题线索用于候选人登记或民调数据。相同正文会标出重复，输出展示正文摘录、原始链接、页面日期和首次发现时间。现有中选会及民调适配器继续按原有验证规则运行。
-
-默认允许的来源域名在 `runtime/article_body.py` 中维护。对不在名单上的来源，正文状态为 `unsupported_domain`；应审查其公开访问规则后再扩充域名。检索未命中或正文读取失败，都不能推断近期没有选战变化。
-
-本地以模拟接口测试适配器；GitHub Actions 已同时通过全量测试和 Runtime ONLINE E2E。实际部署机仍需检查到飞书、GDELT、新闻站点、中选会及 OpenAI（如启用）的网络可达性。GDELT 检索无需额外搜索 API 密钥；LLM 仍只用于表达。
+RSS/Atom、栏目列表和叶级 Sitemap 发现链接，公开正文经原有 ArticleBodyFetcher 读取后入库。机器人查询不等待新闻站点，offline 也可读取本地已采集文章。未读取正文或时间未知的文章不能生成新鲜媒体事件。GDELT仅在显式配置时启用。
 
 ## 实时事件解析链
 
 当前在线链路固定为：
 
 ```text
-GDELT Discovery
+Background RSS / Listing / Sitemap Discovery
+→ Durable Queue / Local News Store
 → ArticleBodyFetcher
 → CampaignEventResolver
 → evidence excerpt
@@ -121,6 +116,12 @@ GDELT Discovery
 ```bash
 python -m pip install -r requirements.txt
 python -m bot
+```
+
+另一个终端运行：
+
+```bash
+python -m runtime.news_collector
 ```
 
 宿主 Python 受外部管理（无法 pip install）时，依赖已装入 `.deps/`，用启动脚本即可：

@@ -248,7 +248,9 @@ class CampaignStateBuilder:
         as_of: Optional[str] = None,
         current_candidates: Optional[Iterable[Dict[str, Any]]] = None,
     ) -> Tuple[List[Dict[str, Any]], List[str]]:
-        if not allow_online or self.mode == "offline" or self.retrieval_backend is None:
+        if self.retrieval_backend is None:
+            return [], []
+        if (not allow_online or self.mode == "offline") and not getattr(self.retrieval_backend, "supports_offline", False):
             return [], []
         leads: List[Dict[str, Any]] = []
         warnings: List[str] = []
@@ -256,9 +258,9 @@ class CampaignStateBuilder:
         query_rows: List[List[Dict[str, Any]]] = []
         cutoff = parse_date(as_of) if as_of else None
         candidate_names = [
-            _candidate_key(row)
+            str(row.get("candidate_name") or row.get("name") or row.get("姓名") or "").strip()
             for row in (current_candidates or [])
-            if _candidate_key(row)
+            if row.get("candidate_name") or row.get("name") or row.get("姓名")
         ]
         for base_query in self.build_retrieval_queries(jurisdiction, target_year):
             query = f"{base_query} 截至{cutoff.isoformat()}" if cutoff else base_query
@@ -267,6 +269,7 @@ class CampaignStateBuilder:
                     query,
                     recency_days=int(self._campaign_config().get("retrieval_recency_days", 30)),
                     purpose="live_campaign_state",
+                    as_of=as_of,
                     jurisdiction=jurisdiction,
                     candidate_names=candidate_names,
                 )
@@ -552,6 +555,7 @@ class CampaignStateBuilder:
             "campaign_state_status": campaign_state_status,
             "current_candidates": current_candidates,
             "current_events": current_events,
+            "event_versions": {str(row["event_id"]): row["event_version"] for row in current_events if row.get("event_id") and row.get("event_version")},
             "polls": polls,
             "candidate_count": len(current_candidates),
             "candidate_keys": sorted(

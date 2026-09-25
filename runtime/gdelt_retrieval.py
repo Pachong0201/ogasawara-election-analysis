@@ -11,12 +11,13 @@ import json
 import time
 from typing import Any, Callable, Dict, List, Optional
 from urllib.error import HTTPError
-from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
+from urllib.parse import urlencode, urlparse
 from urllib.request import Request, urlopen
 
 from .models import utc_now_iso
 from .source_registry import OfflineRetrievalError, RetrievalBackend
 from .article_body import ArticleBodyFetcher
+from .news_utils import _canonical_url
 
 
 ENDPOINT = "https://api.gdeltproject.org/api/v2/doc/doc"
@@ -73,20 +74,6 @@ def _candidate_clause(query: str, candidate_names: Any) -> str:
     if not names:
         return ""
     return "(" + " OR ".join(f'"{name}"' for name in names) + ")"
-
-
-def _canonical_url(raw: Any) -> str:
-    try:
-        parsed = urlparse(str(raw or ""))
-        if parsed.scheme not in {"http", "https"} or not parsed.hostname:
-            return ""
-        # Preserve article identifiers in query strings; strip common trackers.
-        pairs = [(key, value) for key, value in parse_qsl(parsed.query, keep_blank_values=True)
-                 if not key.lower().startswith("utm_") and key.lower() not in {"fbclid", "gclid"}]
-        return urlunparse((parsed.scheme, parsed.hostname.lower() + (f":{parsed.port}" if parsed.port else ""),
-                           parsed.path or "/", "", urlencode(sorted(pairs)), ""))
-    except ValueError:
-        return ""
 
 
 def _first_seen(raw: Any) -> str:

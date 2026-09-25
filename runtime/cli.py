@@ -133,6 +133,9 @@ def _cmd_run(args: argparse.Namespace) -> int:
         retrieval_backend = HostRetrievalBackend(
             inbox_path=Path(args.retrieval_inbox).resolve()
         )
+    if retrieval_backend is None and getattr(args, "retrieval_provider", "disabled") != "disabled":
+        from .news_retrieval import build_retrieval_backend
+        retrieval_backend = build_retrieval_backend(args.retrieval_provider, repo_root or Path(__file__).resolve().parents[1], args.mode)
     pipeline = AnalysisPipeline(
         repo_root=repo_root,
         mode=args.mode,
@@ -258,6 +261,7 @@ def build_parser() -> argparse.ArgumentParser:
         default="",
         help="JSON/JSONL host-web retrieval inbox for local-knowledge research questions",
     )
+    run.add_argument("--retrieval-provider", choices=["local", "gdelt", "disabled"], default="local")
     run.set_defaults(func=_cmd_run)
 
     ingest = sub.add_parser(

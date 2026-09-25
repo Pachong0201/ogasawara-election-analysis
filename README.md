@@ -86,7 +86,10 @@ ogasawara-election-analysis/
 │  ├─ campaign_delta.py # 连续快照的可观察变化
 │  ├─ campaign_event.py # 正文证据摘录、实体解析、跨来源聚类；只生成媒体研究事件
 │  ├─ campaign_events.py # 标准L4事件归一化、去重与冲突审计
-│  ├─ gdelt_retrieval.py # 近期新闻发现与正文读取编排
+│  ├─ news_collector.py # 后台多源采集与持久任务调度
+│  ├─ news_store.py # SQLite文章版本、任务、事件与证据库
+│  ├─ news_retrieval.py # 默认本地检索后端，离线可读
+│  ├─ gdelt_retrieval.py # 可选GDELT后端，不再默认启用
 │  ├─ article_body.py # 受控公开网页正文读取
 │  ├─ host_retrieval.py  # 宿主Web检索JSON/JSONL桥
 │  ├─ freshness.py
@@ -392,7 +395,7 @@ python3 -m unittest discover -s tests -v
 → thread级 Conversation State
 → Intent Router
 → 小笠原 AnalysisPipeline
-→ GDELT 新闻发现 + 公开正文读取
+→ 本地新闻库（后台多源采集、公开正文读取）
 → Campaign Event / Campaign State
 → Analysis Context
 → OpenAI Writer（可选）
@@ -417,3 +420,7 @@ python3 -m unittest discover -s tests -v
 python -m pip install -r requirements.txt
 python -m bot
 ```
+
+## 多源新闻采集
+
+默认后端改为 `local`，请同步修改现有 `.env` 中的 `OGASAWARA_BOT_RETRIEVAL`，并独立启动 `python -m runtime.news_collector`。机器人读取本地新闻库；采集器负责来源发现、正文、重试与版本保存。GDELT保持可选。部署、补采、研究交接与覆盖边界见 [多源采集说明](docs/news-collection.md)。当前种子包括中央社、公视和联合，尚不代表22县市或30日历史完整覆盖。

@@ -25,3 +25,6 @@ cache/**/*.sqlite3
 
 # Bot runtime log
 cache/**/*.log
+
+# SQLite WAL sidecars are runtime data too.
+cache/**/*.sqlite3-*

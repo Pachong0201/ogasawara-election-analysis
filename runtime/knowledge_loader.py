@@ -133,7 +133,7 @@ class KnowledgeLoader:
             questions.append(f"为什么 {region} 出现 {metric} 异常？")
         return questions or ["当地是否存在可解释票型异常的地方政治机制？"]
 
-    def search_and_cache(self, county: str, research_questions: Iterable[str]) -> Dict[str, Any]:
+    def search_and_cache(self, county: str, research_questions: Iterable[str], as_of: Optional[str] = None) -> Dict[str, Any]:
         questions = [str(question) for question in (research_questions or []) if str(question).strip()]
         leads: List[Dict[str, Any]] = []
         warnings: List[str] = []
@@ -142,7 +142,7 @@ class KnowledgeLoader:
 
         for question in questions:
             try:
-                results = self.retrieval_backend.search(question, jurisdiction=county, purpose="local_knowledge")
+                results = self.retrieval_backend.search(question, jurisdiction=county, purpose="local_knowledge", as_of=as_of)
             except OfflineRetrievalError as exc:
                 warnings.append(str(exc))
                 break
@@ -205,12 +205,13 @@ class KnowledgeLoader:
         regions: Optional[Iterable[str]] = None,
         research_questions: Optional[Iterable[str]] = None,
         allow_online: bool = True,
+        as_of: Optional[str] = None,
     ) -> Dict[str, Any]:
         local = self.load_local_knowledge(county, regions=regions, research_questions=research_questions)
         if local["sufficient"] or not allow_online or self.mode == "offline":
             return local
         questions = list(research_questions or local["research_questions"]) or self.build_research_questions([])
-        retrieval = self.search_and_cache(county, questions)
+        retrieval = self.search_and_cache(county, questions, as_of=as_of)
         local["retrieval"] = retrieval
         if retrieval.get("leads"):
             local["sufficient"] = False

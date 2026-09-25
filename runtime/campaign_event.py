@@ -105,6 +105,8 @@ def _norm_text(value: Any) -> str:
     text = str(value or "").strip()
     return (
         text.replace("臺", "台")
+        .replace("蘭", "兰").replace("義", "义").replace("東", "东")
+        .replace("雲", "云").replace("蓮", "莲").replace("門", "门").replace("連", "连")
         .replace("縣", "县")
         .replace("區", "区")
         .replace("鄉", "乡")
@@ -135,6 +137,8 @@ def _record_date(record: Dict[str, Any]) -> Tuple[Optional[dt.date], str]:
         ("first_seen_at", "first_seen_at"),
         ("retrieved_at", "retrieved_at"),
     ):
+        if record.get("source_kind") and key in ("first_seen_at", "retrieved_at"):
+            continue
         parsed = parse_date(record.get(key))
         if parsed:
             return parsed, basis
@@ -355,6 +359,34 @@ def _event_id(
     return f"campaign-event-{digest}"
 
 
+def _independent_publishers(members):
+    """Union matching publishers, wire attribution and near-identical bodies."""
+    parent = list(range(len(members)))
+
+    def root(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    keys, bodies = [], []
+    for item in members:
+        content = str(item.lead.get("content") or "")
+        key = item.lead.get("original_publisher_id") or item.lead.get("publisher_id") or item.domain
+        # Syndicated CNA credit; an ordinary mention of CNA does not suffice.
+        if re.search(r"(?:中央社記者|中央社记者|中央社[）)]|來源[：:]\s*中央社|来源[：:]\s*中央社)", content):
+            key = "cna"
+        if "cna.com.tw" in str(key):
+            key = "cna"
+        keys.append(str(key))
+        bodies.append(_fingerprint_tokens(content))
+    for i in range(len(members)):
+        for j in range(i):
+            if keys[i] == keys[j] or _jaccard(bodies[i], bodies[j]) >= 0.85:
+                parent[root(i)] = root(j)
+    return sorted({keys[root(i)] for i in range(len(members)) if keys[root(i)]})
+
+
 class CampaignEventResolver:
     """Create conservative campaign events from article bodies."""
 
@@ -379,6 +411,10 @@ class CampaignEventResolver:
         for lead in leads or []:
             if not isinstance(lead, dict):
                 continue
+            kind = lead.get("source_kind")
+            if kind and (kind != "media" or lead.get("source_grade") != "C"):
+                ignored["non_media_lead"] = ignored.get("non_media_lead", 0) + 1
+                continue
             status = str(lead.get("body_status") or "")
             content = str(lead.get("content") or "").strip()
             if status != "read" or not content:
@@ -391,10 +427,10 @@ class CampaignEventResolver:
                 ignored["no_date"] = ignored.get("no_date", 0) + 1
                 continue
 
-            title = str(lead.get("title") or lead.get("page_title") or "").strip()
+            title = str(lead.get("page_title") or lead.get("title") or "").strip()
             query = str(lead.get("query") or "")
             combined = f"{title}\n{content}"
-            event_type, _ = _event_type(combined, query=query)
+            event_type, _ = _event_type(combined, query="" if kind else query)
             candidates = _resolve_candidates(combined, names)
             locations = _resolve_locations(combined, jurisdiction)
             excerpt = _evidence_excerpt(
@@ -438,9 +474,13 @@ class CampaignEventResolver:
             event_date = dates[-1]
             candidates = sorted({name for item in members for name in item.candidates})
             locations = sorted({name for item in members for name in item.locations})
-            domains = sorted({item.domain for item in members if item.domain})
+            domains = _independent_publishers(members)
+            requires_review = any(
+                item.lead.get("requires_review") or re.search(r"否認|否认|澄清|撤稿|更正", item.excerpt)
+                for item in members
+            )
             excerpts = [item.excerpt for item in members if item.excerpt]
-            corroborated = len(domains) >= self.corroboration_min_sources
+            corroborated = len(domains) >= self.corroboration_min_sources and not requires_review
 
             sources = []
             for item in members:
@@ -450,6 +490,10 @@ class CampaignEventResolver:
                         "title": str(lead.get("title") or ""),
                         "url": str(lead.get("url") or ""),
                         "domain": item.domain,
+                        "source_kind": lead.get("source_kind", "media"),
+                        "source_grade": lead.get("source_grade", "E"),
+                        "article_version": lead.get("article_version"),
+                        "date_basis": item.date_basis,
                         "page_date": str(lead.get("page_date") or ""),
                         "first_seen_at": str(lead.get("first_seen_at") or ""),
                         "body_status": str(lead.get("body_status") or ""),
@@ -481,12 +525,12 @@ class CampaignEventResolver:
                     "independent_source_count": len(domains),
                     "independence_keys": domains,
                     "verification_status": (
-                        "corroborated_media" if corroborated else "single_source_media"
+                        "requires_review" if requires_review else ("corroborated_media" if corroborated else "single_source_media")
                     ),
                     "source_grade": "C",
                     "source_id": "campaign_event_resolver",
                     "evidence_status": (
-                        "cross_source_corroborated" if corroborated else "single_source_report"
+                        "conflict_or_correction" if requires_review else ("cross_source_corroborated" if corroborated else "single_source_report")
                     ),
                     "structural_use": (
                         "research_trigger_only" if corroborated else "context_only"

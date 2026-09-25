@@ -54,6 +54,7 @@ def compare_campaign_snapshots(
             "previous_snapshot_available": False,
             "candidate_changes": [],
             "new_event_ids": [],
+            "updated_event_ids": [],
             "removed_event_ids": [],
             "new_poll_ids": [],
             "removed_poll_ids": [],
@@ -86,6 +87,10 @@ def compare_campaign_snapshots(
         for key in sorted(before_candidates - now_candidates):
             candidate_changes.append({"change": "candidate_removed", "candidate_key": key})
 
+    before_versions = previous.get("event_versions") or {}
+    updated_events = sorted(str(row["event_id"]) for row in current_events
+                            if row.get("event_version") and before_versions.get(str(row.get("event_id")))
+                            and before_versions[str(row["event_id"])] != row["event_version"])
     new_events = sorted(now_events - before_events)
     removed_events = sorted(before_events - now_events)
     new_polls = sorted(now_polls - before_polls)
@@ -95,7 +100,7 @@ def compare_campaign_snapshots(
     missing_candidates = bool(before_candidates and not now_candidates)
     changed = bool(
         candidate_changes or new_events or removed_events or new_polls
-        or removed_polls or new_retrieval or new_corroborated
+        or removed_polls or new_retrieval or new_corroborated or updated_events
     )
     dimensions: Dict[str, List[str]] = {}
     for row in current_events:
@@ -103,13 +108,14 @@ def compare_campaign_snapshots(
         if event_id in new_events:
             dimension = str(row.get("affected_dimension") or "other")
             dimensions.setdefault(dimension, []).append(event_id)
-    conflicts = [row for row in current_events if row.get("evidence_status") == "requires_review"]
+    conflicts = [row for row in current_events if row.get("evidence_status") == "requires_review" or row.get("verification_status") == "requires_review"]
 
     return {
         "previous_snapshot_available": True,
         "previous_as_of": previous.get("as_of"),
         "candidate_changes": candidate_changes,
         "new_event_ids": new_events,
+        "updated_event_ids": updated_events,
         "removed_event_ids": removed_events,
         "new_poll_ids": new_polls,
         "removed_poll_ids": removed_polls,
