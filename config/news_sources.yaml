@@ -51,3 +51,34 @@ sources:
     source_kind: media
     source_grade: C
     interval_seconds: 900
+  # County-level coverage seeds (2026 county-mayor races).
+  - id: cna_local_listing
+    adapter: listing
+    url: https://www.cna.com.tw/list/aloc.aspx
+    article_domains: [cna.com.tw]
+    article_pattern: '/news/aloc/[0-9]+\.aspx'
+    publisher_id: cna
+    source_kind: media
+    source_grade: C
+    interval_seconds: 900
+    max_links: 100
+  - id: cna_kaohsiung_listing
+    adapter: listing
+    url: https://www.cna.com.tw/list/aik-s.aspx
+    article_domains: [cna.com.tw]
+    article_pattern: '/news/(aloc|aipl|acn)/[0-9]+\.aspx'
+    publisher_id: cna
+    source_kind: media
+    source_grade: C
+    interval_seconds: 900
+    max_links: 100
+  - id: udn_local
+    adapter: listing
+    url: https://udn.com/news/cate/2/6641
+    article_pattern: '/news/story/[0-9]+/[0-9]+'
+    article_domains: [udn.com]
+    publisher_id: udn
+    source_kind: media
+    source_grade: C
+    interval_seconds: 900
+    max_links: 100
