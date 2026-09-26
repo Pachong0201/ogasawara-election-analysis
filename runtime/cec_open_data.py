@@ -176,6 +176,18 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _election_geography_version(election_type: str, year: int, archive_sha: str) -> str:
+    """Version observed election geography by contest, year and source bytes.
+
+    This is narrower than claiming that administrative boundaries stayed
+    legally unchanged across several elections. A different official archive
+    produces a different token, forcing cross-term comparisons to inspect
+    geography compatibility instead of silently sharing one generic version.
+    """
+    token = str(archive_sha or "").strip()[:12] or "unknown"
+    return f"cec-{election_type}-{int(year)}-{token}"
+
+
 class CECArchive:
     """Download/cache/open the official CEC election ZIP."""
 
@@ -567,7 +579,9 @@ class CECOpenDataAdapter(ElectionDataSource):
                         "source_reference": self.archive.source_url,
                         "retrieved_at": utc_now_iso(),
                         "verified_at": utc_now_iso(),
-                        "boundary_version": "cec-township-2014-2024-v1",
+                        "boundary_version": _election_geography_version(
+                            query.election_type, int(query.year), archive_sha
+                        ),
                         "time_scope": "2022",
                         "normalization_version": "v1.2.0",
                         "region_id": region_id,
@@ -688,7 +702,9 @@ class CECOpenDataAdapter(ElectionDataSource):
                     "source_reference": self.archive.source_url,
                     "retrieved_at": utc_now_iso(),
                     "verified_at": utc_now_iso(),
-                    "boundary_version": "cec-township-2014-2024-v1",
+                    "boundary_version": _election_geography_version(
+                            query.election_type, int(query.year), archive_sha
+                        ),
                     "time_scope": str(query.year),
                     "normalization_version": "v1.2.0",
                     "region_id": region_id,

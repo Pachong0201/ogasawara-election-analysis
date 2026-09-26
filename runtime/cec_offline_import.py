@@ -15,6 +15,7 @@ import hashlib
 import io
 import json
 import re
+import shutil
 import sys
 import zipfile
 from pathlib import Path
@@ -29,8 +30,9 @@ from .cec_open_data import (
 )
 from .county_knowledge import COUNTIES
 from .election_loader import ElectionLoader, election_file_path, load_jsonl, safe_component
+from .election_normalizer import normalize_records
 from .matrix_builder import build_cross_level_matrix, build_historical_matrix
-from .models import utc_now_iso
+from .models import DataQuery, utc_now_iso
 from .source_registry import SourceRegistry
 
 
@@ -105,6 +107,51 @@ def validate_archive(path: Path) -> Dict[str, Any]:
         "size": size,
         "member_count": member_count,
         "source_url": DEFAULT_ARCHIVE_SOURCE_URL,
+    }
+
+
+def preserve_archive_artifact(
+    repo_root: Path,
+    path: Path,
+    *,
+    publication_date: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Keep an immutable local copy and a tracked provenance manifest by SHA256."""
+    repo_root = Path(repo_root)
+    path = Path(path)
+    info = validate_archive(path)
+    sha = str(info["sha256"])
+    raw_target = repo_root / "cache" / "raw" / "cec" / "imports" / sha / path.name
+    raw_target.parent.mkdir(parents=True, exist_ok=True)
+    if not raw_target.exists() or _sha256(raw_target) != sha:
+        shutil.copy2(path, raw_target)
+
+    manifest = {
+        "schema_version": "1.0.0",
+        "artifact_type": "cec_votedata_zip",
+        "source_id": "cec_open_data",
+        "source_grade": "A",
+        "source_url": DEFAULT_ARCHIVE_SOURCE_URL,
+        "source_filename": path.name,
+        "publication_date": publication_date,
+        "sha256": sha,
+        "size": info["size"],
+        "member_count": info["member_count"],
+        "raw_archive_path": str(raw_target.relative_to(repo_root)),
+        "imported_at": utc_now_iso(),
+        "preservation_rule": (
+            "raw bytes are copied under cache/raw/cec/imports/<sha256>/; "
+            "the tracked manifest preserves filename, URL, hash and publication date"
+        ),
+    }
+    manifest_path = repo_root / "data" / "manifests" / "cec_artifacts" / f"{sha}.json"
+    _write_json(manifest_path, manifest)
+    return {
+        **info,
+        "source_filename": path.name,
+        "publication_date": publication_date,
+        "raw_archive_path": manifest["raw_archive_path"],
+        "artifact_manifest": str(manifest_path.relative_to(repo_root)),
     }
 
 
@@ -275,10 +322,19 @@ def import_election_archive(
     archive_path: Path,
     counties: Sequence[str],
     election_specs: Optional[Sequence[Tuple[str, int]]] = None,
+    *,
+    publication_date: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Import supported election slices from a validated local CEC archive."""
+    """Import supported slices from the supplied ZIP, always reparsing its bytes.
+
+    This deliberately bypasses ElectionLoader's local-first shortcut. Supplying
+    a new official ZIP means its bytes must be parsed even when older JSONL
+    already exists locally.
+    """
     repo_root = Path(repo_root)
-    archive_info = validate_archive(archive_path)
+    archive_info = preserve_archive_artifact(
+        repo_root, archive_path, publication_date=publication_date
+    )
     adapter = CECOpenDataAdapter(
         cache_dir=repo_root / "cache" / "raw" / "cec",
         archive_path=Path(archive_path),
@@ -294,25 +350,100 @@ def import_election_archive(
         if county not in COUNTIES:
             raise ValueError(f"unsupported county: {county}")
         for election_type, year in specs:
-            loaded = loader.load_election(
+            query = DataQuery(
                 election_type=election_type,
                 year=int(year),
                 jurisdiction=county,
                 level="township_district",
             )
+            try:
+                fetched = adapter.fetch(query)
+            except Exception as exc:
+                results.append(
+                    {
+                        "county": county,
+                        "election_type": election_type,
+                        "year": int(year),
+                        "status": "invalid",
+                        "record_count": 0,
+                        "source": "cec_open_data",
+                        "persisted": False,
+                        "warnings": [],
+                        "errors": [f"{type(exc).__name__}: {exc}"],
+                    }
+                )
+                continue
+
+            raw_records = list(fetched.records or [])
+            warnings = list(fetched.warnings or [])
+            if not raw_records:
+                results.append(
+                    {
+                        "county": county,
+                        "election_type": election_type,
+                        "year": int(year),
+                        "status": "missing",
+                        "record_count": 0,
+                        "source": fetched.source_id or "cec_open_data",
+                        "persisted": False,
+                        "warnings": warnings,
+                        "errors": [],
+                    }
+                )
+                continue
+
+            defaults = {
+                "source_id": adapter.source_id,
+                "source": adapter.source_id,
+                "source_grade": adapter.source_grade,
+                "source_version": fetched.source_version or "",
+                "raw_reference": fetched.raw_reference or "",
+                "normalization_version": "v1.4.0",
+            }
+            normalized = normalize_records(raw_records, defaults=defaults)
+            normalized = [
+                record
+                for record in loader._filter_level(normalized, query.level)
+                if loader._matches_query(record, query)
+            ]
+            validation = loader._validate(normalized, require_provenance=False)
+            errors = [
+                issue.message
+                for issue in validation.issues
+                if issue.severity == "error"
+            ]
+            if errors or not normalized:
+                results.append(
+                    {
+                        "county": county,
+                        "election_type": election_type,
+                        "year": int(year),
+                        "status": "invalid" if errors else "missing",
+                        "record_count": len(normalized),
+                        "source": fetched.source_id or "cec_open_data",
+                        "persisted": False,
+                        "warnings": warnings,
+                        "errors": errors,
+                    }
+                )
+                continue
+
+            loader._persist(query, normalized)
+            loader._sync_geography_from_records(query, normalized)
             results.append(
                 {
                     "county": county,
                     "election_type": election_type,
                     "year": int(year),
-                    "status": loaded.status,
-                    "record_count": len(loaded.records),
-                    "source": loaded.source,
-                    "persisted": loaded.persisted,
-                    "warnings": list(loaded.warnings),
-                    "errors": list(loaded.errors),
+                    "status": "filled",
+                    "record_count": len(normalized),
+                    "source": fetched.source_id or "cec_open_data",
+                    "persisted": True,
+                    "warnings": warnings,
+                    "errors": [],
                 }
             )
+
     return {
         "archive": archive_info,
         "results": results,
@@ -386,6 +517,7 @@ def run_import(
     boundary_csv: Optional[Path] = None,
     counties: Optional[Sequence[str]] = None,
     election_specs: Optional[Sequence[Tuple[str, int]]] = None,
+    archive_publication_date: Optional[str] = None,
 ) -> Dict[str, Any]:
     repo_root = Path(repo_root)
     county_list = list(dict.fromkeys(counties or COUNTIES))
@@ -408,6 +540,7 @@ def run_import(
             Path(archive_path),
             county_list,
             election_specs=election_specs,
+            publication_date=archive_publication_date,
         )
         report["matrices"] = build_county_matrices(
             repo_root,
@@ -445,6 +578,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--archive", help="local official votedata.zip")
     parser.add_argument(
+        "--archive-publication-date",
+        help="optional official publication/update date (YYYY-MM-DD) stored in provenance",
+    )
+    parser.add_argument(
         "--boundaries", help="local official 第11屆立法委員選舉區範圍 CSV"
     )
     parser.add_argument(
@@ -468,6 +605,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             archive_path=Path(args.archive) if args.archive else None,
             boundary_csv=Path(args.boundaries) if args.boundaries else None,
             counties=counties,
+            archive_publication_date=args.archive_publication_date,
         )
     except Exception as exc:
         print(

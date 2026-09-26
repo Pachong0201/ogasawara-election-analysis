@@ -1,3 +1,4 @@
+import hashlib
 import tempfile
 import unittest
 import zipfile
@@ -187,6 +188,12 @@ class TestCECOpenDataAdapter(unittest.TestCase):
         self.assertEqual({r["official_parent_jurisdiction"] for r in result.records}, {"宜蘭縣"})
         self.assertEqual({r["parent_jurisdiction"] for r in result.records}, {"宜兰县"})
         self.assertEqual({r["source_grade"] for r in result.records}, {"A"})
+
+        archive_token = hashlib.sha256(self.archive_path.read_bytes()).hexdigest()[:12]
+        self.assertEqual(
+            {r["boundary_version"] for r in result.records},
+            {f"cec-president-2024-{archive_token}"},
+        )
 
         city = [r for r in result.records if r["jurisdiction"] == "宜蘭市"]
         self.assertEqual(sum(r["votes"] for r in city), 1000)

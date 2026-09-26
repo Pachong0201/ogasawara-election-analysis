@@ -5,13 +5,16 @@ import pytest
 
 from runtime.cec_offline_import import (
     build_county_matrices,
+    import_election_archive,
     import_legislative_boundaries,
     parse_legislative_boundary_csv,
+    preserve_archive_artifact,
     validate_archive,
 )
 from runtime.election_loader import write_jsonl
 from runtime.cec_open_data import CECOpenDataError
 from tests.fixtures.helpers import election_records_for_year
+from tests.test_cec_open_data import build_archive
 
 
 def test_parse_and_import_legislative_boundary_csv(tmp_path):
@@ -95,3 +98,38 @@ def test_build_county_matrices_from_existing_local_records(tmp_path):
     assert summary[county]["region_count"] == 2
     assert set(payload["historical_by_type"]) == {"county_mayor", "president"}
     assert set(payload["cross_level"]["regions"]) == {"甲鄉", "乙鄉"}
+
+
+def test_preserve_archive_and_reparse_even_with_existing_local_data(tmp_path):
+    archive = tmp_path / "votedata.zip"
+    build_archive(archive)
+
+    preserved = preserve_archive_artifact(
+        tmp_path, archive, publication_date="2026-09-26"
+    )
+    assert preserved["publication_date"] == "2026-09-26"
+    assert (tmp_path / preserved["raw_archive_path"]).read_bytes() == archive.read_bytes()
+    manifest = json.loads(
+        (tmp_path / preserved["artifact_manifest"]).read_text(encoding="utf-8")
+    )
+    assert manifest["sha256"] == preserved["sha256"]
+    assert manifest["source_filename"] == "votedata.zip"
+
+    first = import_election_archive(
+        tmp_path,
+        archive,
+        ["宜蘭縣"],
+        election_specs=[("president", 2024)],
+        publication_date="2026-09-26",
+    )
+    second = import_election_archive(
+        tmp_path,
+        archive,
+        ["宜蘭縣"],
+        election_specs=[("president", 2024)],
+        publication_date="2026-09-26",
+    )
+    assert first["results"][0]["status"] == "filled"
+    assert second["results"][0]["status"] == "filled"
+    assert second["results"][0]["persisted"] is True
+    assert second["results"][0]["record_count"] == 4
