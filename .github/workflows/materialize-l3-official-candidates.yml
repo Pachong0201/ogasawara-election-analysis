@@ -51,8 +51,17 @@ jobs:
             echo "No verified L3 candidate changes to commit."
           else
             git commit -m "data: materialize official 2026 L3 candidate profiles"
-            git pull --rebase --autostash origin feature/feishu-election-bot-v1.4-integration
-            git push origin HEAD:feature/feishu-election-bot-v1.4-integration
+            for attempt in 1 2 3; do
+              git pull --rebase --autostash origin feature/feishu-election-bot-v1.4-integration
+              if git push origin HEAD:feature/feishu-election-bot-v1.4-integration; then
+                break
+              fi
+              if [ "$attempt" -eq 3 ]; then
+                echo "Failed to push L3 candidate data after retries."
+                exit 1
+              fi
+              sleep $((attempt * 2))
+            done
           fi
 
       - name: Enforce 22-county candidate coverage
