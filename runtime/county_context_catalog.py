@@ -65,12 +65,22 @@ def _load_json(path: Path) -> Tuple[List[Dict[str, Any]], str]:
     text, encoding = _decode(path.read_bytes())
     payload = json.loads(text)
     if isinstance(payload, dict):
-        for key in ("records", "data", "result", "results"):
-            if isinstance(payload.get(key), list):
-                payload = payload[key]
+        preferred = {"records", "data", "result", "results", "rows", "items"}
+        selected = None
+        for key, value in payload.items():
+            if str(key).strip().lower() in preferred and isinstance(value, list):
+                selected = value
                 break
-        else:
-            payload = [payload]
+        if selected is None:
+            list_values = [
+                value
+                for value in payload.values()
+                if isinstance(value, list)
+                and any(isinstance(item, dict) for item in value)
+            ]
+            if len(list_values) == 1:
+                selected = list_values[0]
+        payload = selected if selected is not None else [payload]
     if not isinstance(payload, list):
         raise ValueError("JSON context source must contain an object or list")
     return [dict(row) for row in payload if isinstance(row, dict)], encoding
@@ -294,6 +304,16 @@ class CountyContextCatalog:
             "unmapped_row_count": len(unmapped),
             "county_file_count": len([key for key in files if key != "_unmapped"]),
             "files": files,
+            "diagnostic": {
+                "field_names": sorted(
+                    {
+                        str(key)
+                        for row in rows[:20]
+                        for key in row.keys()
+                    }
+                )[:80],
+                "sample_rows": rows[:3],
+            },
             "imported_at": utc_now_iso(),
         }
         manifest_path = self.repo_root / "data" / "manifests" / f"context_{source_id}.json"
