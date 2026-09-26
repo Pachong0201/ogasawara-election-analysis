@@ -163,6 +163,14 @@ def build_archive(path: Path):
 
 
 
+def add_custom_family(zf, folder, suffix, area_rows, candidates, profiles, votes):
+    prefix = f"votedata/votedata/voteData/{folder}"
+    zf.writestr(f"{prefix}/elbase{suffix}.csv", csv_bytes(area_rows))
+    zf.writestr(f"{prefix}/elcand{suffix}.csv", csv_bytes(candidates))
+    zf.writestr(f"{prefix}/elpaty.csv", csv_bytes(party_rows()))
+    zf.writestr(f"{prefix}/elprof{suffix}.csv", csv_bytes(profiles))
+    zf.writestr(f"{prefix}/elctks{suffix}.csv", csv_bytes(votes))
+
 class TestCECOpenDataAdapter(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -179,6 +187,60 @@ class TestCECOpenDataAdapter(unittest.TestCase):
             archive_path=self.archive_path,
         )
 
+    def test_family_discovery_parses_parallel_suffix_bundles(self):
+        archive = self.root / "parallel-bundles.zip"
+        with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+            high_area = [
+                ["64", "000", "00", "000", "0000", "高雄市"],
+                ["64", "000", "00", "001", "0000", "楠梓區"],
+            ]
+            high_candidates = [
+                candidate_row("00", "000", "00", "1", "高甲", "1"),
+                candidate_row("00", "000", "00", "2", "高乙", "16"),
+            ]
+            high_profiles = [profile_row("64", "000", "00", "001", 100, 2, 150)]
+            high_votes = [
+                vote_row("64", "000", "00", "001", "1", 45),
+                vote_row("64", "000", "00", "001", "2", 55),
+            ]
+            add_custom_family(
+                zf, "2024總統立委/總統", "",
+                high_area, high_candidates, high_profiles, high_votes,
+            )
+
+            ilan_area = [
+                ["10", "002", "00", "000", "0000", "宜蘭縣"],
+                ["10", "002", "00", "001", "0000", "宜蘭市"],
+            ]
+            ilan_candidates = [
+                candidate_row("00", "000", "00", "1", "宜甲", "1"),
+                candidate_row("00", "000", "00", "2", "宜乙", "16"),
+            ]
+            ilan_profiles = [profile_row("10", "002", "00", "001", 200, 4, 300)]
+            ilan_votes = [
+                vote_row("10", "002", "00", "001", "1", 90),
+                vote_row("10", "002", "00", "001", "2", 110),
+            ]
+            add_custom_family(
+                zf, "2024總統立委/總統", "_P1",
+                ilan_area, ilan_candidates, ilan_profiles, ilan_votes,
+            )
+
+        adapter = CECOpenDataAdapter(
+            cache_dir=self.root / "parallel-cache", archive_path=archive
+        )
+        groups = adapter._resolve_family_member_groups(
+            [item.filename for item in zipfile.ZipFile(archive).infolist()],
+            "2024總統立委/總統",
+        )
+        self.assertEqual(len(groups), 2)
+        result = adapter.fetch(
+            DataQuery("president", 2024, "宜蘭縣", "township_district")
+        )
+        self.assertEqual(len(result.records), 2)
+        self.assertEqual({r["jurisdiction"] for r in result.records}, {"宜蘭市"})
+        self.assertEqual({r["candidate_name"] for r in result.records}, {"宜甲", "宜乙"})
+        self.assertIn("elctks_P1.csv", result.raw_reference)
     def test_2024_president_parses_simplified_jurisdiction(self):
         result = self.adapter().fetch(
             DataQuery("president", 2024, "宜兰县", "township_district")
