@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import os
 from dataclasses import dataclass, field
+from typing import Dict, Any
 from urllib.error import HTTPError
 from urllib.request import Request, build_opener
 
@@ -25,7 +26,7 @@ class ResearchConfig:
     model: str = 'glm-5.3-flash'
     base_url: str = 'https://opencode.ai/zen/go/v1'
     foreground_seconds: float = 60
-    job_seconds: float = 300
+    job_seconds: float = 600
     cache_seconds: int = 1800
     max_queries: int = 6
     max_bodies: int = 20
@@ -58,7 +59,7 @@ def post_json(url, key, payload, timeout, headers=None):
         'User-Agent': 'OgasawaraElectionResearch/1.0', **(headers or {}),
     }, method='POST')
     try:
-        with build_opener(_NoRedirect()).open(request, timeout=max(1, min(20, timeout))) as response:
+        with build_opener(_NoRedirect()).open(request, timeout=max(1, min(120, timeout))) as response:
             raw = response.read(2_000_001)
             if len(raw) > 2_000_000:
                 raise ProviderError('provider_response_too_large', retryable=False)
@@ -90,22 +91,80 @@ class GoModel:
         self.config, self.transport = config, transport
 
     def complete(self, payload, session, timeout=20):
+        # GLM review rounds read many articles; give the model 45-120s even
+        # when the job deadline is nearly exhausted, otherwise every large
+        # review call times out and the job never produces findings.
+        timeout = max(45, min(120, timeout))
         raw = self.transport(self.config.base_url + '/chat/completions', self.config.api_key, {
             'model': self.config.model, 'messages': [
                 {'role': 'system', 'content': SYSTEM},
                 {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)},
-            ], 'max_tokens': 2400, 'temperature': 0.1,
+            ], 'max_tokens': 6000, 'temperature': 0.1,
         }, timeout, {'x-opencode-session': session})
         try:
             text = raw['choices'][0]['message']['content'].strip()
-            if text.startswith('```'):
-                text = text.split('\n', 1)[1].rsplit('```', 1)[0]
-            result = json.loads(text)
-            if not isinstance(result, dict):
-                raise ValueError()
-            return result, int((raw.get('usage') or {}).get('total_tokens') or 0)
+            return _extract_json_object(text), int((raw.get('usage') or {}).get('total_tokens') or 0)
         except (KeyError, IndexError, TypeError, ValueError, AttributeError):
             raise ProviderError('invalid_model_json') from None
+
+
+def _extract_json_object(text: str) -> Dict[str, Any]:
+    """Pull the first JSON object out of model output.
+
+    Models sometimes wrap JSON in code fences or add prose before/after it.
+    json.JSONDecoder().raw_decode ignores trailing text; a closing-brace
+    repair pass recovers truncated-but-parsable output when the model runs
+    into the max_tokens ceiling mid-object.
+    """
+    cleaned = text.strip()
+    if cleaned.startswith('```'):
+        cleaned = cleaned.split('\n', 1)[1] if '\n' in cleaned else ''
+        if cleaned.endswith('```'):
+            cleaned = cleaned[:-3]
+    start = cleaned.find('{')
+    if start < 0:
+        raise ValueError('no JSON object found')
+    decoder = json.JSONDecoder()
+    try:
+        result, _ = decoder.raw_decode(cleaned[start:])
+        if isinstance(result, dict):
+            return result
+        raise ValueError('payload is not an object')
+    except ValueError:
+        pass
+    # Repair pass: cut back to the last structural closing char, then close
+    # any remaining open brackets so a truncated object can still parse.
+    last_close = max(cleaned.rfind('}'), cleaned.rfind(']'))
+    candidates = [cleaned[:last_close + 1]] if last_close > start else [cleaned]
+    candidates.append(cleaned[start:])
+    for candidate in candidates:
+        opens = []
+        pairs = {'}': '{', ']': '['}
+        in_string = False
+        escape_next = False
+        for ch in candidate[start:]:
+            if escape_next:
+                escape_next = False
+            elif ch == '\\':
+                escape_next = True
+            elif ch == '"':
+                in_string = not in_string
+            elif not in_string and ch in '{[':
+                opens.append(ch)
+            elif not in_string and ch in '}]':
+                if opens and opens[-1] == pairs[ch]:
+                    opens.pop()
+        if not opens:
+            continue
+        closers = {'{': '}', '[': ']'}
+        repaired = candidate + ''.join(closers[c] for c in reversed(opens))
+        try:
+            result, _ = decoder.raw_decode(repaired)
+            if isinstance(result, dict):
+                return result
+        except ValueError:
+            continue
+    raise ValueError('unrecoverable JSON output')
 
 
 class TavilySearch:

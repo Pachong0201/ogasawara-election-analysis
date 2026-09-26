@@ -251,16 +251,23 @@ class ResearchWorker:
                         item['query'] += ' ' + str(task.get('target_year', '')) + ' ' + election
             self._search_round(job, state, task, state['plan'])
             if not state.get('review'):
-                state['review'] = self._model(job, state, {'stage': 'review', 'task': task, 'evidence': state['evidence'], 'max_followup_queries': 2})
-                state['findings'], state['rejected_findings'] = self.validate_findings(state['review'], state['evidence'])
+                # Review sees only the most recent evidence window; the output
+                # (findings + citations) scales with the input and otherwise
+                # hits the model's output ceiling on large rounds.
+                review_evidence = state['evidence'][-12:]
+                state['review'] = self._model(job, state, {'stage': 'review', 'task': task, 'evidence': review_evidence, 'max_followup_queries': 2})
+                state['findings'], state['rejected_findings'] = self.validate_findings(state['review'], review_evidence)
                 state['unresolved'] = strings(state['review'].get('unresolved'))
                 self.store.checkpoint(job, state)
             followups = queries(state['review'].get('queries'), task['jurisdiction'])[:2]
             self._search_round(job, state, task, followups)
             final = state['review']
             if followups:
-                final = self._model(job, state, {'stage': 'review', 'task': task, 'evidence': state['evidence'], 'max_followup_queries': 0})
-            state['findings'], state['rejected_findings'] = self.validate_findings(final, state['evidence'])
+                review_evidence = state['evidence'][-12:]
+                final = self._model(job, state, {'stage': 'review', 'task': task, 'evidence': review_evidence, 'max_followup_queries': 0})
+            else:
+                review_evidence = state['evidence'][-12:]
+            state['findings'], state['rejected_findings'] = self.validate_findings(final, review_evidence)
             state['unresolved'] = strings(final.get('unresolved'))
             state['questions'] = strings(task.get('questions'))
             answered = {item['question'] for item in state['findings'] if item['question']}
