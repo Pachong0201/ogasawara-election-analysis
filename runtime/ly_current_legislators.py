@@ -47,26 +47,39 @@ class _CurrentMemberLinks(HTMLParser):
         self.section = ""
         self._href: Optional[str] = None
         self._text: List[str] = []
+        self._recent_text: List[str] = []
         self.links: List[Tuple[str, str]] = []
 
     def handle_starttag(self, tag: str, attrs: Sequence[Tuple[str, Optional[str]]]) -> None:
+        attrs_dict = dict(attrs)
         if tag.lower() == "a":
-            self._href = dict(attrs).get("href")
+            self._href = attrs_dict.get("href")
             self._text = []
+            return
+        if tag.lower() == "img" and self._href is not None:
+            label = _clean(attrs_dict.get("alt") or attrs_dict.get("title") or "")
+            if label:
+                self._text.append(re.sub(r"委員照片$", "", label).strip())
 
     def handle_data(self, data: str) -> None:
         text = _clean(data)
-        if "第11屆 立法委員名單" in text or "第11屆立法委員名單" in text:
-            self.section = "current"
-        elif "離職 立法委員名單" in text or "離職立法委員名單" in text:
+        if not text:
+            return
+        self._recent_text.append(text)
+        self._recent_text = self._recent_text[-8:]
+        joined = "".join(self._recent_text).replace(" ", "")
+        if "離職立法委員名單" in joined:
             self.section = "left"
-        if self._href is not None and text:
+        elif "第11屆立法委員名單" in joined:
+            self.section = "current"
+        if self._href is not None:
             self._text.append(text)
 
     def handle_endtag(self, tag: str) -> None:
         if tag.lower() != "a" or self._href is None:
             return
         text = _clean(" ".join(self._text))
+        text = re.sub(r"委員照片$", "", text).strip()
         href = self._href
         self._href = None
         self._text = []
