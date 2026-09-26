@@ -13,9 +13,9 @@ def fake_fetch(url):
     if url == LIST_URL:
         return """
         <html><body>
-        <h2>第11屆 立法委員名單</h2>
-        <a href="/Pages/List.aspx?nodeid=1001">甲委員</a>
-        <a href="/Pages/List.aspx?nodeid=1002">乙委員</a>
+        <h2><span>第11屆</span><span>立法委員名單</span></h2>
+        <a href="/Pages/List.aspx?nodeid=1001"><img alt="甲委員照片"></a>
+        <a href="/Pages/List.aspx?nodeid=1002"><img alt="乙委員照片"></a>
         <h2>離職 立法委員名單</h2>
         <a href="/Pages/List.aspx?nodeid=1999">離職甲</a>
         </body></html>
