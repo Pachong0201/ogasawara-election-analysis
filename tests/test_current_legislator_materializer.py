@@ -42,11 +42,11 @@ def test_current_legislator_adapter_keeps_current_geographic_members_only():
     result = adapter.fetch_all()
 
     assert len(result["records"]) == 1
-    assert result["records"][0]["name"] == "甲委員"
+    assert result["records"][0]["name"] == "甲"
     assert result["records"][0]["county"] == "宜蘭縣"
     assert result["records"][0]["onboard_date"] == "2024-02-01"
     assert len(result["unassigned"]) == 1
-    assert result["unassigned"][0]["name"] == "乙委員"
+    assert result["unassigned"][0]["name"] == "乙"
     assert result["failure_count"] == 0
 
 
@@ -58,7 +58,7 @@ def test_materializes_current_legislator_office_relationship(tmp_path):
         election_path,
         [
             {
-                "candidate_name": "甲委員",
+                "candidate_name": "甲",
                 "party": "中國國民黨",
                 "votes": 600,
                 "source": "https://data.gov.tw/dataset/13119",
@@ -84,7 +84,7 @@ def test_materializes_current_legislator_office_relationship(tmp_path):
     path = tmp_path / "knowledge" / "local" / "宜蘭縣" / "relationships.jsonl"
     rows = load_jsonl(path)
     assert len(rows) == 1
-    assert rows[0]["subject"] == "甲委員"
+    assert rows[0]["subject"] == "甲"
     assert rows[0]["relationship_type"] == "office_holding"
     assert rows[0]["electoral_district"] == "宜蘭縣第1選舉區"
     assert rows[0]["current_status"] == "active_verified"
