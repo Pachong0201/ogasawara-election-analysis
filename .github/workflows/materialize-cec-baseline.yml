@@ -10,6 +10,8 @@ on:
       - "runtime/cec_open_data.py"
       - "runtime/cec_offline_import.py"
       - "runtime/knowledge_coverage.py"
+      - "runtime/election_normalizer.py"
+      - "runtime/matrix_builder.py"
 
 permissions:
   contents: write
