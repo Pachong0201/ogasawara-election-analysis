@@ -76,3 +76,41 @@ sources:
     assert result["success_count"] == 0
     assert result["failure_count"] == 1
     assert "HTTPS" in result["failures"][0]["error"]
+
+
+def test_json_payload_is_not_overwritten_by_download_metadata(tmp_path):
+    config = tmp_path / "config" / "county_context_sources.yaml"
+    config.parent.mkdir(parents=True, exist_ok=True)
+    config.write_text(
+        """
+version: 1
+sources:
+  fixture:
+    kind: farmers_fishermen_associations
+    topic: farmers_fishermen_associations
+    source_id: fixture_json
+    source_name: Fixture JSON
+    source_grade: A
+    independence_key: fixture_json
+    dataset_url: https://example.test/dataset
+    resource_url: https://example.test/members.json
+    resource_format: json
+    scope_boundary: fixture only
+""",
+        encoding="utf-8",
+    )
+    payload = json.dumps(
+        [{"縣市": "宜蘭縣", "會員數": 123}],
+        ensure_ascii=False,
+    ).encode("utf-8")
+    downloader = OfficialContextDownloader(
+        tmp_path,
+        config_path=config,
+        opener=lambda request: _Response(payload),
+    )
+    result = downloader.materialize_one("fixture_json", force=True)
+    assert result["import"]["mapped_row_count"] == 1
+    raw = tmp_path / "cache" / "raw" / "context" / "fixture_json" / "latest.json"
+    meta = tmp_path / "cache" / "raw" / "context" / "fixture_json" / "latest.meta.json"
+    assert json.loads(raw.read_text(encoding="utf-8"))[0]["縣市"] == "宜蘭縣"
+    assert json.loads(meta.read_text(encoding="utf-8"))["source_id"] == "fixture_json"
