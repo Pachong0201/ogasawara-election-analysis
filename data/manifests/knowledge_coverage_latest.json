@@ -1495,7 +1495,7 @@
           "files": []
         },
         "term11_legislative_boundaries": {
-          "state": "no_local_artifact",
+          "state": "row_data_available",
           "path": "data/geography/electoral_districts/cec_legislator_term11/台東縣.jsonl"
         },
         "cec_spatial_matrix": {
@@ -1559,7 +1559,6 @@
       "unresolved_question_count": 9,
       "gaps": [
         "cec_election_rows_not_imported",
-        "term11_boundary_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -1815,7 +1814,7 @@
   ],
   "summary": {
     "with_cec_election_rows": 1,
-    "with_term11_boundaries": 21,
+    "with_term11_boundaries": 22,
     "with_spatial_matrix": 22,
     "with_active_verified_relationships": 3,
     "with_current_issue_records": 0
