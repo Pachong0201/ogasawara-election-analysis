@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T11:15:26+00:00
+生成时间：2026-09-26T11:20:11+00:00
 
 ## 历史政治知识（L2）
 - 連江縣-population-2025: 截至2025年12月底，連江縣户籍登记人口为13,621人，较2024年12月底减少329人。（2024-12-31—2025-12-31）
@@ -14,6 +14,20 @@
 ## 候选人地方档案（L3）
 - cec-reg-2026-ae7576df634ba6f1: 王忠銘；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 - cec-reg-2026-ed4c666e27d4d6b1: 曹爾元；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-4dc91c3a14be43a9: 曹丞君；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-28b697e854d495e0: 吳軾子；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-e5cce568c20e3d8f: 曹以標；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-6acab9ca45f3fb68: 林惠萍；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-e8ceab052e304e9c: 曹爾章；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-3b574befcafb535a: 陳書建；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-8ad0eab57185f35f: 林明揚；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-fd88bc29f1002574: 陳玉發；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-69ec142af6a77e4a: 周瑞國；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-73b5378e9164fc6a: 謝秉軒；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-51a0ee0b1a84000a: 王孝榛；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-cb92da2f967208a9: 陳貽斌；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-7fe776303a849c33: 林德建；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-4946b2147ce60ff9: 馮印才；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
 - 暂无已晋升地方议题。

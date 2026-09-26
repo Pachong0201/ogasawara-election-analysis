@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T11:15:18+00:00
+生成时间：2026-09-26T11:19:50+00:00
 
 ## 历史政治知识（L2）
 - 澎湖縣-population-2025: 截至2025年12月底，澎湖縣户籍登记人口为106,716人，较2024年12月底减少1,185人。（2024-12-31—2025-12-31）
@@ -18,6 +18,42 @@
 - cec-reg-2026-5f310d5ea8988222: 許智富；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 - cec-reg-2026-be47283d33adb989: 陳盡川；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 - cec-reg-2026-ae7c169ad4d4d994: 葉竹林；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-d72bee8db3cfc452: 吳仁祥；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-549e21d916b0b4a9: 顏家康；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-4a234820f151f98c: 蘇育德；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-988f244b434e97bd: 歐松林；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-4724e026bfaf4276: 林柏成；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-7daf1604c5a49886: 呂黃春金；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-55a12ebf498fb03b: 鄭清發；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-d99125039cb88e1e: 藍凱元；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-7155493950b6ce3e: 陳毓仁；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-3162667323cff1b1: 蘇陳綉色；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-77e71c90094e7819: 許國政；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-bc9b25a3f8c9a376: 張惠雅；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-d6cfd6fba35697a7: 呂光宇；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-7c6761c69e266400: 陳海山；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-cb5281e5d0abda4d: 陳慧娟；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-7447003254fb1b11: 陳偉澄；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-ecfcd92914d536fc: 莊光大；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-f8c8b94e8da7f036: 胡正仁；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-a476798b7723a78b: 莊國輝；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-e148a50758a24a39: 李麗美；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-1b5e33bccb95f6ea: 蔡清續；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-726a8da9c88c1fe9: 許育愷；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-bfa4d843b80a015c: 吳政杰；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-52da1d81d5720e09: 廖璟華；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-2c1f9dab6d63e8b7: 許皆詳；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-a8ff0b0ca2031829: 宋昀芝；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-eb54e9ea2b2f59eb: 宋萬富；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-1326a948db45676c: 魏睿宏；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-c4fa82246924f0fa: 許月里；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-d6a8b20c4b03ba90: 李家萱；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-213735027dd6d9fd: 許嘉峻；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-a17b32a4519cea22: 陳佩真；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-cc05ee94e8010be2: 黃榮焜；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-59258699d6125832: 鄭淑卿；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-41a54f8eb2a10ef7: 張仁和；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-6e093e06c3e00c50: 夏晨榮；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
 - 暂无已晋升地方议题。

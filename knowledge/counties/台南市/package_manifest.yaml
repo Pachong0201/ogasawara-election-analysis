@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 台南市
-generated_at: '2026-09-26T11:14:53+00:00'
-content_sha256: fd785b7c7897fba18be634d1dfeb87c9a0d075bc21e91c6875779c15f1ffea81
+generated_at: '2026-09-26T11:18:41+00:00'
+content_sha256: a1df88a178476fa9d442d610506fed67e13a50ecf999ec82c4f2d527c4284481
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/台南市/claims.jsonl
@@ -17,13 +17,13 @@ generated_indexes:
 counts:
   historical_claim: 4
   local_relationship: 1
-  candidate_profile: 4
+  candidate_profile: 92
   current_issue: 0
-evidence_index_count: 9
+evidence_index_count: 97
 entity_relation_count: 1
 research_question_count: 10
 unresolved_question_count: 7
-promotion_receipt_count: 13
+promotion_receipt_count: 101
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 嘉義市
-generated_at: '2026-09-26T11:14:45+00:00'
-content_sha256: b03e0e690cb507f57a85bc220a4df3e6d8a9b0649b3957c7431d63f76c450ba1
+generated_at: '2026-09-26T11:18:19+00:00'
+content_sha256: 79f40b33d1069144f54d1deb1aa56517d679e59f9aafd3833f45267e81a32822
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/嘉義市/claims.jsonl
@@ -17,13 +17,13 @@ generated_indexes:
 counts:
   historical_claim: 2
   local_relationship: 0
-  candidate_profile: 5
+  candidate_profile: 42
   current_issue: 0
-evidence_index_count: 7
+evidence_index_count: 44
 entity_relation_count: 0
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 12
+promotion_receipt_count: 49
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

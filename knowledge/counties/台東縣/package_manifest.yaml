@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 台東縣
-generated_at: '2026-09-26T11:15:14+00:00'
-content_sha256: 75bb0908f953fc3a03d025f6f443116d2977af815e04de14d6018681fb6993ac
+generated_at: '2026-09-26T11:19:40+00:00'
+content_sha256: 9b65db2af33c3b398d087c1f9d282ed716a170ee0fa59afb0c973e01a790e095
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/台東縣/claims.jsonl
@@ -17,13 +17,13 @@ generated_indexes:
 counts:
   historical_claim: 2
   local_relationship: 0
-  candidate_profile: 4
+  candidate_profile: 60
   current_issue: 0
-evidence_index_count: 6
+evidence_index_count: 62
 entity_relation_count: 0
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 10
+promotion_receipt_count: 66
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true
