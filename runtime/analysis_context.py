@@ -52,6 +52,38 @@ class AnalysisContextBuilder:
         web_sources_used = web_sources_used or []
         baseline_methods = baseline_methods or {}
 
+        knowledge_views = {
+            "stable_local_baseline": {
+                "includes": [
+                    "historical_baseline",
+                    "local_knowledge.stable_local_baseline",
+                ],
+                "available": bool(
+                    records_by_type.get("historical_baseline")
+                    or local_knowledge.get("stable_local_baseline")
+                ),
+                "rule": (
+                    "read this view first for election history, boundaries, spatial matrices, "
+                    "historical claims and official social context"
+                ),
+            },
+            "dynamic_campaign_state": {
+                "includes": [
+                    "local_knowledge.dynamic_local_state",
+                    "current_candidates",
+                    "current_events",
+                    "campaign_state",
+                    "polls",
+                ],
+                "as_of": campaign_state.get("as_of"),
+                "status": campaign_state.get("campaign_state_status"),
+                "rule": (
+                    "use only time-valid current evidence; retrieval leads stay unverified, "
+                    "and dynamic evidence must not be converted into a winner prediction"
+                ),
+            },
+        }
+
         context: Dict[str, Any] = {
             "task": task.to_dict(),
             "readiness": readiness.to_dict(),
@@ -61,6 +93,7 @@ class AnalysisContextBuilder:
             "candidate_residuals": metrics.get("candidate_residuals", []),
             "spatial_anomalies": metrics.get("spatial_anomalies", []),
             "local_knowledge": local_knowledge,
+            "knowledge_views": knowledge_views,
             "current_candidates": current_candidates,
             "current_events": current_events,
             "campaign_event_resolution": campaign_event_resolution,

@@ -382,6 +382,43 @@ A 级来源目录线索。若原始 CSV/ZIP 未成功读取，就不会生成具
 `AnalysisPipeline` 会把 L4 Campaign Event 与已晋升县市记录做确定性实体匹配，输出 `event_importance_signals`。信号保留 record id、time_scope、last_verified_at、current_status、source grade、uncertainty 与 scope boundary，只用于回答“还应核查哪一层地方脉络”，不得解释为因果、动员效果、支持转移、候选人评分或胜负预测。
 
 
+### V1.4 稳定地方底座 + 动态选情状态
+
+运行时现明确暴露两个操作视图，而不是把所有地方资料混在一个对象中：
+
+```text
+stable_local_baseline
+  = 历届选举事实 + 选区边界 + CEC空间矩阵 + 历史政治知识
+  + 官方人口/年龄/社团/宗教/农渔会社会基础
+
+dynamic_campaign_state
+  = 当前地方关系 + 当前候选人 + 当前议题
+  + Campaign Event / Campaign State + 民调
+```
+
+`KnowledgeLoader` 在保持旧字段兼容的同时返回
+`stable_local_baseline` 与 `dynamic_local_state`；`AnalysisContextBuilder`
+再通过 `knowledge_views` 指明完整分析的读取顺序。飞书机器人因此可以先读稳定底座，
+再读取带 `as_of` 的动态状态。官方社会基础目录或历史关系不得因“存在”而被当作当前政治支持，
+动态关系也必须经过 freshness、来源和反证门禁。
+
+社会基础官方资料目录与离线导入：
+
+```bash
+python -m runtime.county_context_catalog --stage-catalog --all-counties
+python -m runtime.county_context_catalog --source-id <source_id> --file <official.csv|json|xml>
+```
+
+当前候选人—推荐政党双来源验证：
+
+```bash
+python -m runtime.current_relationship_verifier \
+  --county 新竹縣 \
+  --research-result cache/research/new-hsinchu-party-check.json
+```
+
+只有 dry-run 通过后才可加 `--apply` 晋升长期当前知识。
+
 ## 最低数据要求
 
 ### 县市长分析

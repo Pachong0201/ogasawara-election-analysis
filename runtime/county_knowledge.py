@@ -186,6 +186,26 @@ class CountyKnowledgeProduction:
                 "relationships": f"knowledge/local/{safe_component(county)}/relationships.jsonl",
                 "candidates": f"knowledge/local/{safe_component(county)}/candidates.jsonl",
                 "issues": f"knowledge/local/{safe_component(county)}/issues.jsonl",
+                "official_context": f"data/context/{safe_component(county)}/",
+                "electoral_boundaries": f"data/geography/electoral_districts/cec_legislator_term11/{safe_component(county)}.jsonl",
+                "cec_spatial_matrix": f"data/matrices/cec/{safe_component(county)}.json",
+            },
+            "operational_views": {
+                "stable_local_baseline": {
+                    "layers": ["L1", "L2"],
+                    "collections": [
+                        "historical_claims",
+                        "official_context",
+                        "electoral_boundaries",
+                        "cec_spatial_matrix",
+                    ],
+                    "rule": "只描述稳定事实与历史结构，不外推当前支持或动员效果。",
+                },
+                "dynamic_local_state": {
+                    "layers": ["L3"],
+                    "collections": ["relationships", "candidates", "issues"],
+                    "rule": "当前关系必须重新验证并受 freshness、来源与反证门禁约束。",
+                },
             },
             "sections": [
                 {

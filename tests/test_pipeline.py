@@ -25,6 +25,17 @@ class TestAnalysisPipeline(unittest.TestCase):
             self.assertIn("triggered_anomaly_count", analysis["evidence_summary"])
             self.assertIn("campaign_state", analysis)
             self.assertIn("as_of", analysis["campaign_state"])
+            self.assertIn("knowledge_views", analysis)
+            self.assertEqual(
+                analysis["knowledge_views"]["stable_local_baseline"]["includes"],
+                ["historical_baseline", "local_knowledge.stable_local_baseline"],
+            )
+            self.assertIn("stable_local_baseline", analysis["local_knowledge"])
+            self.assertIn("dynamic_local_state", analysis["local_knowledge"])
+            self.assertIn(
+                "official_context_files",
+                analysis["local_knowledge"]["stable_local_baseline"],
+            )
             self.assertGreater(len(manifest["files_used"]), 0)
             self.assertEqual(manifest["skill_version"], "1.4.0")
 
