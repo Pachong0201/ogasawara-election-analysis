@@ -21,6 +21,7 @@ from .data_readiness import DataReadinessGate
 from .election_loader import ElectionLoader, election_file_path
 from .freshness import evaluate_records
 from .knowledge_loader import KnowledgeLoader
+from .event_importance import event_importance_signals
 from .matrix_builder import build_cross_level_matrix, build_historical_matrix, build_same_day_matrix
 from .metrics import candidate_residual, electoral_swing, spatial_variance, split_ticket_residual
 from .models import AnalysisContext, ElectionTask, MetricResult, parse_date, utc_now_iso
@@ -430,6 +431,8 @@ class AnalysisPipeline:
             allow_online=online and research_triggered,
             as_of=as_of,
         )
+        importance_signals = event_importance_signals(events, local_knowledge)
+        local_knowledge["event_importance_signals"] = importance_signals
         if research_prepass:
             try:
                 result = coordinator.research(task, questions, [
@@ -503,6 +506,7 @@ class AnalysisPipeline:
             current_candidates=current_candidates,
             current_events=events,
             campaign_event_resolution=campaign_event_resolution,
+            event_importance_signals=importance_signals,
             polls=polls,
             campaign_state=campaign_state,
             evidence_summary={
@@ -514,6 +518,7 @@ class AnalysisPipeline:
                 "campaign_event_raw_count": int(event_report.get("raw_count", 0)),
                 "campaign_event_deduplicated_count": int(event_report.get("deduplicated_count", 0)),
                 "campaign_event_resolution": campaign_event_resolution.get("stats", {}),
+                "event_importance_signal_count": len(importance_signals),
                 "campaign_retrieval_lead_count": len(campaign_leads),
                 "retrieval": retrieval_metadata,
                 "automatic_research": _research_result or {'status': 'historical_replay' if coordinator and not live_request else 'disabled'},

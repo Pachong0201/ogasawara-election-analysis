@@ -323,7 +323,37 @@ python -m runtime.cli knowledge-build --county "宜兰县"
 - `package_manifest.yaml`：计数、权威源文件与生成规则；
 - `evidence_index.jsonl`：已晋升记录的来源、时间、research question 与 current-use 状态索引；
 - `unresolved_questions.jsonl`：尚未被晋升知识覆盖的 retrieval questions；
-- `political_ecology.md`：结构化知识的可读索引，明确不得新增政治事实或因果判断。
+- `political_ecology.md`：结构化知识的可读索引，明确不得新增政治事实或因果判断；
+- `research_questions.jsonl`：十类稳定研究问题及处理状态；
+- `entity_relation_index.jsonl`：由已晋升记录派生的人物—组织—地区关系索引；
+- `county_template.yaml`：统一主题与字段约束；
+- `production_state.yaml`：可恢复生产状态、输入哈希与最后错误。
+
+### V1.4 22 县市知识生产
+
+`runtime/county_knowledge.py` 在 `KnowledgePromotionBuilder` 上增加生产编排，覆盖台湾 22 县市以及历史政治结构、人物、组织、派系/政治网络、选区与空间、地方社团、农渔会、宗教组织、关键议题、人口与产业背景十类主题。
+
+```bash
+# 全量 dry-run，不写文件
+python3 -m runtime.cli knowledge-production --all-counties --dry-run
+
+# 全量增量构建或失败后恢复
+python3 -m runtime.cli knowledge-production --all-counties --incremental
+
+# 单县市增量更新，可选调用 GLM-5.3 Flash + Tavily
+python3 -m runtime.cli knowledge-production \
+  --counties "高雄市" --incremental --run-research
+
+# 状态检查
+python3 -m runtime.cli knowledge-status --all-counties
+python3 -m runtime.cli knowledge-status --counties "高雄市,台南市,新北市"
+```
+
+自动研究只生成 `body_grounded_unverified` retrieval leads，不创建 structured proposal，也不晋升长期知识。后续仍须显式运行 `knowledge-promote`，通过 source、independence、contradiction、time_scope、freshness 与 idempotence gates。
+
+首批 seed 位于 `examples/county_knowledge_seeds/`。高雄市、台南市、新北市各有一条通过 A 级官方来源门禁的行政/空间背景记录；人物、派系、组织和当前议题若证据不足，明确保留为 unresolved。
+
+`AnalysisPipeline` 会把 L4 Campaign Event 与已晋升县市记录做确定性实体匹配，输出 `event_importance_signals`。信号保留 record id、time_scope、last_verified_at、current_status、source grade、uncertainty 与 scope boundary，只用于回答“还应核查哪一层地方脉络”，不得解释为因果、动员效果、支持转移、候选人评分或胜负预测。
 
 
 ## 最低数据要求

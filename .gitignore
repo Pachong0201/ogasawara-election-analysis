@@ -10,6 +10,7 @@ cache/**/*.jsonl
 cache/**/*.json
 !cache/**/.gitkeep
 !cache/README.md
+!cache/knowledge_promotion/*.jsonl
 
 # Generated provenance output
 analysis_manifest.json

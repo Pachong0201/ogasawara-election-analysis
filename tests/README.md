@@ -32,6 +32,7 @@ python3 -m unittest discover -s tests -v
 
 - `test_knowledge_builder.py`：V1.3 proposal 晋升、证据独立性、相反证据、freshness、幂等、receipt 与 county package Builder。
 - `test_cli_knowledge.py`：`knowledge-ingest` staging 边界、`knowledge-promote --dry-run`、正式晋升、`knowledge-build` 与拒绝状态退出码。
+- `test_county_knowledge.py`：22 县市注册、十主题研究计划、dry-run、批量构建、恢复、幂等、自动研究 lead-only 边界、人物—组织—地区索引与事件重要性信号。
 
 
 ### Feishu Bot v0.1

@@ -27,6 +27,11 @@ class KnowledgeLoader:
             "candidates": self.repo_root / "knowledge" / "local" / safe / "candidates.jsonl",
             "issues": self.repo_root / "knowledge" / "local" / safe / "issues.jsonl",
             "retrieval_cache": self.repo_root / "cache" / "retrieval" / f"{safe}.jsonl",
+            "package_manifest": self.repo_root / "knowledge" / "counties" / safe / "package_manifest.yaml",
+            "evidence_index": self.repo_root / "knowledge" / "counties" / safe / "evidence_index.jsonl",
+            "entity_relation_index": self.repo_root / "knowledge" / "counties" / safe / "entity_relation_index.jsonl",
+            "research_questions": self.repo_root / "knowledge" / "counties" / safe / "research_questions.jsonl",
+            "unresolved_questions": self.repo_root / "knowledge" / "counties" / safe / "unresolved_questions.jsonl",
         }
 
     def _load_file(self, path: Path) -> List[Dict[str, Any]]:
@@ -66,6 +71,14 @@ class KnowledgeLoader:
         relationships = self._load_file(paths["relationships"])
         candidates = self._load_file(paths["candidates"])
         issues = self._load_file(paths["issues"])
+        package = {
+            "manifest_path": str(paths["package_manifest"]),
+            "available": paths["package_manifest"].exists(),
+            "evidence_index": self._load_file(paths["evidence_index"]),
+            "entity_relation_index": self._load_file(paths["entity_relation_index"]),
+            "research_questions": self._load_file(paths["research_questions"]),
+            "unresolved_questions": self._load_file(paths["unresolved_questions"]),
+        }
 
         def in_scope(record: Dict[str, Any]) -> bool:
             if not region_set:
@@ -115,6 +128,7 @@ class KnowledgeLoader:
             "relationships": relationships,
             "candidates": candidates,
             "issues": issues,
+            "county_package": package,
             "current_evidence_count": len(current_evidence),
             "question_covered": question_covered,
             "sufficient": sufficient,

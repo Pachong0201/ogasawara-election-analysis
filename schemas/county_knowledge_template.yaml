@@ -1,0 +1,31 @@
+version: 1.4.0
+schema_name: county_knowledge_template
+description: 22 县市统一知识生产模板。模板定义覆盖范围，不构成政治事实。
+type: object
+required: [version, county, authoritative_collections, sections, rules]
+properties:
+  version: {type: string}
+  county: {type: string}
+  authoritative_collections: {type: object}
+  sections:
+    type: array
+    minItems: 10
+    items:
+      type: object
+      required: [topic, label, required_fields]
+      properties:
+        topic:
+          type: string
+          enum: [historical_political_structure, people, organizations, political_networks,
+                 electoral_geography, civil_associations, farmers_fishermen_associations,
+                 religious_organizations, key_issues, demographics_industry]
+        label: {type: string}
+        required_fields:
+          type: array
+          items: {type: string}
+  rules:
+    type: object
+constraints:
+  - 所有当前关系必须有 last_verified_at 与 time_scope。
+  - 所有事实必须保留 source/evidence 与 uncertainty/scope_boundary。
+  - 模板、问题和 package 索引不得生成新的政治事实。

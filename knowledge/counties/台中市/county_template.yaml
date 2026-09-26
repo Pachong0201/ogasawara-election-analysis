@@ -1,0 +1,94 @@
+version: 1.4.0
+county: 台中市
+schema: schemas/county_knowledge_template.yaml
+authoritative_collections:
+  historical_claims: knowledge/historical/台中市/claims.jsonl
+  relationships: knowledge/local/台中市/relationships.jsonl
+  candidates: knowledge/local/台中市/candidates.jsonl
+  issues: knowledge/local/台中市/issues.jsonl
+sections:
+- topic: historical_political_structure
+  label: 历史政治结构
+  required_fields:
+  - time_scope
+  - last_verified_at_if_current
+  - source_evidence
+  - uncertainty
+  - scope_boundary
+- topic: people
+  label: 关键人物
+  required_fields:
+  - time_scope
+  - last_verified_at_if_current
+  - source_evidence
+  - uncertainty
+  - scope_boundary
+- topic: organizations
+  label: 政治与公共组织
+  required_fields:
+  - time_scope
+  - last_verified_at_if_current
+  - source_evidence
+  - uncertainty
+  - scope_boundary
+- topic: political_networks
+  label: 派系与政治网络
+  required_fields:
+  - time_scope
+  - last_verified_at_if_current
+  - source_evidence
+  - uncertainty
+  - scope_boundary
+- topic: electoral_geography
+  label: 选区与空间结构
+  required_fields:
+  - time_scope
+  - last_verified_at_if_current
+  - source_evidence
+  - uncertainty
+  - scope_boundary
+- topic: civil_associations
+  label: 地方社团
+  required_fields:
+  - time_scope
+  - last_verified_at_if_current
+  - source_evidence
+  - uncertainty
+  - scope_boundary
+- topic: farmers_fishermen_associations
+  label: 农渔会
+  required_fields:
+  - time_scope
+  - last_verified_at_if_current
+  - source_evidence
+  - uncertainty
+  - scope_boundary
+- topic: religious_organizations
+  label: 宗教组织
+  required_fields:
+  - time_scope
+  - last_verified_at_if_current
+  - source_evidence
+  - uncertainty
+  - scope_boundary
+- topic: key_issues
+  label: 关键地方议题
+  required_fields:
+  - time_scope
+  - last_verified_at_if_current
+  - source_evidence
+  - uncertainty
+  - scope_boundary
+- topic: demographics_industry
+  label: 人口与产业背景
+  required_fields:
+  - time_scope
+  - last_verified_at_if_current
+  - source_evidence
+  - uncertainty
+  - scope_boundary
+rules:
+  search_results_are_leads_only: true
+  promotion_gate_required: true
+  no_prediction_scoring_or_recommendation: true
+  historical_relationships_are_not_current_by_default: true

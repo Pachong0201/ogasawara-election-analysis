@@ -1,0 +1,42 @@
+county: 雲林縣
+status: completed
+question_count: 10
+input_sha256: 9fb31b1dc468f47d8ebd55d091a2bd55254baa498b3e6afecbfb017d5462ced7
+run_research: false
+started_at: '2026-09-26T07:23:18+00:00'
+attempt: 2
+last_error: ''
+completed_at: '2026-09-26T07:23:19+00:00'
+research:
+  status: not_requested
+manifest:
+  version: 1.4.0
+  county: 雲林縣
+  generated_at: '2026-09-26T04:02:45+00:00'
+  content_sha256: 925972456f7c7379218cef98dd06b8329d0bd9fa8d547ed38605e8f19626c2ef
+  builder: KnowledgePromotionBuilder
+  authoritative_sources:
+    historical_claim: knowledge/historical/雲林縣/claims.jsonl
+    local_relationship: knowledge/local/雲林縣/relationships.jsonl
+    candidate_profile: knowledge/local/雲林縣/candidates.jsonl
+    current_issue: knowledge/local/雲林縣/issues.jsonl
+  generated_indexes:
+    evidence_index: knowledge/counties/雲林縣/evidence_index.jsonl
+    unresolved_questions: knowledge/counties/雲林縣/unresolved_questions.jsonl
+    political_ecology: knowledge/counties/雲林縣/political_ecology.md
+    research_questions: knowledge/counties/雲林縣/research_questions.jsonl
+    entity_relation_index: knowledge/counties/雲林縣/entity_relation_index.jsonl
+  counts:
+    historical_claim: 0
+    local_relationship: 0
+    candidate_profile: 0
+    current_issue: 0
+  evidence_index_count: 0
+  entity_relation_count: 0
+  research_question_count: 10
+  unresolved_question_count: 10
+  promotion_receipt_count: 0
+  rules:
+    generated_files_are_indexes_not_new_facts: true
+    source_files_are_authoritative: true
+    historical_current_separation: true

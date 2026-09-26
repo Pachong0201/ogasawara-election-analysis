@@ -503,7 +503,7 @@ V1.3 知识晋升与地方知识 Builder 增加：
 - 同 ID 幂等写入与冲突保护；
 - county package 自动生成证据索引、未解决问题与政治生态索引；生成文件只做索引，不创造事实。
 
-后续阶段再增加村里／投票所空间分析、Neighbor Divergence 自动化、地方政治知识图谱、半自动历史知识检索和多县市横向比较。
+后续阶段再增加村里／投票所空间分析、Neighbor Divergence 自动化、更多经过人工结构化的地方政治关系与多县市横向比较。
 
 V1.4 Live Campaign State 增加：
 
@@ -516,5 +516,15 @@ V1.4 Live Campaign State 增加：
 - 同一调查系列允许计算 same-series poll delta，不同系列仍禁止拼接；
 - 默认写作顺序改为“当前态势 → 最近变化 → 历史参照 → 地方结构 → 民调校准”；
 - Campaign State Snapshot 只是 L4/L5 的动态时间索引，不新增第六知识层。
+
+V1.4 22 县市知识生产增加：
+
+- `CountyKnowledgeProduction` 覆盖 22 县市与十类统一研究主题；
+- CLI 支持全量、指定县市、增量、dry-run、状态检查、失败恢复与输入哈希幂等；
+- 可调用既有 GLM-5.3 Flash + Tavily 自动研究，但输出保持 retrieval lead，不自动生成 proposal 或晋升事实；
+- county package 增加 `research_questions.jsonl`、`entity_relation_index.jsonl`、`county_template.yaml` 与 `production_state.yaml`；
+- `KnowledgeLoader` 读取 package，`AnalysisPipeline` 生成 evidence-bounded `event_importance_signals`；
+- event importance 只做实体与已晋升知识匹配，不产生因果判断、候选人评分、胜负预测或政治建议；
+- 高雄市、台南市、新北市提供首批官方 A 级行政/空间背景 seed；其余不足主题明确保留 unresolved。
 
 `examples/yilan/` 只作为测试用例，不得成为 Skill 运行依赖。

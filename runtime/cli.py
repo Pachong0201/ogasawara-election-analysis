@@ -22,6 +22,7 @@ from .metrics import (
 )
 from .host_retrieval import HostRetrievalBackend
 from .knowledge_builder import KnowledgePromotionBuilder
+from .county_knowledge import COUNTIES, CountyKnowledgeProduction
 from .models import ElectionTask
 from .pipeline import AnalysisPipeline
 
@@ -193,6 +194,43 @@ def _cmd_knowledge_build(args: argparse.Namespace) -> int:
     return 0
 
 
+def _knowledge_counties(args: argparse.Namespace) -> List[str]:
+    if getattr(args, "all_counties", False):
+        return list(COUNTIES)
+    values = [item.strip() for item in str(getattr(args, "counties", "") or "").split(",") if item.strip()]
+    if not values:
+        raise SystemExit("knowledge-production requires --counties or --all-counties")
+    return values
+
+
+def _cmd_knowledge_production(args: argparse.Namespace) -> int:
+    production = CountyKnowledgeProduction(
+        Path(args.repo_root).resolve() if args.repo_root else None
+    )
+    result = production.build_many(
+        _knowledge_counties(args),
+        incremental=args.incremental,
+        dry_run=args.dry_run,
+        run_research=args.run_research,
+        resume=not args.no_resume,
+        year=args.year,
+    )
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if result["failed_count"] == 0 else 2
+
+
+def _cmd_knowledge_status(args: argparse.Namespace) -> int:
+    production = CountyKnowledgeProduction(
+        Path(args.repo_root).resolve() if args.repo_root else None
+    )
+    counties = list(COUNTIES) if args.all_counties else [
+        item.strip() for item in str(args.counties or "").split(",") if item.strip()
+    ]
+    result = production.status(counties or None)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m runtime.cli", description="V1.4 Data, Runtime & Knowledge Layer")
     parser.add_argument("--repo-root", default=None, help="repository root (defaults to runtime parent)")
@@ -288,6 +326,31 @@ def build_parser() -> argparse.ArgumentParser:
     )
     build.add_argument("--county", required=True)
     build.set_defaults(func=_cmd_knowledge_build)
+
+    production = sub.add_parser(
+        "knowledge-production",
+        help="prepare or incrementally update one or all 22 county knowledge packages",
+    )
+    production.add_argument("--counties", default="", help="comma-separated county names")
+    production.add_argument("--all-counties", action="store_true")
+    production.add_argument("--incremental", action="store_true")
+    production.add_argument("--dry-run", action="store_true")
+    production.add_argument(
+        "--run-research",
+        action="store_true",
+        help="invoke configured GLM/Tavily research; results remain retrieval leads",
+    )
+    production.add_argument("--no-resume", action="store_true")
+    production.add_argument("--year", type=int, default=2026)
+    production.set_defaults(func=_cmd_knowledge_production)
+
+    status = sub.add_parser(
+        "knowledge-status",
+        help="inspect county knowledge production and package status",
+    )
+    status.add_argument("--counties", default="")
+    status.add_argument("--all-counties", action="store_true")
+    status.set_defaults(func=_cmd_knowledge_status)
 
     return parser
 

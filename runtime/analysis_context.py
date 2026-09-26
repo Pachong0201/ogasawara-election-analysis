@@ -24,6 +24,7 @@ class AnalysisContextBuilder:
         current_candidates: Optional[List[Dict[str, Any]]] = None,
         current_events: Optional[List[Dict[str, Any]]] = None,
         campaign_event_resolution: Optional[Dict[str, Any]] = None,
+        event_importance_signals: Optional[List[Dict[str, Any]]] = None,
         campaign_state: Optional[Dict[str, Any]] = None,
         polls: Optional[List[Dict[str, Any]]] = None,
         evidence_summary: Optional[Dict[str, Any]] = None,
@@ -40,6 +41,7 @@ class AnalysisContextBuilder:
         current_candidates = current_candidates or []
         current_events = current_events or []
         campaign_event_resolution = campaign_event_resolution or {}
+        event_importance_signals = event_importance_signals or []
         campaign_state = campaign_state or {}
         polls = polls or []
         evidence_summary = evidence_summary or {}
@@ -62,6 +64,7 @@ class AnalysisContextBuilder:
             "current_candidates": current_candidates,
             "current_events": current_events,
             "campaign_event_resolution": campaign_event_resolution,
+            "event_importance_signals": event_importance_signals,
             "campaign_state": campaign_state,
             "as_of": campaign_state.get("as_of"),
             "campaign_state_status": campaign_state.get("campaign_state_status"),
@@ -95,6 +98,7 @@ class AnalysisContextBuilder:
             "unknowns": unknowns,
             "warnings": warnings,
             "campaign_event_resolution": campaign_event_resolution.get("stats", {}),
+            "event_importance_signal_count": len(event_importance_signals),
         }
         return AnalysisContext(analysis_context=context, analysis_manifest=manifest)
 

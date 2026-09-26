@@ -1,0 +1,42 @@
+county: 台東縣
+status: completed
+question_count: 10
+input_sha256: f51e55dd80eb9cdf6a0d84be98d75b757de1525a757a08f9cb4522a6ab5f308c
+run_research: false
+started_at: '2026-09-26T07:23:19+00:00'
+attempt: 2
+last_error: ''
+completed_at: '2026-09-26T07:23:19+00:00'
+research:
+  status: not_requested
+manifest:
+  version: 1.4.0
+  county: 台東縣
+  generated_at: '2026-09-26T04:02:45+00:00'
+  content_sha256: d6a10b6cebddbfd2ad2290d2479cbb06a4c46752b8178cb479efe7b96c9039a2
+  builder: KnowledgePromotionBuilder
+  authoritative_sources:
+    historical_claim: knowledge/historical/台東縣/claims.jsonl
+    local_relationship: knowledge/local/台東縣/relationships.jsonl
+    candidate_profile: knowledge/local/台東縣/candidates.jsonl
+    current_issue: knowledge/local/台東縣/issues.jsonl
+  generated_indexes:
+    evidence_index: knowledge/counties/台東縣/evidence_index.jsonl
+    unresolved_questions: knowledge/counties/台東縣/unresolved_questions.jsonl
+    political_ecology: knowledge/counties/台東縣/political_ecology.md
+    research_questions: knowledge/counties/台東縣/research_questions.jsonl
+    entity_relation_index: knowledge/counties/台東縣/entity_relation_index.jsonl
+  counts:
+    historical_claim: 0
+    local_relationship: 0
+    candidate_profile: 0
+    current_issue: 0
+  evidence_index_count: 0
+  entity_relation_count: 0
+  research_question_count: 10
+  unresolved_question_count: 10
+  promotion_receipt_count: 0
+  rules:
+    generated_files_are_indexes_not_new_facts: true
+    source_files_are_authoritative: true
+    historical_current_separation: true
