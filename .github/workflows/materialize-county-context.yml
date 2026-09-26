@@ -15,7 +15,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: feature-v1.4-knowledge-materialization
+  group: materialize-county-context
   cancel-in-progress: false
 
 jobs:
@@ -41,36 +41,25 @@ jobs:
         run: |
           python -m runtime.context_official_download --force --allow-partial
 
-      - name: Rebuild knowledge coverage manifest
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          from runtime.knowledge_coverage import KnowledgeCoverageAudit
-
-          root = Path(".").resolve()
-          report = KnowledgeCoverageAudit(root).build()
-          path = root / "data" / "manifests" / "knowledge_coverage_latest.json"
-          path.parent.mkdir(parents=True, exist_ok=True)
-          path.write_text(
-              json.dumps(report, ensure_ascii=False, indent=2) + "\n",
-              encoding="utf-8",
-          )
-          print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
-          PY
-
       - name: Commit verified normalized context data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/context data/manifests
+          git add data/context data/manifests/context_*.json
           if git diff --cached --quiet; then
             echo "No normalized county-context changes to commit."
             exit 0
           fi
           git commit -m "data: materialize verified official county context"
-          git pull --rebase --autostash origin feature/feishu-election-bot-v1.4-integration
-          git push origin HEAD:feature/feishu-election-bot-v1.4-integration
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin feature/feishu-election-bot-v1.4-integration
+            if git push origin HEAD:feature/feishu-election-bot-v1.4-integration; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          echo "Failed to push materialized data after retries."
+          exit 1
 
       - name: Report remaining context-source failures
         run: |
