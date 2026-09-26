@@ -2,14 +2,14 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T11:30:37+00:00
+生成时间：2026-09-26T12:01:41+00:00
 
 ## 历史政治知识（L2）
 - 連江縣-population-2025: 截至2025年12月底，連江縣户籍登记人口为13,621人，较2024年12月底减少329人。（2024-12-31—2025-12-31）
 - 連江縣-primary-employment-industry-2021: 2021年工业及服务业普查按从业人数观察，連江縣从业人数最多的行业为零售业。（2021-01-01—2021-12-31）
 
 ## 当前地方关系（L3）
-- ly11-office-連江縣-ly11-4a6cd0226632660c: 陳雪生 中國國民黨徽章 陳雪生 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-連江縣-陳雪生: 陳雪生 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-ae7576df634ba6f1: 王忠銘；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -33,7 +33,7 @@
 - 暂无已晋升地方议题。
 
 ## 人物—组织—地区关系索引
-- 陳雪生 中國國民黨徽章 陳雪生 → office_holding → 立法院第11屆立法委員；region=連江縣；current_use=current_usable
+- 陳雪生 → office_holding → 立法院第11屆立法委員；region=連江縣；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 連江縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

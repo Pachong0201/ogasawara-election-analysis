@@ -2,14 +2,14 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T11:30:33+00:00
+生成时间：2026-09-26T12:01:38+00:00
 
 ## 历史政治知识（L2）
 - 宜蘭縣-population-2025: 截至2025年12月底，宜蘭縣户籍登记人口为449,336人，较2024年12月底增加124人。（2024-12-31—2025-12-31）
 - 宜蘭縣-primary-employment-industry-2021: 2021年工业及服务业普查按从业人数观察，宜蘭縣从业人数最多的行业为零售业。（2021-01-01—2021-12-31）
 
 ## 当前地方关系（L3）
-- ly11-office-宜蘭縣-ly11-587e3d6f70daff07: 陳俊宇 民主進步黨徽章 陳俊宇 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-宜蘭縣-陳俊宇: 陳俊宇 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-2717adc2742f3674: 陳宏毅；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -81,7 +81,7 @@
 - 暂无已晋升地方议题。
 
 ## 人物—组织—地区关系索引
-- 陳俊宇 民主進步黨徽章 陳俊宇 → office_holding → 立法院第11屆立法委員；region=宜蘭縣；current_use=current_usable
+- 陳俊宇 → office_holding → 立法院第11屆立法委員；region=宜蘭縣；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 宜蘭縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

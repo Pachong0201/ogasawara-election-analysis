@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 屏東縣
-generated_at: '2026-09-26T11:30:31+00:00'
-content_sha256: f54983836b9c63a9c142e3fbad87a8fbae065cd77421d6a11160bc331a3449b1
+generated_at: '2026-09-26T12:01:38+00:00'
+content_sha256: 8bb33ae2a365e6c0a92d798797fa8257300d4fb4a9e7f63eab0fe01eab400d7e
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/屏東縣/claims.jsonl
@@ -23,7 +23,7 @@ evidence_index_count: 93
 entity_relation_count: 2
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 95
+promotion_receipt_count: 97
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

@@ -46,7 +46,8 @@ class _CurrentMemberLinks(HTMLParser):
         super().__init__()
         self.section = ""
         self._href: Optional[str] = None
-        self._text: List[str] = []
+        self._image_labels: List[str] = []
+        self._visible_text: List[str] = []
         self._recent_text: List[str] = []
         self.links: List[Tuple[str, str]] = []
 
@@ -54,12 +55,13 @@ class _CurrentMemberLinks(HTMLParser):
         attrs_dict = dict(attrs)
         if tag.lower() == "a":
             self._href = attrs_dict.get("href")
-            self._text = []
+            self._image_labels = []
+            self._visible_text = []
             return
         if tag.lower() == "img" and self._href is not None:
             label = _clean(attrs_dict.get("alt") or attrs_dict.get("title") or "")
             if label:
-                self._text.append(re.sub(r"委員照片$", "", label).strip())
+                self._image_labels.append(label)
 
     def handle_data(self, data: str) -> None:
         text = _clean(data)
@@ -73,16 +75,39 @@ class _CurrentMemberLinks(HTMLParser):
         elif "第11屆立法委員名單" in joined:
             self.section = "current"
         if self._href is not None:
-            self._text.append(text)
+            self._visible_text.append(text)
+
+    @staticmethod
+    def _member_name(visible_text: Sequence[str], image_labels: Sequence[str]) -> str:
+        """Choose the member label without concatenating party-badge alt text.
+
+        The live roster anchor contains a portrait alt, a party-logo alt and a
+        visible name.  Treating every fragment as anchor text produced values
+        such as ``吳秉叡 民主進步黨徽章 吳秉叡``.  Prefer visible name text and
+        only fall back to portrait alt text for image-only markup.
+        """
+        ignored = {
+            "中國國民黨", "民主進步黨", "台灣民眾黨", "臺灣民眾黨",
+            "時代力量", "台灣基進", "臺灣基進", "無黨籍", "無",
+        }
+        for value in list(visible_text) + list(image_labels):
+            candidate = _clean(value)
+            candidate = re.sub(r"(?:委員)?照片$", "", candidate).strip()
+            if not candidate or "徽章" in candidate or candidate in ignored:
+                continue
+            if "立法委員名單" in candidate:
+                continue
+            return candidate
+        return ""
 
     def handle_endtag(self, tag: str) -> None:
         if tag.lower() != "a" or self._href is None:
             return
-        text = _clean(" ".join(self._text))
-        text = re.sub(r"委員照片$", "", text).strip()
+        text = self._member_name(self._visible_text, self._image_labels)
         href = self._href
         self._href = None
-        self._text = []
+        self._image_labels = []
+        self._visible_text = []
         if self.section != "current" or not text or "nodeid=" not in href:
             return
         self.links.append((href, text))
@@ -143,6 +168,8 @@ class LYCurrentLegislatorAdapter:
         seen = set()
         for href, name in parser.links:
             url = urllib.parse.urljoin(self.page_url, href)
+            if url == self.page_url:
+                continue
             key = (url, name)
             if key in seen:
                 continue

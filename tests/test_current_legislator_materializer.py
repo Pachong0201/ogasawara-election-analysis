@@ -14,7 +14,9 @@ def fake_fetch(url):
         return """
         <html><body>
         <h2><span>第11屆</span><span>立法委員名單</span></h2>
-        <a href="/Pages/List.aspx?nodeid=1001"><img alt="甲委員照片"></a>
+        <a href="/Pages/List.aspx?nodeid=1001">
+          <img alt="甲委員照片"><img alt="中國國民黨徽章"><span>甲</span>
+        </a>
         <a href="/Pages/List.aspx?nodeid=1002"><img alt="乙委員照片"></a>
         <h2>離職 立法委員名單</h2>
         <a href="/Pages/List.aspx?nodeid=1999">離職甲</a>
@@ -94,3 +96,36 @@ def test_materializes_current_legislator_office_relationship(tmp_path):
 
 def test_county_mapping_normalizes_tai_character():
     assert county_from_constituency("臺北市第3選舉區") == "台北市"
+
+
+def test_member_link_parser_does_not_merge_party_badge_alt_text():
+    links = LYCurrentLegislatorAdapter(page_url=LIST_URL, fetcher=fake_fetch).member_links()
+    assert links[0] == (A_URL, "甲")
+
+
+def test_materializer_prunes_only_stale_managed_legislator_rows(tmp_path):
+    relationship_path = tmp_path / "knowledge" / "local" / "宜蘭縣" / "relationships.jsonl"
+    write_jsonl(
+        relationship_path,
+        [
+            {
+                "relationship_id": "ly11-office-宜蘭縣-stale",
+                "subject": "甲 中國國民黨徽章 甲",
+                "object": "立法院第11屆立法委員",
+                "relationship_type": "office_holding",
+            },
+            {
+                "relationship_id": "manual-office-record",
+                "subject": "保留人物",
+                "object": "立法院第11屆立法委員",
+                "relationship_type": "office_holding",
+            },
+        ],
+    )
+    materializer = CurrentLegislatorMaterializer(tmp_path, adapter=LYCurrentLegislatorAdapter(
+        page_url=LIST_URL, fetcher=fake_fetch
+    ))
+    removed = materializer._reconcile_managed_relationships("宜蘭縣", {"ly11-office-宜蘭縣-甲"})
+    assert removed == 1
+    rows = load_jsonl(relationship_path)
+    assert [row["relationship_id"] for row in rows] == ["manual-office-record"]

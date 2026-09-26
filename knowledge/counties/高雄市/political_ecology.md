@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T11:30:30+00:00
+生成时间：2026-09-26T12:01:36+00:00
 
 ## 历史政治知识（L2）
 - kaohsiung-admin-structure-38-districts: 高雄市政府公开资料记载，高雄市划分为38个行政区。（2010-12-25—2026-09-26）
@@ -12,14 +12,14 @@
 
 ## 当前地方关系（L3）
 - kh-chen-chimai-lai-juilung-20260902: 陈其迈 → public_endorsement → 赖瑞隆；status=active_verified；current_use=current_usable；time_scope=2026-09-02
-- ly11-office-高雄市-ly11-18c86b18256c8296: 李昆澤 民主進步黨徽章 李昆澤 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
-- ly11-office-高雄市-ly11-5863fecc366b283e: 李柏毅 民主進步黨徽章 李柏毅 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
-- ly11-office-高雄市-ly11-f0650ce271528354: 林岱樺 民主進步黨徽章 林岱樺 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
-- ly11-office-高雄市-ly11-a758e884eef8d284: 邱志偉 民主進步黨徽章 邱志偉 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
-- ly11-office-高雄市-ly11-e5f2638c23e1baae: 邱議瑩 民主進步黨徽章 邱議瑩 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
-- ly11-office-高雄市-ly11-ca7b32535e0ac17c: 許智傑 民主進步黨徽章 許智傑 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
-- ly11-office-高雄市-ly11-ab9a4ccf538002bd: 黃捷 民主進步黨徽章 黃捷 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
-- ly11-office-高雄市-ly11-7efe5cefd156b711: 賴瑞隆 民主進步黨徽章 賴瑞隆 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-高雄市-邱議瑩: 邱議瑩 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-高雄市-邱志偉: 邱志偉 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-高雄市-李柏毅: 李柏毅 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-高雄市-林岱樺: 林岱樺 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-高雄市-李昆澤: 李昆澤 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-高雄市-黃捷: 黃捷 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-高雄市-許智傑: 許智傑 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-高雄市-賴瑞隆: 賴瑞隆 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-ec9cf519f323267b: 張靜；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -134,14 +134,14 @@
 
 ## 人物—组织—地区关系索引
 - 陈其迈 → public_endorsement → 赖瑞隆；region=高雄市；current_use=current_usable
-- 李昆澤 民主進步黨徽章 李昆澤 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
-- 李柏毅 民主進步黨徽章 李柏毅 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
-- 林岱樺 民主進步黨徽章 林岱樺 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
-- 邱志偉 民主進步黨徽章 邱志偉 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
-- 邱議瑩 民主進步黨徽章 邱議瑩 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
-- 許智傑 民主進步黨徽章 許智傑 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
-- 黃捷 民主進步黨徽章 黃捷 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
-- 賴瑞隆 民主進步黨徽章 賴瑞隆 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
+- 邱議瑩 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
+- 邱志偉 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
+- 李柏毅 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
+- 林岱樺 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
+- 李昆澤 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
+- 黃捷 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
+- 許智傑 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
+- 賴瑞隆 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 高雄市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

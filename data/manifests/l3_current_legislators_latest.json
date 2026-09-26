@@ -1,10 +1,13 @@
 {
-  "generated_at": "2026-09-26T11:30:37+00:00",
+  "generated_at": "2026-09-26T12:01:41+00:00",
   "county_count": 22,
+  "roster_member_count": 113,
   "covered_county_count": 22,
   "member_count": 73,
   "promoted_count": 73,
-  "unassigned_current_member_count": 40,
+  "pruned_stale_relationship_count": 73,
+  "unmatched_2024_winner_count": 0,
+  "unmatched_2024_winners": [],
   "source_failure_count": 0,
   "source_failures": [],
   "results": [
@@ -15,29 +18,31 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-dd035ce97babc7f301a99dea",
-          "proposal_id": "promote-ly11-office-基隆市-ly11-6fe5af7faba6974d",
+          "receipt_id": "promotion-a9c3982839bdeea25d1ccb64",
+          "proposal_id": "promote-ly11-office-基隆市-林沛祥",
           "county": "基隆市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:08.564817+00:00",
+          "checked_at": "2026-09-26T12:01:23.686951+00:00",
           "target_path": "knowledge/local/基隆市/relationships.jsonl",
-          "record_id": "ly11-office-基隆市-ly11-6fe5af7faba6974d",
+          "record_id": "ly11-office-基隆市-林沛祥",
           "evidence_lead_ids": [
-            "ly-current-基隆市-ly11-6fe5af7faba6974d"
+            "ly-current-基隆市-林沛祥",
+            "cec-2024-regional-winner-基隆市-林沛祥"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "基隆市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "9412cb3f218e7cd1c4fb1d88942a719d0e37fbb92d8e3919cfcbd49b4d76f364",
-          "evidence_snapshot_sha256": "5cffb44a2e2106910c620b087907b8159a1b2df4bc289805702a2fc271c185e4",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "fb08f4e49b5e52956bce04a5de62e250478fa74d7c27850b1badcca96059c93d",
+          "evidence_snapshot_sha256": "d74ecabaf88f8bc388e0e03fad1772c00c2e10f33bbd9500bf906efd28a52a8c",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -51,225 +56,241 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-d29ab30715f544174321c182",
-          "proposal_id": "promote-ly11-office-台北市-ly11-b9839dcd96dfb105",
+          "receipt_id": "promotion-2787409709195d097db99d28",
+          "proposal_id": "promote-ly11-office-台北市-吳思瑤",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:09.632356+00:00",
+          "checked_at": "2026-09-26T12:01:24.378166+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
-          "record_id": "ly11-office-台北市-ly11-b9839dcd96dfb105",
+          "record_id": "ly11-office-台北市-吳思瑤",
           "evidence_lead_ids": [
-            "ly-current-台北市-ly11-b9839dcd96dfb105"
+            "ly-current-台北市-吳思瑤",
+            "cec-2024-regional-winner-台北市-吳思瑤"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "4ce1bf82eea656e4155bae5b1f662d68e57319bed2c1ee9776b0a0ae69272db1",
-          "evidence_snapshot_sha256": "1bb7ecdab9577a0f8853a0e87121e69f0ea086aa47eae368da2d554be59e0114",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "8934d2a5316de73ad3bccecd9edcbd52fbe2187d63d196a0736945f9831ed180",
+          "evidence_snapshot_sha256": "19d65949d4d19dad76cdf6db24b5432ece83d19deccce79af4febdc811db93ec",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-85bb9b3c3fd3789f0641e9db",
-          "proposal_id": "promote-ly11-office-台北市-ly11-664a710955537862",
+          "receipt_id": "promotion-715116fc805cb444108f0649",
+          "proposal_id": "promote-ly11-office-台北市-王世堅",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:09.644197+00:00",
+          "checked_at": "2026-09-26T12:01:24.386038+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
-          "record_id": "ly11-office-台北市-ly11-664a710955537862",
+          "record_id": "ly11-office-台北市-王世堅",
           "evidence_lead_ids": [
-            "ly-current-台北市-ly11-664a710955537862"
+            "ly-current-台北市-王世堅",
+            "cec-2024-regional-winner-台北市-王世堅"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "748b294906a330eecc8bf71d496319667c6f86565d6937e09628b5f826ce1afb",
-          "evidence_snapshot_sha256": "2839048bdf27f08914dd6e53365215d3dd1bf5418258d3684238417b0748a104",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "df5dc65533c78637c4bff8e88da85b5b63dcac266e649e5026a8f1aad2ad675b",
+          "evidence_snapshot_sha256": "76c8540c5fcb2a7ec1014f58162ecfe556702bc352ce031173b2167ed710bddf",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-3d0797ce88b1429a0e79b040",
-          "proposal_id": "promote-ly11-office-台北市-ly11-f36dfd7074706b9e",
+          "receipt_id": "promotion-87659e8463d5a3cee6f68cc3",
+          "proposal_id": "promote-ly11-office-台北市-王鴻薇",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:09.655981+00:00",
+          "checked_at": "2026-09-26T12:01:24.394231+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
-          "record_id": "ly11-office-台北市-ly11-f36dfd7074706b9e",
+          "record_id": "ly11-office-台北市-王鴻薇",
           "evidence_lead_ids": [
-            "ly-current-台北市-ly11-f36dfd7074706b9e"
+            "ly-current-台北市-王鴻薇",
+            "cec-2024-regional-winner-台北市-王鴻薇"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "79f446c1a17463c37e91ac077f5d81b73a6f9905df8ee8ee1e78807aa510c1ec",
-          "evidence_snapshot_sha256": "e266716bc807979d3b39d4bf01d784fb144a4695b492cac8c47a050841dfb17a",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "8f6d57a8d8b92a326aa7ce580abef8ba6a1137c9eac6acbd61b8453361226a5c",
+          "evidence_snapshot_sha256": "8ccda4b7043b6b7dd2874d64331be30311b0b32ff4351b30f4eda1bfd47105fc",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-b7015ea60e2775cdf4c2869e",
-          "proposal_id": "promote-ly11-office-台北市-ly11-5db7abd87cc79186",
+          "receipt_id": "promotion-4856f83893082506422a03ee",
+          "proposal_id": "promote-ly11-office-台北市-李彥秀",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:09.667792+00:00",
+          "checked_at": "2026-09-26T12:01:24.402300+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
-          "record_id": "ly11-office-台北市-ly11-5db7abd87cc79186",
+          "record_id": "ly11-office-台北市-李彥秀",
           "evidence_lead_ids": [
-            "ly-current-台北市-ly11-5db7abd87cc79186"
+            "ly-current-台北市-李彥秀",
+            "cec-2024-regional-winner-台北市-李彥秀"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "2dfb415549749935f2f904a377c98f5ff74e97833f96307950652bbc47ef5224",
-          "evidence_snapshot_sha256": "05c22fbc9783a83a2fda83ecfacd8f61168dd233f4fb9ffc21dbaac7f6c3b3a5",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "d5ad56780315bef7782df9401481d4768a90e8c3d03f2ae3138eedbf5fbaab55",
+          "evidence_snapshot_sha256": "c0ee59fdde476cffd296241b2dbd98cf50b488fa16a466821756c2d62f8157ca",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-60f5dcdd2a8244d670389878",
-          "proposal_id": "promote-ly11-office-台北市-ly11-210b22d7d0bdba0b",
+          "receipt_id": "promotion-ee0a622c634e146fc9758d9b",
+          "proposal_id": "promote-ly11-office-台北市-吳沛憶",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:09.679801+00:00",
+          "checked_at": "2026-09-26T12:01:24.410275+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
-          "record_id": "ly11-office-台北市-ly11-210b22d7d0bdba0b",
+          "record_id": "ly11-office-台北市-吳沛憶",
           "evidence_lead_ids": [
-            "ly-current-台北市-ly11-210b22d7d0bdba0b"
+            "ly-current-台北市-吳沛憶",
+            "cec-2024-regional-winner-台北市-吳沛憶"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "1d4140da2d6d7ada41ec3fe360df5dc0763f8ba9c3625c7d175a2638e52970b2",
-          "evidence_snapshot_sha256": "419e5c83b8c4b226411f3e0694e6a28068e31b89db5f4340d73644e91e0c7b76",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "ed3ce09c05dc4323a1ad548617a558c3355b01d65af5f59b77fef88ddce1831a",
+          "evidence_snapshot_sha256": "25da4eac173cd6224639dd6fa9115edc71512713768e20819be9b4b84c95c654",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-8337d7edb504370973c7ef67",
-          "proposal_id": "promote-ly11-office-台北市-ly11-03ba818813968295",
+          "receipt_id": "promotion-75812199b94d7d00a9998bf0",
+          "proposal_id": "promote-ly11-office-台北市-羅智強",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:09.691826+00:00",
+          "checked_at": "2026-09-26T12:01:24.417937+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
-          "record_id": "ly11-office-台北市-ly11-03ba818813968295",
+          "record_id": "ly11-office-台北市-羅智強",
           "evidence_lead_ids": [
-            "ly-current-台北市-ly11-03ba818813968295"
+            "ly-current-台北市-羅智強",
+            "cec-2024-regional-winner-台北市-羅智強"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "950a2a82b25f47a19d884d8042ed8ef61a83dc19ff09ee1325d7812f07a603c5",
-          "evidence_snapshot_sha256": "350579dedfe66b714afee718151ed041a1543a0695f30dd5290697bf314f7eb3",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "583e6c3f545ae1a30f7fedea5f35afd6b04c472ce1d0d204fff3f89c3f0d29b7",
+          "evidence_snapshot_sha256": "c716183993c131be4733fbe167dfe70cb50c2f0f1797c711c86b36ced827aad1",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-2de8576dc889e9868ef28d3d",
-          "proposal_id": "promote-ly11-office-台北市-ly11-fc89a4fb3be98942",
+          "receipt_id": "promotion-c9148643e6af02d030c0c4c6",
+          "proposal_id": "promote-ly11-office-台北市-徐巧芯",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:09.703798+00:00",
+          "checked_at": "2026-09-26T12:01:24.425985+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
-          "record_id": "ly11-office-台北市-ly11-fc89a4fb3be98942",
+          "record_id": "ly11-office-台北市-徐巧芯",
           "evidence_lead_ids": [
-            "ly-current-台北市-ly11-fc89a4fb3be98942"
+            "ly-current-台北市-徐巧芯",
+            "cec-2024-regional-winner-台北市-徐巧芯"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "be3419894d831ed1305c17311b480ba667ea49cea3aa42fba9ae26afee8e17e4",
-          "evidence_snapshot_sha256": "608bed6dac727cd42ffe26ead0960bc6f19d5466fb7deb5e63d1c468a8cbd873",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "52d571ec7335eaef7403f81b6933886c1c8d93ed4e655cecd41eed07d63ccd3b",
+          "evidence_snapshot_sha256": "1475e09848c30793192cbd80799a9b06b75dcfce01e510ffed43f3b5187944c4",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-1d244e0d53802cde93ee7ef6",
-          "proposal_id": "promote-ly11-office-台北市-ly11-c82d70d247144659",
+          "receipt_id": "promotion-96bb677b12aa840da490d5d2",
+          "proposal_id": "promote-ly11-office-台北市-賴士葆",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:09.715963+00:00",
+          "checked_at": "2026-09-26T12:01:24.433726+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
-          "record_id": "ly11-office-台北市-ly11-c82d70d247144659",
+          "record_id": "ly11-office-台北市-賴士葆",
           "evidence_lead_ids": [
-            "ly-current-台北市-ly11-c82d70d247144659"
+            "ly-current-台北市-賴士葆",
+            "cec-2024-regional-winner-台北市-賴士葆"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "ec1e32b54ececffb12ea6f65c1dba72a280c45624bcc103d9570c505945ef901",
-          "evidence_snapshot_sha256": "b68078a886b93818c7c8c10df74c165177f8042c589641ec0dfdf49969ecf465",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "05968f484f7e3a771c3f3e970befe40feac3fbde10eaebb2bd01b99704995beb",
+          "evidence_snapshot_sha256": "491a4743c1d4cc5e11ed79fdb44fff6fe45cf54d346fb9fff66774905232da5a",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -283,337 +304,361 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-cc3b5dacd082933564050c9d",
-          "proposal_id": "promote-ly11-office-新北市-ly11-67ce45272343e1d3",
+          "receipt_id": "promotion-07ac580bc9985f957e2a0314",
+          "proposal_id": "promote-ly11-office-新北市-洪孟楷",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:11.629705+00:00",
+          "checked_at": "2026-09-26T12:01:25.659929+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
-          "record_id": "ly11-office-新北市-ly11-67ce45272343e1d3",
+          "record_id": "ly11-office-新北市-洪孟楷",
           "evidence_lead_ids": [
-            "ly-current-新北市-ly11-67ce45272343e1d3"
+            "ly-current-新北市-洪孟楷",
+            "cec-2024-regional-winner-新北市-洪孟楷"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "1cae588649aabdcc53142d556aba7f500c014c7425c7460b084564b1c439eb88",
-          "evidence_snapshot_sha256": "deaf4bb8850b3111f49ac9bf94927af35441d50d8d67e7aff95ee40394447e1d",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "91456e4896a8cb0a8e14978a8b50a0147e998b804405ff41654b7a0364b44246",
+          "evidence_snapshot_sha256": "f1c2b25c48486b334182d1777861216b2d6a35e274ff16ae7e51a46029cee2a4",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-e0ab48efee8107737a889099",
-          "proposal_id": "promote-ly11-office-新北市-ly11-0fcf0557e533c7ac",
+          "receipt_id": "promotion-b730013302220bc3427ae7d0",
+          "proposal_id": "promote-ly11-office-新北市-林淑芬",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:11.641957+00:00",
+          "checked_at": "2026-09-26T12:01:25.668894+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
-          "record_id": "ly11-office-新北市-ly11-0fcf0557e533c7ac",
+          "record_id": "ly11-office-新北市-林淑芬",
           "evidence_lead_ids": [
-            "ly-current-新北市-ly11-0fcf0557e533c7ac"
+            "ly-current-新北市-林淑芬",
+            "cec-2024-regional-winner-新北市-林淑芬"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "10b732d92c36ba902f90afc666914df650f70f2bd92963af4b55a04e95ac2aea",
-          "evidence_snapshot_sha256": "c136d561b8d9c632015485e0217bbd6f794fe3ef17f3a4bc54f3f41bd6f8df4d",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "65cd4c3f2d069929cc6caa4be063a486bf64dbc6b069dcb9befba6f9d7120d53",
+          "evidence_snapshot_sha256": "4d991784232381ecd966832f79e552d7e89948a45e8ebda2ed8cd79c68b2ca35",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-d4b57f6f4aef1e4d19bd2840",
-          "proposal_id": "promote-ly11-office-新北市-ly11-7747ecf0d833986a",
+          "receipt_id": "promotion-08ef9f4964e1465a0740dc4c",
+          "proposal_id": "promote-ly11-office-新北市-李坤城",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:11.654204+00:00",
+          "checked_at": "2026-09-26T12:01:25.677970+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
-          "record_id": "ly11-office-新北市-ly11-7747ecf0d833986a",
+          "record_id": "ly11-office-新北市-李坤城",
           "evidence_lead_ids": [
-            "ly-current-新北市-ly11-7747ecf0d833986a"
+            "ly-current-新北市-李坤城",
+            "cec-2024-regional-winner-新北市-李坤城"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "870afba0258cd353f840627567d5828ca1b06d6d0a0128f636e565091769cc77",
-          "evidence_snapshot_sha256": "e226a3b3bd475dbfd2aea0ec06ea9e2bb517cb17c150ee7e41cafd2993dbbebf",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "97499b4536e5123ec551ead0d82de701a2f49c51be55a9394d68e8da756c1047",
+          "evidence_snapshot_sha256": "b9d3fe79d148e459b7a4c6a70f26dbb88a396415ef970586dd5b690239b2a8c1",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-427e293682d470e8f11ddefd",
-          "proposal_id": "promote-ly11-office-新北市-ly11-d10f1fef03ba70fa",
+          "receipt_id": "promotion-b007e8b3b62d9e3ee1f90942",
+          "proposal_id": "promote-ly11-office-新北市-吳秉叡",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:11.666272+00:00",
+          "checked_at": "2026-09-26T12:01:25.686390+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
-          "record_id": "ly11-office-新北市-ly11-d10f1fef03ba70fa",
+          "record_id": "ly11-office-新北市-吳秉叡",
           "evidence_lead_ids": [
-            "ly-current-新北市-ly11-d10f1fef03ba70fa"
+            "ly-current-新北市-吳秉叡",
+            "cec-2024-regional-winner-新北市-吳秉叡"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "25dbcb3c74bb9a9ee61deb51d2fc8a015a6c5aff9bc4e6f5683a6d1708ed77c1",
-          "evidence_snapshot_sha256": "1d1db34e03e153cfc3e8f863974344b5adacbb85c6667b64018c14b79aa7e9d4",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "47bc947cb4796d78050facb68d91e0f3691a797cfb87f273722f0b0818968ded",
+          "evidence_snapshot_sha256": "79b2700857e85a51a7f77488a8c3f5adf6021253175a73006a960c9fe94ad9e8",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-c50e8e5d34587a9b82e8051d",
-          "proposal_id": "promote-ly11-office-新北市-ly11-5caef8bb38e8adc5",
+          "receipt_id": "promotion-66d902b1a1ff18fc678e6a0c",
+          "proposal_id": "promote-ly11-office-新北市-蘇巧慧",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:11.678463+00:00",
+          "checked_at": "2026-09-26T12:01:25.695856+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
-          "record_id": "ly11-office-新北市-ly11-5caef8bb38e8adc5",
+          "record_id": "ly11-office-新北市-蘇巧慧",
           "evidence_lead_ids": [
-            "ly-current-新北市-ly11-5caef8bb38e8adc5"
+            "ly-current-新北市-蘇巧慧",
+            "cec-2024-regional-winner-新北市-蘇巧慧"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "58fcc1525ee0997169c913dc4af58c7904aaf02c8eed69e259f011739792a8a3",
-          "evidence_snapshot_sha256": "8ff8e8ed9e4751fe25882f56741941d52fe61feeab865a29cadcc2f855db3f70",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "b1f9aa2f4ee81d405f97c972ab287ff1f6cd0263378fc58554abf9a447d352fb",
+          "evidence_snapshot_sha256": "74c59d2b30c3d5b7c2e87edd369b7c35e432eb3e61d2be57be19e7d958298a64",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-201695cc97c3f57f135e099f",
-          "proposal_id": "promote-ly11-office-新北市-ly11-b69ab7ce9b7822b0",
+          "receipt_id": "promotion-07be6690e220f005b0251fd0",
+          "proposal_id": "promote-ly11-office-新北市-張宏陸",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:11.690703+00:00",
+          "checked_at": "2026-09-26T12:01:25.704265+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
-          "record_id": "ly11-office-新北市-ly11-b69ab7ce9b7822b0",
+          "record_id": "ly11-office-新北市-張宏陸",
           "evidence_lead_ids": [
-            "ly-current-新北市-ly11-b69ab7ce9b7822b0"
+            "ly-current-新北市-張宏陸",
+            "cec-2024-regional-winner-新北市-張宏陸"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "ccee58df9a645498f11a0e52f59a2f98f7561ab9532586c1eea79c7743b87206",
-          "evidence_snapshot_sha256": "6eb87ca4f1a8ca2aa7111a9775694b87f13489413aa7e308f6def186390f8963",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "e1cb57e938bae71ce3805badace88d53cf3525991c3e63777504977683c7a440",
+          "evidence_snapshot_sha256": "b884c68f679601e3c89e4a33fe170cf26fd64e75c62c105a65aaa6481548232f",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-d46ec91e6a08f2308b4db724",
-          "proposal_id": "promote-ly11-office-新北市-ly11-28ab2e2c0d1c78da",
+          "receipt_id": "promotion-c25938ef9e32b771d8a3ae8d",
+          "proposal_id": "promote-ly11-office-新北市-葉元之",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:11.703404+00:00",
+          "checked_at": "2026-09-26T12:01:25.713698+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
-          "record_id": "ly11-office-新北市-ly11-28ab2e2c0d1c78da",
+          "record_id": "ly11-office-新北市-葉元之",
           "evidence_lead_ids": [
-            "ly-current-新北市-ly11-28ab2e2c0d1c78da"
+            "ly-current-新北市-葉元之",
+            "cec-2024-regional-winner-新北市-葉元之"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "cd03bb5ad845f574280eac68d77883061f6aa208be531e59957e2927e2f92fc2",
-          "evidence_snapshot_sha256": "68de9ea226ddd69b8e1fe6ea576e077a8a58ceead55e327757bf1bd0f6a9968e",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "ee60e1e79fd9aefb85ef18b29d22d7d706dc7c197957a887e94cd1fe8b4ad3aa",
+          "evidence_snapshot_sha256": "6885b06c6d4f94bc138ac48007fa33e7655731a4925596b116bade2b0bed8ccb",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-a3076c44d1572bb13586b7a3",
-          "proposal_id": "promote-ly11-office-新北市-ly11-b99e83badcf0b51e",
+          "receipt_id": "promotion-86ed05f9d25edc05aa0e2276",
+          "proposal_id": "promote-ly11-office-新北市-張智倫",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:11.715694+00:00",
+          "checked_at": "2026-09-26T12:01:25.724616+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
-          "record_id": "ly11-office-新北市-ly11-b99e83badcf0b51e",
+          "record_id": "ly11-office-新北市-張智倫",
           "evidence_lead_ids": [
-            "ly-current-新北市-ly11-b99e83badcf0b51e"
+            "ly-current-新北市-張智倫",
+            "cec-2024-regional-winner-新北市-張智倫"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "ed8bb9a2f62ee39e264edd04dcf845605a6e0bc66fca773300eb7d4a4dbc920b",
-          "evidence_snapshot_sha256": "925ecf261b3d793ae115175df98e0584048c2c6495abfbfbdff5590f581e6799",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "eefc5bccd6752ce70680466cb7020a445ff168199b0e095989d613f412ac89c1",
+          "evidence_snapshot_sha256": "79ba2eba0486747630fa5aa4192d86d7b3461008ae70a7296aa7bcdd10d9693e",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-9c2fec3de6aa828b14483f23",
-          "proposal_id": "promote-ly11-office-新北市-ly11-513ba40455e89ffe",
+          "receipt_id": "promotion-a16d95e964dc1598d31bd0cf",
+          "proposal_id": "promote-ly11-office-新北市-林德福",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:11.727898+00:00",
+          "checked_at": "2026-09-26T12:01:25.733269+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
-          "record_id": "ly11-office-新北市-ly11-513ba40455e89ffe",
+          "record_id": "ly11-office-新北市-林德福",
           "evidence_lead_ids": [
-            "ly-current-新北市-ly11-513ba40455e89ffe"
+            "ly-current-新北市-林德福",
+            "cec-2024-regional-winner-新北市-林德福"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "9b9570584e437bda846066484f9055c82dfe448451dd04189ecb66ce57f349b0",
-          "evidence_snapshot_sha256": "6c79d5092f42b2d4f45284bb595142f512ee946f1aa0a894565c031fba1ef8b6",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "cd4ca13bf2e540554d9f7b0c39e9eb4e57e58e58ac107627db7107226cd1550e",
+          "evidence_snapshot_sha256": "5a8f21f096a3b76062c97b2dbfaa95fdc5d3f25bf5c08e38c70ddb0148a62122",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-6ee14a5a3265429d0d865d0a",
-          "proposal_id": "promote-ly11-office-新北市-ly11-180220026d0925be",
+          "receipt_id": "promotion-168d8a50657afb7d7ccf7392",
+          "proposal_id": "promote-ly11-office-新北市-吳琪銘",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:11.740230+00:00",
+          "checked_at": "2026-09-26T12:01:25.742643+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
-          "record_id": "ly11-office-新北市-ly11-180220026d0925be",
+          "record_id": "ly11-office-新北市-吳琪銘",
           "evidence_lead_ids": [
-            "ly-current-新北市-ly11-180220026d0925be"
+            "ly-current-新北市-吳琪銘",
+            "cec-2024-regional-winner-新北市-吳琪銘"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "74cde5734efd80628fd112aa59509f9b5c5678f9200e5453440250bc232050ce",
-          "evidence_snapshot_sha256": "6d187737b9fcbc8ffd5fddfec963ef6fc3c087468f910e97c5db5efd692c289b",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "a06679ae19f1170299c7b72647c7008de0c9018eb0e93e0120b59e42f8a80a1e",
+          "evidence_snapshot_sha256": "7e07ffe28472e46fd0e3cd6bbb51febc1dad6b501d4c9fc8aa09c32a3aeae84b",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-c7c505ea9f0835aa823edd71",
-          "proposal_id": "promote-ly11-office-新北市-ly11-04eff88458b0b405",
+          "receipt_id": "promotion-513cc709d14a6c42962bcb4e",
+          "proposal_id": "promote-ly11-office-新北市-羅明才",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:11.752625+00:00",
+          "checked_at": "2026-09-26T12:01:25.751888+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
-          "record_id": "ly11-office-新北市-ly11-04eff88458b0b405",
+          "record_id": "ly11-office-新北市-羅明才",
           "evidence_lead_ids": [
-            "ly-current-新北市-ly11-04eff88458b0b405"
+            "ly-current-新北市-羅明才",
+            "cec-2024-regional-winner-新北市-羅明才"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "8d80ba27a8e9a9d3dd0576b453dd7b4459e0ea6348b5e05ac68c736f2efb4df5",
-          "evidence_snapshot_sha256": "16e19cbab2582a43f52898517105d7769a731d272ab5997548b64d6069a895ec",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "e17ae174e443a51efaed335bd07c76734b550c00774186771acc04554ed28283",
+          "evidence_snapshot_sha256": "3e3beba90bea67cf9c131bb325a43f3d49280408756d13156f6ba52847879470",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-d8838fb8e67738d537ce0118",
-          "proposal_id": "promote-ly11-office-新北市-ly11-ac129291f937e18e",
+          "receipt_id": "promotion-7c2bb5cc16a65657f313fb3b",
+          "proposal_id": "promote-ly11-office-新北市-廖先翔",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:11.765327+00:00",
+          "checked_at": "2026-09-26T12:01:25.760924+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
-          "record_id": "ly11-office-新北市-ly11-ac129291f937e18e",
+          "record_id": "ly11-office-新北市-廖先翔",
           "evidence_lead_ids": [
-            "ly-current-新北市-ly11-ac129291f937e18e"
+            "ly-current-新北市-廖先翔",
+            "cec-2024-regional-winner-新北市-廖先翔"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新北市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "c5080d62d6a79a7af21fccf3d83e324277e17461f580e22531d06ab3ae63ee1f",
-          "evidence_snapshot_sha256": "3002e18a7245e4bd47f61d89c5b707b248ca17650007f34e37908c2af3846e39",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "50f72e81763246bef78e26a3e8dde5bdbe31ace8afb88f705d375eb64e504c9c",
+          "evidence_snapshot_sha256": "e2e105b49e4fbe6e8e98fdd38ac6b61e19d54fbf1d653bcb303e6644b732416b",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -627,169 +672,181 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-985aa053b0a8af79e8ffac77",
-          "proposal_id": "promote-ly11-office-桃園市-ly11-db3b84603f59628b",
+          "receipt_id": "promotion-f9a8808efc22befb4ceaf83e",
+          "proposal_id": "promote-ly11-office-桃園市-牛煦庭",
           "county": "桃園市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:13.974695+00:00",
+          "checked_at": "2026-09-26T12:01:27.198688+00:00",
           "target_path": "knowledge/local/桃園市/relationships.jsonl",
-          "record_id": "ly11-office-桃園市-ly11-db3b84603f59628b",
+          "record_id": "ly11-office-桃園市-牛煦庭",
           "evidence_lead_ids": [
-            "ly-current-桃園市-ly11-db3b84603f59628b"
+            "ly-current-桃園市-牛煦庭",
+            "cec-2024-regional-winner-桃園市-牛煦庭"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "桃園市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "a5c0448def4b36ef13e15f20f5373b2be50de177dfa08cc2dfa599d756e2c9ec",
-          "evidence_snapshot_sha256": "63b3c7e7bab279a2fce754380359c10c3940f8c7e64a26e16a58be759d0d954e",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "53ab7f5f82d627b12cbeb7efeb0f6a765218aa92097add3f53116b3c48bb94bc",
+          "evidence_snapshot_sha256": "17f6260516240fa3c5a59d4bb5e5bb661c93445210f0536039411644e3150ab5",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-3fc353940e20d964b06958ed",
-          "proposal_id": "promote-ly11-office-桃園市-ly11-02ac24ca61fb3775",
+          "receipt_id": "promotion-3e2f891dd2e1305cde6b7380",
+          "proposal_id": "promote-ly11-office-桃園市-涂權吉",
           "county": "桃園市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:13.986407+00:00",
+          "checked_at": "2026-09-26T12:01:27.206335+00:00",
           "target_path": "knowledge/local/桃園市/relationships.jsonl",
-          "record_id": "ly11-office-桃園市-ly11-02ac24ca61fb3775",
+          "record_id": "ly11-office-桃園市-涂權吉",
           "evidence_lead_ids": [
-            "ly-current-桃園市-ly11-02ac24ca61fb3775"
+            "ly-current-桃園市-涂權吉",
+            "cec-2024-regional-winner-桃園市-涂權吉"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "桃園市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "4b94249c8acebc54d8800f60483b2f3b4d8002102790b6816a2b880fbf06d192",
-          "evidence_snapshot_sha256": "587cadfe2480fbafb27868e4268fd6e5a1c1e7b2af8c7c047f08157bf0f99802",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "8bdfd95940812644dce830641d8fe08ea23f085bfbb05235d14546d8729d9926",
+          "evidence_snapshot_sha256": "72d06c2fa4996d4e4b91da4e66ecb2f02a7f40a6ea5a14ccda5057edcee9d765",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-16a44b550ae3b1f5776afefb",
-          "proposal_id": "promote-ly11-office-桃園市-ly11-1b9bacbb97fc678d",
+          "receipt_id": "promotion-646693583d9a3c7f84cf3132",
+          "proposal_id": "promote-ly11-office-桃園市-魯明哲",
           "county": "桃園市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:13.998216+00:00",
+          "checked_at": "2026-09-26T12:01:27.213970+00:00",
           "target_path": "knowledge/local/桃園市/relationships.jsonl",
-          "record_id": "ly11-office-桃園市-ly11-1b9bacbb97fc678d",
+          "record_id": "ly11-office-桃園市-魯明哲",
           "evidence_lead_ids": [
-            "ly-current-桃園市-ly11-1b9bacbb97fc678d"
+            "ly-current-桃園市-魯明哲",
+            "cec-2024-regional-winner-桃園市-魯明哲"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "桃園市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "e4b4ccee7e7122779adb6a364ee4addfa36a09370516bfe8532301ec0410f20a",
-          "evidence_snapshot_sha256": "ebf63bae31c599d459b87e1dd8ec6a38e84889e5f71896ddccab55145b121e95",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "bd5bd168edc8c5fa0c459995a9332ef0297052b3ec89ece086d28bfec556c643",
+          "evidence_snapshot_sha256": "68e624d7b40a0bad83908410c1f1c934d381c487079169c22bcbe4b402526e81",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-887984f529c5f15f4f577457",
-          "proposal_id": "promote-ly11-office-桃園市-ly11-f919906d2be194b7",
+          "receipt_id": "promotion-ae9c1823f9cb5ec5da462ed1",
+          "proposal_id": "promote-ly11-office-桃園市-萬美玲",
           "county": "桃園市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:14.010164+00:00",
+          "checked_at": "2026-09-26T12:01:27.221652+00:00",
           "target_path": "knowledge/local/桃園市/relationships.jsonl",
-          "record_id": "ly11-office-桃園市-ly11-f919906d2be194b7",
+          "record_id": "ly11-office-桃園市-萬美玲",
           "evidence_lead_ids": [
-            "ly-current-桃園市-ly11-f919906d2be194b7"
+            "ly-current-桃園市-萬美玲",
+            "cec-2024-regional-winner-桃園市-萬美玲"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "桃園市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "b7d68be1042f31337689f3ad5961e3e27ad29bfff279abba9639d6ce5b67b6f2",
-          "evidence_snapshot_sha256": "53dfd7afeb35f428ff3f462df77507acd90a27887c659ec62ab0715b22ac8f87",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "2162ad19cd15a4fa71f289bca0c2cd28802f5e926344612b2ca1bffd6ebabced",
+          "evidence_snapshot_sha256": "63c5855cae1b2b7ca54f416ed961949e98b381c1f77377f06a0ade6fc8558152",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-606a9568c29f85205342eb77",
-          "proposal_id": "promote-ly11-office-桃園市-ly11-29ab33a34a7a0b61",
+          "receipt_id": "promotion-345fe986de8d5b84f99ad931",
+          "proposal_id": "promote-ly11-office-桃園市-呂玉玲",
           "county": "桃園市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:14.022168+00:00",
+          "checked_at": "2026-09-26T12:01:27.229508+00:00",
           "target_path": "knowledge/local/桃園市/relationships.jsonl",
-          "record_id": "ly11-office-桃園市-ly11-29ab33a34a7a0b61",
+          "record_id": "ly11-office-桃園市-呂玉玲",
           "evidence_lead_ids": [
-            "ly-current-桃園市-ly11-29ab33a34a7a0b61"
+            "ly-current-桃園市-呂玉玲",
+            "cec-2024-regional-winner-桃園市-呂玉玲"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "桃園市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "f8a17057ff93fa5af1a26b98795bfa2ad0978685bc171b6844ca842b249000ff",
-          "evidence_snapshot_sha256": "921bbe1124dc0e16c2d62f9806cac664093dc8ea6fb102b7d9a2e28c98e8b7f6",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "82df1cab4cc450fdcd605744c9d9bab48785123f66cb9c4494542d4a6d6a09c6",
+          "evidence_snapshot_sha256": "c03543cf5ad80bb4fa7a136d4fa239809380bce73b170c484424ea7a379c10e3",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-6692e5e829763a370e9d8cb3",
-          "proposal_id": "promote-ly11-office-桃園市-ly11-798147750ec548d4",
+          "receipt_id": "promotion-44d218456fdd72f15c55ec73",
+          "proposal_id": "promote-ly11-office-桃園市-邱若華",
           "county": "桃園市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:14.034153+00:00",
+          "checked_at": "2026-09-26T12:01:27.237278+00:00",
           "target_path": "knowledge/local/桃園市/relationships.jsonl",
-          "record_id": "ly11-office-桃園市-ly11-798147750ec548d4",
+          "record_id": "ly11-office-桃園市-邱若華",
           "evidence_lead_ids": [
-            "ly-current-桃園市-ly11-798147750ec548d4"
+            "ly-current-桃園市-邱若華",
+            "cec-2024-regional-winner-桃園市-邱若華"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "桃園市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "c22163411512cbc2710040723bd43a1959cd4b288a94a2b38417518665a74757",
-          "evidence_snapshot_sha256": "51fe390b73654acafd57cc7669114049e81f7eef209b66e9496abb16e8fc9e15",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "ec33cac87ace0f4b711bbe23e1030a48d22bbac13e7ceb7f609f0691f2c594de",
+          "evidence_snapshot_sha256": "4b58fe6765c6de6412345ee3ab0388a47cc690ed5d016c83a4729ca6faf83fce",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -803,29 +860,31 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-6d15058a6d76ec9981d998cb",
-          "proposal_id": "promote-ly11-office-新竹市-ly11-e18ef8619d27f725",
+          "receipt_id": "promotion-bb7b1fb9c006a2afe1b24125",
+          "proposal_id": "promote-ly11-office-新竹市-鄭正鈐",
           "county": "新竹市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:16.017207+00:00",
+          "checked_at": "2026-09-26T12:01:28.432080+00:00",
           "target_path": "knowledge/local/新竹市/relationships.jsonl",
-          "record_id": "ly11-office-新竹市-ly11-e18ef8619d27f725",
+          "record_id": "ly11-office-新竹市-鄭正鈐",
           "evidence_lead_ids": [
-            "ly-current-新竹市-ly11-e18ef8619d27f725"
+            "ly-current-新竹市-鄭正鈐",
+            "cec-2024-regional-winner-新竹市-鄭正鈐"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新竹市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "1ea3762c26fb15f89c52ceaf4fa759bb3da41327c262047ad9ae034a69d7fac8",
-          "evidence_snapshot_sha256": "72b7481f719b2759c256b74455b9689ebc1af834ba4713dfc9c3f21962c8881f",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "16b392804681e241cd379cdd2af50139c562dd201c9799c651d93647ac03a2ab",
+          "evidence_snapshot_sha256": "6374bcdb888401005a368cf4993e073669291f1eb08c950758b9ef4f796cc0cb",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -839,57 +898,61 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-4089c68f6033a5d4f347c3f7",
-          "proposal_id": "promote-ly11-office-新竹縣-ly11-331ee2d4d1345aef",
+          "receipt_id": "promotion-d48c9169116c802c26cccf19",
+          "proposal_id": "promote-ly11-office-新竹縣-徐欣瑩",
           "county": "新竹縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:17.029882+00:00",
+          "checked_at": "2026-09-26T12:01:29.034432+00:00",
           "target_path": "knowledge/local/新竹縣/relationships.jsonl",
-          "record_id": "ly11-office-新竹縣-ly11-331ee2d4d1345aef",
+          "record_id": "ly11-office-新竹縣-徐欣瑩",
           "evidence_lead_ids": [
-            "ly-current-新竹縣-ly11-331ee2d4d1345aef"
+            "ly-current-新竹縣-徐欣瑩",
+            "cec-2024-regional-winner-新竹縣-徐欣瑩"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新竹縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "0be1d9a866b4f79a4c191882bf234181f0d33e18ce6fb3be76dfd3ec81ce5997",
-          "evidence_snapshot_sha256": "eb1186bc8221d9710f4764edd4b38728a00eb6828ce90793696375142af6ea0a",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "ae2b655ac5e85f51ebb25bcef65f183f31b4015505ba90684721d8e4ef0abef1",
+          "evidence_snapshot_sha256": "150a2dea0714db5151b82ee64c60f9113a313dbe5f8fffb8e07d1e48cb5087f4",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-8dee476596578b910929d8bf",
-          "proposal_id": "promote-ly11-office-新竹縣-ly11-9a4b95490d19c387",
+          "receipt_id": "promotion-fb9a469e53f6e74691b48f08",
+          "proposal_id": "promote-ly11-office-新竹縣-林思銘",
           "county": "新竹縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:17.040634+00:00",
+          "checked_at": "2026-09-26T12:01:29.041300+00:00",
           "target_path": "knowledge/local/新竹縣/relationships.jsonl",
-          "record_id": "ly11-office-新竹縣-ly11-9a4b95490d19c387",
+          "record_id": "ly11-office-新竹縣-林思銘",
           "evidence_lead_ids": [
-            "ly-current-新竹縣-ly11-9a4b95490d19c387"
+            "ly-current-新竹縣-林思銘",
+            "cec-2024-regional-winner-新竹縣-林思銘"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "新竹縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "a2a86b45c39a27e6247a15ed6f8b578fd49aba5b4b2659728ca2798ebf7a0f32",
-          "evidence_snapshot_sha256": "5746b8f02a2132b0e846cb8fa36e750a51bb33e4f285af377459f27e58da1f76",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "cb5df1fc24c9ea7e100579e9bc2f856d8b19f1275e57ae8bed30af54954a3c95",
+          "evidence_snapshot_sha256": "6cea2bd24c079491cb3c0a0647f14d090d841b09a450b6cb3c6d32ba112485c9",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -903,57 +966,61 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-5692f4cf198cd3d77bf14c6c",
-          "proposal_id": "promote-ly11-office-苗栗縣-ly11-3fecf0c14a8a59d5",
+          "receipt_id": "promotion-3557dc96eeceddad99d5775f",
+          "proposal_id": "promote-ly11-office-苗栗縣-陳超明",
           "county": "苗栗縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:18.286956+00:00",
+          "checked_at": "2026-09-26T12:01:29.796107+00:00",
           "target_path": "knowledge/local/苗栗縣/relationships.jsonl",
-          "record_id": "ly11-office-苗栗縣-ly11-3fecf0c14a8a59d5",
+          "record_id": "ly11-office-苗栗縣-陳超明",
           "evidence_lead_ids": [
-            "ly-current-苗栗縣-ly11-3fecf0c14a8a59d5"
+            "ly-current-苗栗縣-陳超明",
+            "cec-2024-regional-winner-苗栗縣-陳超明"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "苗栗縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "39fec40964355f92ae9beb2286e60b7ae7d3250a8aa4ec410283d5f0eabb03fd",
-          "evidence_snapshot_sha256": "de8a4c768f9d62afb120515a63c2b3a2f974ae34416d579e779464855a02b7e2",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "1d18335f6f33b6809faf2972da78911e23a01f62e588af4b631d8f3257707ea4",
+          "evidence_snapshot_sha256": "aa1264c8b8c6e014dcae6b3f86796835099e3cd037fa5058e82cbde21b4be1eb",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-c85a227014744079346998cb",
-          "proposal_id": "promote-ly11-office-苗栗縣-ly11-bdda1bceecbc51be",
+          "receipt_id": "promotion-1949f5588ecc2327e670a9e6",
+          "proposal_id": "promote-ly11-office-苗栗縣-邱鎮軍",
           "county": "苗栗縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:18.298128+00:00",
+          "checked_at": "2026-09-26T12:01:29.803343+00:00",
           "target_path": "knowledge/local/苗栗縣/relationships.jsonl",
-          "record_id": "ly11-office-苗栗縣-ly11-bdda1bceecbc51be",
+          "record_id": "ly11-office-苗栗縣-邱鎮軍",
           "evidence_lead_ids": [
-            "ly-current-苗栗縣-ly11-bdda1bceecbc51be"
+            "ly-current-苗栗縣-邱鎮軍",
+            "cec-2024-regional-winner-苗栗縣-邱鎮軍"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "苗栗縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "adb1a8140d63a71a2b69ae6c0830d530a230b27204daf81f837de41b1f6361c1",
-          "evidence_snapshot_sha256": "69305ebd0b293d04a55a02c13bd5aace34d86e624cc6c04588e0a9963d1d40d3",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "641c78dc5e20dafb3d9e62c01b2ea99825a42d322abbf878bde3383a8f71853f",
+          "evidence_snapshot_sha256": "d359dd2be602a67b2bdc2b4ab7fbaef526f53a57d57c4ca1b65d780fc8dbaa9f",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -967,225 +1034,241 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-9066bce95573c809349baa31",
-          "proposal_id": "promote-ly11-office-台中市-ly11-00cce2851701a59e",
+          "receipt_id": "promotion-153817b730311b924ff8057a",
+          "proposal_id": "promote-ly11-office-台中市-蔡其昌",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:19.324566+00:00",
+          "checked_at": "2026-09-26T12:01:30.428186+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
-          "record_id": "ly11-office-台中市-ly11-00cce2851701a59e",
+          "record_id": "ly11-office-台中市-蔡其昌",
           "evidence_lead_ids": [
-            "ly-current-台中市-ly11-00cce2851701a59e"
+            "ly-current-台中市-蔡其昌",
+            "cec-2024-regional-winner-台中市-蔡其昌"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台中市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "c4293f21579602cd5e6adc8ef6fa1102c779de0b3e6e99196a75b397d93bfdcb",
-          "evidence_snapshot_sha256": "6f7f5f5cc1c4a479e49efec50e1b506e3f7c5bd8c0ec9f3c0a7ae3db0c9001da",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "8a47b2bae0be5d4cd35f9cac1b81ddd89495e27b1db09d5d67151abc688a5002",
+          "evidence_snapshot_sha256": "69ea5504f4cca1c2dd667555428fe1b76963a61eb1ec783f38f63cbced98a7d7",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-d90272d899f0c6fa101d25e7",
-          "proposal_id": "promote-ly11-office-台中市-ly11-a1a57e9ca8feec12",
+          "receipt_id": "promotion-f36dd6b5f22ed506e5fccf61",
+          "proposal_id": "promote-ly11-office-台中市-顏寬恒",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:19.336244+00:00",
+          "checked_at": "2026-09-26T12:01:30.436221+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
-          "record_id": "ly11-office-台中市-ly11-a1a57e9ca8feec12",
+          "record_id": "ly11-office-台中市-顏寬恒",
           "evidence_lead_ids": [
-            "ly-current-台中市-ly11-a1a57e9ca8feec12"
+            "ly-current-台中市-顏寬恒",
+            "cec-2024-regional-winner-台中市-顏寬恒"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台中市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "0920b9a5f75d84664edb6099dbea8eb722d9e5063d58f44cf9ee1e45187cf8f2",
-          "evidence_snapshot_sha256": "bbb13a70fc27c2e50dceda7443c2cff43f3aa7fbcb257c6326df07675e165c94",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "21589f21cdd38cc92ef7585218830e4fa235c252409163f335648e7fb91dc0ec",
+          "evidence_snapshot_sha256": "e967d1bc14d2188fbf0f27541bb4b52022021926b6110b1aa50d66d0930b0ca0",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-34b489c3e9652af42bdedd8e",
-          "proposal_id": "promote-ly11-office-台中市-ly11-c05de9d2797ceb01",
+          "receipt_id": "promotion-fe74d87cfa87fde1f6dcde04",
+          "proposal_id": "promote-ly11-office-台中市-楊瓊瓔",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:19.347812+00:00",
+          "checked_at": "2026-09-26T12:01:30.443713+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
-          "record_id": "ly11-office-台中市-ly11-c05de9d2797ceb01",
+          "record_id": "ly11-office-台中市-楊瓊瓔",
           "evidence_lead_ids": [
-            "ly-current-台中市-ly11-c05de9d2797ceb01"
+            "ly-current-台中市-楊瓊瓔",
+            "cec-2024-regional-winner-台中市-楊瓊瓔"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台中市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "d5426b541281e76cae518a2bb8e46ef6b4f94015a1e8769f7a06bbb65142e789",
-          "evidence_snapshot_sha256": "71fa0a74cb1a9e84a288fd71cbce97bcd0d734d12975d5371101ebdea9c7aa5e",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "5cc7996ffc979b0fd79f8821b50e80cf952499466953d1df6d8e8bb83202f053",
+          "evidence_snapshot_sha256": "05f289f8dbfb421864ce23e1171b2b073b13527631eaf6c5fced9ffbf13bd0e2",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-cb61dc329df29070d89eda41",
-          "proposal_id": "promote-ly11-office-台中市-ly11-a3f70ff898309ee6",
+          "receipt_id": "promotion-91a0a06dcf61c10268fb4827",
+          "proposal_id": "promote-ly11-office-台中市-廖偉翔",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:19.359573+00:00",
+          "checked_at": "2026-09-26T12:01:30.451962+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
-          "record_id": "ly11-office-台中市-ly11-a3f70ff898309ee6",
+          "record_id": "ly11-office-台中市-廖偉翔",
           "evidence_lead_ids": [
-            "ly-current-台中市-ly11-a3f70ff898309ee6"
+            "ly-current-台中市-廖偉翔",
+            "cec-2024-regional-winner-台中市-廖偉翔"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台中市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "6c9e381424269abec2c17365cc1cbe1121d8f3ef10caa420a32de7d5efa833ca",
-          "evidence_snapshot_sha256": "9099673698fdc5d4822ddf8d06755f4acc97306a75716f8d76e62ea760529f91",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "c2f5a389d822cf47360adb99aa58f6e2b82e4c60a8843664558ef11a1fa821cb",
+          "evidence_snapshot_sha256": "21d05b4b2626c7d1b5f7a0e7d1d86f6ee60053707cb23242152f13b0305364d9",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-60e132f4e340547b8e01f11e",
-          "proposal_id": "promote-ly11-office-台中市-ly11-1eaa175336248d82",
+          "receipt_id": "promotion-ba53ba26a139b87150178ecb",
+          "proposal_id": "promote-ly11-office-台中市-黃健豪",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:19.371242+00:00",
+          "checked_at": "2026-09-26T12:01:30.459519+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
-          "record_id": "ly11-office-台中市-ly11-1eaa175336248d82",
+          "record_id": "ly11-office-台中市-黃健豪",
           "evidence_lead_ids": [
-            "ly-current-台中市-ly11-1eaa175336248d82"
+            "ly-current-台中市-黃健豪",
+            "cec-2024-regional-winner-台中市-黃健豪"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台中市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "84dbe605643a016dcbfc8f801c5fdc37806621411ff9f82300df0ada82335095",
-          "evidence_snapshot_sha256": "1da9c12a99f389da68c67beee4b5d8498873b0ed7e0364763f367d4c274e741b",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "1a4be7806c8768719890cc75d89c6f78a6915e523d036962de2ac042abb1101c",
+          "evidence_snapshot_sha256": "e48c50a0e0b07bab538b4138d54a23c772d63be98cfbdc3041b4332393b4322b",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-46ce8a9ae5cadcb30b97ad34",
-          "proposal_id": "promote-ly11-office-台中市-ly11-a155d3ff05986e18",
+          "receipt_id": "promotion-c3c01d6103add45241305983",
+          "proposal_id": "promote-ly11-office-台中市-羅廷瑋",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:19.383123+00:00",
+          "checked_at": "2026-09-26T12:01:30.467099+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
-          "record_id": "ly11-office-台中市-ly11-a155d3ff05986e18",
+          "record_id": "ly11-office-台中市-羅廷瑋",
           "evidence_lead_ids": [
-            "ly-current-台中市-ly11-a155d3ff05986e18"
+            "ly-current-台中市-羅廷瑋",
+            "cec-2024-regional-winner-台中市-羅廷瑋"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台中市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "ae76475a452fbc645d4da74b5b8f5eb35d6f01d231bd64310c18163020b9a414",
-          "evidence_snapshot_sha256": "747a45f82bc90b0476f7be37323005beead981a5fc4a1bdc16ccb180ad012431",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "167d27567325a902d5ee518783824a89d77f3d03dc6b91e87da6d970f6b11199",
+          "evidence_snapshot_sha256": "12b2ebd97b511ba875b7359ad1c417270457c05e0d57c7e8726dd67072d2e3cd",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-9ac9a0312423b61d5f4e9aed",
-          "proposal_id": "promote-ly11-office-台中市-ly11-2bbd18b65d913636",
+          "receipt_id": "promotion-651fadf45e43c88d3bac20c5",
+          "proposal_id": "promote-ly11-office-台中市-何欣純",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:19.394896+00:00",
+          "checked_at": "2026-09-26T12:01:30.474721+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
-          "record_id": "ly11-office-台中市-ly11-2bbd18b65d913636",
+          "record_id": "ly11-office-台中市-何欣純",
           "evidence_lead_ids": [
-            "ly-current-台中市-ly11-2bbd18b65d913636"
+            "ly-current-台中市-何欣純",
+            "cec-2024-regional-winner-台中市-何欣純"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台中市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "692006916a9d79ec7484fa747c6c628f3c721e5cd632bd3c5c352f15e5d0706b",
-          "evidence_snapshot_sha256": "de1911ffe0eea7990ef50023a623967e5d539c728c5e8fd9eaad16f74b39f01e",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "27c6271574137fd5e6b9d9caedfb2759defc8f69bf1975fd3a95af2cb58d0558",
+          "evidence_snapshot_sha256": "a4b1b8411a2164742466b7604125bbbc2c0d2989d9f90bbbc1ea3851919f7da8",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-7f69c5a6bbe2fddb705f2090",
-          "proposal_id": "promote-ly11-office-台中市-ly11-6aa570839d86e505",
+          "receipt_id": "promotion-b4bca5d7141e0a7d1060e698",
+          "proposal_id": "promote-ly11-office-台中市-江啟臣",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:19.406759+00:00",
+          "checked_at": "2026-09-26T12:01:30.482454+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
-          "record_id": "ly11-office-台中市-ly11-6aa570839d86e505",
+          "record_id": "ly11-office-台中市-江啟臣",
           "evidence_lead_ids": [
-            "ly-current-台中市-ly11-6aa570839d86e505"
+            "ly-current-台中市-江啟臣",
+            "cec-2024-regional-winner-台中市-江啟臣"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台中市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "7ea873f21652a77076d9fdd2b03e7a22681ccb7caef080ee35ebbe6a19d32ae2",
-          "evidence_snapshot_sha256": "ae09680e1f2d7a8a9c43cf6a11c8f40625c9c0d7adf9c286d94bcafe28a89b1a",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "6e4f1ff03b5fa3024c87593a83180dca38b79e8f074755471fd6dfa4c1a3c613",
+          "evidence_snapshot_sha256": "0f7b4f15963392eea3a157e984cff9d37b5ec75cb30b38dc5da1a889e981c772",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -1199,113 +1282,121 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-1d94659ca4f0fbf76c983b4c",
-          "proposal_id": "promote-ly11-office-彰化縣-ly11-ac5d55dbb884c2d3",
+          "receipt_id": "promotion-8f611aad8d21b003d1538e49",
+          "proposal_id": "promote-ly11-office-彰化縣-陳秀寳",
           "county": "彰化縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:21.344497+00:00",
+          "checked_at": "2026-09-26T12:01:31.669361+00:00",
           "target_path": "knowledge/local/彰化縣/relationships.jsonl",
-          "record_id": "ly11-office-彰化縣-ly11-ac5d55dbb884c2d3",
+          "record_id": "ly11-office-彰化縣-陳秀寳",
           "evidence_lead_ids": [
-            "ly-current-彰化縣-ly11-ac5d55dbb884c2d3"
+            "ly-current-彰化縣-陳秀寳",
+            "cec-2024-regional-winner-彰化縣-陳秀寳"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "彰化縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "6b2d728d2e46d4b98c04fc580b3f90d604652cb248ccb30ad21a075e58f4ba86",
-          "evidence_snapshot_sha256": "56d79c4fe76f9e6ba2def41213e946ddd69cfdae30865d66365c70788c3c616b",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "a0034e4fff285ea03961da8dfe1da1a16d9890f582c3d6e37a8243e37371c872",
+          "evidence_snapshot_sha256": "c2f178214c7f0ce5e6c7e86c6cb2e8215b28f04a9170930ef6c4a56085189b0f",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-43b99feb0ed7dcbd61f646e0",
-          "proposal_id": "promote-ly11-office-彰化縣-ly11-8febbaca3ec187ab",
+          "receipt_id": "promotion-becfd6c6a94b402ab4f1166a",
+          "proposal_id": "promote-ly11-office-彰化縣-黃秀芳",
           "county": "彰化縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:21.355747+00:00",
+          "checked_at": "2026-09-26T12:01:31.677677+00:00",
           "target_path": "knowledge/local/彰化縣/relationships.jsonl",
-          "record_id": "ly11-office-彰化縣-ly11-8febbaca3ec187ab",
+          "record_id": "ly11-office-彰化縣-黃秀芳",
           "evidence_lead_ids": [
-            "ly-current-彰化縣-ly11-8febbaca3ec187ab"
+            "ly-current-彰化縣-黃秀芳",
+            "cec-2024-regional-winner-彰化縣-黃秀芳"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "彰化縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "5f1a755e3aa574e74c45d8bfedc17d39d6032b67246ef83a21c601f642148d7b",
-          "evidence_snapshot_sha256": "e17d4e049822a39b6f1915dce8542e3a3b41269a5964425f8f9639513003752a",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "2bfe34637872012d3f3409156b1177e77f1e0440f0212f6d44bd30d1d21e4d4a",
+          "evidence_snapshot_sha256": "2beb81755afb4d395e6a650a24c980d99c27176adc05a6137ee66d2873ff971e",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-16b15447b1c042b42238f153",
-          "proposal_id": "promote-ly11-office-彰化縣-ly11-05910ea75b8b5693",
+          "receipt_id": "promotion-600f7fe89e6e4c647f60cb56",
+          "proposal_id": "promote-ly11-office-彰化縣-謝衣鳯",
           "county": "彰化縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:21.367041+00:00",
+          "checked_at": "2026-09-26T12:01:31.685578+00:00",
           "target_path": "knowledge/local/彰化縣/relationships.jsonl",
-          "record_id": "ly11-office-彰化縣-ly11-05910ea75b8b5693",
+          "record_id": "ly11-office-彰化縣-謝衣鳯",
           "evidence_lead_ids": [
-            "ly-current-彰化縣-ly11-05910ea75b8b5693"
+            "ly-current-彰化縣-謝衣鳯",
+            "cec-2024-regional-winner-彰化縣-謝衣鳯"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "彰化縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "ea180f7d822c9b794438fb4842f1b5a980809de792eca94ea05173a2ca4891bd",
-          "evidence_snapshot_sha256": "67509b4f5d07be7b2caf67e9fddc813b0cd3eccad9695d566219fdd5cff78b91",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "d778beace8b1358e3ffb5075c8f7527a6ec75e76f54ce1f0ee7bd23067eec16e",
+          "evidence_snapshot_sha256": "a7ff84ade5e503b8245dca278f93814d2af1414aa22a297d6fc3cc3669aa1d12",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-36941dbd3e148d7f6d8c61a3",
-          "proposal_id": "promote-ly11-office-彰化縣-ly11-6b0c318987c18477",
+          "receipt_id": "promotion-d1b3f130f32e682af53730b5",
+          "proposal_id": "promote-ly11-office-彰化縣-陳素月",
           "county": "彰化縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:21.378458+00:00",
+          "checked_at": "2026-09-26T12:01:31.693445+00:00",
           "target_path": "knowledge/local/彰化縣/relationships.jsonl",
-          "record_id": "ly11-office-彰化縣-ly11-6b0c318987c18477",
+          "record_id": "ly11-office-彰化縣-陳素月",
           "evidence_lead_ids": [
-            "ly-current-彰化縣-ly11-6b0c318987c18477"
+            "ly-current-彰化縣-陳素月",
+            "cec-2024-regional-winner-彰化縣-陳素月"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "彰化縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "8f3855183539c1e9397415d8a0b8d690016f71d1b3459e19365bca6789d873b6",
-          "evidence_snapshot_sha256": "081360550e2c5dde7aa16f1e8eba5cbe61c6d314731fdc6ad950ded15b45b0ca",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "bdf77ee808f33c9d6f532b6ab23da406e74cce3a01868b0061c4f9c6c3219467",
+          "evidence_snapshot_sha256": "cea0940e8db84e1e18a8f078f72614318d9cd235bdf5b63f324080418cde7397",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -1319,57 +1410,61 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-b3668144b99885de0fe154de",
-          "proposal_id": "promote-ly11-office-南投縣-ly11-f9971744e1c1c9f3",
+          "receipt_id": "promotion-43bd1b88bc91df30eb29907a",
+          "proposal_id": "promote-ly11-office-南投縣-馬文君",
           "county": "南投縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:22.972453+00:00",
+          "checked_at": "2026-09-26T12:01:32.664625+00:00",
           "target_path": "knowledge/local/南投縣/relationships.jsonl",
-          "record_id": "ly11-office-南投縣-ly11-f9971744e1c1c9f3",
+          "record_id": "ly11-office-南投縣-馬文君",
           "evidence_lead_ids": [
-            "ly-current-南投縣-ly11-f9971744e1c1c9f3"
+            "ly-current-南投縣-馬文君",
+            "cec-2024-regional-winner-南投縣-馬文君"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "南投縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "a698fa7c0b57443019aa55f26ab1b6b8a308eecdfe328da008b04f42ad447ca1",
-          "evidence_snapshot_sha256": "31fadc3c58a1afd629c2d15a3779f6b24d53024d4aa5fcd56458f481c423300e",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "7aac45ef7b8474b6a67f2ba7cc78d0dfb77aa8b44f8e3ec3426d27a799dca20c",
+          "evidence_snapshot_sha256": "b54ba308851b0c46e8fd0c94fa7eeadf2d5bc1824702ca23e9fd70e6ce49d756",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-8ee3b988390ae142614df6d9",
-          "proposal_id": "promote-ly11-office-南投縣-ly11-d0f65ce0f500a4de",
+          "receipt_id": "promotion-699776f2789c4ec3d37cb57e",
+          "proposal_id": "promote-ly11-office-南投縣-游顥",
           "county": "南投縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:22.983166+00:00",
+          "checked_at": "2026-09-26T12:01:32.671677+00:00",
           "target_path": "knowledge/local/南投縣/relationships.jsonl",
-          "record_id": "ly11-office-南投縣-ly11-d0f65ce0f500a4de",
+          "record_id": "ly11-office-南投縣-游顥",
           "evidence_lead_ids": [
-            "ly-current-南投縣-ly11-d0f65ce0f500a4de"
+            "ly-current-南投縣-游顥",
+            "cec-2024-regional-winner-南投縣-游顥"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "南投縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "01af220b8a3b5bd252dcea578b36dfb13af3e32398f96ac371d5f8a68c02cff4",
-          "evidence_snapshot_sha256": "bd3c77403b4962545e381c4729a57a6888e46ba93a91b9e9c047c65a653cf765",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "7901b8f097a82c7bde7064833e400071cf0792eb78e75138ff15282a1f1e2aec",
+          "evidence_snapshot_sha256": "193a0fcd64307d259b5ff3a20640f3837c4acedf6bc57c235a1c1ffad5510b47",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -1383,57 +1478,61 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-1717205ab78c13c8bd03c374",
-          "proposal_id": "promote-ly11-office-雲林縣-ly11-04c8b63cb5ee2e51",
+          "receipt_id": "promotion-03b0ff600fc93e8d23e9ed96",
+          "proposal_id": "promote-ly11-office-雲林縣-丁學忠",
           "county": "雲林縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:24.091160+00:00",
+          "checked_at": "2026-09-26T12:01:33.346252+00:00",
           "target_path": "knowledge/local/雲林縣/relationships.jsonl",
-          "record_id": "ly11-office-雲林縣-ly11-04c8b63cb5ee2e51",
+          "record_id": "ly11-office-雲林縣-丁學忠",
           "evidence_lead_ids": [
-            "ly-current-雲林縣-ly11-04c8b63cb5ee2e51"
+            "ly-current-雲林縣-丁學忠",
+            "cec-2024-regional-winner-雲林縣-丁學忠"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "雲林縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "a5e02af09cde7814fad11f706454e29b230d391226f20ce5a27cfa912731bae7",
-          "evidence_snapshot_sha256": "8942fa360898c8022582fd11270d47ed6d569a2610957bbfe4abc03af4b38a65",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "7b858ef290dc85fb5c060e292e12ccfd0262c5e02aae0cea1071bd5b8febe4df",
+          "evidence_snapshot_sha256": "3b56f0478b570c82fab1529aa23a023eab4e524adeb12de69e64b25c9718ec1e",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-7fa04efb5d9dcd282fba7f54",
-          "proposal_id": "promote-ly11-office-雲林縣-ly11-3a183438bb505ac0",
+          "receipt_id": "promotion-24b70df246c6747c01427ef4",
+          "proposal_id": "promote-ly11-office-雲林縣-劉建國",
           "county": "雲林縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:24.102315+00:00",
+          "checked_at": "2026-09-26T12:01:33.353574+00:00",
           "target_path": "knowledge/local/雲林縣/relationships.jsonl",
-          "record_id": "ly11-office-雲林縣-ly11-3a183438bb505ac0",
+          "record_id": "ly11-office-雲林縣-劉建國",
           "evidence_lead_ids": [
-            "ly-current-雲林縣-ly11-3a183438bb505ac0"
+            "ly-current-雲林縣-劉建國",
+            "cec-2024-regional-winner-雲林縣-劉建國"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "雲林縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "3459970e333b57ff47fb2d4e33834d0a5ffa47e6cd067c12c49e714807515146",
-          "evidence_snapshot_sha256": "8819852a1651b8a5d913f061b24749825be168c43d33e9f5c4fecc8df9cdc22b",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "cf7c561453c1090b28f5bed59cbf458af8d436cc4e2fcf95f9c464e9c8d5feac",
+          "evidence_snapshot_sha256": "b924fdd3dc0ce91f7d43bae69d6c633e4aa7a31623ec48578b005dedc5116c92",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -1447,29 +1546,31 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-688ef44d63bf0ef21fc5a8b6",
-          "proposal_id": "promote-ly11-office-嘉義市-ly11-5273129fc71c2d2e",
+          "receipt_id": "promotion-c91941e90e1f5c31175951af",
+          "proposal_id": "promote-ly11-office-嘉義市-王美惠",
           "county": "嘉義市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:25.442346+00:00",
+          "checked_at": "2026-09-26T12:01:34.142886+00:00",
           "target_path": "knowledge/local/嘉義市/relationships.jsonl",
-          "record_id": "ly11-office-嘉義市-ly11-5273129fc71c2d2e",
+          "record_id": "ly11-office-嘉義市-王美惠",
           "evidence_lead_ids": [
-            "ly-current-嘉義市-ly11-5273129fc71c2d2e"
+            "ly-current-嘉義市-王美惠",
+            "cec-2024-regional-winner-嘉義市-王美惠"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "嘉義市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "94d4d7933681427037143d1bbd3204ef73db970d85e317cca5f1314218af67f7",
-          "evidence_snapshot_sha256": "4f93b10011060cc750a17c7ac0043030b60bf67a20b61107ad481ac7dfd3968d",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "c20d26ba0f4fb227a7ebe71f2b71c7d49f7ffcd82baee8f0b3a009d09c51ff1f",
+          "evidence_snapshot_sha256": "23ea2b251cee28814b1afc6a9c0f563441293e663b491a94bbd12b2f296af110",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -1483,57 +1584,61 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-e9dca397360c2f96f6959367",
-          "proposal_id": "promote-ly11-office-嘉義縣-ly11-268d3b61af8b2004",
+          "receipt_id": "promotion-a09b93f5b9d08bffcc472c27",
+          "proposal_id": "promote-ly11-office-嘉義縣-蔡易餘",
           "county": "嘉義縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:26.180837+00:00",
+          "checked_at": "2026-09-26T12:01:34.578427+00:00",
           "target_path": "knowledge/local/嘉義縣/relationships.jsonl",
-          "record_id": "ly11-office-嘉義縣-ly11-268d3b61af8b2004",
+          "record_id": "ly11-office-嘉義縣-蔡易餘",
           "evidence_lead_ids": [
-            "ly-current-嘉義縣-ly11-268d3b61af8b2004"
+            "ly-current-嘉義縣-蔡易餘",
+            "cec-2024-regional-winner-嘉義縣-蔡易餘"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "嘉義縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "ab53652a8e71ff9d26cdd076e5718abf39432b7af365fae7816c40488d993976",
-          "evidence_snapshot_sha256": "f7e96879afe27b4bc3e470095f6b47d05c447a6f4982389487eb534ded994d17",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "f134b2fbcd7c4273f6a7ee396fdd813b23df8305f03a4ac2a87016a7139808b3",
+          "evidence_snapshot_sha256": "b62688e31763eaefb9184fd44b2d8221a21b00f279e4be2f92dbb9714e9606a2",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-523699bd5cfdec6a76de5456",
-          "proposal_id": "promote-ly11-office-嘉義縣-ly11-f57fc8c99d4521e4",
+          "receipt_id": "promotion-7545eb8274b55332e3c69cb4",
+          "proposal_id": "promote-ly11-office-嘉義縣-陳冠廷",
           "county": "嘉義縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:26.191319+00:00",
+          "checked_at": "2026-09-26T12:01:34.584926+00:00",
           "target_path": "knowledge/local/嘉義縣/relationships.jsonl",
-          "record_id": "ly11-office-嘉義縣-ly11-f57fc8c99d4521e4",
+          "record_id": "ly11-office-嘉義縣-陳冠廷",
           "evidence_lead_ids": [
-            "ly-current-嘉義縣-ly11-f57fc8c99d4521e4"
+            "ly-current-嘉義縣-陳冠廷",
+            "cec-2024-regional-winner-嘉義縣-陳冠廷"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "嘉義縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "e087fd6a376cbc6d216f65da1a29a471fd8e8b9335a27e125546879ae265f477",
-          "evidence_snapshot_sha256": "9d4f34fde3db9a72047ca97aa7f1cf059c678965b75a6004455c294cd75d63da",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "ad6b8657d101fe3ed9da1497be42ca8da5e8d63b1264c6e94e11585ead494439",
+          "evidence_snapshot_sha256": "305b207cb4d2492fe97c3f7137215776166f30eff04e31850a54d7ced1d0b9e6",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -1547,169 +1652,181 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-11e1ba15a24a21183a7c1325",
-          "proposal_id": "promote-ly11-office-台南市-ly11-4ef7b84c2b2b1091",
+          "receipt_id": "promotion-993baccc5cccf602b8849407",
+          "proposal_id": "promote-ly11-office-台南市-賴惠員",
           "county": "台南市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:27.163482+00:00",
+          "checked_at": "2026-09-26T12:01:35.175272+00:00",
           "target_path": "knowledge/local/台南市/relationships.jsonl",
-          "record_id": "ly11-office-台南市-ly11-4ef7b84c2b2b1091",
+          "record_id": "ly11-office-台南市-賴惠員",
           "evidence_lead_ids": [
-            "ly-current-台南市-ly11-4ef7b84c2b2b1091"
+            "ly-current-台南市-賴惠員",
+            "cec-2024-regional-winner-台南市-賴惠員"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台南市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "3899310d42db4916399354c7bcd07a1649409835ca8f4f8e9fae5df29fec8431",
-          "evidence_snapshot_sha256": "d86de1ed0b5e4b10c1f37a887f0a88e4e549afd1a3527b2701b3ac5150f158ea",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "580be488520351ae62478b2f1e8fc56e58b091fb02693e58a3d00010a881e237",
+          "evidence_snapshot_sha256": "8577c6c19f1dd9eb286031a1c1b24a65e6c51917b5c877d46b11b1a6ed2909b2",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-e3171ce94ead6a5022f3723a",
-          "proposal_id": "promote-ly11-office-台南市-ly11-5e67ace00f1f0421",
+          "receipt_id": "promotion-fadb662e9bcd9830858d9292",
+          "proposal_id": "promote-ly11-office-台南市-郭國文",
           "county": "台南市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:27.175232+00:00",
+          "checked_at": "2026-09-26T12:01:35.182906+00:00",
           "target_path": "knowledge/local/台南市/relationships.jsonl",
-          "record_id": "ly11-office-台南市-ly11-5e67ace00f1f0421",
+          "record_id": "ly11-office-台南市-郭國文",
           "evidence_lead_ids": [
-            "ly-current-台南市-ly11-5e67ace00f1f0421"
+            "ly-current-台南市-郭國文",
+            "cec-2024-regional-winner-台南市-郭國文"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台南市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "65001d2b11c0c390fd5172180d6e7b4af36bea34fe4b97fa83da6f7bef6132a6",
-          "evidence_snapshot_sha256": "79bfeff25994ea4ac00348ed91e580880efc23e947ce62fe842f71de2e7842e5",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "3675080816556ba8bd6836fa6c55a0ce5aee670e39ee5785b73c2d66b77b0361",
+          "evidence_snapshot_sha256": "212955a1b3b5f90797066e1adf66d4977ef84a21a5e0888302f6bf5e5b95649b",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-c08a4b9144fd9d61bbd996d5",
-          "proposal_id": "promote-ly11-office-台南市-ly11-9d17ef001b9e0051",
+          "receipt_id": "promotion-2095034e7d138c67860e06c0",
+          "proposal_id": "promote-ly11-office-台南市-陳亭妃",
           "county": "台南市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:27.186922+00:00",
+          "checked_at": "2026-09-26T12:01:35.190469+00:00",
           "target_path": "knowledge/local/台南市/relationships.jsonl",
-          "record_id": "ly11-office-台南市-ly11-9d17ef001b9e0051",
+          "record_id": "ly11-office-台南市-陳亭妃",
           "evidence_lead_ids": [
-            "ly-current-台南市-ly11-9d17ef001b9e0051"
+            "ly-current-台南市-陳亭妃",
+            "cec-2024-regional-winner-台南市-陳亭妃"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台南市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "b6314a3e15169a7a25c9034e03499f5a5ab853bba7afbc83577bcbd33dd96e87",
-          "evidence_snapshot_sha256": "e478ffb874222db5a9cadc470024d81ddd390b4f9632bdc6975a492707446dec",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "c4dca0e3dc97e4a631015689f317e4aec907e48d14806803bdbbf41d95d8ec0e",
+          "evidence_snapshot_sha256": "a3ad45fb01785229460cf362937975fb642f72770e7f51aca4af4f21bf0a2d06",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-16d3f820841ccf32ab5cf930",
-          "proposal_id": "promote-ly11-office-台南市-ly11-7e17c3fecac90031",
+          "receipt_id": "promotion-257132e55c5fdae288585f52",
+          "proposal_id": "promote-ly11-office-台南市-林宜瑾",
           "county": "台南市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:27.198710+00:00",
+          "checked_at": "2026-09-26T12:01:35.198015+00:00",
           "target_path": "knowledge/local/台南市/relationships.jsonl",
-          "record_id": "ly11-office-台南市-ly11-7e17c3fecac90031",
+          "record_id": "ly11-office-台南市-林宜瑾",
           "evidence_lead_ids": [
-            "ly-current-台南市-ly11-7e17c3fecac90031"
+            "ly-current-台南市-林宜瑾",
+            "cec-2024-regional-winner-台南市-林宜瑾"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台南市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "8f75cf313107868a424560080f9168ff63242c4da6aa50102fd08d0933d3064f",
-          "evidence_snapshot_sha256": "ed131d415af212676bb699071a7710f38280516af3d9c169000be566984e7fa5",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "456d84f256fb76e8aabc7189cd921854f448617885681c9876f967ca7c35a51f",
+          "evidence_snapshot_sha256": "eac36aba5ed1550345decf0f4c21f77ea4c49a62d6fb037d9a5fc92f4d1be5dd",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-89ffed62dce489a21919f9d6",
-          "proposal_id": "promote-ly11-office-台南市-ly11-2c70be431629d658",
+          "receipt_id": "promotion-8cc31cbc17723616a3bbf90f",
+          "proposal_id": "promote-ly11-office-台南市-林俊憲",
           "county": "台南市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:27.211008+00:00",
+          "checked_at": "2026-09-26T12:01:35.205838+00:00",
           "target_path": "knowledge/local/台南市/relationships.jsonl",
-          "record_id": "ly11-office-台南市-ly11-2c70be431629d658",
+          "record_id": "ly11-office-台南市-林俊憲",
           "evidence_lead_ids": [
-            "ly-current-台南市-ly11-2c70be431629d658"
+            "ly-current-台南市-林俊憲",
+            "cec-2024-regional-winner-台南市-林俊憲"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台南市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "7faab9c1047ba8c9f79229b442836bf9a0e08881531526d41bc7d5534395b52d",
-          "evidence_snapshot_sha256": "e13498e16a8499a2d873c0c8f737543ee0ab063c765aaa3a0fa55d0310f70da7",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "16c32daa4ea433b08d8f5b70667ce6e7a0d03022c790a0718ec14f83a6425da6",
+          "evidence_snapshot_sha256": "17db1ff25d3f8f11bb6a8e1e5fa39fe9b47e88e8de5a8eeaef4e6f39210233b8",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-ddd2d7df69b94e4aacccffc0",
-          "proposal_id": "promote-ly11-office-台南市-ly11-b237d6dccd1352cc",
+          "receipt_id": "promotion-e11a05a0259d2bb3f564c269",
+          "proposal_id": "promote-ly11-office-台南市-王定宇",
           "county": "台南市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:27.222932+00:00",
+          "checked_at": "2026-09-26T12:01:35.213519+00:00",
           "target_path": "knowledge/local/台南市/relationships.jsonl",
-          "record_id": "ly11-office-台南市-ly11-b237d6dccd1352cc",
+          "record_id": "ly11-office-台南市-王定宇",
           "evidence_lead_ids": [
-            "ly-current-台南市-ly11-b237d6dccd1352cc"
+            "ly-current-台南市-王定宇",
+            "cec-2024-regional-winner-台南市-王定宇"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台南市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "a315544045fc59c2f983b8e7fdac084b2aa2cf33efaffac4bc7ebd561a3aaba4",
-          "evidence_snapshot_sha256": "430b7176336526c06ffeba6ac5df00f86919eda89730a2bf1352d1717cae3b4d",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "d03d0f7c14f2423d63009a788025c30326849ced08c865c668b7915e48862da2",
+          "evidence_snapshot_sha256": "65a51c2a0ef0e57de340af1560a2aa69e773f971855c7ef58e7d096c0db20b9b",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -1723,225 +1840,241 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-f0293de2cc640e6959f4ee4d",
-          "proposal_id": "promote-ly11-office-高雄市-ly11-18c86b18256c8296",
+          "receipt_id": "promotion-0bb0262f5e2649271f49ecce",
+          "proposal_id": "promote-ly11-office-高雄市-邱議瑩",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:28.926952+00:00",
+          "checked_at": "2026-09-26T12:01:36.239669+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
-          "record_id": "ly11-office-高雄市-ly11-18c86b18256c8296",
+          "record_id": "ly11-office-高雄市-邱議瑩",
           "evidence_lead_ids": [
-            "ly-current-高雄市-ly11-18c86b18256c8296"
+            "ly-current-高雄市-邱議瑩",
+            "cec-2024-regional-winner-高雄市-邱議瑩"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "高雄市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "20d99fff226d4899f5ec80975582ace95e92bb612cc27c82a5b805b7fd077d41",
-          "evidence_snapshot_sha256": "16270385f8c07d85ea8dfb4983004a88ded5aacbe25bff28da613b5aa06326b1",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "d5e72f389728d61aa688d3d7c848dd2a9b06467d1852de11e612f4a958dc3023",
+          "evidence_snapshot_sha256": "834799ff6ce8ad72d396e85390bad9fb1a1a450a3b9b7a92b3fe933eaa5f3827",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-bf87f9a079e145f3adcae005",
-          "proposal_id": "promote-ly11-office-高雄市-ly11-5863fecc366b283e",
+          "receipt_id": "promotion-38ba30d048b1b40af4636197",
+          "proposal_id": "promote-ly11-office-高雄市-邱志偉",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:28.938937+00:00",
+          "checked_at": "2026-09-26T12:01:36.247267+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
-          "record_id": "ly11-office-高雄市-ly11-5863fecc366b283e",
+          "record_id": "ly11-office-高雄市-邱志偉",
           "evidence_lead_ids": [
-            "ly-current-高雄市-ly11-5863fecc366b283e"
+            "ly-current-高雄市-邱志偉",
+            "cec-2024-regional-winner-高雄市-邱志偉"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "高雄市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "ad3ed7faf79e429ee6b8d74246886cf609c77421387f2606c2e67168f3168b5f",
-          "evidence_snapshot_sha256": "b023266b63e2d6352cc717bc88b85b770b6ba697067c4b3f09fdb477d35627ea",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "f84c662b82e1a5c161793d7487c4643193c108f3db87d5825d9e9740c2560194",
+          "evidence_snapshot_sha256": "3bf995e141e4762cbe4c52f81887da406be7086c9f17bfdc49e05d4d2a1a2488",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-44eadb30e3830b4497302c43",
-          "proposal_id": "promote-ly11-office-高雄市-ly11-f0650ce271528354",
+          "receipt_id": "promotion-9d83a4d863114ec688b14df3",
+          "proposal_id": "promote-ly11-office-高雄市-李柏毅",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:28.950954+00:00",
+          "checked_at": "2026-09-26T12:01:36.254969+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
-          "record_id": "ly11-office-高雄市-ly11-f0650ce271528354",
+          "record_id": "ly11-office-高雄市-李柏毅",
           "evidence_lead_ids": [
-            "ly-current-高雄市-ly11-f0650ce271528354"
+            "ly-current-高雄市-李柏毅",
+            "cec-2024-regional-winner-高雄市-李柏毅"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "高雄市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "453f4d2dc3de20e9393aeb9e0dbd61b1137ff44f49a050c4e06e65c87396cd22",
-          "evidence_snapshot_sha256": "df9d40e50703dce24cffa76e8a71982d92d0f42bb4a1555fb2826c11c499ce54",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "139148ca35e32c52871688675d2e9e811989ee3798c6178646c5fc248d19363c",
+          "evidence_snapshot_sha256": "4bf588812037038148d8422338c4c926f0927eb870ccb84cc69307eaab33de04",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-7ff37819604fc2c12aec5046",
-          "proposal_id": "promote-ly11-office-高雄市-ly11-a758e884eef8d284",
+          "receipt_id": "promotion-a25206411ef55528246513c2",
+          "proposal_id": "promote-ly11-office-高雄市-林岱樺",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:28.963005+00:00",
+          "checked_at": "2026-09-26T12:01:36.262953+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
-          "record_id": "ly11-office-高雄市-ly11-a758e884eef8d284",
+          "record_id": "ly11-office-高雄市-林岱樺",
           "evidence_lead_ids": [
-            "ly-current-高雄市-ly11-a758e884eef8d284"
+            "ly-current-高雄市-林岱樺",
+            "cec-2024-regional-winner-高雄市-林岱樺"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "高雄市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "9dcc8f536eaa04f2659f62a5231d33efbbb56062254010c0fd1909be9a945dbb",
-          "evidence_snapshot_sha256": "f104cd4ac353e6ae8c6f3d3dd04716fd29264e038def406014bb19c0d13334cf",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "6741cd221965c594ade19b9a4621b194cd3395ab3616f4a4aeb8f87be4cd8602",
+          "evidence_snapshot_sha256": "88eaca64230d8f0e2e39fae96dec72ec9b6221301c2790022fb5da0882b5d663",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-6d0e001a83209628c6a796ee",
-          "proposal_id": "promote-ly11-office-高雄市-ly11-e5f2638c23e1baae",
+          "receipt_id": "promotion-216ee57516e3fb9fcc01ea8b",
+          "proposal_id": "promote-ly11-office-高雄市-李昆澤",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:28.975063+00:00",
+          "checked_at": "2026-09-26T12:01:36.271100+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
-          "record_id": "ly11-office-高雄市-ly11-e5f2638c23e1baae",
+          "record_id": "ly11-office-高雄市-李昆澤",
           "evidence_lead_ids": [
-            "ly-current-高雄市-ly11-e5f2638c23e1baae"
+            "ly-current-高雄市-李昆澤",
+            "cec-2024-regional-winner-高雄市-李昆澤"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "高雄市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "7b4a33b9dd27fe52eaace353e81d32f6a9e4723c7b2a5036824eabac20794af9",
-          "evidence_snapshot_sha256": "ebe3452307eb906357acf5a3f9b900f6c0584254f90d6585ca73500f5d23dcb1",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "cdf0514d6a7ca177b106794ce6b21881115957b64c407035c6eb9cf797bcdf93",
+          "evidence_snapshot_sha256": "0886a4e2a1fb335fd836eb12f46cdeda9ae9ff07914f1d8b3629a4f251f8ebcb",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-ec0aa68ceea79bcb1889550d",
-          "proposal_id": "promote-ly11-office-高雄市-ly11-ca7b32535e0ac17c",
+          "receipt_id": "promotion-da2e09e937bf4ad52e14efa4",
+          "proposal_id": "promote-ly11-office-高雄市-黃捷",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:28.987169+00:00",
+          "checked_at": "2026-09-26T12:01:36.278842+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
-          "record_id": "ly11-office-高雄市-ly11-ca7b32535e0ac17c",
+          "record_id": "ly11-office-高雄市-黃捷",
           "evidence_lead_ids": [
-            "ly-current-高雄市-ly11-ca7b32535e0ac17c"
+            "ly-current-高雄市-黃捷",
+            "cec-2024-regional-winner-高雄市-黃捷"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "高雄市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "1d43aa50c3ba7e9eb6c2f3b110b78482a880136f5f685e5c9e5feaf10e7f65d8",
-          "evidence_snapshot_sha256": "8f1ccf051d28b1b85e2b9e41af369664ca3dd88cf81a5e1f8dfb21317b70143b",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "8d8864e369544987291912055d2a5b4b97dfbd80baadcbf58fb0b5a81ef4bf09",
+          "evidence_snapshot_sha256": "eebb23ebeef4057ddb896edd63114654da21d3fe0823aff54d4f5f0b3c2f762a",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-f28ba0e571424fd34ae0e54a",
-          "proposal_id": "promote-ly11-office-高雄市-ly11-ab9a4ccf538002bd",
+          "receipt_id": "promotion-6664102ea19ff7be1d861c59",
+          "proposal_id": "promote-ly11-office-高雄市-許智傑",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:28.999287+00:00",
+          "checked_at": "2026-09-26T12:01:36.286828+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
-          "record_id": "ly11-office-高雄市-ly11-ab9a4ccf538002bd",
+          "record_id": "ly11-office-高雄市-許智傑",
           "evidence_lead_ids": [
-            "ly-current-高雄市-ly11-ab9a4ccf538002bd"
+            "ly-current-高雄市-許智傑",
+            "cec-2024-regional-winner-高雄市-許智傑"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "高雄市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "3540b120f97cc1d00645f0aee0f29e77decc2d34137f71258c459c3a5bd0325c",
-          "evidence_snapshot_sha256": "8ccf0db95b5407b30e01bad1762445930938b27ffa07dcf2c298dc27e1137faa",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "5b48c35df37f8f2dcf1b2e906fba64e00b678477c9759fdb1d162dc2f7dd901a",
+          "evidence_snapshot_sha256": "5a8a78f8fd6f04f9a51e4d6d0088e2ea044dba29845abb314081088b910c4703",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-d49fb06f09e8e334341491f0",
-          "proposal_id": "promote-ly11-office-高雄市-ly11-7efe5cefd156b711",
+          "receipt_id": "promotion-474d834563909595752e54db",
+          "proposal_id": "promote-ly11-office-高雄市-賴瑞隆",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:29.011501+00:00",
+          "checked_at": "2026-09-26T12:01:36.294700+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
-          "record_id": "ly11-office-高雄市-ly11-7efe5cefd156b711",
+          "record_id": "ly11-office-高雄市-賴瑞隆",
           "evidence_lead_ids": [
-            "ly-current-高雄市-ly11-7efe5cefd156b711"
+            "ly-current-高雄市-賴瑞隆",
+            "cec-2024-regional-winner-高雄市-賴瑞隆"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "高雄市目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "bd2ec7f6e83e70733e3e571ff24b883de74c85f36571c7b8346e86751e06d299",
-          "evidence_snapshot_sha256": "5c127a2a31d16adec50d45714611ce24ed64fb18b07ccd7d6b0ed61eb2e5c500",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "db314c66d09e1a17cbc9d56fff2415e4ce89b1973f4fe955b6b4854dd8f802c3",
+          "evidence_snapshot_sha256": "cd6d9527957d606abbdba80916ffd4a239fa9d6d6d99c10656cd3d8c15558bd9",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -1955,57 +2088,61 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-29884a987864cdd0d34e2b21",
-          "proposal_id": "promote-ly11-office-屏東縣-ly11-68d357c3f1ca17ec",
+          "receipt_id": "promotion-62f9bf82f8f750e174dbf17c",
+          "proposal_id": "promote-ly11-office-屏東縣-鍾佳濱",
           "county": "屏東縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:30.989338+00:00",
+          "checked_at": "2026-09-26T12:01:37.561921+00:00",
           "target_path": "knowledge/local/屏東縣/relationships.jsonl",
-          "record_id": "ly11-office-屏東縣-ly11-68d357c3f1ca17ec",
+          "record_id": "ly11-office-屏東縣-鍾佳濱",
           "evidence_lead_ids": [
-            "ly-current-屏東縣-ly11-68d357c3f1ca17ec"
+            "ly-current-屏東縣-鍾佳濱",
+            "cec-2024-regional-winner-屏東縣-鍾佳濱"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "屏東縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "ba780eb1417e23b052f52b5490e12b232e3a750042f4d6081ea37705e7cba835",
-          "evidence_snapshot_sha256": "1e83ae199be818cb0d73c14aff38d25904a13e842cfab1f38c711985179e994d",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "ccdeaa75f58da39bcc069670cd7994a68cf4d1aaf9801140ccf8ec2d9e6bbe17",
+          "evidence_snapshot_sha256": "1ac71f30c16dcf43d96c0fd06e7a4bcc83ff6b2f457133efdcda6aee60eb95ca",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-25981a5d7ee83119c07becc5",
-          "proposal_id": "promote-ly11-office-屏東縣-ly11-77af760e3ef73133",
+          "receipt_id": "promotion-e7b431768411b4cd668a872b",
+          "proposal_id": "promote-ly11-office-屏東縣-徐富癸",
           "county": "屏東縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:31.000619+00:00",
+          "checked_at": "2026-09-26T12:01:37.571360+00:00",
           "target_path": "knowledge/local/屏東縣/relationships.jsonl",
-          "record_id": "ly11-office-屏東縣-ly11-77af760e3ef73133",
+          "record_id": "ly11-office-屏東縣-徐富癸",
           "evidence_lead_ids": [
-            "ly-current-屏東縣-ly11-77af760e3ef73133"
+            "ly-current-屏東縣-徐富癸",
+            "cec-2024-regional-winner-屏東縣-徐富癸"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "屏東縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "f3c2291677155d1e07b1ebe1eca6f77a1c5b15450739b139d862c88ea112f290",
-          "evidence_snapshot_sha256": "24c1427f30d37e01159080a3000ea665fc566ebbfe2d6d769372fc32aeeb9c4a",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "aaa4530c35fc0181cca450327cfd887781c04b383343c11af69f3ca2834aa295",
+          "evidence_snapshot_sha256": "0365e40a69769f637ef19b75727760331ca4922e95b8caf5024a4929f3a9f59a",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -2019,29 +2156,31 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-fb084fc652b95f5e1e31105f",
-          "proposal_id": "promote-ly11-office-宜蘭縣-ly11-587e3d6f70daff07",
+          "receipt_id": "promotion-d42c1ae894e51e0b498c1e01",
+          "proposal_id": "promote-ly11-office-宜蘭縣-陳俊宇",
           "county": "宜蘭縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:32.532408+00:00",
+          "checked_at": "2026-09-26T12:01:38.570037+00:00",
           "target_path": "knowledge/local/宜蘭縣/relationships.jsonl",
-          "record_id": "ly11-office-宜蘭縣-ly11-587e3d6f70daff07",
+          "record_id": "ly11-office-宜蘭縣-陳俊宇",
           "evidence_lead_ids": [
-            "ly-current-宜蘭縣-ly11-587e3d6f70daff07"
+            "ly-current-宜蘭縣-陳俊宇",
+            "cec-2024-regional-winner-宜蘭縣-陳俊宇"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "宜蘭縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "f7964ef8c300bd51445b71d502d5f64f6a3dba23d1a7ad4c9aa26f449d674f9e",
-          "evidence_snapshot_sha256": "22ba81dccd7b21d96210c62bc2f2dfb2077dd0f59a54d6b4e34a4f9ea3204df8",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "744b7b3503e012b2d27f230d29b19aeab3eaa5c991dfe3f3d131963ceb6a079d",
+          "evidence_snapshot_sha256": "f82b9468d23ac06baa68082c9ae4300ea7d9a433c2847b7498085bca6c6b958e",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -2055,29 +2194,31 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-281457143c6e6eb24db865fc",
-          "proposal_id": "promote-ly11-office-花蓮縣-ly11-b71e63e779185e80",
+          "receipt_id": "promotion-697ee4566d8fcc1186109534",
+          "proposal_id": "promote-ly11-office-花蓮縣-傅崐萁",
           "county": "花蓮縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:33.630599+00:00",
+          "checked_at": "2026-09-26T12:01:39.282305+00:00",
           "target_path": "knowledge/local/花蓮縣/relationships.jsonl",
-          "record_id": "ly11-office-花蓮縣-ly11-b71e63e779185e80",
+          "record_id": "ly11-office-花蓮縣-傅崐萁",
           "evidence_lead_ids": [
-            "ly-current-花蓮縣-ly11-b71e63e779185e80"
+            "ly-current-花蓮縣-傅崐萁",
+            "cec-2024-regional-winner-花蓮縣-傅崐萁"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "花蓮縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "d797f7b89f67a74eb66662a780b6d159e6172f59614e7c1f13e30e893d26cb2e",
-          "evidence_snapshot_sha256": "7947bdacdbb076480e87f05d88b228ac952fe56b860b636110c722a4951b5c9b",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "633ef118d1a22112fb8e909c884c23aec77b0fc5768a78f8bc467f1268f43e0a",
+          "evidence_snapshot_sha256": "24f336ea5148e7a5982f1f2ebbbd15f192517f042ffd99cf8ca4294dc47bda13",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -2091,29 +2232,31 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-8a70863e0083c6b92fea7894",
-          "proposal_id": "promote-ly11-office-台東縣-ly11-4823ce499c46acb3",
+          "receipt_id": "promotion-506337a5ba67b25ce1f55e9b",
+          "proposal_id": "promote-ly11-office-台東縣-黃建賓",
           "county": "台東縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:34.647556+00:00",
+          "checked_at": "2026-09-26T12:01:39.946714+00:00",
           "target_path": "knowledge/local/台東縣/relationships.jsonl",
-          "record_id": "ly11-office-台東縣-ly11-4823ce499c46acb3",
+          "record_id": "ly11-office-台東縣-黃建賓",
           "evidence_lead_ids": [
-            "ly-current-台東縣-ly11-4823ce499c46acb3"
+            "ly-current-台東縣-黃建賓",
+            "cec-2024-regional-winner-台東縣-黃建賓"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "台東縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "c700b9d4b2a18f61f29cf35b3dce6c1b061f27a3a3f357b91134879fd3d577ec",
-          "evidence_snapshot_sha256": "ba667716136f19efcb2a60650bf894bef407658098b91fc13b946a0925f10808",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "0ff091ae92209ababc1989429bc31d16236c9ca67f3463a56e1fc6dd4bb7cb52",
+          "evidence_snapshot_sha256": "f43b568a9a750e6afd0f2edada6adda9e5f0883cf7de70379a6bfdbf31106ba6",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -2127,29 +2270,31 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-8cd8d4ec575fe3500a75142f",
-          "proposal_id": "promote-ly11-office-澎湖縣-ly11-40d2b92efc7dbc20",
+          "receipt_id": "promotion-17ded8450527ec24ac6a01bb",
+          "proposal_id": "promote-ly11-office-澎湖縣-楊曜",
           "county": "澎湖縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:35.688310+00:00",
+          "checked_at": "2026-09-26T12:01:40.574398+00:00",
           "target_path": "knowledge/local/澎湖縣/relationships.jsonl",
-          "record_id": "ly11-office-澎湖縣-ly11-40d2b92efc7dbc20",
+          "record_id": "ly11-office-澎湖縣-楊曜",
           "evidence_lead_ids": [
-            "ly-current-澎湖縣-ly11-40d2b92efc7dbc20"
+            "ly-current-澎湖縣-楊曜",
+            "cec-2024-regional-winner-澎湖縣-楊曜"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "澎湖縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "cdeaa086aa43f3af02c5341f663e9337f94809b044f9aff0286073436f154591",
-          "evidence_snapshot_sha256": "b16a98727acf9cb5ce565d90dbd925da3f9bf507c0414fdc9d056a2db0837560",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "271c431e218b7b6a2b064717c89eb3a548af76111481cd444cd87ce11f770fc4",
+          "evidence_snapshot_sha256": "6ee85d64b8a90bf4a6a25f76e5a71418e47714b66a7a5cd9d98d550c63f0b780",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -2163,29 +2308,31 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-e81bc887e94bad4948584cee",
-          "proposal_id": "promote-ly11-office-金門縣-ly11-108cc814e84de1bc",
+          "receipt_id": "promotion-196b2a57e673fe1cce37d78f",
+          "proposal_id": "promote-ly11-office-金門縣-陳玉珍",
           "county": "金門縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:36.426606+00:00",
+          "checked_at": "2026-09-26T12:01:41.012493+00:00",
           "target_path": "knowledge/local/金門縣/relationships.jsonl",
-          "record_id": "ly11-office-金門縣-ly11-108cc814e84de1bc",
+          "record_id": "ly11-office-金門縣-陳玉珍",
           "evidence_lead_ids": [
-            "ly-current-金門縣-ly11-108cc814e84de1bc"
+            "ly-current-金門縣-陳玉珍",
+            "cec-2024-regional-winner-金門縣-陳玉珍"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "金門縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "d21f58c42bddaf2a5b7b5b6a486cdf6d9d527518c5f7c7df15016d889068e074",
-          "evidence_snapshot_sha256": "7dd320206016dabe58e6e30f53645cedf0e47a5954df4adf7977ab3aeaa822fe",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "bffffb318f8c30c788a860e571340bf4d86e91c17e540ef4efd029315a355f8f",
+          "evidence_snapshot_sha256": "b540a293c08f8c3e6080719dec674f1d61d1e16b79fb5597d261d387c3f93bc9",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"
@@ -2199,29 +2346,31 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-93271f301e1b1dfed2fca941",
-          "proposal_id": "promote-ly11-office-連江縣-ly11-4a6cd0226632660c",
+          "receipt_id": "promotion-ad8b245f93780bf640573010",
+          "proposal_id": "promote-ly11-office-連江縣-陳雪生",
           "county": "連江縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T11:30:37.175875+00:00",
+          "checked_at": "2026-09-26T12:01:41.490928+00:00",
           "target_path": "knowledge/local/連江縣/relationships.jsonl",
-          "record_id": "ly11-office-連江縣-ly11-4a6cd0226632660c",
+          "record_id": "ly11-office-連江縣-陳雪生",
           "evidence_lead_ids": [
-            "ly-current-連江縣-ly11-4a6cd0226632660c"
+            "ly-current-連江縣-陳雪生",
+            "cec-2024-regional-winner-連江縣-陳雪生"
           ],
           "evidence_grades": [
+            "A",
             "A"
           ],
-          "independent_source_count": 1,
+          "independent_source_count": 2,
           "research_questions": [
             "連江縣目前有哪些由立法院官方名冊確認的第11屆區域立法委員？"
           ],
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
-          "contradiction_check_note": "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。",
-          "record_sha256": "17769c7feecd82b8e88591c9ce9a3790739e20ab929d1a13ccac88f55983aba7",
-          "evidence_snapshot_sha256": "b8c2f78e660ca788854dc867f4097abebacb08a3da3ccfd30a0c96c3b6718784",
+          "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
+          "record_sha256": "4a7bebd942bb8ca5ff0ccbbcf48805e5ebaee8a4bb9dec99a7c89ef5a9672d8e",
+          "evidence_snapshot_sha256": "7c416d299d9f69a482d182c2177161aa506d97068884dea21d2b3fda5452834b",
           "reasons": [],
           "warnings": [],
           "knowledge_builder_version": "1.4.0"

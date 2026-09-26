@@ -143,9 +143,11 @@
         "candidate_profile_count": 63,
         "mayor_2026_candidate_count": 3,
         "councilor_2026_candidate_count": 60,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/基隆市/candidates.jsonl",
         "relationship_path": "knowledge/local/基隆市/relationships.jsonl",
@@ -156,7 +158,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -301,9 +302,11 @@
         "candidate_profile_count": 104,
         "mayor_2026_candidate_count": 6,
         "councilor_2026_candidate_count": 98,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 8,
+        "dual_source_relationship_count": 8,
+        "relationship_types": {
+          "office_holding": 8
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/台北市/candidates.jsonl",
         "relationship_path": "knowledge/local/台北市/relationships.jsonl",
@@ -314,7 +317,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_fishermen_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -457,10 +459,11 @@
         "candidate_profile_count": 115,
         "mayor_2026_candidate_count": 3,
         "councilor_2026_candidate_count": 112,
-        "active_verified_relationship_count": 1,
-        "dual_source_relationship_count": 1,
+        "active_verified_relationship_count": 13,
+        "dual_source_relationship_count": 13,
         "relationship_types": {
-          "campaign_cooperation": 1
+          "campaign_cooperation": 1,
+          "office_holding": 12
         },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/新北市/candidates.jsonl",
@@ -616,9 +619,11 @@
         "candidate_profile_count": 111,
         "mayor_2026_candidate_count": 2,
         "councilor_2026_candidate_count": 109,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 6,
+        "dual_source_relationship_count": 6,
+        "relationship_types": {
+          "office_holding": 6
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/桃園市/candidates.jsonl",
         "relationship_path": "knowledge/local/桃園市/relationships.jsonl",
@@ -629,7 +634,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -774,9 +778,11 @@
         "candidate_profile_count": 59,
         "mayor_2026_candidate_count": 3,
         "councilor_2026_candidate_count": 56,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/新竹市/candidates.jsonl",
         "relationship_path": "knowledge/local/新竹市/relationships.jsonl",
@@ -787,7 +793,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -932,9 +937,11 @@
         "candidate_profile_count": 71,
         "mayor_2026_candidate_count": 3,
         "councilor_2026_candidate_count": 68,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 2,
+        "dual_source_relationship_count": 2,
+        "relationship_types": {
+          "office_holding": 2
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/新竹縣/candidates.jsonl",
         "relationship_path": "knowledge/local/新竹縣/relationships.jsonl",
@@ -945,7 +952,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_fishermen_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -1090,9 +1096,11 @@
         "candidate_profile_count": 58,
         "mayor_2026_candidate_count": 2,
         "councilor_2026_candidate_count": 56,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 2,
+        "dual_source_relationship_count": 2,
+        "relationship_types": {
+          "office_holding": 2
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/苗栗縣/candidates.jsonl",
         "relationship_path": "knowledge/local/苗栗縣/relationships.jsonl",
@@ -1103,7 +1111,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -1248,9 +1255,11 @@
         "candidate_profile_count": 105,
         "mayor_2026_candidate_count": 3,
         "councilor_2026_candidate_count": 102,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 8,
+        "dual_source_relationship_count": 8,
+        "relationship_types": {
+          "office_holding": 8
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/台中市/candidates.jsonl",
         "relationship_path": "knowledge/local/台中市/relationships.jsonl",
@@ -1261,7 +1270,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -1406,9 +1414,11 @@
         "candidate_profile_count": 90,
         "mayor_2026_candidate_count": 4,
         "councilor_2026_candidate_count": 86,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 4,
+        "dual_source_relationship_count": 4,
+        "relationship_types": {
+          "office_holding": 4
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/彰化縣/candidates.jsonl",
         "relationship_path": "knowledge/local/彰化縣/relationships.jsonl",
@@ -1419,7 +1429,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -1564,9 +1573,11 @@
         "candidate_profile_count": 63,
         "mayor_2026_candidate_count": 2,
         "councilor_2026_candidate_count": 61,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 2,
+        "dual_source_relationship_count": 2,
+        "relationship_types": {
+          "office_holding": 2
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/南投縣/candidates.jsonl",
         "relationship_path": "knowledge/local/南投縣/relationships.jsonl",
@@ -1577,7 +1588,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -1722,9 +1732,11 @@
         "candidate_profile_count": 77,
         "mayor_2026_candidate_count": 4,
         "councilor_2026_candidate_count": 73,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 2,
+        "dual_source_relationship_count": 2,
+        "relationship_types": {
+          "office_holding": 2
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/雲林縣/candidates.jsonl",
         "relationship_path": "knowledge/local/雲林縣/relationships.jsonl",
@@ -1735,7 +1747,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -1880,9 +1891,11 @@
         "candidate_profile_count": 42,
         "mayor_2026_candidate_count": 5,
         "councilor_2026_candidate_count": 37,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/嘉義市/candidates.jsonl",
         "relationship_path": "knowledge/local/嘉義市/relationships.jsonl",
@@ -1893,7 +1906,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_fishermen_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -2038,9 +2050,11 @@
         "candidate_profile_count": 55,
         "mayor_2026_candidate_count": 2,
         "councilor_2026_candidate_count": 53,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 2,
+        "dual_source_relationship_count": 2,
+        "relationship_types": {
+          "office_holding": 2
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/嘉義縣/candidates.jsonl",
         "relationship_path": "knowledge/local/嘉義縣/relationships.jsonl",
@@ -2051,7 +2065,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -2194,9 +2207,10 @@
         "candidate_profile_count": 92,
         "mayor_2026_candidate_count": 4,
         "councilor_2026_candidate_count": 88,
-        "active_verified_relationship_count": 1,
-        "dual_source_relationship_count": 1,
+        "active_verified_relationship_count": 7,
+        "dual_source_relationship_count": 7,
         "relationship_types": {
+          "office_holding": 6,
           "public_endorsement": 1
         },
         "current_issue_count": 0,
@@ -2351,9 +2365,10 @@
         "candidate_profile_count": 106,
         "mayor_2026_candidate_count": 5,
         "councilor_2026_candidate_count": 101,
-        "active_verified_relationship_count": 1,
-        "dual_source_relationship_count": 1,
+        "active_verified_relationship_count": 9,
+        "dual_source_relationship_count": 9,
         "relationship_types": {
+          "office_holding": 8,
           "public_endorsement": 1
         },
         "current_issue_count": 0,
@@ -2510,9 +2525,11 @@
         "candidate_profile_count": 89,
         "mayor_2026_candidate_count": 2,
         "councilor_2026_candidate_count": 87,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 2,
+        "dual_source_relationship_count": 2,
+        "relationship_types": {
+          "office_holding": 2
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/屏東縣/candidates.jsonl",
         "relationship_path": "knowledge/local/屏東縣/relationships.jsonl",
@@ -2523,7 +2540,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -2668,9 +2684,11 @@
         "candidate_profile_count": 64,
         "mayor_2026_candidate_count": 5,
         "councilor_2026_candidate_count": 59,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/宜蘭縣/candidates.jsonl",
         "relationship_path": "knowledge/local/宜蘭縣/relationships.jsonl",
@@ -2681,7 +2699,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -2826,9 +2843,11 @@
         "candidate_profile_count": 59,
         "mayor_2026_candidate_count": 4,
         "councilor_2026_candidate_count": 55,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/花蓮縣/candidates.jsonl",
         "relationship_path": "knowledge/local/花蓮縣/relationships.jsonl",
@@ -2839,7 +2858,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -2984,9 +3002,11 @@
         "candidate_profile_count": 60,
         "mayor_2026_candidate_count": 4,
         "councilor_2026_candidate_count": 56,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/台東縣/candidates.jsonl",
         "relationship_path": "knowledge/local/台東縣/relationships.jsonl",
@@ -2997,7 +3017,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -3142,9 +3161,11 @@
         "candidate_profile_count": 42,
         "mayor_2026_candidate_count": 6,
         "councilor_2026_candidate_count": 36,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/澎湖縣/candidates.jsonl",
         "relationship_path": "knowledge/local/澎湖縣/relationships.jsonl",
@@ -3155,7 +3176,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -3300,9 +3320,11 @@
         "candidate_profile_count": 42,
         "mayor_2026_candidate_count": 7,
         "councilor_2026_candidate_count": 35,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/金門縣/candidates.jsonl",
         "relationship_path": "knowledge/local/金門縣/relationships.jsonl",
@@ -3313,7 +3335,6 @@
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     },
@@ -3449,9 +3470,11 @@
         "candidate_profile_count": 16,
         "mayor_2026_candidate_count": 2,
         "councilor_2026_candidate_count": 14,
-        "active_verified_relationship_count": 0,
-        "dual_source_relationship_count": 0,
-        "relationship_types": {},
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
         "current_issue_count": 0,
         "candidate_path": "knowledge/local/連江縣/candidates.jsonl",
         "relationship_path": "knowledge/local/連江縣/relationships.jsonl",
@@ -3463,7 +3486,6 @@
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
     }
@@ -3477,7 +3499,7 @@
     "total_candidate_profiles": 1583,
     "total_2026_mayor_candidates": 81,
     "total_2026_councilor_candidates": 1502,
-    "with_active_verified_relationships": 3,
+    "with_active_verified_relationships": 22,
     "with_current_issue_records": 0
   },
   "interpretation_boundary": "coverage states describe repository artifacts only; source_catalog_only and research_leads_only are not equivalent to verified row-level knowledge"

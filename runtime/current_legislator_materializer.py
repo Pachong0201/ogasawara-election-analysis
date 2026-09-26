@@ -210,6 +210,44 @@ class CurrentLegislatorMaterializer:
             },
         }
 
+    def _reconcile_managed_relationships(
+        self,
+        county: str,
+        expected_ids: set[str],
+    ) -> int:
+        """Remove stale rows owned by this materializer before rebuilding.
+
+        This is intentionally limited to records whose ID and object identify
+        the Legislative Yuan materializer.  Manually curated relationships and
+        other generated relationship families are left untouched.
+        """
+        path = (
+            self.repo_root
+            / "knowledge"
+            / "local"
+            / safe_component(county)
+            / "relationships.jsonl"
+        )
+        if not path.exists():
+            return 0
+        rows = load_jsonl(path)
+        kept: List[Dict[str, Any]] = []
+        removed = 0
+        for row in rows:
+            relationship_id = str(row.get("relationship_id") or "")
+            managed = (
+                relationship_id.startswith("ly11-office-")
+                and row.get("object") == "立法院第11屆立法委員"
+                and row.get("relationship_type") == "office_holding"
+            )
+            if managed and relationship_id not in expected_ids:
+                removed += 1
+                continue
+            kept.append(row)
+        if removed:
+            write_jsonl(path, kept)
+        return removed
+
     def materialize(self, *, apply: bool = False) -> Dict[str, Any]:
         roster, source_failures = self._current_roster()
         grouped: Dict[str, List[Dict[str, Any]]] = {county: [] for county in COUNTIES}
@@ -230,7 +268,16 @@ class CurrentLegislatorMaterializer:
                 grouped[county].append(winner)
 
         results: List[Dict[str, Any]] = []
+        pruned_count = 0
         for county, rows in grouped.items():
+            expected_ids = {
+                str(self._proposal(row, [])["target_record"]["relationship_id"])
+                for row in rows
+            }
+            if apply:
+                pruned_count += self._reconcile_managed_relationships(
+                    county, expected_ids
+                )
             receipts: List[Dict[str, Any]] = []
             for row in rows:
                 leads = self._leads(row, str(row["roster_name"]))
@@ -266,6 +313,7 @@ class CurrentLegislatorMaterializer:
             "covered_county_count": sum(1 for row in results if row["member_count"] > 0),
             "member_count": sum(int(row["member_count"]) for row in results),
             "promoted_count": sum(int(row["promoted_count"]) for row in results),
+            "pruned_stale_relationship_count": pruned_count,
             "unmatched_2024_winner_count": len(unmatched_winners),
             "unmatched_2024_winners": unmatched_winners,
             "source_failure_count": len(source_failures),
