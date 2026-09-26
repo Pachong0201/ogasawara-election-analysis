@@ -55,6 +55,25 @@ def test_coverage_distinguishes_catalogs_from_row_data(tmp_path):
     issues = tmp_path / "knowledge" / "local" / "新竹縣" / "issues.jsonl"
     write_jsonl(issues, [{"claim_id": "i-1"}])
 
+    candidates = tmp_path / "knowledge" / "local" / "新竹縣" / "candidates.jsonl"
+    write_jsonl(
+        candidates,
+        [
+            {
+                "candidate_id": "mayor-1",
+                "election_type": "county_mayor",
+                "election_year": 2026,
+                "candidate_status": "registered",
+            },
+            {
+                "candidate_id": "councilor-1",
+                "election_type": "councilor",
+                "election_year": 2026,
+                "candidate_status": "registered",
+            },
+        ],
+    )
+
     after = audit.county("新竹縣")
     assert after["stable_local_baseline"]["cec_elections"]["state"] == "row_data_available"
     assert after["stable_local_baseline"]["term11_legislative_boundaries"]["state"] == "row_data_available"
@@ -62,6 +81,10 @@ def test_coverage_distinguishes_catalogs_from_row_data(tmp_path):
     sources = after["stable_local_baseline"]["official_social_context"]["sources"]
     age = next(row for row in sources if row["source_id"] == "dgbas_census_age_structure_2020")
     assert age["state"] == "row_data_available"
+    assert after["dynamic_local_state"]["candidate_profile_count"] == 2
+    assert after["dynamic_local_state"]["mayor_2026_candidate_count"] == 1
+    assert after["dynamic_local_state"]["councilor_2026_candidate_count"] == 1
+    assert after["dynamic_local_state"]["relationship_types"] == {"other": 1}
     assert after["dynamic_local_state"]["active_verified_relationship_count"] == 1
     assert after["dynamic_local_state"]["dual_source_relationship_count"] == 1
     assert after["dynamic_local_state"]["current_issue_count"] == 1
