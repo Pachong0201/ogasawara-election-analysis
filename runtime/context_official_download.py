@@ -113,7 +113,9 @@ class OfficialContextDownloader:
         raw_dir = self.repo_root / "cache" / "raw" / "context" / source_id
         raw_dir.mkdir(parents=True, exist_ok=True)
         latest_path = raw_dir / f"latest.{resource_format}"
-        metadata_path = raw_dir / "latest.json"
+        # JSON resources themselves use latest.json, so metadata must never share
+        # that path or it will overwrite the just-downloaded official payload.
+        metadata_path = raw_dir / "latest.meta.json"
 
         if latest_path.exists() and latest_path.stat().st_size > 0 and not force:
             return {
