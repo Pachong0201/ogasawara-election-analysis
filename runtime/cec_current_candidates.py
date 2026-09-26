@@ -15,7 +15,7 @@ from .models import SourceFetchResult, utc_now_iso
 from .source_registry import CurrentCandidateSource
 
 
-CEC_2026_REGISTRATION_PAGE = "https://web.cec.gov.tw/central/article/64733"
+CEC_2026_REGISTRATION_PAGE = "https://web.cec.gov.tw/central/article/64709"
 CEC_2026_ELECTION_DATE = "2026-11-28"
 CEC_2026_PUBLISHED_DATE = "2026-09-07"
 
@@ -56,7 +56,7 @@ def _download_bytes(url: str) -> bytes:
     request = urllib.request.Request(
         encoded,
         headers={
-            "User-Agent": "ogasawara-election-analysis/1.3",
+            "User-Agent": "ogasawara-election-analysis/1.4",
             "Accept": "text/html,application/pdf,*/*",
         },
     )
