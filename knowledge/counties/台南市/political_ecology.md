@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T07:47:55+00:00
+生成时间：2026-09-26T11:07:24+00:00
 
 ## 历史政治知识（L2）
 - tainan-2010-merger-37-districts: 台南市政府公开资料记载，2010年12月25日原台南县与台南市合并，合并后全市分为37个行政区。（2010-12-25—2026-09-26）
@@ -14,7 +14,10 @@
 - tainan-lin-chunhsien-chen-tingfei-20260115: 林俊宪 → public_endorsement → 陈亭妃；status=active_verified；current_use=current_usable；time_scope=2026-01-15
 
 ## 候选人地方档案（L3）
-- 暂无已晋升候选人档案。
+- cec-reg-2026-6d52520f12586f61: 謝龍介；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-d12fd23c53854e31: 蕭燐洪；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-a023370d996da44c: 葉人文；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-1a637cf171d1af24: 陳亭妃；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
 - 暂无已晋升地方议题。
@@ -23,9 +26,9 @@
 - 林俊宪 → public_endorsement → 陈亭妃；region=台南市；current_use=current_usable
 
 ## 尚未解决的检索问题
-- 台南市 的行政区、立委选区与历届地方选举空间差异中，哪些结构需要结合边界版本解释？（leads=2, verified=0）
 - 台南市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
 - 台南市 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？（leads=0, verified=0）
+- 台南市 的行政区、立委选区与历届地方选举空间差异中，哪些结构需要结合边界版本解释？（leads=0, verified=0）
 - 台南市 有哪些地方社团与公共事务网络可由可靠资料确认，且不得据其存在推断政治支持？（leads=0, verified=0）
 - 台南市 农会、渔会的组织分布与公开政治互动有哪些可核实记录，其时间范围为何？（leads=0, verified=0）
 - 台南市 宗教组织参与地方公共事务或公开政治活动的可验证记录有哪些，证据边界为何？（leads=0, verified=0）

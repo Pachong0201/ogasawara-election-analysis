@@ -1,0 +1,2478 @@
+{
+  "generated_at": "2026-09-26T11:07:56+00:00",
+  "county_count": 22,
+  "complete_count": 22,
+  "candidate_count": 81,
+  "promoted_count": 81,
+  "failure_count": 0,
+  "results": [
+    {
+      "county": "基隆市",
+      "candidate_count": 3,
+      "promoted_count": 3,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-24866a43241115f99ee80edc",
+          "proposal_id": "promote-cec-reg-2026-d34a9750f4a609fb",
+          "county": "基隆市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:33.145646+00:00",
+          "target_path": "knowledge/local/基隆市/candidates.jsonl",
+          "record_id": "cec-reg-2026-d34a9750f4a609fb",
+          "evidence_lead_ids": [
+            "cec-current-candidate-基隆市-cec-reg-2026-d34a9750f4a609fb"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年基隆市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "a8d0e85b57e71268c9aceb38d03ef292ee583220ca7ae850000a125740f7edd1",
+          "evidence_snapshot_sha256": "cea1f89f8f7df7aea6b4edf59a84d7dab3681f357ccc1997966cd1885da37893",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-73e04f863206aff0fb9b07bc",
+          "proposal_id": "promote-cec-reg-2026-36eec730ddbfd212",
+          "county": "基隆市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:33.155036+00:00",
+          "target_path": "knowledge/local/基隆市/candidates.jsonl",
+          "record_id": "cec-reg-2026-36eec730ddbfd212",
+          "evidence_lead_ids": [
+            "cec-current-candidate-基隆市-cec-reg-2026-36eec730ddbfd212"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年基隆市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "be98c3efa5f2c0bbe3ecb3dda50133f03e8f6023609e38eb87fec0ca3a2cf346",
+          "evidence_snapshot_sha256": "538c1e75e1fe22f6d09cc4f86218407e1105f558eb0c960e5b935125f05023b7",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-ebc7fe3337bcd4daa3691a56",
+          "proposal_id": "promote-cec-reg-2026-2258a832de6e1264",
+          "county": "基隆市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:33.164745+00:00",
+          "target_path": "knowledge/local/基隆市/candidates.jsonl",
+          "record_id": "cec-reg-2026-2258a832de6e1264",
+          "evidence_lead_ids": [
+            "cec-current-candidate-基隆市-cec-reg-2026-2258a832de6e1264"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年基隆市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "3a223ed77d9c4b06e6b72346543ffd705464b499b95974dadb71f34661853fc2",
+          "evidence_snapshot_sha256": "8ff98f6c7b3874d58d4fda9cc8779aeabfcc03e0984a0bd6af030d9f880c7552",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "台北市",
+      "candidate_count": 6,
+      "promoted_count": 6,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-a63e550a2248c74b93ea7beb",
+          "proposal_id": "promote-cec-reg-2026-3345f202025019f7",
+          "county": "台北市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:36.943030+00:00",
+          "target_path": "knowledge/local/台北市/candidates.jsonl",
+          "record_id": "cec-reg-2026-3345f202025019f7",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台北市-cec-reg-2026-3345f202025019f7"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台北市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "88604aab20cc500509f25b7a53878a5027373b418e35aeef464a38e0c895f6c0",
+          "evidence_snapshot_sha256": "918947a5ef7c984b0fc97cb1f5afe39b77c3f5c9fb608cd1237863310fee4ed3",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-d567bc9118bbe2cd8b21e701",
+          "proposal_id": "promote-cec-reg-2026-7d535f09dddcebcc",
+          "county": "台北市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:36.952436+00:00",
+          "target_path": "knowledge/local/台北市/candidates.jsonl",
+          "record_id": "cec-reg-2026-7d535f09dddcebcc",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台北市-cec-reg-2026-7d535f09dddcebcc"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台北市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "b6cc727e734bba3caa32adb27890180ac6a38cf8bf2ea211ce334e97d2f7b09f",
+          "evidence_snapshot_sha256": "e2bb0d6d0dc64e83f24b83fe12a635678553cc18e42c2221150b14965a5dacb0",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-45eb11925f268d47c83f74dc",
+          "proposal_id": "promote-cec-reg-2026-e4e1f783a5eee6d5",
+          "county": "台北市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:36.961712+00:00",
+          "target_path": "knowledge/local/台北市/candidates.jsonl",
+          "record_id": "cec-reg-2026-e4e1f783a5eee6d5",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台北市-cec-reg-2026-e4e1f783a5eee6d5"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台北市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "2b5525999cddddb2b77bb978b744b2872c1a8b21a1b953a73a85e48149d000e2",
+          "evidence_snapshot_sha256": "f545ca77b5fe989d9f3f34fa4fc3fb7e7acb80c51d4cac38f540ec787583dafe",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-b43e74197f02794f6cc6342f",
+          "proposal_id": "promote-cec-reg-2026-f178d7f55cec26c1",
+          "county": "台北市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:36.971687+00:00",
+          "target_path": "knowledge/local/台北市/candidates.jsonl",
+          "record_id": "cec-reg-2026-f178d7f55cec26c1",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台北市-cec-reg-2026-f178d7f55cec26c1"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台北市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "a74e603d52d42121055d7bfe6dbadba3e47f4298cfd48c24c3b89af60135173e",
+          "evidence_snapshot_sha256": "88c0f0b492164173f1f11ef155417ec34dd99998c088b1de8a1316a0f8d90217",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-8b8c8e2024a3f77d1a5901ba",
+          "proposal_id": "promote-cec-reg-2026-260f84981051d648",
+          "county": "台北市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:36.981585+00:00",
+          "target_path": "knowledge/local/台北市/candidates.jsonl",
+          "record_id": "cec-reg-2026-260f84981051d648",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台北市-cec-reg-2026-260f84981051d648"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台北市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "452daa3eeb84b63b9262a9f80d7b5cc6297d0555fe3b3e5fe9c8d6d102c27480",
+          "evidence_snapshot_sha256": "9e1af63ab06874a2c9e18742c1510e1eea7ac8556b49d8add34404326dd91eb4",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-b0d5296feb0ddcff1817a122",
+          "proposal_id": "promote-cec-reg-2026-3ba58db03dc4fb42",
+          "county": "台北市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:36.993413+00:00",
+          "target_path": "knowledge/local/台北市/candidates.jsonl",
+          "record_id": "cec-reg-2026-3ba58db03dc4fb42",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台北市-cec-reg-2026-3ba58db03dc4fb42"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台北市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "5f772d8db1c416bea88ce9301fe9772811440e364f36b98d2ad38a16d1ee2484",
+          "evidence_snapshot_sha256": "ee90091e60d8e536242c0ade2d15126eec962f15bcea722a6af5eb2eca9cb482",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "新北市",
+      "candidate_count": 3,
+      "promoted_count": 3,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-5c5080053a8ecd8ad76a4415",
+          "proposal_id": "promote-cec-reg-2026-c5eea051b105fed6",
+          "county": "新北市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:40.851266+00:00",
+          "target_path": "knowledge/local/新北市/candidates.jsonl",
+          "record_id": "cec-reg-2026-c5eea051b105fed6",
+          "evidence_lead_ids": [
+            "cec-current-candidate-新北市-cec-reg-2026-c5eea051b105fed6"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年新北市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "32705f7797bad2d75ce79e0873603fe299dc0bfa439f00d0d5f43bb8942c8b12",
+          "evidence_snapshot_sha256": "0748207d3bc2c1d438c85310d59b2b8eb04a624eaf0e80ea05ac681a99733e90",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-3f56d3554695b9c1033e2c10",
+          "proposal_id": "promote-cec-reg-2026-f08515b4d8707deb",
+          "county": "新北市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:40.860563+00:00",
+          "target_path": "knowledge/local/新北市/candidates.jsonl",
+          "record_id": "cec-reg-2026-f08515b4d8707deb",
+          "evidence_lead_ids": [
+            "cec-current-candidate-新北市-cec-reg-2026-f08515b4d8707deb"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年新北市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "beea6a082b457796199312f063d6777342fdc37df0d5a237ea47f5d698ad647f",
+          "evidence_snapshot_sha256": "0ffaf115ad446d561ec0c08da444fcd909a8aa2988813d96b9a9831e74ab938c",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-336f721a866df30aee6cd279",
+          "proposal_id": "promote-cec-reg-2026-6053bff65961d894",
+          "county": "新北市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:40.870017+00:00",
+          "target_path": "knowledge/local/新北市/candidates.jsonl",
+          "record_id": "cec-reg-2026-6053bff65961d894",
+          "evidence_lead_ids": [
+            "cec-current-candidate-新北市-cec-reg-2026-6053bff65961d894"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年新北市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "67206bdf92413c809d96b51435a62fdfcc245980301a96070219902309a3b2c1",
+          "evidence_snapshot_sha256": "cd371c6f1732a1e960816cb1d6f2f5c417fba6d1154653b98baaecec65e099cb",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "桃園市",
+      "candidate_count": 2,
+      "promoted_count": 2,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-ffaeb722998a3e8d5780a959",
+          "proposal_id": "promote-cec-reg-2026-6a799c19a64d1b81",
+          "county": "桃園市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:44.679200+00:00",
+          "target_path": "knowledge/local/桃園市/candidates.jsonl",
+          "record_id": "cec-reg-2026-6a799c19a64d1b81",
+          "evidence_lead_ids": [
+            "cec-current-candidate-桃園市-cec-reg-2026-6a799c19a64d1b81"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年桃園市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "3f4a95cfad51c7a044006fef0fdc78d9c5d7123363d2f486beb074ccdae8a419",
+          "evidence_snapshot_sha256": "32265f81a6bf3453d1cd5aabda4101a89a54f276e9595516abcc9ce9083adb16",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-5537c57679366ed04b5d4bad",
+          "proposal_id": "promote-cec-reg-2026-ab52b785ca0ddd3b",
+          "county": "桃園市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:44.688496+00:00",
+          "target_path": "knowledge/local/桃園市/candidates.jsonl",
+          "record_id": "cec-reg-2026-ab52b785ca0ddd3b",
+          "evidence_lead_ids": [
+            "cec-current-candidate-桃園市-cec-reg-2026-ab52b785ca0ddd3b"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年桃園市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "43f390232bdc320b3054cabea10a12fc364a7fe198ed6c4630af8660a7d5d2fe",
+          "evidence_snapshot_sha256": "f122cb05cbf110d3437a173f5875f5ef98a452b67bbca6e50538bfb4f111f5e8",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "新竹市",
+      "candidate_count": 3,
+      "promoted_count": 3,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-3a28fa8f50234cdf29627742",
+          "proposal_id": "promote-cec-reg-2026-6aae0a69773caf8a",
+          "county": "新竹市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:48.470834+00:00",
+          "target_path": "knowledge/local/新竹市/candidates.jsonl",
+          "record_id": "cec-reg-2026-6aae0a69773caf8a",
+          "evidence_lead_ids": [
+            "cec-current-candidate-新竹市-cec-reg-2026-6aae0a69773caf8a"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年新竹市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "1976b0e4dbee9071c34cb7a65c6bdee0a89878734153cb099ddb936598af558e",
+          "evidence_snapshot_sha256": "f84a3157f51f073271735babea76c3c28df5a6b51dd7347910a9d7a8a68066a9",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-3eb7380e8025569ef224627a",
+          "proposal_id": "promote-cec-reg-2026-34eccc70b71ca5ed",
+          "county": "新竹市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:48.480067+00:00",
+          "target_path": "knowledge/local/新竹市/candidates.jsonl",
+          "record_id": "cec-reg-2026-34eccc70b71ca5ed",
+          "evidence_lead_ids": [
+            "cec-current-candidate-新竹市-cec-reg-2026-34eccc70b71ca5ed"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年新竹市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "6ac0a4954baf69af70bda5387b24fcfc38330f7b4e8fedb5fcd50ef690f73fc8",
+          "evidence_snapshot_sha256": "bd8acb2acbab42466e5dceefc1aace45b0c5fe46107d24c05e9e5c3fec1df18d",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-83fd29f53537d22eeb8d293f",
+          "proposal_id": "promote-cec-reg-2026-959499db8540947c",
+          "county": "新竹市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:48.489404+00:00",
+          "target_path": "knowledge/local/新竹市/candidates.jsonl",
+          "record_id": "cec-reg-2026-959499db8540947c",
+          "evidence_lead_ids": [
+            "cec-current-candidate-新竹市-cec-reg-2026-959499db8540947c"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年新竹市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "21eba7fda587e242e6b502bbbcf586f6596c96bac59404d297869cf99c586cff",
+          "evidence_snapshot_sha256": "004395ede99eb761251135298cedceb356bf7b7cb4c5e3a4bc4d0c2c08495c9b",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "新竹縣",
+      "candidate_count": 3,
+      "promoted_count": 3,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-62e267e4f9f5a9b6685b26ab",
+          "proposal_id": "promote-cec-reg-2026-aa4118bafab47c6f",
+          "county": "新竹縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:52.251476+00:00",
+          "target_path": "knowledge/local/新竹縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-aa4118bafab47c6f",
+          "evidence_lead_ids": [
+            "cec-current-candidate-新竹縣-cec-reg-2026-aa4118bafab47c6f"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年新竹縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "c62656a643d3d8882447c9884efeeb61f39aabae807b49c111a293b553e78753",
+          "evidence_snapshot_sha256": "a962351da5c32c343d83a556a9159a2174ec658ee2e1a2d9b071f37fc6e2c365",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-544fc91fdc5cf537b77728f6",
+          "proposal_id": "promote-cec-reg-2026-49a29b410778ab74",
+          "county": "新竹縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:52.260705+00:00",
+          "target_path": "knowledge/local/新竹縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-49a29b410778ab74",
+          "evidence_lead_ids": [
+            "cec-current-candidate-新竹縣-cec-reg-2026-49a29b410778ab74"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年新竹縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "ad820d1d4c90a4fc14674f54e7d74ee6400de13e45647846874c7012772c5e4f",
+          "evidence_snapshot_sha256": "ff832f81eae878e41eb0224ee571d12529d63a837baf6d9c1aa679181dee1728",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-41037c763dfc11dc0f388066",
+          "proposal_id": "promote-cec-reg-2026-f62ec5fcc58fda6c",
+          "county": "新竹縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:52.270228+00:00",
+          "target_path": "knowledge/local/新竹縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-f62ec5fcc58fda6c",
+          "evidence_lead_ids": [
+            "cec-current-candidate-新竹縣-cec-reg-2026-f62ec5fcc58fda6c"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年新竹縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "2818bdbcf37eff8502cfd72a56ac6f0825437f762f62065e73a2e0fa030e0725",
+          "evidence_snapshot_sha256": "3afb536a0a7595dea81a8b2694547c6165f967b772c6966182234d7d4a1cd651",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "苗栗縣",
+      "candidate_count": 2,
+      "promoted_count": 2,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-6182cc44a225f130ad044008",
+          "proposal_id": "promote-cec-reg-2026-74f0f9006a20bb1c",
+          "county": "苗栗縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:56.038096+00:00",
+          "target_path": "knowledge/local/苗栗縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-74f0f9006a20bb1c",
+          "evidence_lead_ids": [
+            "cec-current-candidate-苗栗縣-cec-reg-2026-74f0f9006a20bb1c"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年苗栗縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "90c0a2a126dc64fa6c55a8c7655fdbf9b7ed2b6bb6b93e0c2f5bf1b61b5d3ef5",
+          "evidence_snapshot_sha256": "26f554539ac63454b8b34208f966446b89b334fee1af237486371fa964e47e32",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-3d51628ca3f123fe891de8e8",
+          "proposal_id": "promote-cec-reg-2026-e341c65ec436de6b",
+          "county": "苗栗縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:06:56.047437+00:00",
+          "target_path": "knowledge/local/苗栗縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-e341c65ec436de6b",
+          "evidence_lead_ids": [
+            "cec-current-candidate-苗栗縣-cec-reg-2026-e341c65ec436de6b"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年苗栗縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "3c544c57e9e9823e940718516aa3e53b2b19aed31d61cf2bb28c8b4900e12f4b",
+          "evidence_snapshot_sha256": "3fa3aac0ca5353ad84e430de02b27330bfb62f6d4031c7cec76715801666917e",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "台中市",
+      "candidate_count": 3,
+      "promoted_count": 3,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-9b8920c5a71080e445157f2e",
+          "proposal_id": "promote-cec-reg-2026-673b7df7ddf57fd2",
+          "county": "台中市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:01.127030+00:00",
+          "target_path": "knowledge/local/台中市/candidates.jsonl",
+          "record_id": "cec-reg-2026-673b7df7ddf57fd2",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台中市-cec-reg-2026-673b7df7ddf57fd2"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台中市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "b9c718e48cd191f0f17c59efb6431464891138706d65b3913db6cb067bf59db0",
+          "evidence_snapshot_sha256": "158c1c51f9d4867b8a947637d6f6febd84fb45ff29f87812ec434b911c57faa8",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-5a6cca927658e9b7fd60071d",
+          "proposal_id": "promote-cec-reg-2026-05c2aeeabf824a35",
+          "county": "台中市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:01.136378+00:00",
+          "target_path": "knowledge/local/台中市/candidates.jsonl",
+          "record_id": "cec-reg-2026-05c2aeeabf824a35",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台中市-cec-reg-2026-05c2aeeabf824a35"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台中市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "2eff74f686785deb48f03b5ed274f6e56062f31c225dce6c90a1e1e54e27c7da",
+          "evidence_snapshot_sha256": "3a1d9bd54d7d5ba68903063d344767fece438f844aa6a729d4a0a981c37cd343",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-c9570af017dbba3c13904d54",
+          "proposal_id": "promote-cec-reg-2026-5009466ae72090a7",
+          "county": "台中市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:01.145676+00:00",
+          "target_path": "knowledge/local/台中市/candidates.jsonl",
+          "record_id": "cec-reg-2026-5009466ae72090a7",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台中市-cec-reg-2026-5009466ae72090a7"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台中市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "5d3782258ef7e96724561c6fdeef874fa32f1039608b16815449ca193f60f5bc",
+          "evidence_snapshot_sha256": "841837c5e3de7931c11e83cff0ccbb1eac7da4c63c385c6fa11783f61c425100",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "彰化縣",
+      "candidate_count": 4,
+      "promoted_count": 4,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-d3dd670f60a9a646adb1b00e",
+          "proposal_id": "promote-cec-reg-2026-bc9ef64d4a6fdfa2",
+          "county": "彰化縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:04.969231+00:00",
+          "target_path": "knowledge/local/彰化縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-bc9ef64d4a6fdfa2",
+          "evidence_lead_ids": [
+            "cec-current-candidate-彰化縣-cec-reg-2026-bc9ef64d4a6fdfa2"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年彰化縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "bbf4e1ebaad8328d903f8b11a46466bb0fb666ff51e7a96b417e027ccf682878",
+          "evidence_snapshot_sha256": "ee44ad1d1f8eacc94f5905c13c5cb46a65fac571ac38be2944daee378fee0656",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-88cc0257534d27c6edf096f2",
+          "proposal_id": "promote-cec-reg-2026-7634fedbf23f5892",
+          "county": "彰化縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:04.978505+00:00",
+          "target_path": "knowledge/local/彰化縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-7634fedbf23f5892",
+          "evidence_lead_ids": [
+            "cec-current-candidate-彰化縣-cec-reg-2026-7634fedbf23f5892"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年彰化縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "3116c0fa51ee93f0e626d743277e11f774ff699299964e765a0d51ada839e791",
+          "evidence_snapshot_sha256": "0309fc3e8decd52827d0f4747895bb365e3075b15091828fc4e650a49e77deb5",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-718a961b38a87207727febcd",
+          "proposal_id": "promote-cec-reg-2026-b05e8bc962952b3a",
+          "county": "彰化縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:04.988028+00:00",
+          "target_path": "knowledge/local/彰化縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-b05e8bc962952b3a",
+          "evidence_lead_ids": [
+            "cec-current-candidate-彰化縣-cec-reg-2026-b05e8bc962952b3a"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年彰化縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "b437be50444770da7029608172199cf35401637f223aebc85244a9a606f1fdfb",
+          "evidence_snapshot_sha256": "34a03063f87303c826e8958d75f5e667fb420996d7058058226244981979ce14",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-5320c906896a769a7df09834",
+          "proposal_id": "promote-cec-reg-2026-bae886d0d2dc0466",
+          "county": "彰化縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:04.997558+00:00",
+          "target_path": "knowledge/local/彰化縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-bae886d0d2dc0466",
+          "evidence_lead_ids": [
+            "cec-current-candidate-彰化縣-cec-reg-2026-bae886d0d2dc0466"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年彰化縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "e25977718977ef47f8b82adaba2565c752ecd34039612ad8cc48503526ae32f4",
+          "evidence_snapshot_sha256": "04249b3215fbca29b8f6e4d2f46cf518bb775ad57a7493e0931dbd5e7293a5df",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "南投縣",
+      "candidate_count": 2,
+      "promoted_count": 2,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-2ff342fc70f27ec6fad8ac9b",
+          "proposal_id": "promote-cec-reg-2026-640d20c3a5b72b90",
+          "county": "南投縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:08.818231+00:00",
+          "target_path": "knowledge/local/南投縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-640d20c3a5b72b90",
+          "evidence_lead_ids": [
+            "cec-current-candidate-南投縣-cec-reg-2026-640d20c3a5b72b90"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年南投縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "f28af9d1bfea0dfcd8e2fb4f23845294ec83169ed906a5a82ddb88e87b94759e",
+          "evidence_snapshot_sha256": "f2dbba4511bbbe6b13700f4390868904f5113d32a97f5db7141cd4d389abb39d",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-577d0bb0b0b449c3e30fad31",
+          "proposal_id": "promote-cec-reg-2026-79cf1f8d6690aed7",
+          "county": "南投縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:08.827766+00:00",
+          "target_path": "knowledge/local/南投縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-79cf1f8d6690aed7",
+          "evidence_lead_ids": [
+            "cec-current-candidate-南投縣-cec-reg-2026-79cf1f8d6690aed7"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年南投縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "1e2fb5cecb962cac8580b53a07b81b7e74ba8d8f19ac5eab538a4a120f71b2db",
+          "evidence_snapshot_sha256": "a96c8a6bd0e49b6e0421c109f3906ef8c04497837fac618de1641de9a3cdd229",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "雲林縣",
+      "candidate_count": 4,
+      "promoted_count": 4,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-d9bd23fb89c8892f2dd2dae9",
+          "proposal_id": "promote-cec-reg-2026-b50ae7e015f3f6f3",
+          "county": "雲林縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:12.741602+00:00",
+          "target_path": "knowledge/local/雲林縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-b50ae7e015f3f6f3",
+          "evidence_lead_ids": [
+            "cec-current-candidate-雲林縣-cec-reg-2026-b50ae7e015f3f6f3"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年雲林縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "e2f3f13953defb0ab8a9b7e71393a2edb25707fabe5c7282aa5166b4140a8432",
+          "evidence_snapshot_sha256": "57641028a23c9c5c0c032c4aa0dc197a3dfec373de822872a4a6150ad03bec60",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-d54977bf7111081219fb520d",
+          "proposal_id": "promote-cec-reg-2026-4eb18e72a70d823d",
+          "county": "雲林縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:12.751446+00:00",
+          "target_path": "knowledge/local/雲林縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-4eb18e72a70d823d",
+          "evidence_lead_ids": [
+            "cec-current-candidate-雲林縣-cec-reg-2026-4eb18e72a70d823d"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年雲林縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "9521792e1200e7bf0fc95e5735e98a95902ca894707dd1ddb200c47a61170d2d",
+          "evidence_snapshot_sha256": "85a0ded4fad6fcc43f062a0a31ff60debe2c374294f001d54809504a779ab305",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-8bc96af4bb7c3fde09b7cf7a",
+          "proposal_id": "promote-cec-reg-2026-d6831a06e9f612dd",
+          "county": "雲林縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:12.763784+00:00",
+          "target_path": "knowledge/local/雲林縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-d6831a06e9f612dd",
+          "evidence_lead_ids": [
+            "cec-current-candidate-雲林縣-cec-reg-2026-d6831a06e9f612dd"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年雲林縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "31cfc08d22c523d413eae5ee5d3ad5e7daa35103bbfcd3a7c8279dc94ffd468f",
+          "evidence_snapshot_sha256": "35245ec99a2462c9e59302a364713a4e68cf454265753f4b39cfa58ad8138a34",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-81c97766ae08a5943de42750",
+          "proposal_id": "promote-cec-reg-2026-28d8e882b4264273",
+          "county": "雲林縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:12.774949+00:00",
+          "target_path": "knowledge/local/雲林縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-28d8e882b4264273",
+          "evidence_lead_ids": [
+            "cec-current-candidate-雲林縣-cec-reg-2026-28d8e882b4264273"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年雲林縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "d40be05757ed16799d3ac15d732941f9879684f9b41d2e28669c6f8e1466cab4",
+          "evidence_snapshot_sha256": "8e2ac5999e08ce3058d7f08e62b1353c3ac4405c50a2874e76df8a735a0ee90f",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "嘉義市",
+      "candidate_count": 5,
+      "promoted_count": 5,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-4a8a5269665a67438d91ffd3",
+          "proposal_id": "promote-cec-reg-2026-f227fe8b61b017a4",
+          "county": "嘉義市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:16.631962+00:00",
+          "target_path": "knowledge/local/嘉義市/candidates.jsonl",
+          "record_id": "cec-reg-2026-f227fe8b61b017a4",
+          "evidence_lead_ids": [
+            "cec-current-candidate-嘉義市-cec-reg-2026-f227fe8b61b017a4"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年嘉義市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "2cf37289ab118b2c46449179fac29d04e3381bd4231935372982c51720ef8385",
+          "evidence_snapshot_sha256": "18841d18237560f0b3995913403d92fbd3467a97b632e88d9bea58bbed0b8855",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-0b2486256f859cfec3b5fc72",
+          "proposal_id": "promote-cec-reg-2026-53ebc4ee63f828e8",
+          "county": "嘉義市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:16.641272+00:00",
+          "target_path": "knowledge/local/嘉義市/candidates.jsonl",
+          "record_id": "cec-reg-2026-53ebc4ee63f828e8",
+          "evidence_lead_ids": [
+            "cec-current-candidate-嘉義市-cec-reg-2026-53ebc4ee63f828e8"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年嘉義市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "6f2d17ad88fe387c0cf01a2c2732fbf43346209ac78f23b5e85fa739a9a73662",
+          "evidence_snapshot_sha256": "7d028fdb9d84673811c69aea70cc1e4e10e3917cd473ef9714610ee5404a715f",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-a9ce5c60b8b94590bd57cf89",
+          "proposal_id": "promote-cec-reg-2026-9492070cd15fa962",
+          "county": "嘉義市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:16.650829+00:00",
+          "target_path": "knowledge/local/嘉義市/candidates.jsonl",
+          "record_id": "cec-reg-2026-9492070cd15fa962",
+          "evidence_lead_ids": [
+            "cec-current-candidate-嘉義市-cec-reg-2026-9492070cd15fa962"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年嘉義市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "081c5f0cd2a271e952e54e77258a971d9450a22009ab66dd834aef2ea7cb672c",
+          "evidence_snapshot_sha256": "45c149c991237a684eceae94e2991cf821d17e93a064d14118e45e14684b2a42",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-149f7c9696016ad49317b901",
+          "proposal_id": "promote-cec-reg-2026-ef97824b941fad26",
+          "county": "嘉義市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:16.660428+00:00",
+          "target_path": "knowledge/local/嘉義市/candidates.jsonl",
+          "record_id": "cec-reg-2026-ef97824b941fad26",
+          "evidence_lead_ids": [
+            "cec-current-candidate-嘉義市-cec-reg-2026-ef97824b941fad26"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年嘉義市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "f7d89f168e67b8353dd67848c4891efa6f7066431c17143ce72cdfa023b7d751",
+          "evidence_snapshot_sha256": "4dd72b545ce6970f376977dca8be857a327adc119c3eb86c5bda0a9c859bdabe",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-e7ded566e6e7ba6fdd7b3470",
+          "proposal_id": "promote-cec-reg-2026-e53a8b40bc7cb70b",
+          "county": "嘉義市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:16.670032+00:00",
+          "target_path": "knowledge/local/嘉義市/candidates.jsonl",
+          "record_id": "cec-reg-2026-e53a8b40bc7cb70b",
+          "evidence_lead_ids": [
+            "cec-current-candidate-嘉義市-cec-reg-2026-e53a8b40bc7cb70b"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年嘉義市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "ab1f8506a55b549571424a9b3cc3d630c9784889d5a645db309d71642bdcc4d3",
+          "evidence_snapshot_sha256": "8d329d93019d065c78a108ff60da7546efb097c1cfcefcb42bdce756c5b8c4ac",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "嘉義縣",
+      "candidate_count": 2,
+      "promoted_count": 2,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-045e9aa19a10964dba1c64d9",
+          "proposal_id": "promote-cec-reg-2026-c41aa66b0398c28e",
+          "county": "嘉義縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:20.538213+00:00",
+          "target_path": "knowledge/local/嘉義縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-c41aa66b0398c28e",
+          "evidence_lead_ids": [
+            "cec-current-candidate-嘉義縣-cec-reg-2026-c41aa66b0398c28e"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年嘉義縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "2a9d089d17630160838da3cc5f5f8ccbe2ea82fa88584d00e15c3567772f39cb",
+          "evidence_snapshot_sha256": "0701f3d3a70b03c82731674bb91f77f81c121a1d5a9af758c3732ee4bb799d7f",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-fe663c50035781524c3922d1",
+          "proposal_id": "promote-cec-reg-2026-e3630b27a2c7ccf0",
+          "county": "嘉義縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:20.547514+00:00",
+          "target_path": "knowledge/local/嘉義縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-e3630b27a2c7ccf0",
+          "evidence_lead_ids": [
+            "cec-current-candidate-嘉義縣-cec-reg-2026-e3630b27a2c7ccf0"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年嘉義縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "9de6b78202cf8af706306fdf7ce424da37c6bec12b39bfa5d187a278382e3ac8",
+          "evidence_snapshot_sha256": "ca148ffec58ab84e357bf3f276e17b525f6c0fec03c8fe92c5158f40f31b2c86",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "台南市",
+      "candidate_count": 4,
+      "promoted_count": 4,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-52b35a34ea00585f2aeb8375",
+          "proposal_id": "promote-cec-reg-2026-6d52520f12586f61",
+          "county": "台南市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:24.323726+00:00",
+          "target_path": "knowledge/local/台南市/candidates.jsonl",
+          "record_id": "cec-reg-2026-6d52520f12586f61",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台南市-cec-reg-2026-6d52520f12586f61"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台南市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "a8df48c3cc86373f47c16e2b0ecb8aa321ceaf860c93bafdcff44ac62de71954",
+          "evidence_snapshot_sha256": "173fc1a23e5acca817256dbf1d9207e3730440eecd263d609542e327c21c0eee",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-b206fff91462d0893d38fef3",
+          "proposal_id": "promote-cec-reg-2026-d12fd23c53854e31",
+          "county": "台南市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:24.333042+00:00",
+          "target_path": "knowledge/local/台南市/candidates.jsonl",
+          "record_id": "cec-reg-2026-d12fd23c53854e31",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台南市-cec-reg-2026-d12fd23c53854e31"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台南市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "88b64dd1053e21f14a2d7566aff15e3b8f326d85d6ca2aac34b2cb0c5f0c9d5d",
+          "evidence_snapshot_sha256": "dbc85a55e820d478d62487ad96a42ac117592d17815ee6bf00078bfa3abe304c",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-99606c4d2ec209bcacb79cae",
+          "proposal_id": "promote-cec-reg-2026-a023370d996da44c",
+          "county": "台南市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:24.342443+00:00",
+          "target_path": "knowledge/local/台南市/candidates.jsonl",
+          "record_id": "cec-reg-2026-a023370d996da44c",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台南市-cec-reg-2026-a023370d996da44c"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台南市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "cd064c3c0180ebd08151dd5ba18053a5ae1677d312477c2e88259dbd7bdd170f",
+          "evidence_snapshot_sha256": "b3026bdc2ded761a294d0f824eb9f9caff03977c9f6880bc4740b96802a7ce62",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-c01767aed931ba0c11ff5612",
+          "proposal_id": "promote-cec-reg-2026-1a637cf171d1af24",
+          "county": "台南市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:24.352074+00:00",
+          "target_path": "knowledge/local/台南市/candidates.jsonl",
+          "record_id": "cec-reg-2026-1a637cf171d1af24",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台南市-cec-reg-2026-1a637cf171d1af24"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台南市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "af41b8eb389f0ab5e9d6eba73c24075c6f96cd0249ef431d92e29361cb2a0ce2",
+          "evidence_snapshot_sha256": "1eb3d7ccedf16ac7745f5fce4841207927ce755647fbf16c4cc66ba107ca1aa9",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "高雄市",
+      "candidate_count": 5,
+      "promoted_count": 5,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-5abb03f90ec7753731ddacc5",
+          "proposal_id": "promote-cec-reg-2026-ec9cf519f323267b",
+          "county": "高雄市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:28.146204+00:00",
+          "target_path": "knowledge/local/高雄市/candidates.jsonl",
+          "record_id": "cec-reg-2026-ec9cf519f323267b",
+          "evidence_lead_ids": [
+            "cec-current-candidate-高雄市-cec-reg-2026-ec9cf519f323267b"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年高雄市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "14f786f0f5527cd1153b71336c096eca31dde645c0fef2b1f7f57c7cebb66aaa",
+          "evidence_snapshot_sha256": "a60fc4c8f85b9285e364ccb370f342e37f1844b1b8d346a4a49af153b75f3b94",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-cf13f1bd0c9e88fced3e0f04",
+          "proposal_id": "promote-cec-reg-2026-3f7a8183c453d985",
+          "county": "高雄市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:28.155810+00:00",
+          "target_path": "knowledge/local/高雄市/candidates.jsonl",
+          "record_id": "cec-reg-2026-3f7a8183c453d985",
+          "evidence_lead_ids": [
+            "cec-current-candidate-高雄市-cec-reg-2026-3f7a8183c453d985"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年高雄市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "9283fdc169b7120aeaef6369edc2fe9b5ce3f97b4d16c4d68ac81de6444c8a32",
+          "evidence_snapshot_sha256": "e69a4f921fedcbdd75bc3630613e4edc5c12b8b46ee85f1650f911038c5203a1",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-c863ee9db08cf0e93ded6d45",
+          "proposal_id": "promote-cec-reg-2026-6b69a227e9adac72",
+          "county": "高雄市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:28.165788+00:00",
+          "target_path": "knowledge/local/高雄市/candidates.jsonl",
+          "record_id": "cec-reg-2026-6b69a227e9adac72",
+          "evidence_lead_ids": [
+            "cec-current-candidate-高雄市-cec-reg-2026-6b69a227e9adac72"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年高雄市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "0d547838d7f814ca7874948a5c151f7300c108b6b0c7973ad5e219de398a9522",
+          "evidence_snapshot_sha256": "3eb2c3b9dd7bb556468fcfa4092487495369ac64b2c229f38ea8237ac4ae5e48",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-46aac52a9f7a386e62772bd1",
+          "proposal_id": "promote-cec-reg-2026-39cd889134c129a2",
+          "county": "高雄市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:28.175926+00:00",
+          "target_path": "knowledge/local/高雄市/candidates.jsonl",
+          "record_id": "cec-reg-2026-39cd889134c129a2",
+          "evidence_lead_ids": [
+            "cec-current-candidate-高雄市-cec-reg-2026-39cd889134c129a2"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年高雄市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "678282ebff7020876d3a91165ebabb79bfa283116d7cd20b62e1159776c99ce4",
+          "evidence_snapshot_sha256": "e43766b57bb2caa4822ee8c85afda7517fcf9646e144233be4c05bc07657d836",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-36c1322b25f82b1ec27cfc87",
+          "proposal_id": "promote-cec-reg-2026-a9b94b5c9c085569",
+          "county": "高雄市",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:28.185630+00:00",
+          "target_path": "knowledge/local/高雄市/candidates.jsonl",
+          "record_id": "cec-reg-2026-a9b94b5c9c085569",
+          "evidence_lead_ids": [
+            "cec-current-candidate-高雄市-cec-reg-2026-a9b94b5c9c085569"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年高雄市縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "aa986fb9697dcf8259d859c31043f3c7a3a0469a1617ca8b8e339e0617dc117e",
+          "evidence_snapshot_sha256": "65660847c30e13194d1c7776e5653a25f8a0bb436b5ce5bd7724bdfb09bf4e78",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "屏東縣",
+      "candidate_count": 2,
+      "promoted_count": 2,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-c6e7098120a310882f446b5f",
+          "proposal_id": "promote-cec-reg-2026-79a89acdaa52bf6c",
+          "county": "屏東縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:32.918117+00:00",
+          "target_path": "knowledge/local/屏東縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-79a89acdaa52bf6c",
+          "evidence_lead_ids": [
+            "cec-current-candidate-屏東縣-cec-reg-2026-79a89acdaa52bf6c"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年屏東縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "aafe936a0bee7d00c6009e1b0cf6f324da32291a955d3ab21dc2fb77454bd617",
+          "evidence_snapshot_sha256": "f6b372a75dedfd76432f293db6670c7a2f52c83bb795813c12ed796ca1a22f17",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-b6b406e7775995d6b3332e4f",
+          "proposal_id": "promote-cec-reg-2026-dde4ecd62d133cfc",
+          "county": "屏東縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:32.927617+00:00",
+          "target_path": "knowledge/local/屏東縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-dde4ecd62d133cfc",
+          "evidence_lead_ids": [
+            "cec-current-candidate-屏東縣-cec-reg-2026-dde4ecd62d133cfc"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年屏東縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "7ea86072b7f9bc12c60fcd8ce7c24cb361d529b15536ad7b2418ae6ad3433899",
+          "evidence_snapshot_sha256": "833def51e015374f03fd0d73f83ef479665562a2648ca87e628ffad9279da4be",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "宜蘭縣",
+      "candidate_count": 5,
+      "promoted_count": 5,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-aa2d56a2725f73b1c6cc0f65",
+          "proposal_id": "promote-cec-reg-2026-2717adc2742f3674",
+          "county": "宜蘭縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:36.661533+00:00",
+          "target_path": "knowledge/local/宜蘭縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-2717adc2742f3674",
+          "evidence_lead_ids": [
+            "cec-current-candidate-宜蘭縣-cec-reg-2026-2717adc2742f3674"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年宜蘭縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "988ed4ccd7be78c0f631828847eeaad54ef35eac187b4e97b7b26b56e7ea99c8",
+          "evidence_snapshot_sha256": "e169c91ebfc50a200c9766447e46120c64e7d503dd56bf289b84d55baacdaee4",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-8ae1523262e9146c5f441371",
+          "proposal_id": "promote-cec-reg-2026-ff789ba7c6420e61",
+          "county": "宜蘭縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:36.670842+00:00",
+          "target_path": "knowledge/local/宜蘭縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-ff789ba7c6420e61",
+          "evidence_lead_ids": [
+            "cec-current-candidate-宜蘭縣-cec-reg-2026-ff789ba7c6420e61"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年宜蘭縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "14af1501289125120c1312e8036dd6ac3169ebf6f56b2a503ef01100250c837a",
+          "evidence_snapshot_sha256": "dd86b6d542ad4afe8900eb1b1035f7d63266f86dcf2633524e4ade340b37e282",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-cb1ed13584c9b9fcd0ee45de",
+          "proposal_id": "promote-cec-reg-2026-6c054bbb2586394c",
+          "county": "宜蘭縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:36.680362+00:00",
+          "target_path": "knowledge/local/宜蘭縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-6c054bbb2586394c",
+          "evidence_lead_ids": [
+            "cec-current-candidate-宜蘭縣-cec-reg-2026-6c054bbb2586394c"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年宜蘭縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "28b03db65adabcd784fc3307f6b11c04b1c314967775a4609a403815de38eb98",
+          "evidence_snapshot_sha256": "5678f5bab3d140c56a1d1b2908eda97730a7a88702292f732ebb71862adfd3c7",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-74ba227a2b092b4883bb96d5",
+          "proposal_id": "promote-cec-reg-2026-24bf731c39aaa1eb",
+          "county": "宜蘭縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:36.690147+00:00",
+          "target_path": "knowledge/local/宜蘭縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-24bf731c39aaa1eb",
+          "evidence_lead_ids": [
+            "cec-current-candidate-宜蘭縣-cec-reg-2026-24bf731c39aaa1eb"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年宜蘭縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "6cb41ace831df2e6b558fa3e55e46684f0fc93c9693c2eb918f2f78c97fa734c",
+          "evidence_snapshot_sha256": "ed7738c7ac8cf4be4aeed4da6a233fcf838b668e4490aae36df47dd521d2e26c",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-913cc9b3cbb5446a76419c8d",
+          "proposal_id": "promote-cec-reg-2026-759cab0b4beb6e40",
+          "county": "宜蘭縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:36.699811+00:00",
+          "target_path": "knowledge/local/宜蘭縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-759cab0b4beb6e40",
+          "evidence_lead_ids": [
+            "cec-current-candidate-宜蘭縣-cec-reg-2026-759cab0b4beb6e40"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年宜蘭縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "5f8d1c3d0ddba015e49da32514eaa54e3968cf4a044d20559814588b35d5836e",
+          "evidence_snapshot_sha256": "fd68d78d38556d4f906d70dbc6f8e414f93d9dcb3b4eaaf0c1b4ecd8cdd5d9c0",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "花蓮縣",
+      "candidate_count": 4,
+      "promoted_count": 4,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-6ef0710e6bafcbb9660bb925",
+          "proposal_id": "promote-cec-reg-2026-503823940d6ee24a",
+          "county": "花蓮縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:40.564392+00:00",
+          "target_path": "knowledge/local/花蓮縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-503823940d6ee24a",
+          "evidence_lead_ids": [
+            "cec-current-candidate-花蓮縣-cec-reg-2026-503823940d6ee24a"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年花蓮縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "7bfb89d7c30877924d2f499434216ec554b9584901057c7d3485c7e357038572",
+          "evidence_snapshot_sha256": "a6ea2ad5b5141eef9b58ddfe84d8584ee648ace54e910a328132c77d18a9445d",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-077589964f75c17354cb0873",
+          "proposal_id": "promote-cec-reg-2026-820cb64bf1ade110",
+          "county": "花蓮縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:40.573779+00:00",
+          "target_path": "knowledge/local/花蓮縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-820cb64bf1ade110",
+          "evidence_lead_ids": [
+            "cec-current-candidate-花蓮縣-cec-reg-2026-820cb64bf1ade110"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年花蓮縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "b31c07c657250edd60e6a11e4cb51b51ef2e81e7aa6658edc4e3edd0310c1430",
+          "evidence_snapshot_sha256": "114dab2a273bf1453631f4581844e627de4ec7d8fa0fc678486e1137b28bd3c7",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-c1c11ccbb8dc764c9c7f54a0",
+          "proposal_id": "promote-cec-reg-2026-d43cba7e165a52b6",
+          "county": "花蓮縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:40.583087+00:00",
+          "target_path": "knowledge/local/花蓮縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-d43cba7e165a52b6",
+          "evidence_lead_ids": [
+            "cec-current-candidate-花蓮縣-cec-reg-2026-d43cba7e165a52b6"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年花蓮縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "88d7783a112d2e49967f0eee3a9ad844544cca1a689d786279e161c41774898d",
+          "evidence_snapshot_sha256": "7f5d8d27128afdd2e30d18111b28a15eb0b17e94e3f4470f9b119e8d861b1815",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-bab41634b2291e266480adc0",
+          "proposal_id": "promote-cec-reg-2026-2c1812cb68e9e564",
+          "county": "花蓮縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:40.592838+00:00",
+          "target_path": "knowledge/local/花蓮縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-2c1812cb68e9e564",
+          "evidence_lead_ids": [
+            "cec-current-candidate-花蓮縣-cec-reg-2026-2c1812cb68e9e564"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年花蓮縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "e23c6c8806fa4d222da34d8cbec4c5eccd3ed09d652232ea869730cc3b4dd227",
+          "evidence_snapshot_sha256": "acff2ae7e95e9f8cb523ec33ca07d79be8d465aa6fddd0a396de491ea710f62b",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "台東縣",
+      "candidate_count": 4,
+      "promoted_count": 4,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-ec01ae4d06a4ad89e78ce334",
+          "proposal_id": "promote-cec-reg-2026-8878e5c859542ee4",
+          "county": "台東縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:44.358712+00:00",
+          "target_path": "knowledge/local/台東縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-8878e5c859542ee4",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台東縣-cec-reg-2026-8878e5c859542ee4"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台東縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "02dd1a9da44888276eba4b541713ccdc7473ea13ed3e144f2646e3241b4d57d4",
+          "evidence_snapshot_sha256": "e896f2461796fbee36767eca9264f37b7e104148d10446f3233fd1c2921359c8",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-96639c4874124c2c4b63ea10",
+          "proposal_id": "promote-cec-reg-2026-f0ad6611ceb59970",
+          "county": "台東縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:44.367973+00:00",
+          "target_path": "knowledge/local/台東縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-f0ad6611ceb59970",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台東縣-cec-reg-2026-f0ad6611ceb59970"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台東縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "de1cb67d1b2b408f237b515b6c59a24c61fde04a8192996ba3ad5e23960ebb59",
+          "evidence_snapshot_sha256": "ad507adf99cf65da12fade836ff9338c5e8eaeabac9b7b9dc5c229dcfb9ab1ca",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-67bc9b6ae0286b3af282b36b",
+          "proposal_id": "promote-cec-reg-2026-5d5dc203a10ebfc4",
+          "county": "台東縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:44.377418+00:00",
+          "target_path": "knowledge/local/台東縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-5d5dc203a10ebfc4",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台東縣-cec-reg-2026-5d5dc203a10ebfc4"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台東縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "3fdabf5b20378ad1f2d2db081bd213f7f6fce291cd9c744e721e85548ca68e6d",
+          "evidence_snapshot_sha256": "499119e29865dc2c31d256dbb0acaccd696c3f5ae7d046e3b9c17efaea62df53",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-5c2f17ab05afe272b700228d",
+          "proposal_id": "promote-cec-reg-2026-50baffde4d211d29",
+          "county": "台東縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:44.386849+00:00",
+          "target_path": "knowledge/local/台東縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-50baffde4d211d29",
+          "evidence_lead_ids": [
+            "cec-current-candidate-台東縣-cec-reg-2026-50baffde4d211d29"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年台東縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "1a3ed5345c69b3483ad08a0d7c695666b3cbde46151cc7a4ad3a930f74d5a0c1",
+          "evidence_snapshot_sha256": "0ac70ef7f50fe9baaebade64d01b8c1e305915a6836cc4e8d2a1c38462a1dc4f",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "澎湖縣",
+      "candidate_count": 6,
+      "promoted_count": 6,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-261e040cee821aeb1581a0a7",
+          "proposal_id": "promote-cec-reg-2026-fec6e12e7acde6cd",
+          "county": "澎湖縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:48.189082+00:00",
+          "target_path": "knowledge/local/澎湖縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-fec6e12e7acde6cd",
+          "evidence_lead_ids": [
+            "cec-current-candidate-澎湖縣-cec-reg-2026-fec6e12e7acde6cd"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年澎湖縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "09f7dc3c32195c1827ccdb238272aa5ff57abecbd3191426b4af0f7f97712f23",
+          "evidence_snapshot_sha256": "6cb9bcaf6f28236f02cf799b1527b18cd3d0af395455b74ec81071d93889f8b6",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-e68499d00ba555aac0517b5c",
+          "proposal_id": "promote-cec-reg-2026-ec545cdabf4813e5",
+          "county": "澎湖縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:48.198474+00:00",
+          "target_path": "knowledge/local/澎湖縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-ec545cdabf4813e5",
+          "evidence_lead_ids": [
+            "cec-current-candidate-澎湖縣-cec-reg-2026-ec545cdabf4813e5"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年澎湖縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "a9678fd030173531d069bb6e73ec5ad30a93eb200270b05d9fab297a004b5207",
+          "evidence_snapshot_sha256": "4abb3945b67680085d8dd55cbd167ad6d9967174c61aa19c9b54585aa027a1e6",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-1d90724addd766ae401a13f3",
+          "proposal_id": "promote-cec-reg-2026-68e85894eb7c1099",
+          "county": "澎湖縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:48.207876+00:00",
+          "target_path": "knowledge/local/澎湖縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-68e85894eb7c1099",
+          "evidence_lead_ids": [
+            "cec-current-candidate-澎湖縣-cec-reg-2026-68e85894eb7c1099"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年澎湖縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "833cd8049f7e264f637f460026d1b009fc3e06fc0ff6ac290bf47a96c830d069",
+          "evidence_snapshot_sha256": "461e6e88686ea7dc2b4ae4f2baa3ab0662475619fdb27b8f1e2ee96fee73d009",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-9b82c7b91512cb8293f7d1ae",
+          "proposal_id": "promote-cec-reg-2026-5f310d5ea8988222",
+          "county": "澎湖縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:48.217500+00:00",
+          "target_path": "knowledge/local/澎湖縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-5f310d5ea8988222",
+          "evidence_lead_ids": [
+            "cec-current-candidate-澎湖縣-cec-reg-2026-5f310d5ea8988222"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年澎湖縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "905d682db556f2840bf2c62db79d915145eb2dad80b8c0ace8e1b427a7bbcad1",
+          "evidence_snapshot_sha256": "7ba52760d89768123090ab0b1915afc254fa4edd18b8ced97f223b61b957fc9b",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-3a7fc6fa872bfe9c19d9d093",
+          "proposal_id": "promote-cec-reg-2026-be47283d33adb989",
+          "county": "澎湖縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:48.227394+00:00",
+          "target_path": "knowledge/local/澎湖縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-be47283d33adb989",
+          "evidence_lead_ids": [
+            "cec-current-candidate-澎湖縣-cec-reg-2026-be47283d33adb989"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年澎湖縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "3cbdb392b12aecd817336f30a9d000e671d27cdc9b844cf29dec7ab8ed64bd35",
+          "evidence_snapshot_sha256": "2019725558f6da83e80bb1a8bc6c9affc641a4d5911b8cf0772bc9df8f16410f",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-75a2656f5c4d24a8bd44fa4e",
+          "proposal_id": "promote-cec-reg-2026-ae7c169ad4d4d994",
+          "county": "澎湖縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:48.237154+00:00",
+          "target_path": "knowledge/local/澎湖縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-ae7c169ad4d4d994",
+          "evidence_lead_ids": [
+            "cec-current-candidate-澎湖縣-cec-reg-2026-ae7c169ad4d4d994"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年澎湖縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "efaa6714e098ff7f7fe2112aa71128ae91095964a197302c167e6c60d5be6058",
+          "evidence_snapshot_sha256": "df3def1b6cb999c443f4f3a5b7b248b08e0de6c95469ed3a0741ccd61b511042",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "金門縣",
+      "candidate_count": 7,
+      "promoted_count": 7,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-a44ed984bd7c4fc813552b06",
+          "proposal_id": "promote-cec-reg-2026-a411ed05e9e74332",
+          "county": "金門縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:52.172772+00:00",
+          "target_path": "knowledge/local/金門縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-a411ed05e9e74332",
+          "evidence_lead_ids": [
+            "cec-current-candidate-金門縣-cec-reg-2026-a411ed05e9e74332"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年金門縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "62ca6f2d3246e1a09c8074622151f6cc699a26ebd0060476b3579943732d20e7",
+          "evidence_snapshot_sha256": "cc62c722e7274394c9ddfc4d5a410f94ddbf44e3b0cba936be44da5abfd736a1",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-8938d5338fecd3d02c9c077e",
+          "proposal_id": "promote-cec-reg-2026-dd0ee0ff5768fbdf",
+          "county": "金門縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:52.182296+00:00",
+          "target_path": "knowledge/local/金門縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-dd0ee0ff5768fbdf",
+          "evidence_lead_ids": [
+            "cec-current-candidate-金門縣-cec-reg-2026-dd0ee0ff5768fbdf"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年金門縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "dbad377aa9f8ca7ab37b1ac53e34bbab4e82c06a660a5663e1e04b91f3fd59b2",
+          "evidence_snapshot_sha256": "264f1d6b2f8225eca2d7d91534f732ba65f1dc59e5a96e1cba465567da0fdb1c",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-af32ecbe2c14d3ebe44e3f5f",
+          "proposal_id": "promote-cec-reg-2026-93fe9abcb19d542b",
+          "county": "金門縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:52.191682+00:00",
+          "target_path": "knowledge/local/金門縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-93fe9abcb19d542b",
+          "evidence_lead_ids": [
+            "cec-current-candidate-金門縣-cec-reg-2026-93fe9abcb19d542b"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年金門縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "6ebdfad1f5fec1dbc4693527e1d0fb0d851142361f36af41f7e2c980b86c5e92",
+          "evidence_snapshot_sha256": "982fa652be169c00879ae1b94c5f66118d55cadf7df3c807aa115cd16f112443",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-c3a94b65e4b076604c3937e7",
+          "proposal_id": "promote-cec-reg-2026-c44af0c2231f9cdc",
+          "county": "金門縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:52.201353+00:00",
+          "target_path": "knowledge/local/金門縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-c44af0c2231f9cdc",
+          "evidence_lead_ids": [
+            "cec-current-candidate-金門縣-cec-reg-2026-c44af0c2231f9cdc"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年金門縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "021b156b5c6a92290e5c94db06eb44ee63f009841296d967b6d29f3b62996744",
+          "evidence_snapshot_sha256": "a70d87841ae10305158b659701085c45c26484bb6f22265912a1195ba5896d9c",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-43e996a3598cacb389cdc8ae",
+          "proposal_id": "promote-cec-reg-2026-d924a5fd1354ab48",
+          "county": "金門縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:52.211274+00:00",
+          "target_path": "knowledge/local/金門縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-d924a5fd1354ab48",
+          "evidence_lead_ids": [
+            "cec-current-candidate-金門縣-cec-reg-2026-d924a5fd1354ab48"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年金門縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "c11d04671cc7bb054de929e05cd571242b4094a8e37c5d6e23a9e25a4823171e",
+          "evidence_snapshot_sha256": "795a952ee73794330ba1cdb4d0e447dd1343c2b67246119cb309cdeacb6540e0",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-894a559c769f3ed985511218",
+          "proposal_id": "promote-cec-reg-2026-5843ca3cef03bd11",
+          "county": "金門縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:52.221023+00:00",
+          "target_path": "knowledge/local/金門縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-5843ca3cef03bd11",
+          "evidence_lead_ids": [
+            "cec-current-candidate-金門縣-cec-reg-2026-5843ca3cef03bd11"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年金門縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "a8003345273bb1f6b652677c4b3916541c3b3fd86095c94183e5795a575fa83e",
+          "evidence_snapshot_sha256": "d7a437e0ea3d6cc28af85f9ecb549cd109f7252e3b56fe732db64a6a8201cd50",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-9afac241950e8111558b8610",
+          "proposal_id": "promote-cec-reg-2026-1a2d9838a5808539",
+          "county": "金門縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:52.230942+00:00",
+          "target_path": "knowledge/local/金門縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-1a2d9838a5808539",
+          "evidence_lead_ids": [
+            "cec-current-candidate-金門縣-cec-reg-2026-1a2d9838a5808539"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年金門縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "eab50d046bdd3cbc9477414cf2a91a4b4c8caf1a0135f9d37e62765151ecd638",
+          "evidence_snapshot_sha256": "592507caa46f790af159144609510fa9a6e366002bab864985d323697be50a38",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    },
+    {
+      "county": "連江縣",
+      "candidate_count": 2,
+      "promoted_count": 2,
+      "status": "complete",
+      "warnings": [],
+      "receipts": [
+        {
+          "receipt_id": "promotion-f16ffe54af8f10f3fe3145d0",
+          "proposal_id": "promote-cec-reg-2026-ae7576df634ba6f1",
+          "county": "連江縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:56.041343+00:00",
+          "target_path": "knowledge/local/連江縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-ae7576df634ba6f1",
+          "evidence_lead_ids": [
+            "cec-current-candidate-連江縣-cec-reg-2026-ae7576df634ba6f1"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年連江縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "9cd2b0c78ff0731f015fb895a6049eb0c86654c3400c181e94b9d2405a6b1a4d",
+          "evidence_snapshot_sha256": "ae864966fd89a3756a37b9edcb8d334fd5c30cacb1b62e1175149e496838170a",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        },
+        {
+          "receipt_id": "promotion-4d63f6291388ef3501ba4b80",
+          "proposal_id": "promote-cec-reg-2026-ed4c666e27d4d6b1",
+          "county": "連江縣",
+          "target_type": "candidate_profile",
+          "decision": "promoted",
+          "checked_at": "2026-09-26T11:07:56.050674+00:00",
+          "target_path": "knowledge/local/連江縣/candidates.jsonl",
+          "record_id": "cec-reg-2026-ed4c666e27d4d6b1",
+          "evidence_lead_ids": [
+            "cec-current-candidate-連江縣-cec-reg-2026-ed4c666e27d4d6b1"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "independent_source_count": 1,
+          "research_questions": [
+            "2026年連江縣縣市長選舉有哪些已完成登記的候選人，其登記日期與政黨推薦為何？"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "重新讀取中選會115年9月7日候選人登記名冊並以當次官方頁面為登記狀態基準；本紀錄只保存完成登記事實，不將登記解讀為資格審定通過。後續撤回、資格審定或名單異動須另行更新。",
+          "record_sha256": "d2799d29cdbd5411eaab3a5922f447e07597270783fd015586ec9ffb1f32926d",
+          "evidence_snapshot_sha256": "737d978942cb24cd4db9df7ffa9e213a635480d017bd37d122134c0daac37972",
+          "reasons": [],
+          "warnings": [],
+          "knowledge_builder_version": "1.4.0"
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "apply": true
+}

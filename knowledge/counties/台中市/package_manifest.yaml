@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 台中市
-generated_at: '2026-09-26T07:47:54+00:00'
-content_sha256: e1183fdb2257dccce89d0eb8b8a3a5ead989dd6d9ebc70f264dbe1a93a856dba
+generated_at: '2026-09-26T11:07:01+00:00'
+content_sha256: b58ee3aac2121592e4cbbba3efa6c981b496a974a4c62a6e586ae00f0f182399
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/台中市/claims.jsonl
@@ -17,13 +17,13 @@ generated_indexes:
 counts:
   historical_claim: 2
   local_relationship: 0
-  candidate_profile: 0
+  candidate_profile: 3
   current_issue: 0
-evidence_index_count: 2
+evidence_index_count: 5
 entity_relation_count: 0
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 2
+promotion_receipt_count: 5
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

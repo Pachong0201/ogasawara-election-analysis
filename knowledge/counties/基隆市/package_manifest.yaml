@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 基隆市
-generated_at: '2026-09-26T07:47:54+00:00'
-content_sha256: 05c90b6a9abca81be04e95c1f1e1a401b7af62d44cf9b37195c329fa564d8358
+generated_at: '2026-09-26T11:06:33+00:00'
+content_sha256: 8a2c8c031dc1c3d76c686f192c2ea3643766e007953f24a2c109ba29938fa6d7
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/基隆市/claims.jsonl
@@ -17,13 +17,13 @@ generated_indexes:
 counts:
   historical_claim: 2
   local_relationship: 0
-  candidate_profile: 0
+  candidate_profile: 3
   current_issue: 0
-evidence_index_count: 2
+evidence_index_count: 5
 entity_relation_count: 0
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 2
+promotion_receipt_count: 5
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

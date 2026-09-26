@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T07:47:55+00:00
+生成时间：2026-09-26T11:07:28+00:00
 
 ## 历史政治知识（L2）
 - kaohsiung-admin-structure-38-districts: 高雄市政府公开资料记载，高雄市划分为38个行政区。（2010-12-25—2026-09-26）
@@ -14,7 +14,11 @@
 - kh-chen-chimai-lai-juilung-20260902: 陈其迈 → public_endorsement → 赖瑞隆；status=active_verified；current_use=current_usable；time_scope=2026-09-02
 
 ## 候选人地方档案（L3）
-- 暂无已晋升候选人档案。
+- cec-reg-2026-ec9cf519f323267b: 張靜；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-3f7a8183c453d985: 賴瑞隆；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-6b69a227e9adac72: 王肇民；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-39cd889134c129a2: 柯志恩；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-a9b94b5c9c085569: 洪方隆；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
 - 暂无已晋升地方议题。
@@ -23,9 +27,9 @@
 - 陈其迈 → public_endorsement → 赖瑞隆；region=高雄市；current_use=current_usable
 
 ## 尚未解决的检索问题
-- 高雄市 的行政区、立委选区与历届地方选举空间差异中，哪些结构需要结合边界版本解释？（leads=2, verified=0）
 - 高雄市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
 - 高雄市 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？（leads=0, verified=0）
+- 高雄市 的行政区、立委选区与历届地方选举空间差异中，哪些结构需要结合边界版本解释？（leads=0, verified=0）
 - 高雄市 有哪些地方社团与公共事务网络可由可靠资料确认，且不得据其存在推断政治支持？（leads=0, verified=0）
 - 高雄市 农会、渔会的组织分布与公开政治互动有哪些可核实记录，其时间范围为何？（leads=0, verified=0）
 - 高雄市 宗教组织参与地方公共事务或公开政治活动的可验证记录有哪些，证据边界为何？（leads=0, verified=0）
