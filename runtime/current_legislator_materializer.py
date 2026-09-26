@@ -1,17 +1,31 @@
-"""Promote official current Legislative Yuan membership into county L3 relationships."""
+"""Promote current regional legislators into county L3 relationships.
+
+Current status comes from the Legislative Yuan current-member roster. County,
+district and party are taken from the already materialized official CEC 2024
+regional-legislator results. A record is promoted only when the CEC district
+winner's name is still present in the Legislative Yuan current roster.
+
+This avoids treating the 2024 result alone as proof of current office holding
+and avoids one HTTP request per legislator profile.
+"""
 
 from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence
+from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 from .county_knowledge import COUNTIES
-from .election_loader import load_jsonl, safe_component, write_jsonl
+from .election_loader import election_file_path, load_jsonl, safe_component, write_jsonl
 from .knowledge_builder import KnowledgePromotionBuilder
 from .ly_current_legislators import LYCurrentLegislatorAdapter
 from .models import utc_now_iso
+
+
+def _norm_name(value: Any) -> str:
+    return re.sub(r"\s+", "", str(value or "")).replace("．", "‧")
 
 
 class CurrentLegislatorMaterializer:
@@ -39,57 +53,141 @@ class CurrentLegislatorMaterializer:
                 merged[key] = row
         write_jsonl(path, merged.values())
 
-    def _lead(self, row: Dict[str, Any]) -> Dict[str, Any]:
+    def _current_roster(self) -> Tuple[Dict[str, str], List[Dict[str, str]]]:
+        failures: List[Dict[str, str]] = []
+        roster: Dict[str, str] = {}
+        try:
+            for url, name in self.adapter.member_links():
+                key = _norm_name(name)
+                if key:
+                    roster[key] = name
+        except Exception as exc:
+            failures.append({
+                "source": self.adapter.page_url,
+                "error": f"{type(exc).__name__}: {exc}",
+            })
+        return roster, failures
+
+    def _cec_winners(self, county: str) -> List[Dict[str, Any]]:
+        path = election_file_path(
+            self.repo_root, "regional_legislator", 2024, county
+        )
+        rows = load_jsonl(path) if path.exists() else []
+        totals: Dict[Tuple[str, str, str], Dict[str, Any]] = {}
+        for row in rows:
+            codes = row.get("cec_codes") or {}
+            district = str(codes.get("election_district") or "").strip()
+            name = str(row.get("candidate_name") or "").strip()
+            party = str(row.get("party") or "").strip()
+            if not district or not name:
+                continue
+            key = (district, name, party)
+            bucket = totals.setdefault(
+                key,
+                {
+                    "district_code": district,
+                    "name": name,
+                    "party": party,
+                    "votes": 0,
+                    "source": str(row.get("source") or ""),
+                    "source_reference": str(
+                        row.get("source_reference") or row.get("source") or ""
+                    ),
+                },
+            )
+            bucket["votes"] += int(row.get("votes") or 0)
+
+        by_district: Dict[str, List[Dict[str, Any]]] = {}
+        for row in totals.values():
+            by_district.setdefault(row["district_code"], []).append(row)
+
+        winners: List[Dict[str, Any]] = []
+        for district, candidates in sorted(by_district.items()):
+            ordered = sorted(
+                candidates,
+                key=lambda item: (-int(item["votes"]), item["name"]),
+            )
+            if not ordered:
+                continue
+            if len(ordered) > 1 and int(ordered[0]["votes"]) == int(ordered[1]["votes"]):
+                continue
+            winner = dict(ordered[0])
+            winner["county"] = county
+            winner["electoral_district"] = f"{county}第{int(district)}選舉區"
+            winners.append(winner)
+        return winners
+
+    def _leads(self, row: Dict[str, Any], roster_name: str) -> List[Dict[str, Any]]:
         county = str(row["county"])
         name = str(row["name"])
         party = str(row.get("party") or "")
-        constituency = str(row.get("constituency") or "")
-        onboard = str(row.get("onboard_date") or "")
+        district = str(row.get("electoral_district") or "")
         question = self._question(county)
-        return {
-            "lead_id": f"ly-current-{safe_component(county)}-{safe_component(str(row['member_id']))}",
-            "county": county,
-            "query": question,
-            "research_questions": [question],
-            "title": f"立法院第11屆立法委員：{name}",
-            "summary": (
-                f"立法院本屆立委資料列示{name}為第11屆立法委員，"
-                f"黨籍為{party or '未列示'}，選區為{constituency}，"
-                f"到職日期為{onboard or '未列示'}。"
-            ),
-            "evidence": f"{name}；黨籍：{party}；選區：{constituency}；到職日期：{onboard}",
-            "url": str(row["source_reference"]),
-            "source_id": "legislative_yuan_current_members",
-            "source_name": "立法院",
-            "source_grade": "A",
-            "verification_status": "verified",
-            "independence_key": "legislative_yuan",
-            "published_at": "",
-            "retrieved_at": str(row.get("last_verified_at") or utc_now_iso()),
-        }
+        now = utc_now_iso()
+        return [
+            {
+                "lead_id": f"ly-current-{safe_component(county)}-{safe_component(name)}",
+                "county": county,
+                "query": question,
+                "research_questions": [question],
+                "title": "立法院第11屆本屆立法委員名單",
+                "summary": f"立法院本屆立委名單目前列有{roster_name}。",
+                "evidence": f"第11屆立法委員名單：{roster_name}",
+                "url": self.adapter.page_url,
+                "source_id": "legislative_yuan_current_members",
+                "source_name": "立法院",
+                "source_grade": "A",
+                "verification_status": "verified",
+                "independence_key": "legislative_yuan",
+                "published_at": "",
+                "retrieved_at": now,
+            },
+            {
+                "lead_id": f"cec-2024-regional-winner-{safe_component(county)}-{safe_component(name)}",
+                "county": county,
+                "query": question,
+                "research_questions": [question],
+                "title": "中選會2024區域立法委員選舉資料",
+                "summary": f"中選會2024區域立委資料彙總顯示{name}在{district}得票最高。",
+                "evidence": f"{district}；{name}；{party}；彙總得票{row['votes']}",
+                "url": str(row.get("source_reference") or row.get("source") or ""),
+                "source_id": "cec_open_data",
+                "source_name": "中央選舉委員會",
+                "source_grade": "A",
+                "verification_status": "verified",
+                "independence_key": "cec",
+                "published_at": "2024-01-13",
+                "retrieved_at": now,
+            },
+        ]
 
-    def _proposal(self, row: Dict[str, Any], lead: Dict[str, Any]) -> Dict[str, Any]:
+    def _proposal(
+        self,
+        row: Dict[str, Any],
+        leads: List[Dict[str, Any]],
+    ) -> Dict[str, Any]:
         county = str(row["county"])
         name = str(row["name"])
-        constituency = str(row.get("constituency") or "")
-        last_verified = str(row.get("last_verified_at") or utc_now_iso())[:10]
-        onboard = str(row.get("onboard_date") or "")
-        relation_id = f"ly11-office-{safe_component(county)}-{safe_component(str(row['member_id']))}"
+        district = str(row.get("electoral_district") or "")
+        today = utc_now_iso()[:10]
+        relation_id = f"ly11-office-{safe_component(county)}-{safe_component(name)}"
         return {
             "proposal_id": f"promote-{relation_id}",
             "county": county,
             "target_type": "local_relationship",
             "research_questions": [self._question(county)],
-            "evidence_lead_ids": [lead["lead_id"]],
+            "evidence_lead_ids": [lead["lead_id"] for lead in leads],
             "contradiction_check_completed": True,
             "contradictory_lead_ids": [],
             "contradiction_check_note": (
-                "以立法院本屆立法委員名單與委員個人頁作為當次現任狀態基準；"
-                "離職委員另列於官方離職名單。後續職務異動須重新抓取官方頁面。"
+                "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認"
+                "同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；"
+                "未匹配的2024當選人留作待核，不以歷史結果推定現任。"
             ),
             "scope_boundary": (
-                "僅確認立法院官方頁面當次列示的第11屆現任立法委員、黨籍與選區；"
-                "不推斷地方派系歸屬、支持轉移、競選動員能力或選舉結果。"
+                "僅確認當次立法院本屆名單中的第11屆區域立法委員，以及其"
+                "2024中選會選舉資料中的選區與政黨；不推斷地方派系歸屬、"
+                "支持轉移、競選動員能力或任何選舉結果。"
             ),
             "target_record": {
                 "relationship_id": relation_id,
@@ -99,38 +197,46 @@ class CurrentLegislatorMaterializer:
                 "object_type": "organization",
                 "relationship_type": "office_holding",
                 "region": county,
-                "time_scope": f"{onboard or '2024-02-01'}—current",
-                "last_verified_at": last_verified,
+                "time_scope": "2024-02-01—current",
+                "last_verified_at": today,
                 "current_status": "active_verified",
                 "party": str(row.get("party") or ""),
-                "electoral_district": constituency,
+                "electoral_district": district,
                 "uncertainty": {
                     "level": "low",
-                    "reason": "立法院本屆立委官方名冊及個人頁。",
+                    "reason": "立法院現任名冊與中選會2024區域立委資料雙重官方核對。",
                     "competing_explanations": [],
                 },
             },
         }
 
     def materialize(self, *, apply: bool = False) -> Dict[str, Any]:
-        fetched = self.adapter.fetch_all()
+        roster, source_failures = self._current_roster()
         grouped: Dict[str, List[Dict[str, Any]]] = {county: [] for county in COUNTIES}
-        for row in fetched["records"]:
-            county = str(row.get("county") or "")
-            if county in grouped:
-                grouped[county].append(row)
+        unmatched_winners: List[Dict[str, Any]] = []
+
+        for county in COUNTIES:
+            for winner in self._cec_winners(county):
+                roster_name = roster.get(_norm_name(winner["name"]))
+                if not roster_name:
+                    unmatched_winners.append({
+                        "county": county,
+                        "name": winner["name"],
+                        "electoral_district": winner["electoral_district"],
+                        "reason": "2024 CEC district winner not found in current LY roster",
+                    })
+                    continue
+                winner["roster_name"] = roster_name
+                grouped[county].append(winner)
 
         results: List[Dict[str, Any]] = []
         for county, rows in grouped.items():
-            if not rows:
-                results.append({"county": county, "member_count": 0, "promoted_count": 0, "status": "missing"})
-                continue
-            leads = [self._lead(row) for row in rows]
-            self._stage(county, leads)
-            receipts = []
-            for row, lead in zip(rows, leads):
+            receipts: List[Dict[str, Any]] = []
+            for row in rows:
+                leads = self._leads(row, str(row["roster_name"]))
+                self._stage(county, leads)
                 result = self.builder.promote(
-                    self._proposal(row, lead),
+                    self._proposal(row, leads),
                     dry_run=not apply,
                     build_package=False,
                 )
@@ -139,25 +245,31 @@ class CurrentLegislatorMaterializer:
                 1 for receipt in receipts
                 if receipt.get("decision") in {"promoted", "unchanged"}
             )
-            if apply:
+            if apply and rows:
                 self.builder.build_county_package(county)
             results.append({
                 "county": county,
                 "member_count": len(rows),
                 "promoted_count": promoted,
-                "status": "complete" if promoted == len(rows) else "partial",
+                "status": (
+                    "complete"
+                    if rows and promoted == len(rows)
+                    else ("missing" if not rows else "partial")
+                ),
                 "receipts": receipts,
             })
 
         output = {
             "generated_at": utc_now_iso(),
             "county_count": len(COUNTIES),
+            "roster_member_count": len(roster),
             "covered_county_count": sum(1 for row in results if row["member_count"] > 0),
             "member_count": sum(int(row["member_count"]) for row in results),
             "promoted_count": sum(int(row["promoted_count"]) for row in results),
-            "unassigned_current_member_count": len(fetched.get("unassigned") or []),
-            "source_failure_count": int(fetched.get("failure_count") or 0),
-            "source_failures": fetched.get("failures") or [],
+            "unmatched_2024_winner_count": len(unmatched_winners),
+            "unmatched_2024_winners": unmatched_winners,
+            "source_failure_count": len(source_failures),
+            "source_failures": source_failures,
             "results": results,
             "apply": apply,
         }
@@ -176,7 +288,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parser.parse_args(argv)
     result = CurrentLegislatorMaterializer(args.repo_root).materialize(apply=args.apply)
     print(json.dumps(result, ensure_ascii=False, indent=2))
-    if result["source_failure_count"] == 0 and result["member_count"] > 0:
+    if (
+        result["source_failure_count"] == 0
+        and result["member_count"] > 0
+        and result["promoted_count"] == result["member_count"]
+    ):
         return 0
     if args.allow_partial and result["member_count"] > 0:
         return 0
