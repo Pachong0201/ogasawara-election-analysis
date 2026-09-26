@@ -63,6 +63,20 @@ def test_dual_source_party_relationship_dry_run_passes(tmp_path):
     assert result["decisions"][0]["evidence_grades"] == ["A", "C"]
 
 
+def test_promoted_candidate_profiles_are_used_when_runtime_cache_is_absent(tmp_path):
+    path = tmp_path / "knowledge" / "local" / "新竹縣" / "candidates.jsonl"
+    write_jsonl(path, [_candidate()])
+    verifier = CurrentRelationshipVerifier(tmp_path)
+    result = verifier.run(
+        "新竹縣",
+        _research("甲候選人完成登記，並由民主進步黨推薦參選縣長。"),
+        apply=False,
+    )
+    assert result["candidate_count"] == 1
+    assert result["proposal_count"] == 1
+    assert result["unresolved_count"] == 0
+
+
 def test_media_quote_must_name_candidate_and_party(tmp_path):
     path = current_candidates_path(tmp_path, "新竹縣")
     write_jsonl(path, [_candidate()])
