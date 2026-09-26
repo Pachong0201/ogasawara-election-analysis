@@ -1,0 +1,42 @@
+{
+  "source_path": "/home/runner/work/ogasawara-election-analysis/ogasawara-election-analysis/cache/raw/cec/term11-legislative-boundaries.csv",
+  "source_sha256": "8141cc1cf12b9afb4cf8d10d44ee992bf33c4c6c5090e79a71a08dc0bb8ce1ba",
+  "source_size": 15854,
+  "encoding": "utf-8-sig",
+  "headers": [
+    "選舉區",
+    "選舉區範圍"
+  ],
+  "district_header": "選舉區",
+  "scope_header": "選舉區範圍",
+  "boundary_version": "cec-legislator-term11-8141cc1cf12b",
+  "source_url": "https://data.cec.gov.tw/第11屆立法委員選舉區範圍/立法委員選舉區範圍.csv",
+  "row_count": 73,
+  "unmapped_count": 1,
+  "county_file_count": 21,
+  "files": {
+    "基隆市": "data/geography/electoral_districts/cec_legislator_term11/基隆市.jsonl",
+    "台北市": "data/geography/electoral_districts/cec_legislator_term11/台北市.jsonl",
+    "新北市": "data/geography/electoral_districts/cec_legislator_term11/新北市.jsonl",
+    "桃園市": "data/geography/electoral_districts/cec_legislator_term11/桃園市.jsonl",
+    "新竹市": "data/geography/electoral_districts/cec_legislator_term11/新竹市.jsonl",
+    "新竹縣": "data/geography/electoral_districts/cec_legislator_term11/新竹縣.jsonl",
+    "苗栗縣": "data/geography/electoral_districts/cec_legislator_term11/苗栗縣.jsonl",
+    "台中市": "data/geography/electoral_districts/cec_legislator_term11/台中市.jsonl",
+    "彰化縣": "data/geography/electoral_districts/cec_legislator_term11/彰化縣.jsonl",
+    "南投縣": "data/geography/electoral_districts/cec_legislator_term11/南投縣.jsonl",
+    "雲林縣": "data/geography/electoral_districts/cec_legislator_term11/雲林縣.jsonl",
+    "嘉義市": "data/geography/electoral_districts/cec_legislator_term11/嘉義市.jsonl",
+    "嘉義縣": "data/geography/electoral_districts/cec_legislator_term11/嘉義縣.jsonl",
+    "台南市": "data/geography/electoral_districts/cec_legislator_term11/台南市.jsonl",
+    "高雄市": "data/geography/electoral_districts/cec_legislator_term11/高雄市.jsonl",
+    "屏東縣": "data/geography/electoral_districts/cec_legislator_term11/屏東縣.jsonl",
+    "宜蘭縣": "data/geography/electoral_districts/cec_legislator_term11/宜蘭縣.jsonl",
+    "花蓮縣": "data/geography/electoral_districts/cec_legislator_term11/花蓮縣.jsonl",
+    "澎湖縣": "data/geography/electoral_districts/cec_legislator_term11/澎湖縣.jsonl",
+    "金門縣": "data/geography/electoral_districts/cec_legislator_term11/金門縣.jsonl",
+    "連江縣": "data/geography/electoral_districts/cec_legislator_term11/連江縣.jsonl",
+    "_unmapped": "data/geography/electoral_districts/cec_legislator_term11/_unmapped.jsonl"
+  },
+  "imported_at": "2026-09-26T10:50:36+00:00"
+}
