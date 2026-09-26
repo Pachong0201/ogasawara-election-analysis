@@ -7,6 +7,9 @@ on:
       - feature/feishu-election-bot-v1.4-integration
     paths:
       - ".github/workflows/materialize-cec-baseline.yml"
+      - "runtime/cec_open_data.py"
+      - "runtime/cec_offline_import.py"
+      - "runtime/knowledge_coverage.py"
 
 permissions:
   contents: write
@@ -93,9 +96,6 @@ jobs:
           )
           print("CEC_IMPORT_FILLED=", (report.get("archive_import") or {}).get("filled_or_complete"))
           print("CEC_IMPORT_MISSING=", missing)
-          if missing:
-              raise SystemExit(f"CEC import has {missing} missing/invalid slices")
-
           coverage = KnowledgeCoverageAudit(root).build()
           coverage_path = root / "data" / "manifests" / "knowledge_coverage_latest.json"
           coverage_path.parent.mkdir(parents=True, exist_ok=True)
@@ -115,5 +115,21 @@ jobs:
             echo "No generated CEC changes to commit."
             exit 0
           fi
-          git commit -m "data: materialize official CEC 22-county baseline"
+          git commit -m "data: materialize verified CEC baseline artifacts"
+          git pull --rebase origin feature/feishu-election-bot-v1.4-integration
           git push origin HEAD:feature/feishu-election-bot-v1.4-integration
+
+      - name: Enforce complete CEC coverage
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path("data/manifests/cec_offline_import_latest.json")
+          report = json.loads(path.read_text(encoding="utf-8"))
+          missing = int((report.get("archive_import") or {}).get("missing_or_invalid") or 0)
+          filled = int((report.get("archive_import") or {}).get("filled_or_complete") or 0)
+          print(f"CEC_IMPORT_FILLED={filled}")
+          print(f"CEC_IMPORT_MISSING={missing}")
+          if missing:
+              raise SystemExit(f"CEC import still has {missing} missing/invalid slices")
+          PY
