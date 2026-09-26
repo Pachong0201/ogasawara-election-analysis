@@ -71,7 +71,10 @@ class ElectionBotService:
                 and state.focus.election_type == request.focus.election_type
                 and state.focus.target_year == request.focus.target_year
             )
-            if state.analysis_context and same_focus and not request.refresh:
+            research_status = (state.analysis_context.get('analysis_context', {}).get('evidence_summary', {})
+                               .get('automatic_research', {}).get('status'))
+            research_pending = research_status in ('pending', 'running', 'retry_pending')
+            if state.analysis_context and same_focus and not request.refresh and not research_pending:
                 context = state.analysis_context
             elif request.focus.jurisdiction:
                 context = await self.skill_service.run(request.focus)

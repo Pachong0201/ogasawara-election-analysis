@@ -100,7 +100,7 @@ class NewsStore:
             else:
                 db.execute('UPDATE sources SET failures=failures+1,last_error=? WHERE id=?', (error, source_id))
 
-    def discover(self, record, now):
+    def discover(self, record, now, enqueue_body=True):
         """Upsert a link and enqueue its body atomically; never erase read content."""
         url = record['url']
         with self.connect() as db:
@@ -115,8 +115,9 @@ class NewsStore:
                           'discovered_via': [record['source_id']]}
             db.execute('INSERT INTO articles VALUES(?,?,?,?) ON CONFLICT(url) DO UPDATE SET record=excluded.record,last_seen=excluded.last_seen',
                        (url, dumps(merged), now, now))
-            db.execute("INSERT OR IGNORE INTO jobs(kind,key,payload,due) VALUES('body',?,?,?)",
-                       (url, dumps({'url': url, 'source_id': record['source_id']}), now))
+            if enqueue_body:
+                db.execute("INSERT OR IGNORE INTO jobs(kind,key,payload,due) VALUES('body',?,?,?)",
+                           (url, dumps({'url': url, 'source_id': record['source_id']}), now))
 
     def claim(self, kind, now, lease_seconds=300):
         with self.connect() as db:

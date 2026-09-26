@@ -54,10 +54,11 @@ def relevant(record, jurisdiction, candidate_names):
 class LocalNewsBackend(RetrievalBackend):
     supports_offline = True
 
-    def __init__(self, repo_root, store=None, max_results=300, queue_research=True):
+    def __init__(self, repo_root, store=None, max_results=300, queue_research=True, research_coordinator=None):
         self.store = store or NewsStore(Path(repo_root) / 'cache/news/news.sqlite3')
         self.max_results = max_results
         self.queue_research = queue_research
+        self.research_coordinator = research_coordinator
         self._seen = {}
         self._truncated = False
 
@@ -70,7 +71,8 @@ class LocalNewsBackend(RetrievalBackend):
             match = re.search(r'截至(\d{4}-\d{2}-\d{2})', query)
             as_of = match.group(1) if match else None
         cutoff = min(time.time(), cutoff_time(as_of))
-        start = cutoff - max(1, min(365, int(kwargs.get('recency_days', 30)))) * 86400
+        days = kwargs.get('recency_days', 3650 if kwargs.get('purpose') == 'local_knowledge' else 30)
+        start = cutoff - max(1, min(3650, int(days))) * 86400
         rows = []
         for record in self.store.records_at(cutoff):
             date = article_date(record)
@@ -80,7 +82,7 @@ class LocalNewsBackend(RetrievalBackend):
                 continue
             # Always preserve source kind/grade; the resolver controls evidence use.
             rows.append({**record, 'query': query, 'jurisdiction': jurisdiction})
-        if self.queue_research and (not rows or kwargs.get('purpose') == 'local_knowledge'):
+        if self.queue_research and self.research_coordinator is None and (not rows or kwargs.get('purpose') == 'local_knowledge'):
             # Durable host handoff, never an implicit paid API request.
             key = hashlib.sha256(f"{jurisdiction}:{str(as_of)[:10]}:{query}".encode()).hexdigest()
             self.store.enqueue('research', key, {'query': query, 'jurisdiction': jurisdiction,
@@ -112,6 +114,15 @@ class LocalNewsBackend(RetrievalBackend):
 
 def build_retrieval_backend(provider, repo_root, mode='online', max_body_fetches=6):
     if provider == 'local':
+        if mode != 'offline':
+            from .research_providers import ResearchConfig
+            config = ResearchConfig.from_env()
+            if config.enabled:
+                from .auto_research import ResearchCoordinator
+                from .research_store import ResearchStore
+                store = ResearchStore(Path(repo_root) / 'cache/news/news.sqlite3')
+                coordinator = ResearchCoordinator(repo_root, store, config)
+                return LocalNewsBackend(repo_root, store, research_coordinator=coordinator)
         return LocalNewsBackend(repo_root, queue_research=mode != "offline")
     if provider == 'gdelt' and mode != 'offline':
         from .gdelt_retrieval import GDELTNewsBackend

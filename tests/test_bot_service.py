@@ -76,6 +76,16 @@ class TestElectionBotService(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self):
         self.tmp.cleanup()
 
+    async def test_pending_research_is_refreshed_on_context_followup(self):
+        reply = await self.service.handle_message(inbound("分析高雄选情"))
+        state = self.store.load(reply.conversation_key)
+        state.analysis_context['analysis_context']['evidence_summary'] = {
+            'automatic_research': {'status': 'running'}
+        }
+        self.store.save(state)
+        await self.service.handle_message(inbound("查看来源", message_id="m2", reply_to="m1"))
+        self.assertEqual(len(self.skill.calls), 2)
+
     async def test_group_message_without_mention_is_ignored(self):
         reply = await self.service.handle_message(
             inbound("分析高雄选情", mentioned=False)

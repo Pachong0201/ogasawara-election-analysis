@@ -1,0 +1,19 @@
+# Identity registry for web search; independent of scheduled feed enablement.
+# Unknown sites remain other/E, even when their public body can be read.
+publishers:
+  - {id: cna, domains: [cna.com.tw, focustaiwan.tw]}
+  - {id: udn, domains: [udn.com]}
+  - {id: pts, domains: [pts.org.tw]}
+  - {id: ltn, domains: [ltn.com.tw]}
+  - {id: newtalk, domains: [newtalk.tw]}
+  - {id: storm, domains: [storm.mg]}
+  - {id: ettoday, domains: [ettoday.net]}
+  - {id: ebc, domains: [ebc.net.tw]}
+  - {id: tvbs, domains: [tvbs.com.tw]}
+  - {id: chinatimes, domains: [chinatimes.com]}
+  - {id: setn, domains: [setn.com]}
+  - {id: nownews, domains: [nownews.com]}
+  - {id: rti, domains: [rti.org.tw]}
+  - {id: mirrormedia, domains: [mirrormedia.mg]}
+  - {id: rwnews, domains: [rwnews.tw]}
+  - {id: upmedia, domains: [upmedia.mg]}

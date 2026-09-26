@@ -7,6 +7,7 @@ traceable Analysis Context that a report writer may use under SKILL.md rules.
 from __future__ import annotations
 
 from collections import defaultdict
+import datetime as dt
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
@@ -312,12 +313,16 @@ class AnalysisPipeline:
         write_manifest: bool = False,
         manifest_path: Optional[Path] = None,
         as_of: Optional[str] = None,
+        _research_result: Optional[Dict[str, Any]] = None,
     ) -> AnalysisContext:
-        as_of = as_of or utc_now_iso()
+        live_request = as_of is None
+        as_of = as_of or dt.datetime.now(dt.timezone.utc).isoformat()
         as_of_date = parse_date(as_of)
         if not as_of_date:
             raise ValueError("as_of must be an ISO date or timestamp")
         online = self._allow_online(allow_online)
+        coordinator = getattr(self.retrieval_backend, 'research_coordinator', None)
+        research_prepass = bool(coordinator and online and live_request and _research_result is None)
         readiness = self.gate.prepare(task, loader=self.loader, allow_online=online, now=as_of_date)
 
         records_by_type, files_used, load_warnings = self._load_periods(task, readiness)
@@ -394,6 +399,7 @@ class AnalysisPipeline:
             online_expected=online,
             event_conflicts=list(event_report.get("conflicts", [])),
             as_of=as_of,
+            persist=False if research_prepass else None,
         )
 
         historical_regions = {
@@ -424,6 +430,20 @@ class AnalysisPipeline:
             allow_online=online and research_triggered,
             as_of=as_of,
         )
+        if research_prepass:
+            try:
+                result = coordinator.research(task, questions, [
+                    str(row.get('candidate_name') or row.get('name') or row.get('姓名') or '')
+                    for row in current_candidates
+                ])
+            except Exception as exc:
+                result = {'status': 'failed', 'last_error': type(exc).__name__}
+            # Freeze the evidence cutoff only AFTER bounded collection. Explicit
+            # as_of replays never enter this branch and never advance their cutoff.
+            return self.run(task, allow_online=allow_online, write_manifest=write_manifest,
+                            manifest_path=manifest_path, _research_result=result)
+        if _research_result is not None:
+            local_knowledge['automatic_research'] = _research_result
         retrieval_metadata = (
             self.retrieval_backend.metadata()
             if self.retrieval_backend is not None
@@ -462,6 +482,13 @@ class AnalysisPipeline:
         }
 
         sources = self._source_summary(records_by_type, current_candidates + polls + events + campaign_leads)
+        research_urls = []
+        for finding in (_research_result or {}).get('findings', []):
+            for citation in finding.get('citations', []):
+                if citation['url'] not in research_urls:
+                    research_urls.append(citation['url'])
+                    sources.append({'source_id': citation.get('publisher_id'),
+                                    'source_grade': citation.get('source_grade'), 'reference': citation['url']})
         context = self.context_builder.build(
             task=task,
             readiness=readiness,
@@ -489,6 +516,7 @@ class AnalysisPipeline:
                 "campaign_event_resolution": campaign_event_resolution.get("stats", {}),
                 "campaign_retrieval_lead_count": len(campaign_leads),
                 "retrieval": retrieval_metadata,
+                "automatic_research": _research_result or {'status': 'historical_replay' if coordinator and not live_request else 'disabled'},
                 "local_knowledge_sufficient": bool(local_knowledge.get("sufficient")),
                 "poll_freshness": poll_freshness,
                 "current_poll_calibration_available": int(campaign_state.get("fresh_verified_poll_count", 0)) > 0,
@@ -498,6 +526,7 @@ class AnalysisPipeline:
             unknowns=unknowns,
             warnings=warnings,
             sources=sources,
+            web_sources_used=research_urls,
             files_used=files_used,
             baseline_methods=baseline_methods,
         )
