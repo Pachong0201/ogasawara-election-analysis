@@ -56,8 +56,24 @@ class CurrentRelationshipVerifier:
         self.builder = KnowledgePromotionBuilder(self.repo_root)
 
     def _candidate_records(self, county: str) -> List[Dict[str, Any]]:
-        path = current_candidates_path(self.repo_root, county)
-        return load_jsonl(path) if path.exists() else []
+        cache_path = current_candidates_path(self.repo_root, county)
+        if cache_path.exists():
+            rows = load_jsonl(cache_path)
+        else:
+            rows = load_jsonl(
+                self.repo_root
+                / "knowledge"
+                / "local"
+                / safe_component(county)
+                / "candidates.jsonl"
+            )
+        return [
+            row
+            for row in rows
+            if row.get("election_type") == "county_mayor"
+            and int(row.get("election_year") or 0) == 2026
+            and row.get("candidate_status") in {"registered", "qualified", "nominated"}
+        ]
 
     @staticmethod
     def _official_lead(county: str, candidate: Dict[str, Any], question: str) -> Dict[str, Any]:
