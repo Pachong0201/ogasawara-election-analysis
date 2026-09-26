@@ -6,8 +6,63 @@
       "county": "基隆市",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 42,
+              "path": "data/elections/county_mayor/2014/基隆市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 14,
+              "path": "data/elections/county_mayor/2018/基隆市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 35,
+              "path": "data/elections/county_mayor/2022/基隆市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 21,
+              "path": "data/elections/president/2016/基隆市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 21,
+              "path": "data/elections/president/2020/基隆市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 21,
+              "path": "data/elections/president/2024/基隆市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 28,
+              "path": "data/elections/regional_legislator/2016/基隆市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 28,
+              "path": "data/elections/regional_legislator/2020/基隆市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 42,
+              "path": "data/elections/regional_legislator/2024/基隆市.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -73,7 +128,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -87,8 +141,63 @@
       "county": "台北市",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 84,
+              "path": "data/elections/county_mayor/2014/台北市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 60,
+              "path": "data/elections/county_mayor/2018/台北市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 144,
+              "path": "data/elections/county_mayor/2022/台北市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 36,
+              "path": "data/elections/president/2016/台北市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 36,
+              "path": "data/elections/president/2020/台北市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 36,
+              "path": "data/elections/president/2024/台北市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 114,
+              "path": "data/elections/regional_legislator/2016/台北市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 102,
+              "path": "data/elections/regional_legislator/2020/台北市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 101,
+              "path": "data/elections/regional_legislator/2024/台北市.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -154,7 +263,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -168,8 +276,63 @@
       "county": "新北市",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 87,
+              "path": "data/elections/county_mayor/2014/新北市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 58,
+              "path": "data/elections/county_mayor/2018/新北市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 58,
+              "path": "data/elections/county_mayor/2022/新北市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 87,
+              "path": "data/elections/president/2016/新北市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 87,
+              "path": "data/elections/president/2020/新北市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 87,
+              "path": "data/elections/president/2024/新北市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 145,
+              "path": "data/elections/regional_legislator/2016/新北市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 205,
+              "path": "data/elections/regional_legislator/2020/新北市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 149,
+              "path": "data/elections/regional_legislator/2024/新北市.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -233,7 +396,6 @@
       },
       "unresolved_question_count": 8,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -246,8 +408,63 @@
       "county": "桃園市",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 39,
+              "path": "data/elections/county_mayor/2014/桃園市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 65,
+              "path": "data/elections/county_mayor/2018/桃園市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 52,
+              "path": "data/elections/county_mayor/2022/桃園市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 39,
+              "path": "data/elections/president/2016/桃園市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 39,
+              "path": "data/elections/president/2020/桃園市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 39,
+              "path": "data/elections/president/2024/桃園市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 76,
+              "path": "data/elections/regional_legislator/2016/桃園市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 64,
+              "path": "data/elections/regional_legislator/2020/桃園市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 66,
+              "path": "data/elections/regional_legislator/2024/桃園市.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -313,7 +530,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -327,8 +543,63 @@
       "county": "新竹市",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 15,
+              "path": "data/elections/county_mayor/2014/新竹市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 18,
+              "path": "data/elections/county_mayor/2018/新竹市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 18,
+              "path": "data/elections/county_mayor/2022/新竹市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 9,
+              "path": "data/elections/president/2016/新竹市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 9,
+              "path": "data/elections/president/2020/新竹市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 9,
+              "path": "data/elections/president/2024/新竹市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 30,
+              "path": "data/elections/regional_legislator/2016/新竹市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 18,
+              "path": "data/elections/regional_legislator/2020/新竹市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 21,
+              "path": "data/elections/regional_legislator/2024/新竹市.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -394,7 +665,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -408,8 +678,63 @@
       "county": "新竹縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 52,
+              "path": "data/elections/county_mayor/2014/新竹縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 52,
+              "path": "data/elections/county_mayor/2018/新竹縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 65,
+              "path": "data/elections/county_mayor/2022/新竹縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 39,
+              "path": "data/elections/president/2016/新竹縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 39,
+              "path": "data/elections/president/2020/新竹縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 39,
+              "path": "data/elections/president/2024/新竹縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 104,
+              "path": "data/elections/regional_legislator/2016/新竹縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 91,
+              "path": "data/elections/regional_legislator/2020/新竹縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 56,
+              "path": "data/elections/regional_legislator/2024/新竹縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -475,7 +800,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -489,8 +813,63 @@
       "county": "苗栗縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 108,
+              "path": "data/elections/county_mayor/2014/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 72,
+              "path": "data/elections/county_mayor/2018/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 90,
+              "path": "data/elections/county_mayor/2022/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 54,
+              "path": "data/elections/president/2016/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 54,
+              "path": "data/elections/president/2020/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 54,
+              "path": "data/elections/president/2024/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 90,
+              "path": "data/elections/regional_legislator/2016/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 108,
+              "path": "data/elections/regional_legislator/2020/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 36,
+              "path": "data/elections/regional_legislator/2024/苗栗縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -556,7 +935,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -570,8 +948,63 @@
       "county": "台中市",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 58,
+              "path": "data/elections/county_mayor/2014/台中市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 87,
+              "path": "data/elections/county_mayor/2018/台中市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 87,
+              "path": "data/elections/county_mayor/2022/台中市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 87,
+              "path": "data/elections/president/2016/台中市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 87,
+              "path": "data/elections/president/2020/台中市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 87,
+              "path": "data/elections/president/2024/台中市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 114,
+              "path": "data/elections/regional_legislator/2016/台中市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 133,
+              "path": "data/elections/regional_legislator/2020/台中市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 114,
+              "path": "data/elections/regional_legislator/2024/台中市.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -637,7 +1070,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -651,8 +1083,63 @@
       "county": "彰化縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 104,
+              "path": "data/elections/county_mayor/2014/彰化縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 130,
+              "path": "data/elections/county_mayor/2018/彰化縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 78,
+              "path": "data/elections/county_mayor/2022/彰化縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 78,
+              "path": "data/elections/president/2016/彰化縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 78,
+              "path": "data/elections/president/2020/彰化縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 78,
+              "path": "data/elections/president/2024/彰化縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 97,
+              "path": "data/elections/regional_legislator/2016/彰化縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 110,
+              "path": "data/elections/regional_legislator/2020/彰化縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 92,
+              "path": "data/elections/regional_legislator/2024/彰化縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -718,7 +1205,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -732,8 +1218,63 @@
       "county": "南投縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 26,
+              "path": "data/elections/county_mayor/2014/南投縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 26,
+              "path": "data/elections/county_mayor/2018/南投縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 39,
+              "path": "data/elections/county_mayor/2022/南投縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 39,
+              "path": "data/elections/president/2016/南投縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 39,
+              "path": "data/elections/president/2020/南投縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 39,
+              "path": "data/elections/president/2024/南投縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 26,
+              "path": "data/elections/regional_legislator/2016/南投縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 47,
+              "path": "data/elections/regional_legislator/2020/南投縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 51,
+              "path": "data/elections/regional_legislator/2024/南投縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -799,7 +1340,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -813,8 +1353,63 @@
       "county": "雲林縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 40,
+              "path": "data/elections/county_mayor/2014/雲林縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 80,
+              "path": "data/elections/county_mayor/2018/雲林縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 60,
+              "path": "data/elections/county_mayor/2022/雲林縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 60,
+              "path": "data/elections/president/2016/雲林縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 60,
+              "path": "data/elections/president/2020/雲林縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 60,
+              "path": "data/elections/president/2024/雲林縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 69,
+              "path": "data/elections/regional_legislator/2016/雲林縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 80,
+              "path": "data/elections/regional_legislator/2020/雲林縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 84,
+              "path": "data/elections/regional_legislator/2024/雲林縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -880,7 +1475,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -894,8 +1488,63 @@
       "county": "嘉義市",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 12,
+              "path": "data/elections/county_mayor/2014/嘉義市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 8,
+              "path": "data/elections/county_mayor/2018/嘉義市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 10,
+              "path": "data/elections/county_mayor/2022/嘉義市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 6,
+              "path": "data/elections/president/2016/嘉義市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 6,
+              "path": "data/elections/president/2020/嘉義市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 6,
+              "path": "data/elections/president/2024/嘉義市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 8,
+              "path": "data/elections/regional_legislator/2016/嘉義市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 16,
+              "path": "data/elections/regional_legislator/2020/嘉義市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 12,
+              "path": "data/elections/regional_legislator/2024/嘉義市.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -961,7 +1610,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -975,8 +1623,63 @@
       "county": "嘉義縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 54,
+              "path": "data/elections/county_mayor/2014/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 72,
+              "path": "data/elections/county_mayor/2018/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 36,
+              "path": "data/elections/county_mayor/2022/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 54,
+              "path": "data/elections/president/2016/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 54,
+              "path": "data/elections/president/2020/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 54,
+              "path": "data/elections/president/2024/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 54,
+              "path": "data/elections/regional_legislator/2016/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 92,
+              "path": "data/elections/regional_legislator/2020/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 66,
+              "path": "data/elections/regional_legislator/2024/嘉義縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -1042,7 +1745,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -1056,8 +1758,63 @@
       "county": "台南市",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 74,
+              "path": "data/elections/county_mayor/2014/台南市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 222,
+              "path": "data/elections/county_mayor/2018/台南市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 185,
+              "path": "data/elections/county_mayor/2022/台南市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 111,
+              "path": "data/elections/president/2016/台南市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 111,
+              "path": "data/elections/president/2020/台南市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 111,
+              "path": "data/elections/president/2024/台南市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 168,
+              "path": "data/elections/regional_legislator/2016/台南市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 191,
+              "path": "data/elections/regional_legislator/2020/台南市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 141,
+              "path": "data/elections/regional_legislator/2024/台南市.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -1121,7 +1878,6 @@
       },
       "unresolved_question_count": 7,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -1171,6 +1927,24 @@
               "year": 2024,
               "record_count": 114,
               "path": "data/elections/president/2024/高雄市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 172,
+              "path": "data/elections/regional_legislator/2016/高雄市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 211,
+              "path": "data/elections/regional_legislator/2020/高雄市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 129,
+              "path": "data/elections/regional_legislator/2024/高雄市.jsonl"
             }
           ]
         },
@@ -1248,8 +2022,63 @@
       "county": "屏東縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 66,
+              "path": "data/elections/county_mayor/2014/屏東縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 99,
+              "path": "data/elections/county_mayor/2018/屏東縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 99,
+              "path": "data/elections/county_mayor/2022/屏東縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 99,
+              "path": "data/elections/president/2016/屏東縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 99,
+              "path": "data/elections/president/2020/屏東縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 99,
+              "path": "data/elections/president/2024/屏東縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 117,
+              "path": "data/elections/regional_legislator/2016/屏東縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 264,
+              "path": "data/elections/regional_legislator/2020/屏東縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 154,
+              "path": "data/elections/regional_legislator/2024/屏東縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -1315,7 +2144,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -1329,8 +2157,63 @@
       "county": "宜蘭縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 24,
+              "path": "data/elections/county_mayor/2014/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 60,
+              "path": "data/elections/county_mayor/2018/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 72,
+              "path": "data/elections/county_mayor/2022/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 36,
+              "path": "data/elections/president/2016/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 36,
+              "path": "data/elections/president/2020/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 36,
+              "path": "data/elections/president/2024/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 96,
+              "path": "data/elections/regional_legislator/2016/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 72,
+              "path": "data/elections/regional_legislator/2020/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 72,
+              "path": "data/elections/regional_legislator/2024/宜蘭縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -1396,7 +2279,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -1410,8 +2292,63 @@
       "county": "花蓮縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 78,
+              "path": "data/elections/county_mayor/2014/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 39,
+              "path": "data/elections/county_mayor/2018/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 39,
+              "path": "data/elections/county_mayor/2022/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 39,
+              "path": "data/elections/president/2016/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 39,
+              "path": "data/elections/president/2020/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 39,
+              "path": "data/elections/president/2024/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 52,
+              "path": "data/elections/regional_legislator/2016/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 78,
+              "path": "data/elections/regional_legislator/2020/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 52,
+              "path": "data/elections/regional_legislator/2024/花蓮縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -1477,7 +2414,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -1491,8 +2427,63 @@
       "county": "台東縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 32,
+              "path": "data/elections/county_mayor/2014/台東縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 80,
+              "path": "data/elections/county_mayor/2018/台東縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 48,
+              "path": "data/elections/county_mayor/2022/台東縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 48,
+              "path": "data/elections/president/2016/台東縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 48,
+              "path": "data/elections/president/2020/台東縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 48,
+              "path": "data/elections/president/2024/台東縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 32,
+              "path": "data/elections/regional_legislator/2016/台東縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 64,
+              "path": "data/elections/regional_legislator/2020/台東縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 96,
+              "path": "data/elections/regional_legislator/2024/台東縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -1558,7 +2549,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -1572,8 +2562,63 @@
       "county": "澎湖縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 12,
+              "path": "data/elections/county_mayor/2014/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 42,
+              "path": "data/elections/county_mayor/2018/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 18,
+              "path": "data/elections/county_mayor/2022/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 18,
+              "path": "data/elections/president/2016/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 18,
+              "path": "data/elections/president/2020/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 18,
+              "path": "data/elections/president/2024/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 24,
+              "path": "data/elections/regional_legislator/2016/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 18,
+              "path": "data/elections/regional_legislator/2020/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 18,
+              "path": "data/elections/regional_legislator/2024/澎湖縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -1639,7 +2684,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -1653,8 +2697,63 @@
       "county": "金門縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 60,
+              "path": "data/elections/county_mayor/2014/金門縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 36,
+              "path": "data/elections/county_mayor/2018/金門縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 36,
+              "path": "data/elections/county_mayor/2022/金門縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 18,
+              "path": "data/elections/president/2016/金門縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 18,
+              "path": "data/elections/president/2020/金門縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 18,
+              "path": "data/elections/president/2024/金門縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 48,
+              "path": "data/elections/regional_legislator/2016/金門縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 60,
+              "path": "data/elections/regional_legislator/2020/金門縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 18,
+              "path": "data/elections/regional_legislator/2024/金門縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -1720,7 +2819,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -1734,8 +2832,63 @@
       "county": "連江縣",
       "stable_local_baseline": {
         "cec_elections": {
-          "state": "no_local_artifact",
-          "files": []
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 8,
+              "path": "data/elections/county_mayor/2014/連江縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 16,
+              "path": "data/elections/county_mayor/2018/連江縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 12,
+              "path": "data/elections/county_mayor/2022/連江縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 12,
+              "path": "data/elections/president/2016/連江縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 12,
+              "path": "data/elections/president/2020/連江縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 12,
+              "path": "data/elections/president/2024/連江縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 16,
+              "path": "data/elections/regional_legislator/2016/連江縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 20,
+              "path": "data/elections/regional_legislator/2020/連江縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 12,
+              "path": "data/elections/regional_legislator/2024/連江縣.jsonl"
+            }
+          ]
         },
         "term11_legislative_boundaries": {
           "state": "row_data_available",
@@ -1801,7 +2954,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "cec_election_rows_not_imported",
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
@@ -1813,7 +2965,7 @@
     }
   ],
   "summary": {
-    "with_cec_election_rows": 1,
+    "with_cec_election_rows": 22,
     "with_term11_boundaries": 22,
     "with_spatial_matrix": 22,
     "with_active_verified_relationships": 3,
