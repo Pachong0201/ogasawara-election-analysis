@@ -90,6 +90,15 @@ class CuratedCountyBaseline:
         self.repo_root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[1]
         self.config_path = Path(config_path) if config_path else self.repo_root / "config" / "curated_county_baseline.yaml"
         self.config = yaml.safe_load(self.config_path.read_text(encoding="utf-8")) or {}
+        # Supplementary academic research is maintained separately from the
+        # compact official baseline. These records are retrieval leads only
+        # unless an item explicitly opts into promotion, so adding literature
+        # cannot silently turn historical scholarship into a current fact.
+        supplement_path = self.repo_root / "config" / "county_academic_research.yaml"
+        if config_path is None and supplement_path.exists():
+            supplement = yaml.safe_load(supplement_path.read_text(encoding="utf-8")) or {}
+            self.config.setdefault("academic_records", [])
+            self.config["academic_records"].extend(list(supplement.get("academic_records") or []))
         self.builder = KnowledgePromotionBuilder(self.repo_root)
 
     def _official_items(self, county: str) -> tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
