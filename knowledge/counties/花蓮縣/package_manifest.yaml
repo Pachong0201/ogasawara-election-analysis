@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 花蓮縣
-generated_at: '2026-09-26T11:07:40+00:00'
-content_sha256: 53376e5fd0bc17e5e75a4d2932221138696429ee3b59f375ee66c946a9ee9f05
+generated_at: '2026-09-26T11:15:10+00:00'
+content_sha256: 3e2e9bece394d2304f86cc44b05d29cd6aaaefe44403ea41d914659ad35c5b91
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/花蓮縣/claims.jsonl
@@ -23,7 +23,7 @@ evidence_index_count: 6
 entity_relation_count: 0
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 6
+promotion_receipt_count: 10
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true
