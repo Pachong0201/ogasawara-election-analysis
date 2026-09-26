@@ -329,17 +329,26 @@ class CECOpenDataAdapter(ElectionDataSource):
         with self.archive.open(archive_info.path) as zf:
             names = [info.filename for info in zf.infolist()]
             for family in PATH_FAMILIES[(query.election_type, int(query.year))]:
-                file_map = self._resolve_family_members(names, family)
-                if not file_map:
+                member_groups = self._resolve_family_member_groups(names, family)
+                if not member_groups:
                     continue
-                try:
-                    part_records = self._parse_family(zf, query, file_map, archive_info.sha256)
-                except CECOpenDataError as exc:
-                    warnings.append(f"{family}: {exc}")
-                    continue
-                if part_records:
-                    records.extend(part_records)
-                    used_members.extend(file_map.values())
+                for file_map in member_groups:
+                    try:
+                        part_records = self._parse_family(
+                            zf, query, file_map, archive_info.sha256
+                        )
+                    except CECOpenDataError as exc:
+                        warnings.append(
+                            f"{family} [{file_map.get('_bundle_id', 'bundle')}]: {exc}"
+                        )
+                        continue
+                    if part_records:
+                        records.extend(part_records)
+                        used_members.extend(
+                            value
+                            for key, value in file_map.items()
+                            if not key.startswith("_")
+                        )
 
             # 2022 Chiayi City mayor voting was held separately on 2022-12-18.
             # The official ZIP stores it in a special two-file CSV format rather
@@ -397,31 +406,83 @@ class CECOpenDataAdapter(ElectionDataSource):
             f"{stem}_T1.csv",
         )
 
-    def _resolve_family_members(self, names: Sequence[str], family: str) -> Dict[str, str]:
-        matched = [name for name in names if f"/{family}/" in f"/{name}"]
+    def _resolve_family_member_groups(
+        self, names: Sequence[str], family: str
+    ) -> List[Dict[str, str]]:
+        """Discover every complete CEC table bundle inside an election family.
+
+        The real votedata.zip may contain multiple parallel CSV bundles under
+        the same election directory (different suffixes and/or nested folders).
+        Choosing one shortest filename silently drops the other jurisdictions.
+        Group by parent directory plus filename suffix and parse every complete
+        bundle instead. elpaty.csv may be shared by suffixed bundles in the
+        same directory.
+        """
+        matched = [
+            name
+            for name in names
+            if f"/{family}/" in f"/{name}" and name.lower().endswith(".csv")
+        ]
         if not matched:
-            return {}
+            return []
 
-        result: Dict[str, str] = {}
-        for stem in ("elbase", "elcand", "elpaty", "elprof", "elctks"):
-            options = [
-                name for name in matched
-                if any(name.endswith("/" + candidate) for candidate in self._member_name_candidates(stem))
-            ]
-            if not options:
-                # 2016 may use suffixed files beyond the two known primary suffixes;
-                # constrain by stem but keep discovery inside the exact election folder.
-                options = [
-                    name for name in matched
-                    if name.rsplit("/", 1)[-1].startswith(stem + "_")
-                    and name.lower().endswith(".csv")
-                ]
-            if not options:
-                return {}
-            # Prefer shortest path/name; exact stem beats a suffixed fallback.
-            result[stem] = sorted(options, key=lambda value: (len(value.rsplit("/", 1)[-1]), len(value)))[0]
-        return result
+        stems = ("elbase", "elcand", "elpaty", "elprof", "elctks")
+        core_stems = ("elbase", "elcand", "elprof", "elctks")
+        indexed: Dict[Tuple[str, str, str], str] = {}
+        suffixes_by_parent: Dict[str, set[str]] = {}
 
+        for name in matched:
+            parent, filename = name.rsplit("/", 1)
+            lower = filename.lower()
+            for stem in stems:
+                prefix = stem.lower()
+                if not lower.startswith(prefix) or not lower.endswith(".csv"):
+                    continue
+                suffix = filename[len(stem):-4]
+                if suffix and not suffix.startswith("_"):
+                    continue
+                indexed[(parent, stem, suffix)] = name
+                if stem in core_stems:
+                    suffixes_by_parent.setdefault(parent, set()).add(suffix)
+                break
+
+        groups: List[Dict[str, str]] = []
+        seen: set[Tuple[str, ...]] = set()
+        for parent in sorted(suffixes_by_parent):
+            for suffix in sorted(
+                suffixes_by_parent[parent], key=lambda value: (len(value), value)
+            ):
+                group: Dict[str, str] = {}
+                complete = True
+                for stem in core_stems:
+                    member = indexed.get((parent, stem, suffix))
+                    if not member:
+                        complete = False
+                        break
+                    group[stem] = member
+                if not complete:
+                    continue
+
+                party = (
+                    indexed.get((parent, "elpaty", suffix))
+                    or indexed.get((parent, "elpaty", ""))
+                )
+                if not party:
+                    continue
+                group["elpaty"] = party
+                signature = tuple(group[stem] for stem in stems)
+                if signature in seen:
+                    continue
+                seen.add(signature)
+                group["_bundle_id"] = f"{parent.rsplit('/', 1)[-1]}:{suffix or 'default'}"
+                groups.append(group)
+
+        return groups
+
+    def _resolve_family_members(self, names: Sequence[str], family: str) -> Dict[str, str]:
+        """Compatibility helper returning the first discovered complete bundle."""
+        groups = self._resolve_family_member_groups(names, family)
+        return groups[0] if groups else {}
     @staticmethod
     def _read(zf: zipfile.ZipFile, member: str) -> List[List[str]]:
         try:
