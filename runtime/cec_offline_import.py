@@ -30,7 +30,7 @@ from .cec_open_data import (
 )
 from .county_knowledge import COUNTIES
 from .election_loader import ElectionLoader, election_file_path, load_jsonl, safe_component
-from .election_normalizer import normalize_records
+from .election_normalizer import normalize_records, validate_records
 from .matrix_builder import build_cross_level_matrix, build_historical_matrix
 from .models import DataQuery, utc_now_iso
 from .source_registry import SourceRegistry
@@ -406,7 +406,24 @@ def import_election_archive(
                 for record in loader._filter_level(normalized, query.level)
                 if loader._matches_query(record, query)
             ]
-            validation = loader._validate(normalized, require_provenance=False)
+            # These records come from the A-grade official CEC archive itself.
+            # Existing local geography may be incomplete, so validate against the
+            # union of the registry and the official regions observed in this slice.
+            # This preserves unknown-region checking without making an incomplete
+            # pre-existing registry block authoritative geography ingestion.
+            known_regions = loader._known_regions()
+            if known_regions is not None:
+                known_regions = set(known_regions)
+                for record in normalized:
+                    for field in ("jurisdiction", "parent_jurisdiction"):
+                        value = str(record.get(field) or "").strip()
+                        if value:
+                            known_regions.add(value)
+            validation = validate_records(
+                normalized,
+                known_regions=known_regions,
+                require_provenance=False,
+            )
             errors = [
                 issue.message
                 for issue in validation.issues
@@ -484,6 +501,21 @@ def build_county_matrices(
             records_by_type.setdefault(election_type, []).extend(rows)
             file_refs.append(str(path.relative_to(repo_root)))
 
+        target = output_dir / f"{safe_component(county)}.json"
+        if not file_refs:
+            # An empty JSON shell is not a historical spatial matrix. Remove stale
+            # placeholders so coverage auditing reflects actual row-level inputs.
+            if target.exists():
+                target.unlink()
+            summary[county] = {
+                "file": None,
+                "input_file_count": 0,
+                "election_types": [],
+                "region_count": 0,
+                "state": "no_input_rows",
+            }
+            continue
+
         payload = {
             "schema_version": "1.0.0",
             "county": county,
@@ -499,13 +531,13 @@ def build_county_matrices(
                 for election_type, rows in sorted(records_by_type.items())
             },
         }
-        target = output_dir / f"{safe_component(county)}.json"
         _write_json(target, payload)
         summary[county] = {
             "file": str(target.relative_to(repo_root)),
             "input_file_count": len(file_refs),
             "election_types": sorted(records_by_type),
             "region_count": len(payload["cross_level"]["regions"]),
+            "state": "row_data_available",
         }
     return summary
 
