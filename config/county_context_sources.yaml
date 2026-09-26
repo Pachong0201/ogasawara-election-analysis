@@ -13,6 +13,8 @@ sources:
     source_grade: A
     independence_key: dgbas
     dataset_url: https://data.gov.tw/dataset/24240
+    resource_url: https://ws.dgbas.gov.tw/001/Upload/461/relfile/11525/230872/mp06136a109.xml
+    resource_format: xml
     update_frequency: 每10年
     time_scope: "2020人口及住宅普查"
     formats: [xml]
@@ -28,6 +30,8 @@ sources:
     source_grade: A
     independence_key: moi_religion
     dataset_url: https://data.gov.tw/dataset/8203
+    resource_url: https://religion.moi.gov.tw/Report/temple.xml
+    resource_format: xml
     update_frequency: 不定期
     formats: [xml]
     scope_boundary: >
@@ -42,6 +46,8 @@ sources:
     source_grade: A
     independence_key: moi_groups
     dataset_url: https://data.gov.tw/dataset/147595
+    resource_url: https://opdadm.moi.gov.tw/api/v1/no-auth/resource/api/dataset/EE4847CD-674E-4C52-B889-64D242083DDC/resource/6E09E30C-D88C-471B-8846-F82168B08D80/download
+    resource_format: csv
     live_search_url: https://grouptw.moi.gov.tw/searchGroup
     update_frequency: 不定期
     formats: [csv]
@@ -57,6 +63,8 @@ sources:
     source_grade: A
     independence_key: moa
     dataset_url: https://data.gov.tw/dataset/87858
+    resource_url: https://data.moa.gov.tw/service/opendata/agrstatUnit.aspx?IsTransData=1&UnitId=D24&dimension_group_code_1=XX11&dimension_group_code_2=BF02&item_code=BF0120
+    resource_format: json
     update_frequency: 每1年
     formats: [json]
     scope_boundary: >
@@ -71,6 +79,8 @@ sources:
     source_grade: A
     independence_key: moa_fisheries
     dataset_url: https://data.gov.tw/dataset/135723
+    resource_url: https://data.moa.gov.tw/Service/OpenData/DataFileService.aspx?IsTransData=1&UnitId=G73
+    resource_format: json
     update_frequency: 每1年
     formats: [json, csv]
     scope_boundary: >
