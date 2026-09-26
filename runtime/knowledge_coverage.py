@@ -163,6 +163,9 @@ class KnowledgeCoverageAudit:
             self.repo_root / "knowledge" / "local" / safe / "relationships.jsonl"
         )
         issues_path = self.repo_root / "knowledge" / "local" / safe / "issues.jsonl"
+        candidates_path = (
+            self.repo_root / "knowledge" / "local" / safe / "candidates.jsonl"
+        )
         unresolved_path = (
             self.repo_root
             / "knowledge"
@@ -174,6 +177,19 @@ class KnowledgeCoverageAudit:
             load_jsonl(relationships_path) if relationships_path.exists() else []
         )
         issues = load_jsonl(issues_path) if issues_path.exists() else []
+        candidates = load_jsonl(candidates_path) if candidates_path.exists() else []
+        mayor_candidates = [
+            row for row in candidates
+            if row.get("election_type") == "county_mayor"
+            and int(row.get("election_year") or 0) == 2026
+            and row.get("candidate_status") in {"registered", "qualified", "nominated"}
+        ]
+        councilor_candidates = [
+            row for row in candidates
+            if row.get("election_type") == "councilor"
+            and int(row.get("election_year") or 0) == 2026
+            and row.get("candidate_status") in {"registered", "qualified", "nominated"}
+        ]
         active = [
             row
             for row in relationships
@@ -182,6 +198,10 @@ class KnowledgeCoverageAudit:
         dual_source = [
             row for row in active if len(self._independence_keys(row)) >= 2
         ]
+        relationship_types: Dict[str, int] = {}
+        for row in active:
+            relation_type = str(row.get("relationship_type") or "other")
+            relationship_types[relation_type] = relationship_types.get(relation_type, 0) + 1
         academic = self._academic_leads(county)
         context = self._context_inventory(county)
 
@@ -195,6 +215,10 @@ class KnowledgeCoverageAudit:
         for source in context["sources"]:
             if source["state"] == "source_catalog_only":
                 gaps.append(f"context_catalog_only:{source['source_id']}")
+        if not mayor_candidates:
+            gaps.append("no_2026_mayor_candidate_profile")
+        if not councilor_candidates:
+            gaps.append("no_2026_councilor_candidate_profile")
         if not active:
             gaps.append("no_active_verified_local_relationship")
         if not issues:
@@ -253,9 +277,14 @@ class KnowledgeCoverageAudit:
                 "official_social_context": context,
             },
             "dynamic_local_state": {
+                "candidate_profile_count": len(candidates),
+                "mayor_2026_candidate_count": len(mayor_candidates),
+                "councilor_2026_candidate_count": len(councilor_candidates),
                 "active_verified_relationship_count": len(active),
                 "dual_source_relationship_count": len(dual_source),
+                "relationship_types": dict(sorted(relationship_types.items())),
                 "current_issue_count": len(issues),
+                "candidate_path": str(candidates_path.relative_to(self.repo_root)),
                 "relationship_path": str(relationships_path.relative_to(self.repo_root)),
                 "issue_path": str(issues_path.relative_to(self.repo_root)),
             },
@@ -288,6 +317,28 @@ class KnowledgeCoverageAudit:
                     for row in rows
                     if row["stable_local_baseline"]["cec_spatial_matrix"]["state"]
                     == "row_data_available"
+                ),
+                "with_2026_mayor_candidate_profiles": sum(
+                    1
+                    for row in rows
+                    if row["dynamic_local_state"]["mayor_2026_candidate_count"] > 0
+                ),
+                "with_2026_councilor_candidate_profiles": sum(
+                    1
+                    for row in rows
+                    if row["dynamic_local_state"]["councilor_2026_candidate_count"] > 0
+                ),
+                "total_candidate_profiles": sum(
+                    row["dynamic_local_state"]["candidate_profile_count"]
+                    for row in rows
+                ),
+                "total_2026_mayor_candidates": sum(
+                    row["dynamic_local_state"]["mayor_2026_candidate_count"]
+                    for row in rows
+                ),
+                "total_2026_councilor_candidates": sum(
+                    row["dynamic_local_state"]["councilor_2026_candidate_count"]
+                    for row in rows
                 ),
                 "with_active_verified_relationships": sum(
                     1
