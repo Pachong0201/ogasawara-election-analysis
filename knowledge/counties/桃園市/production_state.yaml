@@ -1,19 +1,19 @@
 county: 桃園市
 status: completed
 question_count: 10
-input_sha256: 0ba8728998a893438b2a78519f8fae189b4ddb3c438fdfeb5cb18d42aae486c0
+input_sha256: 6f77c08b2a41f457ab0ae9f981849f33ddeef9c0caf620ae07f8634c71187ef9
 run_research: false
-started_at: '2026-09-26T07:23:18+00:00'
-attempt: 2
+started_at: '2026-09-26T07:47:54+00:00'
+attempt: 4
 last_error: ''
-completed_at: '2026-09-26T07:23:18+00:00'
+completed_at: '2026-09-26T07:47:54+00:00'
 research:
   status: not_requested
 manifest:
   version: 1.4.0
   county: 桃園市
-  generated_at: '2026-09-26T04:02:44+00:00'
-  content_sha256: 4192c75a86b852634c8830331c5d5ce0407b4cb5cc56e07fcde9ab4509e4b647
+  generated_at: '2026-09-26T07:47:54+00:00'
+  content_sha256: 63b1072cc8814f8a76cb4851559cb72fd308a09bf2ae7b14dafe5bb3afb70b62
   builder: KnowledgePromotionBuilder
   authoritative_sources:
     historical_claim: knowledge/historical/桃園市/claims.jsonl
@@ -27,15 +27,15 @@ manifest:
     research_questions: knowledge/counties/桃園市/research_questions.jsonl
     entity_relation_index: knowledge/counties/桃園市/entity_relation_index.jsonl
   counts:
-    historical_claim: 0
+    historical_claim: 2
     local_relationship: 0
     candidate_profile: 0
     current_issue: 0
-  evidence_index_count: 0
+  evidence_index_count: 2
   entity_relation_count: 0
   research_question_count: 10
-  unresolved_question_count: 10
-  promotion_receipt_count: 0
+  unresolved_question_count: 9
+  promotion_receipt_count: 2
   rules:
     generated_files_are_indexes_not_new_facts: true
     source_files_are_authoritative: true

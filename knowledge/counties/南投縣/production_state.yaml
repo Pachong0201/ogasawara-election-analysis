@@ -1,19 +1,19 @@
 county: 南投縣
 status: completed
 question_count: 10
-input_sha256: d6d451894a73e63aa03469540837c4fcd666d7399265f4967c3bfdf13b7643d5
+input_sha256: b8d092b2e3a04db6f6c876fb1620dd23949a7ac2e19f62d89b58d8400bdcf2c8
 run_research: false
-started_at: '2026-09-26T07:23:18+00:00'
-attempt: 2
+started_at: '2026-09-26T07:47:55+00:00'
+attempt: 4
 last_error: ''
-completed_at: '2026-09-26T07:23:18+00:00'
+completed_at: '2026-09-26T07:47:55+00:00'
 research:
   status: not_requested
 manifest:
   version: 1.4.0
   county: 南投縣
-  generated_at: '2026-09-26T04:02:45+00:00'
-  content_sha256: 241f0b2762049ea639fb13ebdb88d0d0defef9c95f6ff5812e25d4ff853079d5
+  generated_at: '2026-09-26T07:47:55+00:00'
+  content_sha256: 534b0313aec4ad6466a961512e45e8f21930f3f74a80c772f16da89b3842e060
   builder: KnowledgePromotionBuilder
   authoritative_sources:
     historical_claim: knowledge/historical/南投縣/claims.jsonl
@@ -27,15 +27,15 @@ manifest:
     research_questions: knowledge/counties/南投縣/research_questions.jsonl
     entity_relation_index: knowledge/counties/南投縣/entity_relation_index.jsonl
   counts:
-    historical_claim: 0
+    historical_claim: 2
     local_relationship: 0
     candidate_profile: 0
     current_issue: 0
-  evidence_index_count: 0
+  evidence_index_count: 2
   entity_relation_count: 0
   research_question_count: 10
-  unresolved_question_count: 10
-  promotion_receipt_count: 0
+  unresolved_question_count: 9
+  promotion_receipt_count: 2
   rules:
     generated_files_are_indexes_not_new_facts: true
     source_files_are_authoritative: true

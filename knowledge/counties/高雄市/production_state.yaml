@@ -1,19 +1,19 @@
 county: 高雄市
 status: completed
 question_count: 10
-input_sha256: aa8ba8a0f2046d3639a1037075afb02dc355e8355d78b3864911bf2f5da86660
+input_sha256: 528ac40ba54fbda3db06e6969d92bef4fb872a771aacc777d4f3e7e01fa1a804
 run_research: false
-started_at: '2026-09-26T07:23:19+00:00'
-attempt: 2
+started_at: '2026-09-26T07:47:55+00:00'
+attempt: 4
 last_error: ''
-completed_at: '2026-09-26T07:23:19+00:00'
+completed_at: '2026-09-26T07:47:55+00:00'
 research:
   status: not_requested
 manifest:
   version: 1.4.0
   county: 高雄市
-  generated_at: '2026-09-26T04:02:32+00:00'
-  content_sha256: 5c6b3b60208fcf50c1c7d8653a2a5c04853e4dfe86f52ae2adb8a70e4fcaaddf
+  generated_at: '2026-09-26T07:47:55+00:00'
+  content_sha256: 67cd24bd1528a1e824e6f2bbb7e5df6e9a1e14faaad2fbe30375a27f3707c68e
   builder: KnowledgePromotionBuilder
   authoritative_sources:
     historical_claim: knowledge/historical/高雄市/claims.jsonl
@@ -27,15 +27,15 @@ manifest:
     research_questions: knowledge/counties/高雄市/research_questions.jsonl
     entity_relation_index: knowledge/counties/高雄市/entity_relation_index.jsonl
   counts:
-    historical_claim: 1
-    local_relationship: 0
+    historical_claim: 4
+    local_relationship: 1
     candidate_profile: 0
     current_issue: 0
-  evidence_index_count: 1
-  entity_relation_count: 0
+  evidence_index_count: 5
+  entity_relation_count: 1
   research_question_count: 10
-  unresolved_question_count: 10
-  promotion_receipt_count: 1
+  unresolved_question_count: 7
+  promotion_receipt_count: 5
   rules:
     generated_files_are_indexes_not_new_facts: true
     source_files_are_authoritative: true

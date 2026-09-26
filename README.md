@@ -353,6 +353,32 @@ python3 -m runtime.cli knowledge-status --counties "高雄市,台南市,新北�
 
 首批 seed 位于 `examples/county_knowledge_seeds/`。高雄市、台南市、新北市各有一条通过 A 级官方来源门禁的行政/空间背景记录；人物、派系、组织和当前议题若证据不足，明确保留为 unresolved。
 
+仓库另提供经 chat/web 核验、可重复执行的县市基线输入
+`config/curated_county_baseline.yaml`。它覆盖 22 县市的 2025 年底户籍人口与
+2021 年工业服务业主要从业行业，并收录首批学术研究和近期公开关系证据。
+所有内容仍先进入 retrieval staging，再以 structured proposal 通过原有门禁：
+
+```bash
+# 首次执行前检查 49 条提案，不写文件
+python3 -m runtime.cli knowledge-curated-baseline --all-counties --dry-run
+
+# 正式晋升并重建 22 县市 package
+python3 -m runtime.cli knowledge-curated-baseline --all-counties
+
+# 只更新指定县市；已有稳定 record id 默认跳过
+python3 -m runtime.cli knowledge-curated-baseline --counties "高雄市,台南市,新北市"
+
+# 来源确有更新时才重新评估同一 record id
+python3 -m runtime.cli knowledge-curated-baseline \
+  --counties "高雄市" --refresh-existing
+```
+
+中选会第 11 届立委选区范围资料集与历届县市长资料库在该基线中只作为
+A 级来源目录线索。若原始 CSV/ZIP 未成功读取，就不会生成具体边界、票数或
+趋势结论，相关问题继续保留在 `unresolved_questions.jsonl`。C 级媒体关系必须
+有两个不同 `independence_key` 的已验证来源；promotion receipt 与 record provenance
+会保存反证检查是否完成、反证 lead id 及检查边界。
+
 `AnalysisPipeline` 会把 L4 Campaign Event 与已晋升县市记录做确定性实体匹配，输出 `event_importance_signals`。信号保留 record id、time_scope、last_verified_at、current_status、source grade、uncertainty 与 scope boundary，只用于回答“还应核查哪一层地方脉络”，不得解释为因果、动员效果、支持转移、候选人评分或胜负预测。
 
 

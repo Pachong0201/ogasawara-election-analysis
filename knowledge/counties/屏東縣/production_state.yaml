@@ -1,19 +1,19 @@
 county: 屏東縣
 status: completed
 question_count: 10
-input_sha256: 02bf8f9235245f9f7b04490e0bd26618181d6b61448fa7cfbdbad7a7c2b8d9d0
+input_sha256: b0801311cf8080f8259ebc9df82f302715ee6038aeab6a1e7bb41167d0be9f98
 run_research: false
-started_at: '2026-09-26T07:23:19+00:00'
-attempt: 2
+started_at: '2026-09-26T07:47:55+00:00'
+attempt: 4
 last_error: ''
-completed_at: '2026-09-26T07:23:19+00:00'
+completed_at: '2026-09-26T07:47:55+00:00'
 research:
   status: not_requested
 manifest:
   version: 1.4.0
   county: 屏東縣
-  generated_at: '2026-09-26T04:02:45+00:00'
-  content_sha256: 1eea120b83bcf05d4ef948e1d8562196a9207051203ab85e8a9e48cdf070c0c8
+  generated_at: '2026-09-26T07:47:55+00:00'
+  content_sha256: 7963fadf286559ee26298232c313e19b8a3ebb4638bd143e9d18ca3b6fb97582
   builder: KnowledgePromotionBuilder
   authoritative_sources:
     historical_claim: knowledge/historical/屏東縣/claims.jsonl
@@ -27,15 +27,15 @@ manifest:
     research_questions: knowledge/counties/屏東縣/research_questions.jsonl
     entity_relation_index: knowledge/counties/屏東縣/entity_relation_index.jsonl
   counts:
-    historical_claim: 0
+    historical_claim: 2
     local_relationship: 0
     candidate_profile: 0
     current_issue: 0
-  evidence_index_count: 0
+  evidence_index_count: 2
   entity_relation_count: 0
   research_question_count: 10
-  unresolved_question_count: 10
-  promotion_receipt_count: 0
+  unresolved_question_count: 9
+  promotion_receipt_count: 2
   rules:
     generated_files_are_indexes_not_new_facts: true
     source_files_are_authoritative: true

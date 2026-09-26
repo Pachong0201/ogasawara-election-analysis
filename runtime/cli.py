@@ -231,6 +231,20 @@ def _cmd_knowledge_status(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_knowledge_curated_baseline(args: argparse.Namespace) -> int:
+    from .curated_county_baseline import CuratedCountyBaseline
+
+    result = CuratedCountyBaseline(
+        Path(args.repo_root).resolve() if args.repo_root else None
+    ).run(
+        _knowledge_counties(args),
+        dry_run=args.dry_run,
+        refresh_existing=args.refresh_existing,
+    )
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if not {"rejected", "requires_review"}.intersection(result["decisions"]) else 2
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m runtime.cli", description="V1.4 Data, Runtime & Knowledge Layer")
     parser.add_argument("--repo-root", default=None, help="repository root (defaults to runtime parent)")
@@ -351,6 +365,20 @@ def build_parser() -> argparse.ArgumentParser:
     status.add_argument("--counties", default="")
     status.add_argument("--all-counties", action="store_true")
     status.set_defaults(func=_cmd_knowledge_status)
+
+    curated = sub.add_parser(
+        "knowledge-curated-baseline",
+        help="stage and promote the tracked chat-verified county baseline",
+    )
+    curated.add_argument("--counties", default="", help="comma-separated county names")
+    curated.add_argument("--all-counties", action="store_true")
+    curated.add_argument("--dry-run", action="store_true")
+    curated.add_argument(
+        "--refresh-existing",
+        action="store_true",
+        help="re-evaluate records whose stable record id already exists",
+    )
+    curated.set_defaults(func=_cmd_knowledge_curated_baseline)
 
     return parser
 

@@ -1,4 +1,4 @@
-version: 1.3.0
+version: 1.4.0
 schema_name: knowledge_promotion_receipt
 description: 知识晋升门禁与持久化结果，供审计、重跑和 county package manifest 使用。
 
@@ -28,6 +28,11 @@ properties:
     type: array
     items: {type: string}
   independent_source_count: {type: integer}
+  contradiction_check_completed: {type: boolean}
+  contradictory_lead_ids:
+    type: array
+    items: {type: string}
+  contradiction_check_note: {type: string}
   reasons:
     type: array
     items: {type: string}

@@ -625,6 +625,11 @@ class KnowledgePromotionBuilder:
             "warnings": warnings,
             "research_questions": research_questions,
             "scope_boundary": str(proposal.get("scope_boundary") or "").strip(),
+            "contradiction_check_completed": contradiction_check_completed,
+            "contradictory_lead_ids": contradiction_ids,
+            "contradiction_check_note": str(
+                proposal.get("contradiction_check_note") or ""
+            ).strip(),
             "independent_source_count": int(evidence.get("independent_source_count") or 0),
             "evidence_grades": list(evidence.get("grades") or []),
         }
@@ -668,6 +673,11 @@ class KnowledgePromotionBuilder:
                 lead.get("lead_id") or lead.get("url") for lead in support
             ),
             "evidence_grades": evaluation["evidence_grades"],
+            "contradiction_check_completed": evaluation.get(
+                "contradiction_check_completed", False
+            ),
+            "contradictory_lead_ids": evaluation.get("contradictory_lead_ids") or [],
+            "contradiction_check_note": evaluation.get("contradiction_check_note") or "",
         }
 
         if target_type == "historical_claim":
@@ -863,6 +873,11 @@ class KnowledgePromotionBuilder:
             "evidence_grades": evaluation["evidence_grades"],
             "independent_source_count": evaluation["independent_source_count"],
             "research_questions": evaluation["research_questions"],
+            "contradiction_check_completed": evaluation.get(
+                "contradiction_check_completed", False
+            ),
+            "contradictory_lead_ids": evaluation.get("contradictory_lead_ids") or [],
+            "contradiction_check_note": evaluation.get("contradiction_check_note") or "",
             "record_sha256": record_hash,
             "evidence_snapshot_sha256": evidence_hash,
             "reasons": evaluation["reasons"],

@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 桃園市
-generated_at: '2026-09-26T04:02:44+00:00'
-content_sha256: 4192c75a86b852634c8830331c5d5ce0407b4cb5cc56e07fcde9ab4509e4b647
+generated_at: '2026-09-26T07:47:54+00:00'
+content_sha256: 63b1072cc8814f8a76cb4851559cb72fd308a09bf2ae7b14dafe5bb3afb70b62
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/桃園市/claims.jsonl
@@ -15,15 +15,15 @@ generated_indexes:
   research_questions: knowledge/counties/桃園市/research_questions.jsonl
   entity_relation_index: knowledge/counties/桃園市/entity_relation_index.jsonl
 counts:
-  historical_claim: 0
+  historical_claim: 2
   local_relationship: 0
   candidate_profile: 0
   current_issue: 0
-evidence_index_count: 0
+evidence_index_count: 2
 entity_relation_count: 0
 research_question_count: 10
-unresolved_question_count: 10
-promotion_receipt_count: 0
+unresolved_question_count: 9
+promotion_receipt_count: 2
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

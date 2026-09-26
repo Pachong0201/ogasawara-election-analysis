@@ -104,6 +104,23 @@ properties:
         items: {type: string}
   scope_boundary:
     type: string
+  promotion_provenance:
+    type: object
+    properties:
+      proposal_id: {type: string}
+      promoted_at: {type: string}
+      builder_version: {type: string}
+      evidence_lead_ids:
+        type: array
+        items: {type: string}
+      evidence_grades:
+        type: array
+        items: {type: string}
+      contradiction_check_completed: {type: boolean}
+      contradictory_lead_ids:
+        type: array
+        items: {type: string}
+      contradiction_check_note: {type: string}
   notes:
     type: string
 

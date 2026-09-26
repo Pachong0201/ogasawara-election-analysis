@@ -1,19 +1,19 @@
 county: 苗栗縣
 status: completed
 question_count: 10
-input_sha256: a5f36890f5bfa1b02e7fbe52db3f7b9192cc96552c3b59b034d675e2ca0eae71
+input_sha256: 091a3880e301118951448d465ceae1650de0e0e7988a8084f526bfb8983fc5cf
 run_research: false
-started_at: '2026-09-26T07:23:18+00:00'
-attempt: 2
+started_at: '2026-09-26T07:47:54+00:00'
+attempt: 4
 last_error: ''
-completed_at: '2026-09-26T07:23:18+00:00'
+completed_at: '2026-09-26T07:47:54+00:00'
 research:
   status: not_requested
 manifest:
   version: 1.4.0
   county: 苗栗縣
-  generated_at: '2026-09-26T04:02:44+00:00'
-  content_sha256: b668b6ddb231a226bcb1d016538d6c4b476c525ea2945e9057da0f70a456854c
+  generated_at: '2026-09-26T07:47:54+00:00'
+  content_sha256: db4f0cec2f5bfc60790b21cc6ac5797bd4e8491168e7214a17850810c64e39a0
   builder: KnowledgePromotionBuilder
   authoritative_sources:
     historical_claim: knowledge/historical/苗栗縣/claims.jsonl
@@ -27,15 +27,15 @@ manifest:
     research_questions: knowledge/counties/苗栗縣/research_questions.jsonl
     entity_relation_index: knowledge/counties/苗栗縣/entity_relation_index.jsonl
   counts:
-    historical_claim: 0
+    historical_claim: 2
     local_relationship: 0
     candidate_profile: 0
     current_issue: 0
-  evidence_index_count: 0
+  evidence_index_count: 2
   entity_relation_count: 0
   research_question_count: 10
-  unresolved_question_count: 10
-  promotion_receipt_count: 0
+  unresolved_question_count: 9
+  promotion_receipt_count: 2
   rules:
     generated_files_are_indexes_not_new_facts: true
     source_files_are_authoritative: true

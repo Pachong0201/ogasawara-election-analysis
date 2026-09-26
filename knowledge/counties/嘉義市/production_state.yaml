@@ -1,19 +1,19 @@
 county: 嘉義市
 status: completed
 question_count: 10
-input_sha256: 8772d3dbfa70a913366984057827148171dee404d222254fa1523eced3332132
+input_sha256: 12133f9e74a8a00e38eb9a87dc78fdfd9bd347e58b1ba59b8b776558bce207f1
 run_research: false
-started_at: '2026-09-26T07:23:19+00:00'
-attempt: 2
+started_at: '2026-09-26T07:47:55+00:00'
+attempt: 4
 last_error: ''
-completed_at: '2026-09-26T07:23:19+00:00'
+completed_at: '2026-09-26T07:47:55+00:00'
 research:
   status: not_requested
 manifest:
   version: 1.4.0
   county: 嘉義市
-  generated_at: '2026-09-26T04:02:45+00:00'
-  content_sha256: 3f5a2abefc99fb8bbdf225e1d34896263faf00abac5274ff5b30d353183b00ad
+  generated_at: '2026-09-26T07:47:55+00:00'
+  content_sha256: 27b7b4b28a059a232628fc1c13b2f8eec54b09493afa3d4be0249657e2ea6af9
   builder: KnowledgePromotionBuilder
   authoritative_sources:
     historical_claim: knowledge/historical/嘉義市/claims.jsonl
@@ -27,15 +27,15 @@ manifest:
     research_questions: knowledge/counties/嘉義市/research_questions.jsonl
     entity_relation_index: knowledge/counties/嘉義市/entity_relation_index.jsonl
   counts:
-    historical_claim: 0
+    historical_claim: 2
     local_relationship: 0
     candidate_profile: 0
     current_issue: 0
-  evidence_index_count: 0
+  evidence_index_count: 2
   entity_relation_count: 0
   research_question_count: 10
-  unresolved_question_count: 10
-  promotion_receipt_count: 0
+  unresolved_question_count: 9
+  promotion_receipt_count: 2
   rules:
     generated_files_are_indexes_not_new_facts: true
     source_files_are_authoritative: true

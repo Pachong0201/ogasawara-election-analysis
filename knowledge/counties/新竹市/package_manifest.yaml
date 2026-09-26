@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 新竹市
-generated_at: '2026-09-26T04:02:44+00:00'
-content_sha256: c26a3b0701867f8b0f15d1886bdd137dbfc2b1669c2c32677e2fe52da3971c87
+generated_at: '2026-09-26T07:47:54+00:00'
+content_sha256: 0204d7ef63dddb5e41062ddb3faf0f0d46761fd1ecfca331a32f7272d326a643
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/新竹市/claims.jsonl
@@ -15,15 +15,15 @@ generated_indexes:
   research_questions: knowledge/counties/新竹市/research_questions.jsonl
   entity_relation_index: knowledge/counties/新竹市/entity_relation_index.jsonl
 counts:
-  historical_claim: 0
+  historical_claim: 2
   local_relationship: 0
   candidate_profile: 0
   current_issue: 0
-evidence_index_count: 0
+evidence_index_count: 2
 entity_relation_count: 0
 research_question_count: 10
-unresolved_question_count: 10
-promotion_receipt_count: 0
+unresolved_question_count: 9
+promotion_receipt_count: 2
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

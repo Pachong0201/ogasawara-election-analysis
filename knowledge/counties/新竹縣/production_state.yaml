@@ -1,19 +1,19 @@
 county: 新竹縣
 status: completed
 question_count: 10
-input_sha256: c9cbe6e6465779448fb67321edf7e5a4797ef768c75b7c657dd7a28102ad54c1
+input_sha256: 59d8fbb799dac868f06127c175ace6f15f3c1254b51ed2cd1df7f98b65d6b71d
 run_research: false
-started_at: '2026-09-26T07:23:18+00:00'
-attempt: 2
+started_at: '2026-09-26T07:47:54+00:00'
+attempt: 4
 last_error: ''
-completed_at: '2026-09-26T07:23:18+00:00'
+completed_at: '2026-09-26T07:47:54+00:00'
 research:
   status: not_requested
 manifest:
   version: 1.4.0
   county: 新竹縣
-  generated_at: '2026-09-26T04:02:44+00:00'
-  content_sha256: 66ffab384f73560d14c6a0d52ad346f34781f87b3ec78e5f12b70c6000d3a4ad
+  generated_at: '2026-09-26T07:47:54+00:00'
+  content_sha256: a8aa301384671abbdf6c642c6dd9b9bc3855ecf2be3305fef2df9b24a2689c98
   builder: KnowledgePromotionBuilder
   authoritative_sources:
     historical_claim: knowledge/historical/新竹縣/claims.jsonl
@@ -27,15 +27,15 @@ manifest:
     research_questions: knowledge/counties/新竹縣/research_questions.jsonl
     entity_relation_index: knowledge/counties/新竹縣/entity_relation_index.jsonl
   counts:
-    historical_claim: 0
+    historical_claim: 2
     local_relationship: 0
     candidate_profile: 0
     current_issue: 0
-  evidence_index_count: 0
+  evidence_index_count: 2
   entity_relation_count: 0
   research_question_count: 10
-  unresolved_question_count: 10
-  promotion_receipt_count: 0
+  unresolved_question_count: 9
+  promotion_receipt_count: 2
   rules:
     generated_files_are_indexes_not_new_facts: true
     source_files_are_authoritative: true

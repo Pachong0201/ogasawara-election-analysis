@@ -1,19 +1,19 @@
 county: 澎湖縣
 status: completed
 question_count: 10
-input_sha256: 4457980711d95655175231db15346916a314f0e4c253da297a2f9dcde7b44ada
+input_sha256: c601c853368107638e2dee6d81f8584ae09a674a71ef9bb287e886ce9e283be3
 run_research: false
-started_at: '2026-09-26T07:23:19+00:00'
-attempt: 2
+started_at: '2026-09-26T07:47:56+00:00'
+attempt: 4
 last_error: ''
-completed_at: '2026-09-26T07:23:19+00:00'
+completed_at: '2026-09-26T07:47:56+00:00'
 research:
   status: not_requested
 manifest:
   version: 1.4.0
   county: 澎湖縣
-  generated_at: '2026-09-26T04:02:45+00:00'
-  content_sha256: d9994f61f1cf9adede63a5327b2362152f1bb7be9f0c6d8e4a8210c14eed8850
+  generated_at: '2026-09-26T07:47:56+00:00'
+  content_sha256: aecbb608c71fc2d6478b1809bcc1764544fd82d1eef78b899003ec51d3aa8d63
   builder: KnowledgePromotionBuilder
   authoritative_sources:
     historical_claim: knowledge/historical/澎湖縣/claims.jsonl
@@ -27,15 +27,15 @@ manifest:
     research_questions: knowledge/counties/澎湖縣/research_questions.jsonl
     entity_relation_index: knowledge/counties/澎湖縣/entity_relation_index.jsonl
   counts:
-    historical_claim: 0
+    historical_claim: 2
     local_relationship: 0
     candidate_profile: 0
     current_issue: 0
-  evidence_index_count: 0
+  evidence_index_count: 2
   entity_relation_count: 0
   research_question_count: 10
-  unresolved_question_count: 10
-  promotion_receipt_count: 0
+  unresolved_question_count: 9
+  promotion_receipt_count: 2
   rules:
     generated_files_are_indexes_not_new_facts: true
     source_files_are_authoritative: true

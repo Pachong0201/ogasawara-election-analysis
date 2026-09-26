@@ -1,19 +1,19 @@
 county: 台東縣
 status: completed
 question_count: 10
-input_sha256: f51e55dd80eb9cdf6a0d84be98d75b757de1525a757a08f9cb4522a6ab5f308c
+input_sha256: 6249c865a00814c4d079457fb45fdaa9c33b7cf6c4de93a1e3c88caa544ea633
 run_research: false
-started_at: '2026-09-26T07:23:19+00:00'
-attempt: 2
+started_at: '2026-09-26T07:47:56+00:00'
+attempt: 4
 last_error: ''
-completed_at: '2026-09-26T07:23:19+00:00'
+completed_at: '2026-09-26T07:47:56+00:00'
 research:
   status: not_requested
 manifest:
   version: 1.4.0
   county: 台東縣
-  generated_at: '2026-09-26T04:02:45+00:00'
-  content_sha256: d6a10b6cebddbfd2ad2290d2479cbb06a4c46752b8178cb479efe7b96c9039a2
+  generated_at: '2026-09-26T07:47:56+00:00'
+  content_sha256: cb86f35363dc8de53bae14910dcb3f7dbdbf0af112e46338948460dd5816b280
   builder: KnowledgePromotionBuilder
   authoritative_sources:
     historical_claim: knowledge/historical/台東縣/claims.jsonl
@@ -27,15 +27,15 @@ manifest:
     research_questions: knowledge/counties/台東縣/research_questions.jsonl
     entity_relation_index: knowledge/counties/台東縣/entity_relation_index.jsonl
   counts:
-    historical_claim: 0
+    historical_claim: 2
     local_relationship: 0
     candidate_profile: 0
     current_issue: 0
-  evidence_index_count: 0
+  evidence_index_count: 2
   entity_relation_count: 0
   research_question_count: 10
-  unresolved_question_count: 10
-  promotion_receipt_count: 0
+  unresolved_question_count: 9
+  promotion_receipt_count: 2
   rules:
     generated_files_are_indexes_not_new_facts: true
     source_files_are_authoritative: true

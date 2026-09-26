@@ -69,6 +69,11 @@ properties:
       evidence_grades:
         type: array
         items: {type: string}
+      contradiction_check_completed: {type: boolean}
+      contradictory_lead_ids:
+        type: array
+        items: {type: string}
+      contradiction_check_note: {type: string}
   record_type:
     type: string
     enum: [historical_claim]
