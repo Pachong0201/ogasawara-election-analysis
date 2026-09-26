@@ -15,13 +15,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: materialize-l3-current-legislators
+  group: materialize-l3-current-legislators-v2
   cancel-in-progress: false
 
 jobs:
   materialize:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 12
     steps:
       - name: Checkout feature branch
         uses: actions/checkout@v4
@@ -73,8 +73,9 @@ jobs:
           report = json.loads(path.read_text(encoding="utf-8"))
           print("L3_LEGISLATOR_COUNT=", report.get("member_count"))
           print("L3_COVERED_COUNTIES=", report.get("covered_county_count"))
-          print("L3_UNASSIGNED=", report.get("unassigned_current_member_count"))
+          print("L3_ROSTER_COUNT=", report.get("roster_member_count"))
+          print("L3_UNMATCHED_2024_WINNERS=", report.get("unmatched_2024_winner_count"))
           print("L3_SOURCE_FAILURES=", report.get("source_failure_count"))
           if int(report.get("member_count") or 0) <= 0:
-              raise SystemExit("No geographic current legislators were materialized")
+              raise SystemExit("No current regional legislators were materialized")
           PY
