@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 南投縣
-generated_at: '2026-09-26T12:01:33+00:00'
-content_sha256: 300b16fbf3a2291df50214f3b6850d6bc86676ef6370915ccf8cd644e19278ef
+generated_at: '2026-09-26T12:11:02+00:00'
+content_sha256: b50f9f7c214f1ab5dc1bbb072d85ab89b99dc050e81c0e04f694a3fede37876e
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/南投縣/claims.jsonl
@@ -23,7 +23,7 @@ evidence_index_count: 67
 entity_relation_count: 2
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 71
+promotion_receipt_count: 73
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

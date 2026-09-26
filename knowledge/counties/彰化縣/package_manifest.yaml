@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 彰化縣
-generated_at: '2026-09-26T12:01:32+00:00'
-content_sha256: de46f7c23c016ca36dc15f2340fa35359e4c641b6740cb46e53ec5128fe540ad
+generated_at: '2026-09-26T12:11:01+00:00'
+content_sha256: 44b67249dcb94b4530dc3e294c20c2a44880aeb8bbf11848e5b6bf852e680db9
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/彰化縣/claims.jsonl
@@ -23,7 +23,7 @@ evidence_index_count: 96
 entity_relation_count: 4
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 104
+promotion_receipt_count: 108
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

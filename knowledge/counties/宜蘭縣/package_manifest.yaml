@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 宜蘭縣
-generated_at: '2026-09-26T12:01:38+00:00'
-content_sha256: 5d8e33e57c4435908baa4e8417b89eeb9538839d435c413d6c97f64edb6b48a8
+generated_at: '2026-09-26T12:11:12+00:00'
+content_sha256: 0ec67a37ac651c7dd4a494f259a7c7d7b8af8c992a528922a6329ec300af7e7e
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/宜蘭縣/claims.jsonl
@@ -23,7 +23,7 @@ evidence_index_count: 67
 entity_relation_count: 1
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 73
+promotion_receipt_count: 74
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

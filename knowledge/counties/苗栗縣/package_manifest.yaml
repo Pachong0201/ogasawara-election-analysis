@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 苗栗縣
-generated_at: '2026-09-26T12:01:30+00:00'
-content_sha256: ed077e44e9c7ee48fe86293040188379e89da4ddf855697ccf6e9d464458bc8c
+generated_at: '2026-09-26T12:10:57+00:00'
+content_sha256: 3b447c96352c4904efbee1b8f7474bc4d43fa5d2010a25ce6372b06021e9f6f9
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/苗栗縣/claims.jsonl
@@ -23,7 +23,7 @@ evidence_index_count: 62
 entity_relation_count: 2
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 66
+promotion_receipt_count: 68
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

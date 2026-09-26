@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-09-26T12:01:41+00:00",
+  "generated_at": "2026-09-26T12:11:16+00:00",
   "county_count": 22,
   "roster_member_count": 113,
   "covered_county_count": 22,
   "member_count": 73,
   "promoted_count": 73,
-  "pruned_stale_relationship_count": 73,
+  "pruned_stale_relationship_count": 0,
   "unmatched_2024_winner_count": 0,
   "unmatched_2024_winners": [],
   "source_failure_count": 0,
@@ -18,12 +18,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-a9c3982839bdeea25d1ccb64",
+          "receipt_id": "promotion-556595130ad0ac991f126b87",
           "proposal_id": "promote-ly11-office-基隆市-林沛祥",
           "county": "基隆市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:23.686951+00:00",
+          "checked_at": "2026-09-26T12:10:47.739045+00:00",
           "target_path": "knowledge/local/基隆市/relationships.jsonl",
           "record_id": "ly11-office-基隆市-林沛祥",
           "evidence_lead_ids": [
@@ -41,10 +41,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "fb08f4e49b5e52956bce04a5de62e250478fa74d7c27850b1badcca96059c93d",
+          "record_sha256": "bf9a0f63506e1bd44567023bf9a237f00c6ed9e1d6d35d95952246f3d763afd0",
           "evidence_snapshot_sha256": "d74ecabaf88f8bc388e0e03fad1772c00c2e10f33bbd9500bf906efd28a52a8c",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -56,12 +58,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-2787409709195d097db99d28",
+          "receipt_id": "promotion-eeeaafbf017962886ab9bb0d",
           "proposal_id": "promote-ly11-office-台北市-吳思瑤",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:24.378166+00:00",
+          "checked_at": "2026-09-26T12:10:48.798204+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
           "record_id": "ly11-office-台北市-吳思瑤",
           "evidence_lead_ids": [
@@ -79,19 +81,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "8934d2a5316de73ad3bccecd9edcbd52fbe2187d63d196a0736945f9831ed180",
+          "record_sha256": "e8376dbe2730ddedd9ef49055f389fefd66c48b753859ac55f421a61bf07c767",
           "evidence_snapshot_sha256": "19d65949d4d19dad76cdf6db24b5432ece83d19deccce79af4febdc811db93ec",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-715116fc805cb444108f0649",
+          "receipt_id": "promotion-c001d186dafeb3044c08d77d",
           "proposal_id": "promote-ly11-office-台北市-王世堅",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:24.386038+00:00",
+          "checked_at": "2026-09-26T12:10:48.810773+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
           "record_id": "ly11-office-台北市-王世堅",
           "evidence_lead_ids": [
@@ -109,19 +113,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "df5dc65533c78637c4bff8e88da85b5b63dcac266e649e5026a8f1aad2ad675b",
+          "record_sha256": "50d681585acd39e430519115aa49e701e88f9d184d825f97f95e811e035a9c10",
           "evidence_snapshot_sha256": "76c8540c5fcb2a7ec1014f58162ecfe556702bc352ce031173b2167ed710bddf",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-87659e8463d5a3cee6f68cc3",
+          "receipt_id": "promotion-77adb853cb3f818576dbca4f",
           "proposal_id": "promote-ly11-office-台北市-王鴻薇",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:24.394231+00:00",
+          "checked_at": "2026-09-26T12:10:48.823528+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
           "record_id": "ly11-office-台北市-王鴻薇",
           "evidence_lead_ids": [
@@ -139,19 +145,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "8f6d57a8d8b92a326aa7ce580abef8ba6a1137c9eac6acbd61b8453361226a5c",
+          "record_sha256": "a8fa67bcef0bf19fe049ddeb81d47e4624eb7f01c381194ba459e85331bb6308",
           "evidence_snapshot_sha256": "8ccda4b7043b6b7dd2874d64331be30311b0b32ff4351b30f4eda1bfd47105fc",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-4856f83893082506422a03ee",
+          "receipt_id": "promotion-5552b44e90ec22b9c0a50a16",
           "proposal_id": "promote-ly11-office-台北市-李彥秀",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:24.402300+00:00",
+          "checked_at": "2026-09-26T12:10:48.837242+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
           "record_id": "ly11-office-台北市-李彥秀",
           "evidence_lead_ids": [
@@ -169,19 +177,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "d5ad56780315bef7782df9401481d4768a90e8c3d03f2ae3138eedbf5fbaab55",
+          "record_sha256": "30dad4afe1c3bc4350676d09896f32503737068133a8353040e1bafb54db545b",
           "evidence_snapshot_sha256": "c0ee59fdde476cffd296241b2dbd98cf50b488fa16a466821756c2d62f8157ca",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-ee0a622c634e146fc9758d9b",
+          "receipt_id": "promotion-26f4c4abe5a99c7fec0e7900",
           "proposal_id": "promote-ly11-office-台北市-吳沛憶",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:24.410275+00:00",
+          "checked_at": "2026-09-26T12:10:48.850090+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
           "record_id": "ly11-office-台北市-吳沛憶",
           "evidence_lead_ids": [
@@ -199,19 +209,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "ed3ce09c05dc4323a1ad548617a558c3355b01d65af5f59b77fef88ddce1831a",
+          "record_sha256": "5af32ff07bcd518c0cbb311f16cb00b5ca866c9f053b2c1e4584c215d5092c4a",
           "evidence_snapshot_sha256": "25da4eac173cd6224639dd6fa9115edc71512713768e20819be9b4b84c95c654",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-75812199b94d7d00a9998bf0",
+          "receipt_id": "promotion-6cdd0a072aefda96faf6b403",
           "proposal_id": "promote-ly11-office-台北市-羅智強",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:24.417937+00:00",
+          "checked_at": "2026-09-26T12:10:48.863125+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
           "record_id": "ly11-office-台北市-羅智強",
           "evidence_lead_ids": [
@@ -229,19 +241,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "583e6c3f545ae1a30f7fedea5f35afd6b04c472ce1d0d204fff3f89c3f0d29b7",
+          "record_sha256": "e098ed03fe884c41e86035b73a319e1a50fc04eae3e696a81352c3a5fc2202eb",
           "evidence_snapshot_sha256": "c716183993c131be4733fbe167dfe70cb50c2f0f1797c711c86b36ced827aad1",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-c9148643e6af02d030c0c4c6",
+          "receipt_id": "promotion-77f78f7f3e416c89d2d96ee1",
           "proposal_id": "promote-ly11-office-台北市-徐巧芯",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:24.425985+00:00",
+          "checked_at": "2026-09-26T12:10:48.876091+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
           "record_id": "ly11-office-台北市-徐巧芯",
           "evidence_lead_ids": [
@@ -259,19 +273,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "52d571ec7335eaef7403f81b6933886c1c8d93ed4e655cecd41eed07d63ccd3b",
+          "record_sha256": "b1e769774770b792bf0ceb95e0f5aedfcdc383610471d603b3d36855e617fc18",
           "evidence_snapshot_sha256": "1475e09848c30793192cbd80799a9b06b75dcfce01e510ffed43f3b5187944c4",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-96bb677b12aa840da490d5d2",
+          "receipt_id": "promotion-5c25c1c8fce04c99b2a64690",
           "proposal_id": "promote-ly11-office-台北市-賴士葆",
           "county": "台北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:24.433726+00:00",
+          "checked_at": "2026-09-26T12:10:48.889334+00:00",
           "target_path": "knowledge/local/台北市/relationships.jsonl",
           "record_id": "ly11-office-台北市-賴士葆",
           "evidence_lead_ids": [
@@ -289,10 +305,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "05968f484f7e3a771c3f3e970befe40feac3fbde10eaebb2bd01b99704995beb",
+          "record_sha256": "6e258b04d966684f7cbfd0d21d758a6f5ea010a55cf7ecffd4dd24824d85d06c",
           "evidence_snapshot_sha256": "491a4743c1d4cc5e11ed79fdb44fff6fe45cf54d346fb9fff66774905232da5a",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -304,12 +322,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-07ac580bc9985f957e2a0314",
+          "receipt_id": "promotion-a39ec215eb2fea240fadcadf",
           "proposal_id": "promote-ly11-office-新北市-洪孟楷",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:25.659929+00:00",
+          "checked_at": "2026-09-26T12:10:50.769363+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
           "record_id": "ly11-office-新北市-洪孟楷",
           "evidence_lead_ids": [
@@ -327,19 +345,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "91456e4896a8cb0a8e14978a8b50a0147e998b804405ff41654b7a0364b44246",
+          "record_sha256": "5ea812297065ca7e755d7d8ecc00b1808c6759c4c5d5781ce806ccf7bda5a839",
           "evidence_snapshot_sha256": "f1c2b25c48486b334182d1777861216b2d6a35e274ff16ae7e51a46029cee2a4",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-b730013302220bc3427ae7d0",
+          "receipt_id": "promotion-3d9147eecb7540261d07213a",
           "proposal_id": "promote-ly11-office-新北市-林淑芬",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:25.668894+00:00",
+          "checked_at": "2026-09-26T12:10:50.782527+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
           "record_id": "ly11-office-新北市-林淑芬",
           "evidence_lead_ids": [
@@ -357,19 +377,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "65cd4c3f2d069929cc6caa4be063a486bf64dbc6b069dcb9befba6f9d7120d53",
+          "record_sha256": "0dbf681c569d9ca73983b361e53ffcdb2488f7cc9fa12e4b0b893a115d37f687",
           "evidence_snapshot_sha256": "4d991784232381ecd966832f79e552d7e89948a45e8ebda2ed8cd79c68b2ca35",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-08ef9f4964e1465a0740dc4c",
+          "receipt_id": "promotion-966d4659e578ff4f9623ea5d",
           "proposal_id": "promote-ly11-office-新北市-李坤城",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:25.677970+00:00",
+          "checked_at": "2026-09-26T12:10:50.795764+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
           "record_id": "ly11-office-新北市-李坤城",
           "evidence_lead_ids": [
@@ -387,19 +409,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "97499b4536e5123ec551ead0d82de701a2f49c51be55a9394d68e8da756c1047",
+          "record_sha256": "efc5a38b2a864dea78bc38159351a1e1e180f949e2ff8f46f84ae975551a0c59",
           "evidence_snapshot_sha256": "b9d3fe79d148e459b7a4c6a70f26dbb88a396415ef970586dd5b690239b2a8c1",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-b007e8b3b62d9e3ee1f90942",
+          "receipt_id": "promotion-69a91a989aa77b907707afb8",
           "proposal_id": "promote-ly11-office-新北市-吳秉叡",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:25.686390+00:00",
+          "checked_at": "2026-09-26T12:10:50.809063+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
           "record_id": "ly11-office-新北市-吳秉叡",
           "evidence_lead_ids": [
@@ -417,19 +441,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "47bc947cb4796d78050facb68d91e0f3691a797cfb87f273722f0b0818968ded",
+          "record_sha256": "3e0b9473ad417088814c7ae18f46cf8aafec3738e80c678110e2e3cd8a8fc055",
           "evidence_snapshot_sha256": "79b2700857e85a51a7f77488a8c3f5adf6021253175a73006a960c9fe94ad9e8",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-66d902b1a1ff18fc678e6a0c",
+          "receipt_id": "promotion-2566c7e9c63ef808449f7791",
           "proposal_id": "promote-ly11-office-新北市-蘇巧慧",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:25.695856+00:00",
+          "checked_at": "2026-09-26T12:10:50.822466+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
           "record_id": "ly11-office-新北市-蘇巧慧",
           "evidence_lead_ids": [
@@ -447,19 +473,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "b1f9aa2f4ee81d405f97c972ab287ff1f6cd0263378fc58554abf9a447d352fb",
+          "record_sha256": "6783832df80747ec63da287f04e33fa1e77c4db6320cec6333338bebe297bcbd",
           "evidence_snapshot_sha256": "74c59d2b30c3d5b7c2e87edd369b7c35e432eb3e61d2be57be19e7d958298a64",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-07be6690e220f005b0251fd0",
+          "receipt_id": "promotion-85ac8849f4efd9313a65dd9b",
           "proposal_id": "promote-ly11-office-新北市-張宏陸",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:25.704265+00:00",
+          "checked_at": "2026-09-26T12:10:50.835887+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
           "record_id": "ly11-office-新北市-張宏陸",
           "evidence_lead_ids": [
@@ -477,19 +505,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "e1cb57e938bae71ce3805badace88d53cf3525991c3e63777504977683c7a440",
+          "record_sha256": "7462797bc911dcb4822f1e9147388b53d872ba9667c733b365d72fb270d047f6",
           "evidence_snapshot_sha256": "b884c68f679601e3c89e4a33fe170cf26fd64e75c62c105a65aaa6481548232f",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-c25938ef9e32b771d8a3ae8d",
+          "receipt_id": "promotion-b5d5a6efe8226b16e3f3d873",
           "proposal_id": "promote-ly11-office-新北市-葉元之",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:25.713698+00:00",
+          "checked_at": "2026-09-26T12:10:50.849268+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
           "record_id": "ly11-office-新北市-葉元之",
           "evidence_lead_ids": [
@@ -507,19 +537,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "ee60e1e79fd9aefb85ef18b29d22d7d706dc7c197957a887e94cd1fe8b4ad3aa",
+          "record_sha256": "10170cab4ac8b7477199243093683fea44d847feacd0428d9b39d799e407a054",
           "evidence_snapshot_sha256": "6885b06c6d4f94bc138ac48007fa33e7655731a4925596b116bade2b0bed8ccb",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-86ed05f9d25edc05aa0e2276",
+          "receipt_id": "promotion-46b544ddf90ec160c82587c2",
           "proposal_id": "promote-ly11-office-新北市-張智倫",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:25.724616+00:00",
+          "checked_at": "2026-09-26T12:10:50.862772+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
           "record_id": "ly11-office-新北市-張智倫",
           "evidence_lead_ids": [
@@ -537,19 +569,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "eefc5bccd6752ce70680466cb7020a445ff168199b0e095989d613f412ac89c1",
+          "record_sha256": "36c2e53bc669f93bd925ee2cf54e41ebf586be6f4f0a4ec8a44d43d1de3e8834",
           "evidence_snapshot_sha256": "79ba2eba0486747630fa5aa4192d86d7b3461008ae70a7296aa7bcdd10d9693e",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-a16d95e964dc1598d31bd0cf",
+          "receipt_id": "promotion-eeeb3690857e45bc5548e4fc",
           "proposal_id": "promote-ly11-office-新北市-林德福",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:25.733269+00:00",
+          "checked_at": "2026-09-26T12:10:50.876543+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
           "record_id": "ly11-office-新北市-林德福",
           "evidence_lead_ids": [
@@ -567,19 +601,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "cd4ca13bf2e540554d9f7b0c39e9eb4e57e58e58ac107627db7107226cd1550e",
+          "record_sha256": "e672615ac43557d348c796e3901a8a9d5dfdfe77469f478f6f87c943cadbb2ef",
           "evidence_snapshot_sha256": "5a8f21f096a3b76062c97b2dbfaa95fdc5d3f25bf5c08e38c70ddb0148a62122",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-168d8a50657afb7d7ccf7392",
+          "receipt_id": "promotion-038b38f6a560fa4e2459910d",
           "proposal_id": "promote-ly11-office-新北市-吳琪銘",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:25.742643+00:00",
+          "checked_at": "2026-09-26T12:10:50.890232+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
           "record_id": "ly11-office-新北市-吳琪銘",
           "evidence_lead_ids": [
@@ -597,19 +633,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "a06679ae19f1170299c7b72647c7008de0c9018eb0e93e0120b59e42f8a80a1e",
+          "record_sha256": "118cc5472cebb5a1753e1330785ca28edcf9a38046a5ce722e921466a2beee1e",
           "evidence_snapshot_sha256": "7e07ffe28472e46fd0e3cd6bbb51febc1dad6b501d4c9fc8aa09c32a3aeae84b",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-513cc709d14a6c42962bcb4e",
+          "receipt_id": "promotion-5a35edd2b88da8c2943ea513",
           "proposal_id": "promote-ly11-office-新北市-羅明才",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:25.751888+00:00",
+          "checked_at": "2026-09-26T12:10:50.903982+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
           "record_id": "ly11-office-新北市-羅明才",
           "evidence_lead_ids": [
@@ -627,19 +665,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "e17ae174e443a51efaed335bd07c76734b550c00774186771acc04554ed28283",
+          "record_sha256": "d371b80f7c6b9c4f157018452461651a7577fb517d1eddfa47b5a646e9ba030c",
           "evidence_snapshot_sha256": "3e3beba90bea67cf9c131bb325a43f3d49280408756d13156f6ba52847879470",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-7c2bb5cc16a65657f313fb3b",
+          "receipt_id": "promotion-00fa3d37695882a22eb212b0",
           "proposal_id": "promote-ly11-office-新北市-廖先翔",
           "county": "新北市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:25.760924+00:00",
+          "checked_at": "2026-09-26T12:10:50.917851+00:00",
           "target_path": "knowledge/local/新北市/relationships.jsonl",
           "record_id": "ly11-office-新北市-廖先翔",
           "evidence_lead_ids": [
@@ -657,10 +697,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "50f72e81763246bef78e26a3e8dde5bdbe31ace8afb88f705d375eb64e504c9c",
+          "record_sha256": "fbbb47b367cf5e68fee48cf71c58f97d95d22c289b441512d3c44267100a3e43",
           "evidence_snapshot_sha256": "e2e105b49e4fbe6e8e98fdd38ac6b61e19d54fbf1d653bcb303e6644b732416b",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -672,12 +714,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-f9a8808efc22befb4ceaf83e",
+          "receipt_id": "promotion-e903d5e6345f09e73e1c14ec",
           "proposal_id": "promote-ly11-office-桃園市-牛煦庭",
           "county": "桃園市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:27.198688+00:00",
+          "checked_at": "2026-09-26T12:10:53.098411+00:00",
           "target_path": "knowledge/local/桃園市/relationships.jsonl",
           "record_id": "ly11-office-桃園市-牛煦庭",
           "evidence_lead_ids": [
@@ -695,19 +737,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "53ab7f5f82d627b12cbeb7efeb0f6a765218aa92097add3f53116b3c48bb94bc",
+          "record_sha256": "f035aba67847e16a1c79d4ffc1fc657e12d2aafef7cd59d0c05b1a5aa6595013",
           "evidence_snapshot_sha256": "17f6260516240fa3c5a59d4bb5e5bb661c93445210f0536039411644e3150ab5",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-3e2f891dd2e1305cde6b7380",
+          "receipt_id": "promotion-08fe39fd7f42c591bb789b03",
           "proposal_id": "promote-ly11-office-桃園市-涂權吉",
           "county": "桃園市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:27.206335+00:00",
+          "checked_at": "2026-09-26T12:10:53.110677+00:00",
           "target_path": "knowledge/local/桃園市/relationships.jsonl",
           "record_id": "ly11-office-桃園市-涂權吉",
           "evidence_lead_ids": [
@@ -725,19 +769,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "8bdfd95940812644dce830641d8fe08ea23f085bfbb05235d14546d8729d9926",
+          "record_sha256": "1dd4f8affaa46de3c69995f7dbce7862de812d9761c93398e1ff7de5f7ad1a35",
           "evidence_snapshot_sha256": "72d06c2fa4996d4e4b91da4e66ecb2f02a7f40a6ea5a14ccda5057edcee9d765",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-646693583d9a3c7f84cf3132",
+          "receipt_id": "promotion-c1ba7279a5f5210e888728b8",
           "proposal_id": "promote-ly11-office-桃園市-魯明哲",
           "county": "桃園市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:27.213970+00:00",
+          "checked_at": "2026-09-26T12:10:53.123259+00:00",
           "target_path": "knowledge/local/桃園市/relationships.jsonl",
           "record_id": "ly11-office-桃園市-魯明哲",
           "evidence_lead_ids": [
@@ -755,19 +801,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "bd5bd168edc8c5fa0c459995a9332ef0297052b3ec89ece086d28bfec556c643",
+          "record_sha256": "24bb4cd5d638288cd3d6ef7d9beddcf2b3cf4cc64126331a9874058f98d363bf",
           "evidence_snapshot_sha256": "68e624d7b40a0bad83908410c1f1c934d381c487079169c22bcbe4b402526e81",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-ae9c1823f9cb5ec5da462ed1",
+          "receipt_id": "promotion-8e88baef288ac72ffd7e1ddc",
           "proposal_id": "promote-ly11-office-桃園市-萬美玲",
           "county": "桃園市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:27.221652+00:00",
+          "checked_at": "2026-09-26T12:10:53.135794+00:00",
           "target_path": "knowledge/local/桃園市/relationships.jsonl",
           "record_id": "ly11-office-桃園市-萬美玲",
           "evidence_lead_ids": [
@@ -785,19 +833,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "2162ad19cd15a4fa71f289bca0c2cd28802f5e926344612b2ca1bffd6ebabced",
+          "record_sha256": "5956048e721b0e74090132be668cf4dcd858539642bcb947d07242f523ffb8cb",
           "evidence_snapshot_sha256": "63c5855cae1b2b7ca54f416ed961949e98b381c1f77377f06a0ade6fc8558152",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-345fe986de8d5b84f99ad931",
+          "receipt_id": "promotion-22fe52fd5ec7ab7c478c8228",
           "proposal_id": "promote-ly11-office-桃園市-呂玉玲",
           "county": "桃園市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:27.229508+00:00",
+          "checked_at": "2026-09-26T12:10:53.148545+00:00",
           "target_path": "knowledge/local/桃園市/relationships.jsonl",
           "record_id": "ly11-office-桃園市-呂玉玲",
           "evidence_lead_ids": [
@@ -815,19 +865,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "82df1cab4cc450fdcd605744c9d9bab48785123f66cb9c4494542d4a6d6a09c6",
+          "record_sha256": "99bc9868a4f1e513da16a75a060394ea3b8cf6000d30c08b0cfe5a9e7d921333",
           "evidence_snapshot_sha256": "c03543cf5ad80bb4fa7a136d4fa239809380bce73b170c484424ea7a379c10e3",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-44d218456fdd72f15c55ec73",
+          "receipt_id": "promotion-f58e4ddea0ea2a80ba1f0a90",
           "proposal_id": "promote-ly11-office-桃園市-邱若華",
           "county": "桃園市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:27.237278+00:00",
+          "checked_at": "2026-09-26T12:10:53.165420+00:00",
           "target_path": "knowledge/local/桃園市/relationships.jsonl",
           "record_id": "ly11-office-桃園市-邱若華",
           "evidence_lead_ids": [
@@ -845,10 +897,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "ec33cac87ace0f4b711bbe23e1030a48d22bbac13e7ceb7f609f0691f2c594de",
+          "record_sha256": "964d3b67c4bd0ffb72900fc5afc7746453c08253a6c3b5843f6c4f96763b414b",
           "evidence_snapshot_sha256": "4b58fe6765c6de6412345ee3ab0388a47cc690ed5d016c83a4729ca6faf83fce",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -860,12 +914,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-bb7b1fb9c006a2afe1b24125",
+          "receipt_id": "promotion-903b7fe0077e5e3ab748fedc",
           "proposal_id": "promote-ly11-office-新竹市-鄭正鈐",
           "county": "新竹市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:28.432080+00:00",
+          "checked_at": "2026-09-26T12:10:55.129442+00:00",
           "target_path": "knowledge/local/新竹市/relationships.jsonl",
           "record_id": "ly11-office-新竹市-鄭正鈐",
           "evidence_lead_ids": [
@@ -883,10 +937,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "16b392804681e241cd379cdd2af50139c562dd201c9799c651d93647ac03a2ab",
+          "record_sha256": "c059aff95895c3d58088102b8683b7f2dbfc19ac4063876663005d6b7251dd9a",
           "evidence_snapshot_sha256": "6374bcdb888401005a368cf4993e073669291f1eb08c950758b9ef4f796cc0cb",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -898,12 +954,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-d48c9169116c802c26cccf19",
+          "receipt_id": "promotion-690bb3c3afc7efe6741dfd88",
           "proposal_id": "promote-ly11-office-新竹縣-徐欣瑩",
           "county": "新竹縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:29.034432+00:00",
+          "checked_at": "2026-09-26T12:10:56.123676+00:00",
           "target_path": "knowledge/local/新竹縣/relationships.jsonl",
           "record_id": "ly11-office-新竹縣-徐欣瑩",
           "evidence_lead_ids": [
@@ -921,19 +977,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "ae2b655ac5e85f51ebb25bcef65f183f31b4015505ba90684721d8e4ef0abef1",
+          "record_sha256": "bd96509e56790ea058da8ce02715b9529a4cedca85fe9730ead68efc153be519",
           "evidence_snapshot_sha256": "150a2dea0714db5151b82ee64c60f9113a313dbe5f8fffb8e07d1e48cb5087f4",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-fb9a469e53f6e74691b48f08",
+          "receipt_id": "promotion-415bc181d73316b48071408d",
           "proposal_id": "promote-ly11-office-新竹縣-林思銘",
           "county": "新竹縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:29.041300+00:00",
+          "checked_at": "2026-09-26T12:10:56.134952+00:00",
           "target_path": "knowledge/local/新竹縣/relationships.jsonl",
           "record_id": "ly11-office-新竹縣-林思銘",
           "evidence_lead_ids": [
@@ -951,10 +1009,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "cb5df1fc24c9ea7e100579e9bc2f856d8b19f1275e57ae8bed30af54954a3c95",
+          "record_sha256": "9f18f6fb7e55313eebe0716acfeb4712ce92aaccc38877630776bf8e0263ec26",
           "evidence_snapshot_sha256": "6cea2bd24c079491cb3c0a0647f14d090d841b09a450b6cb3c6d32ba112485c9",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -966,12 +1026,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-3557dc96eeceddad99d5775f",
+          "receipt_id": "promotion-7cd55968a93eada58f6dc5a5",
           "proposal_id": "promote-ly11-office-苗栗縣-陳超明",
           "county": "苗栗縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:29.796107+00:00",
+          "checked_at": "2026-09-26T12:10:57.349163+00:00",
           "target_path": "knowledge/local/苗栗縣/relationships.jsonl",
           "record_id": "ly11-office-苗栗縣-陳超明",
           "evidence_lead_ids": [
@@ -989,19 +1049,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "1d18335f6f33b6809faf2972da78911e23a01f62e588af4b631d8f3257707ea4",
+          "record_sha256": "0950acfa1be4e4aae25ea5b372ba9b8e6b0aa17ac0fbcea229e898bb9f661dbe",
           "evidence_snapshot_sha256": "aa1264c8b8c6e014dcae6b3f86796835099e3cd037fa5058e82cbde21b4be1eb",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-1949f5588ecc2327e670a9e6",
+          "receipt_id": "promotion-9ce3204ad80d54c712832ec8",
           "proposal_id": "promote-ly11-office-苗栗縣-邱鎮軍",
           "county": "苗栗縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:29.803343+00:00",
+          "checked_at": "2026-09-26T12:10:57.360348+00:00",
           "target_path": "knowledge/local/苗栗縣/relationships.jsonl",
           "record_id": "ly11-office-苗栗縣-邱鎮軍",
           "evidence_lead_ids": [
@@ -1019,10 +1081,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "641c78dc5e20dafb3d9e62c01b2ea99825a42d322abbf878bde3383a8f71853f",
+          "record_sha256": "a118655afd99ea262404358228c0ad14b386aa41152655bc47fae17b46138ef0",
           "evidence_snapshot_sha256": "d359dd2be602a67b2bdc2b4ab7fbaef526f53a57d57c4ca1b65d780fc8dbaa9f",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -1034,12 +1098,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-153817b730311b924ff8057a",
+          "receipt_id": "promotion-1beb1ba13cb60e78f1009618",
           "proposal_id": "promote-ly11-office-台中市-蔡其昌",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:30.428186+00:00",
+          "checked_at": "2026-09-26T12:10:58.367673+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
           "record_id": "ly11-office-台中市-蔡其昌",
           "evidence_lead_ids": [
@@ -1057,19 +1121,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "8a47b2bae0be5d4cd35f9cac1b81ddd89495e27b1db09d5d67151abc688a5002",
+          "record_sha256": "3d859f477376425df5706f39dcc1eb1a9816f28bcb51a4cf279f0557d126fbc2",
           "evidence_snapshot_sha256": "69ea5504f4cca1c2dd667555428fe1b76963a61eb1ec783f38f63cbced98a7d7",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-f36dd6b5f22ed506e5fccf61",
+          "receipt_id": "promotion-4a6a94276257de274014d248",
           "proposal_id": "promote-ly11-office-台中市-顏寬恒",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:30.436221+00:00",
+          "checked_at": "2026-09-26T12:10:58.380321+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
           "record_id": "ly11-office-台中市-顏寬恒",
           "evidence_lead_ids": [
@@ -1087,19 +1153,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "21589f21cdd38cc92ef7585218830e4fa235c252409163f335648e7fb91dc0ec",
+          "record_sha256": "efa14b13e5e6010bc2b3f1a243d6032690a50f684ef0bfaab2da0ed4b0be1950",
           "evidence_snapshot_sha256": "e967d1bc14d2188fbf0f27541bb4b52022021926b6110b1aa50d66d0930b0ca0",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-fe74d87cfa87fde1f6dcde04",
+          "receipt_id": "promotion-5a47540d2eb98ef0ace43c5f",
           "proposal_id": "promote-ly11-office-台中市-楊瓊瓔",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:30.443713+00:00",
+          "checked_at": "2026-09-26T12:10:58.393090+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
           "record_id": "ly11-office-台中市-楊瓊瓔",
           "evidence_lead_ids": [
@@ -1117,19 +1185,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "5cc7996ffc979b0fd79f8821b50e80cf952499466953d1df6d8e8bb83202f053",
+          "record_sha256": "0289be50dc05e7831637f0b6b024a17a6c0df6bbedf22449cdba65b411ad9e9e",
           "evidence_snapshot_sha256": "05f289f8dbfb421864ce23e1171b2b073b13527631eaf6c5fced9ffbf13bd0e2",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-91a0a06dcf61c10268fb4827",
+          "receipt_id": "promotion-14fedf9ecf3ca6c99d527db4",
           "proposal_id": "promote-ly11-office-台中市-廖偉翔",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:30.451962+00:00",
+          "checked_at": "2026-09-26T12:10:58.406120+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
           "record_id": "ly11-office-台中市-廖偉翔",
           "evidence_lead_ids": [
@@ -1147,19 +1217,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "c2f5a389d822cf47360adb99aa58f6e2b82e4c60a8843664558ef11a1fa821cb",
+          "record_sha256": "a2b6513b28ae297a161b4211f2f274fc3503e96b7707b9f51187ba0a28701233",
           "evidence_snapshot_sha256": "21d05b4b2626c7d1b5f7a0e7d1d86f6ee60053707cb23242152f13b0305364d9",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-ba53ba26a139b87150178ecb",
+          "receipt_id": "promotion-12c04a1cab03f5b358a9380f",
           "proposal_id": "promote-ly11-office-台中市-黃健豪",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:30.459519+00:00",
+          "checked_at": "2026-09-26T12:10:58.419058+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
           "record_id": "ly11-office-台中市-黃健豪",
           "evidence_lead_ids": [
@@ -1177,19 +1249,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "1a4be7806c8768719890cc75d89c6f78a6915e523d036962de2ac042abb1101c",
+          "record_sha256": "162e620cca8768699c966e6db70ff5a0eba45d03fc7eac552e584b98b7f287ce",
           "evidence_snapshot_sha256": "e48c50a0e0b07bab538b4138d54a23c772d63be98cfbdc3041b4332393b4322b",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-c3c01d6103add45241305983",
+          "receipt_id": "promotion-0ad4901c9242b710dcef56e8",
           "proposal_id": "promote-ly11-office-台中市-羅廷瑋",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:30.467099+00:00",
+          "checked_at": "2026-09-26T12:10:58.432167+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
           "record_id": "ly11-office-台中市-羅廷瑋",
           "evidence_lead_ids": [
@@ -1207,19 +1281,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "167d27567325a902d5ee518783824a89d77f3d03dc6b91e87da6d970f6b11199",
+          "record_sha256": "f377ddaf1c8295ded4a4119bf368d80aa15ff34d53255db2ab1565e1aa826072",
           "evidence_snapshot_sha256": "12b2ebd97b511ba875b7359ad1c417270457c05e0d57c7e8726dd67072d2e3cd",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-651fadf45e43c88d3bac20c5",
+          "receipt_id": "promotion-7d772765deb8439f96b9ea1c",
           "proposal_id": "promote-ly11-office-台中市-何欣純",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:30.474721+00:00",
+          "checked_at": "2026-09-26T12:10:58.445209+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
           "record_id": "ly11-office-台中市-何欣純",
           "evidence_lead_ids": [
@@ -1237,19 +1313,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "27c6271574137fd5e6b9d9caedfb2759defc8f69bf1975fd3a95af2cb58d0558",
+          "record_sha256": "66eb1a1f0ccae1cfdacb0e15a1d2391cf1d1b1c6eb06b91f7e2837068822ed7a",
           "evidence_snapshot_sha256": "a4b1b8411a2164742466b7604125bbbc2c0d2989d9f90bbbc1ea3851919f7da8",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-b4bca5d7141e0a7d1060e698",
+          "receipt_id": "promotion-2c245413496a964dcb2f9da0",
           "proposal_id": "promote-ly11-office-台中市-江啟臣",
           "county": "台中市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:30.482454+00:00",
+          "checked_at": "2026-09-26T12:10:58.458555+00:00",
           "target_path": "knowledge/local/台中市/relationships.jsonl",
           "record_id": "ly11-office-台中市-江啟臣",
           "evidence_lead_ids": [
@@ -1267,10 +1345,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "6e4f1ff03b5fa3024c87593a83180dca38b79e8f074755471fd6dfa4c1a3c613",
+          "record_sha256": "f16756d2ac587f7a76354eddecfe0404d06e36c5e3d53c5625430fe589b8c56b",
           "evidence_snapshot_sha256": "0f7b4f15963392eea3a157e984cff9d37b5ec75cb30b38dc5da1a889e981c772",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -1282,12 +1362,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-8f611aad8d21b003d1538e49",
+          "receipt_id": "promotion-da99d756f3e65b06e6a7c942",
           "proposal_id": "promote-ly11-office-彰化縣-陳秀寳",
           "county": "彰化縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:31.669361+00:00",
+          "checked_at": "2026-09-26T12:11:00.371499+00:00",
           "target_path": "knowledge/local/彰化縣/relationships.jsonl",
           "record_id": "ly11-office-彰化縣-陳秀寳",
           "evidence_lead_ids": [
@@ -1305,19 +1385,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "a0034e4fff285ea03961da8dfe1da1a16d9890f582c3d6e37a8243e37371c872",
+          "record_sha256": "9c974fc33f7215628b23aa878c735b1a32fdc83709d61413a470e6fa2303052d",
           "evidence_snapshot_sha256": "c2f178214c7f0ce5e6c7e86c6cb2e8215b28f04a9170930ef6c4a56085189b0f",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-becfd6c6a94b402ab4f1166a",
+          "receipt_id": "promotion-cb9a39067769f210f3bc769e",
           "proposal_id": "promote-ly11-office-彰化縣-黃秀芳",
           "county": "彰化縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:31.677677+00:00",
+          "checked_at": "2026-09-26T12:11:00.383447+00:00",
           "target_path": "knowledge/local/彰化縣/relationships.jsonl",
           "record_id": "ly11-office-彰化縣-黃秀芳",
           "evidence_lead_ids": [
@@ -1335,19 +1417,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "2bfe34637872012d3f3409156b1177e77f1e0440f0212f6d44bd30d1d21e4d4a",
+          "record_sha256": "41217f980e11850f2cab0658adb89a3d53747884e09c6e7eea4b2f01df4ffad9",
           "evidence_snapshot_sha256": "2beb81755afb4d395e6a650a24c980d99c27176adc05a6137ee66d2873ff971e",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-600f7fe89e6e4c647f60cb56",
+          "receipt_id": "promotion-71627949747104610ae12940",
           "proposal_id": "promote-ly11-office-彰化縣-謝衣鳯",
           "county": "彰化縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:31.685578+00:00",
+          "checked_at": "2026-09-26T12:11:00.395546+00:00",
           "target_path": "knowledge/local/彰化縣/relationships.jsonl",
           "record_id": "ly11-office-彰化縣-謝衣鳯",
           "evidence_lead_ids": [
@@ -1365,19 +1449,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "d778beace8b1358e3ffb5075c8f7527a6ec75e76f54ce1f0ee7bd23067eec16e",
+          "record_sha256": "b1839298963c1e80c08b3c360d629db19baee9954f2990e7b1eee51d977f19e3",
           "evidence_snapshot_sha256": "a7ff84ade5e503b8245dca278f93814d2af1414aa22a297d6fc3cc3669aa1d12",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-d1b3f130f32e682af53730b5",
+          "receipt_id": "promotion-1b14c7a2cb75aa93a8f39846",
           "proposal_id": "promote-ly11-office-彰化縣-陳素月",
           "county": "彰化縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:31.693445+00:00",
+          "checked_at": "2026-09-26T12:11:00.407802+00:00",
           "target_path": "knowledge/local/彰化縣/relationships.jsonl",
           "record_id": "ly11-office-彰化縣-陳素月",
           "evidence_lead_ids": [
@@ -1395,10 +1481,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "bdf77ee808f33c9d6f532b6ab23da406e74cce3a01868b0061c4f9c6c3219467",
+          "record_sha256": "15f9073a321f9a2c1bd14dbfe22e3cc6df4974045e0d77c815bf0d82d125efd2",
           "evidence_snapshot_sha256": "cea0940e8db84e1e18a8f078f72614318d9cd235bdf5b63f324080418cde7397",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -1410,12 +1498,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-43bd1b88bc91df30eb29907a",
+          "receipt_id": "promotion-da23a2af95ca80dd66b5d9be",
           "proposal_id": "promote-ly11-office-南投縣-馬文君",
           "county": "南投縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:32.664625+00:00",
+          "checked_at": "2026-09-26T12:11:01.990503+00:00",
           "target_path": "knowledge/local/南投縣/relationships.jsonl",
           "record_id": "ly11-office-南投縣-馬文君",
           "evidence_lead_ids": [
@@ -1433,19 +1521,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "7aac45ef7b8474b6a67f2ba7cc78d0dfb77aa8b44f8e3ec3426d27a799dca20c",
+          "record_sha256": "4649c3ed7c367abb14fd62bcbb16e13f0e78cb62e4f5ef03b9b95a0108aebdde",
           "evidence_snapshot_sha256": "b54ba308851b0c46e8fd0c94fa7eeadf2d5bc1824702ca23e9fd70e6ce49d756",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-699776f2789c4ec3d37cb57e",
+          "receipt_id": "promotion-0f713e104bf847af3dc1170f",
           "proposal_id": "promote-ly11-office-南投縣-游顥",
           "county": "南投縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:32.671677+00:00",
+          "checked_at": "2026-09-26T12:11:02.002399+00:00",
           "target_path": "knowledge/local/南投縣/relationships.jsonl",
           "record_id": "ly11-office-南投縣-游顥",
           "evidence_lead_ids": [
@@ -1463,10 +1553,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "7901b8f097a82c7bde7064833e400071cf0792eb78e75138ff15282a1f1e2aec",
+          "record_sha256": "f50121cdeb9904cb0c54f73b29c5722dec34ee0027e64576cabe0e8fc423b885",
           "evidence_snapshot_sha256": "193a0fcd64307d259b5ff3a20640f3837c4acedf6bc57c235a1c1ffad5510b47",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -1478,12 +1570,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-03b0ff600fc93e8d23e9ed96",
+          "receipt_id": "promotion-a34d3d8596f135826bb9f300",
           "proposal_id": "promote-ly11-office-雲林縣-丁學忠",
           "county": "雲林縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:33.346252+00:00",
+          "checked_at": "2026-09-26T12:11:03.100552+00:00",
           "target_path": "knowledge/local/雲林縣/relationships.jsonl",
           "record_id": "ly11-office-雲林縣-丁學忠",
           "evidence_lead_ids": [
@@ -1501,19 +1593,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "7b858ef290dc85fb5c060e292e12ccfd0262c5e02aae0cea1071bd5b8febe4df",
+          "record_sha256": "8cb464a469b3fd7ee26004f2fe310b5f83f7696c168d2452695acf83c69d9e59",
           "evidence_snapshot_sha256": "3b56f0478b570c82fab1529aa23a023eab4e524adeb12de69e64b25c9718ec1e",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-24b70df246c6747c01427ef4",
+          "receipt_id": "promotion-cdbb875d3091a3dbd909d877",
           "proposal_id": "promote-ly11-office-雲林縣-劉建國",
           "county": "雲林縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:33.353574+00:00",
+          "checked_at": "2026-09-26T12:11:03.112206+00:00",
           "target_path": "knowledge/local/雲林縣/relationships.jsonl",
           "record_id": "ly11-office-雲林縣-劉建國",
           "evidence_lead_ids": [
@@ -1531,10 +1625,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "cf7c561453c1090b28f5bed59cbf458af8d436cc4e2fcf95f9c464e9c8d5feac",
+          "record_sha256": "7e7487ea95ab18dee909cbb2c8ab016baef4492c316d4fa930440a619da2390b",
           "evidence_snapshot_sha256": "b924fdd3dc0ce91f7d43bae69d6c633e4aa7a31623ec48578b005dedc5116c92",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -1546,12 +1642,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-c91941e90e1f5c31175951af",
+          "receipt_id": "promotion-33b8e5e90f0e6ddc82702b33",
           "proposal_id": "promote-ly11-office-嘉義市-王美惠",
           "county": "嘉義市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:34.142886+00:00",
+          "checked_at": "2026-09-26T12:11:04.428560+00:00",
           "target_path": "knowledge/local/嘉義市/relationships.jsonl",
           "record_id": "ly11-office-嘉義市-王美惠",
           "evidence_lead_ids": [
@@ -1569,10 +1665,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "c20d26ba0f4fb227a7ebe71f2b71c7d49f7ffcd82baee8f0b3a009d09c51ff1f",
+          "record_sha256": "f85808b1f640c740f7b5c2929cc583a7f910a9a017c05a2b55b274087fce32ab",
           "evidence_snapshot_sha256": "23ea2b251cee28814b1afc6a9c0f563441293e663b491a94bbd12b2f296af110",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -1584,12 +1682,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-a09b93f5b9d08bffcc472c27",
+          "receipt_id": "promotion-ec9fa6a1cc7e35f587d9453a",
           "proposal_id": "promote-ly11-office-嘉義縣-蔡易餘",
           "county": "嘉義縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:34.578427+00:00",
+          "checked_at": "2026-09-26T12:11:05.154517+00:00",
           "target_path": "knowledge/local/嘉義縣/relationships.jsonl",
           "record_id": "ly11-office-嘉義縣-蔡易餘",
           "evidence_lead_ids": [
@@ -1607,19 +1705,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "f134b2fbcd7c4273f6a7ee396fdd813b23df8305f03a4ac2a87016a7139808b3",
+          "record_sha256": "876ba53cbdfdd7f537cd60edd18e972aa7fb1bb612ea1ee8ecc63dba5b4a2d6d",
           "evidence_snapshot_sha256": "b62688e31763eaefb9184fd44b2d8221a21b00f279e4be2f92dbb9714e9606a2",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-7545eb8274b55332e3c69cb4",
+          "receipt_id": "promotion-c066dcc238703cfd2439fb61",
           "proposal_id": "promote-ly11-office-嘉義縣-陳冠廷",
           "county": "嘉義縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:34.584926+00:00",
+          "checked_at": "2026-09-26T12:11:05.165893+00:00",
           "target_path": "knowledge/local/嘉義縣/relationships.jsonl",
           "record_id": "ly11-office-嘉義縣-陳冠廷",
           "evidence_lead_ids": [
@@ -1637,10 +1737,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "ad6b8657d101fe3ed9da1497be42ca8da5e8d63b1264c6e94e11585ead494439",
+          "record_sha256": "2eba834da74fa6550c549da5ae3026d490a177fadca521f9c9aff8795cf51e53",
           "evidence_snapshot_sha256": "305b207cb4d2492fe97c3f7137215776166f30eff04e31850a54d7ced1d0b9e6",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -1652,12 +1754,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-993baccc5cccf602b8849407",
+          "receipt_id": "promotion-b6f76838a7ed5b5bcfff51d3",
           "proposal_id": "promote-ly11-office-台南市-賴惠員",
           "county": "台南市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:35.175272+00:00",
+          "checked_at": "2026-09-26T12:11:06.130624+00:00",
           "target_path": "knowledge/local/台南市/relationships.jsonl",
           "record_id": "ly11-office-台南市-賴惠員",
           "evidence_lead_ids": [
@@ -1675,19 +1777,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "580be488520351ae62478b2f1e8fc56e58b091fb02693e58a3d00010a881e237",
+          "record_sha256": "9a754c7309b8a9483bb87655b3e07590d683284123c412b65ea946f0286167c5",
           "evidence_snapshot_sha256": "8577c6c19f1dd9eb286031a1c1b24a65e6c51917b5c877d46b11b1a6ed2909b2",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-fadb662e9bcd9830858d9292",
+          "receipt_id": "promotion-950bd27cf1e6289cfb44c886",
           "proposal_id": "promote-ly11-office-台南市-郭國文",
           "county": "台南市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:35.182906+00:00",
+          "checked_at": "2026-09-26T12:11:06.143926+00:00",
           "target_path": "knowledge/local/台南市/relationships.jsonl",
           "record_id": "ly11-office-台南市-郭國文",
           "evidence_lead_ids": [
@@ -1705,19 +1809,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "3675080816556ba8bd6836fa6c55a0ce5aee670e39ee5785b73c2d66b77b0361",
+          "record_sha256": "f6592e7cff5fbb648a42133853a677f486d131ac408beb029c96f77d7a652d29",
           "evidence_snapshot_sha256": "212955a1b3b5f90797066e1adf66d4977ef84a21a5e0888302f6bf5e5b95649b",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-2095034e7d138c67860e06c0",
+          "receipt_id": "promotion-e70011bc33f1f297bf877a2a",
           "proposal_id": "promote-ly11-office-台南市-陳亭妃",
           "county": "台南市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:35.190469+00:00",
+          "checked_at": "2026-09-26T12:11:06.156975+00:00",
           "target_path": "knowledge/local/台南市/relationships.jsonl",
           "record_id": "ly11-office-台南市-陳亭妃",
           "evidence_lead_ids": [
@@ -1735,19 +1841,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "c4dca0e3dc97e4a631015689f317e4aec907e48d14806803bdbbf41d95d8ec0e",
+          "record_sha256": "c1d6fbc670d8e24776f9c545c361bff4589a17716b6545399ed59519f1285f55",
           "evidence_snapshot_sha256": "a3ad45fb01785229460cf362937975fb642f72770e7f51aca4af4f21bf0a2d06",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-257132e55c5fdae288585f52",
+          "receipt_id": "promotion-5a153da777ed3fb3043d3c22",
           "proposal_id": "promote-ly11-office-台南市-林宜瑾",
           "county": "台南市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:35.198015+00:00",
+          "checked_at": "2026-09-26T12:11:06.169855+00:00",
           "target_path": "knowledge/local/台南市/relationships.jsonl",
           "record_id": "ly11-office-台南市-林宜瑾",
           "evidence_lead_ids": [
@@ -1765,19 +1873,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "456d84f256fb76e8aabc7189cd921854f448617885681c9876f967ca7c35a51f",
+          "record_sha256": "9e0e180bdb2145f0d45d9cbfae2e9384807bcb52cbc20652f72797d559b8d87f",
           "evidence_snapshot_sha256": "eac36aba5ed1550345decf0f4c21f77ea4c49a62d6fb037d9a5fc92f4d1be5dd",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-8cc31cbc17723616a3bbf90f",
+          "receipt_id": "promotion-4372fbcc43c67e7276db9608",
           "proposal_id": "promote-ly11-office-台南市-林俊憲",
           "county": "台南市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:35.205838+00:00",
+          "checked_at": "2026-09-26T12:11:06.182683+00:00",
           "target_path": "knowledge/local/台南市/relationships.jsonl",
           "record_id": "ly11-office-台南市-林俊憲",
           "evidence_lead_ids": [
@@ -1795,19 +1905,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "16c32daa4ea433b08d8f5b70667ce6e7a0d03022c790a0718ec14f83a6425da6",
+          "record_sha256": "b564b6a9f0fc0b5792e4db36df02ccb3bb9f74b3a8ddc82f9b0c035fe96fc3c2",
           "evidence_snapshot_sha256": "17db1ff25d3f8f11bb6a8e1e5fa39fe9b47e88e8de5a8eeaef4e6f39210233b8",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-e11a05a0259d2bb3f564c269",
+          "receipt_id": "promotion-1cb68dd200fecde0a4488c20",
           "proposal_id": "promote-ly11-office-台南市-王定宇",
           "county": "台南市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:35.213519+00:00",
+          "checked_at": "2026-09-26T12:11:06.195482+00:00",
           "target_path": "knowledge/local/台南市/relationships.jsonl",
           "record_id": "ly11-office-台南市-王定宇",
           "evidence_lead_ids": [
@@ -1825,10 +1937,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "d03d0f7c14f2423d63009a788025c30326849ced08c865c668b7915e48862da2",
+          "record_sha256": "43645e74b12c219a91d9e0259385b4d3d2c0d87f0113f01701b0c3e042719bcd",
           "evidence_snapshot_sha256": "65a51c2a0ef0e57de340af1560a2aa69e773f971855c7ef58e7d096c0db20b9b",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -1840,12 +1954,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-0bb0262f5e2649271f49ecce",
+          "receipt_id": "promotion-be7f6051c89d2f73a0601eae",
           "proposal_id": "promote-ly11-office-高雄市-邱議瑩",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:36.239669+00:00",
+          "checked_at": "2026-09-26T12:11:07.872827+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
           "record_id": "ly11-office-高雄市-邱議瑩",
           "evidence_lead_ids": [
@@ -1863,19 +1977,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "d5e72f389728d61aa688d3d7c848dd2a9b06467d1852de11e612f4a958dc3023",
+          "record_sha256": "ff237edf6512bb34f6749e6add2c332d1ca0c7e0dca92c7e2dc76ca305458238",
           "evidence_snapshot_sha256": "834799ff6ce8ad72d396e85390bad9fb1a1a450a3b9b7a92b3fe933eaa5f3827",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-38ba30d048b1b40af4636197",
+          "receipt_id": "promotion-7b8a857efee5b2f0c17215d0",
           "proposal_id": "promote-ly11-office-高雄市-邱志偉",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:36.247267+00:00",
+          "checked_at": "2026-09-26T12:11:07.891891+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
           "record_id": "ly11-office-高雄市-邱志偉",
           "evidence_lead_ids": [
@@ -1893,19 +2009,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "f84c662b82e1a5c161793d7487c4643193c108f3db87d5825d9e9740c2560194",
+          "record_sha256": "074907acf0a342befae0a86ef69c2b5c16f4de3f758e4fdb27020d0fa1ca193f",
           "evidence_snapshot_sha256": "3bf995e141e4762cbe4c52f81887da406be7086c9f17bfdc49e05d4d2a1a2488",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-9d83a4d863114ec688b14df3",
+          "receipt_id": "promotion-516b63c4c1aa6bc20989cda6",
           "proposal_id": "promote-ly11-office-高雄市-李柏毅",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:36.254969+00:00",
+          "checked_at": "2026-09-26T12:11:07.905195+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
           "record_id": "ly11-office-高雄市-李柏毅",
           "evidence_lead_ids": [
@@ -1923,19 +2041,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "139148ca35e32c52871688675d2e9e811989ee3798c6178646c5fc248d19363c",
+          "record_sha256": "85eb4511c4d835003b4026d9d596b1703249a81cf5c70e5cf41c5aa14a310f7b",
           "evidence_snapshot_sha256": "4bf588812037038148d8422338c4c926f0927eb870ccb84cc69307eaab33de04",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-a25206411ef55528246513c2",
+          "receipt_id": "promotion-43be288e4a865e182324e9a7",
           "proposal_id": "promote-ly11-office-高雄市-林岱樺",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:36.262953+00:00",
+          "checked_at": "2026-09-26T12:11:07.918813+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
           "record_id": "ly11-office-高雄市-林岱樺",
           "evidence_lead_ids": [
@@ -1953,19 +2073,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "6741cd221965c594ade19b9a4621b194cd3395ab3616f4a4aeb8f87be4cd8602",
+          "record_sha256": "81657c136293c11f1596948cc6edd94dd36735907906a67df0c9e85074037682",
           "evidence_snapshot_sha256": "88eaca64230d8f0e2e39fae96dec72ec9b6221301c2790022fb5da0882b5d663",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-216ee57516e3fb9fcc01ea8b",
+          "receipt_id": "promotion-a7591f62dd14b81cab3619f4",
           "proposal_id": "promote-ly11-office-高雄市-李昆澤",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:36.271100+00:00",
+          "checked_at": "2026-09-26T12:11:07.932123+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
           "record_id": "ly11-office-高雄市-李昆澤",
           "evidence_lead_ids": [
@@ -1983,19 +2105,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "cdf0514d6a7ca177b106794ce6b21881115957b64c407035c6eb9cf797bcdf93",
+          "record_sha256": "192e626822c6d94ddb7f311231d68a721c9f4cde7a42077dc53575ae0203b6ca",
           "evidence_snapshot_sha256": "0886a4e2a1fb335fd836eb12f46cdeda9ae9ff07914f1d8b3629a4f251f8ebcb",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-da2e09e937bf4ad52e14efa4",
+          "receipt_id": "promotion-32bce8483191de0dc3dfde80",
           "proposal_id": "promote-ly11-office-高雄市-黃捷",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:36.278842+00:00",
+          "checked_at": "2026-09-26T12:11:07.945409+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
           "record_id": "ly11-office-高雄市-黃捷",
           "evidence_lead_ids": [
@@ -2013,19 +2137,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "8d8864e369544987291912055d2a5b4b97dfbd80baadcbf58fb0b5a81ef4bf09",
+          "record_sha256": "17b29e355186e9335df2996f79f0409230ac6360df3762f307e579c6ceb3c992",
           "evidence_snapshot_sha256": "eebb23ebeef4057ddb896edd63114654da21d3fe0823aff54d4f5f0b3c2f762a",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-6664102ea19ff7be1d861c59",
+          "receipt_id": "promotion-8aadd753d577398519995d49",
           "proposal_id": "promote-ly11-office-高雄市-許智傑",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:36.286828+00:00",
+          "checked_at": "2026-09-26T12:11:07.958883+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
           "record_id": "ly11-office-高雄市-許智傑",
           "evidence_lead_ids": [
@@ -2043,19 +2169,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "5b48c35df37f8f2dcf1b2e906fba64e00b678477c9759fdb1d162dc2f7dd901a",
+          "record_sha256": "c4b837ecf1ed74952934a3081103915487d1c3545f427db812df87dc20a90e32",
           "evidence_snapshot_sha256": "5a8a78f8fd6f04f9a51e4d6d0088e2ea044dba29845abb314081088b910c4703",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-474d834563909595752e54db",
+          "receipt_id": "promotion-a40ac1e4879ed3048d5f9d49",
           "proposal_id": "promote-ly11-office-高雄市-賴瑞隆",
           "county": "高雄市",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:36.294700+00:00",
+          "checked_at": "2026-09-26T12:11:07.972325+00:00",
           "target_path": "knowledge/local/高雄市/relationships.jsonl",
           "record_id": "ly11-office-高雄市-賴瑞隆",
           "evidence_lead_ids": [
@@ -2073,10 +2201,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "db314c66d09e1a17cbc9d56fff2415e4ce89b1973f4fe955b6b4854dd8f802c3",
+          "record_sha256": "715cbb1ef69a7423ee5b24578dff8c34b8f9825201ede4c59a41b045006a747d",
           "evidence_snapshot_sha256": "cd6d9527957d606abbdba80916ffd4a239fa9d6d6d99c10656cd3d8c15558bd9",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -2088,12 +2218,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-62f9bf82f8f750e174dbf17c",
+          "receipt_id": "promotion-2af93e11b4543ec80dafad46",
           "proposal_id": "promote-ly11-office-屏東縣-鍾佳濱",
           "county": "屏東縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:37.561921+00:00",
+          "checked_at": "2026-09-26T12:11:09.930401+00:00",
           "target_path": "knowledge/local/屏東縣/relationships.jsonl",
           "record_id": "ly11-office-屏東縣-鍾佳濱",
           "evidence_lead_ids": [
@@ -2111,19 +2241,21 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "ccdeaa75f58da39bcc069670cd7994a68cf4d1aaf9801140ccf8ec2d9e6bbe17",
+          "record_sha256": "5bd9c6cc3ebbcb158c364e46ed7b3359f30bd4c290ce47c03662873b7c22db9c",
           "evidence_snapshot_sha256": "1ac71f30c16dcf43d96c0fd06e7a4bcc83ff6b2f457133efdcda6aee60eb95ca",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         },
         {
-          "receipt_id": "promotion-e7b431768411b4cd668a872b",
+          "receipt_id": "promotion-07dfcee15b36049e05bbd24e",
           "proposal_id": "promote-ly11-office-屏東縣-徐富癸",
           "county": "屏東縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:37.571360+00:00",
+          "checked_at": "2026-09-26T12:11:09.942717+00:00",
           "target_path": "knowledge/local/屏東縣/relationships.jsonl",
           "record_id": "ly11-office-屏東縣-徐富癸",
           "evidence_lead_ids": [
@@ -2141,10 +2273,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "aaa4530c35fc0181cca450327cfd887781c04b383343c11af69f3ca2834aa295",
+          "record_sha256": "fac3a5b7f7e6bb8d5e993380822cf60bfc3f1e824e6ae6ef4ce89eab98aa9cd7",
           "evidence_snapshot_sha256": "0365e40a69769f637ef19b75727760331ca4922e95b8caf5024a4929f3a9f59a",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -2156,12 +2290,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-d42c1ae894e51e0b498c1e01",
+          "receipt_id": "promotion-817936bc2604ddec29b0355d",
           "proposal_id": "promote-ly11-office-宜蘭縣-陳俊宇",
           "county": "宜蘭縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:38.570037+00:00",
+          "checked_at": "2026-09-26T12:11:11.465971+00:00",
           "target_path": "knowledge/local/宜蘭縣/relationships.jsonl",
           "record_id": "ly11-office-宜蘭縣-陳俊宇",
           "evidence_lead_ids": [
@@ -2179,10 +2313,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "744b7b3503e012b2d27f230d29b19aeab3eaa5c991dfe3f3d131963ceb6a079d",
+          "record_sha256": "91b870ab32a2c780819c0a498dd5d7408da08287526bcbe82bbed787f013024c",
           "evidence_snapshot_sha256": "f82b9468d23ac06baa68082c9ae4300ea7d9a433c2847b7498085bca6c6b958e",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -2194,12 +2330,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-697ee4566d8fcc1186109534",
+          "receipt_id": "promotion-4349cf703a7f107f80389cfd",
           "proposal_id": "promote-ly11-office-花蓮縣-傅崐萁",
           "county": "花蓮縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:39.282305+00:00",
+          "checked_at": "2026-09-26T12:11:12.579012+00:00",
           "target_path": "knowledge/local/花蓮縣/relationships.jsonl",
           "record_id": "ly11-office-花蓮縣-傅崐萁",
           "evidence_lead_ids": [
@@ -2217,10 +2353,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "633ef118d1a22112fb8e909c884c23aec77b0fc5768a78f8bc467f1268f43e0a",
+          "record_sha256": "aac6a3b62ffd8443a978ecd3f66759f11fad49e4e13b7c381d52af1f1919b351",
           "evidence_snapshot_sha256": "24f336ea5148e7a5982f1f2ebbbd15f192517f042ffd99cf8ca4294dc47bda13",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -2232,12 +2370,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-506337a5ba67b25ce1f55e9b",
+          "receipt_id": "promotion-0ecb92362d64e6ee18f7a9d1",
           "proposal_id": "promote-ly11-office-台東縣-黃建賓",
           "county": "台東縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:39.946714+00:00",
+          "checked_at": "2026-09-26T12:11:13.594161+00:00",
           "target_path": "knowledge/local/台東縣/relationships.jsonl",
           "record_id": "ly11-office-台東縣-黃建賓",
           "evidence_lead_ids": [
@@ -2255,10 +2393,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "0ff091ae92209ababc1989429bc31d16236c9ca67f3463a56e1fc6dd4bb7cb52",
+          "record_sha256": "8daa68b84b60b6ca2c3cbefb70beda2bc6c43f20df3f97f305f76898c31f2184",
           "evidence_snapshot_sha256": "f43b568a9a750e6afd0f2edada6adda9e5f0883cf7de70379a6bfdbf31106ba6",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -2270,12 +2410,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-17ded8450527ec24ac6a01bb",
+          "receipt_id": "promotion-f675543215f086b7e3452b82",
           "proposal_id": "promote-ly11-office-澎湖縣-楊曜",
           "county": "澎湖縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:40.574398+00:00",
+          "checked_at": "2026-09-26T12:11:14.613136+00:00",
           "target_path": "knowledge/local/澎湖縣/relationships.jsonl",
           "record_id": "ly11-office-澎湖縣-楊曜",
           "evidence_lead_ids": [
@@ -2293,10 +2433,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "271c431e218b7b6a2b064717c89eb3a548af76111481cd444cd87ce11f770fc4",
+          "record_sha256": "3c996497083b3444cadfa2ab3e032377633810d5596a725f38d2954b4c1c1a82",
           "evidence_snapshot_sha256": "6ee85d64b8a90bf4a6a25f76e5a71418e47714b66a7a5cd9d98d550c63f0b780",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -2308,12 +2450,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-196b2a57e673fe1cce37d78f",
+          "receipt_id": "promotion-2a0fb5d8ce027238158bdf15",
           "proposal_id": "promote-ly11-office-金門縣-陳玉珍",
           "county": "金門縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:41.012493+00:00",
+          "checked_at": "2026-09-26T12:11:15.339119+00:00",
           "target_path": "knowledge/local/金門縣/relationships.jsonl",
           "record_id": "ly11-office-金門縣-陳玉珍",
           "evidence_lead_ids": [
@@ -2331,10 +2473,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "bffffb318f8c30c788a860e571340bf4d86e91c17e540ef4efd029315a355f8f",
+          "record_sha256": "a06328150b689d3b01a7bce15e6b2ae42709cfd9de93bf88bb48689367eb9f3a",
           "evidence_snapshot_sha256": "b540a293c08f8c3e6080719dec674f1d61d1e16b79fb5597d261d387c3f93bc9",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
@@ -2346,12 +2490,12 @@
       "status": "complete",
       "receipts": [
         {
-          "receipt_id": "promotion-ad8b245f93780bf640573010",
+          "receipt_id": "promotion-e01b83b4495014a33bc1ff1a",
           "proposal_id": "promote-ly11-office-連江縣-陳雪生",
           "county": "連江縣",
           "target_type": "local_relationship",
           "decision": "promoted",
-          "checked_at": "2026-09-26T12:01:41.490928+00:00",
+          "checked_at": "2026-09-26T12:11:16.070036+00:00",
           "target_path": "knowledge/local/連江縣/relationships.jsonl",
           "record_id": "ly11-office-連江縣-陳雪生",
           "evidence_lead_ids": [
@@ -2369,10 +2513,12 @@
           "contradiction_check_completed": true,
           "contradictory_lead_ids": [],
           "contradiction_check_note": "立法院本屆名單確認當次仍在任；中選會2024區域立委資料確認同名當選人的選區與政黨。只有兩個官方來源姓名一致時才晉升；未匹配的2024當選人留作待核，不以歷史結果推定現任。",
-          "record_sha256": "4a7bebd942bb8ca5ff0ccbbcf48805e5ebaee8a4bb9dec99a7c89ef5a9672d8e",
+          "record_sha256": "8b554b0ff9a30912dea7cce2d8937b6fc84e8085964c7493dfa91b94eb3a177c",
           "evidence_snapshot_sha256": "7c416d299d9f69a482d182c2177161aa506d97068884dea21d2b3fda5452834b",
           "reasons": [],
-          "warnings": [],
+          "warnings": [
+            "existing record replaced by newer/equal verified record"
+          ],
           "knowledge_builder_version": "1.4.0"
         }
       ]
