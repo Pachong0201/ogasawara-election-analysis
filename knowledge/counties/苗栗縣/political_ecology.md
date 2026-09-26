@@ -2,14 +2,15 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T11:17:20+00:00
+生成时间：2026-09-26T11:30:18+00:00
 
 ## 历史政治知识（L2）
 - 苗栗縣-population-2025: 截至2025年12月底，苗栗縣户籍登记人口为531,172人，较2024年12月底减少1,682人。（2024-12-31—2025-12-31）
 - 苗栗縣-primary-employment-industry-2021: 2021年工业及服务业普查按从业人数观察，苗栗縣从业人数最多的行业为电子零组件制造业。（2021-01-01—2021-12-31）
 
 ## 当前地方关系（L3）
-- 暂无已晋升当前地方关系。
+- ly11-office-苗栗縣-ly11-3fecf0c14a8a59d5: 邱鎮軍 中國國民黨徽章 邱鎮軍 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-苗栗縣-ly11-bdda1bceecbc51be: 陳超明 無徽章 陳超明 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-74f0f9006a20bb1c: 陳品安；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -75,7 +76,8 @@
 - 暂无已晋升地方议题。
 
 ## 人物—组织—地区关系索引
-- 暂无可索引关系。
+- 邱鎮軍 中國國民黨徽章 邱鎮軍 → office_holding → 立法院第11屆立法委員；region=苗栗縣；current_use=current_usable
+- 陳超明 無徽章 陳超明 → office_holding → 立法院第11屆立法委員；region=苗栗縣；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 苗栗縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

@@ -2,14 +2,21 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T11:16:19+00:00
+生成时间：2026-09-26T11:30:10+00:00
 
 ## 历史政治知识（L2）
 - 台北市-population-2025: 截至2025年12月底，台北市户籍登记人口为2,439,507人，较2024年12月底减少51,362人。（2024-12-31—2025-12-31）
 - 台北市-primary-employment-industry-2021: 2021年工业及服务业普查按从业人数观察，台北市从业人数最多的行业为批发业。（2021-01-01—2021-12-31）
 
 ## 当前地方关系（L3）
-- 暂无已晋升当前地方关系。
+- ly11-office-台北市-ly11-b9839dcd96dfb105: 王世堅 民主進步黨徽章 王世堅 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台北市-ly11-664a710955537862: 王鴻薇 中國國民黨徽章 王鴻薇 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台北市-ly11-f36dfd7074706b9e: 吳沛憶 民主進步黨徽章 吳沛憶 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台北市-ly11-5db7abd87cc79186: 吳思瑤 民主進步黨徽章 吳思瑤 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台北市-ly11-210b22d7d0bdba0b: 李彥秀 中國國民黨徽章 李彥秀 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台北市-ly11-03ba818813968295: 徐巧芯 中國國民黨徽章 徐巧芯 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台北市-ly11-fc89a4fb3be98942: 賴士葆 中國國民黨徽章 賴士葆 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台北市-ly11-c82d70d247144659: 羅智強 中國國民黨徽章 羅智強 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-3345f202025019f7: 郭璽；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -121,7 +128,14 @@
 - 暂无已晋升地方议题。
 
 ## 人物—组织—地区关系索引
-- 暂无可索引关系。
+- 王世堅 民主進步黨徽章 王世堅 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable
+- 王鴻薇 中國國民黨徽章 王鴻薇 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable
+- 吳沛憶 民主進步黨徽章 吳沛憶 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable
+- 吳思瑤 民主進步黨徽章 吳思瑤 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable
+- 李彥秀 中國國民黨徽章 李彥秀 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable
+- 徐巧芯 中國國民黨徽章 徐巧芯 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable
+- 賴士葆 中國國民黨徽章 賴士葆 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable
+- 羅智強 中國國民黨徽章 羅智強 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 台北市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

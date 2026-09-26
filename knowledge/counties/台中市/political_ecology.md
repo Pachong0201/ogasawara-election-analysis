@@ -2,14 +2,21 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T11:17:32+00:00
+生成时间：2026-09-26T11:30:20+00:00
 
 ## 历史政治知识（L2）
 - 台中市-population-2025: 截至2025年12月底，台中市户籍登记人口为2,868,465人，较2024年12月底增加7,864人。（2024-12-31—2025-12-31）
 - 台中市-primary-employment-industry-2021: 2021年工业及服务业普查按从业人数观察，台中市从业人数最多的行业为批发业。（2021-01-01—2021-12-31）
 
 ## 当前地方关系（L3）
-- 暂无已晋升当前地方关系。
+- ly11-office-台中市-ly11-00cce2851701a59e: 江啟臣 中國國民黨徽章 江啟臣 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台中市-ly11-a1a57e9ca8feec12: 何欣純 民主進步黨徽章 何欣純 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台中市-ly11-c05de9d2797ceb01: 黃健豪 中國國民黨徽章 黃健豪 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台中市-ly11-a3f70ff898309ee6: 楊瓊瓔 中國國民黨徽章 楊瓊瓔 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台中市-ly11-1eaa175336248d82: 廖偉翔 中國國民黨徽章 廖偉翔 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台中市-ly11-a155d3ff05986e18: 蔡其昌 民主進步黨徽章 蔡其昌 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台中市-ly11-2bbd18b65d913636: 顏寬恒 中國國民黨徽章 顏寬恒 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台中市-ly11-6aa570839d86e505: 羅廷瑋 中國國民黨徽章 羅廷瑋 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-673b7df7ddf57fd2: 何欣純；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -122,7 +129,14 @@
 - 暂无已晋升地方议题。
 
 ## 人物—组织—地区关系索引
-- 暂无可索引关系。
+- 江啟臣 中國國民黨徽章 江啟臣 → office_holding → 立法院第11屆立法委員；region=台中市；current_use=current_usable
+- 何欣純 民主進步黨徽章 何欣純 → office_holding → 立法院第11屆立法委員；region=台中市；current_use=current_usable
+- 黃健豪 中國國民黨徽章 黃健豪 → office_holding → 立法院第11屆立法委員；region=台中市；current_use=current_usable
+- 楊瓊瓔 中國國民黨徽章 楊瓊瓔 → office_holding → 立法院第11屆立法委員；region=台中市；current_use=current_usable
+- 廖偉翔 中國國民黨徽章 廖偉翔 → office_holding → 立法院第11屆立法委員；region=台中市；current_use=current_usable
+- 蔡其昌 民主進步黨徽章 蔡其昌 → office_holding → 立法院第11屆立法委員；region=台中市；current_use=current_usable
+- 顏寬恒 中國國民黨徽章 顏寬恒 → office_holding → 立法院第11屆立法委員；region=台中市；current_use=current_usable
+- 羅廷瑋 中國國民黨徽章 羅廷瑋 → office_holding → 立法院第11屆立法委員；region=台中市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 台中市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

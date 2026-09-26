@@ -2,14 +2,19 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T11:16:45+00:00
+生成时间：2026-09-26T11:30:15+00:00
 
 ## 历史政治知识（L2）
 - 桃園市-population-2025: 截至2025年12月底，桃園市户籍登记人口为2,355,106人，较2024年12月底增加16,458人。（2024-12-31—2025-12-31）
 - 桃園市-primary-employment-industry-2021: 2021年工业及服务业普查按从业人数观察，桃園市从业人数最多的行业为电子零组件制造业。（2021-01-01—2021-12-31）
 
 ## 当前地方关系（L3）
-- 暂无已晋升当前地方关系。
+- ly11-office-桃園市-ly11-db3b84603f59628b: 牛煦庭 中國國民黨徽章 牛煦庭 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-桃園市-ly11-02ac24ca61fb3775: 呂玉玲 中國國民黨徽章 呂玉玲 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-桃園市-ly11-1b9bacbb97fc678d: 邱若華 中國國民黨徽章 邱若華 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-桃園市-ly11-f919906d2be194b7: 涂權吉 中國國民黨徽章 涂權吉 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-桃園市-ly11-29ab33a34a7a0b61: 萬美玲 中國國民黨徽章 萬美玲 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-桃園市-ly11-798147750ec548d4: 魯明哲 中國國民黨徽章 魯明哲 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-6a799c19a64d1b81: 張善政；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -128,7 +133,12 @@
 - 暂无已晋升地方议题。
 
 ## 人物—组织—地区关系索引
-- 暂无可索引关系。
+- 牛煦庭 中國國民黨徽章 牛煦庭 → office_holding → 立法院第11屆立法委員；region=桃園市；current_use=current_usable
+- 呂玉玲 中國國民黨徽章 呂玉玲 → office_holding → 立法院第11屆立法委員；region=桃園市；current_use=current_usable
+- 邱若華 中國國民黨徽章 邱若華 → office_holding → 立法院第11屆立法委員；region=桃園市；current_use=current_usable
+- 涂權吉 中國國民黨徽章 涂權吉 → office_holding → 立法院第11屆立法委員；region=桃園市；current_use=current_usable
+- 萬美玲 中國國民黨徽章 萬美玲 → office_holding → 立法院第11屆立法委員；region=桃園市；current_use=current_usable
+- 魯明哲 中國國民黨徽章 魯明哲 → office_holding → 立法院第11屆立法委員；region=桃園市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 桃園市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

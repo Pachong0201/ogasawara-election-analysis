@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T11:16:32+00:00
+生成时间：2026-09-26T11:30:12+00:00
 
 ## 历史政治知识（L2）
 - new-taipei-2010-upgrade-29-districts: 新北市政府公开资料记载，新北市自2010年12月25日起改制为直辖市，全市划分为29区。（2010-12-25—2026-09-26）
@@ -11,6 +11,18 @@
 
 ## 当前地方关系（L3）
 - ntpc-tsai-ingwen-su-chiaohui-20260820: 蔡英文 → campaign_cooperation → 苏巧慧竞选总部；status=active_verified；current_use=current_usable；time_scope=2026-08-20
+- ly11-office-新北市-ly11-67ce45272343e1d3: 吳秉叡 民主進步黨徽章 吳秉叡 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-新北市-ly11-0fcf0557e533c7ac: 吳琪銘 民主進步黨徽章 吳琪銘 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-新北市-ly11-7747ecf0d833986a: 李坤城 民主進步黨徽章 李坤城 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-新北市-ly11-d10f1fef03ba70fa: 林淑芬 民主進步黨徽章 林淑芬 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-新北市-ly11-5caef8bb38e8adc5: 林德福 中國國民黨徽章 林德福 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-新北市-ly11-b69ab7ce9b7822b0: 洪孟楷 中國國民黨徽章 洪孟楷 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-新北市-ly11-28ab2e2c0d1c78da: 張宏陸 民主進步黨徽章 張宏陸 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-新北市-ly11-b99e83badcf0b51e: 張智倫 中國國民黨徽章 張智倫 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-新北市-ly11-513ba40455e89ffe: 葉元之 中國國民黨徽章 葉元之 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-新北市-ly11-180220026d0925be: 廖先翔 中國國民黨徽章 廖先翔 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-新北市-ly11-04eff88458b0b405: 羅明才 中國國民黨徽章 羅明才 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-新北市-ly11-ac129291f937e18e: 蘇巧慧 民主進步黨徽章 蘇巧慧 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-c5eea051b105fed6: 蘇巧慧；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -134,6 +146,18 @@
 
 ## 人物—组织—地区关系索引
 - 蔡英文 → campaign_cooperation → 苏巧慧竞选总部；region=新北市；current_use=current_usable
+- 吳秉叡 民主進步黨徽章 吳秉叡 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
+- 吳琪銘 民主進步黨徽章 吳琪銘 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
+- 李坤城 民主進步黨徽章 李坤城 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
+- 林淑芬 民主進步黨徽章 林淑芬 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
+- 林德福 中國國民黨徽章 林德福 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
+- 洪孟楷 中國國民黨徽章 洪孟楷 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
+- 張宏陸 民主進步黨徽章 張宏陸 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
+- 張智倫 中國國民黨徽章 張智倫 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
+- 葉元之 中國國民黨徽章 葉元之 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
+- 廖先翔 中國國民黨徽章 廖先翔 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
+- 羅明才 中國國民黨徽章 羅明才 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
+- 蘇巧慧 民主進步黨徽章 蘇巧慧 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 新北市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

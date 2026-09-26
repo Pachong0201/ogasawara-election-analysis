@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 雲林縣
-generated_at: '2026-09-26T11:18:07+00:00'
-content_sha256: a378216b37fca6c274bd628353b99f13acc8a3a9444bff0f91ceed37a654b20b
+generated_at: '2026-09-26T11:30:24+00:00'
+content_sha256: 8b93fb573e5946e0b306ea8983de29cb5ce5ad10fa267ef78fad277e170b9e33
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/雲林縣/claims.jsonl
@@ -16,14 +16,14 @@ generated_indexes:
   entity_relation_index: knowledge/counties/雲林縣/entity_relation_index.jsonl
 counts:
   historical_claim: 2
-  local_relationship: 0
+  local_relationship: 2
   candidate_profile: 77
   current_issue: 0
-evidence_index_count: 79
-entity_relation_count: 0
+evidence_index_count: 81
+entity_relation_count: 2
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 83
+promotion_receipt_count: 85
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

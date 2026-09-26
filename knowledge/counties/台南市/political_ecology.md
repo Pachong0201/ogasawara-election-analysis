@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T11:18:41+00:00
+生成时间：2026-09-26T11:30:28+00:00
 
 ## 历史政治知识（L2）
 - tainan-2010-merger-37-districts: 台南市政府公开资料记载，2010年12月25日原台南县与台南市合并，合并后全市分为37个行政区。（2010-12-25—2026-09-26）
@@ -12,6 +12,12 @@
 
 ## 当前地方关系（L3）
 - tainan-lin-chunhsien-chen-tingfei-20260115: 林俊宪 → public_endorsement → 陈亭妃；status=active_verified；current_use=current_usable；time_scope=2026-01-15
+- ly11-office-台南市-ly11-4ef7b84c2b2b1091: 王定宇 民主進步黨徽章 王定宇 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台南市-ly11-5e67ace00f1f0421: 林宜瑾 民主進步黨徽章 林宜瑾 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台南市-ly11-9d17ef001b9e0051: 林俊憲 民主進步黨徽章 林俊憲 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台南市-ly11-7e17c3fecac90031: 郭國文 民主進步黨徽章 郭國文 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台南市-ly11-2c70be431629d658: 陳亭妃 民主進步黨徽章 陳亭妃 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- ly11-office-台南市-ly11-b237d6dccd1352cc: 賴惠員 民主進步黨徽章 賴惠員 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-6d52520f12586f61: 謝龍介；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -112,6 +118,12 @@
 
 ## 人物—组织—地区关系索引
 - 林俊宪 → public_endorsement → 陈亭妃；region=台南市；current_use=current_usable
+- 王定宇 民主進步黨徽章 王定宇 → office_holding → 立法院第11屆立法委員；region=台南市；current_use=current_usable
+- 林宜瑾 民主進步黨徽章 林宜瑾 → office_holding → 立法院第11屆立法委員；region=台南市；current_use=current_usable
+- 林俊憲 民主進步黨徽章 林俊憲 → office_holding → 立法院第11屆立法委員；region=台南市；current_use=current_usable
+- 郭國文 民主進步黨徽章 郭國文 → office_holding → 立法院第11屆立法委員；region=台南市；current_use=current_usable
+- 陳亭妃 民主進步黨徽章 陳亭妃 → office_holding → 立法院第11屆立法委員；region=台南市；current_use=current_usable
+- 賴惠員 民主進步黨徽章 賴惠員 → office_holding → 立法院第11屆立法委員；region=台南市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 台南市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
