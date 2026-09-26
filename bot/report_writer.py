@@ -64,13 +64,61 @@ def _compact_campaign_state(state: Dict[str, Any]) -> Dict[str, Any]:
     return compact
 
 
+def _trim_lead(lead: Dict[str, Any]) -> Dict[str, Any]:
+    keep = {
+        key: lead.get(key)
+        for key in ("lead_id", "title", "url", "publisher_id", "body_status",
+                    "content_sha256", "page_date", "first_seen_at",
+                    "jurisdictions", "verification_status", "duplicate_of")
+        if lead.get(key) is not None
+    }
+    excerpt = str(lead.get("evidence_excerpt") or lead.get("content") or "")
+    if excerpt:
+        keep["evidence_excerpt"] = excerpt[:300]
+    return keep
+
+
+def _trim_event(event: Dict[str, Any]) -> Dict[str, Any]:
+    trimmed = dict(event)
+    excerpt = str(trimmed.get("evidence_excerpt") or "")
+    if excerpt:
+        trimmed["evidence_excerpt"] = excerpt[:420]
+    return trimmed
+
+
 def _analysis_payload(context: Dict[str, Any]) -> Dict[str, Any]:
     analysis = context.get("analysis_context", {}) if isinstance(context, dict) else {}
     manifest = context.get("analysis_manifest", {}) if isinstance(context, dict) else {}
+
+    # The writer only needs structured events, evidence excerpts and status
+    # metadata — raw retrieval dumps (article bodies etc.) would exceed the
+    # model's context window and burn tokens without improving the prose.
+    local_knowledge = dict(analysis.get("local_knowledge", {}))
+    if isinstance(local_knowledge.get("retrieval"), dict):
+        raw_retrieval = local_knowledge.pop("retrieval")
+        local_knowledge["retrieval_summary"] = {
+            "status": raw_retrieval.get("status"),
+            "lead_count": raw_retrieval.get("lead_count"),
+            "available": raw_retrieval.get("available"),
+        }
+
+    campaign_state = _compact_campaign_state(analysis.get("campaign_state", {}))
+    leads = campaign_state.get("retrieval_leads") or []
+    if leads:
+        campaign_state["retrieval_leads"] = [_trim_lead(lead) for lead in leads[:8]]
+
+    events = analysis.get("current_events", [])
+    if events:
+        analysis["current_events"] = [_trim_event(e) for e in events[:24]]
+    resolution = analysis.get("campaign_event_resolution", {})
+    resolved = resolution.get("events")
+    if resolved:
+        resolution["events"] = [_trim_event(e) for e in resolved[:24]]
+
     return {
         "task": analysis.get("task", {}),
         "readiness": analysis.get("readiness", {}),
-        "campaign_state": _compact_campaign_state(analysis.get("campaign_state", {})),
+        "campaign_state": campaign_state,
         "campaign_event_resolution": analysis.get("campaign_event_resolution", {}),
         "current_candidates": analysis.get("current_candidates", []),
         "current_events": analysis.get("current_events", []),
@@ -79,7 +127,7 @@ def _analysis_payload(context: Dict[str, Any]) -> Dict[str, Any]:
         "split_ticket": analysis.get("split_ticket", []),
         "candidate_residuals": analysis.get("candidate_residuals", []),
         "spatial_anomalies": analysis.get("spatial_anomalies", []),
-        "local_knowledge": analysis.get("local_knowledge", {}),
+        "local_knowledge": local_knowledge,
         "historical_baseline": analysis.get("historical_baseline", {}),
         "evidence_summary": analysis.get("evidence_summary", {}),
         "unknowns": analysis.get("unknowns", []),
@@ -282,7 +330,87 @@ class OpenAIReportWriter(BaseReportWriter):
         return await asyncio.to_thread(self._write_sync, request, context)
 
 
-def build_report_writer(api_key: str = "", model: str = "gpt-5.6-sol") -> BaseReportWriter:
+class ChatCompletionsReportWriter(BaseReportWriter):
+    """Report writer for OpenAI-compatible chat/completions endpoints.
+
+    Used for GLM models served through OpenCode Go, which requires a stable
+    ``x-opencode-session`` header and a custom user agent.
+    """
+
+    def __init__(self, api_key: str, model: str, base_url: str, session: str = ""):
+        self.api_key = api_key
+        self.model = model
+        self.base_url = base_url.rstrip("/")
+        self.session = session or "ogasawara-writer"
+
+    def _write_sync(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
+        import hashlib
+        import urllib.request
+
+        # Stable per-conversation-ish session; deterministic hash keeps
+        # routing/prompt-caching effective across worker restarts.
+        session = (
+            "ogasawara-writer-"
+            + hashlib.md5(self.model.encode("utf-8")).hexdigest()[:16]
+        )
+        payload = _analysis_payload(context)
+        mode_hint = {
+            FULL_ANALYSIS: "完整分析，优先当前选战，控制在约1200—2200字。",
+            CAMPAIGN_UPDATE: "重点回答与近期/上一快照相比发生了什么，控制在约600—1200字。",
+            POLL_ANALYSIS: "只重点解释民调方法、可比性、未决定比例及其与结构的关系。",
+            SOURCES: "简要说明判断依据，并列出最关键来源。",
+        }.get(request.intent, "回答用户追问，优先复用现有 Context，不重复整篇报告。")
+
+        body = json.dumps({
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": SYSTEM_INSTRUCTIONS},
+                {
+                    "role": "user",
+                    "content": (
+                        f"用户问题：{request.text}\n"
+                        f"任务模式：{mode_hint}\n"
+                        "Analysis Context(JSON)：\n"
+                        + json.dumps(payload, ensure_ascii=False)
+                    ),
+                },
+            ],
+            "max_tokens": 6000,
+            "temperature": 0.3,
+        }, ensure_ascii=False).encode("utf-8")
+        req = urllib.request.Request(
+            self.base_url + "/chat/completions", body,
+            {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {self.api_key}",
+                "User-Agent": "ogasawara-election-research/0.1",
+                "x-opencode-session": session,
+            },
+        )
+        with urllib.request.urlopen(req, timeout=120) as response:
+            data = json.loads(response.read())
+        text = str(
+            (data.get("choices") or [{}])[0].get("message", {}).get("content", "")
+        ).strip()
+        if not text:
+            raise RuntimeError("chat/completions returned empty content")
+        return text
+
+    async def write(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
+        if request.intent == HELP:
+            return help_text()
+        return await asyncio.to_thread(self._write_sync, request, context)
+
+
+def build_report_writer(
+    api_key: str = "",
+    model: str = "gpt-5.6-sol",
+    base_url: str = "",
+) -> BaseReportWriter:
+    if api_key and base_url and "opencode.ai" in base_url:
+        return ChatCompletionsReportWriter(
+            api_key=api_key, model=model, base_url=base_url
+        )
     if api_key:
         return OpenAIReportWriter(api_key=api_key, model=model)
     return DeterministicReportWriter()

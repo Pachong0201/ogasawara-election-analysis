@@ -26,6 +26,69 @@ def _send_uuid(prefix: str, message_id: str) -> str:
     return f"{prefix}-{digest}"
 
 
+# Substantive report replies are delivered as a Word document instead of a
+# long chat bubble; short hints (e.g. "请指定县市") stay as text.
+DOCX_MIN_LENGTH = 400
+
+
+async def send_reply(channel: Any, inbound: Any, text: str) -> Any:
+    """Send the reply, preferring a .docx document for full reports."""
+    base_opts = {
+        "reply_to": inbound.message_id,
+        "reply_in_thread": inbound.chat_type in {"group", "topic"},
+        "receive_id_type": "chat_id",
+    }
+    if len(text) >= DOCX_MIN_LENGTH:
+        try:
+            from .docx_writer import build_docx
+
+            data = build_docx(text, title="选情分析报告")
+            result = await channel.send(
+                inbound.chat_id,
+                {
+                    "file": {
+                        "source": data,
+                        "file_name": f"选情分析报告-{datetime_now_slug()}.docx",
+                    }
+                },
+                {**base_opts, "uuid": _send_uuid("ogasawara-doc", inbound.message_id)},
+            )
+            if result.success:
+                return result
+            LOG.warning(
+                "docx reply send failed (%s); falling back to markdown",
+                result.error,
+            )
+        except Exception:
+            LOG.exception("docx generation failed; falling back to markdown")
+    result = await channel.send(
+        inbound.chat_id,
+        {"markdown": text},
+        {**base_opts, "uuid": _send_uuid("ogasawara-final", inbound.message_id)},
+    )
+    if not result.success:
+        LOG.warning(
+            "final reply send failed (%s); retrying as plain text",
+            result.error,
+        )
+        result = await channel.send(
+            inbound.chat_id,
+            {"text": text},
+            {
+                "reply_to": inbound.message_id,
+                "receive_id_type": "chat_id",
+                "uuid": _send_uuid("ogasawara-text", inbound.message_id),
+            },
+        )
+    return result
+
+
+def datetime_now_slug() -> str:
+    import datetime as _dt
+
+    return _dt.datetime.now(_dt.timezone.utc).strftime("%Y%m%d%H%M")
+
+
 def _inbound(message: Any) -> InboundMessage:
     conversation = getattr(message, "conversation", None)
     return InboundMessage(
@@ -49,6 +112,7 @@ def build_service(config: BotConfig) -> ElectionBotService:
     writer = build_report_writer(
         api_key=config.openai_api_key,
         model=config.openai_writer_model,
+        base_url=config.openai_base_url,
     )
     return ElectionBotService(
         config=config,
@@ -128,30 +192,7 @@ async def run(feishu_channel_cls: Any = None, inbound_config: Any = None) -> Non
             reply = await service.handle_message(inbound)
             if reply is None:
                 return
-            result = await channel.send(
-                inbound.chat_id,
-                {"markdown": reply.text},
-                {
-                    "reply_to": inbound.message_id,
-                    "reply_in_thread": inbound.chat_type in {"group", "topic"},
-                    "receive_id_type": "chat_id",
-                    "uuid": _send_uuid("ogasawara-final", inbound.message_id),
-                },
-            )
-            if not result.success:
-                LOG.warning(
-                    "final reply send failed (%s); retrying as plain text",
-                    result.error,
-                )
-                result = await channel.send(
-                    inbound.chat_id,
-                    {"text": reply.text},
-                    {
-                        "reply_to": inbound.message_id,
-                        "receive_id_type": "chat_id",
-                        "uuid": _send_uuid("ogasawara-final-text", inbound.message_id),
-                    },
-                )
+            result = await send_reply(channel, inbound, reply.text)
             result_id = str(getattr(result, "message_id", "") or "")
             if result_id:
                 service.link_outbound_message(result_id, reply.conversation_key)

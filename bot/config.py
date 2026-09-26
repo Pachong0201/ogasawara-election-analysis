@@ -32,6 +32,7 @@ class BotConfig:
     lark_app_id: str = ""
     lark_app_secret: str = ""
     openai_api_key: str = ""
+    openai_base_url: str = ""
     openai_router_model: str = "gpt-5.6-luna"
     openai_writer_model: str = "gpt-5.6-sol"
     skill_mode: str = "online"
@@ -57,6 +58,7 @@ class BotConfig:
             lark_app_id=os.getenv("LARK_APP_ID", "").strip(),
             lark_app_secret=os.getenv("LARK_APP_SECRET", "").strip(),
             openai_api_key=os.getenv("OPENAI_API_KEY", "").strip(),
+            openai_base_url=os.getenv("OPENAI_BASE_URL", "").strip(),
             openai_router_model=os.getenv("OPENAI_ROUTER_MODEL", "gpt-5.6-luna").strip(),
             openai_writer_model=os.getenv("OPENAI_WRITER_MODEL", "gpt-5.6-sol").strip(),
             skill_mode=os.getenv("OGASAWARA_BOT_MODE", "online").strip().lower(),
