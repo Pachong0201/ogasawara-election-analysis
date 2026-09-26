@@ -259,13 +259,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
     parser.add_argument("--counties", default="")
     parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--allow-partial", action="store_true")
     args = parser.parse_args(argv)
     result = CurrentCandidateMaterializer(args.repo_root).materialize_many(
         _parse_counties(args.counties),
         apply=args.apply,
     )
     print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0 if result["failure_count"] == 0 else 3
+    if result["failure_count"] == 0 and result["complete_count"] == result["county_count"]:
+        return 0
+    if args.allow_partial and result["candidate_count"] > 0:
+        return 0
+    return 3
 
 
 if __name__ == "__main__":
