@@ -1,0 +1,85 @@
+version: 1.0.0
+as_of: 2026-09-26
+purpose: >
+  22县市社会基础层的官方数据源目录。目录记录只用于检索与离线导入，
+  不因数据集存在就推断任何政治态度、组织动员能力或选举结果。
+
+sources:
+  age_structure_2020:
+    kind: age_structure
+    topic: demographics_industry
+    source_id: dgbas_census_age_structure_2020
+    source_name: 行政院主计总处「常住人口之年龄结构（不含移工）」
+    source_grade: A
+    independence_key: dgbas
+    dataset_url: https://data.gov.tw/dataset/24240
+    update_frequency: 每10年
+    time_scope: "2020人口及住宅普查"
+    formats: [xml]
+    scope_boundary: >
+      仅用于描述2020年普查常住人口年龄结构，不等同2026年户籍年龄结构，
+      不得直接推断个人政治态度或投票选择。
+
+  temples:
+    kind: religious_organizations
+    topic: religious_organizations
+    source_id: moi_religion_temples
+    source_name: 内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」
+    source_grade: A
+    independence_key: moi_religion
+    dataset_url: https://data.gov.tw/dataset/8203
+    update_frequency: 不定期
+    formats: [xml]
+    scope_boundary: >
+      只确认宗教组织登记/资讯系统中的组织、行政区与地址等公开资料；
+      不因寺庙存在推断其政治立场、支持对象或动员效果。
+
+  social_groups:
+    kind: civil_associations
+    topic: civil_associations
+    source_id: moi_national_social_groups_by_area
+    source_name: 内政部合作及人民团体司「全国性社会团体名册-按地区」
+    source_grade: A
+    independence_key: moi_groups
+    dataset_url: https://data.gov.tw/dataset/147595
+    live_search_url: https://grouptw.moi.gov.tw/searchGroup
+    update_frequency: 不定期
+    formats: [csv]
+    scope_boundary: >
+      开放资料为历史名册，当前状态需再到人民团体数位柜台复核；
+      团体存在、地址或负责人资料不得直接推断政治关系。
+
+  farmers_association_members:
+    kind: farmers_fishermen_associations
+    topic: farmers_fishermen_associations
+    source_id: moa_farmers_association_members
+    source_name: 农业部「农会会员数」
+    source_grade: A
+    independence_key: moa
+    dataset_url: https://data.gov.tw/dataset/87858
+    update_frequency: 每1年
+    formats: [json]
+    scope_boundary: >
+      仅描述县市、会员类别、年度与人数等组织基础资料；
+      不据会员规模推断政治支持或选举动员能力。
+
+  fishermen_association_members:
+    kind: farmers_fishermen_associations
+    topic: farmers_fishermen_associations
+    source_id: moa_fishermen_association_members
+    source_name: 农业部渔业署「每年渔会会员数统计资料」
+    source_grade: A
+    independence_key: moa_fisheries
+    dataset_url: https://data.gov.tw/dataset/135723
+    update_frequency: 每1年
+    formats: [json, csv]
+    scope_boundary: >
+      仅描述县市、会员类别、资料年、会员性质与人数；
+      不据会员规模推断政治支持或选举动员能力。
+
+key_issue_policy:
+  topic: key_issues
+  rule: >
+    关键地方议题不使用静态目录直接生成事实。必须以具体县市、具体时间范围检索，
+    优先使用主管机关A/B级资料；如仅有媒体C级资料，至少需要两个不同independence_key
+    的正文来源，并保留反证/更正检查。不得把议题热度转换为候选人支持度或胜负预测。
