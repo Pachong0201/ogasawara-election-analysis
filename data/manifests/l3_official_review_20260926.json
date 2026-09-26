@@ -1,0 +1,400 @@
+{
+  "generated_at": "2026-09-26T15:17:47+00:00",
+  "county_count": 5,
+  "proposal_count": 14,
+  "promoted_count": 14,
+  "receipts": [
+    {
+      "receipt_id": "promotion-757f8afba8b5d036e5ccf061",
+      "proposal_id": "promote-official-event-20260926-0-0",
+      "county": "高雄市",
+      "target_type": "local_relationship",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:47.255318+00:00",
+      "target_path": "knowledge/local/高雄市/relationships.jsonl",
+      "record_id": "official-event-20260926-0-0",
+      "evidence_lead_ids": [
+        "official-body-20260926-0"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "高雄市 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "消防局事後新聞稿確認受贈與總幹事身分；檢索撤回澄清未取得推翻此日期事件的資料。市府行程僅作輔助，不算獨立來源。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "1d9f245bfb2fca769fbb4c6a91c63c34e1739b93d5ad0ed9f8c740e89262ec71",
+      "evidence_snapshot_sha256": "73b8a922844eba314637c72da0f2607ca7a1112deac1240b60c2ab868bfc593c",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-0c918e5f98b8425b4e938884",
+      "proposal_id": "promote-official-event-20260926-0-1",
+      "county": "高雄市",
+      "target_type": "local_relationship",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:47.265822+00:00",
+      "target_path": "knowledge/local/高雄市/relationships.jsonl",
+      "record_id": "official-event-20260926-0-1",
+      "evidence_lead_ids": [
+        "official-body-20260926-0"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "高雄市 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "消防局事後新聞稿確認受贈與總幹事身分；檢索撤回澄清未取得推翻此日期事件的資料。市府行程僅作輔助，不算獨立來源。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "d3e56266719e2261dac6fac91384e14198a05e6ba92170c1b896500e13551f3a",
+      "evidence_snapshot_sha256": "73b8a922844eba314637c72da0f2607ca7a1112deac1240b60c2ab868bfc593c",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-2c41e4abe2902cd57d01716f",
+      "proposal_id": "promote-official-issue-20260926-0-0",
+      "county": "高雄市",
+      "target_type": "current_issue",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:47.276317+00:00",
+      "target_path": "knowledge/local/高雄市/issues.jsonl",
+      "record_id": "official-issue-20260926-0-0",
+      "evidence_lead_ids": [
+        "official-body-20260926-0"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "高雄市 当前与近十年哪些地方治理、建设、环境或产业议题具有持续公开证据？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "消防局事後新聞稿確認受贈與總幹事身分；檢索撤回澄清未取得推翻此日期事件的資料。市府行程僅作輔助，不算獨立來源。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "e0e94303dbd51b83c85cc600db582eb7c51d21174278199312026c64f4de3fa7",
+      "evidence_snapshot_sha256": "73b8a922844eba314637c72da0f2607ca7a1112deac1240b60c2ab868bfc593c",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-d37d7e03980b072f5e99d8c5",
+      "proposal_id": "promote-official-event-20260926-1-0",
+      "county": "台南市",
+      "target_type": "local_relationship",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:48.544114+00:00",
+      "target_path": "knowledge/local/台南市/relationships.jsonl",
+      "record_id": "official-event-20260926-1-0",
+      "evidence_lead_ids": [
+        "official-body-20260926-1"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "台南市 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "已核對事後官方新聞正文與修改日期；反向检索未取得否定當日出席的資料。僅記錄活動參與，不延伸組織支持。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "f3ac7a3404919623fcae473d0d067ab2a4851891fa47536a81525e8de038b7c2",
+      "evidence_snapshot_sha256": "dc489f17ac01fac897ecbe7e34be6dbf3e63ff78730ac6fd1fac13b156edfca9",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-24b8cac6906863e3275990bb",
+      "proposal_id": "promote-official-event-20260926-1-1",
+      "county": "台南市",
+      "target_type": "local_relationship",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:48.552738+00:00",
+      "target_path": "knowledge/local/台南市/relationships.jsonl",
+      "record_id": "official-event-20260926-1-1",
+      "evidence_lead_ids": [
+        "official-body-20260926-1"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "台南市 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "已核對事後官方新聞正文與修改日期；反向检索未取得否定當日出席的資料。僅記錄活動參與，不延伸組織支持。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "cb025cf91719de8064a5ef102d483221f81f27a037b5754392c983cfc914fc9e",
+      "evidence_snapshot_sha256": "dc489f17ac01fac897ecbe7e34be6dbf3e63ff78730ac6fd1fac13b156edfca9",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-2b7d780d789e4a832317e618",
+      "proposal_id": "promote-official-event-20260926-2-0",
+      "county": "台中市",
+      "target_type": "local_relationship",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:49.641727+00:00",
+      "target_path": "knowledge/local/台中市/relationships.jsonl",
+      "record_id": "official-event-20260926-2-0",
+      "evidence_lead_ids": [
+        "official-body-20260926-2"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "台中市 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "已讀經發局活動正文及其9月14日更新；反向檢索未發現推翻此日期參與紀錄的資料。張大春為代表出席，不能記成盧秀燕本人到場。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "35499d12fa06a0e5d65bde8595e416d5575b346659a888992178b76cccdd1267",
+      "evidence_snapshot_sha256": "22b793686c40257e3b14e323c991d75c98e1942dff875d1f3b62795ae3f552ba",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-01d822ba541004ab702a5e62",
+      "proposal_id": "promote-official-event-20260926-2-1",
+      "county": "台中市",
+      "target_type": "local_relationship",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:49.650260+00:00",
+      "target_path": "knowledge/local/台中市/relationships.jsonl",
+      "record_id": "official-event-20260926-2-1",
+      "evidence_lead_ids": [
+        "official-body-20260926-2"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "台中市 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "已讀經發局活動正文及其9月14日更新；反向檢索未發現推翻此日期參與紀錄的資料。張大春為代表出席，不能記成盧秀燕本人到場。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "eaf88709b3916311049def2bd33e84c5d6de5584c9eb1e35d6e0e19a0ce5bbb4",
+      "evidence_snapshot_sha256": "22b793686c40257e3b14e323c991d75c98e1942dff875d1f3b62795ae3f552ba",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-7d9fbe1c178e616c2ded8350",
+      "proposal_id": "promote-official-event-20260926-2-2",
+      "county": "台中市",
+      "target_type": "local_relationship",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:49.659408+00:00",
+      "target_path": "knowledge/local/台中市/relationships.jsonl",
+      "record_id": "official-event-20260926-2-2",
+      "evidence_lead_ids": [
+        "official-body-20260926-2"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "台中市 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "已讀經發局活動正文及其9月14日更新；反向檢索未發現推翻此日期參與紀錄的資料。張大春為代表出席，不能記成盧秀燕本人到場。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "6b0bd011de7b75f41fb009f7d91fc59fa84f8c74cd0582d51071180ebacfd004",
+      "evidence_snapshot_sha256": "22b793686c40257e3b14e323c991d75c98e1942dff875d1f3b62795ae3f552ba",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-ec5eaf951114c811ebeb91dc",
+      "proposal_id": "promote-official-issue-20260926-2-0",
+      "county": "台中市",
+      "target_type": "current_issue",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:49.668457+00:00",
+      "target_path": "knowledge/local/台中市/issues.jsonl",
+      "record_id": "official-issue-20260926-2-0",
+      "evidence_lead_ids": [
+        "official-body-20260926-2"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "台中市 当前与近十年哪些地方治理、建设、环境或产业议题具有持续公开证据？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "已讀經發局活動正文及其9月14日更新；反向檢索未發現推翻此日期參與紀錄的資料。張大春為代表出席，不能記成盧秀燕本人到場。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "36f329e78e33042116c7064bb1995883b1c2fba6f91287e615ec85360caf0af8",
+      "evidence_snapshot_sha256": "22b793686c40257e3b14e323c991d75c98e1942dff875d1f3b62795ae3f552ba",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-45d343fe5da517d9e2efa3fa",
+      "proposal_id": "promote-official-issue-20260926-3-0",
+      "county": "桃園市",
+      "target_type": "current_issue",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:51.006893+00:00",
+      "target_path": "knowledge/local/桃園市/issues.jsonl",
+      "record_id": "official-issue-20260926-3-0",
+      "evidence_lead_ids": [
+        "official-body-20260926-3"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "桃園市 当前与近十年哪些地方治理、建设、环境或产业议题具有持续公开证据？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "已核對9月9日官方質詢紀錄並檢索後續認證更新；不將申請當作通過，金額僅屬當日答詢口徑，不認定完成核定或完工。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "1d998ccda6abb393544b900bdb402491f02c8197920b95981158731af215dfd7",
+      "evidence_snapshot_sha256": "efc41a814521c5487d069b8c6b9bbb66688ee3096b0cf1d19c1d997d2831c115",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-9613c097505ed04794fab6f7",
+      "proposal_id": "promote-official-issue-20260926-3-1",
+      "county": "桃園市",
+      "target_type": "current_issue",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:51.016469+00:00",
+      "target_path": "knowledge/local/桃園市/issues.jsonl",
+      "record_id": "official-issue-20260926-3-1",
+      "evidence_lead_ids": [
+        "official-body-20260926-3"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "桃園市 当前与近十年哪些地方治理、建设、环境或产业议题具有持续公开证据？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "已核對9月9日官方質詢紀錄並檢索後續認證更新；不將申請當作通過，金額僅屬當日答詢口徑，不認定完成核定或完工。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "03d044f1732a11e1740afd52001d0479f133679b35ed5174647cb3b6862412b4",
+      "evidence_snapshot_sha256": "efc41a814521c5487d069b8c6b9bbb66688ee3096b0cf1d19c1d997d2831c115",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-5764ca21a832fedc8093480b",
+      "proposal_id": "promote-official-event-20260926-4-0",
+      "county": "新北市",
+      "target_type": "local_relationship",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:52.312639+00:00",
+      "target_path": "knowledge/local/新北市/relationships.jsonl",
+      "record_id": "official-event-20260926-4-0",
+      "evidence_lead_ids": [
+        "official-body-20260926-4"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "新北市 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "事後社會局正文確認李美珍受贈並代表侯友宜回贈感謝牌；不以事前市長行程認定侯友宜本人出席。檢索更新未取得推翻此受贈紀錄的證據。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "5ee696d6eb0a5335634e8a20f686a41dd348c6a9180a64d7d93bdaa98a90506e",
+      "evidence_snapshot_sha256": "f4676887e6812fc05fd1915431578559ab14c6059edbe0a6511f45b28c1656ab",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-0002ecdcf516bde3e6108527",
+      "proposal_id": "promote-official-event-20260926-4-1",
+      "county": "新北市",
+      "target_type": "local_relationship",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:52.322750+00:00",
+      "target_path": "knowledge/local/新北市/relationships.jsonl",
+      "record_id": "official-event-20260926-4-1",
+      "evidence_lead_ids": [
+        "official-body-20260926-4"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "新北市 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "事後社會局正文確認李美珍受贈並代表侯友宜回贈感謝牌；不以事前市長行程認定侯友宜本人出席。檢索更新未取得推翻此受贈紀錄的證據。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "6f034ee532383d6ff8c3b84018c9ea201648dcd1ded10db2f8963e853e89ab80",
+      "evidence_snapshot_sha256": "f4676887e6812fc05fd1915431578559ab14c6059edbe0a6511f45b28c1656ab",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    },
+    {
+      "receipt_id": "promotion-74c3ddddacb81987d47412dd",
+      "proposal_id": "promote-official-issue-20260926-4-0",
+      "county": "新北市",
+      "target_type": "current_issue",
+      "decision": "promoted",
+      "checked_at": "2026-09-26T15:17:52.331779+00:00",
+      "target_path": "knowledge/local/新北市/issues.jsonl",
+      "record_id": "official-issue-20260926-4-0",
+      "evidence_lead_ids": [
+        "official-body-20260926-4"
+      ],
+      "evidence_grades": [
+        "A"
+      ],
+      "independent_source_count": 1,
+      "research_questions": [
+        "新北市 当前与近十年哪些地方治理、建设、环境或产业议题具有持续公开证据？"
+      ],
+      "contradiction_check_completed": true,
+      "contradictory_lead_ids": [],
+      "contradiction_check_note": "事後社會局正文確認李美珍受贈並代表侯友宜回贈感謝牌；不以事前市長行程認定侯友宜本人出席。檢索更新未取得推翻此受贈紀錄的證據。 查核日期：2026-09-26T15:17:47+00:00",
+      "record_sha256": "498ee6d5d12998ffc8cf1ba27d8db0173931e2a08484557dcaebcf79fa541799",
+      "evidence_snapshot_sha256": "f4676887e6812fc05fd1915431578559ab14c6059edbe0a6511f45b28c1656ab",
+      "reasons": [],
+      "warnings": [],
+      "knowledge_builder_version": "1.4.0"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:11:07+00:00
+生成时间：2026-09-26T15:17:49+00:00
 
 ## 历史政治知识（L2）
 - tainan-2010-merger-37-districts: 台南市政府公开资料记载，2010年12月25日原台南县与台南市合并，合并后全市分为37个行政区。（2010-12-25—2026-09-26）
@@ -18,6 +18,8 @@
 - ly11-office-台南市-林宜瑾: 林宜瑾 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-台南市-林俊憲: 林俊憲 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-台南市-王定宇: 王定宇 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260926-1-0: 黃偉哲 → other → 中華民國全國商圈總會；status=active_verified；current_use=current_usable；time_scope=2026-09-19
+- official-event-20260926-1-1: 盧崑福 → other → 2026商圈樂活購；status=active_verified；current_use=current_usable；time_scope=2026-09-19
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-6d52520f12586f61: 謝龍介；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -124,6 +126,8 @@
 - 林宜瑾 → office_holding → 立法院第11屆立法委員；region=台南市；current_use=current_usable
 - 林俊憲 → office_holding → 立法院第11屆立法委員；region=台南市；current_use=current_usable
 - 王定宇 → office_holding → 立法院第11屆立法委員；region=台南市；current_use=current_usable
+- 黃偉哲 → other → 中華民國全國商圈總會；region=台南市；current_use=current_usable
+- 盧崑福 → other → 2026商圈樂活購；region=台南市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 台南市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

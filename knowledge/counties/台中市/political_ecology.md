@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:10:59+00:00
+生成时间：2026-09-26T15:17:50+00:00
 
 ## 历史政治知识（L2）
 - 台中市-population-2025: 截至2025年12月底，台中市户籍登记人口为2,868,465人，较2024年12月底增加7,864人。（2024-12-31—2025-12-31）
@@ -17,6 +17,9 @@
 - ly11-office-台中市-羅廷瑋: 羅廷瑋 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-台中市-何欣純: 何欣純 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-台中市-江啟臣: 江啟臣 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260926-2-0: 張大春 → other → 盧秀燕；status=active_verified；current_use=current_usable；time_scope=2026-09-03
+- official-event-20260926-2-1: 臺中市工商發展投資策進會 → other → 臺中市產業創新協會；status=active_verified；current_use=current_usable；time_scope=2026-09-03
+- official-event-20260926-2-2: 臺中市工商發展投資策進會 → other → 臺中市金手獎得獎廠商協進會；status=active_verified；current_use=current_usable；time_scope=2026-09-03
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-673b7df7ddf57fd2: 何欣純；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -126,7 +129,7 @@
 - cec-reg-2026-a769e5342042506c: 瓦力司．比尤；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260926-2-0: 經發局記錄台中32家企業與日本大分11家企業參與媒合；可確認市府推動海外產業交流，不能據此認定已有訂單或投資成果。；current_use=current_usable；date=2026-09-03；time_scope=2026-09-03
 
 ## 人物—组织—地区关系索引
 - 蔡其昌 → office_holding → 立法院第11屆立法委員；region=台中市；current_use=current_usable
@@ -137,17 +140,18 @@
 - 羅廷瑋 → office_holding → 立法院第11屆立法委員；region=台中市；current_use=current_usable
 - 何欣純 → office_holding → 立法院第11屆立法委員；region=台中市；current_use=current_usable
 - 江啟臣 → office_holding → 立法院第11屆立法委員；region=台中市；current_use=current_usable
+- 張大春 → other → 盧秀燕；region=台中市；current_use=current_usable
+- 臺中市工商發展投資策進會 → other → 臺中市產業創新協會；region=台中市；current_use=current_usable
+- 臺中市工商發展投資策進會 → other → 臺中市金手獎得獎廠商協進會；region=台中市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 台中市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
 - 台中市 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？（leads=0, verified=0）
-- 台中市 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？（leads=0, verified=0）
 - 学术或可靠公开资料如何描述 台中市 的历史派系或政治网络，其有效时间范围及当前可验证状态为何？（leads=0, verified=0）
 - 台中市 的行政区、立委选区与历届地方选举空间差异中，哪些结构需要结合边界版本解释？（leads=0, verified=0）
 - 台中市 有哪些地方社团与公共事务网络可由可靠资料确认，且不得据其存在推断政治支持？（leads=0, verified=0）
 - 台中市 农会、渔会的组织分布与公开政治互动有哪些可核实记录，其时间范围为何？（leads=0, verified=0）
 - 台中市 宗教组织参与地方公共事务或公开政治活动的可验证记录有哪些，证据边界为何？（leads=0, verified=0）
-- 台中市 当前与近十年哪些地方治理、建设、环境或产业议题具有持续公开证据？（leads=0, verified=0）
 
 ## 使用边界
 - 历史记录只在其 time_scope 内有效。

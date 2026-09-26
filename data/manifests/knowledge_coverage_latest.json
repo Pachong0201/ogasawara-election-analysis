@@ -459,23 +459,23 @@
         "candidate_profile_count": 115,
         "mayor_2026_candidate_count": 3,
         "councilor_2026_candidate_count": 112,
-        "active_verified_relationship_count": 13,
+        "active_verified_relationship_count": 15,
         "dual_source_relationship_count": 13,
         "relationship_types": {
           "campaign_cooperation": 1,
-          "office_holding": 12
+          "office_holding": 13,
+          "other": 1
         },
-        "current_issue_count": 0,
+        "current_issue_count": 1,
         "candidate_path": "knowledge/local/新北市/candidates.jsonl",
         "relationship_path": "knowledge/local/新北市/relationships.jsonl",
         "issue_path": "knowledge/local/新北市/issues.jsonl"
       },
-      "unresolved_question_count": 8,
+      "unresolved_question_count": 7,
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moa_farmers_association_members",
-        "no_current_issue_record"
+        "context_catalog_only:moa_farmers_association_members"
       ]
     },
     {
@@ -624,17 +624,16 @@
         "relationship_types": {
           "office_holding": 6
         },
-        "current_issue_count": 0,
+        "current_issue_count": 2,
         "candidate_path": "knowledge/local/桃園市/candidates.jsonl",
         "relationship_path": "knowledge/local/桃園市/relationships.jsonl",
         "issue_path": "knowledge/local/桃園市/issues.jsonl"
       },
-      "unresolved_question_count": 9,
+      "unresolved_question_count": 8,
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moa_farmers_association_members",
-        "no_current_issue_record"
+        "context_catalog_only:moa_farmers_association_members"
       ]
     },
     {
@@ -1255,22 +1254,22 @@
         "candidate_profile_count": 105,
         "mayor_2026_candidate_count": 3,
         "councilor_2026_candidate_count": 102,
-        "active_verified_relationship_count": 8,
+        "active_verified_relationship_count": 11,
         "dual_source_relationship_count": 8,
         "relationship_types": {
-          "office_holding": 8
+          "office_holding": 8,
+          "other": 3
         },
-        "current_issue_count": 0,
+        "current_issue_count": 1,
         "candidate_path": "knowledge/local/台中市/candidates.jsonl",
         "relationship_path": "knowledge/local/台中市/relationships.jsonl",
         "issue_path": "knowledge/local/台中市/issues.jsonl"
       },
-      "unresolved_question_count": 9,
+      "unresolved_question_count": 7,
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moa_farmers_association_members",
-        "no_current_issue_record"
+        "context_catalog_only:moa_farmers_association_members"
       ]
     },
     {
@@ -2207,10 +2206,11 @@
         "candidate_profile_count": 92,
         "mayor_2026_candidate_count": 4,
         "councilor_2026_candidate_count": 88,
-        "active_verified_relationship_count": 7,
+        "active_verified_relationship_count": 9,
         "dual_source_relationship_count": 7,
         "relationship_types": {
           "office_holding": 6,
+          "other": 2,
           "public_endorsement": 1
         },
         "current_issue_count": 0,
@@ -2365,23 +2365,23 @@
         "candidate_profile_count": 106,
         "mayor_2026_candidate_count": 5,
         "councilor_2026_candidate_count": 101,
-        "active_verified_relationship_count": 9,
+        "active_verified_relationship_count": 11,
         "dual_source_relationship_count": 9,
         "relationship_types": {
-          "office_holding": 8,
+          "office_holding": 9,
+          "other": 1,
           "public_endorsement": 1
         },
-        "current_issue_count": 0,
+        "current_issue_count": 1,
         "candidate_path": "knowledge/local/高雄市/candidates.jsonl",
         "relationship_path": "knowledge/local/高雄市/relationships.jsonl",
         "issue_path": "knowledge/local/高雄市/issues.jsonl"
       },
-      "unresolved_question_count": 7,
+      "unresolved_question_count": 6,
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moa_farmers_association_members",
-        "no_current_issue_record"
+        "context_catalog_only:moa_farmers_association_members"
       ]
     },
     {
@@ -3500,7 +3500,7 @@
     "total_2026_mayor_candidates": 81,
     "total_2026_councilor_candidates": 1502,
     "with_active_verified_relationships": 22,
-    "with_current_issue_records": 0
+    "with_current_issue_records": 4
   },
   "interpretation_boundary": "coverage states describe repository artifacts only; source_catalog_only and research_leads_only are not equivalent to verified row-level knowledge"
 }

@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:10:52+00:00
+生成时间：2026-09-26T15:17:53+00:00
 
 ## 历史政治知识（L2）
 - new-taipei-2010-upgrade-29-districts: 新北市政府公开资料记载，新北市自2010年12月25日起改制为直辖市，全市划分为29区。（2010-12-25—2026-09-26）
@@ -23,6 +23,8 @@
 - ly11-office-新北市-吳琪銘: 吳琪銘 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-新北市-羅明才: 羅明才 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-新北市-廖先翔: 廖先翔 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260926-4-0: 李美珍 → other → 新北市喜悅成長協會；status=active_verified；current_use=current_usable；time_scope=2026-09-22
+- official-event-20260926-4-1: 游伯湖 → office_holding → 新北市喜悅成長協會；status=active_verified；current_use=current_usable；time_scope=2026-09-22
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-c5eea051b105fed6: 蘇巧慧；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -142,7 +144,7 @@
 - cec-reg-2026-b6e1c7d51ea55a77: 羅美菁；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260926-4-0: 社會局記錄喜悅成長協會依社福中心需求捐贈約21萬元物資；可作公私合作服務紀錄，無法據此推論整體弱勢需求已被滿足。；current_use=current_usable；date=2026-09-22；time_scope=2026-09-22
 
 ## 人物—组织—地区关系索引
 - 蔡英文 → campaign_cooperation → 苏巧慧竞选总部；region=新北市；current_use=current_usable
@@ -158,6 +160,8 @@
 - 吳琪銘 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
 - 羅明才 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
 - 廖先翔 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
+- 李美珍 → other → 新北市喜悅成長協會；region=新北市；current_use=current_usable
+- 游伯湖 → office_holding → 新北市喜悅成長協會；region=新北市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 新北市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
@@ -167,7 +171,6 @@
 - 新北市 有哪些地方社团与公共事务网络可由可靠资料确认，且不得据其存在推断政治支持？（leads=0, verified=0）
 - 新北市 农会、渔会的组织分布与公开政治互动有哪些可核实记录，其时间范围为何？（leads=0, verified=0）
 - 新北市 宗教组织参与地方公共事务或公开政治活动的可验证记录有哪些，证据边界为何？（leads=0, verified=0）
-- 新北市 当前与近十年哪些地方治理、建设、环境或产业议题具有持续公开证据？（leads=0, verified=0）
 
 ## 使用边界
 - 历史记录只在其 time_scope 内有效。

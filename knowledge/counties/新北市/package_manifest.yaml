@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 新北市
-generated_at: '2026-09-26T12:10:52+00:00'
-content_sha256: 5a88e8455f513b78386cf997f963fffd0ec3bd18109d45de01102c11f7e10c33
+generated_at: '2026-09-26T15:17:53+00:00'
+content_sha256: eb3e51f3bfaad156c5f9340ca91a0c2b18020c7bb208137c6db25671b8ab26fa
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/新北市/claims.jsonl
@@ -16,14 +16,14 @@ generated_indexes:
   entity_relation_index: knowledge/counties/新北市/entity_relation_index.jsonl
 counts:
   historical_claim: 3
-  local_relationship: 13
+  local_relationship: 15
   candidate_profile: 115
-  current_issue: 0
-evidence_index_count: 131
-entity_relation_count: 13
+  current_issue: 1
+evidence_index_count: 134
+entity_relation_count: 15
 research_question_count: 10
-unresolved_question_count: 8
-promotion_receipt_count: 158
+unresolved_question_count: 7
+promotion_receipt_count: 161
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

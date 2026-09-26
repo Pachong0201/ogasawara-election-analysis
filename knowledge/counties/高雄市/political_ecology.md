@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:11:08+00:00
+生成时间：2026-09-26T15:17:47+00:00
 
 ## 历史政治知识（L2）
 - kaohsiung-admin-structure-38-districts: 高雄市政府公开资料记载，高雄市划分为38个行政区。（2010-12-25—2026-09-26）
@@ -20,6 +20,8 @@
 - ly11-office-高雄市-黃捷: 黃捷 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-高雄市-許智傑: 許智傑 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-高雄市-賴瑞隆: 賴瑞隆 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260926-0-0: 陳其邁 → other → 梓官區農會；status=active_verified；current_use=current_usable；time_scope=2026-09-19
+- official-event-20260926-0-1: 林逸昌 → office_holding → 梓官區農會；status=active_verified；current_use=current_usable；time_scope=2026-09-19
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-ec9cf519f323267b: 張靜；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -130,7 +132,7 @@
 - cec-reg-2026-f545c2a83b820a58: 陳奕蓁；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260926-0-0: 消防局記錄梓官區農會捐贈救護車及防護裝備，總值450萬元；車輛規劃配置梓官分隊，屬地方救護量能補充，後續實際使用成效未核實。；current_use=current_usable；date=2026-09-19；time_scope=2026-09-19
 
 ## 人物—组织—地区关系索引
 - 陈其迈 → public_endorsement → 赖瑞隆；region=高雄市；current_use=current_usable
@@ -142,6 +144,8 @@
 - 黃捷 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
 - 許智傑 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
 - 賴瑞隆 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
+- 陳其邁 → other → 梓官區農會；region=高雄市；current_use=current_usable
+- 林逸昌 → office_holding → 梓官區農會；region=高雄市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 高雄市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
@@ -150,7 +154,6 @@
 - 高雄市 有哪些地方社团与公共事务网络可由可靠资料确认，且不得据其存在推断政治支持？（leads=0, verified=0）
 - 高雄市 农会、渔会的组织分布与公开政治互动有哪些可核实记录，其时间范围为何？（leads=0, verified=0）
 - 高雄市 宗教组织参与地方公共事务或公开政治活动的可验证记录有哪些，证据边界为何？（leads=0, verified=0）
-- 高雄市 当前与近十年哪些地方治理、建设、环境或产业议题具有持续公开证据？（leads=0, verified=0）
 
 ## 使用边界
 - 历史记录只在其 time_scope 内有效。

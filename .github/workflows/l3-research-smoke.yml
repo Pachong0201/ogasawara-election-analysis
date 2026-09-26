@@ -27,17 +27,7 @@ jobs:
           python-version: '3.11'
       - run: pip install -r requirements.txt
       - name: Verify model JSON protocol
-        run: |
-          python - <<'PY'
-          import json, time
-          from runtime.research_providers import GoModel, ResearchConfig
-          started = time.monotonic()
-          output, tokens = GoModel(ResearchConfig.from_env()).complete(
-              {'stage':'plan','task':{'jurisdiction':'高雄市','questions':['高雄市近期交通建設進度有何官方更新？']},'max_queries':2},
-              'l3-acceptance',90)
-          assert isinstance(output.get('queries'), list) and output['queries'], 'empty search plan'
-          print(json.dumps({'elapsed_seconds':round(time.monotonic()-started,1),'tokens':tokens,'query_count':len(output['queries'])}))
-          PY
+        run: python -m runtime.research_preflight
       - name: Research and verify one county
         run: python -u -m runtime.l3_key_issue_research --counties 高雄市 --max-findings 3 --apply --manifest-name l3_acceptance_latest.json
       - name: Preserve audit and accepted records

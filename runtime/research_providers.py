@@ -65,7 +65,14 @@ def post_json(url, key, payload, timeout, headers=None):
                 raise ProviderError('provider_response_too_large', retryable=False)
             return json.loads(raw)
     except HTTPError as exc:
-        raise ProviderError(f'provider_http_{exc.code}', retry_seconds(exc.headers.get('Retry-After')),
+        code = f'provider_http_{exc.code}'
+        # Classify quota versus transient throttling without logging response
+        # bodies, credentials, account identifiers or model reasoning.
+        if exc.code == 429:
+            detail = exc.read(8192).decode('utf-8', errors='replace').lower()
+            if any(word in detail for word in ('quota', 'balance', 'credit', 'usage limit', 'weekly limit', 'monthly limit')):
+                code += '_quota'
+        raise ProviderError(code, retry_seconds(exc.headers.get('Retry-After')),
                             exc.code in (408, 429) or exc.code >= 500) from None
     except TimeoutError:
         raise ProviderError('provider_timeout') from None
