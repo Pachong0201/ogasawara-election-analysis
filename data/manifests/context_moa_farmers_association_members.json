@@ -67,10 +67,10 @@
       }
     ]
   },
-  "imported_at": "2026-09-26T11:06:02+00:00",
+  "imported_at": "2026-09-26T11:11:20+00:00",
   "resource_url": "https://data.moa.gov.tw/service/opendata/agrstatUnit.aspx?IsTransData=1&UnitId=D24&dimension_group_code_1=XX11&dimension_group_code_2=BF02&item_code=BF0120",
   "resource_format": "json",
   "downloaded_sha256": "9be5a43ebd3477a75e07fe52b20f84a6ab5380694e641b33f6d944030682c72f",
   "downloaded_size": 265674,
-  "downloaded_at": "2026-09-26T11:06:02+00:00"
+  "downloaded_at": "2026-09-26T11:11:20+00:00"
 }

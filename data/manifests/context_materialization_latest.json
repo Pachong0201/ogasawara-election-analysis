@@ -12,7 +12,7 @@
         "resource_format": "csv",
         "sha256": "47e1fe308f1b64fb8d5ab7217a1c378b93a9e6cafe50a3954c1aa2f764497ebf",
         "size": 2251480,
-        "downloaded_at": "2026-09-26T11:05:59+00:00",
+        "downloaded_at": "2026-09-26T11:11:17+00:00",
         "attempt": 1,
         "path": "/home/runner/work/ogasawara-election-analysis/ogasawara-election-analysis/cache/raw/context/moi_national_social_groups_by_area/latest.csv",
         "downloaded": true
@@ -89,7 +89,7 @@
             }
           ]
         },
-        "imported_at": "2026-09-26T11:05:59+00:00",
+        "imported_at": "2026-09-26T11:11:18+00:00",
         "manifest_path": "data/manifests/context_moi_national_social_groups_by_area.json"
       }
     },
@@ -102,7 +102,7 @@
         "resource_format": "json",
         "sha256": "9be5a43ebd3477a75e07fe52b20f84a6ab5380694e641b33f6d944030682c72f",
         "size": 265674,
-        "downloaded_at": "2026-09-26T11:06:02+00:00",
+        "downloaded_at": "2026-09-26T11:11:20+00:00",
         "attempt": 1,
         "path": "/home/runner/work/ogasawara-election-analysis/ogasawara-election-analysis/cache/raw/context/moa_farmers_association_members/latest.json",
         "downloaded": true
@@ -176,7 +176,7 @@
             }
           ]
         },
-        "imported_at": "2026-09-26T11:06:02+00:00",
+        "imported_at": "2026-09-26T11:11:20+00:00",
         "manifest_path": "data/manifests/context_moa_farmers_association_members.json"
       }
     },
@@ -189,7 +189,7 @@
         "resource_format": "json",
         "sha256": "13589e8f6d79749920f6ef2ffbc3251b087fcab18a2c8e5f0adaa2d10ed4efb4",
         "size": 258693,
-        "downloaded_at": "2026-09-26T11:06:05+00:00",
+        "downloaded_at": "2026-09-26T11:11:22+00:00",
         "attempt": 1,
         "path": "/home/runner/work/ogasawara-election-analysis/ogasawara-election-analysis/cache/raw/context/moa_fishermen_association_members/latest.json",
         "downloaded": true
@@ -259,7 +259,7 @@
             }
           ]
         },
-        "imported_at": "2026-09-26T11:06:05+00:00",
+        "imported_at": "2026-09-26T11:11:22+00:00",
         "manifest_path": "data/manifests/context_moa_fishermen_association_members.json"
       }
     }
@@ -274,5 +274,5 @@
       "error": "OfficialContextDownloadError: moi_religion_temples: official resource download failed after 3 attempts: <urlopen error timed out>"
     }
   ],
-  "finished_at": "2026-09-26T11:06:05+00:00"
+  "finished_at": "2026-09-26T11:11:22+00:00"
 }
