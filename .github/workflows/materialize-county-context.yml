@@ -7,6 +7,9 @@ on:
       - feature/feishu-election-bot-v1.4-integration
     paths:
       - ".github/workflows/materialize-county-context.yml"
+      - "runtime/context_official_download.py"
+      - "runtime/county_context_catalog.py"
+      - "config/county_context_sources.yaml"
 
 permissions:
   contents: write
@@ -36,7 +39,7 @@ jobs:
 
       - name: Download and import official county-context resources
         run: |
-          python -m runtime.context_official_download --force
+          python -m runtime.context_official_download --force --allow-partial
 
       - name: Rebuild knowledge coverage manifest
         run: |
@@ -65,5 +68,21 @@ jobs:
             echo "No normalized county-context changes to commit."
             exit 0
           fi
-          git commit -m "data: materialize official 22-county social context"
+          git commit -m "data: materialize verified official county context"
+          git pull --rebase origin feature/feishu-election-bot-v1.4-integration
           git push origin HEAD:feature/feishu-election-bot-v1.4-integration
+
+      - name: Report remaining context-source failures
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path("data/manifests/context_materialization_latest.json")
+          report = json.loads(path.read_text(encoding="utf-8"))
+          print("CONTEXT_SUCCESS=", report.get("success_count"))
+          print("CONTEXT_FAILURE=", report.get("failure_count"))
+          for failure in report.get("failures") or []:
+              print(failure.get("source_id"), failure.get("error"))
+          if int(report.get("failure_count") or 0):
+              raise SystemExit("official context materialization still has source failures")
+          PY
