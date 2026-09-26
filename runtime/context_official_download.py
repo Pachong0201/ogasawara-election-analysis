@@ -44,10 +44,17 @@ def _sha256(path: Path) -> str:
 
 
 def _ssl_context() -> ssl.SSLContext:
-    context = ssl.create_default_context()
+    try:
+        import certifi
+        context = ssl.create_default_context(cafile=certifi.where())
+    except Exception:
+        context = ssl.create_default_context()
     strict_flag = getattr(ssl, "VERIFY_X509_STRICT", None)
     if strict_flag is not None:
         context.verify_flags &= ~strict_flag
+    partial_flag = getattr(ssl, "VERIFY_X509_PARTIAL_CHAIN", None)
+    if partial_flag is not None:
+        context.verify_flags |= partial_flag
     return context
 
 
@@ -137,7 +144,7 @@ class OfficialContextDownloader:
                 else:
                     response = urllib.request.urlopen(
                         request,
-                        timeout=DEFAULT_TIMEOUT_SECONDS,
+                        timeout=int(source.get("timeout_seconds") or DEFAULT_TIMEOUT_SECONDS),
                         context=_ssl_context(),
                     )
                 written = 0
@@ -198,8 +205,11 @@ class OfficialContextDownloader:
         download = self._download(source_id, source, force=force)
         imported = self.catalog.import_file(source_id, Path(download["path"]))
         if int(imported.get("mapped_row_count") or 0) <= 0:
+            diagnostic = imported.get("diagnostic") or {}
             raise OfficialContextDownloadError(
-                f"{source_id}: download parsed but produced zero county-mapped rows"
+                f"{source_id}: download parsed but produced zero county-mapped rows; "
+                f"fields={diagnostic.get('field_names')}; "
+                f"samples={diagnostic.get('sample_rows')}"
             )
         manifest_path = self.repo_root / str(imported["manifest_path"])
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -251,13 +261,24 @@ class OfficialContextDownloader:
                 )
                 if fail_fast:
                     raise
-        return {
+        output = {
             "source_count": len(selected),
             "success_count": len(results),
             "failure_count": len(failures),
             "results": results,
             "failures": failures,
+            "finished_at": utc_now_iso(),
         }
+        manifest_path = (
+            self.repo_root / "data" / "manifests" / "context_materialization_latest.json"
+        )
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        manifest_path.write_text(
+            json.dumps(output, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        output["manifest_path"] = str(manifest_path.relative_to(self.repo_root))
+        return output
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
@@ -275,6 +296,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--fail-fast", action="store_true")
+    parser.add_argument(
+        "--allow-partial",
+        action="store_true",
+        help="return success when at least one official source materializes; failures remain in the manifest",
+    )
     args = parser.parse_args(argv)
     result = OfficialContextDownloader(args.repo_root).materialize_many(
         args.source_id or None,
@@ -282,7 +308,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         fail_fast=args.fail_fast,
     )
     print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0 if result["failure_count"] == 0 else 3
+    if result["failure_count"] == 0:
+        return 0
+    if args.allow_partial and result["success_count"] > 0:
+        return 0
+    return 3
 
 
 if __name__ == "__main__":
