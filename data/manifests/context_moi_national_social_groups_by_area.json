@@ -1,0 +1,79 @@
+{
+  "source_id": "moi_national_social_groups_by_area",
+  "kind": "civil_associations",
+  "dataset_url": "https://data.gov.tw/dataset/147595",
+  "source_path": "/home/runner/work/ogasawara-election-analysis/ogasawara-election-analysis/cache/raw/context/moi_national_social_groups_by_area/latest.csv",
+  "source_sha256": "47e1fe308f1b64fb8d5ab7217a1c378b93a9e6cafe50a3954c1aa2f764497ebf",
+  "source_size": 2251480,
+  "encoding": "utf-8-sig",
+  "input_row_count": 23864,
+  "mapped_row_count": 22101,
+  "unmapped_row_count": 1763,
+  "county_file_count": 21,
+  "files": {
+    "基隆市": "data/context/基隆市/civil_associations.jsonl",
+    "台北市": "data/context/台北市/civil_associations.jsonl",
+    "新北市": "data/context/新北市/civil_associations.jsonl",
+    "桃園市": "data/context/桃園市/civil_associations.jsonl",
+    "新竹市": "data/context/新竹市/civil_associations.jsonl",
+    "新竹縣": "data/context/新竹縣/civil_associations.jsonl",
+    "苗栗縣": "data/context/苗栗縣/civil_associations.jsonl",
+    "台中市": "data/context/台中市/civil_associations.jsonl",
+    "彰化縣": "data/context/彰化縣/civil_associations.jsonl",
+    "南投縣": "data/context/南投縣/civil_associations.jsonl",
+    "雲林縣": "data/context/雲林縣/civil_associations.jsonl",
+    "嘉義市": "data/context/嘉義市/civil_associations.jsonl",
+    "嘉義縣": "data/context/嘉義縣/civil_associations.jsonl",
+    "台南市": "data/context/台南市/civil_associations.jsonl",
+    "高雄市": "data/context/高雄市/civil_associations.jsonl",
+    "屏東縣": "data/context/屏東縣/civil_associations.jsonl",
+    "宜蘭縣": "data/context/宜蘭縣/civil_associations.jsonl",
+    "花蓮縣": "data/context/花蓮縣/civil_associations.jsonl",
+    "台東縣": "data/context/台東縣/civil_associations.jsonl",
+    "澎湖縣": "data/context/澎湖縣/civil_associations.jsonl",
+    "金門縣": "data/context/金門縣/civil_associations.jsonl",
+    "_unmapped": "data/context/_unmapped/civil_associations-moi_national_social_groups_by_area.jsonl"
+  },
+  "diagnostic": {
+    "field_names": [
+      "Accociation Name",
+      "Area",
+      "Date_of_Establishment",
+      "Name",
+      "SeqNo",
+      "type"
+    ],
+    "sample_rows": [
+      {
+        "SeqNo": "1",
+        "type": "社會團體",
+        "Name": "中華德藝教學研究發展協會",
+        "Date_of_Establishment": "1050115",
+        "Area": "臺中市",
+        "Accociation Name": "合作及人民團體司"
+      },
+      {
+        "SeqNo": "2",
+        "type": "社會團體",
+        "Name": "臺灣樂齡體智能研究推廣協會",
+        "Date_of_Establishment": "1100123",
+        "Area": "嘉義縣",
+        "Accociation Name": "合作及人民團體司"
+      },
+      {
+        "SeqNo": "3",
+        "type": "社會團體",
+        "Name": "原住民族青年社會實踐協會",
+        "Date_of_Establishment": "1090724",
+        "Area": "高雄市",
+        "Accociation Name": "合作及人民團體司"
+      }
+    ]
+  },
+  "imported_at": "2026-09-26T11:05:59+00:00",
+  "resource_url": "https://opdadm.moi.gov.tw/api/v1/no-auth/resource/api/dataset/EE4847CD-674E-4C52-B889-64D242083DDC/resource/6E09E30C-D88C-471B-8846-F82168B08D80/download",
+  "resource_format": "csv",
+  "downloaded_sha256": "47e1fe308f1b64fb8d5ab7217a1c378b93a9e6cafe50a3954c1aa2f764497ebf",
+  "downloaded_size": 2251480,
+  "downloaded_at": "2026-09-26T11:05:59+00:00"
+}

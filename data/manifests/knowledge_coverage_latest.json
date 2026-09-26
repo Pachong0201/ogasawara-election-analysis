@@ -81,8 +81,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/基隆市/civil_associations.jsonl",
+              "record_count": 176,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/基隆市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -100,7 +120,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -112,11 +132,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -130,9 +150,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -216,8 +234,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/台北市/civil_associations.jsonl",
+              "record_count": 8163,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/台北市/farmers_fishermen_associations.jsonl",
+              "record_count": 91,
+              "source_ids": [
+                "moa_farmers_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_farmers_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -235,13 +273,13 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部「农会会员数」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_fishermen_association_members",
@@ -250,8 +288,8 @@
               "state": "source_catalog_only"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -265,8 +303,6 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
-        "context_catalog_only:moa_farmers_association_members",
         "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
@@ -349,8 +385,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/新北市/civil_associations.jsonl",
+              "record_count": 4042,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/新北市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -368,7 +424,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -380,11 +436,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -398,9 +454,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_current_issue_record"
       ]
     },
@@ -483,8 +537,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/桃園市/civil_associations.jsonl",
+              "record_count": 1528,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/桃園市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -502,7 +576,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -514,11 +588,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -532,9 +606,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -618,8 +690,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/新竹市/civil_associations.jsonl",
+              "record_count": 274,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/新竹市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -637,7 +729,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -649,11 +741,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -667,9 +759,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -753,8 +843,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/新竹縣/civil_associations.jsonl",
+              "record_count": 308,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/新竹縣/farmers_fishermen_associations.jsonl",
+              "record_count": 91,
+              "source_ids": [
+                "moa_farmers_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_farmers_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -772,13 +882,13 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部「农会会员数」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_fishermen_association_members",
@@ -787,8 +897,8 @@
               "state": "source_catalog_only"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -802,8 +912,6 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
-        "context_catalog_only:moa_farmers_association_members",
         "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
@@ -888,8 +996,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/苗栗縣/civil_associations.jsonl",
+              "record_count": 213,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/苗栗縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -907,7 +1035,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -919,11 +1047,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -937,9 +1065,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -1023,8 +1149,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/台中市/civil_associations.jsonl",
+              "record_count": 2751,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/台中市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -1042,7 +1188,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -1054,11 +1200,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -1072,9 +1218,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -1158,8 +1302,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/彰化縣/civil_associations.jsonl",
+              "record_count": 461,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/彰化縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -1177,7 +1341,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -1189,11 +1353,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -1207,9 +1371,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -1293,8 +1455,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/南投縣/civil_associations.jsonl",
+              "record_count": 294,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/南投縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -1312,7 +1494,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -1324,11 +1506,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -1342,9 +1524,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -1428,8 +1608,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/雲林縣/civil_associations.jsonl",
+              "record_count": 212,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/雲林縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -1447,7 +1647,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -1459,11 +1659,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -1477,9 +1677,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -1563,8 +1761,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/嘉義市/civil_associations.jsonl",
+              "record_count": 182,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/嘉義市/farmers_fishermen_associations.jsonl",
+              "record_count": 91,
+              "source_ids": [
+                "moa_farmers_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_farmers_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -1582,13 +1800,13 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部「农会会员数」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_fishermen_association_members",
@@ -1597,8 +1815,8 @@
               "state": "source_catalog_only"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -1612,8 +1830,6 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
-        "context_catalog_only:moa_farmers_association_members",
         "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
@@ -1698,8 +1914,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/嘉義縣/civil_associations.jsonl",
+              "record_count": 141,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/嘉義縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -1717,7 +1953,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -1729,11 +1965,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -1747,9 +1983,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -1831,8 +2065,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/台南市/civil_associations.jsonl",
+              "record_count": 867,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/台南市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -1850,7 +2104,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -1862,11 +2116,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -1880,9 +2134,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_current_issue_record"
       ]
     },
@@ -1963,8 +2215,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/高雄市/civil_associations.jsonl",
+              "record_count": 1707,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/高雄市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -1982,7 +2254,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -1994,11 +2266,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -2012,9 +2284,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_current_issue_record"
       ]
     },
@@ -2097,8 +2367,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/屏東縣/civil_associations.jsonl",
+              "record_count": 276,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/屏東縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -2116,7 +2406,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -2128,11 +2418,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -2146,9 +2436,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -2232,8 +2520,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/宜蘭縣/civil_associations.jsonl",
+              "record_count": 201,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/宜蘭縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -2251,7 +2559,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -2263,11 +2571,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -2281,9 +2589,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -2367,8 +2673,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/花蓮縣/civil_associations.jsonl",
+              "record_count": 167,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/花蓮縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -2386,7 +2712,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -2398,11 +2724,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -2416,9 +2742,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -2502,8 +2826,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/台東縣/civil_associations.jsonl",
+              "record_count": 99,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/台東縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -2521,7 +2865,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -2533,11 +2877,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -2551,9 +2895,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -2637,8 +2979,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/澎湖縣/civil_associations.jsonl",
+              "record_count": 17,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/澎湖縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -2656,7 +3018,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -2668,11 +3030,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -2686,9 +3048,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -2772,8 +3132,28 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/金門縣/civil_associations.jsonl",
+              "record_count": 22,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/金門縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -2791,7 +3171,7 @@
               "source_id": "moi_national_social_groups_by_area",
               "kind": "civil_associations",
               "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moa_farmers_association_members",
@@ -2803,11 +3183,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
         }
       },
       "dynamic_local_state": {
@@ -2821,9 +3201,7 @@
       "gaps": [
         "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
-        "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
@@ -2907,8 +3285,19 @@
           "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
         },
         "official_social_context": {
-          "files": [],
-          "imported_source_ids": [],
+          "files": [
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/連江縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members"
+          ],
           "sources": [
             {
               "source_id": "dgbas_census_age_structure_2020",
@@ -2938,11 +3327,11 @@
               "source_id": "moa_fishermen_association_members",
               "kind": "farmers_fishermen_associations",
               "source_name": "农业部渔业署「每年渔会会员数统计资料」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 0,
-          "catalog_only_source_count": 5
+          "row_data_source_count": 1,
+          "catalog_only_source_count": 4
         }
       },
       "dynamic_local_state": {
@@ -2958,7 +3347,6 @@
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area",
         "context_catalog_only:moa_farmers_association_members",
-        "context_catalog_only:moa_fishermen_association_members",
         "no_active_verified_local_relationship",
         "no_current_issue_record"
       ]
