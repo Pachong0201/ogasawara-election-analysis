@@ -10,6 +10,8 @@
 
 `历史基准 → 当前候选人格局 → Campaign State Snapshot(as_of) → 最近30／14／7日变化 → 历史／当前双触发地方知识检索 → 同源民调校准 → 当前竞争结构`
 
+自动研究已支持 **OpenCode Go / GLM-5.3 Flash + Tavily Web Search**：研究问题可自动执行搜索、读取正文、补搜、校验引用并回存本地证据库。飞书摘要展示执行状态与来源；显式历史回看和离线模式不触发 API。默认关闭，配置两项密钥并启用后生效，详见 [自动研究部署与证据边界](docs/automatic-research.md)。
+
 禁止把“最新民调 → 直接判断当前选情”当作主要路径，也禁止只用历史票型解释本轮选战而忽略最新变化。
 
 ## 适用输出
@@ -59,6 +61,8 @@ ogasawara-election-analysis/
 │  ├─ historical_claim.yaml
 │  ├─ local_relationship.yaml
 │  ├─ retrieval_lead.yaml
+│  ├─ campaign_event.yaml          # 已验证/标准化L4事件严格合同
+│  ├─ campaign_media_event.yaml    # 正文聚类媒体研究事件合同
 │  ├─ knowledge_proposal.yaml
 │  └─ knowledge_promotion_receipt.yaml
 ├─ methods/
@@ -82,6 +86,13 @@ ogasawara-election-analysis/
 │  ├─ campaign_state.py # V1.4选战快照、7/14/30日变化与同源民调delta
 │  ├─ campaign_events.py # 唯一L4事件标准化、去重及冲突审计入口
 │  ├─ campaign_delta.py # 连续快照的可观察变化
+│  ├─ campaign_event.py # 正文证据摘录、实体解析、跨来源聚类；只生成媒体研究事件
+│  ├─ campaign_events.py # 标准L4事件归一化、去重与冲突审计
+│  ├─ news_collector.py # 后台多源采集与持久任务调度
+│  ├─ news_store.py # SQLite文章版本、任务、事件与证据库
+│  ├─ news_retrieval.py # 默认本地检索后端，离线可读
+│  ├─ gdelt_retrieval.py # 可选GDELT后端，不再默认启用
+│  ├─ article_body.py # 受控公开网页正文读取
 │  ├─ host_retrieval.py  # 宿主Web检索JSON/JSONL桥
 │  ├─ freshness.py
 │  ├─ analysis_context.py
@@ -117,6 +128,7 @@ V1.4 解决“历史结构很强、当前战况很弱”的问题。完整分析
 ```text
 as_of
 → 当前候选人格局
+→ 公开新闻正文解析为 Campaign Event
 → 最近30／14／7日竞选事件
 → 与上一Campaign State Snapshot比较
 → 同一调查系列跨期变化
@@ -311,8 +323,101 @@ python -m runtime.cli knowledge-build --county "宜兰县"
 - `package_manifest.yaml`：计数、权威源文件与生成规则；
 - `evidence_index.jsonl`：已晋升记录的来源、时间、research question 与 current-use 状态索引；
 - `unresolved_questions.jsonl`：尚未被晋升知识覆盖的 retrieval questions；
-- `political_ecology.md`：结构化知识的可读索引，明确不得新增政治事实或因果判断。
+- `political_ecology.md`：结构化知识的可读索引，明确不得新增政治事实或因果判断；
+- `research_questions.jsonl`：十类稳定研究问题及处理状态；
+- `entity_relation_index.jsonl`：由已晋升记录派生的人物—组织—地区关系索引；
+- `county_template.yaml`：统一主题与字段约束；
+- `production_state.yaml`：可恢复生产状态、输入哈希与最后错误。
 
+### V1.4 22 县市知识生产
+
+`runtime/county_knowledge.py` 在 `KnowledgePromotionBuilder` 上增加生产编排，覆盖台湾 22 县市以及历史政治结构、人物、组织、派系/政治网络、选区与空间、地方社团、农渔会、宗教组织、关键议题、人口与产业背景十类主题。
+
+```bash
+# 全量 dry-run，不写文件
+python3 -m runtime.cli knowledge-production --all-counties --dry-run
+
+# 全量增量构建或失败后恢复
+python3 -m runtime.cli knowledge-production --all-counties --incremental
+
+# 单县市增量更新，可选调用 GLM-5.3 Flash + Tavily
+python3 -m runtime.cli knowledge-production \
+  --counties "高雄市" --incremental --run-research
+
+# 状态检查
+python3 -m runtime.cli knowledge-status --all-counties
+python3 -m runtime.cli knowledge-status --counties "高雄市,台南市,新北市"
+```
+
+自动研究只生成 `body_grounded_unverified` retrieval leads，不创建 structured proposal，也不晋升长期知识。后续仍须显式运行 `knowledge-promote`，通过 source、independence、contradiction、time_scope、freshness 与 idempotence gates。
+
+首批 seed 位于 `examples/county_knowledge_seeds/`。高雄市、台南市、新北市各有一条通过 A 级官方来源门禁的行政/空间背景记录；人物、派系、组织和当前议题若证据不足，明确保留为 unresolved。
+
+仓库另提供经 chat/web 核验、可重复执行的县市基线输入
+`config/curated_county_baseline.yaml`。它覆盖 22 县市的 2025 年底户籍人口与
+2021 年工业服务业主要从业行业，并收录首批学术研究和近期公开关系证据。
+所有内容仍先进入 retrieval staging，再以 structured proposal 通过原有门禁：
+
+```bash
+# 首次执行前检查 49 条提案，不写文件
+python3 -m runtime.cli knowledge-curated-baseline --all-counties --dry-run
+
+# 正式晋升并重建 22 县市 package
+python3 -m runtime.cli knowledge-curated-baseline --all-counties
+
+# 只更新指定县市；已有稳定 record id 默认跳过
+python3 -m runtime.cli knowledge-curated-baseline --counties "高雄市,台南市,新北市"
+
+# 来源确有更新时才重新评估同一 record id
+python3 -m runtime.cli knowledge-curated-baseline \
+  --counties "高雄市" --refresh-existing
+```
+
+中选会第 11 届立委选区范围资料集与历届县市长资料库在该基线中只作为
+A 级来源目录线索。若原始 CSV/ZIP 未成功读取，就不会生成具体边界、票数或
+趋势结论，相关问题继续保留在 `unresolved_questions.jsonl`。C 级媒体关系必须
+有两个不同 `independence_key` 的已验证来源；promotion receipt 与 record provenance
+会保存反证检查是否完成、反证 lead id 及检查边界。
+
+`AnalysisPipeline` 会把 L4 Campaign Event 与已晋升县市记录做确定性实体匹配，输出 `event_importance_signals`。信号保留 record id、time_scope、last_verified_at、current_status、source grade、uncertainty 与 scope boundary，只用于回答“还应核查哪一层地方脉络”，不得解释为因果、动员效果、支持转移、候选人评分或胜负预测。
+
+
+### V1.4 稳定地方底座 + 动态选情状态
+
+运行时现明确暴露两个操作视图，而不是把所有地方资料混在一个对象中：
+
+```text
+stable_local_baseline
+  = 历届选举事实 + 选区边界 + CEC空间矩阵 + 历史政治知识
+  + 官方人口/年龄/社团/宗教/农渔会社会基础
+
+dynamic_campaign_state
+  = 当前地方关系 + 当前候选人 + 当前议题
+  + Campaign Event / Campaign State + 民调
+```
+
+`KnowledgeLoader` 在保持旧字段兼容的同时返回
+`stable_local_baseline` 与 `dynamic_local_state`；`AnalysisContextBuilder`
+再通过 `knowledge_views` 指明完整分析的读取顺序。飞书机器人因此可以先读稳定底座，
+再读取带 `as_of` 的动态状态。官方社会基础目录或历史关系不得因“存在”而被当作当前政治支持，
+动态关系也必须经过 freshness、来源和反证门禁。
+
+社会基础官方资料目录与离线导入：
+
+```bash
+python -m runtime.county_context_catalog --stage-catalog --all-counties
+python -m runtime.county_context_catalog --source-id <source_id> --file <official.csv|json|xml>
+```
+
+当前候选人—推荐政党双来源验证：
+
+```bash
+python -m runtime.current_relationship_verifier \
+  --county 新竹縣 \
+  --research-result cache/research/new-hsinchu-party-check.json
+```
+
+只有 dry-run 通过后才可加 `--apply` 晋升长期当前知识。
 
 ## 最低数据要求
 
@@ -375,3 +480,42 @@ python3 -m unittest discover -s tests -v
 ## 边界声明
 
 本 Skill 不提供选举预测、候选人推荐或政治动员。所有结构性判断必须附带证据等级、时间范围和不确定性说明。无法解释时应输出 `unknown`，不得自行补齐因果链。
+
+## 飞书选情机器人
+
+统一整合分支为 `feature/feishu-election-bot-v1.4-integration`。机器人采用飞书长连接，将群聊自然语言请求映射到 V1.4 `AnalysisPipeline`。
+
+```text
+飞书群 @机器人
+→ thread级 Conversation State
+→ Intent Router
+→ 小笠原 AnalysisPipeline
+→ 本地新闻库（后台多源采集、公开正文读取）
+→ Campaign Event / Campaign State
+→ Analysis Context
+→ OpenAI Writer（可选）
+→ 飞书线程回复
+```
+
+- 群聊默认仅在 @机器人 时响应，私聊直接响应；
+- “分析高雄选情”执行完整 V1.4；
+- “更新一下”沿用线程 Election Focus 并重新生成 Snapshot；
+- 新闻正文经实体识别和跨来源聚类后形成 Campaign Event；
+- single_source_media 仅作上下文，corroborated_media 仅可触发进一步研究，不等于官方核验事实；
+- OpenAI API 未配置时仍可返回确定性结构化摘要；
+- App Secret / API Key 仅从环境变量读取。
+
+完整部署说明见 `docs/feishu-bot.md`。
+
+当前统一整合分支 GitHub Actions 验证：`158 passed, 146 subtests passed, 0 failed`，`Runtime online end-to-end` 同时通过。
+
+启动：
+
+```bash
+python -m pip install -r requirements.txt
+python -m bot
+```
+
+## 多源新闻采集
+
+默认后端改为 `local`，请同步修改现有 `.env` 中的 `OGASAWARA_BOT_RETRIEVAL`，并独立启动 `python -m runtime.news_collector`。机器人读取本地新闻库；采集器负责来源发现、正文、重试与版本保存。GDELT保持可选。部署、补采、研究交接与覆盖边界见 [多源采集说明](docs/news-collection.md)。当前种子包括中央社、公视和联合，尚不代表22县市或30日历史完整覆盖。

@@ -22,6 +22,8 @@ from .metrics import (
 )
 from .host_retrieval import HostRetrievalBackend
 from .knowledge_builder import KnowledgePromotionBuilder
+from .knowledge_coverage import KnowledgeCoverageAudit
+from .county_knowledge import COUNTIES, CountyKnowledgeProduction
 from .models import ElectionTask
 from .pipeline import AnalysisPipeline
 
@@ -133,6 +135,9 @@ def _cmd_run(args: argparse.Namespace) -> int:
         retrieval_backend = HostRetrievalBackend(
             inbox_path=Path(args.retrieval_inbox).resolve()
         )
+    if retrieval_backend is None and getattr(args, "retrieval_provider", "disabled") != "disabled":
+        from .news_retrieval import build_retrieval_backend
+        retrieval_backend = build_retrieval_backend(args.retrieval_provider, repo_root or Path(__file__).resolve().parents[1], args.mode)
     pipeline = AnalysisPipeline(
         repo_root=repo_root,
         mode=args.mode,
@@ -188,6 +193,68 @@ def _cmd_knowledge_build(args: argparse.Namespace) -> int:
     result = builder.build_county_package(args.county)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
+
+
+def _knowledge_counties(args: argparse.Namespace) -> List[str]:
+    if getattr(args, "all_counties", False):
+        return list(COUNTIES)
+    values = [item.strip() for item in str(getattr(args, "counties", "") or "").split(",") if item.strip()]
+    if not values:
+        raise SystemExit("knowledge-production requires --counties or --all-counties")
+    return values
+
+
+def _cmd_knowledge_production(args: argparse.Namespace) -> int:
+    production = CountyKnowledgeProduction(
+        Path(args.repo_root).resolve() if args.repo_root else None
+    )
+    result = production.build_many(
+        _knowledge_counties(args),
+        incremental=args.incremental,
+        dry_run=args.dry_run,
+        run_research=args.run_research,
+        resume=not args.no_resume,
+        year=args.year,
+    )
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if result["failed_count"] == 0 else 2
+
+
+def _cmd_knowledge_status(args: argparse.Namespace) -> int:
+    production = CountyKnowledgeProduction(
+        Path(args.repo_root).resolve() if args.repo_root else None
+    )
+    counties = list(COUNTIES) if args.all_counties else [
+        item.strip() for item in str(args.counties or "").split(",") if item.strip()
+    ]
+    result = production.status(counties or None)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
+def _cmd_knowledge_coverage(args: argparse.Namespace) -> int:
+    counties = list(COUNTIES) if args.all_counties else [
+        item.strip() for item in str(args.counties or "").split(",") if item.strip()
+    ]
+    result = KnowledgeCoverageAudit(
+        Path(args.repo_root).resolve() if args.repo_root else None
+    ).build(counties or None)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
+def _cmd_knowledge_curated_baseline(args: argparse.Namespace) -> int:
+    from .curated_county_baseline import CuratedCountyBaseline
+
+    result = CuratedCountyBaseline(
+        Path(args.repo_root).resolve() if args.repo_root else None
+    ).run(
+        _knowledge_counties(args),
+        dry_run=args.dry_run,
+        refresh_existing=args.refresh_existing,
+    )
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if not {"rejected", "requires_review"}.intersection(result["decisions"]) else 2
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -258,6 +325,7 @@ def build_parser() -> argparse.ArgumentParser:
         default="",
         help="JSON/JSONL host-web retrieval inbox for local-knowledge research questions",
     )
+    run.add_argument("--retrieval-provider", choices=["local", "gdelt", "disabled"], default="local")
     run.set_defaults(func=_cmd_run)
 
     ingest = sub.add_parser(
@@ -284,6 +352,53 @@ def build_parser() -> argparse.ArgumentParser:
     )
     build.add_argument("--county", required=True)
     build.set_defaults(func=_cmd_knowledge_build)
+
+    production = sub.add_parser(
+        "knowledge-production",
+        help="prepare or incrementally update one or all 22 county knowledge packages",
+    )
+    production.add_argument("--counties", default="", help="comma-separated county names")
+    production.add_argument("--all-counties", action="store_true")
+    production.add_argument("--incremental", action="store_true")
+    production.add_argument("--dry-run", action="store_true")
+    production.add_argument(
+        "--run-research",
+        action="store_true",
+        help="invoke configured GLM/Tavily research; results remain retrieval leads",
+    )
+    production.add_argument("--no-resume", action="store_true")
+    production.add_argument("--year", type=int, default=2026)
+    production.set_defaults(func=_cmd_knowledge_production)
+
+    status = sub.add_parser(
+        "knowledge-status",
+        help="inspect county knowledge production and package status",
+    )
+    status.add_argument("--counties", default="")
+    status.add_argument("--all-counties", action="store_true")
+    status.set_defaults(func=_cmd_knowledge_status)
+
+    coverage = sub.add_parser(
+        "knowledge-coverage",
+        help="audit actual row-level coverage versus catalogs/leads for 22 counties",
+    )
+    coverage.add_argument("--counties", default="")
+    coverage.add_argument("--all-counties", action="store_true")
+    coverage.set_defaults(func=_cmd_knowledge_coverage)
+
+    curated = sub.add_parser(
+        "knowledge-curated-baseline",
+        help="stage and promote the tracked chat-verified county baseline",
+    )
+    curated.add_argument("--counties", default="", help="comma-separated county names")
+    curated.add_argument("--all-counties", action="store_true")
+    curated.add_argument("--dry-run", action="store_true")
+    curated.add_argument(
+        "--refresh-existing",
+        action="store_true",
+        help="re-evaluate records whose stable record id already exists",
+    )
+    curated.set_defaults(func=_cmd_knowledge_curated_baseline)
 
     return parser
 

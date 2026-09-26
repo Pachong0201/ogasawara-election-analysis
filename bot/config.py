@@ -1,0 +1,80 @@
+"""Environment-backed bot configuration.
+
+Secrets are never read from repository files. Feishu and OpenAI credentials
+must be supplied through environment variables or the deployment secret store.
+"""
+
+from __future__ import annotations
+
+import os
+from dataclasses import dataclass
+from pathlib import Path
+
+
+def _load_dotenv(path: Path) -> None:
+    """Load a local .env file if present; real environment variables win."""
+    if not path.is_file():
+        return
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip().strip("'\"")
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
+@dataclass(frozen=True)
+class BotConfig:
+    repo_root: Path
+    lark_app_id: str = ""
+    lark_app_secret: str = ""
+    openai_api_key: str = ""
+    openai_base_url: str = ""
+    openai_router_model: str = "gpt-5.6-luna"
+    openai_writer_model: str = "gpt-5.6-sol"
+    skill_mode: str = "online"
+    retrieval_provider: str = "local"
+    max_article_fetches: int = 6
+    require_mention: bool = True
+    conversation_db: Path = Path("cache/bot/conversations.sqlite3")
+    default_target_year: int = 2026
+
+    @classmethod
+    def from_env(cls, require_feishu: bool = False) -> "BotConfig":
+        repo_root = Path(
+            os.getenv("OGASAWARA_REPO_ROOT") or Path(__file__).resolve().parents[1]
+        ).resolve()
+        _load_dotenv(repo_root / ".env")
+        db_raw = os.getenv("FEISHU_BOT_CONVERSATION_DB", "cache/bot/conversations.sqlite3")
+        db_path = Path(db_raw)
+        if not db_path.is_absolute():
+            db_path = repo_root / db_path
+
+        config = cls(
+            repo_root=repo_root,
+            lark_app_id=os.getenv("LARK_APP_ID", "").strip(),
+            lark_app_secret=os.getenv("LARK_APP_SECRET", "").strip(),
+            openai_api_key=os.getenv("OPENAI_API_KEY", "").strip(),
+            openai_base_url=os.getenv("OPENAI_BASE_URL", "").strip(),
+            openai_router_model=os.getenv("OPENAI_ROUTER_MODEL", "gpt-5.6-luna").strip(),
+            openai_writer_model=os.getenv("OPENAI_WRITER_MODEL", "gpt-5.6-sol").strip(),
+            skill_mode=os.getenv("OGASAWARA_BOT_MODE", "online").strip().lower(),
+            retrieval_provider=os.getenv("OGASAWARA_BOT_RETRIEVAL", "local").strip().lower(),
+            max_article_fetches=int(os.getenv("OGASAWARA_MAX_ARTICLE_FETCHES", "6")),
+            require_mention=os.getenv("FEISHU_REQUIRE_MENTION", "true").strip().lower()
+            not in {"0", "false", "no", "off"},
+            conversation_db=db_path,
+            default_target_year=int(os.getenv("OGASAWARA_TARGET_YEAR", "2026")),
+        )
+        if config.skill_mode not in {"online", "offline", "auto"}:
+            raise ValueError("OGASAWARA_BOT_MODE must be online, offline, or auto")
+        if config.retrieval_provider not in {"local", "gdelt", "disabled"}:
+            raise ValueError("OGASAWARA_BOT_RETRIEVAL must be local, gdelt, or disabled")
+        if not 0 <= config.max_article_fetches <= 12:
+            raise ValueError("OGASAWARA_MAX_ARTICLE_FETCHES must be between 0 and 12")
+        if require_feishu and (not config.lark_app_id or not config.lark_app_secret):
+            raise RuntimeError("LARK_APP_ID and LARK_APP_SECRET are required")
+        return config

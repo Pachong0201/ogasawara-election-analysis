@@ -120,10 +120,13 @@ entrypoint: SKILL.md
 - `runtime/freshness.py`
 - `runtime/analysis_context.py`
 - `runtime/campaign_state.py`
+- `runtime/campaign_event.py`
 - `runtime/pipeline.py`
 - `runtime/host_retrieval.py`
 - `runtime/knowledge_builder.py`
 - `schemas/retrieval_lead.yaml`
+- `schemas/campaign_event.yaml`
+- `schemas/campaign_media_event.yaml`
 - `schemas/knowledge_proposal.yaml`
 - `schemas/knowledge_promotion_receipt.yaml`
 - `config/knowledge_promotion.yaml`
@@ -151,12 +154,14 @@ entrypoint: SKILL.md
 
 1. 明确 `as_of`，不得使用“目前”“近期”而无具体时点；
 2. 读取当前候选人、登记／提名状态、竞选组织与已验证当前事件；
-3. ONLINE MODE 主动检索最近 30 日资料，并分别形成 7 日、14 日、30 日窗口；
-4. 与上一份 Campaign State Snapshot 比较候选人格局、新事件与新民调；
-5. 对同一 pollster、commissioner、method、sample_frame、question_wording 的连续调查计算 same-series point-estimate change；
-6. 出现候选人格局变化、已验证重要竞选事件、同源民调明显变化或上一快照后的新增事件时，设置 `campaign_change_trigger=true`；
-7. `campaign_change_trigger` 与历史票型异常具有同等“触发研究”资格，可进入 Minimum Sufficient Local Knowledge；
-8. 任何 campaign trigger 都只表示“需要进一步验证”，不得直接解释为胜负变化或因果证明。
+3. ONLINE MODE 主动检索最近 30 日资料；公开新闻检索结果若能读取正文，必须先经过 evidence extraction、候选人／地点实体识别与跨来源聚类，再形成 media Campaign Event；该对象服从 `schemas/campaign_media_event.yaml`，不得替代严格标准事件 `schemas/campaign_event.yaml`；
+4. 单一媒体正文只保留为 single_source_media；两个以上独立来源正文对同一事件相互印证时可形成 corroborated_media，但只具有 research_trigger_only 资格，不得称为 A/B 级已核实事实；
+5. 将已验证事件与结构化 Campaign Event 一并放入 7 日、14 日、30 日窗口；
+6. 与上一份 Campaign State Snapshot 比较候选人格局、新事件、新检索线索与新民调；
+7. 对同一 pollster、commissioner、method、sample_frame、question_wording 的连续调查计算 same-series point-estimate change；
+8. 出现候选人格局变化、已验证重要竞选事件、corroborated_media 事件、同源民调明显变化或上一快照后的新增事件时，设置 `campaign_change_trigger=true`；
+9. `campaign_change_trigger` 与历史票型异常具有同等“触发研究”资格，可进入 Minimum Sufficient Local Knowledge；
+10. 任何 campaign trigger 都只表示“需要进一步验证”，不得直接解释为胜负变化或因果证明。
 
 关联文件：
 
@@ -308,12 +313,13 @@ retrieval lead 不得直接进入长期知识。只有宿主已经完成结构�
 V1.4 在地方知识与民调最终解释前建立选战进行时快照：
 
 1. 明确 `as_of`；
-2. 汇总最近 30／14／7 日已验证竞选事件；
-3. 比较候选人格局与上一快照；
-4. 只在 pollster、commissioner、method、sample_frame、question_wording 一致时计算 same-series poll delta；
-5. 当前候选人变化、组织／支持变化、政党合作、重大议题、争议、司法事件或同源民调变化均可触发 `campaign_change_trigger`；
-6. trigger 只产生研究问题，不代表任何候选人受益、受损、领先或更可能当选；
-7. 宿主检索的 lead_only 线索不得作为已确认事实。
+2. 对公开新闻执行“发现 → 正文读取 → 证据摘录 → 实体识别 → 跨来源聚类 → Campaign Event”；
+3. 汇总最近 30／14／7 日已验证竞选事件与结构化媒体事件，并严格区分 verified、corroborated_media 与 single_source_media；
+4. 比较候选人格局、结构化事件、retrieval lead 与上一快照；
+5. 只在 pollster、commissioner、method、sample_frame、question_wording 一致时计算 same-series poll delta；
+6. 当前候选人变化、已验证事件、corroborated_media 事件、组织／支持变化、政党合作、重大议题、争议、司法事件或同源民调变化均可触发 `campaign_change_trigger`；
+7. trigger 只产生研究问题，不代表任何候选人受益、受损、领先或更可能当选；
+8. lead_only 与 single_source_media 不得作为已确认事实；corroborated_media 也必须明确写明仍待官方资料、当事人原始声明或更高等级来源确认。
 
 ### STEP 9：民调校准
 
@@ -497,7 +503,7 @@ V1.3 知识晋升与地方知识 Builder 增加：
 - 同 ID 幂等写入与冲突保护；
 - county package 自动生成证据索引、未解决问题与政治生态索引；生成文件只做索引，不创造事实。
 
-后续阶段再增加村里／投票所空间分析、Neighbor Divergence 自动化、地方政治知识图谱、半自动历史知识检索和多县市横向比较。
+后续阶段再增加村里／投票所空间分析、Neighbor Divergence 自动化、更多经过人工结构化的地方政治关系与多县市横向比较。
 
 V1.4 Live Campaign State 增加：
 
@@ -510,5 +516,15 @@ V1.4 Live Campaign State 增加：
 - 同一调查系列允许计算 same-series poll delta，不同系列仍禁止拼接；
 - 默认写作顺序改为“当前态势 → 最近变化 → 历史参照 → 地方结构 → 民调校准”；
 - Campaign State Snapshot 只是 L4/L5 的动态时间索引，不新增第六知识层。
+
+V1.4 22 县市知识生产增加：
+
+- `CountyKnowledgeProduction` 覆盖 22 县市与十类统一研究主题；
+- CLI 支持全量、指定县市、增量、dry-run、状态检查、失败恢复与输入哈希幂等；
+- 可调用既有 GLM-5.3 Flash + Tavily 自动研究，但输出保持 retrieval lead，不自动生成 proposal 或晋升事实；
+- county package 增加 `research_questions.jsonl`、`entity_relation_index.jsonl`、`county_template.yaml` 与 `production_state.yaml`；
+- `KnowledgeLoader` 读取 package，`AnalysisPipeline` 生成 evidence-bounded `event_importance_signals`；
+- event importance 只做实体与已晋升知识匹配，不产生因果判断、候选人评分、胜负预测或政治建议；
+- 高雄市、台南市、新北市提供首批官方 A 级行政/空间背景 seed；其余不足主题明确保留 unresolved。
 
 `examples/yilan/` 只作为测试用例，不得成为 Skill 运行依赖。

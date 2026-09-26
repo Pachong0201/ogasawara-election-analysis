@@ -14,7 +14,18 @@ def _float(value: Any) -> Optional[float]:
 
 
 def _region(record: Dict[str, Any]) -> str:
-    return str(record.get("jurisdiction") or record.get("region") or "")
+    region = str(record.get("jurisdiction") or record.get("region") or "")
+    if record.get("election_type") == "regional_legislator":
+        codes = record.get("cec_codes") or {}
+        district = (
+            str(codes.get("election_district") or "")
+            if isinstance(codes, dict)
+            else ""
+        )
+        district = district or str(record.get("electoral_district") or "")
+        if district and district.strip("0"):
+            return f"{region}｜立委選區{district}"
+    return region
 
 
 def _candidate_key(record: Dict[str, Any]) -> str:

@@ -1,0 +1,79 @@
+name: Materialize official L3 candidates
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/feishu-election-bot-v1.4-integration
+    paths:
+      - ".github/workflows/materialize-l3-official-candidates.yml"
+      - "runtime/cec_current_candidates.py"
+      - "runtime/current_candidate_materializer.py"
+      - "runtime/knowledge_builder.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: materialize-l3-official-candidates
+  cancel-in-progress: false
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/feishu-election-bot-v1.4-integration
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Fetch CEC registration PDFs and promote L3 candidate profiles
+        run: |
+          python -m runtime.current_candidate_materializer --apply --allow-partial
+
+      - name: Commit verified L3 candidate profiles
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add knowledge/local knowledge/counties data/manifests
+          git add -u cache/knowledge_promotion cache/retrieval || true
+          if git diff --cached --quiet; then
+            echo "No verified L3 candidate changes to commit."
+          else
+            git commit -m "data: materialize official 2026 L3 candidate profiles"
+            for attempt in 1 2 3; do
+              git pull --rebase --autostash origin feature/feishu-election-bot-v1.4-integration
+              if git push origin HEAD:feature/feishu-election-bot-v1.4-integration; then
+                break
+              fi
+              if [ "$attempt" -eq 3 ]; then
+                echo "Failed to push L3 candidate data after retries."
+                exit 1
+              fi
+              sleep $((attempt * 2))
+            done
+          fi
+
+      - name: Enforce 22-county candidate coverage
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path("data/manifests/l3_official_candidates_latest.json")
+          report = json.loads(path.read_text(encoding="utf-8"))
+          print("L3_CANDIDATE_COUNT=", report.get("candidate_count"))
+          print("L3_COMPLETE_COUNT=", report.get("complete_count"))
+          print("L3_FAILURE_COUNT=", report.get("failure_count"))
+          if int(report.get("complete_count") or 0) != int(report.get("county_count") or 0):
+              raise SystemExit("L3 official candidate materialization is not complete for all counties")
+          PY

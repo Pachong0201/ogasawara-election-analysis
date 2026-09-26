@@ -1,0 +1,72 @@
+{
+  "source_id": "moa_fishermen_association_members",
+  "kind": "farmers_fishermen_associations",
+  "dataset_url": "https://data.gov.tw/dataset/135723",
+  "source_path": "/home/runner/work/ogasawara-election-analysis/ogasawara-election-analysis/cache/raw/context/moa_fishermen_association_members/latest.json",
+  "source_sha256": "13589e8f6d79749920f6ef2ffbc3251b087fcab18a2c8e5f0adaa2d10ed4efb4",
+  "source_size": 258693,
+  "encoding": "utf-8-sig",
+  "input_row_count": 1596,
+  "mapped_row_count": 1596,
+  "unmapped_row_count": 0,
+  "county_file_count": 19,
+  "files": {
+    "基隆市": "data/context/基隆市/farmers_fishermen_associations.jsonl",
+    "新北市": "data/context/新北市/farmers_fishermen_associations.jsonl",
+    "桃園市": "data/context/桃園市/farmers_fishermen_associations.jsonl",
+    "新竹市": "data/context/新竹市/farmers_fishermen_associations.jsonl",
+    "苗栗縣": "data/context/苗栗縣/farmers_fishermen_associations.jsonl",
+    "台中市": "data/context/台中市/farmers_fishermen_associations.jsonl",
+    "彰化縣": "data/context/彰化縣/farmers_fishermen_associations.jsonl",
+    "南投縣": "data/context/南投縣/farmers_fishermen_associations.jsonl",
+    "雲林縣": "data/context/雲林縣/farmers_fishermen_associations.jsonl",
+    "嘉義縣": "data/context/嘉義縣/farmers_fishermen_associations.jsonl",
+    "台南市": "data/context/台南市/farmers_fishermen_associations.jsonl",
+    "高雄市": "data/context/高雄市/farmers_fishermen_associations.jsonl",
+    "屏東縣": "data/context/屏東縣/farmers_fishermen_associations.jsonl",
+    "宜蘭縣": "data/context/宜蘭縣/farmers_fishermen_associations.jsonl",
+    "花蓮縣": "data/context/花蓮縣/farmers_fishermen_associations.jsonl",
+    "台東縣": "data/context/台東縣/farmers_fishermen_associations.jsonl",
+    "澎湖縣": "data/context/澎湖縣/farmers_fishermen_associations.jsonl",
+    "金門縣": "data/context/金門縣/farmers_fishermen_associations.jsonl",
+    "連江縣": "data/context/連江縣/farmers_fishermen_associations.jsonl"
+  },
+  "diagnostic": {
+    "field_names": [
+      "人數",
+      "會員性質",
+      "會員類別",
+      "縣市別",
+      "資料年"
+    ],
+    "sample_rows": [
+      {
+        "縣市別": "1002 宜蘭縣",
+        "會員類別": "1 甲類會員",
+        "資料年": "100",
+        "會員性質": "1 男",
+        "人數": "13049"
+      },
+      {
+        "縣市別": "1002 宜蘭縣",
+        "會員類別": "1 甲類會員",
+        "資料年": "100",
+        "會員性質": "2 女",
+        "人數": "14055"
+      },
+      {
+        "縣市別": "1002 宜蘭縣",
+        "會員類別": "1 甲類會員",
+        "資料年": "101",
+        "會員性質": "1 男",
+        "人數": "12388"
+      }
+    ]
+  },
+  "imported_at": "2026-09-26T11:11:22+00:00",
+  "resource_url": "https://data.moa.gov.tw/Service/OpenData/DataFileService.aspx?IsTransData=1&UnitId=G73",
+  "resource_format": "json",
+  "downloaded_sha256": "13589e8f6d79749920f6ef2ffbc3251b087fcab18a2c8e5f0adaa2d10ed4efb4",
+  "downloaded_size": 258693,
+  "downloaded_at": "2026-09-26T11:11:22+00:00"
+}

@@ -1,0 +1,77 @@
+name: Materialize official county context
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/feishu-election-bot-v1.4-integration
+    paths:
+      - ".github/workflows/materialize-county-context.yml"
+      - "runtime/context_official_download.py"
+      - "runtime/county_context_catalog.py"
+      - "config/county_context_sources.yaml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: materialize-county-context
+  cancel-in-progress: false
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/feishu-election-bot-v1.4-integration
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Download and import official county-context resources
+        run: |
+          python -m runtime.context_official_download --force --allow-partial
+
+      - name: Commit verified normalized context data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/context data/manifests/context_*.json
+          if git diff --cached --quiet; then
+            echo "No normalized county-context changes to commit."
+            exit 0
+          fi
+          git commit -m "data: materialize verified official county context"
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin feature/feishu-election-bot-v1.4-integration
+            if git push origin HEAD:feature/feishu-election-bot-v1.4-integration; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          echo "Failed to push materialized data after retries."
+          exit 1
+
+      - name: Report remaining context-source failures
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path("data/manifests/context_materialization_latest.json")
+          report = json.loads(path.read_text(encoding="utf-8"))
+          print("CONTEXT_SUCCESS=", report.get("success_count"))
+          print("CONTEXT_FAILURE=", report.get("failure_count"))
+          for failure in report.get("failures") or []:
+              print(failure.get("source_id"), failure.get("error"))
+          if int(report.get("failure_count") or 0):
+              raise SystemExit("official context materialization still has source failures")
+          PY

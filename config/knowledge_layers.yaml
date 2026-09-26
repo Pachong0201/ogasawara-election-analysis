@@ -171,6 +171,39 @@ layers:
       - 单一民调形成确定结论
     schema: schemas/poll.yaml
 
+operational_views:
+  stable_local_baseline:
+    purpose: >
+      供分析链先读取的稳定地方底座。组合 L1 历史选举事实、选区边界与空间矩阵，
+      L2 历史政治知识，以及已离线导入的官方人口、社团、宗教、农渔会等社会基础资料。
+    includes: [L1, L2]
+    runtime_paths:
+      - data/elections/
+      - data/geography/electoral_districts/
+      - data/matrices/cec/
+      - data/context/
+      - knowledge/historical/
+    forbidden:
+      - 由组织存在、规模或历史关系推断当前政治支持
+      - 由人口结构直接推断个人投票选择
+
+  dynamic_campaign_state:
+    purpose: >
+      供稳定底座之后读取的动态选情视图。组合经 freshness 校验的 L3 当前地方关系，
+      L4 Campaign Event / Campaign State 与 L5 民调；所有资料必须带时间边界。
+    includes: [L3, L4, L5]
+    runtime_paths:
+      - knowledge/local/
+      - cache/events/
+      - cache/campaign_state/
+      - cache/polls/
+    current_relationship_rule: >
+      当前候选人—组织关系必须使用近期可核资料；候选人—推荐政党关系由
+      current_relationship_verifier 执行中选会 A 级登记记录加独立媒体正文交叉确认。
+    forbidden:
+      - 把 retrieval lead 当成当前事实
+      - 把动态事件或民调转换为胜负结论
+
 separation_rules:
   - id: LAYER-01
     statement: 五层知识必须分别标记 layer_id，不得混用。

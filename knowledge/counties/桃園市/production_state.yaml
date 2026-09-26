@@ -1,0 +1,42 @@
+county: 桃園市
+status: completed
+question_count: 10
+input_sha256: 6f77c08b2a41f457ab0ae9f981849f33ddeef9c0caf620ae07f8634c71187ef9
+run_research: false
+started_at: '2026-09-26T07:47:54+00:00'
+attempt: 4
+last_error: ''
+completed_at: '2026-09-26T07:47:54+00:00'
+research:
+  status: not_requested
+manifest:
+  version: 1.4.0
+  county: 桃園市
+  generated_at: '2026-09-26T07:47:54+00:00'
+  content_sha256: 63b1072cc8814f8a76cb4851559cb72fd308a09bf2ae7b14dafe5bb3afb70b62
+  builder: KnowledgePromotionBuilder
+  authoritative_sources:
+    historical_claim: knowledge/historical/桃園市/claims.jsonl
+    local_relationship: knowledge/local/桃園市/relationships.jsonl
+    candidate_profile: knowledge/local/桃園市/candidates.jsonl
+    current_issue: knowledge/local/桃園市/issues.jsonl
+  generated_indexes:
+    evidence_index: knowledge/counties/桃園市/evidence_index.jsonl
+    unresolved_questions: knowledge/counties/桃園市/unresolved_questions.jsonl
+    political_ecology: knowledge/counties/桃園市/political_ecology.md
+    research_questions: knowledge/counties/桃園市/research_questions.jsonl
+    entity_relation_index: knowledge/counties/桃園市/entity_relation_index.jsonl
+  counts:
+    historical_claim: 2
+    local_relationship: 0
+    candidate_profile: 0
+    current_issue: 0
+  evidence_index_count: 2
+  entity_relation_count: 0
+  research_question_count: 10
+  unresolved_question_count: 9
+  promotion_receipt_count: 2
+  rules:
+    generated_files_are_indexes_not_new_facts: true
+    source_files_are_authoritative: true
+    historical_current_separation: true

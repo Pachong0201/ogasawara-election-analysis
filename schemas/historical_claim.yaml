@@ -1,4 +1,4 @@
-version: 1.3.0
+version: 1.4.0
 schema_name: historical_claim
 description: >
   L2 历史政治知识中的非关系型历史事实。仅描述 time_scope 内可证实的历史现象，
@@ -37,6 +37,14 @@ properties:
     items: {type: string}
   scope_boundary:
     type: string
+  uncertainty:
+    type: object
+    properties:
+      level: {type: string, enum: [low, medium, high, unknown]}
+      reason: {type: string}
+      competing_explanations:
+        type: array
+        items: {type: string}
   evidence:
     type: array
     items:
@@ -61,6 +69,11 @@ properties:
       evidence_grades:
         type: array
         items: {type: string}
+      contradiction_check_completed: {type: boolean}
+      contradictory_lead_ids:
+        type: array
+        items: {type: string}
+      contradiction_check_note: {type: string}
   record_type:
     type: string
     enum: [historical_claim]

@@ -1,0 +1,30 @@
+version: 1.4.0
+county: 台北市
+generated_at: '2026-09-26T12:10:49+00:00'
+content_sha256: 17d237713db266c8eb67c9d5622d68e9e34b4e5baf949ff342cbf2e54f0dd580
+builder: KnowledgePromotionBuilder
+authoritative_sources:
+  historical_claim: knowledge/historical/台北市/claims.jsonl
+  local_relationship: knowledge/local/台北市/relationships.jsonl
+  candidate_profile: knowledge/local/台北市/candidates.jsonl
+  current_issue: knowledge/local/台北市/issues.jsonl
+generated_indexes:
+  evidence_index: knowledge/counties/台北市/evidence_index.jsonl
+  unresolved_questions: knowledge/counties/台北市/unresolved_questions.jsonl
+  political_ecology: knowledge/counties/台北市/political_ecology.md
+  research_questions: knowledge/counties/台北市/research_questions.jsonl
+  entity_relation_index: knowledge/counties/台北市/entity_relation_index.jsonl
+counts:
+  historical_claim: 2
+  local_relationship: 8
+  candidate_profile: 104
+  current_issue: 0
+evidence_index_count: 114
+entity_relation_count: 8
+research_question_count: 10
+unresolved_question_count: 9
+promotion_receipt_count: 136
+rules:
+  generated_files_are_indexes_not_new_facts: true
+  source_files_are_authoritative: true
+  historical_current_separation: true

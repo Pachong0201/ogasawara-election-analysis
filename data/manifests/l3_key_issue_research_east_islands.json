@@ -1,0 +1,74 @@
+{
+  "generated_at": "2026-09-26T16:00:55+00:00",
+  "county_count": 6,
+  "covered_county_count": 0,
+  "finding_count": 0,
+  "proposal_count": 0,
+  "promoted_count": 0,
+  "rejected_count": 0,
+  "failure_count": 0,
+  "results": [
+    {
+      "county": "宜蘭縣",
+      "primary_status": "retry_pending",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_http_429"
+    },
+    {
+      "county": "花蓮縣",
+      "primary_status": "retry_pending",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_http_429"
+    },
+    {
+      "county": "台東縣",
+      "primary_status": "retry_pending",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_http_429"
+    },
+    {
+      "county": "澎湖縣",
+      "primary_status": "retry_pending",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_http_429"
+    },
+    {
+      "county": "金門縣",
+      "primary_status": "retry_pending",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_http_429"
+    },
+    {
+      "county": "連江縣",
+      "primary_status": "retry_pending",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_http_429"
+    }
+  ],
+  "failures": [],
+  "apply": true
+}

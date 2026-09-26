@@ -10,9 +10,22 @@ cache/**/*.jsonl
 cache/**/*.json
 !cache/**/.gitkeep
 !cache/README.md
+!cache/knowledge_promotion/*.jsonl
 
 # Generated provenance output
 analysis_manifest.json
 
 # Official raw archives are runtime cache only
 cache/raw/
+
+# Bot conversation state
+cache/**/*.sqlite3
+
+# Local dependency target used when the host Python is externally managed
+.deps/
+
+# Bot runtime log
+cache/**/*.log
+
+# SQLite WAL sidecars are runtime data too.
+cache/**/*.sqlite3-*

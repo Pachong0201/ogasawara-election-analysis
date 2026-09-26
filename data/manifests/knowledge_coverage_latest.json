@@ -1,0 +1,3506 @@
+{
+  "schema_version": "1.0.0",
+  "county_count": 22,
+  "counties": [
+    {
+      "county": "基隆市",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 42,
+              "path": "data/elections/county_mayor/2014/基隆市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 14,
+              "path": "data/elections/county_mayor/2018/基隆市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 35,
+              "path": "data/elections/county_mayor/2022/基隆市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 21,
+              "path": "data/elections/president/2016/基隆市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 21,
+              "path": "data/elections/president/2020/基隆市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 21,
+              "path": "data/elections/president/2024/基隆市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 28,
+              "path": "data/elections/regional_legislator/2016/基隆市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 28,
+              "path": "data/elections/regional_legislator/2020/基隆市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 42,
+              "path": "data/elections/regional_legislator/2024/基隆市.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/基隆市.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/基隆市.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-keelung-party-faction-elections-2002"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/基隆市/civil_associations.jsonl",
+              "record_count": 176,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/基隆市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 63,
+        "mayor_2026_candidate_count": 3,
+        "councilor_2026_candidate_count": 60,
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/基隆市/candidates.jsonl",
+        "relationship_path": "knowledge/local/基隆市/relationships.jsonl",
+        "issue_path": "knowledge/local/基隆市/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "台北市",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 84,
+              "path": "data/elections/county_mayor/2014/台北市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 60,
+              "path": "data/elections/county_mayor/2018/台北市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 144,
+              "path": "data/elections/county_mayor/2022/台北市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 36,
+              "path": "data/elections/president/2016/台北市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 36,
+              "path": "data/elections/president/2020/台北市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 36,
+              "path": "data/elections/president/2024/台北市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 114,
+              "path": "data/elections/regional_legislator/2016/台北市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 102,
+              "path": "data/elections/regional_legislator/2020/台北市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 101,
+              "path": "data/elections/regional_legislator/2024/台北市.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/台北市.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/台北市.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-taipei-shilin-beitou-election-2011"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/台北市/civil_associations.jsonl",
+              "record_count": 8163,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/台北市/farmers_fishermen_associations.jsonl",
+              "record_count": 91,
+              "source_ids": [
+                "moa_farmers_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_farmers_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "source_catalog_only"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 104,
+        "mayor_2026_candidate_count": 6,
+        "councilor_2026_candidate_count": 98,
+        "active_verified_relationship_count": 8,
+        "dual_source_relationship_count": 8,
+        "relationship_types": {
+          "office_holding": 8
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/台北市/candidates.jsonl",
+        "relationship_path": "knowledge/local/台北市/relationships.jsonl",
+        "issue_path": "knowledge/local/台北市/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_fishermen_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "新北市",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 87,
+              "path": "data/elections/county_mayor/2014/新北市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 58,
+              "path": "data/elections/county_mayor/2018/新北市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 58,
+              "path": "data/elections/county_mayor/2022/新北市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 87,
+              "path": "data/elections/president/2016/新北市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 87,
+              "path": "data/elections/president/2020/新北市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 87,
+              "path": "data/elections/president/2024/新北市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 145,
+              "path": "data/elections/regional_legislator/2016/新北市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 205,
+              "path": "data/elections/regional_legislator/2020/新北市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 149,
+              "path": "data/elections/regional_legislator/2024/新北市.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/新北市.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/新北市.json"
+        },
+        "academic_research": {
+          "state": "not_targeted_by_19_county_supplement",
+          "lead_count": 0,
+          "lead_ids": [],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/新北市/civil_associations.jsonl",
+              "record_count": 4042,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/新北市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 115,
+        "mayor_2026_candidate_count": 3,
+        "councilor_2026_candidate_count": 112,
+        "active_verified_relationship_count": 15,
+        "dual_source_relationship_count": 13,
+        "relationship_types": {
+          "campaign_cooperation": 1,
+          "office_holding": 13,
+          "other": 1
+        },
+        "current_issue_count": 1,
+        "candidate_path": "knowledge/local/新北市/candidates.jsonl",
+        "relationship_path": "knowledge/local/新北市/relationships.jsonl",
+        "issue_path": "knowledge/local/新北市/issues.jsonl"
+      },
+      "unresolved_question_count": 7,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members"
+      ]
+    },
+    {
+      "county": "桃園市",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 39,
+              "path": "data/elections/county_mayor/2014/桃園市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 65,
+              "path": "data/elections/county_mayor/2018/桃園市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 52,
+              "path": "data/elections/county_mayor/2022/桃園市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 39,
+              "path": "data/elections/president/2016/桃園市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 39,
+              "path": "data/elections/president/2020/桃園市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 39,
+              "path": "data/elections/president/2024/桃園市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 76,
+              "path": "data/elections/regional_legislator/2016/桃園市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 64,
+              "path": "data/elections/regional_legislator/2020/桃園市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 66,
+              "path": "data/elections/regional_legislator/2024/桃園市.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/桃園市.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/桃園市.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-taoyuan-council-local-power-2015"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/桃園市/civil_associations.jsonl",
+              "record_count": 1528,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/桃園市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 111,
+        "mayor_2026_candidate_count": 2,
+        "councilor_2026_candidate_count": 109,
+        "active_verified_relationship_count": 6,
+        "dual_source_relationship_count": 6,
+        "relationship_types": {
+          "office_holding": 6
+        },
+        "current_issue_count": 2,
+        "candidate_path": "knowledge/local/桃園市/candidates.jsonl",
+        "relationship_path": "knowledge/local/桃園市/relationships.jsonl",
+        "issue_path": "knowledge/local/桃園市/issues.jsonl"
+      },
+      "unresolved_question_count": 8,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members"
+      ]
+    },
+    {
+      "county": "新竹市",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 15,
+              "path": "data/elections/county_mayor/2014/新竹市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 18,
+              "path": "data/elections/county_mayor/2018/新竹市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 18,
+              "path": "data/elections/county_mayor/2022/新竹市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 9,
+              "path": "data/elections/president/2016/新竹市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 9,
+              "path": "data/elections/president/2020/新竹市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 9,
+              "path": "data/elections/president/2024/新竹市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 30,
+              "path": "data/elections/regional_legislator/2016/新竹市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 18,
+              "path": "data/elections/regional_legislator/2020/新竹市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 21,
+              "path": "data/elections/regional_legislator/2024/新竹市.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/新竹市.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/新竹市.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-hsinchu-city-urbanization-factions-2000"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/新竹市/civil_associations.jsonl",
+              "record_count": 274,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/新竹市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 59,
+        "mayor_2026_candidate_count": 3,
+        "councilor_2026_candidate_count": 56,
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/新竹市/candidates.jsonl",
+        "relationship_path": "knowledge/local/新竹市/relationships.jsonl",
+        "issue_path": "knowledge/local/新竹市/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "新竹縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 52,
+              "path": "data/elections/county_mayor/2014/新竹縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 52,
+              "path": "data/elections/county_mayor/2018/新竹縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 65,
+              "path": "data/elections/county_mayor/2022/新竹縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 39,
+              "path": "data/elections/president/2016/新竹縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 39,
+              "path": "data/elections/president/2020/新竹縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 39,
+              "path": "data/elections/president/2024/新竹縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 104,
+              "path": "data/elections/regional_legislator/2016/新竹縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 91,
+              "path": "data/elections/regional_legislator/2020/新竹縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 56,
+              "path": "data/elections/regional_legislator/2024/新竹縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/新竹縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/新竹縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-hsinchu-county-party-faction-2002"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/新竹縣/civil_associations.jsonl",
+              "record_count": 308,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/新竹縣/farmers_fishermen_associations.jsonl",
+              "record_count": 91,
+              "source_ids": [
+                "moa_farmers_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_farmers_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "source_catalog_only"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 71,
+        "mayor_2026_candidate_count": 3,
+        "councilor_2026_candidate_count": 68,
+        "active_verified_relationship_count": 2,
+        "dual_source_relationship_count": 2,
+        "relationship_types": {
+          "office_holding": 2
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/新竹縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/新竹縣/relationships.jsonl",
+        "issue_path": "knowledge/local/新竹縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_fishermen_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "苗栗縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 108,
+              "path": "data/elections/county_mayor/2014/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 72,
+              "path": "data/elections/county_mayor/2018/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 90,
+              "path": "data/elections/county_mayor/2022/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 54,
+              "path": "data/elections/president/2016/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 54,
+              "path": "data/elections/president/2020/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 54,
+              "path": "data/elections/president/2024/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 90,
+              "path": "data/elections/regional_legislator/2016/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 108,
+              "path": "data/elections/regional_legislator/2020/苗栗縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 36,
+              "path": "data/elections/regional_legislator/2024/苗栗縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/苗栗縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/苗栗縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-miaoli-election-mobilization-study"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/苗栗縣/civil_associations.jsonl",
+              "record_count": 213,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/苗栗縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 58,
+        "mayor_2026_candidate_count": 2,
+        "councilor_2026_candidate_count": 56,
+        "active_verified_relationship_count": 2,
+        "dual_source_relationship_count": 2,
+        "relationship_types": {
+          "office_holding": 2
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/苗栗縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/苗栗縣/relationships.jsonl",
+        "issue_path": "knowledge/local/苗栗縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "台中市",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 58,
+              "path": "data/elections/county_mayor/2014/台中市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 87,
+              "path": "data/elections/county_mayor/2018/台中市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 87,
+              "path": "data/elections/county_mayor/2022/台中市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 87,
+              "path": "data/elections/president/2016/台中市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 87,
+              "path": "data/elections/president/2020/台中市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 87,
+              "path": "data/elections/president/2024/台中市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 114,
+              "path": "data/elections/regional_legislator/2016/台中市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 133,
+              "path": "data/elections/regional_legislator/2020/台中市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 114,
+              "path": "data/elections/regional_legislator/2024/台中市.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/台中市.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/台中市.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-taichung-farmers-association-leadership"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/台中市/civil_associations.jsonl",
+              "record_count": 2751,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/台中市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 105,
+        "mayor_2026_candidate_count": 3,
+        "councilor_2026_candidate_count": 102,
+        "active_verified_relationship_count": 11,
+        "dual_source_relationship_count": 8,
+        "relationship_types": {
+          "office_holding": 8,
+          "other": 3
+        },
+        "current_issue_count": 1,
+        "candidate_path": "knowledge/local/台中市/candidates.jsonl",
+        "relationship_path": "knowledge/local/台中市/relationships.jsonl",
+        "issue_path": "knowledge/local/台中市/issues.jsonl"
+      },
+      "unresolved_question_count": 7,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members"
+      ]
+    },
+    {
+      "county": "彰化縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 104,
+              "path": "data/elections/county_mayor/2014/彰化縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 130,
+              "path": "data/elections/county_mayor/2018/彰化縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 78,
+              "path": "data/elections/county_mayor/2022/彰化縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 78,
+              "path": "data/elections/president/2016/彰化縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 78,
+              "path": "data/elections/president/2020/彰化縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 78,
+              "path": "data/elections/president/2024/彰化縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 97,
+              "path": "data/elections/regional_legislator/2016/彰化縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 110,
+              "path": "data/elections/regional_legislator/2020/彰化縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 92,
+              "path": "data/elections/regional_legislator/2024/彰化縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/彰化縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/彰化縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-changhua-factions-origin-2009"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/彰化縣/civil_associations.jsonl",
+              "record_count": 461,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/彰化縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 90,
+        "mayor_2026_candidate_count": 4,
+        "councilor_2026_candidate_count": 86,
+        "active_verified_relationship_count": 4,
+        "dual_source_relationship_count": 4,
+        "relationship_types": {
+          "office_holding": 4
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/彰化縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/彰化縣/relationships.jsonl",
+        "issue_path": "knowledge/local/彰化縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "南投縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 26,
+              "path": "data/elections/county_mayor/2014/南投縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 26,
+              "path": "data/elections/county_mayor/2018/南投縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 39,
+              "path": "data/elections/county_mayor/2022/南投縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 39,
+              "path": "data/elections/president/2016/南投縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 39,
+              "path": "data/elections/president/2020/南投縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 39,
+              "path": "data/elections/president/2024/南投縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 26,
+              "path": "data/elections/regional_legislator/2016/南投縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 47,
+              "path": "data/elections/regional_legislator/2020/南投縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 51,
+              "path": "data/elections/regional_legislator/2024/南投縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/南投縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/南投縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-nantou-renai-factions-2012"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/南投縣/civil_associations.jsonl",
+              "record_count": 294,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/南投縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 63,
+        "mayor_2026_candidate_count": 2,
+        "councilor_2026_candidate_count": 61,
+        "active_verified_relationship_count": 2,
+        "dual_source_relationship_count": 2,
+        "relationship_types": {
+          "office_holding": 2
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/南投縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/南投縣/relationships.jsonl",
+        "issue_path": "knowledge/local/南投縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "雲林縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 40,
+              "path": "data/elections/county_mayor/2014/雲林縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 80,
+              "path": "data/elections/county_mayor/2018/雲林縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 60,
+              "path": "data/elections/county_mayor/2022/雲林縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 60,
+              "path": "data/elections/president/2016/雲林縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 60,
+              "path": "data/elections/president/2020/雲林縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 60,
+              "path": "data/elections/president/2024/雲林縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 69,
+              "path": "data/elections/regional_legislator/2016/雲林縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 80,
+              "path": "data/elections/regional_legislator/2020/雲林縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 84,
+              "path": "data/elections/regional_legislator/2024/雲林縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/雲林縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/雲林縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-yunlin-parties-factions-2010"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/雲林縣/civil_associations.jsonl",
+              "record_count": 212,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/雲林縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 77,
+        "mayor_2026_candidate_count": 4,
+        "councilor_2026_candidate_count": 73,
+        "active_verified_relationship_count": 2,
+        "dual_source_relationship_count": 2,
+        "relationship_types": {
+          "office_holding": 2
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/雲林縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/雲林縣/relationships.jsonl",
+        "issue_path": "knowledge/local/雲林縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "嘉義市",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 12,
+              "path": "data/elections/county_mayor/2014/嘉義市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 8,
+              "path": "data/elections/county_mayor/2018/嘉義市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 10,
+              "path": "data/elections/county_mayor/2022/嘉義市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 6,
+              "path": "data/elections/president/2016/嘉義市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 6,
+              "path": "data/elections/president/2020/嘉義市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 6,
+              "path": "data/elections/president/2024/嘉義市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 8,
+              "path": "data/elections/regional_legislator/2016/嘉義市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 16,
+              "path": "data/elections/regional_legislator/2020/嘉義市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 12,
+              "path": "data/elections/regional_legislator/2024/嘉義市.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/嘉義市.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/嘉義市.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-chiayi-city-resource-support-2023"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/嘉義市/civil_associations.jsonl",
+              "record_count": 182,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/嘉義市/farmers_fishermen_associations.jsonl",
+              "record_count": 91,
+              "source_ids": [
+                "moa_farmers_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_farmers_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "source_catalog_only"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 42,
+        "mayor_2026_candidate_count": 5,
+        "councilor_2026_candidate_count": 37,
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/嘉義市/candidates.jsonl",
+        "relationship_path": "knowledge/local/嘉義市/relationships.jsonl",
+        "issue_path": "knowledge/local/嘉義市/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_fishermen_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "嘉義縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 54,
+              "path": "data/elections/county_mayor/2014/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 72,
+              "path": "data/elections/county_mayor/2018/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 36,
+              "path": "data/elections/county_mayor/2022/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 54,
+              "path": "data/elections/president/2016/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 54,
+              "path": "data/elections/president/2020/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 54,
+              "path": "data/elections/president/2024/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 54,
+              "path": "data/elections/regional_legislator/2016/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 92,
+              "path": "data/elections/regional_legislator/2020/嘉義縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 66,
+              "path": "data/elections/regional_legislator/2024/嘉義縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/嘉義縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/嘉義縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-chiayi-county-lin-huang-2025"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/嘉義縣/civil_associations.jsonl",
+              "record_count": 141,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/嘉義縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 55,
+        "mayor_2026_candidate_count": 2,
+        "councilor_2026_candidate_count": 53,
+        "active_verified_relationship_count": 2,
+        "dual_source_relationship_count": 2,
+        "relationship_types": {
+          "office_holding": 2
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/嘉義縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/嘉義縣/relationships.jsonl",
+        "issue_path": "knowledge/local/嘉義縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "台南市",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 74,
+              "path": "data/elections/county_mayor/2014/台南市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 222,
+              "path": "data/elections/county_mayor/2018/台南市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 185,
+              "path": "data/elections/county_mayor/2022/台南市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 111,
+              "path": "data/elections/president/2016/台南市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 111,
+              "path": "data/elections/president/2020/台南市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 111,
+              "path": "data/elections/president/2024/台南市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 168,
+              "path": "data/elections/regional_legislator/2016/台南市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 191,
+              "path": "data/elections/regional_legislator/2020/台南市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 141,
+              "path": "data/elections/regional_legislator/2024/台南市.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/台南市.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/台南市.json"
+        },
+        "academic_research": {
+          "state": "not_targeted_by_19_county_supplement",
+          "lead_count": 0,
+          "lead_ids": [],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/台南市/civil_associations.jsonl",
+              "record_count": 867,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/台南市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 92,
+        "mayor_2026_candidate_count": 4,
+        "councilor_2026_candidate_count": 88,
+        "active_verified_relationship_count": 9,
+        "dual_source_relationship_count": 7,
+        "relationship_types": {
+          "office_holding": 6,
+          "other": 2,
+          "public_endorsement": 1
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/台南市/candidates.jsonl",
+        "relationship_path": "knowledge/local/台南市/relationships.jsonl",
+        "issue_path": "knowledge/local/台南市/issues.jsonl"
+      },
+      "unresolved_question_count": 7,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "高雄市",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 114,
+              "path": "data/elections/county_mayor/2014/高雄市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 152,
+              "path": "data/elections/county_mayor/2018/高雄市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 152,
+              "path": "data/elections/county_mayor/2022/高雄市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 114,
+              "path": "data/elections/president/2016/高雄市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 114,
+              "path": "data/elections/president/2020/高雄市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 114,
+              "path": "data/elections/president/2024/高雄市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 172,
+              "path": "data/elections/regional_legislator/2016/高雄市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 211,
+              "path": "data/elections/regional_legislator/2020/高雄市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 129,
+              "path": "data/elections/regional_legislator/2024/高雄市.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/高雄市.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/高雄市.json"
+        },
+        "academic_research": {
+          "state": "not_targeted_by_19_county_supplement",
+          "lead_count": 0,
+          "lead_ids": [],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/高雄市/civil_associations.jsonl",
+              "record_count": 1707,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/高雄市/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 106,
+        "mayor_2026_candidate_count": 5,
+        "councilor_2026_candidate_count": 101,
+        "active_verified_relationship_count": 11,
+        "dual_source_relationship_count": 9,
+        "relationship_types": {
+          "office_holding": 9,
+          "other": 1,
+          "public_endorsement": 1
+        },
+        "current_issue_count": 1,
+        "candidate_path": "knowledge/local/高雄市/candidates.jsonl",
+        "relationship_path": "knowledge/local/高雄市/relationships.jsonl",
+        "issue_path": "knowledge/local/高雄市/issues.jsonl"
+      },
+      "unresolved_question_count": 6,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members"
+      ]
+    },
+    {
+      "county": "屏東縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 66,
+              "path": "data/elections/county_mayor/2014/屏東縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 99,
+              "path": "data/elections/county_mayor/2018/屏東縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 99,
+              "path": "data/elections/county_mayor/2022/屏東縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 99,
+              "path": "data/elections/president/2016/屏東縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 99,
+              "path": "data/elections/president/2020/屏東縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 99,
+              "path": "data/elections/president/2024/屏東縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 117,
+              "path": "data/elections/regional_legislator/2016/屏東縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 264,
+              "path": "data/elections/regional_legislator/2020/屏東縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 154,
+              "path": "data/elections/regional_legislator/2024/屏東縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/屏東縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/屏東縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-pingtung-yanpu-factions-2019"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/屏東縣/civil_associations.jsonl",
+              "record_count": 276,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/屏東縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 89,
+        "mayor_2026_candidate_count": 2,
+        "councilor_2026_candidate_count": 87,
+        "active_verified_relationship_count": 2,
+        "dual_source_relationship_count": 2,
+        "relationship_types": {
+          "office_holding": 2
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/屏東縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/屏東縣/relationships.jsonl",
+        "issue_path": "knowledge/local/屏東縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "宜蘭縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 24,
+              "path": "data/elections/county_mayor/2014/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 60,
+              "path": "data/elections/county_mayor/2018/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 72,
+              "path": "data/elections/county_mayor/2022/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 36,
+              "path": "data/elections/president/2016/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 36,
+              "path": "data/elections/president/2020/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 36,
+              "path": "data/elections/president/2024/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 96,
+              "path": "data/elections/regional_legislator/2016/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 72,
+              "path": "data/elections/regional_legislator/2020/宜蘭縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 72,
+              "path": "data/elections/regional_legislator/2024/宜蘭縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/宜蘭縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/宜蘭縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-yilan-factional-politics-1996"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/宜蘭縣/civil_associations.jsonl",
+              "record_count": 201,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/宜蘭縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 64,
+        "mayor_2026_candidate_count": 5,
+        "councilor_2026_candidate_count": 59,
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/宜蘭縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/宜蘭縣/relationships.jsonl",
+        "issue_path": "knowledge/local/宜蘭縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "花蓮縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 78,
+              "path": "data/elections/county_mayor/2014/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 39,
+              "path": "data/elections/county_mayor/2018/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 39,
+              "path": "data/elections/county_mayor/2022/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 39,
+              "path": "data/elections/president/2016/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 39,
+              "path": "data/elections/president/2020/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 39,
+              "path": "data/elections/president/2024/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 52,
+              "path": "data/elections/regional_legislator/2016/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 78,
+              "path": "data/elections/regional_legislator/2020/花蓮縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 52,
+              "path": "data/elections/regional_legislator/2024/花蓮縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/花蓮縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/花蓮縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-hualien-county-mayor-strategy-2003"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/花蓮縣/civil_associations.jsonl",
+              "record_count": 167,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/花蓮縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 59,
+        "mayor_2026_candidate_count": 4,
+        "councilor_2026_candidate_count": 55,
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/花蓮縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/花蓮縣/relationships.jsonl",
+        "issue_path": "knowledge/local/花蓮縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "台東縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 32,
+              "path": "data/elections/county_mayor/2014/台東縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 80,
+              "path": "data/elections/county_mayor/2018/台東縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 48,
+              "path": "data/elections/county_mayor/2022/台東縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 48,
+              "path": "data/elections/president/2016/台東縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 48,
+              "path": "data/elections/president/2020/台東縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 48,
+              "path": "data/elections/president/2024/台東縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 32,
+              "path": "data/elections/regional_legislator/2016/台東縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 64,
+              "path": "data/elections/regional_legislator/2020/台東縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 96,
+              "path": "data/elections/regional_legislator/2024/台東縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/台東縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/台東縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-taitung-factions-development-2007"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/台東縣/civil_associations.jsonl",
+              "record_count": 99,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/台東縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 60,
+        "mayor_2026_candidate_count": 4,
+        "councilor_2026_candidate_count": 56,
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/台東縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/台東縣/relationships.jsonl",
+        "issue_path": "knowledge/local/台東縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "澎湖縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 12,
+              "path": "data/elections/county_mayor/2014/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 42,
+              "path": "data/elections/county_mayor/2018/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 18,
+              "path": "data/elections/county_mayor/2022/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 18,
+              "path": "data/elections/president/2016/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 18,
+              "path": "data/elections/president/2020/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 18,
+              "path": "data/elections/president/2024/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 24,
+              "path": "data/elections/regional_legislator/2016/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 18,
+              "path": "data/elections/regional_legislator/2020/澎湖縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 18,
+              "path": "data/elections/regional_legislator/2024/澎湖縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/澎湖縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/澎湖縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-penghu-factions-rise-fall-2002"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/澎湖縣/civil_associations.jsonl",
+              "record_count": 17,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/澎湖縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 42,
+        "mayor_2026_candidate_count": 6,
+        "councilor_2026_candidate_count": 36,
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/澎湖縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/澎湖縣/relationships.jsonl",
+        "issue_path": "knowledge/local/澎湖縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "金門縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 60,
+              "path": "data/elections/county_mayor/2014/金門縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 36,
+              "path": "data/elections/county_mayor/2018/金門縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 36,
+              "path": "data/elections/county_mayor/2022/金門縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 18,
+              "path": "data/elections/president/2016/金門縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 18,
+              "path": "data/elections/president/2020/金門縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 18,
+              "path": "data/elections/president/2024/金門縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 48,
+              "path": "data/elections/regional_legislator/2016/金門縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 60,
+              "path": "data/elections/regional_legislator/2020/金門縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 18,
+              "path": "data/elections/regional_legislator/2024/金門縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/金門縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/金門縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-kinmen-political-ecology-2020"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "civil_associations",
+              "path": "data/context/金門縣/civil_associations.jsonl",
+              "record_count": 22,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/金門縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 2,
+          "catalog_only_source_count": 3
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 42,
+        "mayor_2026_candidate_count": 7,
+        "councilor_2026_candidate_count": 35,
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/金門縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/金門縣/relationships.jsonl",
+        "issue_path": "knowledge/local/金門縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    },
+    {
+      "county": "連江縣",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 8,
+              "path": "data/elections/county_mayor/2014/連江縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 16,
+              "path": "data/elections/county_mayor/2018/連江縣.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 12,
+              "path": "data/elections/county_mayor/2022/連江縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 12,
+              "path": "data/elections/president/2016/連江縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 12,
+              "path": "data/elections/president/2020/連江縣.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 12,
+              "path": "data/elections/president/2024/連江縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 16,
+              "path": "data/elections/regional_legislator/2016/連江縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 20,
+              "path": "data/elections/regional_legislator/2020/連江縣.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 12,
+              "path": "data/elections/regional_legislator/2024/連江縣.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/連江縣.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/連江縣.json"
+        },
+        "academic_research": {
+          "state": "research_leads_only",
+          "lead_count": 1,
+          "lead_ids": [
+            "academic-matsu-political-ecology-2017"
+          ],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/連江縣/farmers_fishermen_associations.jsonl",
+              "record_count": 84,
+              "source_ids": [
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "moa_fishermen_association_members"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 1,
+          "catalog_only_source_count": 4
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 16,
+        "mayor_2026_candidate_count": 2,
+        "councilor_2026_candidate_count": 14,
+        "active_verified_relationship_count": 1,
+        "dual_source_relationship_count": 1,
+        "relationship_types": {
+          "office_holding": 1
+        },
+        "current_issue_count": 0,
+        "candidate_path": "knowledge/local/連江縣/candidates.jsonl",
+        "relationship_path": "knowledge/local/連江縣/relationships.jsonl",
+        "issue_path": "knowledge/local/連江縣/issues.jsonl"
+      },
+      "unresolved_question_count": 9,
+      "gaps": [
+        "context_catalog_only:dgbas_census_age_structure_2020",
+        "context_catalog_only:moi_religion_temples",
+        "context_catalog_only:moi_national_social_groups_by_area",
+        "context_catalog_only:moa_farmers_association_members",
+        "no_current_issue_record"
+      ]
+    }
+  ],
+  "summary": {
+    "with_cec_election_rows": 22,
+    "with_term11_boundaries": 22,
+    "with_spatial_matrix": 22,
+    "with_2026_mayor_candidate_profiles": 22,
+    "with_2026_councilor_candidate_profiles": 22,
+    "total_candidate_profiles": 1583,
+    "total_2026_mayor_candidates": 81,
+    "total_2026_councilor_candidates": 1502,
+    "with_active_verified_relationships": 22,
+    "with_current_issue_records": 4
+  },
+  "interpretation_boundary": "coverage states describe repository artifacts only; source_catalog_only and research_leads_only are not equivalent to verified row-level knowledge"
+}

@@ -1,0 +1,92 @@
+name: Research and materialize L3 candidate-party relationships
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/feishu-election-bot-v1.4-integration
+    paths:
+      - ".github/workflows/materialize-l3-candidate-party-relationships.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: materialize-l3-candidate-party-relationships
+  cancel-in-progress: false
+
+jobs:
+  research:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - batch: north
+            counties: "基隆市,台北市,新北市,桃園市,新竹市,新竹縣"
+          - batch: central
+            counties: "苗栗縣,台中市,彰化縣,南投縣,雲林縣"
+          - batch: south
+            counties: "嘉義市,嘉義縣,台南市,高雄市,屏東縣"
+          - batch: east_islands
+            counties: "宜蘭縣,花蓮縣,台東縣,澎湖縣,金門縣,連江縣"
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      OGASAWARA_AUTO_RESEARCH: "true"
+      OPENCODE_GO_API_KEY: ${{ secrets.OPENCODE_GO_API_KEY }}
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+      RESEARCH_LLM_MODEL: glm-5.3-flash
+      RESEARCH_LLM_BASE_URL: https://opencode.ai/zen/go/v1
+      RESEARCH_FOREGROUND_SECONDS: "60"
+      RESEARCH_DAILY_SEARCHES: "120"
+      RESEARCH_DAILY_TOKEN_BUDGET: "500000"
+
+    steps:
+      - name: Checkout latest feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/feishu-election-bot-v1.4-integration
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Require automatic-research credentials
+        run: |
+          test -n "$OPENCODE_GO_API_KEY" || (echo "OPENCODE_GO_API_KEY secret is missing" && exit 2)
+          test -n "$TAVILY_API_KEY" || (echo "TAVILY_API_KEY secret is missing" && exit 2)
+
+      - name: Research and promote dual-source candidate-party relationships
+        run: |
+          python -m runtime.l3_candidate_party_research \
+            --counties "${{ matrix.counties }}" \
+            --apply \
+            --manifest-name "l3_candidate_party_research_${{ matrix.batch }}.json"
+
+      - name: Commit verified L3 relationships and batch audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add knowledge/local knowledge/counties "data/manifests/l3_candidate_party_research_${{ matrix.batch }}.json"
+          git add -u cache/knowledge_promotion cache/retrieval || true
+          if git diff --cached --quiet; then
+            echo "No L3 candidate-party changes for ${{ matrix.batch }}."
+            exit 0
+          fi
+          git commit -m "data: verify L3 candidate-party relationships (${{ matrix.batch }})"
+          for attempt in 1 2 3 4; do
+            git pull --rebase --autostash origin feature/feishu-election-bot-v1.4-integration
+            if git push origin HEAD:feature/feishu-election-bot-v1.4-integration; then
+              exit 0
+            fi
+            sleep $((attempt * 3))
+          done
+          echo "Failed to push L3 relationship batch after retries."
+          exit 1

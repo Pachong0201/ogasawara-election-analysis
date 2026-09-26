@@ -1,0 +1,30 @@
+version: 1.4.0
+county: 屏東縣
+generated_at: '2026-09-26T12:11:10+00:00'
+content_sha256: 6fd92b6b763fb07129f9edd99987f237b1860dee604f3dfd93791d9ef26d82c5
+builder: KnowledgePromotionBuilder
+authoritative_sources:
+  historical_claim: knowledge/historical/屏東縣/claims.jsonl
+  local_relationship: knowledge/local/屏東縣/relationships.jsonl
+  candidate_profile: knowledge/local/屏東縣/candidates.jsonl
+  current_issue: knowledge/local/屏東縣/issues.jsonl
+generated_indexes:
+  evidence_index: knowledge/counties/屏東縣/evidence_index.jsonl
+  unresolved_questions: knowledge/counties/屏東縣/unresolved_questions.jsonl
+  political_ecology: knowledge/counties/屏東縣/political_ecology.md
+  research_questions: knowledge/counties/屏東縣/research_questions.jsonl
+  entity_relation_index: knowledge/counties/屏東縣/entity_relation_index.jsonl
+counts:
+  historical_claim: 2
+  local_relationship: 2
+  candidate_profile: 89
+  current_issue: 0
+evidence_index_count: 93
+entity_relation_count: 2
+research_question_count: 10
+unresolved_question_count: 9
+promotion_receipt_count: 99
+rules:
+  generated_files_are_indexes_not_new_facts: true
+  source_files_are_authoritative: true
+  historical_current_separation: true

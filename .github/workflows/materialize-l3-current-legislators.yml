@@ -1,0 +1,81 @@
+name: Materialize current L3 legislators
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/feishu-election-bot-v1.4-integration
+    paths:
+      - ".github/workflows/materialize-l3-current-legislators.yml"
+      - "runtime/ly_current_legislators.py"
+      - "runtime/current_legislator_materializer.py"
+      - "runtime/knowledge_builder.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: materialize-l3-current-legislators-v2
+  cancel-in-progress: false
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/feishu-election-bot-v1.4-integration
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Fetch Legislative Yuan current roster and promote office relationships
+        run: |
+          python -m runtime.current_legislator_materializer --apply --allow-partial
+
+      - name: Commit verified current legislator relationships
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add knowledge/local knowledge/counties data/manifests
+          git add -u cache/knowledge_promotion cache/retrieval || true
+          if git diff --cached --quiet; then
+            echo "No current legislator changes to commit."
+          else
+            git commit -m "data: materialize current L3 legislator relationships"
+            for attempt in 1 2 3; do
+              git pull --rebase --autostash origin feature/feishu-election-bot-v1.4-integration
+              if git push origin HEAD:feature/feishu-election-bot-v1.4-integration; then
+                break
+              fi
+              if [ "$attempt" -eq 3 ]; then
+                echo "Failed to push current legislator data after retries."
+                exit 1
+              fi
+              sleep $((attempt * 2))
+            done
+          fi
+
+      - name: Report current legislator coverage
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path("data/manifests/l3_current_legislators_latest.json")
+          report = json.loads(path.read_text(encoding="utf-8"))
+          print("L3_LEGISLATOR_COUNT=", report.get("member_count"))
+          print("L3_COVERED_COUNTIES=", report.get("covered_county_count"))
+          print("L3_ROSTER_COUNT=", report.get("roster_member_count"))
+          print("L3_UNMATCHED_2024_WINNERS=", report.get("unmatched_2024_winner_count"))
+          print("L3_SOURCE_FAILURES=", report.get("source_failure_count"))
+          if int(report.get("member_count") or 0) <= 0:
+              raise SystemExit("No current regional legislators were materialized")
+          PY

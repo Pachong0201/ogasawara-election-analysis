@@ -1,6 +1,6 @@
 # 测试
 
-本目录包含 Skill V1.0 契约测试与 V1.1/V1.2/V1.3 Data、Runtime 与 Knowledge 行为测试。
+本目录包含 Skill V1.0 契约测试与 V1.1—V1.4 Data、Runtime、Knowledge、Campaign State 及飞书机器人行为测试。
 
 ## 运行
 
@@ -32,3 +32,12 @@ python3 -m unittest discover -s tests -v
 
 - `test_knowledge_builder.py`：V1.3 proposal 晋升、证据独立性、相反证据、freshness、幂等、receipt 与 county package Builder。
 - `test_cli_knowledge.py`：`knowledge-ingest` staging 边界、`knowledge-promote --dry-run`、正式晋升、`knowledge-build` 与拒绝状态退出码。
+- `test_county_knowledge.py`：22 县市注册、十主题研究计划、dry-run、批量构建、恢复、幂等、自动研究 lead-only 边界、人物—组织—地区索引与事件重要性信号。
+
+
+### Feishu Bot v0.1
+
+- `test_bot_router.py`：县市识别、更新窗口、追问 focus 继承。
+- `test_bot_conversation.py`：群聊线程隔离、私聊连续会话、机器人回复链映射。
+- `test_bot_service.py`：@触发、完整分析、更新重跑、上下文追问复用。
+- `test_bot_report_writer.py`：未配置 OpenAI API 时的确定性回退输出。

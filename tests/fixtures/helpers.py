@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import datetime as dt
 import json
 import tempfile
 from contextlib import contextmanager
@@ -159,7 +158,10 @@ def write_election_records(root: Path, election_type: str, year: int, jurisdicti
 
 def write_current_candidates(root: Path, jurisdiction: str = DEFAULT_JURISDICTION) -> Path:
     path = root / "cache" / "candidates" / f"{jurisdiction}.jsonl"
-    now = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat()
+    # Fixed verification timestamp: suite-wide as_of is 2026-09-23, so a
+    # wall-clock "now" would eventually be later than as_of and fail
+    # _verified_by_as_of (a time-dependent test).
+    now = "2026-09-20T12:00:00+00:00"
     records = [
         {
             "candidate_id": "c1",

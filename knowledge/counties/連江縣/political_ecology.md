@@ -1,0 +1,53 @@
+# 連江縣 地方政治知识索引
+
+> 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
+
+生成时间：2026-09-26T12:11:16+00:00
+
+## 历史政治知识（L2）
+- 連江縣-population-2025: 截至2025年12月底，連江縣户籍登记人口为13,621人，较2024年12月底减少329人。（2024-12-31—2025-12-31）
+- 連江縣-primary-employment-industry-2021: 2021年工业及服务业普查按从业人数观察，連江縣从业人数最多的行业为零售业。（2021-01-01—2021-12-31）
+
+## 当前地方关系（L3）
+- ly11-office-連江縣-陳雪生: 陳雪生 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+
+## 候选人地方档案（L3）
+- cec-reg-2026-ae7576df634ba6f1: 王忠銘；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-ed4c666e27d4d6b1: 曹爾元；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-4dc91c3a14be43a9: 曹丞君；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-28b697e854d495e0: 吳軾子；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-e5cce568c20e3d8f: 曹以標；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-6acab9ca45f3fb68: 林惠萍；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-e8ceab052e304e9c: 曹爾章；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-3b574befcafb535a: 陳書建；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-8ad0eab57185f35f: 林明揚；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-fd88bc29f1002574: 陳玉發；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-69ec142af6a77e4a: 周瑞國；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-73b5378e9164fc6a: 謝秉軒；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-51a0ee0b1a84000a: 王孝榛；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-cb92da2f967208a9: 陳貽斌；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-7fe776303a849c33: 林德建；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+- cec-reg-2026-4946b2147ce60ff9: 馮印才；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
+
+## 当前地方议题（L3）
+- 暂无已晋升地方议题。
+
+## 人物—组织—地区关系索引
+- 陳雪生 → office_holding → 立法院第11屆立法委員；region=連江縣；current_use=current_usable
+
+## 尚未解决的检索问题
+- 連江縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
+- 連江縣 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？（leads=0, verified=0）
+- 連江縣 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？（leads=0, verified=0）
+- 学术或可靠公开资料如何描述 連江縣 的历史派系或政治网络，其有效时间范围及当前可验证状态为何？（leads=0, verified=0）
+- 連江縣 的行政区、立委选区与历届地方选举空间差异中，哪些结构需要结合边界版本解释？（leads=0, verified=0）
+- 連江縣 有哪些地方社团与公共事务网络可由可靠资料确认，且不得据其存在推断政治支持？（leads=0, verified=0）
+- 連江縣 农会、渔会的组织分布与公开政治互动有哪些可核实记录，其时间范围为何？（leads=0, verified=0）
+- 連江縣 宗教组织参与地方公共事务或公开政治活动的可验证记录有哪些，证据边界为何？（leads=0, verified=0）
+- 連江縣 当前与近十年哪些地方治理、建设、环境或产业议题具有持续公开证据？（leads=0, verified=0）
+
+## 使用边界
+- 历史记录只在其 time_scope 内有效。
+- active_verified 关系必须继续满足 freshness 与当前验证要求。
+- retrieval lead 未经晋升不得作为长期结构事实。
+- 本索引不得用于候选人评分、排名、胜负预测或政治推荐。
