@@ -21,7 +21,9 @@ from .campaign_event import _norm_text
 from .news_sources import published
 from .news_store import dumps, iso
 from .news_utils import _canonical_url
-from .research_providers import GoModel, TavilySearch, ResearchConfig, ProviderError, SYSTEM
+from .research_providers import (
+    MODEL_MAX_TOKENS, GoModel, TavilySearch, ResearchConfig, ProviderError, SYSTEM,
+)
 from .research_store import ResearchStore
 
 
@@ -56,10 +58,17 @@ class ResearchWorker:
         path = self.root / 'config/research_sources.yaml'
         if not path.exists():
             path = Path(__file__).resolve().parents[1] / 'config/research_sources.yaml'
-        self.publishers = (yaml.safe_load(path.read_text(encoding='utf-8')) or {}).get('publishers', [])
+        source_config = yaml.safe_load(path.read_text(encoding='utf-8')) or {}
+        self.publishers = source_config.get('publishers', [])
+        self.official_domains = tuple(source_config.get('official_domains') or ())
 
     def _identity(self, url):
         host = urlparse(url).hostname
+        if host and _valid_host(url, self.official_domains):
+            official_id = 'official_' + host.lower().replace('.', '_')
+            return dict(source_id=official_id, publisher_id=official_id,
+                        source_kind='official', source_grade='A',
+                        independence_key=host.lower())
         for publisher in self.publishers:
             if _valid_host(url, publisher['domains']):
                 return dict(source_id='web_' + publisher['id'], publisher_id=publisher['id'],
@@ -75,10 +84,13 @@ class ResearchWorker:
         return min(cap, remaining)
 
     def _model(self, job, state, payload):
+        state['active_stage'] = 'model_' + str(payload.get('stage') or 'unknown')
         self.store.checkpoint(job, state)
-        timeout = self._remaining(90)
+        timeout = self._remaining(105)
         # UTF-8 bytes are a conservative token reservation for these text requests.
-        reserve = len((SYSTEM + dumps(payload)).encode()) + 16000
+        reserve = len((SYSTEM + dumps(payload)).encode()) + MODEL_MAX_TOKENS.get(
+            str(payload.get('stage') or ''), 12000
+        )
         call = self.store.reserve_call(job, 'model', reserve, self.config.daily_tokens,
                                        {'stage': payload['stage'], 'model': self.config.model})
         if call is None:
@@ -93,6 +105,7 @@ class ResearchWorker:
             raise
 
     def _read(self, job, state, task, row, purpose):
+        state['active_stage'] = 'body_read'
         raw_url = row.get('url')
         if not isinstance(raw_url, str) or len(raw_url) > 4000:
             return
@@ -148,10 +161,11 @@ class ResearchWorker:
         if article.get('body_status') == 'read':
             # Body excerpt sent to the model is recorded so citation validation is reproducible.
             state['evidence'].append({k: article.get(k) for k in (
-                'url', 'title', 'source_id', 'source_kind', 'source_grade', 'publisher_id',
-                'page_date', 'published_at', 'article_version', 'retrieved_at')}
-                | {'content': article.get('content', '')[:3500],
-                   'content_truncated': bool(article.get('content_truncated')) or len(article.get('content', '')) > 3500})
+                'url', 'title', 'source_id', 'source_name', 'source_kind', 'source_grade',
+                'publisher_id', 'independence_key', 'page_date', 'published_at',
+                'article_version', 'retrieved_at')}
+                | {'content': article.get('content', '')[:2400],
+                   'content_truncated': bool(article.get('content_truncated')) or len(article.get('content', '')) > 2400})
 
     def _search_round(self, job, state, task, plan):
         for item in plan:
@@ -164,6 +178,7 @@ class ResearchWorker:
             timeout = self._remaining()
             cached = state['search_results'].get(signature)
             if cached is None:
+                state['active_stage'] = 'search'
                 call = self.store.reserve_call(job, 'search', 1, self.config.daily_searches, item)
                 if call is None:
                     raise ProviderError('daily_search_budget', 86400 - time.time() % 86400)
@@ -200,7 +215,10 @@ class ResearchWorker:
                 article = by_url.get(cite['url'])
                 quote = cite.get('quote')
                 if article and isinstance(quote, str) and 16 <= len(quote) <= 800 and quote in article['content']:
-                    citations.append({k: article.get(k) for k in ('url', 'title', 'source_grade', 'source_kind', 'publisher_id', 'page_date', 'article_version')}
+                    citations.append({k: article.get(k) for k in (
+                        'url', 'title', 'source_id', 'source_name', 'source_grade',
+                        'source_kind', 'publisher_id', 'independence_key', 'page_date',
+                        'article_version')}
                                      | {'quote': quote})
             # All supplied citations must be real; partial validation cannot rescue a fabricated citation.
             if citations and isinstance(raw, list) and len(citations) == len(raw):
@@ -222,6 +240,8 @@ class ResearchWorker:
         self.deadline = time.monotonic() + self.config.job_seconds
         state = self.store.result(job['id'])
         state.update(status='running', model=self.config.model, search_provider='tavily')
+        state.pop('last_error', None)
+        state.pop('error_stage', None)
         for key, default in [('articles', []), ('evidence', []), ('completed_queries', []), ('search_results', {}), ('findings', []), ('unresolved', [])]:
             state.setdefault(key, default)
         task = dict(job['payload'])
@@ -254,8 +274,11 @@ class ResearchWorker:
                 # Review sees only the most recent evidence window; the output
                 # (findings + citations) scales with the input and otherwise
                 # hits the model's output ceiling on large rounds.
-                review_evidence = state['evidence'][-12:]
-                state['review'] = self._model(job, state, {'stage': 'review', 'task': task, 'evidence': review_evidence, 'max_followup_queries': 2})
+                review_evidence = state['evidence'][-8:]
+                state['review'] = self._model(job, state, {
+                    'stage': 'review', 'task': task, 'evidence': review_evidence,
+                    'max_followup_queries': 2, 'max_findings': 3,
+                })
                 state['findings'], state['rejected_findings'] = self.validate_findings(state['review'], review_evidence)
                 state['unresolved'] = strings(state['review'].get('unresolved'))
                 self.store.checkpoint(job, state)
@@ -263,10 +286,13 @@ class ResearchWorker:
             self._search_round(job, state, task, followups)
             final = state['review']
             if followups:
-                review_evidence = state['evidence'][-12:]
-                final = self._model(job, state, {'stage': 'review', 'task': task, 'evidence': review_evidence, 'max_followup_queries': 0})
+                review_evidence = state['evidence'][-8:]
+                final = self._model(job, state, {
+                    'stage': 'review', 'task': task, 'evidence': review_evidence,
+                    'max_followup_queries': 0, 'max_findings': 3,
+                })
             else:
-                review_evidence = state['evidence'][-12:]
+                review_evidence = state['evidence'][-8:]
             state['findings'], state['rejected_findings'] = self.validate_findings(final, review_evidence)
             state['unresolved'] = strings(final.get('unresolved'))
             state['questions'] = strings(task.get('questions'))
@@ -280,14 +306,18 @@ class ResearchWorker:
             if not state['findings']:
                 state['unresolved'].append('本次未取得足夠可引用證據，不能據此判定事件不存在。')
             state['completed_at'] = iso(time.time())
+            state.pop('active_stage', None)
             self.store.checkpoint(job, state)
             self.store.finish(job)
         except Exception as exc:
             code = str(exc) if isinstance(exc, ProviderError) else type(exc).__name__
             state['status'] = 'partial' if state['evidence'] else 'failed'
             state['last_error'] = code
+            state['error_stage'] = str(state.get('active_stage') or 'unknown')
             retryable = isinstance(exc, ProviderError) and exc.retryable and job['attempts'] < 3
-            delay = max(60 * 2 ** job['attempts'], getattr(exc, 'retry_after', 0))
+            base_delay = 15 if code in {'provider_timeout', 'provider_transport_error'} else 60
+            delay = max(base_delay * 2 ** max(0, job['attempts'] - 1),
+                        getattr(exc, 'retry_after', 0))
             try:
                 self.store.checkpoint(job, state)
                 self.store.finish(job, time.time() + delay if retryable else None, code)
@@ -299,7 +329,8 @@ class ResearchWorker:
 def public_result(result):
     """Keep full bodies and raw search responses out of the report writer context."""
     return {k: result[k] for k in ('status', 'job_id', 'model', 'search_provider', 'findings',
-            'unresolved', 'questions', 'last_error', 'updated_at', 'completed_at', 'model_tokens', 'rejected_findings') if k in result} | {
+            'unresolved', 'questions', 'last_error', 'error_stage', 'updated_at',
+            'completed_at', 'model_tokens', 'rejected_findings') if k in result} | {
                 'search_count': len(result.get('search_results', {})),
                 'body_count': len(result.get('evidence', [])),
                 'coverage_complete': False,
@@ -320,7 +351,8 @@ class ResearchCoordinator:
         payload = {'jurisdiction': task.jurisdiction, 'target_year': task.target_year,
                    'election_type': task.election_type, 'questions': sorted(strings(questions)),
                    'candidate_names': sorted(strings(candidate_names, 30)),
-                   'objective': '更新近30日競選動態，並補查以下地方政治研究問題。'}
+                   'objective': ('更新近30日競選動態，並補查以下地方政治研究問題。'
+                                 '優先查找政府機關原始公告，再以獨立媒體正文補充或交叉核驗。')}
         key = 'auto-v1-' + hashlib.sha256(dumps({**payload, 'model': self.config.model, 'base_url': self.config.base_url}).encode()).hexdigest()
         payload['end_date'] = dt.datetime.now(dt.timezone(dt.timedelta(hours=8))).date().isoformat()
         job_id = self.store.schedule(key, payload, self.config.cache_seconds)

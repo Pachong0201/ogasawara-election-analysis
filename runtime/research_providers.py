@@ -12,6 +12,9 @@ from .article_body import _NoRedirect
 from .news_utils import retry_seconds
 
 
+MODEL_MAX_TOKENS = {"plan": 4000, "review": 12000}
+
+
 class ProviderError(Exception):
     def __init__(self, code, retry_after=0, retryable=True):
         super().__init__(code)
@@ -90,10 +93,12 @@ SYSTEM = '''你是選舉資料研究助手。僅輸出 JSON 物件，不輸出 M
 只規劃搜尋、摘錄證據及指出缺口；不得猜測網址、人物關係或當選概率。
 plan 階段輸出 {"queries":[{"query":"查詢文字","purpose":"news或background"}]}。
 查詢必須包含指定縣市，區分縣市與同名人物。兼顧近況、支持表態和否認更正。
+涉及治理、建設或組織互動時，至少規劃一個政府機關原始公告查詢，並以獨立媒體查詢補充；不得猜測網址。
 review 階段輸出 {"findings":[{"question":"所回答的 task.questions 中的原始問題，例行動態可留空",
 "statement":"該來源報導了什麼（不作因果推定）",
 "citations":[{"url":"提供的原始網址","quote":"正文中連續、逐字的引文"}]}],
 "unresolved":["仍缺哪些證據"],"queries":[{"query":"補搜文字","purpose":"news或background"}]}。
+findings 不得超過 max_findings，引用務必精簡；不得輸出思考過程。
 只能引用 evidence 中的正文；摘要及搜尋標題不可作證據。不得把轉載視為獨立佐證。
 單一來源、陣營主張、互相矛盾必須說明；未找到證據不等於事情沒有發生。
 逐項處理 task.questions；未被正文回答的問題必須列入 unresolved，不可用一般新聞摘要代替回答。
@@ -106,12 +111,13 @@ class GoModel:
 
     def complete(self, payload, session, timeout=20):
         # Respect the caller's remaining deadline and stay below the 120s lease.
-        timeout = max(1, min(90, timeout))
+        timeout = max(1, min(105, timeout))
+        max_tokens = MODEL_MAX_TOKENS.get(str(payload.get('stage') or ''), 12000)
         raw = self.transport(self.config.base_url + '/chat/completions', self.config.api_key, {
             'model': self.config.model, 'messages': [
                 {'role': 'system', 'content': SYSTEM},
                 {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)},
-            ], 'max_tokens': 16000, 'temperature': 0.1,
+            ], 'max_tokens': max_tokens, 'temperature': 0.1,
             'response_format': {'type': 'json_object'},
         }, timeout, {'x-opencode-session': session})
         try:

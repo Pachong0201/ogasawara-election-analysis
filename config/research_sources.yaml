@@ -1,5 +1,10 @@
 # Identity registry for web search; independent of scheduled feed enablement.
 # Unknown sites remain other/E, even when their public body can be read.
+# Taiwan government domains are registry-controlled.  They are classified as
+# A-grade official sources by their exact response host; one department cannot
+# accidentally become an "independent" second source merely because it shares
+# the broad gov.tw suffix with another page.
+official_domains: [gov.tw, gov.taipei]
 publishers:
   - {id: cna, domains: [cna.com.tw, focustaiwan.tw]}
   - {id: udn, domains: [udn.com]}

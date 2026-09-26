@@ -31,8 +31,9 @@ def setup(tmp_path, cfg=None, model=None, search=None, body_factory=None):
     store = ResearchStore(tmp_path / 'news.sqlite3')
     model, search = model or Model(), search or Search()
     worker = ResearchWorker(tmp_path, store, cfg or config(), model, search, body_factory or (lambda host: Body()))
+    taipei_today = dt.datetime.now(dt.timezone(dt.timedelta(hours=8))).date().isoformat()
     task = dict(jurisdiction='高雄市', target_year=2026, election_type='county_mayor',
-                questions=['候選人最新動向'], end_date=dt.date.today().isoformat())
+                questions=['候選人最新動向'], end_date=taipei_today)
     job_id = store.schedule('scope', task, 1800)
     return store, worker, model, search, job_id
 
@@ -101,8 +102,11 @@ def test_go_respects_remaining_deadline_and_reserves_thinking_output():
         calls.append(args)
         return {'choices': [{'message': {'content': '{"queries":[]}'}}]}
     GoModel(config(), transport).complete({'stage': 'plan'}, 'test', 5)
+    GoModel(config(), transport).complete({'stage': 'review'}, 'test', 200)
     assert calls[0][3] == 5
-    assert calls[0][2]['max_tokens'] == 16000
+    assert calls[0][2]['max_tokens'] == 4000
+    assert calls[1][3] == 105
+    assert calls[1][2]['max_tokens'] == 12000
     assert 'thinking' not in calls[0][2]  # GLM-5.3 forces thinking.
 
 
@@ -147,6 +151,24 @@ def test_unknown_site_remains_e_even_with_readable_body(tmp_path):
     assert result['status'] == 'completed'
     assert store.article(url)['source_grade'] == 'E'
     assert store.article(url)['source_kind'] == 'other'
+
+
+@pytest.mark.parametrize('url', [
+    'https://www.klcg.gov.tw/tw/klcg1/3168-322375.html',
+    'https://www.gov.taipei/News_Content.aspx?n=fixture',
+])
+def test_registry_controlled_government_domains_are_a_grade(tmp_path, url):
+    store, worker, _, _, job_id = setup(tmp_path, search=Search(url))
+    result = worker.tick(job_id)
+    assert result['status'] == 'completed'
+    article = store.article(url)
+    assert article['source_grade'] == 'A'
+    assert article['source_kind'] == 'official'
+    assert article['independence_key'] == url.split('/')[2]
+    citation = result['findings'][0]['citations'][0]
+    assert citation['source_id'] == article['source_id']
+    assert citation['source_name'] == url.split('/')[2]
+    assert citation['independence_key'] == url.split('/')[2]
 
 
 @pytest.mark.parametrize('url', ['http://example.com/a', 'https://user:pass@example.com/a', 'https://example.com:81/a', 'not-a-url'])
