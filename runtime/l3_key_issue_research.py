@@ -182,9 +182,11 @@ class L3KeyIssueResearchBatch:
         failures: List[Dict[str, str]] = []
         for county in selected:
             try:
-                results.append(
-                    self.run_county(county, apply=apply, max_findings=max_findings)
-                )
+                row = self.run_county(county, apply=apply, max_findings=max_findings)
+                results.append(row)
+                print(json.dumps(row, ensure_ascii=False), flush=True)
+                if row.get('last_error') or row.get('primary_status') not in COUNTER_SEARCH_OK:
+                    failures.append({'county': county, 'error': row.get('last_error') or str(row.get('primary_status'))})
             except Exception as exc:
                 failures.append({"county": county, "error": f"{type(exc).__name__}: {exc}"})
         output = {

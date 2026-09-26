@@ -68,17 +68,17 @@ class ResearchWorker:
         return dict(source_id='web_' + host, publisher_id=host, source_kind='other',
                     source_grade='E', independence_key=host)
 
-    def _remaining(self):
+    def _remaining(self, cap=20):
         remaining = self.deadline - time.monotonic()
         if remaining <= 1:
             raise ProviderError('research_deadline', retryable=False)
-        return min(20, remaining)
+        return min(cap, remaining)
 
     def _model(self, job, state, payload):
         self.store.checkpoint(job, state)
-        timeout = self._remaining()
+        timeout = self._remaining(90)
         # UTF-8 bytes are a conservative token reservation for these text requests.
-        reserve = len((SYSTEM + dumps(payload)).encode()) + 2600
+        reserve = len((SYSTEM + dumps(payload)).encode()) + 16000
         call = self.store.reserve_call(job, 'model', reserve, self.config.daily_tokens,
                                        {'stage': payload['stage'], 'model': self.config.model})
         if call is None:
@@ -330,7 +330,7 @@ class ResearchCoordinator:
             deadline = time.monotonic() + self.config.job_seconds
             while time.monotonic() < deadline:
                 current = worker.tick(job_id)
-                if current.get('status') not in ('running', 'pending'):
+                if current.get('status') not in ('running', 'pending', 'retry_pending'):
                     return
                 time.sleep(1)
         thread = threading.Thread(target=run_pending, daemon=True, name='election-research')

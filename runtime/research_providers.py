@@ -5,7 +5,7 @@ import json
 import os
 from dataclasses import dataclass, field
 from typing import Dict, Any
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, build_opener
 
 from .article_body import _NoRedirect
@@ -67,8 +67,15 @@ def post_json(url, key, payload, timeout, headers=None):
     except HTTPError as exc:
         raise ProviderError(f'provider_http_{exc.code}', retry_seconds(exc.headers.get('Retry-After')),
                             exc.code in (408, 429) or exc.code >= 500) from None
-    except (OSError, ValueError):
-        raise ProviderError('provider_transport_or_json_error') from None
+    except TimeoutError:
+        raise ProviderError('provider_timeout') from None
+    except URLError as exc:
+        code = 'provider_timeout' if isinstance(exc.reason, TimeoutError) else 'provider_transport_error'
+        raise ProviderError(code) from None
+    except OSError:
+        raise ProviderError('provider_transport_error') from None
+    except ValueError:
+        raise ProviderError('provider_invalid_response_json') from None
 
 
 SYSTEM = '''你是選舉資料研究助手。僅輸出 JSON 物件，不輸出 Markdown。
@@ -91,18 +98,23 @@ class GoModel:
         self.config, self.transport = config, transport
 
     def complete(self, payload, session, timeout=20):
-        # GLM review rounds read many articles; give the model 45-120s even
-        # when the job deadline is nearly exhausted, otherwise every large
-        # review call times out and the job never produces findings.
-        timeout = max(45, min(120, timeout))
+        # Respect the caller's remaining deadline and stay below the 120s lease.
+        timeout = max(1, min(90, timeout))
         raw = self.transport(self.config.base_url + '/chat/completions', self.config.api_key, {
             'model': self.config.model, 'messages': [
                 {'role': 'system', 'content': SYSTEM},
                 {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)},
-            ], 'max_tokens': 6000, 'temperature': 0.1,
+            ], 'max_tokens': 16000, 'temperature': 0.1,
+            'response_format': {'type': 'json_object'},
         }, timeout, {'x-opencode-session': session})
         try:
-            text = raw['choices'][0]['message']['content'].strip()
+            choice = raw['choices'][0]
+            if choice.get('finish_reason') == 'length':
+                raise ProviderError('model_output_truncated')
+            text = choice['message']['content']
+            if not isinstance(text, str) or not text.strip():
+                raise ProviderError('model_empty_content')
+            text = text.strip()
             return _extract_json_object(text), int((raw.get('usage') or {}).get('total_tokens') or 0)
         except (KeyError, IndexError, TypeError, ValueError, AttributeError):
             raise ProviderError('invalid_model_json') from None

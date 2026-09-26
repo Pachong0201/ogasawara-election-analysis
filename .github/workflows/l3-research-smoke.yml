@@ -1,0 +1,57 @@
+name: L3 live research acceptance
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/feishu-election-bot-v1.4-integration]
+    paths: [runtime/research_providers.py, runtime/auto_research.py, .github/workflows/l3-research-smoke.yml]
+permissions:
+  contents: write
+concurrency:
+  group: l3-research-smoke
+  cancel-in-progress: false
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      OGASAWARA_AUTO_RESEARCH: 'true'
+      OPENCODE_GO_API_KEY: ${{ secrets.OPENCODE_GO_API_KEY }}
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/feishu-election-bot-v1.4-integration
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Verify model JSON protocol
+        run: |
+          python - <<'PY'
+          import json, time
+          from runtime.research_providers import GoModel, ResearchConfig
+          started = time.monotonic()
+          output, tokens = GoModel(ResearchConfig.from_env()).complete(
+              {'stage':'plan','task':{'jurisdiction':'高雄市','questions':['高雄市近期交通建設進度有何官方更新？']},'max_queries':2},
+              'l3-acceptance',90)
+          assert isinstance(output.get('queries'), list) and output['queries'], 'empty search plan'
+          print(json.dumps({'elapsed_seconds':round(time.monotonic()-started,1),'tokens':tokens,'query_count':len(output['queries'])}))
+          PY
+      - name: Research and verify one county
+        run: python -u -m runtime.l3_key_issue_research --counties 高雄市 --max-findings 3 --apply --manifest-name l3_acceptance_latest.json
+      - name: Preserve audit and accepted records
+        if: always()
+        run: |
+          test -f data/manifests/l3_acceptance_latest.json || exit 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/manifests/l3_acceptance_latest.json knowledge/local knowledge/counties
+          git add -u cache/knowledge_promotion cache/retrieval || true
+          git diff --cached --quiet && exit 0
+          git commit -m 'data: audit live L3 research acceptance'
+          for attempt in 1 2 3 4; do
+            git pull --rebase --autostash origin feature/feishu-election-bot-v1.4-integration
+            git push origin HEAD:feature/feishu-election-bot-v1.4-integration && exit 0
+          done
+          exit 1

@@ -10,6 +10,16 @@ def _question():
     )
 
 
+def test_retry_pending_is_a_batch_failure(tmp_path, monkeypatch):
+    batch = L3KeyIssueResearchBatch(tmp_path)
+    monkeypatch.setattr(batch, 'run_county', lambda *args, **kwargs: {
+        'county': '新竹縣', 'primary_status': 'retry_pending', 'last_error': 'provider_timeout',
+    })
+    result = batch.run_many(['新竹縣'])
+    assert result['failure_count'] == 1
+    assert result['promoted_count'] == 0
+
+
 def _primary():
     return {
         "status": "completed",

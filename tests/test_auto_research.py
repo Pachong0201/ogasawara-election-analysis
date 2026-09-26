@@ -84,6 +84,28 @@ def test_go_protocol_no_native_web_search_and_stable_session():
     assert key == 'test-key'
 
 
+def test_go_rejects_truncated_and_empty_responses():
+    import pytest
+    for choice, code in [
+        ({'finish_reason': 'length', 'message': {'content': '{"findings":[]}'}}, 'model_output_truncated'),
+        ({'finish_reason': 'stop', 'message': {'content': None}}, 'model_empty_content'),
+    ]:
+        client = GoModel(config(), lambda *args: {'choices': [choice]})
+        with pytest.raises(ProviderError, match=code):
+            client.complete({'stage': 'review'}, 'test', 90)
+
+
+def test_go_respects_remaining_deadline_and_reserves_thinking_output():
+    calls = []
+    def transport(*args):
+        calls.append(args)
+        return {'choices': [{'message': {'content': '{"queries":[]}'}}]}
+    GoModel(config(), transport).complete({'stage': 'plan'}, 'test', 5)
+    assert calls[0][3] == 5
+    assert calls[0][2]['max_tokens'] == 16000
+    assert 'thinking' not in calls[0][2]  # GLM-5.3 forces thinking.
+
+
 def test_tavily_real_request_time_windows_and_no_generated_answer():
     calls = []
     def transport(*args):
