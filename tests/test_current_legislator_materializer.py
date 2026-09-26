@@ -1,5 +1,5 @@
 from runtime.current_legislator_materializer import CurrentLegislatorMaterializer
-from runtime.election_loader import load_jsonl
+from runtime.election_loader import election_file_path, load_jsonl, write_jsonl
 from runtime.ly_current_legislators import LYCurrentLegislatorAdapter, county_from_constituency
 
 
@@ -51,6 +51,30 @@ def test_current_legislator_adapter_keeps_current_geographic_members_only():
 
 
 def test_materializes_current_legislator_office_relationship(tmp_path):
+    election_path = election_file_path(
+        tmp_path, "regional_legislator", 2024, "宜蘭縣"
+    )
+    write_jsonl(
+        election_path,
+        [
+            {
+                "candidate_name": "甲委員",
+                "party": "中國國民黨",
+                "votes": 600,
+                "source": "https://data.gov.tw/dataset/13119",
+                "source_reference": "https://data.cec.gov.tw/votedata.zip",
+                "cec_codes": {"election_district": "01"},
+            },
+            {
+                "candidate_name": "另一候選人",
+                "party": "民主進步黨",
+                "votes": 400,
+                "source": "https://data.gov.tw/dataset/13119",
+                "source_reference": "https://data.cec.gov.tw/votedata.zip",
+                "cec_codes": {"election_district": "01"},
+            },
+        ],
+    )
     adapter = LYCurrentLegislatorAdapter(page_url=LIST_URL, fetcher=fake_fetch)
     materializer = CurrentLegislatorMaterializer(tmp_path, adapter=adapter)
     result = materializer.materialize(apply=True)
@@ -65,6 +89,7 @@ def test_materializes_current_legislator_office_relationship(tmp_path):
     assert rows[0]["electoral_district"] == "宜蘭縣第1選舉區"
     assert rows[0]["current_status"] == "active_verified"
     assert rows[0]["source_grade"] == "A"
+    assert rows[0]["independent_source_count"] == 2
 
 
 def test_county_mapping_normalizes_tai_character():
