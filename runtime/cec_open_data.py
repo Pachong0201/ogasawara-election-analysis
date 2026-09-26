@@ -579,7 +579,8 @@ class CECOpenDataAdapter(ElectionDataSource):
                         "source_reference": self.archive.source_url,
                         "retrieved_at": utc_now_iso(),
                         "verified_at": utc_now_iso(),
-                        "boundary_version": _election_geography_version(
+                        "boundary_version": "cec-township-2014-2024-v1",
+                        "source_geography_version": _election_geography_version(
                             query.election_type, int(query.year), archive_sha
                         ),
                         "time_scope": "2022",

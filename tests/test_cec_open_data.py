@@ -192,6 +192,10 @@ class TestCECOpenDataAdapter(unittest.TestCase):
         archive_token = hashlib.sha256(self.archive_path.read_bytes()).hexdigest()[:12]
         self.assertEqual(
             {r["boundary_version"] for r in result.records},
+            {"cec-township-2014-2024-v1"},
+        )
+        self.assertEqual(
+            {r["source_geography_version"] for r in result.records},
             {f"cec-president-2024-{archive_token}"},
         )
 

@@ -49,4 +49,4 @@ CSV 缺少「选举区／选举区范围」字段、ZIP 为空/超限/CRC 异常
 
 ## 刷新语义
 
-每次显式提供 ZIP 都会重新解析该 ZIP，不会因为 `data/elections/` 已存在旧 JSONL 而跳过。记录中的 `boundary_version` 由选举类型、年份与原始 ZIP SHA256 派生；因此跨届或原始档案变更时，空间矩阵可以识别版本差异并要求人工检查边界可比性。
+每次显式提供 ZIP 都会重新解析该 ZIP，不会因为 `data/elections/` 已存在旧 JSONL 而跳过。`boundary_version` 继续表示可比性门禁使用的行政/选区边界版本；原始 ZIP 与届次观察版本另写入 `source_geography_version`，由选举类型、年份和 ZIP SHA256 派生。两者分离，避免把“档案版本不同”误判成“法定边界一定不同”，同时仍保留原始资料变更的追溯能力。
