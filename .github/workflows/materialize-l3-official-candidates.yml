@@ -15,7 +15,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: materialize-l3-official-candidates
+  group: feature-v1.4-knowledge-materialization
   cancel-in-progress: false
 
 jobs:
@@ -46,11 +46,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add knowledge/local knowledge/counties data/manifests
+          git add -u cache/knowledge_promotion cache/retrieval || true
           if git diff --cached --quiet; then
             echo "No verified L3 candidate changes to commit."
           else
             git commit -m "data: materialize official 2026 L3 candidate profiles"
-            git pull --rebase origin feature/feishu-election-bot-v1.4-integration
+            git pull --rebase --autostash origin feature/feishu-election-bot-v1.4-integration
             git push origin HEAD:feature/feishu-election-bot-v1.4-integration
           fi
 
