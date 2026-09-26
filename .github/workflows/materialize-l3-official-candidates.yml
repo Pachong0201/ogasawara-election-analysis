@@ -15,7 +15,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: feature-v1.4-knowledge-materialization
+  group: materialize-l3-official-candidates
   cancel-in-progress: false
 
 jobs:
