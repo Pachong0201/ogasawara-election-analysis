@@ -1,0 +1,64 @@
+{
+  "generated_at": "2026-09-26T15:39:41+00:00",
+  "county_count": 5,
+  "covered_county_count": 0,
+  "finding_count": 0,
+  "proposal_count": 0,
+  "promoted_count": 0,
+  "rejected_count": 0,
+  "failure_count": 0,
+  "results": [
+    {
+      "county": "嘉義市",
+      "primary_status": "retry_pending",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_transport_or_json_error"
+    },
+    {
+      "county": "嘉義縣",
+      "primary_status": "retry_pending",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_http_429"
+    },
+    {
+      "county": "台南市",
+      "primary_status": "retry_pending",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_http_429"
+    },
+    {
+      "county": "高雄市",
+      "primary_status": "retry_pending",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_http_429"
+    },
+    {
+      "county": "屏東縣",
+      "primary_status": "retry_pending",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_http_429"
+    }
+  ],
+  "failures": [],
+  "apply": true
+}
