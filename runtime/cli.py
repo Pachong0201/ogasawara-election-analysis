@@ -22,6 +22,7 @@ from .metrics import (
 )
 from .host_retrieval import HostRetrievalBackend
 from .knowledge_builder import KnowledgePromotionBuilder
+from .knowledge_coverage import KnowledgeCoverageAudit
 from .county_knowledge import COUNTIES, CountyKnowledgeProduction
 from .models import ElectionTask
 from .pipeline import AnalysisPipeline
@@ -231,6 +232,17 @@ def _cmd_knowledge_status(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_knowledge_coverage(args: argparse.Namespace) -> int:
+    counties = list(COUNTIES) if args.all_counties else [
+        item.strip() for item in str(args.counties or "").split(",") if item.strip()
+    ]
+    result = KnowledgeCoverageAudit(
+        Path(args.repo_root).resolve() if args.repo_root else None
+    ).build(counties or None)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
 def _cmd_knowledge_curated_baseline(args: argparse.Namespace) -> int:
     from .curated_county_baseline import CuratedCountyBaseline
 
@@ -365,6 +377,14 @@ def build_parser() -> argparse.ArgumentParser:
     status.add_argument("--counties", default="")
     status.add_argument("--all-counties", action="store_true")
     status.set_defaults(func=_cmd_knowledge_status)
+
+    coverage = sub.add_parser(
+        "knowledge-coverage",
+        help="audit actual row-level coverage versus catalogs/leads for 22 counties",
+    )
+    coverage.add_argument("--counties", default="")
+    coverage.add_argument("--all-counties", action="store_true")
+    coverage.set_defaults(func=_cmd_knowledge_coverage)
 
     curated = sub.add_parser(
         "knowledge-curated-baseline",
