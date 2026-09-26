@@ -2,6 +2,7 @@ import json
 import zipfile
 
 import pytest
+import yaml
 
 from runtime.cec_offline_import import (
     build_county_matrices,
@@ -133,3 +134,73 @@ def test_preserve_archive_and_reparse_even_with_existing_local_data(tmp_path):
     assert second["results"][0]["status"] == "filled"
     assert second["results"][0]["persisted"] is True
     assert second["results"][0]["record_count"] == 4
+
+
+def test_offline_import_accepts_official_regions_missing_from_existing_registry(tmp_path):
+    archive = tmp_path / "votedata.zip"
+    build_archive(archive)
+
+    geo = tmp_path / "data" / "geography" / "administrative_areas" / "cec_高雄市.yaml"
+    geo.parent.mkdir(parents=True, exist_ok=True)
+    geo.write_text(
+        yaml.safe_dump(
+            {
+                "version": "1.2.0",
+                "source": "cec_open_data",
+                "jurisdiction": "高雄市",
+                "regions": [
+                    {
+                        "region_id": "fixture",
+                        "name": "高雄市",
+                        "level": "county_city",
+                    }
+                ],
+            },
+            allow_unicode=True,
+            sort_keys=False,
+        ),
+        encoding="utf-8",
+    )
+
+    result = import_election_archive(
+        tmp_path,
+        archive,
+        ["宜蘭縣"],
+        election_specs=[("president", 2024)],
+    )
+    assert result["missing_or_invalid"] == 0
+    assert result["filled_or_complete"] == 1
+    persisted = (
+        tmp_path / "data" / "elections" / "president" / "2024" / "宜蘭縣.jsonl"
+    )
+    assert persisted.exists()
+    rows = [json.loads(line) for line in persisted.read_text(encoding="utf-8").splitlines()]
+    assert {row["jurisdiction"] for row in rows} == {"宜蘭市", "羅東鎮"}
+
+
+def test_build_county_matrices_does_not_count_empty_placeholder(tmp_path):
+    county = "新竹市"
+    stale = tmp_path / "data" / "matrices" / "cec" / f"{county}.json"
+    stale.parent.mkdir(parents=True, exist_ok=True)
+    stale.write_text('{"county":"新竹市","input_files":[]}', encoding="utf-8")
+
+    summary = build_county_matrices(
+        tmp_path,
+        [county],
+        election_specs=[("president", 2024)],
+    )
+    assert summary[county]["state"] == "no_input_rows"
+    assert summary[county]["file"] is None
+    assert not stale.exists()
+
+
+def test_term11_boundary_maps_official_taitung_spelling(tmp_path):
+    source = tmp_path / "boundaries.csv"
+    source.write_text(
+        "選舉區,選舉區範圍\n"
+        "臺東縣選舉區,臺東縣全境\n",
+        encoding="utf-8-sig",
+    )
+    parsed = parse_legislative_boundary_csv(source)
+    assert parsed["unmapped"] == []
+    assert parsed["rows"][0]["county"] == "台東縣"
