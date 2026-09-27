@@ -121,6 +121,7 @@ class L3KeyIssueResearchBatch:
                 "promoted_count": 0,
                 "rejected_count": 0,
                 "last_error": primary.get("last_error") or "",
+                "error_stage": primary.get("error_stage") or "",
             }
 
         counter_questions = self._counter_questions(county, findings)
@@ -167,6 +168,7 @@ class L3KeyIssueResearchBatch:
             "counter_check_completed": counter_checked,
             "counter_update_finding_count": len(counter_updates),
             "last_error": primary.get("last_error") or counter.get("last_error") or "",
+            "error_stage": primary.get("error_stage") or counter.get("error_stage") or "",
         }
 
     def run_many(

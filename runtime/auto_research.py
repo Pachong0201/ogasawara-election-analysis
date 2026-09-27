@@ -83,10 +83,27 @@ class ResearchWorker:
             raise ProviderError('research_deadline', retryable=False)
         return min(cap, remaining)
 
+    @staticmethod
+    def _review_window(evidence):
+        """Return a deliberately small, reproducible model evidence window.
+
+        Full fetched bodies remain in the research store.  The model only sees
+        four recent excerpts so a review cannot consume the whole provider
+        lease.  Validation is performed against this exact window.
+        """
+        output = []
+        for row in evidence[-4:]:
+            item = dict(row)
+            content = str(item.get('content') or '')
+            item['content'] = content[:1600]
+            item['content_truncated'] = bool(item.get('content_truncated')) or len(content) > 1600
+            output.append(item)
+        return output
+
     def _model(self, job, state, payload):
         state['active_stage'] = 'model_' + str(payload.get('stage') or 'unknown')
         self.store.checkpoint(job, state)
-        timeout = self._remaining(105)
+        timeout = self._remaining(75)
         # UTF-8 bytes are a conservative token reservation for these text requests.
         reserve = len((SYSTEM + dumps(payload)).encode()) + MODEL_MAX_TOKENS.get(
             str(payload.get('stage') or ''), 12000
@@ -274,25 +291,25 @@ class ResearchWorker:
                 # Review sees only the most recent evidence window; the output
                 # (findings + citations) scales with the input and otherwise
                 # hits the model's output ceiling on large rounds.
-                review_evidence = state['evidence'][-8:]
+                review_evidence = self._review_window(state['evidence'])
                 state['review'] = self._model(job, state, {
                     'stage': 'review', 'task': task, 'evidence': review_evidence,
-                    'max_followup_queries': 2, 'max_findings': 3,
+                    'max_followup_queries': 1, 'max_findings': 2,
                 })
                 state['findings'], state['rejected_findings'] = self.validate_findings(state['review'], review_evidence)
                 state['unresolved'] = strings(state['review'].get('unresolved'))
                 self.store.checkpoint(job, state)
-            followups = queries(state['review'].get('queries'), task['jurisdiction'])[:2]
+            followups = queries(state['review'].get('queries'), task['jurisdiction'])[:1]
             self._search_round(job, state, task, followups)
             final = state['review']
             if followups:
-                review_evidence = state['evidence'][-8:]
+                review_evidence = self._review_window(state['evidence'])
                 final = self._model(job, state, {
                     'stage': 'review', 'task': task, 'evidence': review_evidence,
-                    'max_followup_queries': 0, 'max_findings': 3,
+                    'max_followup_queries': 0, 'max_findings': 2,
                 })
             else:
-                review_evidence = state['evidence'][-8:]
+                review_evidence = self._review_window(state['evidence'])
             state['findings'], state['rejected_findings'] = self.validate_findings(final, review_evidence)
             state['unresolved'] = strings(final.get('unresolved'))
             state['questions'] = strings(task.get('questions'))

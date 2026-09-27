@@ -12,7 +12,11 @@ from .article_body import _NoRedirect
 from .news_utils import retry_seconds
 
 
-MODEL_MAX_TOKENS = {"plan": 4000, "review": 12000}
+# GLM-5.3-flash uses the same token budget for hidden reasoning and the JSON
+# answer.  A large review ceiling made a small citation task run until the
+# HTTP lease expired.  These stage-specific ceilings leave enough room for a
+# bounded JSON response while preventing multi-minute free-form reasoning.
+MODEL_MAX_TOKENS = {"plan": 2500, "review": 5000}
 
 
 class ProviderError(Exception):

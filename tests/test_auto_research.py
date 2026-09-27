@@ -104,9 +104,9 @@ def test_go_respects_remaining_deadline_and_reserves_thinking_output():
     GoModel(config(), transport).complete({'stage': 'plan'}, 'test', 5)
     GoModel(config(), transport).complete({'stage': 'review'}, 'test', 200)
     assert calls[0][3] == 5
-    assert calls[0][2]['max_tokens'] == 4000
+    assert calls[0][2]['max_tokens'] == 2500
     assert calls[1][3] == 105
-    assert calls[1][2]['max_tokens'] == 12000
+    assert calls[1][2]['max_tokens'] == 5000
     assert 'thinking' not in calls[0][2]  # GLM-5.3 forces thinking.
 
 
@@ -206,6 +206,18 @@ def test_followup_is_bounded_and_duplicate_articles_are_not_reread(tmp_path):
     result = worker.tick(job_id)
     assert len(search.calls) == 2 and search.calls[1][1] == 'background'
     assert len(model.calls) == 3 and len(result['evidence']) == 1
+
+
+def test_review_window_bounds_articles_and_body_size():
+    evidence = [
+        {'url': f'https://example.test/{index}', 'content': '字' * 2400}
+        for index in range(7)
+    ]
+    window = ResearchWorker._review_window(evidence)
+    assert len(window) == 4
+    assert window[0]['url'].endswith('/3')
+    assert all(len(row['content']) == 1600 for row in window)
+    assert all(row['content_truncated'] is True for row in window)
 
 
 def test_429_persistent_retry_after_and_recovery(tmp_path):

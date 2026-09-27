@@ -32,7 +32,8 @@ class KeyIssueVerifier:
 
     @staticmethod
     def _lead(county: str, question: str, statement: str, cite: Dict[str, Any]):
-        if str(cite.get("source_grade") or "").upper() != "C":
+        grade = str(cite.get("source_grade") or "").upper()
+        if grade not in {"A", "B", "C"}:
             return None
         publisher = str(cite.get("publisher_id") or "").strip()
         url = str(cite.get("url") or "").strip()
@@ -46,9 +47,10 @@ class KeyIssueVerifier:
             "lead_id": lead_id, "county": county, "query": question,
             "research_questions": [question], "title": str(cite.get("title") or ""),
             "summary": statement[:700], "evidence": quote, "url": url,
-            "source_id": f"web_{publisher}", "source_name": publisher,
-            "source_grade": "C", "verification_status": "verified",
-            "independence_key": publisher,
+            "source_id": str(cite.get("source_id") or f"web_{publisher}"),
+            "source_name": str(cite.get("source_name") or publisher),
+            "source_grade": grade, "verification_status": "verified",
+            "independence_key": str(cite.get("independence_key") or publisher),
             "published_at": str(cite.get("page_date") or ""),
             "retrieved_at": utc_now_iso(),
         }
@@ -75,17 +77,26 @@ class KeyIssueVerifier:
                     by_source[lead["independence_key"]] = lead
             leads = list(by_source.values())
             staged.extend(leads)
-            if len(leads) < 2:
-                rejected.append({"statement": statement, "reason": "two independent C sources required"})
+            strong = [row for row in leads if row["source_grade"] in {"A", "B"}]
+            media = [row for row in leads if row["source_grade"] == "C"]
+            if strong:
+                qualified = strong + media
+            elif len(media) >= 2:
+                qualified = media
+            else:
+                rejected.append({
+                    "statement": statement,
+                    "reason": "one A/B official source or two independent C sources required",
+                })
                 continue
-            dates = [str(x.get("published_at") or "")[:10] for x in leads if x.get("published_at")]
+            dates = [str(x.get("published_at") or "")[:10] for x in qualified if x.get("published_at")]
             date = max(dates) if dates else utc_now_iso()[:10]
             token = hashlib.sha1(f"{county}|{statement}|{date}".encode("utf-8")).hexdigest()[:20]
             proposals.append({
                 "proposal_id": f"verify-key-issue-{token}", "county": county,
                 "target_type": "current_issue",
                 "research_questions": [question],
-                "evidence_lead_ids": [x["lead_id"] for x in leads],
+                "evidence_lead_ids": [x["lead_id"] for x in qualified],
                 "contradiction_check_completed": contradiction_checked,
                 "contradictory_lead_ids": [],
                 "contradiction_check_note": contradiction_note.strip() if contradiction_checked else "counter-evidence check pending",
@@ -93,10 +104,17 @@ class KeyIssueVerifier:
                 "target_record": {
                     "claim_id": f"key-issue-{token}", "claim_text": statement,
                     "claim_type": "other", "date": date, "time_scope": date,
-                    "last_verified_at": date, "verification_status": "reported_by_media",
-                    "source": leads[0]["source_name"], "source_grade": "C",
+                    "last_verified_at": utc_now_iso()[:10],
+                    "verification_status": "official_record" if strong else "reported_by_media",
+                    "source": qualified[0]["source_name"],
+                    "source_grade": qualified[0]["source_grade"],
                     "region": county,
-                    "uncertainty": {"level": "medium", "reason": "two independent body-read media sources", "competing_explanations": []},
+                    "uncertainty": {
+                        "level": "medium",
+                        "reason": ("body-read official source; implementation effect not inferred"
+                                   if strong else "two independent body-read media sources"),
+                        "competing_explanations": [],
+                    },
                 },
             })
         if staged:

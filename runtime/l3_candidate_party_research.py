@@ -31,6 +31,7 @@ TERMINAL = {
     "disabled",
     "historical_replay",
 }
+RESEARCH_OK = {"completed", "insufficient_evidence", "not_needed"}
 
 
 class L3CandidatePartyResearchBatch:
@@ -122,6 +123,7 @@ class L3CandidatePartyResearchBatch:
             "unresolved_count": int(verified.get("unresolved_count") or 0),
             "unresolved": verified.get("unresolved") or [],
             "last_error": research.get("last_error") or "",
+            "error_stage": research.get("error_stage") or "",
         }
 
     def run_many(
@@ -136,7 +138,14 @@ class L3CandidatePartyResearchBatch:
         failures: List[Dict[str, str]] = []
         for county in selected:
             try:
-                results.append(self.run_county(county, apply=apply))
+                row = self.run_county(county, apply=apply)
+                results.append(row)
+                print(json.dumps(row, ensure_ascii=False), flush=True)
+                if row.get("last_error") or row.get("research_status") not in RESEARCH_OK:
+                    failures.append({
+                        "county": county,
+                        "error": row.get("last_error") or str(row.get("research_status")),
+                    })
             except Exception as exc:
                 failures.append({
                     "county": county,
