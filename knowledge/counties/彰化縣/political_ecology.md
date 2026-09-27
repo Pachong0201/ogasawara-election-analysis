@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T21:18:44+00:00
+生成时间：2026-09-27T02:38:44+00:00
 
 ## 历史政治知识（L2）
 - 彰化縣-population-2025: 截至2025年12月底，彰化縣户籍登记人口为1,210,206人，较2024年12月底减少15,469人。（2024-12-31—2025-12-31）
@@ -14,6 +14,7 @@
 - ly11-office-彰化縣-謝衣鳯: 謝衣鳯 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-彰化縣-陳素月: 陳素月 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - official-event-20260927-2-0: 王惠美 → public_service_network → 彰化縣各業工會代表；status=active_verified；current_use=current_usable；time_scope=2026-09-07
+- candidate-party-2026-彰化縣-陳素月-民主進步黨: 陳素月 → party → 民主進步黨；status=active_verified；current_use=current_usable；time_scope=2026-09-02—2026-11-28
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-bc9ef64d4a6fdfa2: 陳重嘉；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -116,8 +117,10 @@
 - 謝衣鳯 → office_holding → 立法院第11屆立法委員；region=彰化縣；current_use=current_usable
 - 陳素月 → office_holding → 立法院第11屆立法委員；region=彰化縣；current_use=current_usable
 - 王惠美 → public_service_network → 彰化縣各業工會代表；region=彰化縣；current_use=current_usable
+- 陳素月 → party → 民主進步黨；region=彰化縣；current_use=current_usable
 
 ## 尚未解决的检索问题
+- 2026年彰化縣縣市長候選人魏平政是否由中國國民黨推薦登記？（leads=1, verified=1）
 - 彰化縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
 - 彰化縣 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？（leads=0, verified=0）
 - 彰化縣 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？（leads=0, verified=0）
