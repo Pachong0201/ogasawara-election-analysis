@@ -2,6 +2,8 @@
   "source_id": "moi_national_social_groups_by_area",
   "kind": "civil_associations",
   "dataset_url": "https://data.gov.tw/dataset/147595",
+  "time_scope": "",
+  "update_frequency": "不定期",
   "source_path": "/home/runner/work/ogasawara-election-analysis/ogasawara-election-analysis/cache/raw/context/moi_national_social_groups_by_area/latest.csv",
   "source_sha256": "47e1fe308f1b64fb8d5ab7217a1c378b93a9e6cafe50a3954c1aa2f764497ebf",
   "raw_cache_sha256": "47e1fe308f1b64fb8d5ab7217a1c378b93a9e6cafe50a3954c1aa2f764497ebf",
@@ -137,10 +139,11 @@
     ],
     "note": ""
   },
-  "imported_at": "2026-09-27T08:50:15+00:00",
+  "imported_at": "2026-09-27T09:19:01+00:00",
   "resource_url": "https://opdadm.moi.gov.tw/api/v1/no-auth/resource/api/dataset/EE4847CD-674E-4C52-B889-64D242083DDC/resource/6E09E30C-D88C-471B-8846-F82168B08D80/download",
   "resource_format": "csv",
   "downloaded_sha256": "47e1fe308f1b64fb8d5ab7217a1c378b93a9e6cafe50a3954c1aa2f764497ebf",
   "downloaded_size": 2251480,
-  "downloaded_at": "2026-09-27T08:50:15+00:00"
+  "downloaded_at": null,
+  "download_fallback": false
 }

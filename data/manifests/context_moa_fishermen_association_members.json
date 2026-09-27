@@ -2,6 +2,8 @@
   "source_id": "moa_fishermen_association_members",
   "kind": "farmers_fishermen_associations",
   "dataset_url": "https://data.gov.tw/dataset/135723",
+  "time_scope": "",
+  "update_frequency": "每1年",
   "source_path": "/home/runner/work/ogasawara-election-analysis/ogasawara-election-analysis/cache/raw/context/moa_fishermen_association_members/latest.json",
   "source_sha256": "13589e8f6d79749920f6ef2ffbc3251b087fcab18a2c8e5f0adaa2d10ed4efb4",
   "raw_cache_sha256": "13589e8f6d79749920f6ef2ffbc3251b087fcab18a2c8e5f0adaa2d10ed4efb4",
@@ -137,10 +139,11 @@
     ],
     "note": ""
   },
-  "imported_at": "2026-09-27T08:50:22+00:00",
+  "imported_at": "2026-09-27T09:19:02+00:00",
   "resource_url": "https://data.moa.gov.tw/Service/OpenData/DataFileService.aspx?IsTransData=1&UnitId=G73",
   "resource_format": "json",
   "downloaded_sha256": "13589e8f6d79749920f6ef2ffbc3251b087fcab18a2c8e5f0adaa2d10ed4efb4",
   "downloaded_size": 258693,
-  "downloaded_at": "2026-09-27T08:50:22+00:00"
+  "downloaded_at": null,
+  "download_fallback": false
 }
