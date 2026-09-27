@@ -88,15 +88,16 @@ class ResearchWorker:
         """Return a deliberately small, reproducible model evidence window.
 
         Full fetched bodies remain in the research store.  The model only sees
-        four recent excerpts so a review cannot consume the whole provider
-        lease.  Validation is performed against this exact window.
+        two recent excerpts: enough for the dual-source promotion gate without
+        making a reasoning model spend its entire output budget reviewing four
+        long bodies.  Validation is performed against this exact window.
         """
         output = []
-        for row in evidence[-4:]:
+        for row in evidence[-2:]:
             item = dict(row)
             content = str(item.get('content') or '')
-            item['content'] = content[:1600]
-            item['content_truncated'] = bool(item.get('content_truncated')) or len(content) > 1600
+            item['content'] = content[:1000]
+            item['content_truncated'] = bool(item.get('content_truncated')) or len(content) > 1000
             output.append(item)
         return output
 
@@ -294,7 +295,7 @@ class ResearchWorker:
                 review_evidence = self._review_window(state['evidence'])
                 state['review'] = self._model(job, state, {
                     'stage': 'review', 'task': task, 'evidence': review_evidence,
-                    'max_followup_queries': 1, 'max_findings': 2,
+                    'max_followup_queries': 1, 'max_findings': 1,
                 })
                 state['findings'], state['rejected_findings'] = self.validate_findings(state['review'], review_evidence)
                 state['unresolved'] = strings(state['review'].get('unresolved'))
@@ -306,7 +307,7 @@ class ResearchWorker:
                 review_evidence = self._review_window(state['evidence'])
                 final = self._model(job, state, {
                     'stage': 'review', 'task': task, 'evidence': review_evidence,
-                    'max_followup_queries': 0, 'max_findings': 2,
+                    'max_followup_queries': 0, 'max_findings': 1,
                 })
             else:
                 review_evidence = self._review_window(state['evidence'])

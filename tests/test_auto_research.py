@@ -214,10 +214,18 @@ def test_review_window_bounds_articles_and_body_size():
         for index in range(7)
     ]
     window = ResearchWorker._review_window(evidence)
-    assert len(window) == 4
-    assert window[0]['url'].endswith('/3')
-    assert all(len(row['content']) == 1600 for row in window)
+    assert len(window) == 2
+    assert window[0]['url'].endswith('/5')
+    assert all(len(row['content']) == 1000 for row in window)
     assert all(row['content_truncated'] is True for row in window)
+
+
+def test_review_prompt_keeps_one_finding_and_dual_source_window(tmp_path):
+    store, worker, model, _, job_id = setup(tmp_path)
+    worker.tick(job_id)
+    review = next(payload for payload, _ in model.calls if payload['stage'] == 'review')
+    assert review['max_findings'] == 1
+    assert len(review['evidence']) <= 2
 
 
 def test_429_persistent_retry_after_and_recovery(tmp_path):
