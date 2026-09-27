@@ -1,30 +1,25 @@
 {
-  "generated_at": "2026-09-27T02:09:28+00:00",
+  "generated_at": "2026-09-27T02:15:16+00:00",
   "county_count": 1,
   "covered_county_count": 0,
   "finding_count": 0,
   "proposal_count": 0,
   "promoted_count": 0,
   "rejected_count": 0,
-  "failure_count": 1,
+  "failure_count": 0,
   "results": [
     {
       "county": "高雄市",
-      "primary_status": "partial",
+      "primary_status": "completed",
       "counter_status": "not_needed",
       "finding_count": 0,
       "proposal_count": 0,
       "promoted_count": 0,
       "rejected_count": 0,
-      "last_error": "model_output_truncated",
-      "error_stage": "model_review"
+      "last_error": "",
+      "error_stage": ""
     }
   ],
-  "failures": [
-    {
-      "county": "高雄市",
-      "error": "model_output_truncated"
-    }
-  ],
+  "failures": [],
   "apply": true
 }
