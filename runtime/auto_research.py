@@ -22,7 +22,7 @@ from .news_sources import published
 from .news_store import dumps, iso
 from .news_utils import _canonical_url
 from .research_providers import (
-    MODEL_MAX_TOKENS, GoModel, TavilySearch, ResearchConfig, ProviderError, SYSTEM,
+    MODEL_TOKEN_RESERVATION, GoModel, TavilySearch, ResearchConfig, ProviderError, SYSTEM,
 )
 from .research_store import ResearchStore
 
@@ -106,7 +106,7 @@ class ResearchWorker:
         self.store.checkpoint(job, state)
         timeout = self._remaining(75)
         # UTF-8 bytes are a conservative token reservation for these text requests.
-        reserve = len((SYSTEM + dumps(payload)).encode()) + MODEL_MAX_TOKENS.get(
+        reserve = len((SYSTEM + dumps(payload)).encode()) + MODEL_TOKEN_RESERVATION.get(
             str(payload.get('stage') or ''), 12000
         )
         call = self.store.reserve_call(job, 'model', reserve, self.config.daily_tokens,

@@ -12,11 +12,11 @@ from .article_body import _NoRedirect
 from .news_utils import retry_seconds
 
 
-# GLM-5.3-flash uses the same token budget for hidden reasoning and the JSON
-# answer.  A large review ceiling made a small citation task run until the
-# HTTP lease expired.  These stage-specific ceilings leave enough room for a
-# bounded JSON response while preventing multi-minute free-form reasoning.
-MODEL_MAX_TOKENS = {"plan": 2500, "review": 5000}
+# Keep planning bounded, but do not impose a client-side token ceiling on the
+# review stage. Reasoning models share this field between hidden reasoning and
+# the JSON answer, so a 5,000-token cap repeatedly truncated valid reviews.
+MODEL_MAX_TOKENS = {"plan": 2500}
+MODEL_TOKEN_RESERVATION = {"plan": 2500, "review": 16000}
 
 
 class ProviderError(Exception):
@@ -116,23 +116,51 @@ class GoModel:
     def complete(self, payload, session, timeout=20):
         # Respect the caller's remaining deadline and stay below the 120s lease.
         timeout = max(1, min(105, timeout))
-        max_tokens = MODEL_MAX_TOKENS.get(str(payload.get('stage') or ''), 12000)
-        raw = self.transport(self.config.base_url + '/chat/completions', self.config.api_key, {
+        stage = str(payload.get('stage') or '')
+        request_payload = {
             'model': self.config.model, 'messages': [
                 {'role': 'system', 'content': SYSTEM},
                 {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)},
-            ], 'max_tokens': max_tokens, 'temperature': 0.1,
+            ], 'temperature': 0.1,
             'response_format': {'type': 'json_object'},
-        }, timeout, {'x-opencode-session': session})
+        }
+        if stage in MODEL_MAX_TOKENS:
+            request_payload['max_tokens'] = MODEL_MAX_TOKENS[stage]
+        raw = self.transport(
+            self.config.base_url + '/chat/completions', self.config.api_key,
+            request_payload, timeout, {'x-opencode-session': session},
+        )
         try:
             choice = raw['choices'][0]
-            if choice.get('finish_reason') == 'length':
-                raise ProviderError('model_output_truncated')
+            truncated = choice.get('finish_reason') == 'length'
             text = choice['message']['content']
             if not isinstance(text, str) or not text.strip():
-                raise ProviderError('model_empty_content')
+                raise ProviderError('model_output_truncated' if truncated else 'model_empty_content')
             text = text.strip()
-            return _extract_json_object(text), int((raw.get('usage') or {}).get('total_tokens') or 0)
+            try:
+                result = _extract_json_object(text)
+            except ValueError:
+                raise ProviderError('model_output_truncated' if truncated else 'invalid_model_json') from None
+            if truncated:
+                # A reasoning model can exhaust its shared reasoning/output
+                # budget after closing a useful JSON prefix.  Keep only that
+                # structurally valid prefix; citation validation still checks
+                # every quote against fetched bodies.  Never continue from an
+                # incomplete string/object, and do not launch follow-up work
+                # from a response the model did not finish.
+                if payload.get('stage') == 'review':
+                    unresolved = result.get('unresolved')
+                    if not isinstance(unresolved, list):
+                        unresolved = []
+                    result['unresolved'] = unresolved + [
+                        '模型輸出達長度上限；僅保留已完整解析並通過逐字引文校驗的結論。'
+                    ]
+                    result['queries'] = []
+                else:
+                    result.setdefault('queries', [])
+            return result, int((raw.get('usage') or {}).get('total_tokens') or 0)
+        except ProviderError:
+            raise
         except (KeyError, IndexError, TypeError, ValueError, AttributeError):
             raise ProviderError('invalid_model_json') from None
 

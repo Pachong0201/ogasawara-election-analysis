@@ -85,10 +85,18 @@ def test_go_protocol_no_native_web_search_and_stable_session():
     assert key == 'test-key'
 
 
-def test_go_rejects_truncated_and_empty_responses():
-    import pytest
+def test_go_salvages_only_parseable_truncated_review():
+    choice = {'finish_reason': 'length', 'message': {'content': '{"findings":[],"queries":['}}
+    client = GoModel(config(), lambda *args: {'choices': [choice]})
+    result, _ = client.complete({'stage': 'review'}, 'test', 90)
+    assert result['findings'] == []
+    assert result['queries'] == []
+    assert '長度上限' in result['unresolved'][-1]
+
+
+def test_go_rejects_unparseable_truncation_and_empty_response():
     for choice, code in [
-        ({'finish_reason': 'length', 'message': {'content': '{"findings":[]}'}}, 'model_output_truncated'),
+        ({'finish_reason': 'length', 'message': {'content': '{"findings":[{"statement":"半截'}}, 'model_output_truncated'),
         ({'finish_reason': 'stop', 'message': {'content': None}}, 'model_empty_content'),
     ]:
         client = GoModel(config(), lambda *args: {'choices': [choice]})
@@ -106,7 +114,7 @@ def test_go_respects_remaining_deadline_and_reserves_thinking_output():
     assert calls[0][3] == 5
     assert calls[0][2]['max_tokens'] == 2500
     assert calls[1][3] == 105
-    assert calls[1][2]['max_tokens'] == 5000
+    assert 'max_tokens' not in calls[1][2]
     assert 'thinking' not in calls[0][2]  # GLM-5.3 forces thinking.
 
 
