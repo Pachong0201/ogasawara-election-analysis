@@ -4,11 +4,43 @@
   "dataset_url": "https://data.gov.tw/dataset/87858",
   "source_path": "/home/runner/work/ogasawara-election-analysis/ogasawara-election-analysis/cache/raw/context/moa_farmers_association_members/latest.json",
   "source_sha256": "9be5a43ebd3477a75e07fe52b20f84a6ab5380694e641b33f6d944030682c72f",
+  "raw_cache_sha256": "9be5a43ebd3477a75e07fe52b20f84a6ab5380694e641b33f6d944030682c72f",
+  "raw_cache_path": "cache/raw/context/moa_farmers_association_members/latest.json",
   "source_size": 265674,
   "encoding": "utf-8-sig",
   "input_row_count": 1982,
   "mapped_row_count": 1866,
   "unmapped_row_count": 116,
+  "replaced_source_row_count": 389,
+  "retained_row_count": 3578,
+  "retained_by_source": {
+    "moa_farmers_association_members": 1982,
+    "moa_fishermen_association_members": 1596
+  },
+  "retained_by_county": {
+    "基隆市": 175,
+    "台北市": 91,
+    "新北市": 144,
+    "桃園市": 132,
+    "新竹市": 175,
+    "新竹縣": 91,
+    "苗栗縣": 175,
+    "台中市": 144,
+    "彰化縣": 175,
+    "南投縣": 175,
+    "雲林縣": 175,
+    "嘉義市": 91,
+    "嘉義縣": 175,
+    "台南市": 144,
+    "高雄市": 175,
+    "屏東縣": 175,
+    "宜蘭縣": 175,
+    "花蓮縣": 175,
+    "台東縣": 175,
+    "澎湖縣": 175,
+    "金門縣": 175,
+    "連江縣": 175
+  },
   "county_file_count": 22,
   "files": {
     "基隆市": "data/context/基隆市/farmers_fishermen_associations.jsonl",
@@ -34,6 +66,44 @@
     "金門縣": "data/context/金門縣/farmers_fishermen_associations.jsonl",
     "連江縣": "data/context/連江縣/farmers_fishermen_associations.jsonl",
     "_unmapped": "data/context/_unmapped/farmers_fishermen_associations-moa_farmers_association_members.jsonl"
+  },
+  "reconciliation": {
+    "input_row_count": 1982,
+    "mapped_row_count": 1866,
+    "unmapped_row_count": 116,
+    "replaced_source_row_count": 389,
+    "retained_row_count": 3578,
+    "retained_unmapped_row_count": 116,
+    "retained_county_file_count": 22,
+    "retained_by_source": {
+      "moa_farmers_association_members": 1982,
+      "moa_fishermen_association_members": 1596
+    },
+    "retained_by_county": {
+      "基隆市": 175,
+      "台北市": 91,
+      "新北市": 144,
+      "桃園市": 132,
+      "新竹市": 175,
+      "新竹縣": 91,
+      "苗栗縣": 175,
+      "台中市": 144,
+      "彰化縣": 175,
+      "南投縣": 175,
+      "雲林縣": 175,
+      "嘉義市": 91,
+      "嘉義縣": 175,
+      "台南市": 144,
+      "高雄市": 175,
+      "屏東縣": 175,
+      "宜蘭縣": 175,
+      "花蓮縣": 175,
+      "台東縣": 175,
+      "澎湖縣": 175,
+      "金門縣": 175,
+      "連江縣": 175
+    },
+    "input_accounted": true
   },
   "diagnostic": {
     "field_names": [
@@ -65,12 +135,13 @@
         "value": 85.0,
         "unit": "個"
       }
-    ]
+    ],
+    "note": ""
   },
-  "imported_at": "2026-09-26T11:11:20+00:00",
+  "imported_at": "2026-09-27T08:50:20+00:00",
   "resource_url": "https://data.moa.gov.tw/service/opendata/agrstatUnit.aspx?IsTransData=1&UnitId=D24&dimension_group_code_1=XX11&dimension_group_code_2=BF02&item_code=BF0120",
   "resource_format": "json",
   "downloaded_sha256": "9be5a43ebd3477a75e07fe52b20f84a6ab5380694e641b33f6d944030682c72f",
   "downloaded_size": 265674,
-  "downloaded_at": "2026-09-26T11:11:20+00:00"
+  "downloaded_at": "2026-09-27T08:50:20+00:00"
 }

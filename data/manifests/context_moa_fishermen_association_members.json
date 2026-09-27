@@ -4,22 +4,57 @@
   "dataset_url": "https://data.gov.tw/dataset/135723",
   "source_path": "/home/runner/work/ogasawara-election-analysis/ogasawara-election-analysis/cache/raw/context/moa_fishermen_association_members/latest.json",
   "source_sha256": "13589e8f6d79749920f6ef2ffbc3251b087fcab18a2c8e5f0adaa2d10ed4efb4",
+  "raw_cache_sha256": "13589e8f6d79749920f6ef2ffbc3251b087fcab18a2c8e5f0adaa2d10ed4efb4",
+  "raw_cache_path": "cache/raw/context/moa_fishermen_association_members/latest.json",
   "source_size": 258693,
   "encoding": "utf-8-sig",
   "input_row_count": 1596,
   "mapped_row_count": 1596,
   "unmapped_row_count": 0,
-  "county_file_count": 19,
+  "replaced_source_row_count": 1596,
+  "retained_row_count": 3462,
+  "retained_by_source": {
+    "moa_farmers_association_members": 1866,
+    "moa_fishermen_association_members": 1596
+  },
+  "retained_by_county": {
+    "基隆市": 175,
+    "台北市": 91,
+    "新北市": 144,
+    "桃園市": 132,
+    "新竹市": 175,
+    "新竹縣": 91,
+    "苗栗縣": 175,
+    "台中市": 144,
+    "彰化縣": 175,
+    "南投縣": 175,
+    "雲林縣": 175,
+    "嘉義市": 91,
+    "嘉義縣": 175,
+    "台南市": 144,
+    "高雄市": 175,
+    "屏東縣": 175,
+    "宜蘭縣": 175,
+    "花蓮縣": 175,
+    "台東縣": 175,
+    "澎湖縣": 175,
+    "金門縣": 175,
+    "連江縣": 175
+  },
+  "county_file_count": 22,
   "files": {
     "基隆市": "data/context/基隆市/farmers_fishermen_associations.jsonl",
+    "台北市": "data/context/台北市/farmers_fishermen_associations.jsonl",
     "新北市": "data/context/新北市/farmers_fishermen_associations.jsonl",
     "桃園市": "data/context/桃園市/farmers_fishermen_associations.jsonl",
     "新竹市": "data/context/新竹市/farmers_fishermen_associations.jsonl",
+    "新竹縣": "data/context/新竹縣/farmers_fishermen_associations.jsonl",
     "苗栗縣": "data/context/苗栗縣/farmers_fishermen_associations.jsonl",
     "台中市": "data/context/台中市/farmers_fishermen_associations.jsonl",
     "彰化縣": "data/context/彰化縣/farmers_fishermen_associations.jsonl",
     "南投縣": "data/context/南投縣/farmers_fishermen_associations.jsonl",
     "雲林縣": "data/context/雲林縣/farmers_fishermen_associations.jsonl",
+    "嘉義市": "data/context/嘉義市/farmers_fishermen_associations.jsonl",
     "嘉義縣": "data/context/嘉義縣/farmers_fishermen_associations.jsonl",
     "台南市": "data/context/台南市/farmers_fishermen_associations.jsonl",
     "高雄市": "data/context/高雄市/farmers_fishermen_associations.jsonl",
@@ -30,6 +65,44 @@
     "澎湖縣": "data/context/澎湖縣/farmers_fishermen_associations.jsonl",
     "金門縣": "data/context/金門縣/farmers_fishermen_associations.jsonl",
     "連江縣": "data/context/連江縣/farmers_fishermen_associations.jsonl"
+  },
+  "reconciliation": {
+    "input_row_count": 1596,
+    "mapped_row_count": 1596,
+    "unmapped_row_count": 0,
+    "replaced_source_row_count": 1596,
+    "retained_row_count": 3462,
+    "retained_unmapped_row_count": 0,
+    "retained_county_file_count": 22,
+    "retained_by_source": {
+      "moa_farmers_association_members": 1866,
+      "moa_fishermen_association_members": 1596
+    },
+    "retained_by_county": {
+      "基隆市": 175,
+      "台北市": 91,
+      "新北市": 144,
+      "桃園市": 132,
+      "新竹市": 175,
+      "新竹縣": 91,
+      "苗栗縣": 175,
+      "台中市": 144,
+      "彰化縣": 175,
+      "南投縣": 175,
+      "雲林縣": 175,
+      "嘉義市": 91,
+      "嘉義縣": 175,
+      "台南市": 144,
+      "高雄市": 175,
+      "屏東縣": 175,
+      "宜蘭縣": 175,
+      "花蓮縣": 175,
+      "台東縣": 175,
+      "澎湖縣": 175,
+      "金門縣": 175,
+      "連江縣": 175
+    },
+    "input_accounted": true
   },
   "diagnostic": {
     "field_names": [
@@ -61,12 +134,13 @@
         "會員性質": "1 男",
         "人數": "12388"
       }
-    ]
+    ],
+    "note": ""
   },
-  "imported_at": "2026-09-26T11:11:22+00:00",
+  "imported_at": "2026-09-27T08:50:22+00:00",
   "resource_url": "https://data.moa.gov.tw/Service/OpenData/DataFileService.aspx?IsTransData=1&UnitId=G73",
   "resource_format": "json",
   "downloaded_sha256": "13589e8f6d79749920f6ef2ffbc3251b087fcab18a2c8e5f0adaa2d10ed4efb4",
   "downloaded_size": 258693,
-  "downloaded_at": "2026-09-26T11:11:22+00:00"
+  "downloaded_at": "2026-09-27T08:50:22+00:00"
 }
