@@ -49,6 +49,17 @@ def _ssl_context() -> ssl.SSLContext:
         context = ssl.create_default_context(cafile=certifi.where())
     except Exception:
         context = ssl.create_default_context()
+    # Some official endpoints omit the intermediate CA. Public, key-less
+    # intermediates under config/certs/ complete the chain while TLS
+    # verification (CERT_REQUIRED, hostname, validity) stays enabled.
+    cert_dir = Path(__file__).resolve().parents[1] / "config" / "certs"
+    if cert_dir.exists():
+        for pem in sorted(cert_dir.glob("*.pem")):
+            try:
+                context.load_verify_locations(cafile=str(pem))
+            except Exception:
+                # A broken pin must never silently disable verification.
+                continue
     strict_flag = getattr(ssl, "VERIFY_X509_STRICT", None)
     if strict_flag is not None:
         context.verify_flags &= ~strict_flag
@@ -105,11 +116,19 @@ class OfficialContextDownloader:
         force: bool = False,
     ) -> Dict[str, Any]:
         resource_url = self._validate_url(str(source.get("resource_url") or ""))
+        resource_urls = [resource_url]
+        for alternate in source.get("resource_urls") or []:
+            try:
+                resource_urls.append(self._validate_url(str(alternate)))
+            except OfficialContextDownloadError:
+                continue
         resource_format = str(source.get("resource_format") or "").lower().lstrip(".")
         if resource_format not in {"csv", "json", "xml"}:
             raise OfficialContextDownloadError(
                 f"{source_id}: unsupported resource_format={resource_format!r}"
             )
+        max_retries = max(1, int(source.get("max_retries") or DEFAULT_RETRIES))
+        request_timeout = int(source.get("timeout_seconds") or DEFAULT_TIMEOUT_SECONDS)
         raw_dir = self.repo_root / "cache" / "raw" / "context" / source_id
         raw_dir.mkdir(parents=True, exist_ok=True)
         latest_path = raw_dir / f"latest.{resource_format}"
@@ -128,73 +147,105 @@ class OfficialContextDownloader:
                 "downloaded": False,
             }
 
-        request = urllib.request.Request(
-            resource_url,
-            headers={
-                "User-Agent": "ogasawara-election-analysis/1.4",
-                "Accept": "*/*",
-            },
-        )
         last_error: Optional[Exception] = None
-        for attempt in range(1, DEFAULT_RETRIES + 1):
-            tmp = latest_path.with_suffix(latest_path.suffix + ".tmp")
-            if tmp.exists():
-                tmp.unlink()
-            try:
-                if self.opener is not None:
-                    response = self.opener(request)
-                else:
-                    response = urllib.request.urlopen(
-                        request,
-                        timeout=int(source.get("timeout_seconds") or DEFAULT_TIMEOUT_SECONDS),
-                        context=_ssl_context(),
-                    )
-                written = 0
-                with response:
-                    with tmp.open("wb") as out:
-                        while True:
-                            chunk = response.read(1024 * 1024)
-                            if not chunk:
-                                break
-                            written += len(chunk)
-                            if written > MAX_RESOURCE_BYTES:
-                                raise OfficialContextDownloadError(
-                                    f"{source_id}: resource exceeded {MAX_RESOURCE_BYTES} bytes"
-                                )
-                            out.write(chunk)
-                if written <= 0:
-                    raise OfficialContextDownloadError(
-                        f"{source_id}: download returned zero bytes"
-                    )
-                tmp.replace(latest_path)
-                metadata = {
-                    "source_id": source_id,
-                    "dataset_url": source.get("dataset_url"),
-                    "resource_url": resource_url,
-                    "resource_format": resource_format,
-                    "sha256": _sha256(latest_path),
-                    "size": latest_path.stat().st_size,
-                    "downloaded_at": utc_now_iso(),
-                    "attempt": attempt,
-                }
-                metadata_path.write_text(
-                    json.dumps(metadata, ensure_ascii=False, indent=2) + "\n",
-                    encoding="utf-8",
-                )
-                return {
-                    **metadata,
-                    "path": str(latest_path),
-                    "downloaded": True,
-                }
-            except Exception as exc:
-                last_error = exc
+        attempts_made = 0
+        for candidate_url in resource_urls:
+            request = urllib.request.Request(
+                candidate_url,
+                headers={
+                    "User-Agent": "ogasawara-election-analysis/1.4",
+                    "Accept": "*/*",
+                },
+            )
+            for attempt in range(1, max_retries + 1):
+                attempts_made += 1
+                tmp = latest_path.with_suffix(latest_path.suffix + ".tmp")
                 if tmp.exists():
                     tmp.unlink()
-                if attempt < DEFAULT_RETRIES:
-                    time.sleep(min(2 ** attempt, 8))
+                try:
+                    if self.opener is not None:
+                        response = self.opener(request)
+                    else:
+                        response = urllib.request.urlopen(
+                            request,
+                            timeout=request_timeout,
+                            context=_ssl_context(),
+                        )
+                    written = 0
+                    with response:
+                        with tmp.open("wb") as out:
+                            while True:
+                                chunk = response.read(1024 * 1024)
+                                if not chunk:
+                                    break
+                                written += len(chunk)
+                                if written > MAX_RESOURCE_BYTES:
+                                    raise OfficialContextDownloadError(
+                                        f"{source_id}: resource exceeded {MAX_RESOURCE_BYTES} bytes"
+                                    )
+                                out.write(chunk)
+                    if written <= 0:
+                        raise OfficialContextDownloadError(
+                            f"{source_id}: download returned zero bytes"
+                        )
+                    tmp.replace(latest_path)
+                    metadata = {
+                        "source_id": source_id,
+                        "dataset_url": source.get("dataset_url"),
+                        "resource_url": candidate_url,
+                        "resource_format": resource_format,
+                        "sha256": _sha256(latest_path),
+                        "size": latest_path.stat().st_size,
+                        "downloaded_at": utc_now_iso(),
+                        "attempt": attempt,
+                        "url_attempt": resource_urls.index(candidate_url) + 1,
+                    }
+                    metadata_path.write_text(
+                        json.dumps(metadata, ensure_ascii=False, indent=2) + "\n",
+                        encoding="utf-8",
+                    )
+                    return {
+                        **metadata,
+                        "path": str(latest_path),
+                        "downloaded": True,
+                    }
+                except Exception as exc:
+                    last_error = exc
+                    if tmp.exists():
+                        tmp.unlink()
+                    if attempt < max_retries:
+                        time.sleep(min(2 ** attempt, 8))
+
+        # Bounded retries exhausted. A previously verified raw artifact is a
+        # better operational state than dropping the source, so reuse it and
+        # record the exact download error for audit.
+        if latest_path.exists() and latest_path.stat().st_size > 0:
+            previous_metadata: Dict[str, Any] = {}
+            if metadata_path.exists():
+                try:
+                    previous_metadata = json.loads(
+                        metadata_path.read_text(encoding="utf-8")
+                    )
+                except Exception:
+                    previous_metadata = {}
+            return {
+                "source_id": source_id,
+                "dataset_url": source.get("dataset_url"),
+                "resource_url": resource_url,
+                "urls_tried": resource_urls,
+                "resource_format": resource_format,
+                "path": str(latest_path),
+                "sha256": _sha256(latest_path),
+                "size": latest_path.stat().st_size,
+                "downloaded": False,
+                "fallback": True,
+                "download_error": f"{type(last_error).__name__}: {last_error}",
+                "download_attempts": attempts_made,
+                "downloaded_at": previous_metadata.get("downloaded_at"),
+            }
         raise OfficialContextDownloadError(
             f"{source_id}: official resource download failed after "
-            f"{DEFAULT_RETRIES} attempts: {last_error}"
+            f"{attempts_made} attempts: {last_error}"
         )
 
     def materialize_one(
@@ -222,8 +273,13 @@ class OfficialContextDownloader:
                 "downloaded_sha256": download["sha256"],
                 "downloaded_size": download["size"],
                 "downloaded_at": download.get("downloaded_at"),
+                "download_fallback": bool(download.get("fallback")),
             }
         )
+        if download.get("fallback"):
+            manifest["download_error"] = download.get("download_error")
+            manifest["download_attempts"] = download.get("download_attempts")
+            manifest["urls_tried"] = download.get("urls_tried")
         manifest_path.write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",

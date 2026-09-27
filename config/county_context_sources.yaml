@@ -18,6 +18,8 @@ sources:
     update_frequency: 每10年
     time_scope: "2020人口及住宅普查"
     formats: [xml]
+    timeout_seconds: 180
+    max_retries: 3
     scope_boundary: >
       仅用于描述2020年普查常住人口年龄结构，不等同2026年户籍年龄结构，
       不得直接推断个人政治态度或投票选择。
@@ -34,6 +36,8 @@ sources:
     resource_format: xml
     update_frequency: 不定期
     formats: [xml]
+    timeout_seconds: 240
+    max_retries: 2
     scope_boundary: >
       只确认宗教组织登记/资讯系统中的组织、行政区与地址等公开资料；
       不因寺庙存在推断其政治立场、支持对象或动员效果。
@@ -51,6 +55,8 @@ sources:
     live_search_url: https://grouptw.moi.gov.tw/searchGroup
     update_frequency: 不定期
     formats: [csv]
+    timeout_seconds: 180
+    max_retries: 3
     scope_boundary: >
       开放资料为历史名册，当前状态需再到人民团体数位柜台复核；
       团体存在、地址或负责人资料不得直接推断政治关系。
@@ -67,6 +73,8 @@ sources:
     resource_format: json
     update_frequency: 每1年
     formats: [json]
+    timeout_seconds: 120
+    max_retries: 3
     scope_boundary: >
       仅描述县市、会员类别、年度与人数等组织基础资料；
       不据会员规模推断政治支持或选举动员能力。
@@ -83,6 +91,8 @@ sources:
     resource_format: json
     update_frequency: 每1年
     formats: [json, csv]
+    timeout_seconds: 120
+    max_retries: 3
     scope_boundary: >
       仅描述县市、会员类别、资料年、会员性质与人数；
       不据会员规模推断政治支持或选举动员能力。

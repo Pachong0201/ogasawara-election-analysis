@@ -9,6 +9,11 @@ from typing import Any, Dict, Iterable, List, Optional, Set
 
 import yaml
 
+from .candidate_records import (
+    candidate_is_applicable,
+    candidate_name,
+    strip_internal_fields,
+)
 from .election_normalizer import normalize_records, validate_poll_record, validate_records
 from .models import DataQuery, ValidationReport
 from .source_registry import OfflineBackend, SourceRegistry
@@ -394,6 +399,195 @@ class ElectionLoader:
         if not path.exists():
             return []
         return load_jsonl(path)
+
+    def knowledge_candidates_path(self, jurisdiction: str) -> Path:
+        return (
+            self.repo_root
+            / "knowledge"
+            / "local"
+            / safe_component(jurisdiction)
+            / "candidates.jsonl"
+        )
+
+    def _annotate_candidate(
+        self,
+        record: Dict[str, Any],
+        *,
+        origin: str,
+        jurisdiction: str,
+    ) -> Dict[str, Any]:
+        annotated = dict(record)
+        annotated.setdefault("jurisdiction", jurisdiction)
+        annotated["_candidate_origin"] = origin
+        return annotated
+
+    def load_candidate_pool(
+        self,
+        jurisdiction: str,
+        *,
+        election_type: Optional[str] = None,
+        target_year: Optional[int] = None,
+        as_of: Optional[Any] = None,
+        include_knowledge: bool = True,
+    ) -> List[Dict[str, Any]]:
+        """Return candidate records from cache first, then promoted knowledge.
+
+        The cache tier is an official-adapter cache; the knowledge tier is the
+        promoted ``knowledge/local`` profile store.  Records keep an internal
+        ``_candidate_origin`` marker so callers can require promotion provenance
+        only for the knowledge tier and can report the effective priority.
+        """
+
+        def relevant(record: Dict[str, Any]) -> bool:
+            if election_type in (None, ""):
+                return True
+            record_type = str(record.get("election_type") or "").strip()
+            return record_type in {"", str(election_type)}
+
+        pool: List[Dict[str, Any]] = []
+        cache_path = current_candidates_path(self.repo_root, jurisdiction)
+        if cache_path.exists():
+            for record in load_jsonl(cache_path):
+                if relevant(record):
+                    pool.append(
+                        self._annotate_candidate(
+                            record, origin="cache", jurisdiction=jurisdiction
+                        )
+                    )
+        if include_knowledge:
+            knowledge_path = self.knowledge_candidates_path(jurisdiction)
+            if knowledge_path.exists():
+                for record in load_jsonl(knowledge_path):
+                    if relevant(record):
+                        pool.append(
+                            self._annotate_candidate(
+                                record,
+                                origin="knowledge_local",
+                                jurisdiction=jurisdiction,
+                            )
+                        )
+        return pool
+
+    def candidate_type_summary(
+        self, jurisdiction: str, target_year: int
+    ) -> Dict[str, int]:
+        """Count candidate records by election type for one target year.
+
+        Used for diagnostics only: the readiness gate never lets another
+        election type (for example councilor) satisfy a county-mayor check.
+        """
+        counts: Dict[str, int] = {}
+        paths = [current_candidates_path(self.repo_root, jurisdiction)]
+        knowledge_path = self.knowledge_candidates_path(jurisdiction)
+        if knowledge_path.exists():
+            paths.append(knowledge_path)
+        for path in paths:
+            if not path.exists():
+                continue
+            for record in load_jsonl(path):
+                try:
+                    year = int(record.get("election_year"))
+                except (TypeError, ValueError):
+                    continue
+                if year != int(target_year):
+                    continue
+                key = str(record.get("election_type") or "unknown")
+                counts[key] = counts.get(key, 0) + 1
+        return counts
+
+    def _usable_candidates(
+        self,
+        pool: Iterable[Dict[str, Any]],
+        *,
+        jurisdiction: str,
+        election_type: str,
+        target_year: int,
+        as_of: Optional[Any] = None,
+    ) -> List[Dict[str, Any]]:
+        usable: List[Dict[str, Any]] = []
+        seen: Set[str] = set()
+        for raw in pool:
+            origin = str(raw.get("_candidate_origin") or "cache")
+            record = strip_internal_fields(raw)
+            ok, _reason, _status = candidate_is_applicable(
+                record,
+                jurisdiction=jurisdiction,
+                election_type=election_type,
+                target_year=int(target_year),
+                as_of=as_of,
+                require_promotion=origin == "knowledge_local",
+            )
+            if not ok:
+                continue
+            key = str(
+                record.get("candidate_id")
+                or f"{candidate_name(record)}|{record.get('party') or ''}"
+            )
+            if key in seen:
+                continue
+            seen.add(key)
+            usable.append(record)
+        return usable
+
+    def rebuild_current_candidate_cache(
+        self,
+        jurisdiction: str,
+        election_type: str,
+        target_year: int,
+        *,
+        as_of: Optional[Any] = None,
+        include_knowledge: bool = True,
+    ) -> Dict[str, Any]:
+        """Rebuild ``cache/candidates`` from usable cache/knowledge records.
+
+        This is the explicit recovery path for the note that
+        ``knowledge/local`` holds promoted candidate profiles while
+        ``cache/candidates`` is empty.
+        """
+        pool = self.load_candidate_pool(
+            jurisdiction,
+            election_type=election_type,
+            target_year=int(target_year),
+            as_of=as_of,
+            include_knowledge=include_knowledge,
+        )
+        usable = self._usable_candidates(
+            pool,
+            jurisdiction=jurisdiction,
+            election_type=election_type,
+            target_year=int(target_year),
+            as_of=as_of,
+        )
+        path = current_candidates_path(self.repo_root, jurisdiction)
+        existing = load_jsonl(path) if path.exists() else []
+        keep = [
+            row
+            for row in existing
+            if not (
+                str(row.get("election_type") or "") == str(election_type)
+                and int(row.get("election_year") or 0) == int(target_year)
+            )
+        ]
+        if not usable:
+            return {
+                "status": "missing",
+                "count": 0,
+                "candidate_count": len(pool),
+                "path": str(path.relative_to(self.repo_root)),
+            }
+        write_jsonl(path, keep + usable)
+        origins: Dict[str, int] = {}
+        for raw in pool:
+            origin = str(raw.get("_candidate_origin") or "cache")
+            origins[origin] = origins.get(origin, 0) + 1
+        return {
+            "status": "rebuilt",
+            "count": len(usable),
+            "candidate_count": len(pool),
+            "origins": origins,
+            "path": str(path.relative_to(self.repo_root)),
+            "records": usable,
+        }
 
     @staticmethod
     def _candidate_record_valid(record: Dict[str, Any]) -> bool:

@@ -1,0 +1,293 @@
+{
+  "kind": "farmers_fishermen_associations",
+  "before_commit": "eed5b9a",
+  "after_commit": "worktree+37cd40f data",
+  "before": {
+    "county_file_count": 22,
+    "mapped_totals": {
+      "moa_fishermen_association_members": 1596,
+      "moa_farmers_association_members": 273
+    },
+    "mapped_sum": 1869,
+    "unmapped_totals": {
+      "moa_farmers_association_members": 116
+    },
+    "unmapped_sum": 116,
+    "counties_with_both_sources": [],
+    "counties_single_source": {
+      "南投縣": [
+        "moa_fishermen_association_members"
+      ],
+      "台中市": [
+        "moa_fishermen_association_members"
+      ],
+      "台北市": [
+        "moa_farmers_association_members"
+      ],
+      "台南市": [
+        "moa_fishermen_association_members"
+      ],
+      "台東縣": [
+        "moa_fishermen_association_members"
+      ],
+      "嘉義市": [
+        "moa_farmers_association_members"
+      ],
+      "嘉義縣": [
+        "moa_fishermen_association_members"
+      ],
+      "基隆市": [
+        "moa_fishermen_association_members"
+      ],
+      "宜蘭縣": [
+        "moa_fishermen_association_members"
+      ],
+      "屏東縣": [
+        "moa_fishermen_association_members"
+      ],
+      "彰化縣": [
+        "moa_fishermen_association_members"
+      ],
+      "新北市": [
+        "moa_fishermen_association_members"
+      ],
+      "新竹市": [
+        "moa_fishermen_association_members"
+      ],
+      "新竹縣": [
+        "moa_farmers_association_members"
+      ],
+      "桃園市": [
+        "moa_fishermen_association_members"
+      ],
+      "澎湖縣": [
+        "moa_fishermen_association_members"
+      ],
+      "花蓮縣": [
+        "moa_fishermen_association_members"
+      ],
+      "苗栗縣": [
+        "moa_fishermen_association_members"
+      ],
+      "連江縣": [
+        "moa_fishermen_association_members"
+      ],
+      "金門縣": [
+        "moa_fishermen_association_members"
+      ],
+      "雲林縣": [
+        "moa_fishermen_association_members"
+      ],
+      "高雄市": [
+        "moa_fishermen_association_members"
+      ]
+    },
+    "counties_without_file": [],
+    "per_county": {
+      "南投縣": {
+        "moa_fishermen_association_members": 84
+      },
+      "台中市": {
+        "moa_fishermen_association_members": 84
+      },
+      "台北市": {
+        "moa_farmers_association_members": 91
+      },
+      "台南市": {
+        "moa_fishermen_association_members": 84
+      },
+      "台東縣": {
+        "moa_fishermen_association_members": 84
+      },
+      "嘉義市": {
+        "moa_farmers_association_members": 91
+      },
+      "嘉義縣": {
+        "moa_fishermen_association_members": 84
+      },
+      "基隆市": {
+        "moa_fishermen_association_members": 84
+      },
+      "宜蘭縣": {
+        "moa_fishermen_association_members": 84
+      },
+      "屏東縣": {
+        "moa_fishermen_association_members": 84
+      },
+      "彰化縣": {
+        "moa_fishermen_association_members": 84
+      },
+      "新北市": {
+        "moa_fishermen_association_members": 84
+      },
+      "新竹市": {
+        "moa_fishermen_association_members": 84
+      },
+      "新竹縣": {
+        "moa_farmers_association_members": 91
+      },
+      "桃園市": {
+        "moa_fishermen_association_members": 84
+      },
+      "澎湖縣": {
+        "moa_fishermen_association_members": 84
+      },
+      "花蓮縣": {
+        "moa_fishermen_association_members": 84
+      },
+      "苗栗縣": {
+        "moa_fishermen_association_members": 84
+      },
+      "連江縣": {
+        "moa_fishermen_association_members": 84
+      },
+      "金門縣": {
+        "moa_fishermen_association_members": 84
+      },
+      "雲林縣": {
+        "moa_fishermen_association_members": 84
+      },
+      "高雄市": {
+        "moa_fishermen_association_members": 84
+      }
+    }
+  },
+  "after": {
+    "county_file_count": 22,
+    "mapped_totals": {
+      "moa_farmers_association_members": 1866,
+      "moa_fishermen_association_members": 1596
+    },
+    "mapped_sum": 3462,
+    "unmapped_totals": {
+      "moa_farmers_association_members": 116
+    },
+    "unmapped_sum": 116,
+    "counties_with_both_sources": [
+      "南投縣",
+      "台中市",
+      "台南市",
+      "台東縣",
+      "嘉義縣",
+      "基隆市",
+      "宜蘭縣",
+      "屏東縣",
+      "彰化縣",
+      "新北市",
+      "新竹市",
+      "桃園市",
+      "澎湖縣",
+      "花蓮縣",
+      "苗栗縣",
+      "連江縣",
+      "金門縣",
+      "雲林縣",
+      "高雄市"
+    ],
+    "counties_single_source": {
+      "台北市": [
+        "moa_farmers_association_members"
+      ],
+      "嘉義市": [
+        "moa_farmers_association_members"
+      ],
+      "新竹縣": [
+        "moa_farmers_association_members"
+      ]
+    },
+    "counties_without_file": [],
+    "per_county": {
+      "南投縣": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "台中市": {
+        "moa_farmers_association_members": 60,
+        "moa_fishermen_association_members": 84
+      },
+      "台北市": {
+        "moa_farmers_association_members": 91
+      },
+      "台南市": {
+        "moa_farmers_association_members": 60,
+        "moa_fishermen_association_members": 84
+      },
+      "台東縣": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "嘉義市": {
+        "moa_farmers_association_members": 91
+      },
+      "嘉義縣": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "基隆市": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "宜蘭縣": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "屏東縣": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "彰化縣": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "新北市": {
+        "moa_farmers_association_members": 60,
+        "moa_fishermen_association_members": 84
+      },
+      "新竹市": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "新竹縣": {
+        "moa_farmers_association_members": 91
+      },
+      "桃園市": {
+        "moa_farmers_association_members": 48,
+        "moa_fishermen_association_members": 84
+      },
+      "澎湖縣": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "花蓮縣": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "苗栗縣": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "連江縣": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "金門縣": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "雲林縣": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      },
+      "高雄市": {
+        "moa_farmers_association_members": 91,
+        "moa_fishermen_association_members": 84
+      }
+    }
+  },
+  "delta": {
+    "mapped_total": 1593,
+    "farmers_mapped": 1593,
+    "fishermen_mapped": 0,
+    "counties_with_both_sources": 19
+  }
+}

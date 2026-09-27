@@ -24,8 +24,9 @@ from .host_retrieval import HostRetrievalBackend
 from .knowledge_builder import KnowledgePromotionBuilder
 from .knowledge_coverage import KnowledgeCoverageAudit
 from .county_knowledge import COUNTIES, CountyKnowledgeProduction
-from .models import ElectionTask
+from .models import ElectionTask, parse_date
 from .pipeline import AnalysisPipeline
+from .readiness_matrix import ReadinessMatrix
 
 
 def _task_from_args(args: argparse.Namespace) -> ElectionTask:
@@ -158,6 +159,67 @@ def _cmd_run(args: argparse.Namespace) -> int:
 
 
 
+def _cmd_sync_candidates(args: argparse.Namespace) -> int:
+    loader = ElectionLoader(
+        Path(args.repo_root).resolve() if args.repo_root else None, mode="offline"
+    )
+    counties = list(COUNTIES) if args.all_counties else [args.county]
+    as_of = parse_date(args.as_of) if args.as_of else None
+    results = [
+        {
+            "county": county,
+            **{
+                key: value
+                for key, value in loader.rebuild_current_candidate_cache(
+                    county,
+                    args.type,
+                    int(args.year),
+                    as_of=as_of,
+                ).items()
+                if key != "records"
+            },
+        }
+        for county in counties
+    ]
+    output = {
+        "election_type": args.type,
+        "target_year": int(args.year),
+        "as_of": args.as_of,
+        "counties": results,
+        "rebuilt": [row["county"] for row in results if row["status"] == "rebuilt"],
+        "missing": [row["county"] for row in results if row["status"] != "rebuilt"],
+    }
+    if getattr(args, "output", ""):
+        target = Path(args.output)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(output, ensure_ascii=False, indent=2))
+    return 0 if not output["missing"] else 3
+
+
+def _cmd_readiness_matrix(args: argparse.Namespace) -> int:
+    counties = (
+        [item.strip() for item in args.counties.split(",") if item.strip()]
+        if getattr(args, "counties", "")
+        else None
+    )
+    matrix = ReadinessMatrix(
+        Path(args.repo_root).resolve() if args.repo_root else None
+    ).run(
+        election_type=args.type,
+        target_year=int(args.year),
+        as_of=args.as_of or None,
+        counties=counties,
+    )
+    output_path = getattr(args, "output", "")
+    if output_path:
+        target = Path(output_path)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(matrix, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(matrix, ensure_ascii=False, indent=2))
+    return 0
+
+
 def _cmd_knowledge_ingest(args: argparse.Namespace) -> int:
     builder = KnowledgePromotionBuilder(
         Path(args.repo_root).resolve() if args.repo_root else None
@@ -269,6 +331,29 @@ def build_parser() -> argparse.ArgumentParser:
     readiness.add_argument("--level", default="township_district")
     readiness.add_argument("--candidates", default="")
     readiness.set_defaults(func=_cmd_readiness)
+
+    sync = sub.add_parser(
+        "sync-candidates",
+        help="rebuild cache/candidates from usable cache or promoted knowledge profiles",
+    )
+    sync.add_argument("--county", default="")
+    sync.add_argument("--all-counties", action="store_true")
+    sync.add_argument("--year", required=True, type=int)
+    sync.add_argument("--type", required=True)
+    sync.add_argument("--as-of", default="", help="ISO date used for applicability/freshness")
+    sync.add_argument("--output", default="")
+    sync.set_defaults(func=_cmd_sync_candidates)
+
+    matrix = sub.add_parser(
+        "readiness-matrix",
+        help="offline per-county readiness and candidate-availability audit",
+    )
+    matrix.add_argument("--type", default="county_mayor")
+    matrix.add_argument("--year", type=int, default=2026)
+    matrix.add_argument("--as-of", default="")
+    matrix.add_argument("--counties", default="")
+    matrix.add_argument("--output", default="")
+    matrix.set_defaults(func=_cmd_readiness_matrix)
 
     matrix = sub.add_parser("build-matrix", help="build local election matrices")
     matrix.add_argument("--county", required=True)

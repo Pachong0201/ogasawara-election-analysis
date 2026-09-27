@@ -21,7 +21,7 @@ concurrency:
 jobs:
   materialize:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Checkout feature branch
         uses: actions/checkout@v4
@@ -37,9 +37,21 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
 
+      - name: Restore raw official context cache
+        uses: actions/cache@v4
+        with:
+          path: cache/raw/context
+          key: context-raw-${{ hashFiles('config/county_context_sources.yaml') }}
+          restore-keys: |
+            context-raw-
+
       - name: Download and import official county-context resources
         run: |
           python -m runtime.context_official_download --force --allow-partial
+
+      - name: Retry remaining context sources with cached artifacts
+        run: |
+          python -m runtime.context_official_download --allow-partial
 
       - name: Commit verified normalized context data
         run: |

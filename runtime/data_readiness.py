@@ -9,11 +9,20 @@ from __future__ import annotations
 
 import json
 import datetime as dt
+from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple
 
 import yaml
 
+from .candidate_records import (
+    REGISTRATION_CLASSES,
+    REASON_LABELS,
+    candidate_is_applicable,
+    candidate_name,
+    candidate_status_class,
+    strip_internal_fields,
+)
 from .election_loader import ElectionLoader, election_file_path
 from .freshness import evaluate_records, is_fresh
 from .knowledge_loader import KnowledgeLoader
@@ -137,65 +146,130 @@ class DataReadinessGate:
         return info, found
 
     def _current_candidates_requirement(self, task: ElectionTask, now: Optional[dt.date] = None) -> Tuple[Dict[str, Any], List[Dict[str, Any]], bool]:
-        cached = self.loader.load_current_candidates(task.jurisdiction)
+        pool = self.loader.load_candidate_pool(
+            task.jurisdiction,
+            election_type=task.election_type,
+            target_year=int(task.target_year),
+            as_of=now,
+            include_knowledge=True,
+        )
         warnings: List[str] = []
-        candidates: List[Dict[str, Any]] = [dict(item) for item in cached]
+        records: List[Tuple[Dict[str, Any], str]] = []
+        for raw in pool:
+            origin = str(raw.get("_candidate_origin") or "cache")
+            record = strip_internal_fields(raw)
+            record.setdefault("name", record.get("candidate_name", ""))
+            records.append((record, origin))
 
         # Names supplied in the user task are only retrieval seeds. They do not
         # satisfy the hard "current candidate list" gate without sourced,
         # time-valid candidate records.
-        if not candidates and task.candidates:
-            candidates = [
-                {
-                    "name": name,
-                    "candidate_name": name,
-                    "candidate_status": "provided_unverified",
-                    "source_grade": "",
-                }
-                for name in task.candidates
-            ]
+        if not records and task.candidates:
+            for name in task.candidates:
+                records.append(
+                    (
+                        {
+                            "name": name,
+                            "candidate_name": name,
+                            "candidate_status": "provided_unverified",
+                            "source_grade": "",
+                            "_seed": True,
+                        },
+                        "task_seed",
+                    )
+                )
             warnings.append("task-provided candidate names are unverified seeds and do not satisfy the current candidate gate")
 
         verified: List[Dict[str, Any]] = []
+        seen: Set[str] = set()
         stale_names: List[str] = []
         rejected_names: List[str] = []
-        for candidate in candidates:
-            candidate.setdefault("name", candidate.get("candidate_name", ""))
-            candidate.setdefault("candidate_status", candidate.get("status", "announced"))
-            grade = str(candidate.get("source_grade") or "").upper()
-            independent = int(candidate.get("independent_source_count") or 0)
-            grade_ok = grade in {"A", "B"} or (grade == "C" and independent >= 2)
-            status = str(candidate.get("candidate_status") or "").lower()
-            freshness_kind = "candidate_registration" if status == "registered" else "candidate_profile"
-            verified_date = parse_date(candidate.get("last_verified_at") or candidate.get("retrieved_at"))
-            fresh = is_fresh(candidate, kind=freshness_kind, now=now) and (
-                now is None or verified_date is None or verified_date <= now)
-            status_ok = status in {"registered", "nominated", "announced", "potential"}
+        reason_counts: Counter = Counter()
+        status_counts: Counter = Counter()
+        origin_counts: Counter = Counter()
+        for record, origin in records:
+            origin_counts[origin] += 1
+            status_class = candidate_status_class(
+                record.get("candidate_status") or record.get("status")
+            )
+            status_counts[status_class] += 1
+            if record.get("_seed"):
+                continue
+            ok, reason, evaluated_class = candidate_is_applicable(
+                record,
+                jurisdiction=task.jurisdiction,
+                election_type=task.election_type,
+                target_year=int(task.target_year),
+                as_of=now,
+                require_promotion=origin == "knowledge_local",
+            )
+            name = candidate_name(record) or "unknown"
+            if ok:
+                key = str(
+                    record.get("candidate_id")
+                    or f"{name}|{record.get('party') or ''}"
+                )
+                if key in seen:
+                    continue
+                seen.add(key)
+                verified.append(record)
+            elif reason == "stale":
+                stale_names.append(name)
+                reason_counts[reason] += 1
+            else:
+                rejected_names.append(f"{name}({REASON_LABELS.get(reason, reason)})")
+                reason_counts[reason] += 1
 
-            if not fresh:
-                stale_names.append(candidate.get("name") or "unknown")
-            if not grade_ok or not status_ok:
-                rejected_names.append(candidate.get("name") or "unknown")
-            if grade_ok and fresh and status_ok:
-                verified.append(candidate)
-
-        registered = [
-            candidate for candidate in verified
-            if str(candidate.get("candidate_status") or "").lower() == "registered"
-        ]
+        registered_count = sum(
+            1
+            for candidate in verified
+            if candidate_status_class(
+                candidate.get("candidate_status") or candidate.get("status")
+            )
+            in REGISTRATION_CLASSES
+        )
         if stale_names:
             warnings.append("stale candidate records require revalidation: " + ", ".join(sorted(set(stale_names))))
         if rejected_names:
             warnings.append("candidate records failed source/status validation: " + ", ".join(sorted(set(rejected_names))))
+        if origin_counts.get("knowledge_local"):
+            warnings.append(
+                "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles "
+                "(cache can be rebuilt with sync-candidates)"
+            )
+        if verified and registered_count == 0:
+            warnings.append(
+                "no registration or qualification record; candidate list relies on nomination/announcement status only"
+            )
+        type_summary = self.loader.candidate_type_summary(
+            task.jurisdiction, int(task.target_year)
+        )
+        excluded = {
+            key: value
+            for key, value in type_summary.items()
+            if key != str(task.election_type)
+        }
+        if excluded:
+            warnings.append(
+                "candidate records for other election types were excluded from this "
+                f"{task.election_type} check: "
+                + ", ".join(f"{key}={value}" for key, value in sorted(excluded.items()))
+            )
 
         satisfied = bool(verified)
         info = {
             "label": "current_candidates",
             "level": HARD,
-            "count": len(candidates),
+            "count": len(records),
             "verified_count": len(verified),
-            "registered_count": len(registered),
-            "candidates": candidates,
+            "registered_count": registered_count,
+            "nomination_or_announcement_count": len(verified) - registered_count,
+            "status_counts": dict(sorted(status_counts.items())),
+            "rejection_reasons": dict(sorted(reason_counts.items())),
+            "candidate_source_counts": dict(sorted(origin_counts.items())),
+            "excluded_other_election_types": excluded,
+            "registration_confirmed": registered_count > 0,
+            "candidates": [record for record, _origin in records],
             "verified_candidates": verified,
             "warnings": warnings,
             "satisfied": satisfied,
