@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T15:17:51+00:00
+生成时间：2026-09-26T21:18:46+00:00
 
 ## 历史政治知识（L2）
 - 桃園市-population-2025: 截至2025年12月底，桃園市户籍登记人口为2,355,106人，较2024年12月底增加16,458人。（2024-12-31—2025-12-31）
@@ -15,6 +15,7 @@
 - ly11-office-桃園市-萬美玲: 萬美玲 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-桃園市-呂玉玲: 呂玉玲 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-桃園市-邱若華: 邱若華 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260927-1-0: 李柏坊 → public_service_network → 桃園市政府市政團隊；status=active_verified；current_use=current_usable；time_scope=2026-09-09
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-6a799c19a64d1b81: 張善政；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -140,6 +141,7 @@
 - 萬美玲 → office_holding → 立法院第11屆立法委員；region=桃園市；current_use=current_usable
 - 呂玉玲 → office_holding → 立法院第11屆立法委員；region=桃園市；current_use=current_usable
 - 邱若華 → office_holding → 立法院第11屆立法委員；region=桃園市；current_use=current_usable
+- 李柏坊 → public_service_network → 桃園市政府市政團隊；region=桃園市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 桃園市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

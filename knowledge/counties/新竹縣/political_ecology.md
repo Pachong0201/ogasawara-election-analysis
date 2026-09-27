@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:10:56+00:00
+生成时间：2026-09-26T21:18:45+00:00
 
 ## 历史政治知识（L2）
 - 新竹縣-population-2025: 截至2025年12月底，新竹縣户籍登记人口为597,235人，较2024年12月底增加2,594人。（2024-12-31—2025-12-31）
@@ -11,6 +11,7 @@
 ## 当前地方关系（L3）
 - ly11-office-新竹縣-徐欣瑩: 徐欣瑩 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-新竹縣-林思銘: 林思銘 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260927-13-0: 新竹縣政府 → other → 新竹縣後備憲兵荷松協會；status=active_verified；current_use=current_usable；time_scope=2026-01-01
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-aa4118bafab47c6f: 鄭朝方；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -86,11 +87,12 @@
 - cec-reg-2026-ea825ee07f36e0da: 張益生；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260927-13-0: 2026-01-01 新竹县政府正文公布联合服务中心运作，并说明数位发展处与高龄长照处等组织调整；这里只确认官方当日公布的制度事项，不推定行政效率或服务成效。；current_use=current_usable；date=2026-01-01；time_scope=2026-01-01
 
 ## 人物—组织—地区关系索引
 - 徐欣瑩 → office_holding → 立法院第11屆立法委員；region=新竹縣；current_use=current_usable
 - 林思銘 → office_holding → 立法院第11屆立法委員；region=新竹縣；current_use=current_usable
+- 新竹縣政府 → other → 新竹縣後備憲兵荷松協會；region=新竹縣；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 新竹縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

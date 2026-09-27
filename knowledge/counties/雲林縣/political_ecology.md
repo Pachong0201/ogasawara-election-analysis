@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:11:03+00:00
+生成时间：2026-09-26T21:18:50+00:00
 
 ## 历史政治知识（L2）
 - 雲林縣-population-2025: 截至2025年12月底，雲林縣户籍登记人口为650,989人，较2024年12月底减少7,438人。（2024-12-31—2025-12-31）
@@ -11,6 +11,7 @@
 ## 当前地方关系（L3）
 - ly11-office-雲林縣-丁學忠: 丁學忠 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-雲林縣-劉建國: 劉建國 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260927-4-0: 張麗善 → public_service_network → 雲林縣體育會；status=active_verified；current_use=current_usable；time_scope=2026-09-06
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-b50ae7e015f3f6f3: 吳炳輝；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -92,11 +93,12 @@
 - cec-reg-2026-b36d1b7f98dde039: 張忠豪；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260927-4-0: 2026-09-06 云林县政府正文记录社区羽球联谊赛、县府与体育组织推动全民运动及民间器材捐赠；这里只确认政策与资源互动，不推定参与率或健康成效。；current_use=current_usable；date=2026-09-06；time_scope=2026-09-06
 
 ## 人物—组织—地区关系索引
 - 丁學忠 → office_holding → 立法院第11屆立法委員；region=雲林縣；current_use=current_usable
 - 劉建國 → office_holding → 立法院第11屆立法委員；region=雲林縣；current_use=current_usable
+- 張麗善 → public_service_network → 雲林縣體育會；region=雲林縣；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 雲林縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

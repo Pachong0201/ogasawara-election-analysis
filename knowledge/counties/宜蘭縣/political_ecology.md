@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:11:12+00:00
+生成时间：2026-09-26T21:18:42+00:00
 
 ## 历史政治知识（L2）
 - 宜蘭縣-population-2025: 截至2025年12月底，宜蘭縣户籍登记人口为449,336人，较2024年12月底增加124人。（2024-12-31—2025-12-31）
@@ -10,6 +10,7 @@
 
 ## 当前地方关系（L3）
 - ly11-office-宜蘭縣-陳俊宇: 陳俊宇 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260927-12-0: 新群水環境巡守隊 → other → 臺灣湯淺電池股份有限公司；status=active_verified；current_use=current_usable；time_scope=2026-09-05
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-2717adc2742f3674: 陳宏毅；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -78,10 +79,11 @@
 - cec-reg-2026-61e69d37ea137df9: 李勝雄；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260927-12-0: 2026-09-05 宜兰县环保局正文记录亲子净溪、企业捐赠与水环境巡守；这里只确认当日活动和公私协力议题，不推定水质改善或长期参与成效。；current_use=current_usable；date=2026-09-05；time_scope=2026-09-05
 
 ## 人物—组织—地区关系索引
 - 陳俊宇 → office_holding → 立法院第11屆立法委員；region=宜蘭縣；current_use=current_usable
+- 新群水環境巡守隊 → other → 臺灣湯淺電池股份有限公司；region=宜蘭縣；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 宜蘭縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

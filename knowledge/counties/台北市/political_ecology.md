@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:10:49+00:00
+生成时间：2026-09-26T21:18:37+00:00
 
 ## 历史政治知识（L2）
 - 台北市-population-2025: 截至2025年12月底，台北市户籍登记人口为2,439,507人，较2024年12月底减少51,362人。（2024-12-31—2025-12-31）
@@ -17,6 +17,7 @@
 - ly11-office-台北市-羅智強: 羅智強 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-台北市-徐巧芯: 徐巧芯 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-台北市-賴士葆: 賴士葆 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260927-10-0: 臺北市商業處 → public_service_network → 台北市加蚋商圈協會；status=active_verified；current_use=current_usable；time_scope=2026-09-11
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-3345f202025019f7: 郭璽；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -125,7 +126,7 @@
 - cec-reg-2026-7ddf6a810b7edaf1: 孔垂崢HaisulIslituan；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260927-10-0: 臺北市商业处于 2026-09-11 公布加蚋文化节、商圈消费及社区体验活动；这里只确认活动与地方商业议题，不推定来客数、营业额或长期发展成效。；current_use=current_usable；date=2026-09-11；time_scope=2026-09-11
 
 ## 人物—组织—地区关系索引
 - 吳思瑤 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable
@@ -136,6 +137,7 @@
 - 羅智強 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable
 - 徐巧芯 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable
 - 賴士葆 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable
+- 臺北市商業處 → public_service_network → 台北市加蚋商圈協會；region=台北市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 台北市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

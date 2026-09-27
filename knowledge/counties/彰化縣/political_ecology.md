@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:11:01+00:00
+生成时间：2026-09-26T21:18:44+00:00
 
 ## 历史政治知识（L2）
 - 彰化縣-population-2025: 截至2025年12月底，彰化縣户籍登记人口为1,210,206人，较2024年12月底减少15,469人。（2024-12-31—2025-12-31）
@@ -13,6 +13,7 @@
 - ly11-office-彰化縣-黃秀芳: 黃秀芳 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-彰化縣-謝衣鳯: 謝衣鳯 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-彰化縣-陳素月: 陳素月 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260927-2-0: 王惠美 → public_service_network → 彰化縣各業工會代表；status=active_verified；current_use=current_usable；time_scope=2026-09-07
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-bc9ef64d4a6fdfa2: 陳重嘉；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -107,13 +108,14 @@
 - cec-reg-2026-8b868f2a24836698: 高采翎；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260927-2-0: 2026-09-07 彰化县政府正文把工会座谈、劳工意见沟通及劳工大学职能课程列为当日劳动治理事项；这里只确认议题与官方办理内容，不推定劳权改善或就业成效已经发生。；current_use=current_usable；date=2026-09-07；time_scope=2026-09-07
 
 ## 人物—组织—地区关系索引
 - 陳秀寳 → office_holding → 立法院第11屆立法委員；region=彰化縣；current_use=current_usable
 - 黃秀芳 → office_holding → 立法院第11屆立法委員；region=彰化縣；current_use=current_usable
 - 謝衣鳯 → office_holding → 立法院第11屆立法委員；region=彰化縣；current_use=current_usable
 - 陳素月 → office_holding → 立法院第11屆立法委員；region=彰化縣；current_use=current_usable
+- 王惠美 → public_service_network → 彰化縣各業工會代表；region=彰化縣；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 彰化縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

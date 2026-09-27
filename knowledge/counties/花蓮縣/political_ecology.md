@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:11:13+00:00
+生成时间：2026-09-26T21:18:48+00:00
 
 ## 历史政治知识（L2）
 - 花蓮縣-population-2025: 截至2025年12月底，花蓮縣户籍登记人口为312,807人，较2024年12月底减少2,567人。（2024-12-31—2025-12-31）
@@ -10,6 +10,7 @@
 
 ## 当前地方关系（L3）
 - ly11-office-花蓮縣-傅崐萁: 傅崐萁 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260927-8-0: 徐榛蔚 → other → 玉里鎮樂合社區發展協會；status=active_verified；current_use=current_usable；time_scope=2026-09-22
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-503823940d6ee24a: 游淑貞；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -73,10 +74,11 @@
 - cec-reg-2026-67d9b782f5285b38: 金淑敏；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260927-8-0: 2026-09-22 花莲县政府正文以乐合社区获奖为背景，记录社区对阿美族文化传承与社区营造的公共议题；这里只确认官方记录与获奖事项，不独立推定长期治理成效。；current_use=current_usable；date=2026-09-22；time_scope=2026-09-22
 
 ## 人物—组织—地区关系索引
 - 傅崐萁 → office_holding → 立法院第11屆立法委員；region=花蓮縣；current_use=current_usable
+- 徐榛蔚 → other → 玉里鎮樂合社區發展協會；region=花蓮縣；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 花蓮縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

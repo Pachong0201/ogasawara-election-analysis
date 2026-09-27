@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:10:48+00:00
+生成时间：2026-09-26T21:18:41+00:00
 
 ## 历史政治知识（L2）
 - 基隆市-population-2025: 截至2025年12月底，基隆市户籍登记人口为359,836人，较2024年12月底减少1,605人。（2024-12-31—2025-12-31）
@@ -10,6 +10,7 @@
 
 ## 当前地方关系（L3）
 - ly11-office-基隆市-林沛祥: 林沛祥 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260927-6-0: 謝國樑 → public_service_network → 基隆市各區調解委員；status=active_verified；current_use=current_usable；time_scope=2026-09-14
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-d34a9750f4a609fb: 謝國樑；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -77,10 +78,11 @@
 - cec-reg-2026-68d62c33f6f0dcaa: 高李茂俊；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260927-6-0: 2026-09-14 基隆市政府正文记录 72 位调解委员受聘及协助地方纠纷调解；这里只确认制度安排与服务议题，不推定案件化解率或社会成效。；current_use=current_usable；date=2026-09-14；time_scope=2026-09-14
 
 ## 人物—组织—地区关系索引
 - 林沛祥 → office_holding → 立法院第11屆立法委員；region=基隆市；current_use=current_usable
+- 謝國樑 → public_service_network → 基隆市各區調解委員；region=基隆市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 基隆市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

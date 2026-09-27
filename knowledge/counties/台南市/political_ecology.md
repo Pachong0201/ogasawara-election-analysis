@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T15:17:49+00:00
+生成时间：2026-09-26T21:18:39+00:00
 
 ## 历史政治知识（L2）
 - tainan-2010-merger-37-districts: 台南市政府公开资料记载，2010年12月25日原台南县与台南市合并，合并后全市分为37个行政区。（2010-12-25—2026-09-26）
@@ -116,7 +116,7 @@
 - cec-reg-2026-a3cdd517113f9484: 辛晴晴LanguiTamapima；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260927-0-0: 2026-09-19 臺南市政府正文记录全台特色商圈与逾 85 家店家在台南交流展售，并表达串联行销与地方商业的政策期待；这里只确认活动及官方期待，不把参与规模推定为营业额成长或长期成效。；current_use=current_usable；date=2026-09-19；time_scope=2026-09-19
 
 ## 人物—组织—地区关系索引
 - 林俊宪 → public_endorsement → 陈亭妃；region=台南市；current_use=current_usable

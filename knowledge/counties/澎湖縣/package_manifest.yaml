@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 澎湖縣
-generated_at: '2026-09-26T12:11:14+00:00'
-content_sha256: 2c920d8ea19b3bc86222f9fa74d03e1b6d31636ff78ee16d21920c0996cb7ee7
+generated_at: '2026-09-26T21:18:47+00:00'
+content_sha256: 8fc933cabf2285290d67d701ae984a2cf890eadc9bca75b869949703f8ec69c1
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/澎湖縣/claims.jsonl
@@ -16,14 +16,14 @@ generated_indexes:
   entity_relation_index: knowledge/counties/澎湖縣/entity_relation_index.jsonl
 counts:
   historical_claim: 2
-  local_relationship: 1
+  local_relationship: 2
   candidate_profile: 42
-  current_issue: 0
-evidence_index_count: 45
-entity_relation_count: 1
+  current_issue: 1
+evidence_index_count: 47
+entity_relation_count: 2
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 53
+promotion_receipt_count: 55
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

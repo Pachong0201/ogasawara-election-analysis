@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:11:16+00:00
+生成时间：2026-09-26T21:18:49+00:00
 
 ## 历史政治知识（L2）
 - 連江縣-population-2025: 截至2025年12月底，連江縣户籍登记人口为13,621人，较2024年12月底减少329人。（2024-12-31—2025-12-31）
@@ -10,6 +10,7 @@
 
 ## 当前地方关系（L3）
 - ly11-office-連江縣-陳雪生: 陳雪生 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260927-7-0: 王忠銘 → other → 連江縣新移民女性關懷協會；status=active_verified；current_use=current_usable；time_scope=2026-09-14
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-ae7576df634ba6f1: 王忠銘；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -30,10 +31,11 @@
 - cec-reg-2026-4946b2147ce60ff9: 馮印才；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260927-7-0: 连江县政府官方报于 2026-09-14 记录前一日新住民多元文化市集及社会福利宣传；这里只确认活动与新住民公共议题，不推定族群融合或福利触达成效。；current_use=current_usable；date=2026-09-14；time_scope=2026-09-14
 
 ## 人物—组织—地区关系索引
 - 陳雪生 → office_holding → 立法院第11屆立法委員；region=連江縣；current_use=current_usable
+- 王忠銘 → other → 連江縣新移民女性關懷協會；region=連江縣；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 連江縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

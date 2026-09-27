@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 新竹縣
-generated_at: '2026-09-26T12:10:56+00:00'
-content_sha256: db913eeec52382f33934cd0c78feb7f1d8965614b598d529b2a3659a4604192c
+generated_at: '2026-09-26T21:18:45+00:00'
+content_sha256: eab49e2dc5269153266cdfdfc7aa502ac5ecbe06010e9632f6280733fd1e73dc
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/新竹縣/claims.jsonl
@@ -16,14 +16,14 @@ generated_indexes:
   entity_relation_index: knowledge/counties/新竹縣/entity_relation_index.jsonl
 counts:
   historical_claim: 2
-  local_relationship: 2
+  local_relationship: 3
   candidate_profile: 71
-  current_issue: 0
-evidence_index_count: 75
-entity_relation_count: 2
+  current_issue: 1
+evidence_index_count: 77
+entity_relation_count: 3
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 82
+promotion_receipt_count: 84
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

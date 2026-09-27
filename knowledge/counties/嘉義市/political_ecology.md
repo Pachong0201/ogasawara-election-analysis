@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:11:04+00:00
+生成时间：2026-09-26T21:18:40+00:00
 
 ## 历史政治知识（L2）
 - 嘉義市-population-2025: 截至2025年12月底，嘉義市户籍登记人口为261,592人，较2024年12月底减少585人。（2024-12-31—2025-12-31）
@@ -10,6 +10,7 @@
 
 ## 当前地方关系（L3）
 - ly11-office-嘉義市-王美惠: 王美惠 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260927-15-0: 嘉義市政府 → other → 財團法人現代婦女基金會；status=active_verified；current_use=current_usable；time_scope=2026-03-18
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-f227fe8b61b017a4: 黃宏成台灣阿成世界偉人財神總統；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -56,10 +57,11 @@
 - cec-reg-2026-d7bb0694c056b89e: 孫貫志；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260927-15-0: 2026-03-18 官方正文记录嘉义市以两场分享推动女性培力、STEM 学习及青年公共参与；这里只确认活动与政策主题，不推定性别平等或学习成果已改善。；current_use=current_usable；date=2026-03-18；time_scope=2026-03-18
 
 ## 人物—组织—地区关系索引
 - 王美惠 → office_holding → 立法院第11屆立法委員；region=嘉義市；current_use=current_usable
+- 嘉義市政府 → other → 財團法人現代婦女基金會；region=嘉義市；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 嘉義市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）

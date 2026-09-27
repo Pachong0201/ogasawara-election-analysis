@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T12:11:05+00:00
+生成时间：2026-09-26T21:18:40+00:00
 
 ## 历史政治知识（L2）
 - 嘉義縣-population-2025: 截至2025年12月底，嘉義縣户籍登记人口为473,181人，较2024年12月底减少5,605人。（2024-12-31—2025-12-31）
@@ -11,6 +11,7 @@
 ## 当前地方关系（L3）
 - ly11-office-嘉義縣-蔡易餘: 蔡易餘 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - ly11-office-嘉義縣-陳冠廷: 陳冠廷 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
+- official-event-20260927-14-0: 嘉義縣社會局 → public_service_network → 社團法人嘉義縣慈善團體聯合協會；status=active_verified；current_use=current_usable；time_scope=2026-09-18
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-c41aa66b0398c28e: 吳品叡；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -70,11 +71,12 @@
 - cec-reg-2026-6cede212ec669698: 武清山；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
 
 ## 当前地方议题（L3）
-- 暂无已晋升地方议题。
+- official-issue-20260927-14-0: 2026-09-18 官方正文及独立媒体正文记录嘉义县物资银行已运作近 14 年，并由政府与民间慈善团体共同办理公益活动；这里只确认制度与活动存在，不推定涵盖率或脱贫成效。；current_use=current_usable；date=2026-09-18；time_scope=2026-09-18
 
 ## 人物—组织—地区关系索引
 - 蔡易餘 → office_holding → 立法院第11屆立法委員；region=嘉義縣；current_use=current_usable
 - 陳冠廷 → office_holding → 立法院第11屆立法委員；region=嘉義縣；current_use=current_usable
+- 嘉義縣社會局 → public_service_network → 社團法人嘉義縣慈善團體聯合協會；region=嘉義縣；current_use=current_usable
 
 ## 尚未解决的检索问题
 - 嘉義縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
