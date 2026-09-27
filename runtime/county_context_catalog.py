@@ -239,7 +239,52 @@ class CountyContextCatalog:
             counts[county] = len(leads)
         return {"counties": counts, "lead_count": sum(counts.values())}
 
-    def import_file(self, source_id: str, path: Path) -> Dict[str, Any]:
+    @staticmethod
+    def _merge_source_records(
+        existing: Iterable[Dict[str, Any]],
+        incoming: Iterable[Dict[str, Any]],
+        source_id: str,
+    ) -> List[Dict[str, Any]]:
+        """Replace only ``source_id`` records and keep every other source.
+
+        Re-importing the same source is idempotent because records are keyed by
+        ``source_id`` and sorted deterministically; records removed from the
+        newest official file therefore do not linger.
+        """
+        kept = [
+            row
+            for row in existing
+            if str(row.get("source_id") or "").strip() != source_id
+        ]
+        merged = kept + list(incoming)
+        merged.sort(
+            key=lambda row: (
+                str(row.get("source_id") or ""),
+                int(row.get("source_row") or 0),
+                str(row.get("record_id") or ""),
+            )
+        )
+        return merged
+
+    def _kind_county_files(self, kind: str) -> Dict[str, Path]:
+        root = self.repo_root / "data" / "context"
+        files: Dict[str, Path] = {}
+        if not root.exists():
+            return files
+        for path in sorted(root.glob(f"*/{kind}.jsonl")):
+            if path.parent.name == "_unmapped":
+                continue
+            files[path.parent.name] = path
+        return files
+
+    def import_file(
+        self,
+        source_id: str,
+        path: Path,
+        *,
+        official_source_sha256: Optional[str] = None,
+        diagnostic_note: str = "",
+    ) -> Dict[str, Any]:
         source = next(
             (
                 item for item in (self.config.get("sources") or {}).values()
@@ -251,19 +296,29 @@ class CountyContextCatalog:
             raise ValueError(f"unknown context source_id: {source_id}")
         path = Path(path)
         rows, encoding = load_rows(path)
-        sha = _sha256(path)
+        raw_cache_sha = _sha256(path)
+        source_sha = str(official_source_sha256 or raw_cache_sha).strip().lower()
+        if len(source_sha) != 64 or any(ch not in "0123456789abcdef" for ch in source_sha):
+            raise ValueError("official_source_sha256 must be a 64-character hex digest")
+        try:
+            raw_cache_rel = str(path.resolve().relative_to(self.repo_root.resolve()))
+        except ValueError:
+            raw_cache_rel = str(path.resolve())
+        imported_at = utc_now_iso()
         grouped: Dict[str, List[Dict[str, Any]]] = {county: [] for county in COUNTIES}
         unmapped: List[Dict[str, Any]] = []
         for index, raw in enumerate(rows, start=1):
             counties = _counties_in_row(raw)
             normalized = {
-                "record_id": f"{source_id}:{sha[:12]}:{index}",
+                "record_id": f"{source_id}:{source_sha[:12]}:{index}",
                 "source_id": source_id,
                 "source_grade": source["source_grade"],
                 "dataset_url": source["dataset_url"],
-                "source_sha256": sha,
+                "source_sha256": source_sha,
+                "raw_cache_sha256": raw_cache_sha,
+                "raw_cache_path": raw_cache_rel,
                 "source_row": index,
-                "imported_at": utc_now_iso(),
+                "imported_at": imported_at,
                 "scope_boundary": source.get("scope_boundary") or "",
                 "raw": raw,
             }
@@ -276,34 +331,94 @@ class CountyContextCatalog:
                 grouped[counties[0]].append(normalized)
             else:
                 normalized["county_candidates"] = counties
+                normalized["unmapped_reason"] = (
+                    "no_county_name_matched" if not counties else "multiple_county_names_matched"
+                )
                 unmapped.append(normalized)
 
         out_root = self.repo_root / "data" / "context"
+        kind = str(source["kind"])
         files: Dict[str, str] = {}
-        for county, county_rows in grouped.items():
-            if not county_rows:
-                continue
-            target = out_root / safe_component(county) / f"{source['kind']}.jsonl"
-            write_jsonl(target, county_rows)
-            files[county] = str(target.relative_to(self.repo_root))
-        if unmapped:
-            target = out_root / "_unmapped" / f"{source['kind']}-{source_id}.jsonl"
-            write_jsonl(target, unmapped)
-            files["_unmapped"] = str(target.relative_to(self.repo_root))
+        retained_by_county: Dict[str, int] = {}
+        replaced_source_rows = 0
+        for county in COUNTIES:
+            target = out_root / safe_component(county) / f"{kind}.jsonl"
+            existing = load_jsonl(target) if target.exists() else []
+            replaced_source_rows += sum(
+                1
+                for row in existing
+                if str(row.get("source_id") or "").strip() == source_id
+            )
+            merged = self._merge_source_records(existing, grouped.get(county, []), source_id)
+            if merged:
+                write_jsonl(target, merged)
+                files[county] = str(target.relative_to(self.repo_root))
+                retained_by_county[county] = len(merged)
+            elif target.exists():
+                target.unlink()
 
+        unmapped_target = out_root / "_unmapped" / f"{kind}-{source_id}.jsonl"
+        existing_unmapped = load_jsonl(unmapped_target) if unmapped_target.exists() else []
+        replaced_source_rows += sum(
+            1
+            for row in existing_unmapped
+            if str(row.get("source_id") or "").strip() == source_id
+        )
+        merged_unmapped = self._merge_source_records(existing_unmapped, unmapped, source_id)
+        if merged_unmapped:
+            write_jsonl(unmapped_target, merged_unmapped)
+            files["_unmapped"] = str(unmapped_target.relative_to(self.repo_root))
+        elif unmapped_target.exists():
+            unmapped_target.unlink()
+
+        retained_by_source: Dict[str, int] = {}
+        retained_total = 0
+        for county, count in retained_by_county.items():
+            target = out_root / safe_component(county) / f"{kind}.jsonl"
+            for row in load_jsonl(target):
+                sid = str(row.get("source_id") or "unknown")
+                retained_by_source[sid] = retained_by_source.get(sid, 0) + 1
+                retained_total += 1
+        for row in load_jsonl(unmapped_target):
+            sid = str(row.get("source_id") or "unknown")
+            retained_by_source[sid] = retained_by_source.get(sid, 0) + 1
+            retained_total += 1
+
+        mapped_row_count = sum(len(value) for value in grouped.values())
+        reconciliation = {
+            "input_row_count": len(rows),
+            "mapped_row_count": mapped_row_count,
+            "unmapped_row_count": len(unmapped),
+            "replaced_source_row_count": replaced_source_rows,
+            "retained_row_count": retained_total,
+            "retained_unmapped_row_count": len(merged_unmapped),
+            "retained_county_file_count": len(
+                [key for key in files if key != "_unmapped"]
+            ),
+            "retained_by_source": dict(sorted(retained_by_source.items())),
+            "retained_by_county": retained_by_county,
+            "input_accounted": mapped_row_count + len(unmapped) == len(rows),
+        }
         manifest = {
             "source_id": source_id,
-            "kind": source["kind"],
+            "kind": kind,
             "dataset_url": source["dataset_url"],
             "source_path": str(path.resolve()),
-            "source_sha256": sha,
+            "source_sha256": source_sha,
+            "raw_cache_sha256": raw_cache_sha,
+            "raw_cache_path": raw_cache_rel,
             "source_size": path.stat().st_size,
             "encoding": encoding,
             "input_row_count": len(rows),
-            "mapped_row_count": sum(len(value) for value in grouped.values()),
+            "mapped_row_count": mapped_row_count,
             "unmapped_row_count": len(unmapped),
+            "replaced_source_row_count": replaced_source_rows,
+            "retained_row_count": retained_total,
+            "retained_by_source": dict(sorted(retained_by_source.items())),
+            "retained_by_county": retained_by_county,
             "county_file_count": len([key for key in files if key != "_unmapped"]),
             "files": files,
+            "reconciliation": reconciliation,
             "diagnostic": {
                 "field_names": sorted(
                     {
@@ -313,8 +428,9 @@ class CountyContextCatalog:
                     }
                 )[:80],
                 "sample_rows": rows[:3],
+                "note": diagnostic_note,
             },
-            "imported_at": utc_now_iso(),
+            "imported_at": imported_at,
         }
         manifest_path = self.repo_root / "data" / "manifests" / f"context_{source_id}.json"
         manifest_path.parent.mkdir(parents=True, exist_ok=True)
@@ -331,6 +447,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--counties")
     parser.add_argument("--source-id")
     parser.add_argument("--file", type=Path)
+    parser.add_argument(
+        "--official-sha256",
+        default="",
+        help="preserve the original official payload hash when importing a recovered raw cache",
+    )
+    parser.add_argument("--diagnostic-note", default="")
     args = parser.parse_args(argv)
     catalog = CountyContextCatalog(args.repo_root)
     result: Dict[str, Any]
@@ -340,7 +462,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         ]
         result = catalog.stage(counties)
     elif args.source_id and args.file:
-        result = catalog.import_file(args.source_id, args.file)
+        result = catalog.import_file(
+            args.source_id,
+            args.file,
+            official_source_sha256=args.official_sha256 or None,
+            diagnostic_note=args.diagnostic_note,
+        )
         if result["mapped_row_count"] == 0:
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 3
