@@ -12,10 +12,9 @@ from .article_body import _NoRedirect
 from .news_utils import retry_seconds
 
 
-# Keep planning bounded, but do not impose a client-side token ceiling on the
-# review stage. Reasoning models share this field between hidden reasoning and
-# the JSON answer, so a 5,000-token cap repeatedly truncated valid reviews.
-MODEL_MAX_TOKENS = {"plan": 2500}
+# Do not impose client-side token ceilings on plan or review. Reasoning models
+# share this field between hidden reasoning and the JSON answer, so stage caps
+# can truncate otherwise valid structured responses.
 MODEL_TOKEN_RESERVATION = {"plan": 2500, "review": 16000}
 
 
@@ -116,7 +115,6 @@ class GoModel:
     def complete(self, payload, session, timeout=20):
         # Respect the caller's remaining deadline and stay below the 120s lease.
         timeout = max(1, min(105, timeout))
-        stage = str(payload.get('stage') or '')
         request_payload = {
             'model': self.config.model, 'messages': [
                 {'role': 'system', 'content': SYSTEM},
@@ -124,8 +122,6 @@ class GoModel:
             ], 'temperature': 0.1,
             'response_format': {'type': 'json_object'},
         }
-        if stage in MODEL_MAX_TOKENS:
-            request_payload['max_tokens'] = MODEL_MAX_TOKENS[stage]
         raw = self.transport(
             self.config.base_url + '/chat/completions', self.config.api_key,
             request_payload, timeout, {'x-opencode-session': session},

@@ -112,7 +112,7 @@ def test_go_respects_remaining_deadline_and_reserves_thinking_output():
     GoModel(config(), transport).complete({'stage': 'plan'}, 'test', 5)
     GoModel(config(), transport).complete({'stage': 'review'}, 'test', 200)
     assert calls[0][3] == 5
-    assert calls[0][2]['max_tokens'] == 2500
+    assert 'max_tokens' not in calls[0][2]
     assert calls[1][3] == 105
     assert 'max_tokens' not in calls[1][2]
     assert 'thinking' not in calls[0][2]  # GLM-5.3 forces thinking.
