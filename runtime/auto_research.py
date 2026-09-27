@@ -104,7 +104,10 @@ class ResearchWorker:
     def _model(self, job, state, payload):
         state['active_stage'] = 'model_' + str(payload.get('stage') or 'unknown')
         self.store.checkpoint(job, state)
-        timeout = self._remaining(75)
+        # Match GoModel's 105-second provider lease. With client-side token
+        # ceilings removed, reasoning responses may legitimately need more
+        # than the previous 75-second call window.
+        timeout = self._remaining(105)
         # UTF-8 bytes are a conservative token reservation for these text requests.
         reserve = len((SYSTEM + dumps(payload)).encode()) + MODEL_TOKEN_RESERVATION.get(
             str(payload.get('stage') or ''), 12000
