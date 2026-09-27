@@ -1,64 +1,100 @@
 {
-  "generated_at": "2026-09-26T15:39:41+00:00",
+  "generated_at": "2026-09-27T03:38:07+00:00",
   "county_count": 5,
   "covered_county_count": 0,
-  "finding_count": 0,
+  "finding_count": 3,
   "proposal_count": 0,
   "promoted_count": 0,
-  "rejected_count": 0,
-  "failure_count": 0,
+  "rejected_count": 3,
+  "failure_count": 3,
   "results": [
     {
       "county": "嘉義市",
-      "primary_status": "retry_pending",
-      "counter_status": "not_needed",
-      "finding_count": 0,
+      "primary_status": "completed",
+      "counter_status": "partial",
+      "primary_search_count": 5,
+      "primary_body_count": 7,
+      "counter_search_count": 4,
+      "counter_body_count": 8,
+      "finding_count": 1,
       "proposal_count": 0,
       "promoted_count": 0,
-      "rejected_count": 0,
-      "last_error": "provider_transport_or_json_error"
+      "rejected_count": 1,
+      "counter_check_completed": false,
+      "counter_update_finding_count": 0,
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
     },
     {
       "county": "嘉義縣",
-      "primary_status": "retry_pending",
+      "primary_status": "completed",
       "counter_status": "not_needed",
       "finding_count": 0,
       "proposal_count": 0,
       "promoted_count": 0,
       "rejected_count": 0,
-      "last_error": "provider_http_429"
+      "last_error": "",
+      "error_stage": ""
     },
     {
       "county": "台南市",
-      "primary_status": "retry_pending",
-      "counter_status": "not_needed",
-      "finding_count": 0,
+      "primary_status": "completed",
+      "counter_status": "partial",
+      "primary_search_count": 5,
+      "primary_body_count": 6,
+      "counter_search_count": 5,
+      "counter_body_count": 5,
+      "finding_count": 1,
       "proposal_count": 0,
       "promoted_count": 0,
-      "rejected_count": 0,
-      "last_error": "provider_http_429"
+      "rejected_count": 1,
+      "counter_check_completed": false,
+      "counter_update_finding_count": 1,
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
     },
     {
       "county": "高雄市",
-      "primary_status": "retry_pending",
-      "counter_status": "not_needed",
-      "finding_count": 0,
+      "primary_status": "partial",
+      "counter_status": "insufficient_evidence",
+      "primary_search_count": 5,
+      "primary_body_count": 6,
+      "counter_search_count": 5,
+      "counter_body_count": 11,
+      "finding_count": 1,
       "proposal_count": 0,
       "promoted_count": 0,
-      "rejected_count": 0,
-      "last_error": "provider_http_429"
+      "rejected_count": 1,
+      "counter_check_completed": true,
+      "counter_update_finding_count": 0,
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
     },
     {
       "county": "屏東縣",
-      "primary_status": "retry_pending",
+      "primary_status": "completed",
       "counter_status": "not_needed",
       "finding_count": 0,
       "proposal_count": 0,
       "promoted_count": 0,
       "rejected_count": 0,
-      "last_error": "provider_http_429"
+      "last_error": "",
+      "error_stage": ""
     }
   ],
-  "failures": [],
+  "failures": [
+    {
+      "county": "嘉義市",
+      "error": "provider_timeout"
+    },
+    {
+      "county": "台南市",
+      "error": "provider_timeout"
+    },
+    {
+      "county": "高雄市",
+      "error": "provider_timeout"
+    }
+  ],
   "apply": true
 }
