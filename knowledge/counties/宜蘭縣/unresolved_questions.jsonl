@@ -1,3 +1,5 @@
+{"query": "2026年宜蘭縣縣市長候選人吳宗憲是否由中國國民黨推薦登記？", "status": "unresolved_retrieval_leads", "lead_ids": ["cec-party-rec-宜蘭縣-吳宗憲"], "grades": ["A"], "verified_count": 1}
+{"query": "2026年宜蘭縣縣市長候選人林國漳是否由民主進步黨推薦登記？", "status": "unresolved_retrieval_leads", "lead_ids": ["media-party-rec-f73a34844e0ad56c5e9c"], "grades": ["C"], "verified_count": 1}
 {"question_id": "宜蘭縣-01-historical_political_structure", "topic": "historical_political_structure", "query": "宜蘭縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？", "status": "unresolved_no_promoted_evidence", "lead_ids": [], "grades": [], "verified_count": 0}
 {"question_id": "宜蘭縣-02-people", "topic": "people", "query": "宜蘭縣 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？", "status": "unresolved_no_promoted_evidence", "lead_ids": [], "grades": [], "verified_count": 0}
 {"question_id": "宜蘭縣-03-organizations", "topic": "organizations", "query": "宜蘭縣 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？", "status": "unresolved_no_promoted_evidence", "lead_ids": [], "grades": [], "verified_count": 0}

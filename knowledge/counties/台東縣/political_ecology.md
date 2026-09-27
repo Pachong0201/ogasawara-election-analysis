@@ -2,7 +2,7 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T21:18:39+00:00
+生成时间：2026-09-27T03:28:13+00:00
 
 ## 历史政治知识（L2）
 - 台東縣-population-2025: 截至2025年12月底，台東縣户籍登记人口为208,320人，较2024年12月底减少1,899人。（2024-12-31—2025-12-31）
@@ -11,6 +11,7 @@
 ## 当前地方关系（L3）
 - ly11-office-台東縣-黃建賓: 黃建賓 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - official-event-20260927-16-0: 臺東縣政府 → public_service_network → 中福社區發展協會；status=active_verified；current_use=current_usable；time_scope=2025-12-23
+- candidate-party-2026-台東縣-陳瑩-民主進步黨: 陳瑩 → party → 民主進步黨；status=active_verified；current_use=current_usable；time_scope=2026-09-02—2026-11-28
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-8878e5c859542ee4: 陳瑩；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -80,8 +81,10 @@
 ## 人物—组织—地区关系索引
 - 黃建賓 → office_holding → 立法院第11屆立法委員；region=台東縣；current_use=current_usable
 - 臺東縣政府 → public_service_network → 中福社區發展協會；region=台東縣；current_use=current_usable
+- 陳瑩 → party → 民主進步黨；region=台東縣；current_use=current_usable
 
 ## 尚未解决的检索问题
+- 2026年台東縣縣市長候選人吳秀華是否由中國國民黨推薦登記？（leads=1, verified=1）
 - 台東縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
 - 台東縣 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？（leads=0, verified=0）
 - 台東縣 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？（leads=0, verified=0）

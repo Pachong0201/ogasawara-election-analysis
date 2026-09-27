@@ -1,0 +1,132 @@
+{
+  "generated_at": "2026-09-27T03:39:20+00:00",
+  "county_count": 6,
+  "eligible_candidate_count": 11,
+  "proposal_count": 8,
+  "promoted_count": 8,
+  "unresolved_count": 3,
+  "failure_count": 1,
+  "results": [
+    {
+      "county": "宜蘭縣",
+      "candidate_count": 5,
+      "eligible_candidate_count": 2,
+      "research_status": "completed",
+      "search_count": 5,
+      "body_count": 14,
+      "finding_count": 1,
+      "proposal_count": 1,
+      "promoted_count": 1,
+      "unresolved_count": 1,
+      "unresolved": [
+        {
+          "county": "宜蘭縣",
+          "candidate": "吳宗憲",
+          "party": "中國國民黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年宜蘭縣縣市長候選人吳宗憲是否由中國國民黨推薦登記？"
+        }
+      ],
+      "last_error": "",
+      "error_stage": ""
+    },
+    {
+      "county": "花蓮縣",
+      "candidate_count": 4,
+      "eligible_candidate_count": 2,
+      "research_status": "completed",
+      "search_count": 5,
+      "body_count": 10,
+      "finding_count": 1,
+      "proposal_count": 2,
+      "promoted_count": 2,
+      "unresolved_count": 0,
+      "unresolved": [],
+      "last_error": "",
+      "error_stage": ""
+    },
+    {
+      "county": "台東縣",
+      "candidate_count": 4,
+      "eligible_candidate_count": 2,
+      "research_status": "partial",
+      "search_count": 5,
+      "body_count": 12,
+      "finding_count": 1,
+      "proposal_count": 1,
+      "promoted_count": 1,
+      "unresolved_count": 1,
+      "unresolved": [
+        {
+          "county": "台東縣",
+          "candidate": "吳秀華",
+          "party": "中國國民黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年台東縣縣市長候選人吳秀華是否由中國國民黨推薦登記？"
+        }
+      ],
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
+    },
+    {
+      "county": "澎湖縣",
+      "candidate_count": 6,
+      "eligible_candidate_count": 3,
+      "research_status": "completed",
+      "search_count": 5,
+      "body_count": 13,
+      "finding_count": 1,
+      "proposal_count": 3,
+      "promoted_count": 3,
+      "unresolved_count": 0,
+      "unresolved": [],
+      "last_error": "",
+      "error_stage": ""
+    },
+    {
+      "county": "金門縣",
+      "candidate_count": 7,
+      "eligible_candidate_count": 1,
+      "research_status": "completed",
+      "search_count": 5,
+      "body_count": 15,
+      "finding_count": 1,
+      "proposal_count": 1,
+      "promoted_count": 1,
+      "unresolved_count": 0,
+      "unresolved": [],
+      "last_error": "",
+      "error_stage": ""
+    },
+    {
+      "county": "連江縣",
+      "candidate_count": 2,
+      "eligible_candidate_count": 1,
+      "research_status": "insufficient_evidence",
+      "search_count": 5,
+      "body_count": 6,
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "unresolved_count": 1,
+      "unresolved": [
+        {
+          "county": "連江縣",
+          "candidate": "王忠銘",
+          "party": "中國國民黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年連江縣縣市長候選人王忠銘是否由中國國民黨推薦登記？"
+        }
+      ],
+      "last_error": "",
+      "error_stage": ""
+    }
+  ],
+  "failures": [
+    {
+      "county": "台東縣",
+      "error": "provider_timeout"
+    }
+  ],
+  "apply": true
+}
