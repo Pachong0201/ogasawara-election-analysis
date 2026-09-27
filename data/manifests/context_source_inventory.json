@@ -1,5 +1,6 @@
 {
-  "generated_from": "data/manifests/context_source_inventory.json",
+  "generated_from": "scripts/context_source_report.py",
+  "county_count": 22,
   "sources": {
     "dgbas_census_age_structure_2020": {
       "name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
@@ -11,45 +12,47 @@
       "update_frequency": "每10年",
       "configured_timeout_seconds": 180,
       "configured_max_retries": 3,
-      "row_data_state": "catalog_or_failure_only",
-      "counties_with_rows": 0,
-      "missing_counties": [
-        "南投縣",
-        "台中市",
-        "台北市",
-        "台南市",
-        "台東縣",
-        "嘉義市",
-        "嘉義縣",
-        "基隆市",
-        "宜蘭縣",
-        "屏東縣",
-        "彰化縣",
-        "新北市",
-        "新竹市",
-        "新竹縣",
-        "桃園市",
-        "澎湖縣",
-        "花蓮縣",
-        "苗栗縣",
-        "連江縣",
-        "金門縣",
-        "雲林縣",
-        "高雄市"
-      ],
-      "missing_reason": "blocked_source_download_failure",
-      "mapped_rows": 0,
-      "unmapped_rows": 0,
-      "unmapped_reasons": {},
-      "county_rows": {},
-      "manifest_path": "",
-      "imported_at": "",
-      "official_source_sha256": "",
-      "raw_cache_sha256": "",
-      "raw_cache_path": "",
+      "row_data_state": "row_data_available",
+      "counties_with_rows": 22,
+      "missing_counties": [],
+      "missing_reason": "full_county_coverage",
+      "mapped_rows": 22,
+      "unmapped_rows": 10,
+      "unmapped_reasons": {
+        "no_county_name_matched": 10
+      },
+      "county_rows": {
+        "南投縣": 1,
+        "台中市": 1,
+        "台北市": 1,
+        "台南市": 1,
+        "台東縣": 1,
+        "嘉義市": 1,
+        "嘉義縣": 1,
+        "基隆市": 1,
+        "宜蘭縣": 1,
+        "屏東縣": 1,
+        "彰化縣": 1,
+        "新北市": 1,
+        "新竹市": 1,
+        "新竹縣": 1,
+        "桃園市": 1,
+        "澎湖縣": 1,
+        "花蓮縣": 1,
+        "苗栗縣": 1,
+        "連江縣": 1,
+        "金門縣": 1,
+        "雲林縣": 1,
+        "高雄市": 1
+      },
+      "manifest_path": "data/manifests/context_dgbas_census_age_structure_2020.json",
+      "imported_at": "2026-09-27T09:14:32+00:00",
+      "official_source_sha256": "8aefd34ad3180a7c285602e0bf1c72d5da1251365f68c2f9344ccb3aef037a46",
+      "raw_cache_sha256": "8aefd34ad3180a7c285602e0bf1c72d5da1251365f68c2f9344ccb3aef037a46",
+      "raw_cache_path": "cache/raw/context/dgbas_census_age_structure_2020/latest.xml",
       "download_fallback": false,
       "download_error": "",
-      "download_failure": "OfficialContextDownloadError: dgbas_census_age_structure_2020: official resource download failed after 3 attempts: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)>"
+      "download_failure": ""
     },
     "moi_religion_temples": {
       "name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
@@ -99,7 +102,7 @@
       "raw_cache_path": "",
       "download_fallback": false,
       "download_error": "",
-      "download_failure": "OfficialContextDownloadError: moi_religion_temples: official resource download failed after 3 attempts: <urlopen error timed out>"
+      "download_failure": "OfficialContextDownloadError: moi_religion_temples: official resource download failed after 2 attempts: <urlopen error [Errno 110] Connection timed out>"
     },
     "moi_national_social_groups_by_area": {
       "name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
@@ -120,8 +123,8 @@
       "mapped_rows": 22101,
       "unmapped_rows": 1763,
       "unmapped_reasons": {
-        "no_county_name_matched": 1759,
-        "multiple_county_names_matched": 4
+        "multiple_county_names_matched": 4,
+        "no_county_name_matched": 1759
       },
       "county_rows": {
         "南投縣": 294,
@@ -147,7 +150,7 @@
         "高雄市": 1707
       },
       "manifest_path": "data/manifests/context_moi_national_social_groups_by_area.json",
-      "imported_at": "2026-09-27T08:50:15+00:00",
+      "imported_at": "2026-09-27T09:19:01+00:00",
       "official_source_sha256": "47e1fe308f1b64fb8d5ab7217a1c378b93a9e6cafe50a3954c1aa2f764497ebf",
       "raw_cache_sha256": "47e1fe308f1b64fb8d5ab7217a1c378b93a9e6cafe50a3954c1aa2f764497ebf",
       "raw_cache_path": "cache/raw/context/moi_national_social_groups_by_area/latest.csv",
@@ -199,7 +202,7 @@
         "高雄市": 91
       },
       "manifest_path": "data/manifests/context_moa_farmers_association_members.json",
-      "imported_at": "2026-09-27T08:50:20+00:00",
+      "imported_at": "2026-09-27T09:19:02+00:00",
       "official_source_sha256": "9be5a43ebd3477a75e07fe52b20f84a6ab5380694e641b33f6d944030682c72f",
       "raw_cache_sha256": "9be5a43ebd3477a75e07fe52b20f84a6ab5380694e641b33f6d944030682c72f",
       "raw_cache_path": "cache/raw/context/moa_farmers_association_members/latest.json",
@@ -250,7 +253,7 @@
         "高雄市": 84
       },
       "manifest_path": "data/manifests/context_moa_fishermen_association_members.json",
-      "imported_at": "2026-09-27T08:50:22+00:00",
+      "imported_at": "2026-09-27T09:19:02+00:00",
       "official_source_sha256": "13589e8f6d79749920f6ef2ffbc3251b087fcab18a2c8e5f0adaa2d10ed4efb4",
       "raw_cache_sha256": "13589e8f6d79749920f6ef2ffbc3251b087fcab18a2c8e5f0adaa2d10ed4efb4",
       "raw_cache_path": "cache/raw/context/moa_fishermen_association_members/latest.json",

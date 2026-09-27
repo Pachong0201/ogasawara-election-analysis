@@ -83,6 +83,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/基隆市/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/基隆市/civil_associations.jsonl",
               "record_count": 176,
@@ -101,6 +109,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -110,7 +119,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -137,8 +146,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -158,7 +167,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -243,6 +251,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/台北市/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/台北市/civil_associations.jsonl",
               "record_count": 8163,
@@ -260,6 +276,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moi_national_social_groups_by_area"
           ],
@@ -268,7 +285,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -295,8 +312,8 @@
               "state": "source_catalog_only"
             }
           ],
-          "row_data_source_count": 2,
-          "catalog_only_source_count": 3
+          "row_data_source_count": 3,
+          "catalog_only_source_count": 2
         }
       },
       "dynamic_local_state": {
@@ -316,7 +333,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_fishermen_association_members"
       ]
@@ -400,6 +416,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/新北市/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/新北市/civil_associations.jsonl",
               "record_count": 4042,
@@ -418,6 +442,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -427,7 +452,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -454,8 +479,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -476,7 +501,6 @@
       },
       "unresolved_question_count": 7,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -561,6 +585,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/桃園市/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/桃園市/civil_associations.jsonl",
               "record_count": 1528,
@@ -579,6 +611,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -588,7 +621,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -615,8 +648,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -636,7 +669,6 @@
       },
       "unresolved_question_count": 8,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -721,6 +753,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/新竹市/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/新竹市/civil_associations.jsonl",
               "record_count": 274,
@@ -739,6 +779,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -748,7 +789,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -775,8 +816,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -796,7 +837,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -881,6 +921,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/新竹縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/新竹縣/civil_associations.jsonl",
               "record_count": 308,
@@ -898,6 +946,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moi_national_social_groups_by_area"
           ],
@@ -906,7 +955,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -933,8 +982,8 @@
               "state": "source_catalog_only"
             }
           ],
-          "row_data_source_count": 2,
-          "catalog_only_source_count": 3
+          "row_data_source_count": 3,
+          "catalog_only_source_count": 2
         }
       },
       "dynamic_local_state": {
@@ -954,7 +1003,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_fishermen_association_members"
       ]
@@ -1040,6 +1088,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/苗栗縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/苗栗縣/civil_associations.jsonl",
               "record_count": 213,
@@ -1058,6 +1114,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -1067,7 +1124,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -1094,8 +1151,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -1115,7 +1172,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -1200,6 +1256,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/台中市/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/台中市/civil_associations.jsonl",
               "record_count": 2751,
@@ -1218,6 +1282,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -1227,7 +1292,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -1254,8 +1319,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -1276,7 +1341,6 @@
       },
       "unresolved_question_count": 8,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -1361,6 +1425,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/彰化縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/彰化縣/civil_associations.jsonl",
               "record_count": 461,
@@ -1379,6 +1451,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -1388,7 +1461,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -1415,8 +1488,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -1437,7 +1510,6 @@
       },
       "unresolved_question_count": 10,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -1522,6 +1594,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/南投縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/南投縣/civil_associations.jsonl",
               "record_count": 294,
@@ -1540,6 +1620,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -1549,7 +1630,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -1576,8 +1657,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -1598,7 +1679,6 @@
       },
       "unresolved_question_count": 10,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -1683,6 +1763,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/雲林縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/雲林縣/civil_associations.jsonl",
               "record_count": 212,
@@ -1701,6 +1789,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -1710,7 +1799,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -1737,8 +1826,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -1758,7 +1847,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -1843,6 +1931,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/嘉義市/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/嘉義市/civil_associations.jsonl",
               "record_count": 182,
@@ -1860,6 +1956,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moi_national_social_groups_by_area"
           ],
@@ -1868,7 +1965,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -1895,8 +1992,8 @@
               "state": "source_catalog_only"
             }
           ],
-          "row_data_source_count": 2,
-          "catalog_only_source_count": 3
+          "row_data_source_count": 3,
+          "catalog_only_source_count": 2
         }
       },
       "dynamic_local_state": {
@@ -1916,7 +2013,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moa_fishermen_association_members"
       ]
@@ -2002,6 +2098,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/嘉義縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/嘉義縣/civil_associations.jsonl",
               "record_count": 141,
@@ -2020,6 +2124,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -2029,7 +2134,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -2056,8 +2161,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -2077,7 +2182,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -2160,6 +2264,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/台南市/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/台南市/civil_associations.jsonl",
               "record_count": 867,
@@ -2178,6 +2290,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -2187,7 +2300,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -2214,8 +2327,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -2236,7 +2349,6 @@
       },
       "unresolved_question_count": 7,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -2319,6 +2431,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/高雄市/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/高雄市/civil_associations.jsonl",
               "record_count": 1707,
@@ -2337,6 +2457,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -2346,7 +2467,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -2373,8 +2494,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -2395,7 +2516,6 @@
       },
       "unresolved_question_count": 6,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -2480,6 +2600,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/屏東縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/屏東縣/civil_associations.jsonl",
               "record_count": 276,
@@ -2498,6 +2626,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -2507,7 +2636,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -2534,8 +2663,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -2555,7 +2684,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -2640,6 +2768,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/宜蘭縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/宜蘭縣/civil_associations.jsonl",
               "record_count": 201,
@@ -2658,6 +2794,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -2667,7 +2804,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -2694,8 +2831,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -2716,7 +2853,6 @@
       },
       "unresolved_question_count": 11,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -2801,6 +2937,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/花蓮縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/花蓮縣/civil_associations.jsonl",
               "record_count": 167,
@@ -2819,6 +2963,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -2828,7 +2973,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -2855,8 +3000,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -2877,7 +3022,6 @@
       },
       "unresolved_question_count": 11,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -2962,6 +3106,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/台東縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/台東縣/civil_associations.jsonl",
               "record_count": 99,
@@ -2980,6 +3132,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -2989,7 +3142,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -3016,8 +3169,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -3038,7 +3191,6 @@
       },
       "unresolved_question_count": 10,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -3123,6 +3275,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/澎湖縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/澎湖縣/civil_associations.jsonl",
               "record_count": 17,
@@ -3141,6 +3301,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -3150,7 +3311,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -3177,8 +3338,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -3199,7 +3360,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -3284,6 +3444,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/金門縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "civil_associations",
               "path": "data/context/金門縣/civil_associations.jsonl",
               "record_count": 22,
@@ -3302,6 +3470,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members",
             "moi_national_social_groups_by_area"
@@ -3311,7 +3480,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -3338,8 +3507,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 3,
-          "catalog_only_source_count": 2
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
         }
       },
       "dynamic_local_state": {
@@ -3360,7 +3529,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples"
       ]
     },
@@ -3445,6 +3613,14 @@
         "official_social_context": {
           "files": [
             {
+              "kind": "age_structure",
+              "path": "data/context/連江縣/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
               "kind": "farmers_fishermen_associations",
               "path": "data/context/連江縣/farmers_fishermen_associations.jsonl",
               "record_count": 175,
@@ -3455,6 +3631,7 @@
             }
           ],
           "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
             "moa_farmers_association_members",
             "moa_fishermen_association_members"
           ],
@@ -3463,7 +3640,7 @@
               "source_id": "dgbas_census_age_structure_2020",
               "kind": "age_structure",
               "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
-              "state": "source_catalog_only"
+              "state": "row_data_available"
             },
             {
               "source_id": "moi_religion_temples",
@@ -3490,8 +3667,8 @@
               "state": "row_data_available"
             }
           ],
-          "row_data_source_count": 2,
-          "catalog_only_source_count": 3
+          "row_data_source_count": 3,
+          "catalog_only_source_count": 2
         }
       },
       "dynamic_local_state": {
@@ -3511,7 +3688,6 @@
       },
       "unresolved_question_count": 9,
       "gaps": [
-        "context_catalog_only:dgbas_census_age_structure_2020",
         "context_catalog_only:moi_religion_temples",
         "context_catalog_only:moi_national_social_groups_by_area"
       ]
