@@ -1,64 +1,92 @@
 {
-  "generated_at": "2026-09-26T14:45:07+00:00",
+  "generated_at": "2026-09-27T03:00:33+00:00",
   "county_count": 5,
   "covered_county_count": 0,
-  "finding_count": 0,
-  "proposal_count": 0,
+  "finding_count": 3,
+  "proposal_count": 1,
   "promoted_count": 0,
-  "rejected_count": 0,
-  "failure_count": 0,
+  "rejected_count": 2,
+  "failure_count": 1,
   "results": [
     {
       "county": "苗栗縣",
-      "primary_status": "retry_pending",
-      "counter_status": "not_needed",
-      "finding_count": 0,
-      "proposal_count": 0,
+      "primary_status": "completed",
+      "counter_status": "completed",
+      "primary_search_count": 5,
+      "primary_body_count": 4,
+      "counter_search_count": 5,
+      "counter_body_count": 7,
+      "finding_count": 1,
+      "proposal_count": 1,
       "promoted_count": 0,
       "rejected_count": 0,
-      "last_error": "provider_transport_or_json_error"
+      "counter_check_completed": false,
+      "counter_update_finding_count": 1,
+      "last_error": "",
+      "error_stage": ""
     },
     {
       "county": "台中市",
-      "primary_status": "retry_pending",
-      "counter_status": "not_needed",
-      "finding_count": 0,
+      "primary_status": "completed",
+      "counter_status": "completed",
+      "primary_search_count": 5,
+      "primary_body_count": 8,
+      "counter_search_count": 5,
+      "counter_body_count": 10,
+      "finding_count": 1,
       "proposal_count": 0,
       "promoted_count": 0,
-      "rejected_count": 0,
-      "last_error": "provider_transport_or_json_error"
+      "rejected_count": 1,
+      "counter_check_completed": false,
+      "counter_update_finding_count": 1,
+      "last_error": "",
+      "error_stage": ""
     },
     {
       "county": "彰化縣",
-      "primary_status": "retry_pending",
-      "counter_status": "not_needed",
-      "finding_count": 0,
+      "primary_status": "completed",
+      "counter_status": "completed",
+      "primary_search_count": 5,
+      "primary_body_count": 12,
+      "counter_search_count": 5,
+      "counter_body_count": 4,
+      "finding_count": 1,
       "proposal_count": 0,
       "promoted_count": 0,
-      "rejected_count": 0,
-      "last_error": "invalid_model_json"
+      "rejected_count": 1,
+      "counter_check_completed": false,
+      "counter_update_finding_count": 1,
+      "last_error": "",
+      "error_stage": ""
     },
     {
       "county": "南投縣",
-      "primary_status": "retry_pending",
+      "primary_status": "partial",
       "counter_status": "not_needed",
       "finding_count": 0,
       "proposal_count": 0,
       "promoted_count": 0,
       "rejected_count": 0,
-      "last_error": "provider_transport_or_json_error"
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
     },
     {
       "county": "雲林縣",
-      "primary_status": "retry_pending",
+      "primary_status": "completed",
       "counter_status": "not_needed",
       "finding_count": 0,
       "proposal_count": 0,
       "promoted_count": 0,
       "rejected_count": 0,
-      "last_error": "invalid_model_json"
+      "last_error": "",
+      "error_stage": ""
     }
   ],
-  "failures": [],
+  "failures": [
+    {
+      "county": "南投縣",
+      "error": "provider_timeout"
+    }
+  ],
   "apply": true
 }
