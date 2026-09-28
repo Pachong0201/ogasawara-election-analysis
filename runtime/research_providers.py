@@ -118,7 +118,7 @@ review 階段輸出 {"findings":[{"question":"所回答的 task.questions 中的
 "statement":"該來源報導了什麼（不作因果推定）",
 "citations":[{"url":"提供的原始網址","quote":"正文中連續、逐字的引文"}]}],
 "unresolved":["仍缺哪些證據"],"queries":[{"query":"補搜文字","purpose":"news或background"}]}。
-findings 不得超過 max_findings；整個 JSON 應少於 1800 個中文字，quote 各取 16–120 字即可；不得輸出思考過程。
+findings 不得超過 max_findings；整個 JSON 應少於 5000 個中文字，quote 各取 16–120 字即可；不得輸出思考過程。
 只能引用 evidence 中的正文；摘要及搜尋標題不可作證據。不得把轉載視為獨立佐證。
 單一來源、陣營主張、互相矛盾必須說明；未找到證據不等於事情沒有發生。
 逐項處理 task.questions；未被正文回答的問題必須列入 unresolved，不可用一般新聞摘要代替回答。
