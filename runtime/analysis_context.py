@@ -28,6 +28,7 @@ class AnalysisContextBuilder:
         campaign_state: Optional[Dict[str, Any]] = None,
         polls: Optional[List[Dict[str, Any]]] = None,
         evidence_summary: Optional[Dict[str, Any]] = None,
+        assessment: Optional[Dict[str, Any]] = None,
         unknowns: Optional[List[str]] = None,
         warnings: Optional[List[str]] = None,
         sources: Optional[List[Dict[str, Any]]] = None,
@@ -45,6 +46,7 @@ class AnalysisContextBuilder:
         campaign_state = campaign_state or {}
         polls = polls or []
         evidence_summary = evidence_summary or {}
+        assessment = assessment or {}
         unknowns = unknowns or []
         warnings = warnings or []
         sources = sources or []
@@ -109,6 +111,7 @@ class AnalysisContextBuilder:
             "same_series_poll_changes": campaign_state.get("same_series_poll_changes", []),
             "polls": polls,
             "evidence_summary": evidence_summary,
+            "assessment": assessment,
             "unknowns": unknowns,
             "warnings": warnings,
             "sources": sources,
@@ -132,6 +135,11 @@ class AnalysisContextBuilder:
             "warnings": warnings,
             "campaign_event_resolution": campaign_event_resolution.get("stats", {}),
             "event_importance_signal_count": len(event_importance_signals),
+            "assessment": {
+                "version": assessment.get("version"),
+                "dynamic_count": len(assessment.get("current_dynamics") or []),
+                "evidence_pack_count": len(assessment.get("evidence_pack") or []),
+            },
         }
         return AnalysisContext(analysis_context=context, analysis_manifest=manifest)
 
