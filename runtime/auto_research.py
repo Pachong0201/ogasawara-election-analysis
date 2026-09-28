@@ -173,22 +173,30 @@ class ResearchWorker:
         return output
 
     def _model(self, job, state, payload):
-        state['active_stage'] = 'model_' + str(payload.get('stage') or 'unknown')
+        stage = str(payload.get('stage') or 'unknown')
+        state['active_stage'] = 'model_' + stage
         self.store.checkpoint(job, state)
         # Match GoModel's 105-second provider lease. With client-side token
         # ceilings removed, reasoning responses may legitimately need more
         # than the previous 75-second call window.
         timeout = self._remaining(105)
+        model_name = (
+            self.config.planner_model
+            if stage == 'research_planner' and self.config.planner_model
+            else self.config.model
+        )
+        model_payload = dict(payload)
+        model_payload['_model'] = model_name
         # UTF-8 bytes are a conservative token reservation for these text requests.
-        reserve = len((SYSTEM + dumps(payload)).encode()) + MODEL_TOKEN_RESERVATION.get(
-            str(payload.get('stage') or ''), 12000
+        reserve = len((SYSTEM + dumps(model_payload)).encode()) + MODEL_TOKEN_RESERVATION.get(
+            stage, 12000
         )
         call = self.store.reserve_call(job, 'model', reserve, self.config.daily_tokens,
-                                       {'stage': payload['stage'], 'model': self.config.model})
+                                       {'stage': stage, 'model': model_name})
         if call is None:
             raise ProviderError('daily_model_budget', 86400 - time.time() % 86400)
         try:
-            output, tokens = self.model.complete(payload, f'ogasawara-research-{job["id"]}', timeout)
+            output, tokens = self.model.complete(model_payload, f'ogasawara-research-{job["id"]}', timeout)
             self.store.finish_call(call, 'ok', tokens)
             state['model_tokens'] = state.get('model_tokens', 0) + tokens
             return output
