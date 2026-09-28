@@ -438,52 +438,70 @@ class AnalysisPipeline:
         importance_signals = event_importance_signals(events, local_knowledge)
         local_knowledge["event_importance_signals"] = importance_signals
         if research_prepass:
-            draft_assessment = self.assessment_builder.build(
-                campaign_state=campaign_state,
-                current_events=events,
-                campaign_event_resolution=campaign_event_resolution,
-                metrics=metrics,
-                polls=polls,
-                research_result={"status": "not_started", "round_name": "draft"},
-                unknowns=[],
-                warnings=list(campaign_retrieval_warnings),
-                local_knowledge=local_knowledge,
-                historical_baseline={
-                    "historical_matrix": historical_matrix,
-                    "cross_level_matrix": cross_level_matrix,
-                },
-                current_candidates=current_candidates,
-                task=task.to_dict(),
-            )
-            assessment_questions = [
-                str(item.get("question") or "")
-                for item in draft_assessment.get("follow_up_questions") or []
-                if str(item.get("question") or "").strip()
+            candidate_names = [
+                str(row.get('candidate_name') or row.get('name') or row.get('姓名') or '')
+                for row in current_candidates
+                if str(row.get('candidate_name') or row.get('name') or row.get('姓名') or '').strip()
             ]
-            bounded_questions = list(dict.fromkeys(assessment_questions + questions))[:6]
+            research_seed = {
+                "jurisdiction": task.jurisdiction,
+                "historical_anomalies": [dict(row) for row in triggered[:12] if isinstance(row, dict)],
+                "campaign_change_reasons": list(campaign_state.get("campaign_change_reasons") or [])[:8],
+                "current_events": [
+                    {
+                        "date": row.get("date") or row.get("page_date"),
+                        "event_type": row.get("event_type") or row.get("claim_type"),
+                        "actors": row.get("candidate_entities") or row.get("actors") or [],
+                        "locations": row.get("locations") or [],
+                        "summary": str(row.get("summary") or row.get("evidence_excerpt") or "")[:500],
+                        "verification_status": row.get("verification_status"),
+                    }
+                    for row in resolved_events[:12] if isinstance(row, dict)
+                ],
+                "local_relationships": list(local_knowledge.get("relationships") or [])[:12],
+                "local_issues": list(local_knowledge.get("issues") or [])[:10],
+                "existing_questions": questions[:8],
+                "poll_state": {
+                    "fresh_verified_poll_count": campaign_state.get("fresh_verified_poll_count", 0),
+                    "same_series_changes": list(campaign_state.get("same_series_poll_changes") or [])[:6],
+                },
+            }
+            planner_result = {"status": "unavailable", "research_questions": [], "planner_hypotheses": []}
             try:
-                candidate_names = [
-                    str(row.get('candidate_name') or row.get('name') or row.get('姓名') or '')
-                    for row in current_candidates
+                planner = getattr(coordinator, "plan_questions", None)
+                if callable(planner):
+                    planner_result = dict(planner(task, research_seed, candidate_names) or {})
+                planner_questions = [
+                    str(item.get("question") or "").strip()
+                    for item in planner_result.get("research_questions") or []
+                    if isinstance(item, dict) and str(item.get("question") or "").strip()
                 ]
-                assessment_research = getattr(coordinator, "research_assessment_followup", None)
-                if callable(assessment_research):
-                    result = assessment_research(task, bounded_questions, candidate_names)
-                else:
-                    result = coordinator.research(task, bounded_questions, candidate_names)
-                result = dict(result or {})
-                result["round_name"] = "assessment_follow_up"
+                bounded_questions = list(dict.fromkeys(planner_questions + questions))[:6]
+                if not bounded_questions:
+                    bounded_questions = [
+                        f"{task.jurisdiction}最近30日候選人競選活動、地方組織互動與主要議題有哪些可核驗變化？"
+                    ]
+                result = dict(coordinator.research(task, bounded_questions, candidate_names) or {})
+                result["round_name"] = "planner_research"
                 result["follow_up_questions"] = bounded_questions
+                result["planner"] = planner_result
             except Exception as exc:
                 result = {
-                    'status': 'failed', 'last_error': type(exc).__name__,
-                    'round_name': 'assessment_follow_up',
-                    'follow_up_questions': bounded_questions,
+                    "status": "failed",
+                    "last_error": type(exc).__name__,
+                    "round_name": "planner_research",
+                    "follow_up_questions": questions[:6],
+                    "planner": planner_result,
                 }
-            # Freeze the evidence cutoff only AFTER bounded collection. Explicit
-            # as_of replays never enter this branch and never advance their cutoff.
-            return self.run(task, allow_online=allow_online, write_manifest=write_manifest,
-                            manifest_path=manifest_path, _research_result=result)
+            # Freeze the evidence cutoff only AFTER planner-led bounded collection.
+            # Explicit as_of replays never enter this branch.
+            return self.run(
+                task,
+                allow_online=allow_online,
+                write_manifest=write_manifest,
+                manifest_path=manifest_path,
+                _research_result=result,
+            )
         if _research_result is not None:
             local_knowledge['automatic_research'] = _research_result
         retrieval_metadata = (
