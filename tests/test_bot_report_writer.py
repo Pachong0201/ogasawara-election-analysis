@@ -5,6 +5,7 @@ from bot.report_writer import (
     ChatCompletionsReportWriter,
     DeterministicReportWriter,
     _analysis_payload,
+    _reader_payload,
     build_report_writer,
 )
 from bot.router import FULL_ANALYSIS
@@ -129,6 +130,26 @@ class TestDeterministicReportWriter(unittest.IsolatedAsyncioTestCase):
             payload["assessment"]["evidence_pack"][0]["excerpt"],
             "正文证据",
         )
+
+    async def test_reader_payload_hides_legacy_assessment_from_llm(self):
+        context = {
+            "analysis_context": {
+                "research_brief": {"version": 1, "core_facts": [{"statement": "fact"}]},
+                "assessment": {"version": 2, "key_variables": [{"name": "legacy"}]},
+                "historical_baseline": {"raw": "legacy"},
+                "current_events": [{"event_id": "e1", "evidence_excerpt": "bounded"}],
+                "sources": [{"source_id": "s1", "source_grade": "A"}],
+                "unknowns": ["gap"],
+            },
+            "analysis_manifest": {},
+        }
+        payload = _reader_payload(context)
+        self.assertEqual(payload["research_brief"]["version"], 1)
+        self.assertNotIn("assessment", payload)
+        self.assertNotIn("final_assessment", payload)
+        self.assertNotIn("historical_baseline", payload)
+        self.assertIn("bounded_evidence_excerpts", payload)
+
 
 
 def test_deepseek_uses_chat_completions_writer():
