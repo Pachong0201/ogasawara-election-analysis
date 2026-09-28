@@ -321,6 +321,27 @@ class ResearchWorker:
                 rejected += 1
         return findings, rejected
 
+    @staticmethod
+    def validate_hypothesis_review(output, evidence):
+        """Keep analytical hypotheses bounded to URLs that were actually read."""
+        known = {row.get('url') for row in evidence if isinstance(row, dict) and row.get('url')}
+        result = []
+        raw_rows = output.get('hypothesis_review')
+        for row in raw_rows[:8] if isinstance(raw_rows, list) else []:
+            if not isinstance(row, dict) or not isinstance(row.get('hypothesis'), str):
+                continue
+            supporting = [str(url) for url in row.get('supporting_urls') or [] if str(url) in known][:6]
+            counter = [str(url) for url in row.get('counter_urls') or [] if str(url) in known][:6]
+            result.append({
+                'hypothesis': row['hypothesis'].strip()[:500],
+                'supporting_urls': supporting,
+                'counter_urls': counter,
+                'alternative_explanations': strings(row.get('alternative_explanations', []), 6),
+                'followup_question': str(row.get('followup_question') or '')[:500],
+                'status': 'evidence_present' if supporting else 'insufficient_evidence',
+            })
+        return result
+
     def tick(self, job_id=None):
         if not self.config.enabled:
             return {'status': 'disabled'}
@@ -334,7 +355,7 @@ class ResearchWorker:
         state.update(status='running', model=self.config.model, search_provider='tavily')
         state.pop('last_error', None)
         state.pop('error_stage', None)
-        for key, default in [('articles', []), ('evidence', []), ('completed_queries', []), ('search_results', {}), ('findings', []), ('unresolved', [])]:
+        for key, default in [('articles', []), ('evidence', []), ('completed_queries', []), ('search_results', {}), ('findings', []), ('unresolved', []), ('hypothesis_review', [])]:
             state.setdefault(key, default)
         task = dict(job['payload'])
         task.setdefault('questions', [task.get('query', '')])
@@ -343,6 +364,33 @@ class ResearchWorker:
         try:
             if not task.get('jurisdiction'):
                 raise ProviderError('missing_research_jurisdiction', retryable=False)
+            if task.get('planner_only'):
+                output = self._model(job, state, {
+                    'stage': 'research_planner',
+                    'task': {
+                        'jurisdiction': task.get('jurisdiction'),
+                        'target_year': task.get('target_year'),
+                        'election_type': task.get('election_type'),
+                        'candidate_names': task.get('candidate_names') or [],
+                    },
+                    'seed_context': task.get('seed_context') or {},
+                    'max_questions': int(task.get('max_questions') or 6),
+                    'max_hypotheses': int(task.get('max_hypotheses') or 5),
+                })
+                state['research_questions'] = planner_questions(
+                    output.get('research_questions'), int(task.get('max_questions') or 6)
+                )
+                state['planner_hypotheses'] = planner_hypotheses(
+                    output.get('hypotheses'), int(task.get('max_hypotheses') or 5)
+                )
+                state['status'] = 'completed' if state['research_questions'] else 'insufficient_evidence'
+                if not state['research_questions']:
+                    state['unresolved'].append('研究規劃器未產生可執行的具體研究問題。')
+                state['completed_at'] = iso(time.time())
+                state.pop('active_stage', None)
+                self.store.checkpoint(job, state)
+                self.store.finish(job)
+                return self.store.result(job['id'])
             from .news_retrieval import cutoff_time
             today = dt.datetime.now(dt.timezone(dt.timedelta(hours=8))).date()
             if task.get('as_of') and dt.datetime.fromtimestamp(cutoff_time(task['as_of']), dt.timezone(dt.timedelta(hours=8))).date() < today:
@@ -374,6 +422,7 @@ class ResearchWorker:
                     'max_findings': min(8, max(3, len(review_evidence))),
                 })
                 state['findings'], state['rejected_findings'] = self.validate_findings(state['review'], review_evidence)
+                state['hypothesis_review'] = self.validate_hypothesis_review(state['review'], review_evidence)
                 state['unresolved'] = strings(state['review'].get('unresolved'))
                 self.store.checkpoint(job, state)
             remaining_queries = max(0, self.config.max_queries - len(state['completed_queries']))
@@ -390,6 +439,7 @@ class ResearchWorker:
             else:
                 review_evidence = self._review_window(state['evidence'])
             state['findings'], state['rejected_findings'] = self.validate_findings(final, review_evidence)
+            state['hypothesis_review'] = self.validate_hypothesis_review(final, review_evidence)
             state['unresolved'] = strings(final.get('unresolved'))
             state['questions'] = strings(task.get('questions'))
             answered = {item['question'] for item in state['findings'] if item['question']}
@@ -428,7 +478,8 @@ def public_result(result):
         result.get('evidence', []), limit=12, excerpt_chars=1400
     )
     return {k: result[k] for k in ('status', 'job_id', 'model', 'search_provider', 'findings',
-            'unresolved', 'questions', 'last_error', 'error_stage', 'updated_at',
+            'unresolved', 'questions', 'research_questions', 'planner_hypotheses',
+            'hypothesis_review', 'last_error', 'error_stage', 'updated_at',
             'completed_at', 'model_tokens', 'rejected_findings') if k in result} | {
                 'search_count': len(result.get('search_results', {})),
                 'body_count': len(result.get('evidence', [])),
@@ -442,6 +493,39 @@ class ResearchCoordinator:
         self.root, self.store = Path(root), store
         self.config = config or ResearchConfig.from_env()
         self.worker_factory = worker_factory or (lambda: ResearchWorker(root, store, self.config))
+
+    def plan_questions(self, task, seed_context, candidate_names):
+        """Use the research model to turn evidence gaps into specific, searchable questions."""
+        if not self.config.enabled:
+            return {'status': 'disabled'}
+        if self.config.problem():
+            return {'status': 'configuration_error', 'last_error': self.config.problem()}
+        payload = {
+            'jurisdiction': task.jurisdiction,
+            'target_year': task.target_year,
+            'election_type': task.election_type,
+            'candidate_names': sorted(strings(candidate_names, 30)),
+            'planner_only': True,
+            'seed_context': seed_context,
+            'max_questions': 6,
+            'max_hypotheses': 5,
+        }
+        key = 'planner-v1-' + hashlib.sha256(
+            dumps({**payload, 'model': self.config.model, 'base_url': self.config.base_url}).encode()
+        ).hexdigest()
+        job_id = self.store.schedule(key, payload, self.config.cache_seconds)
+        worker = self.worker_factory()
+        thread = threading.Thread(
+            target=lambda: worker.tick(job_id),
+            daemon=True,
+            name='election-research-planner',
+        )
+        thread.start()
+        thread.join(self.config.foreground_seconds)
+        result = public_result(self.store.result(job_id))
+        result['cache_ttl_seconds'] = self.config.cache_seconds
+        result['round_name'] = 'research_planner'
+        return result
 
     def research(self, task, questions, candidate_names):
         return self._research(task, questions, candidate_names, round_name="initial")
