@@ -84,20 +84,54 @@ class ResearchWorker:
         return min(cap, remaining)
 
     @staticmethod
-    def _review_window(evidence):
-        """Return a deliberately small, reproducible model evidence window.
+    def _review_window(evidence, limit=10, excerpt_chars=1600):
+        """Build a diverse, bounded evidence window for analytical review.
 
-        Full fetched bodies remain in the research store.  The model only sees
-        two recent excerpts: enough for the dual-source promotion gate without
-        making a reasoning model spend its entire output budget reviewing four
-        long bodies.  Validation is performed against this exact window.
+        Full bodies stay in the research store.  The review model receives a
+        source-diverse selection instead of only the final two articles: first
+        take the newest item from distinct publishers/independence groups, then
+        fill remaining slots with additional recent evidence.  This preserves
+        corroboration and local-detail coverage without dumping raw bodies into
+        the model context.
         """
+        rows = [row for row in evidence if isinstance(row, dict) and row.get('url')]
+        selected = []
+        selected_urls = set()
+        seen_sources = set()
+
+        for row in reversed(rows):
+            source_key = (
+                row.get('independence_key')
+                or row.get('publisher_id')
+                or row.get('source_name')
+                or row.get('url')
+            )
+            if source_key in seen_sources:
+                continue
+            selected.append(row)
+            selected_urls.add(row.get('url'))
+            seen_sources.add(source_key)
+            if len(selected) >= limit:
+                break
+
+        if len(selected) < limit:
+            for row in reversed(rows):
+                if row.get('url') in selected_urls:
+                    continue
+                selected.append(row)
+                selected_urls.add(row.get('url'))
+                if len(selected) >= limit:
+                    break
+
+        selected.reverse()
         output = []
-        for row in evidence[-2:]:
+        for row in selected:
             item = dict(row)
             content = str(item.get('content') or '')
-            item['content'] = content[:1000]
-            item['content_truncated'] = bool(item.get('content_truncated')) or len(content) > 1000
+            item['content'] = content[:excerpt_chars]
+            item['content_truncated'] = (
+                bool(item.get('content_truncated')) or len(content) > excerpt_chars
+            )
             output.append(item)
         return output
 
@@ -280,8 +314,9 @@ class ResearchWorker:
                 self.store.finish(job)
                 return self.store.result(job['id'])
             if not state.get('plan'):
-                output = self._model(job, state, {'stage': 'plan', 'task': task, 'max_queries': 4})
-                plan = queries(output.get('queries'), task['jurisdiction'])[:4]
+                plan_limit = max(4, min(6, self.config.max_queries))
+                output = self._model(job, state, {'stage': 'plan', 'task': task, 'max_queries': plan_limit})
+                plan = queries(output.get('queries'), task['jurisdiction'])[:plan_limit]
                 # A successful run always makes an actual search, even if the plan is malformed.
                 state['plan'] = plan or [{'query': task['jurisdiction'] + ' ' + str(task.get('target_year', '')) + ' 選舉 最新 提名 支持 澄清', 'purpose': 'news'}]
                 if not any(item['purpose'] == 'news' for item in state['plan']):
@@ -298,19 +333,22 @@ class ResearchWorker:
                 review_evidence = self._review_window(state['evidence'])
                 state['review'] = self._model(job, state, {
                     'stage': 'review', 'task': task, 'evidence': review_evidence,
-                    'max_followup_queries': 1, 'max_findings': 1,
+                    'max_followup_queries': 2,
+                    'max_findings': min(8, max(3, len(review_evidence))),
                 })
                 state['findings'], state['rejected_findings'] = self.validate_findings(state['review'], review_evidence)
                 state['unresolved'] = strings(state['review'].get('unresolved'))
                 self.store.checkpoint(job, state)
-            followups = queries(state['review'].get('queries'), task['jurisdiction'])[:1]
+            remaining_queries = max(0, self.config.max_queries - len(state['completed_queries']))
+            followups = queries(state['review'].get('queries'), task['jurisdiction'])[:min(2, remaining_queries)]
             self._search_round(job, state, task, followups)
             final = state['review']
             if followups:
                 review_evidence = self._review_window(state['evidence'])
                 final = self._model(job, state, {
                     'stage': 'review', 'task': task, 'evidence': review_evidence,
-                    'max_followup_queries': 0, 'max_findings': 1,
+                    'max_followup_queries': 0,
+                    'max_findings': min(8, max(3, len(review_evidence))),
                 })
             else:
                 review_evidence = self._review_window(state['evidence'])
@@ -348,12 +386,16 @@ class ResearchWorker:
 
 
 def public_result(result):
-    """Keep full bodies and raw search responses out of the report writer context."""
+    """Expose a bounded evidence pack while keeping raw bodies/search dumps private."""
+    evidence_pack = ResearchWorker._review_window(
+        result.get('evidence', []), limit=12, excerpt_chars=1400
+    )
     return {k: result[k] for k in ('status', 'job_id', 'model', 'search_provider', 'findings',
             'unresolved', 'questions', 'last_error', 'error_stage', 'updated_at',
             'completed_at', 'model_tokens', 'rejected_findings') if k in result} | {
                 'search_count': len(result.get('search_results', {})),
                 'body_count': len(result.get('evidence', [])),
+                'evidence_pack': evidence_pack,
                 'coverage_complete': False,
             }
 
@@ -372,8 +414,17 @@ class ResearchCoordinator:
         payload = {'jurisdiction': task.jurisdiction, 'target_year': task.target_year,
                    'election_type': task.election_type, 'questions': sorted(strings(questions)),
                    'candidate_names': sorted(strings(candidate_names, 30)),
-                   'objective': ('更新近30日競選動態，並補查以下地方政治研究問題。'
-                                 '優先查找政府機關原始公告，再以獨立媒體正文補充或交叉核驗。')}
+                   'research_dimensions': [
+                       '候選人近期活動與競選策略',
+                       '地方政治人物、組織與公開支持互動',
+                       '政黨合作、競選總部與組織變化',
+                       '地方議題、政策攻防與治理爭點',
+                       '爭議、司法事件、澄清與更正',
+                       '最新公開民調及其方法資訊',
+                   ],
+                   'objective': ('更新近30日競選動態，並補查地方政治研究問題。'
+                                 '研究規劃應覆蓋 research_dimensions，優先查找政府機關原始公告，'
+                                 '再以獨立媒體正文補充或交叉核驗。')}
         key = 'auto-v1-' + hashlib.sha256(dumps({**payload, 'model': self.config.model, 'base_url': self.config.base_url}).encode()).hexdigest()
         payload['end_date'] = dt.datetime.now(dt.timezone(dt.timedelta(hours=8))).date().isoformat()
         job_id = self.store.schedule(key, payload, self.config.cache_seconds)
