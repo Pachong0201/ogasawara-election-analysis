@@ -145,7 +145,9 @@ def test_cross_media_read_store_and_cited_findings(tmp_path):
     assert result['findings'][0]['verification_status'] == 'body_grounded_unverified'
     assert len(store.records_at(time.time())) == 1
     assert store.records_at(before) == []
-    assert 'evidence' not in public_result(result)
+    public = public_result(result)
+    assert 'evidence' not in public
+    assert public['evidence_pack'] and public['evidence_pack'][0]['url'] == URL
     with store.connect() as db:
         assert db.execute("SELECT COUNT(*) FROM research_calls WHERE status='ok'").fetchone()[0] == 3
         assert db.execute("SELECT COUNT(*) FROM jobs WHERE kind='body'").fetchone()[0] == 0
@@ -216,24 +218,28 @@ def test_followup_is_bounded_and_duplicate_articles_are_not_reread(tmp_path):
     assert len(model.calls) == 3 and len(result['evidence']) == 1
 
 
-def test_review_window_bounds_articles_and_body_size():
+def test_review_window_is_source_diverse_and_bounded():
     evidence = [
-        {'url': f'https://example.test/{index}', 'content': '字' * 2400}
+        {
+            'url': f'https://example.test/{index}',
+            'content': '字' * 2400,
+            'publisher_id': f'publisher-{index}',
+        }
         for index in range(7)
     ]
     window = ResearchWorker._review_window(evidence)
-    assert len(window) == 2
-    assert window[0]['url'].endswith('/5')
-    assert all(len(row['content']) == 1000 for row in window)
+    assert len(window) == 7
+    assert window[0]['url'].endswith('/0')
+    assert all(len(row['content']) == 1600 for row in window)
     assert all(row['content_truncated'] is True for row in window)
 
 
-def test_review_prompt_keeps_one_finding_and_dual_source_window(tmp_path):
+def test_review_prompt_allows_multiple_findings_and_larger_window(tmp_path):
     store, worker, model, _, job_id = setup(tmp_path)
     worker.tick(job_id)
     review = next(payload for payload, _ in model.calls if payload['stage'] == 'review')
-    assert review['max_findings'] == 1
-    assert len(review['evidence']) <= 2
+    assert review['max_findings'] >= 3
+    assert len(review['evidence']) <= 10
 
 
 def test_429_persistent_retry_after_and_recovery(tmp_path):
