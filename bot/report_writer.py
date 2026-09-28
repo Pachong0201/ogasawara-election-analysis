@@ -246,6 +246,39 @@ def _apply_validation_issues(text: str, raw: str) -> str:
     return revised
 
 
+def _writer_protocol(model: str, requested: str = "auto") -> str:
+    """Route OpenCode Go models to the endpoint documented for that model."""
+    requested = str(requested or "auto").strip().lower()
+    if requested in {"responses", "chat"}:
+        return requested
+    model_id = str(model or "").strip().lower().split("/")[-1]
+    if model_id in {
+        "gpt-5.6-luna",
+        "grok-4.6",
+        "muse-spark-1.3-contributor",
+        "muse-spark-1.2-contributor",
+    }:
+        return "responses"
+    return "chat"
+
+
+def _responses_text(data: Dict[str, Any]) -> str:
+    """Extract concatenated output_text blocks from a raw Responses API object."""
+    direct = data.get("output_text") if isinstance(data, dict) else None
+    if isinstance(direct, str) and direct.strip():
+        return direct.strip()
+    parts = []
+    for item in (data.get("output") or []) if isinstance(data, dict) else []:
+        if not isinstance(item, dict) or item.get("type") != "message":
+            continue
+        for block in item.get("content") or []:
+            if isinstance(block, dict) and block.get("type") == "output_text":
+                value = block.get("text")
+                if isinstance(value, str) and value.strip():
+                    parts.append(value.strip())
+    return "\n".join(parts).strip()
+
+
 class BaseReportWriter:
     async def write(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
         raise NotImplementedError
