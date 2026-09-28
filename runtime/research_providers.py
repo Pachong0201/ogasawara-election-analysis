@@ -42,11 +42,20 @@ class ResearchConfig:
     @classmethod
     def from_env(cls):
         deepseek_model = os.getenv('DEEPSEEK_MODEL', '').strip()
+        api_key = (
+            os.getenv('DEEPSEEK_API_KEY', '').strip()
+            or os.getenv('OPENCODE_GO_API_KEY', '').strip()
+        )
+        search_key = os.getenv('TAVILY_API_KEY', '').strip()
+        enabled_raw = os.getenv('OGASAWARA_AUTO_RESEARCH', 'auto').strip().lower()
+        if enabled_raw in ('auto', ''):
+            enabled = bool(api_key and search_key)
+        else:
+            enabled = enabled_raw in ('1', 'true', 'yes', 'on')
         return cls(
-            enabled=os.getenv('OGASAWARA_AUTO_RESEARCH', 'false').lower() in ('1', 'true', 'yes'),
-            api_key=(os.getenv('DEEPSEEK_API_KEY', '').strip()
-                     or os.getenv('OPENCODE_GO_API_KEY', '').strip()),
-            search_key=os.getenv('TAVILY_API_KEY', ''),
+            enabled=enabled,
+            api_key=api_key,
+            search_key=search_key,
             model=(deepseek_model or os.getenv('RESEARCH_LLM_MODEL', '').strip()
                    or 'deepseek-flash'),
             base_url=(os.getenv('DEEPSEEK_BASE_URL', '').strip()
