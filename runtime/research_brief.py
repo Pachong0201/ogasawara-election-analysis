@@ -78,12 +78,16 @@ class ResearchBriefBuilder:
             for row in (rows or [])
             if isinstance(row, dict) and _region_name(row.get("region"))
         }
-        known_regions.update(
-            _region_name(row.get("region") or row.get("location"))
-            for key in ("relationships", "historical_claims", "candidates", "issues")
-            for row in (local_knowledge.get(key) or [])
-            if isinstance(row, dict)
-        )
+        for value in (local_knowledge.get("regions") or []):
+            candidate = _region_name(value)
+            if (
+                candidate
+                and candidate != jurisdiction
+                and len(candidate) <= 8
+                and candidate.endswith(_REGION_SUFFIXES)
+                and not any(token in candidate for token in _REGION_NOISE)
+            ):
+                known_regions.add(candidate)
         known_regions.discard("")
         known_regions.discard(jurisdiction)
 
