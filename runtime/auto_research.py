@@ -47,6 +47,43 @@ def queries(value, county):
     return result
 
 
+def planner_questions(value, limit=6):
+    result = []
+    for item in value[:limit] if isinstance(value, list) else []:
+        if not isinstance(item, dict) or not isinstance(item.get('question'), str):
+            continue
+        question = item['question'].strip()[:500]
+        if not question:
+            continue
+        row = {
+            'question': question,
+            'region': str(item.get('region') or '')[:80],
+            'actors': strings(item.get('actors', []), 8),
+            'time_window': str(item.get('time_window') or '')[:120],
+            'evidence_needed': strings(item.get('evidence_needed', []), 6),
+            'priority': 'high' if item.get('priority') == 'high' else 'medium',
+        }
+        if row not in result:
+            result.append(row)
+    return result
+
+
+def planner_hypotheses(value, limit=5):
+    result = []
+    for item in value[:limit] if isinstance(value, list) else []:
+        if not isinstance(item, dict) or not isinstance(item.get('hypothesis'), str):
+            continue
+        hypothesis = item['hypothesis'].strip()[:500]
+        if not hypothesis:
+            continue
+        result.append({
+            'hypothesis': hypothesis,
+            'why_it_matters': str(item.get('why_it_matters') or '')[:500],
+            'counter_question': str(item.get('counter_question') or '')[:500],
+        })
+    return result
+
+
 class ResearchWorker:
     def __init__(self, root, store=None, config=None, model=None, search=None, body_factory=None):
         self.root = Path(root)
