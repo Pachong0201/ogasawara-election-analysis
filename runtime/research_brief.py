@@ -198,33 +198,43 @@ class ResearchBriefBuilder:
             })
 
         hypotheses: List[Dict[str, Any]] = []
-        for row in regional_patterns:
-            if row["historical_signals"] and row["current_events"]:
-                hypotheses.append({
-                    "question": f"{row['region']}的当前竞选活动是否与既有历史结构出现新的连接？",
-                    "region": row["region"],
-                    "supporting_evidence": [],
-                    "counter_evidence": [],
-                    "status": "to_be_interpreted_by_writer",
-                })
-        for row in organization_changes:
-            if row.get("relation_type") not in (None, "", "single_visit"):
-                hypotheses.append({
-                    "question": "已观察到的组织协作是否具有持续性，以及它在地方层级意味着什么？",
-                    "region": row.get("region"),
-                    "supporting_evidence": row.get("evidence_references") or [],
-                    "counter_evidence": [row.get("boundary")] if row.get("boundary") else [],
-                    "status": "to_be_interpreted_by_writer",
-                })
-        for item in (assessment.get("follow_up_questions") or [])[:6]:
-            if isinstance(item, dict) and item.get("question"):
-                hypotheses.append({
-                    "question": item["question"],
-                    "region": item.get("region"),
-                    "supporting_evidence": [],
-                    "counter_evidence": [],
-                    "status": item.get("status") or "unresolved",
-                })
+        planner = research_result.get("planner") or {}
+        for item in (planner.get("planner_hypotheses") or [])[:5]:
+            if not isinstance(item, dict) or not item.get("hypothesis"):
+                continue
+            hypotheses.append({
+                "hypothesis": str(item.get("hypothesis"))[:500],
+                "why_it_matters": str(item.get("why_it_matters") or "")[:500],
+                "counter_question": str(item.get("counter_question") or "")[:500],
+                "supporting_evidence": [],
+                "counter_evidence": [],
+                "status": "planned_for_research",
+            })
+        for item in (research_result.get("hypothesis_review") or [])[:8]:
+            if not isinstance(item, dict) or not item.get("hypothesis"):
+                continue
+            hypotheses.append({
+                "hypothesis": str(item.get("hypothesis"))[:500],
+                "why_it_matters": "",
+                "counter_question": str(item.get("followup_question") or "")[:500],
+                "supporting_evidence": _strings(item.get("supporting_urls") or [], 6),
+                "counter_evidence": _strings(item.get("counter_urls") or [], 6),
+                "alternative_explanations": _strings(item.get("alternative_explanations") or [], 6),
+                "status": item.get("status") or "insufficient_evidence",
+            })
+        # Fallback only when planner output is unavailable. Keep this as a research
+        # question generator, not as a political conclusion.
+        if not hypotheses:
+            for row in regional_patterns:
+                if row["historical_signals"] and row["current_events"]:
+                    hypotheses.append({
+                        "hypothesis": f"{row['region']}的当前竞选活动是否与既有历史结构出现新的连接？",
+                        "why_it_matters": "该地区同时存在历史结构信号与当前竞选活动，值得定向核验。",
+                        "counter_question": "是否存在媒体覆盖、行程安排或其他非结构性解释？",
+                        "supporting_evidence": [],
+                        "counter_evidence": [],
+                        "status": "fallback_research_question",
+                    })
 
         research_findings = []
         for row in (research_result.get("findings") or [])[:8]:
@@ -281,8 +291,12 @@ class ResearchBriefBuilder:
             ),
             "recommended_focus": [
                 str(x.get("question") or "")
-                for x in (assessment.get("follow_up_questions") or [])[:6]
+                for x in ((planner.get("research_questions") or [])[:6])
                 if isinstance(x, dict) and x.get("question")
+            ] or [
+                str(x.get("followup_question") or "")
+                for x in (research_result.get("hypothesis_review") or [])[:6]
+                if isinstance(x, dict) and x.get("followup_question")
             ],
             "sources": sources[:24],
             "writer_contract": {
