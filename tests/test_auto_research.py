@@ -383,6 +383,125 @@ def test_future_and_other_county_bodies_are_excluded(tmp_path):
     assert not store.article(URL)
 
 
+def test_model_driven_planner_produces_specific_questions(tmp_path):
+    class PlannerModel(Model):
+        def complete(self, payload, session, timeout):
+            self.calls.append((payload, session))
+            assert payload["stage"] == "research_planner"
+            return {
+                "research_questions": [{
+                    "question": "高雄市三民區近30日候選人與地方議員是否出現持續聯合活動？",
+                    "region": "三民區",
+                    "actors": ["候選人甲"],
+                    "time_window": "近30日",
+                    "evidence_needed": ["官方競選公告", "獨立媒體正文"],
+                    "priority": "high",
+                }],
+                "hypotheses": [{
+                    "hypothesis": "三民區近期活動增加是否代表競選組織正由全市層級下沉到地方層級？",
+                    "why_it_matters": "需要區分單次曝光與持續組織協作。",
+                    "counter_question": "是否只是行程安排或媒體覆蓋增加？",
+                }],
+            }, 50
+
+    store = ResearchStore(tmp_path / "news.sqlite3")
+    model = PlannerModel()
+    worker = ResearchWorker(tmp_path, store, config(), model, Search(), lambda host: Body())
+    coordinator = ResearchCoordinator(tmp_path, store, config(), lambda: worker)
+    result = coordinator.plan_questions(
+        make_task(jurisdiction="高雄市"),
+        {"historical_anomalies": [{"region": "三民區", "value": 0.08}]},
+        ["候選人甲"],
+    )
+    assert result["status"] == "completed"
+    assert result["research_questions"][0]["region"] == "三民區"
+    assert result["planner_hypotheses"][0]["counter_question"]
+    assert model.calls[0][0]["stage"] == "research_planner"
+
+
+def test_hypothesis_review_can_trigger_second_pass_without_explicit_queries(tmp_path):
+    class HypothesisModel(Model):
+        review_calls = 0
+
+        def complete(self, payload, session, timeout):
+            self.calls.append((payload, session))
+            if payload["stage"] == "plan":
+                return {"queries": [{"query": "高雄市 選舉", "purpose": "news"}]}, 20
+            self.review_calls += 1
+            evidence = payload["evidence"]
+            return {
+                "findings": [{
+                    "statement": "正文報導候選人舉行地方活動。",
+                    "question": "候選人最新動向",
+                    "citations": [{"url": evidence[0]["url"], "quote": evidence[0]["content"][:len(QUOTE)]}],
+                }],
+                "hypothesis_review": [{
+                    "hypothesis": "地方活動是否具有持續組織協作性？",
+                    "supporting_urls": [evidence[0]["url"]],
+                    "counter_urls": [],
+                    "alternative_explanations": ["可能只是單次行程安排"],
+                    "followup_question": "近30日是否還有同區域重複聯合活動？",
+                }],
+                "unresolved": [],
+                "queries": [],
+            }, 40
+
+    model = HypothesisModel()
+    _, worker, _, search, job_id = setup(tmp_path, model=model)
+    result = worker.tick(job_id)
+    assert len(search.calls) == 2
+    assert "近30日是否還有同區域重複聯合活動" in search.calls[1][0]
+    assert result["hypothesis_review"][0]["status"] == "evidence_present"
+    assert model.review_calls == 2
+
+
+def test_pipeline_prefers_planner_questions_over_rule_questions(tmp_path):
+    populate_full_repo(tmp_path)
+    store = ResearchStore(tmp_path / "news.sqlite3")
+
+    class Coordinator:
+        planned = 0
+        researched = 0
+
+        def plan_questions(self, task, seed_context, candidate_names):
+            self.planned += 1
+            assert "historical_anomalies" in seed_context
+            return {
+                "status": "completed",
+                "research_questions": [{
+                    "question": "新竹縣竹北市近30日地方組織互動是否持續？",
+                    "region": "竹北市",
+                }],
+                "planner_hypotheses": [{
+                    "hypothesis": "地方組織互動是否由單次活動轉為持續協作？",
+                }],
+            }
+
+        def research(self, task, questions, candidate_names):
+            self.researched += 1
+            assert questions[0] == "新竹縣竹北市近30日地方組織互動是否持續？"
+            return {
+                "status": "completed",
+                "findings": [],
+                "hypothesis_review": [],
+                "search_count": 1,
+            }
+
+    coordinator = Coordinator()
+    backend = LocalNewsBackend(tmp_path, store, research_coordinator=coordinator)
+    pipeline = AnalysisPipeline(
+        tmp_path,
+        mode="online",
+        retrieval_backend=backend,
+        source_registry=SourceRegistry(config_path=tmp_path / "missing.yaml"),
+    )
+    context = pipeline.run(make_task()).analysis_context
+    research = context["local_knowledge"]["automatic_research"]
+    assert coordinator.planned == 1 and coordinator.researched == 1
+    assert research["round_name"] == "planner_research"
+    assert research["planner"]["research_questions"][0]["region"] == "竹北市"
+
+
 def test_offline_factory_never_installs_research(monkeypatch, tmp_path):
     monkeypatch.setenv('OGASAWARA_AUTO_RESEARCH', 'true')
     backend = build_retrieval_backend('local', tmp_path, mode='offline')
