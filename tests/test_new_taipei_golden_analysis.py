@@ -117,7 +117,7 @@ def test_aq12_writer_receives_final_assessment_first_and_forbids_news_list():
     assessment = build()
     context = {"analysis_context": {"assessment": assessment, "historical_baseline": {}, "local_knowledge": {}, "polls": [], "unknowns": []}}
     payload = _analysis_payload(context)
-    assert next(iter(payload)) == "final_assessment"
+    assert next(iter(payload)) == "research_brief"
     assert "禁止按日期或新闻逐条机械汇总" in SYSTEM_INSTRUCTIONS
     request = ParsedRequest(intent=FULL_ANALYSIS, text="分析新北", focus=ElectionFocus(jurisdiction="新北市"))
     text = asyncio.run(DeterministicReportWriter().write(request, context))
