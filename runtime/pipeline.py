@@ -26,6 +26,7 @@ from .event_importance import event_importance_signals
 from .matrix_builder import build_cross_level_matrix, build_historical_matrix, build_same_day_matrix
 from .metrics import candidate_residual, electoral_swing, spatial_variance, split_ticket_residual
 from .models import AnalysisContext, ElectionTask, MetricResult, parse_date, utc_now_iso
+from .research_brief import ResearchBriefBuilder
 from .source_registry import RetrievalBackend, SourceRegistry
 
 
@@ -67,6 +68,7 @@ class AnalysisPipeline:
         )
         self.context_builder = AnalysisContextBuilder(self.repo_root, skill_version="1.4.0")
         self.assessment_builder = ElectionAssessmentBuilder()
+        self.research_brief_builder = ResearchBriefBuilder()
         self.campaign_event_loader = CampaignEventLoader(self.repo_root)
         self.runtime_config = self._load_runtime_config()
         policy_path = self.repo_root / self.runtime_config.get("campaign_state", {}).get("policy_file", "config/campaign_state.yaml")
@@ -568,6 +570,27 @@ class AnalysisPipeline:
                     task=task.to_dict(),
                 ) if research_result.get("round_name") == "assessment_follow_up" else None
             ),
+        )
+
+        research_brief = self.research_brief_builder.build(
+            task=task.to_dict(),
+            historical_baseline={
+                "historical_matrix": historical_matrix,
+                "cross_level_matrix": cross_level_matrix,
+            },
+            metrics=metrics,
+            local_knowledge=local_knowledge,
+            current_candidates=current_candidates,
+            current_events=events,
+            campaign_event_resolution=campaign_event_resolution,
+            campaign_state=campaign_state,
+            polls=polls,
+            research_result=research_result,
+            assessment=assessment,
+            research_brief=research_brief,
+            unknowns=unknowns,
+            warnings=warnings,
+            sources=sources,
         )
 
         context = self.context_builder.build(
