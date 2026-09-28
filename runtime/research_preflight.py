@@ -1,10 +1,14 @@
 """One bounded, non-promoting live model check before expensive L3 batches."""
 import json
 import time
+from bot.config import BotConfig
 from .research_providers import GoModel, ResearchConfig, ProviderError
 
 
 def main():
+    # Match the bot startup path: load the repository .env before constructing
+    # the research provider configuration.
+    BotConfig.from_env()
     config = ResearchConfig.from_env()
     if config.problem():
         print(json.dumps({'status': 'configuration_error', 'error': config.problem()}))

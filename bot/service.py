@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 from typing import Optional
+import logging
 
 from .config import BotConfig
 from .conversation import ConversationStore
 from .models import BotReply, ConversationState, InboundMessage
-from .report_writer import BaseReportWriter
+from .report_writer import BaseReportWriter, DeterministicReportWriter
 from .router import (
     CAMPAIGN_UPDATE,
     CONTEXT_QA,
@@ -93,7 +94,16 @@ class ElectionBotService:
             last_user_text=request.text,
         )
         self.store.save(new_state)
-        text = await self.writer.write(request, new_state.analysis_context)
+        try:
+            text = await self.writer.write(request, new_state.analysis_context)
+        except Exception:
+            logging.getLogger(__name__).exception(
+                "report writer failed; returning structured summary"
+            )
+            text = await DeterministicReportWriter().write(
+                request, new_state.analysis_context
+            )
+            text = "报告生成服务暂时不可用，以下为本地结构化摘要。\n\n" + text
         return BotReply(text=text, conversation_key=key, reply_in_thread=True)
 
     def link_outbound_message(self, message_id: str, conversation_key: str) -> None:

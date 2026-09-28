@@ -2,11 +2,14 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T21:18:37+00:00
+生成时间：2026-09-27T10:15:00+00:00
 
 ## 历史政治知识（L2）
 - 台北市-population-2025: 截至2025年12月底，台北市户籍登记人口为2,439,507人，较2024年12月底减少51,362人。（2024-12-31—2025-12-31）
 - 台北市-primary-employment-industry-2021: 2021年工业及服务业普查按从业人数观察，台北市从业人数最多的行业为批发业。（2021-01-01—2021-12-31）
+- taipei-academic-2014-political-map: 张顺全、庄文忠的研究以台北市各里及中选会总体选举资料进行集群与趋势分析，并认为2014年台北市长选举结果出现了“超越蓝绿”的现象。（2014年台北市长选举）
+- taipei-academic-2014-borough-chief-role: 郭怡均对2014年台北市中正区议员选举的案例研究认为，里长在地方选举中仍扮演中介或桩脚角色，但影响力相较过去已有弱化。（2014年台北市议员选举中正区案例）
+- taipei-academic-2018-delayed-voting: 邓志松、周嘉辰的空间分析发现，2018年台北市长选举在村里层次存在部分选票流动，但延迟投票对三位候选人的整体影响并不显著。（2018年台北市长选举）
 
 ## 当前地方关系（L3）
 - ly11-office-台北市-吳思瑤: 吳思瑤 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
@@ -127,6 +130,10 @@
 
 ## 当前地方议题（L3）
 - official-issue-20260927-10-0: 臺北市商业处于 2026-09-11 公布加蚋文化节、商圈消费及社区体验活动；这里只确认活动与地方商业议题，不推定来客数、营业额或长期发展成效。；current_use=current_usable；date=2026-09-11；time_scope=2026-09-11
+- taipei-current-pedestrian-safety-plan: 台北市政府交通局的行人安全友善计划指出部分地点仍缺少或缺乏连续行人空间，并以4大主轴、10项策略、35项具体工作推动改善。；current_use=current_usable；date=2026-01-14；time_scope=2026-01-14—current
+- taipei-current-t17t18-land-right: 台北市公有土地开发联合招商清单记载，北士科T17、T18市有土地设定地上权案于2026年2月11日签约，民间机构为台灣輝達經典股份有限公司。；current_use=current_usable；date=2026-02-11；time_scope=2026-02-11—current
+- taipei-current-shezidao-review: 台北市政府社子岛开发大事纪记载，区段征收计划于2026年5月25日报请内政部审议，并于8月17日由内政部土地征收审议小组专案小组召开第一次会议。；current_use=current_usable；date=2026-08-17；time_scope=2026-05-25—current
+- taipei-current-social-housing-transfer: 台北市政府都市发展局公告，营运中社会住宅自2025年6月1日起全数移交台北市住宅及都市更新中心，后者负责住宅出租、管理维护与住户服务。；current_use=current_usable；date=2025-05-05；time_scope=2025-06-01—current
 
 ## 人物—组织—地区关系索引
 - 吳思瑤 → office_holding → 立法院第11屆立法委員；region=台北市；current_use=current_usable

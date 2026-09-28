@@ -60,16 +60,21 @@ async def send_reply(channel: Any, inbound: Any, text: str) -> Any:
                 result.error,
             )
         except Exception:
-            LOG.exception("docx generation failed; falling back to markdown")
-    result = await channel.send(
-        inbound.chat_id,
-        {"markdown": text},
-        {**base_opts, "uuid": _send_uuid("ogasawara-final", inbound.message_id)},
-    )
-    if not result.success:
+            LOG.exception("docx reply preparation/send failed; falling back to markdown")
+
+    try:
+        result = await channel.send(
+            inbound.chat_id,
+            {"markdown": text},
+            {**base_opts, "uuid": _send_uuid("ogasawara-final", inbound.message_id)},
+        )
+    except Exception:
+        LOG.exception("markdown reply send failed; retrying as plain text")
+        result = None
+    if result is None or not result.success:
         LOG.warning(
             "final reply send failed (%s); retrying as plain text",
-            result.error,
+            getattr(result, "error", None),
         )
         result = await channel.send(
             inbound.chat_id,
@@ -175,19 +180,22 @@ async def run(feishu_channel_cls: Any = None, inbound_config: Any = None) -> Non
         try:
             ack_key = service.store.resolve_key(inbound)
             if looks_long_running(inbound.text):
-                ack = await channel.send(
-                    inbound.chat_id,
-                    {"markdown": "收到，正在读取最新选情资料并运行结构分析……"},
-                    {
-                        "reply_to": inbound.message_id,
-                        "reply_in_thread": inbound.chat_type in {"group", "topic"},
-                        "receive_id_type": "chat_id",
-                        "uuid": _send_uuid("ogasawara-ack", inbound.message_id),
-                    },
-                )
-                ack_id = str(getattr(ack, "message_id", "") or "")
-                if ack_id:
-                    service.link_outbound_message(ack_id, ack_key)
+                try:
+                    ack = await channel.send(
+                        inbound.chat_id,
+                        {"markdown": "收到，正在读取最新选情资料并运行结构分析……"},
+                        {
+                            "reply_to": inbound.message_id,
+                            "reply_in_thread": inbound.chat_type in {"group", "topic"},
+                            "receive_id_type": "chat_id",
+                            "uuid": _send_uuid("ogasawara-ack", inbound.message_id),
+                        },
+                    )
+                    ack_id = str(getattr(ack, "message_id", "") or "")
+                    if ack_id:
+                        service.link_outbound_message(ack_id, ack_key)
+                except Exception:
+                    LOG.exception("ack reply send failed; continuing with analysis")
 
             reply = await service.handle_message(inbound)
             if reply is None:

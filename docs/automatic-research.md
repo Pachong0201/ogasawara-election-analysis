@@ -10,10 +10,10 @@
 OGASAWARA_BOT_MODE=online
 OGASAWARA_BOT_RETRIEVAL=local
 OGASAWARA_AUTO_RESEARCH=true
-OPENCODE_GO_API_KEY=填入自己的密钥
+DEEPSEEK_API_KEY=填入 DeepSeek 官方密钥
 TAVILY_API_KEY=填入自己的密钥
-RESEARCH_LLM_MODEL=glm-5.3-flash
-RESEARCH_LLM_BASE_URL=https://opencode.ai/zen/go/v1
+DEEPSEEK_MODEL=deepseek-flash
+DEEPSEEK_BASE_URL=https://api.deepseek.com
 RESEARCH_FOREGROUND_SECONDS=60
 RESEARCH_DAILY_SEARCHES=120
 RESEARCH_DAILY_TOKEN_BUDGET=500000
@@ -39,7 +39,7 @@ python -m runtime.auto_research --once
 
 Windows 可在项目目录使用上述 Python 命令；先安装 `requirements.txt`。研究 CLI 与机器人一样读取项目 `.env`，已有环境变量优先。CLI `--status` 不调用外部 API、不打印密钥。缺少密钥不会影响原有本地新闻分析，但报告明确显示配置问题。
 
-本次 Go 接口用于自动研究。原有 `OPENAI_*` 路由/报告设置独立；不配置 OpenAI 时，确定性飞书摘要同样展示自动补查结果、正文引用和未解决问题。
+同一个 DeepSeek 官方接口用于自动研究和飞书报告写作。不配置 `DEEPSEEK_API_KEY` 时，确定性飞书摘要仍会展示已有的补查结果、正文引用和未解决问题；自动网页研究还需另外配置 `TAVILY_API_KEY`。
 
 ## 执行及证据边界
 

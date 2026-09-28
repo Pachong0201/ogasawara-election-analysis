@@ -146,7 +146,7 @@ class BaseReportWriter:
 
 
 class DeterministicReportWriter(BaseReportWriter):
-    """Useful fallback when no OpenAI API key is configured."""
+    """Useful fallback when no model API key is configured."""
 
     async def write(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
         if request.intent == HELP:
@@ -285,7 +285,7 @@ class DeterministicReportWriter(BaseReportWriter):
         if unknowns:
             lines.append("资料限制：" + "；".join(str(value) for value in unknowns[:4]))
         lines.append(
-            "说明：当前未配置 OPENAI_API_KEY，因此显示确定性的结构化摘要；"
+            "说明：当前未配置 DEEPSEEK_API_KEY，因此显示确定性的结构化摘要；"
             "配置 API 后将由 LLM 基于同一 Analysis Context 生成自然语言研判。"
         )
         return "\n\n".join(lines)
@@ -331,11 +331,7 @@ class OpenAIReportWriter(BaseReportWriter):
 
 
 class ChatCompletionsReportWriter(BaseReportWriter):
-    """Report writer for OpenAI-compatible chat/completions endpoints.
-
-    Used for GLM models served through OpenCode Go, which requires a stable
-    ``x-opencode-session`` header and a custom user agent.
-    """
+    """Report writer for OpenAI-compatible chat/completions endpoints."""
 
     def __init__(self, api_key: str, model: str, base_url: str, session: str = ""):
         self.api_key = api_key
@@ -375,17 +371,19 @@ class ChatCompletionsReportWriter(BaseReportWriter):
                     ),
                 },
             ],
-            "max_tokens": 6000,
+            "max_tokens": 16000,
             "temperature": 0.3,
         }, ensure_ascii=False).encode("utf-8")
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.api_key}",
+            "User-Agent": "ogasawara-election-research/0.1",
+        }
+        # This legacy header is only valid for OpenCode deployments.
+        if "opencode.ai" in self.base_url:
+            headers["x-opencode-session"] = session
         req = urllib.request.Request(
-            self.base_url + "/chat/completions", body,
-            {
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {self.api_key}",
-                "User-Agent": "ogasawara-election-research/0.1",
-                "x-opencode-session": session,
-            },
+            self.base_url + "/chat/completions", body, headers
         )
         with urllib.request.urlopen(req, timeout=120) as response:
             data = json.loads(response.read())
@@ -404,10 +402,10 @@ class ChatCompletionsReportWriter(BaseReportWriter):
 
 def build_report_writer(
     api_key: str = "",
-    model: str = "gpt-5.6-sol",
+    model: str = "deepseek-flash",
     base_url: str = "",
 ) -> BaseReportWriter:
-    if api_key and base_url and "opencode.ai" in base_url:
+    if api_key and base_url:
         return ChatCompletionsReportWriter(
             api_key=api_key, model=model, base_url=base_url
         )

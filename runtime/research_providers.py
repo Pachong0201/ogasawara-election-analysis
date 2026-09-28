@@ -29,8 +29,8 @@ class ResearchConfig:
     enabled: bool = False
     api_key: str = field(default='', repr=False)
     search_key: str = field(default='', repr=False)
-    model: str = 'glm-5.3-flash'
-    base_url: str = 'https://opencode.ai/zen/go/v1'
+    model: str = 'deepseek-flash'
+    base_url: str = 'https://api.deepseek.com'
     foreground_seconds: float = 60
     job_seconds: float = 600
     cache_seconds: int = 1800
@@ -41,11 +41,17 @@ class ResearchConfig:
 
     @classmethod
     def from_env(cls):
+        deepseek_model = os.getenv('DEEPSEEK_MODEL', '').strip()
         return cls(
             enabled=os.getenv('OGASAWARA_AUTO_RESEARCH', 'false').lower() in ('1', 'true', 'yes'),
-            api_key=os.getenv('OPENCODE_GO_API_KEY', ''), search_key=os.getenv('TAVILY_API_KEY', ''),
-            model=os.getenv('RESEARCH_LLM_MODEL', 'glm-5.3-flash'),
-            base_url=os.getenv('RESEARCH_LLM_BASE_URL', 'https://opencode.ai/zen/go/v1').rstrip('/'),
+            api_key=(os.getenv('DEEPSEEK_API_KEY', '').strip()
+                     or os.getenv('OPENCODE_GO_API_KEY', '').strip()),
+            search_key=os.getenv('TAVILY_API_KEY', ''),
+            model=(deepseek_model or os.getenv('RESEARCH_LLM_MODEL', '').strip()
+                   or 'deepseek-flash'),
+            base_url=(os.getenv('DEEPSEEK_BASE_URL', '').strip()
+                      or os.getenv('RESEARCH_LLM_BASE_URL', '').strip()
+                      or 'https://api.deepseek.com').rstrip('/'),
             foreground_seconds=max(0, min(60, float(os.getenv('RESEARCH_FOREGROUND_SECONDS', '60')))),
             daily_searches=max(1, int(os.getenv('RESEARCH_DAILY_SEARCHES', '120'))),
             daily_tokens=max(1, int(os.getenv('RESEARCH_DAILY_TOKEN_BUDGET', '500000'))),
@@ -122,9 +128,12 @@ class GoModel:
             ], 'temperature': 0.1,
             'response_format': {'type': 'json_object'},
         }
+        headers = {}
+        if 'opencode.ai' in self.config.base_url:
+            headers['x-opencode-session'] = session
         raw = self.transport(
             self.config.base_url + '/chat/completions', self.config.api_key,
-            request_payload, timeout, {'x-opencode-session': session},
+            request_payload, timeout, headers,
         )
         try:
             choice = raw['choices'][0]

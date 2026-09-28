@@ -1,6 +1,6 @@
 """Environment-backed bot configuration.
 
-Secrets are never read from repository files. Feishu and OpenAI credentials
+Secrets are never read from repository files. Feishu and model credentials
 must be supplied through environment variables or the deployment secret store.
 """
 
@@ -32,9 +32,9 @@ class BotConfig:
     lark_app_id: str = ""
     lark_app_secret: str = ""
     openai_api_key: str = ""
-    openai_base_url: str = ""
-    openai_router_model: str = "gpt-5.6-luna"
-    openai_writer_model: str = "gpt-5.6-sol"
+    openai_base_url: str = "https://api.deepseek.com"
+    openai_router_model: str = "deepseek-flash"
+    openai_writer_model: str = "deepseek-flash"
     skill_mode: str = "online"
     retrieval_provider: str = "local"
     max_article_fetches: int = 6
@@ -53,14 +53,32 @@ class BotConfig:
         if not db_path.is_absolute():
             db_path = repo_root / db_path
 
+        deepseek_model = os.getenv("DEEPSEEK_MODEL", "").strip()
         config = cls(
             repo_root=repo_root,
             lark_app_id=os.getenv("LARK_APP_ID", "").strip(),
             lark_app_secret=os.getenv("LARK_APP_SECRET", "").strip(),
-            openai_api_key=os.getenv("OPENAI_API_KEY", "").strip(),
-            openai_base_url=os.getenv("OPENAI_BASE_URL", "").strip(),
-            openai_router_model=os.getenv("OPENAI_ROUTER_MODEL", "gpt-5.6-luna").strip(),
-            openai_writer_model=os.getenv("OPENAI_WRITER_MODEL", "gpt-5.6-sol").strip(),
+            # Keep the old OPENAI_* names as a compatibility fallback for
+            # existing deployments, but prefer the official DeepSeek config.
+            openai_api_key=(
+                os.getenv("DEEPSEEK_API_KEY", "").strip()
+                or os.getenv("OPENAI_API_KEY", "").strip()
+            ),
+            openai_base_url=(
+                os.getenv("DEEPSEEK_BASE_URL", "").strip()
+                or os.getenv("OPENAI_BASE_URL", "").strip()
+                or "https://api.deepseek.com"
+            ),
+            openai_router_model=(
+                deepseek_model
+                or os.getenv("OPENAI_ROUTER_MODEL", "").strip()
+                or "deepseek-flash"
+            ),
+            openai_writer_model=(
+                deepseek_model
+                or os.getenv("OPENAI_WRITER_MODEL", "").strip()
+                or "deepseek-flash"
+            ),
             skill_mode=os.getenv("OGASAWARA_BOT_MODE", "online").strip().lower(),
             retrieval_provider=os.getenv("OGASAWARA_BOT_RETRIEVAL", "local").strip().lower(),
             max_article_fetches=int(os.getenv("OGASAWARA_MAX_ARTICLE_FETCHES", "6")),

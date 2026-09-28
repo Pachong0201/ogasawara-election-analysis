@@ -1,7 +1,12 @@
 import unittest
 
 from bot.models import ElectionFocus, ParsedRequest
-from bot.report_writer import DeterministicReportWriter, _analysis_payload
+from bot.report_writer import (
+    ChatCompletionsReportWriter,
+    DeterministicReportWriter,
+    _analysis_payload,
+    build_report_writer,
+)
 from bot.router import FULL_ANALYSIS
 
 
@@ -29,7 +34,7 @@ class TestDeterministicReportWriter(unittest.IsolatedAsyncioTestCase):
         self.assertIn("高雄市", text)
         self.assertIn("READY", text)
         self.assertIn("7d 3项", text)
-        self.assertIn("OPENAI_API_KEY", text)
+        self.assertIn("DEEPSEEK_API_KEY", text)
 
 
     async def test_resolved_campaign_event_is_presented_with_evidence_boundary(self):
@@ -98,6 +103,17 @@ class TestDeterministicReportWriter(unittest.IsolatedAsyncioTestCase):
             payload["campaign_event_resolution"]["events"][0]["evidence_excerpt"],
             "保留的有限证据摘录",
         )
+
+
+def test_deepseek_uses_chat_completions_writer():
+    writer = build_report_writer(
+        api_key="test-key",
+        model="deepseek-flash",
+        base_url="https://api.deepseek.com",
+    )
+    assert isinstance(writer, ChatCompletionsReportWriter)
+    assert writer.base_url == "https://api.deepseek.com"
+    assert writer.model == "deepseek-flash"
 
 
 if __name__ == "__main__":

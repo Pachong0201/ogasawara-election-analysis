@@ -40,4 +40,4 @@ python3 -m unittest discover -s tests -v
 - `test_bot_router.py`：县市识别、更新窗口、追问 focus 继承。
 - `test_bot_conversation.py`：群聊线程隔离、私聊连续会话、机器人回复链映射。
 - `test_bot_service.py`：@触发、完整分析、更新重跑、上下文追问复用。
-- `test_bot_report_writer.py`：未配置 OpenAI API 时的确定性回退输出。
+- `test_bot_report_writer.py`：未配置 DeepSeek API 时的确定性回退输出。

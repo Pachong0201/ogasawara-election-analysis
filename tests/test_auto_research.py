@@ -71,7 +71,7 @@ class Body:
                 'page_date': (dt.datetime.now(dt.timezone.utc) - dt.timedelta(minutes=1)).isoformat()}
 
 
-def test_go_protocol_no_native_web_search_and_stable_session():
+def test_deepseek_protocol_no_native_web_search():
     calls = []
     def transport(*args):
         calls.append(args)
@@ -79,9 +79,9 @@ def test_go_protocol_no_native_web_search_and_stable_session():
     client = GoModel(config(), transport)
     assert client.complete({'stage': 'plan'}, 'session-1') == ({'queries': []}, 12)
     url, key, body, timeout, headers = calls[0]
-    assert url == 'https://opencode.ai/zen/go/v1/chat/completions'
-    assert body['model'] == 'glm-5.3-flash' and 'tools' not in body
-    assert headers['x-opencode-session'] == 'session-1'
+    assert url == 'https://api.deepseek.com/chat/completions'
+    assert body['model'] == 'deepseek-flash' and 'tools' not in body
+    assert headers == {}
     assert key == 'test-key'
 
 

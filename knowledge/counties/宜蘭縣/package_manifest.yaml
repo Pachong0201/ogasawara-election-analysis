@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 宜蘭縣
-generated_at: '2026-09-27T03:12:37+00:00'
-content_sha256: a2e121eb3eb2017fa6df5aa90093a2d61573338ff1d388e7e46e28a248e8d721
+generated_at: '2026-09-27T13:06:58+00:00'
+content_sha256: bde6026fdcd6446331f9ef23a473fb7ea0d03ad87547565bb2dce7789c3b0b15
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/宜蘭縣/claims.jsonl
@@ -15,15 +15,15 @@ generated_indexes:
   research_questions: knowledge/counties/宜蘭縣/research_questions.jsonl
   entity_relation_index: knowledge/counties/宜蘭縣/entity_relation_index.jsonl
 counts:
-  historical_claim: 2
-  local_relationship: 3
+  historical_claim: 5
+  local_relationship: 6
   candidate_profile: 64
-  current_issue: 1
-evidence_index_count: 70
-entity_relation_count: 3
+  current_issue: 8
+evidence_index_count: 83
+entity_relation_count: 6
 research_question_count: 10
-unresolved_question_count: 11
-promotion_receipt_count: 77
+unresolved_question_count: 10
+promotion_receipt_count: 90
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

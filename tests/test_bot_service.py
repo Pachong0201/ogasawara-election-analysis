@@ -101,6 +101,18 @@ class TestElectionBotService(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(state.focus.jurisdiction, "高雄市")
         self.assertTrue(state.analysis_context)
 
+    async def test_writer_failure_returns_summary_and_preserves_context(self):
+        from unittest.mock import AsyncMock
+        from urllib.error import HTTPError
+
+        self.writer.write = AsyncMock(side_effect=HTTPError(
+            "https://example.test", 429, "Too Many Requests", {}, None
+        ))
+        reply = await self.service.handle_message(inbound("分析高雄选情"))
+        self.assertIn("本地结构化摘要", reply.text)
+        self.assertIn("高雄市", reply.text)
+        self.assertTrue(self.store.load(reply.conversation_key).analysis_context)
+
     async def test_followup_reply_reuses_context_without_rerunning_skill(self):
         first = await self.service.handle_message(inbound("分析高雄选情", message_id="m1"))
         self.service.link_outbound_message("bot1", first.conversation_key)

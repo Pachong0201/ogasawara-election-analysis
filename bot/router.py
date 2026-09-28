@@ -50,6 +50,13 @@ ALIASES: Dict[str, str] = {
 
 def _clean_text(text: str) -> str:
     text = str(text or "").strip()
+    # Feishu rich-text ``code_block`` nodes are rendered by the channel SDK as
+    # a whole-message Markdown fence.  Users often paste commands this way;
+    # unwrap the outer fence so intent and jurisdiction detection see the
+    # actual command.  Embedded fences in normal prose are left untouched.
+    fenced = re.fullmatch(r"```(?:[\w+-]+)?\s*\n?(.*?)\n?```", text, re.DOTALL)
+    if fenced:
+        text = fenced.group(1).strip()
     text = re.sub(r"^@\S+\s*", "", text)
     return text.strip()
 

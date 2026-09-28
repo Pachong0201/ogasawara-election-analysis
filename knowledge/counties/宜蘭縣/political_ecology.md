@@ -2,16 +2,22 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-27T03:12:37+00:00
+生成时间：2026-09-27T13:06:58+00:00
 
 ## 历史政治知识（L2）
 - 宜蘭縣-population-2025: 截至2025年12月底，宜蘭縣户籍登记人口为449,336人，较2024年12月底增加124人。（2024-12-31—2025-12-31）
 - 宜蘭縣-primary-employment-industry-2021: 2021年工业及服务业普查按从业人数观察，宜蘭縣从业人数最多的行业为零售业。（2021-01-01—2021-12-31）
+- yl-wu-ly-start-20260927: 立法院吴宗宪委员页面记载其第11届全国不分区及侨居国外国民选区身份、到职日期2024年2月1日。（2024-02-01到职记录）
+- yl-liu-by-election-20260927: 宜兰选委会2024年4月13日补选结果新闻稿列刘灿辉为第4选举区候选人，政党推荐栏为无。（2024-04-13补选）
+- yl-hsieh-abstract-20260927: 谢志得1996年论文公开摘要将研究范围设为1949年迁台后至1992年立委选举，并讨论派系形成、转型及组织动员。（1949—1992研究范围；1996论文出版）
 
 ## 当前地方关系（L3）
 - ly11-office-宜蘭縣-陳俊宇: 陳俊宇 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - official-event-20260927-12-0: 新群水環境巡守隊 → other → 臺灣湯淺電池股份有限公司；status=active_verified；current_use=current_usable；time_scope=2026-09-05
 - candidate-party-2026-宜蘭縣-林國漳-民主進步黨: 林國漳 → party → 民主進步黨；status=active_verified；current_use=current_usable；time_scope=2026-09-02—2026-11-28
+- yl-lin-former-chair-20260927: 林國漳 → office_holding → 社團法人宜蘭縣信賴台灣之友會；status=historical_only；current_use=historical_or_stale；time_scope=2026-01-19变更登记时已辞任；开始及真实辞任生效日unknown
+- yl-chen-wu-event-20260927: 陳琬惠 → campaign_cooperation → 吳宗憲；status=historical_only；current_use=historical_or_stale；time_scope=2026-09-01活动
+- yl-zhang-wu-event-20260927: 張勝德 → campaign_cooperation → 吳宗憲；status=historical_only；current_use=historical_or_stale；time_scope=2026-09-01活动
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-2717adc2742f3674: 陳宏毅；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -81,15 +87,24 @@
 
 ## 当前地方议题（L3）
 - official-issue-20260927-12-0: 2026-09-05 宜兰县环保局正文记录亲子净溪、企业捐赠与水环境巡守；这里只确认当日活动和公私协力议题，不推定水质改善或长期参与成效。；current_use=current_usable；date=2026-09-05；time_scope=2026-09-05
+- yl-hsr-approved-20260927: 铁道局计划正文记载高铁延伸宜兰综合规划及可行性修正报告于2026年7月28日获行政院核定。；current_use=current_usable；date=2026-07-28；time_scope=2026-07-28公告或事件记录；不是全程当前状态证明
+- yl-elevated-approved-20260927: 铁道局计划正文记载宜兰铁路高架化综合规划于2026年3月25日获行政院核定。；current_use=current_usable；date=2026-03-25；time_scope=2026-03-25公告或事件记录；不是全程当前状态证明
+- yl-elevated-south-award-20260927: 铁道局正文记载宜兰新站南至冬山站北段土建轨道工程设计及监造技术服务标于2026年9月4日决标。；current_use=current_usable；date=2026-09-04；time_scope=2026-09-04公告或事件记录；不是全程当前状态证明
+- yl-flood-measures-20260927: 宜兰县政府9月1日公开消息记录自主防灾社区结合决策仪表板与淹水感测器。；current_use=current_usable；date=2026-09-01；time_scope=2026-09-01公告或事件记录；不是全程当前状态证明
+- yl-lize-contract-20260927: 宜兰环保局3月24日原稿记录利泽焚化厂ROT案完成签约，进入履约与整建整备阶段。；current_use=current_usable；date=2026-03-24；time_scope=2026-03-24公告或事件记录；不是全程当前状态证明
+- yl-local-review-announcement-20260927: 宜兰县选委会首页9月24日列出地方公职人员候选人资格审查结果公告。；current_use=current_usable；date=2026-09-24；time_scope=2026-09-24公告或事件记录；不是全程当前状态证明
+- yl-defense-dispute-event-20260927: 9月21日至24日中央社与公视分别报道蓝营质疑林国漳律师执业的选举攻防及林阵营反驳；双方评价存在争议。；current_use=current_usable；date=2026-09-24；time_scope=2026-09-24公告或事件记录；不是全程当前状态证明
 
 ## 人物—组织—地区关系索引
 - 陳俊宇 → office_holding → 立法院第11屆立法委員；region=宜蘭縣；current_use=current_usable
 - 新群水環境巡守隊 → other → 臺灣湯淺電池股份有限公司；region=宜蘭縣；current_use=current_usable
 - 林國漳 → party → 民主進步黨；region=宜蘭縣；current_use=current_usable
+- 林國漳 → office_holding → 社團法人宜蘭縣信賴台灣之友會；region=宜蘭縣；current_use=historical_or_stale
+- 陳琬惠 → campaign_cooperation → 吳宗憲；region=宜蘭縣；current_use=historical_or_stale
+- 張勝德 → campaign_cooperation → 吳宗憲；region=宜蘭縣；current_use=historical_or_stale
 
 ## 尚未解决的检索问题
-- 2026年宜蘭縣縣市長候選人吳宗憲是否由中國國民黨推薦登記？（leads=1, verified=1）
-- 2026年宜蘭縣縣市長候選人林國漳是否由民主進步黨推薦登記？（leads=1, verified=1）
+- 截至2026-09-27，宜蘭縣证据包中哪些登记、历史研究、个人公开关系及政策程序可由原始资料核验？（leads=22, verified=6）
 - 宜蘭縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
 - 宜蘭縣 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？（leads=0, verified=0）
 - 宜蘭縣 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？（leads=0, verified=0）

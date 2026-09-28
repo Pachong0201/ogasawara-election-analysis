@@ -2,13 +2,15 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T15:17:47+00:00
+生成时间：2026-09-27T12:34:01+00:00
 
 ## 历史政治知识（L2）
 - kaohsiung-admin-structure-38-districts: 高雄市政府公开资料记载，高雄市划分为38个行政区。（2010-12-25—2026-09-26）
 - 高雄市-population-2025: 截至2025年12月底，高雄市户籍登记人口为2,718,545人，较2024年12月底减少12,867人。（2024-12-31—2025-12-31）
 - 高雄市-primary-employment-industry-2021: 2021年工业及服务业普查按从业人数观察，高雄市从业人数最多的行业为批发业。（2021-01-01—2021-12-31）
 - kh-academic-factions-2018: 该论文对县市合并后的原高雄县地方派系进行研究，认为派系并未因合并而消失，但红、白、黑等网络呈现分化、跨党移动或政党化等不同变化。（2010-2018）
+- kh-yang-types-20260927: 杨天杰2024年论文摘要提出农会传统垂直、里长相对水平、宫庙相对水平三种桩脚转型类型。（2024年3月出版；主要观察2014、2018，延伸2020、2022）
+- kh-yang-postmerger-20260927: 杨天杰2024年论文摘要认为县市合并后县派弱化，而市派通过吸纳县派存续。（2024年3月出版；主要观察2014、2018，延伸2020、2022）
 
 ## 当前地方关系（L3）
 - kh-chen-chimai-lai-juilung-20260902: 陈其迈 → public_endorsement → 赖瑞隆；status=active_verified；current_use=current_usable；time_scope=2026-09-02
@@ -22,6 +24,8 @@
 - ly11-office-高雄市-賴瑞隆: 賴瑞隆 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - official-event-20260926-0-0: 陳其邁 → other → 梓官區農會；status=active_verified；current_use=current_usable；time_scope=2026-09-19
 - official-event-20260926-0-1: 林逸昌 → office_holding → 梓官區農會；status=active_verified；current_use=current_usable；time_scope=2026-09-19
+- kh-lin-lai-20260905: 林岱樺 → public_endorsement → 賴瑞隆；status=historical_only；current_use=historical_or_stale；time_scope=2026-09-05当天公开表态
+- kh-wang-ko-20260913: 王金平 → campaign_cooperation → 柯志恩；status=historical_only；current_use=historical_or_stale；time_scope=2026-09-13当天公开表态
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-ec9cf519f323267b: 張靜；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -133,6 +137,12 @@
 
 ## 当前地方议题（L3）
 - official-issue-20260926-0-0: 消防局記錄梓官區農會捐贈救護車及防護裝備，總值450萬元；車輛規劃配置梓官分隊，屬地方救護量能補充，後續實際使用成效未核實。；current_use=current_usable；date=2026-09-19；time_scope=2026-09-19
+- kh-dalinpu-eia-20260927: 高雄都发局9月23日公告新材料循环产业园区通过环评，并说明都市计划及设园仍有后续程序。；current_use=current_usable；date=2026-09-23；time_scope=2026-09-23公告记录，非完工证明
+- kh-dalinpu-scope-20260927: 3月13日安置法规将小港大林蒲及凤鼻头沿海六里列为迁村范围，安置区涉及前镇明正及凤山南成、保安、中民。；current_use=current_usable；date=2026-03-13；time_scope=2026-03-13公告记录，非完工证明
+- kh-fish-trial-20260927: 行政院9月17日公告前镇渔港两年试营运，期间攤商清洁管理费由中央补助。；current_use=current_usable；date=2026-09-17；time_scope=2026-09-17公告记录，非完工证明
+- kh-fish-free-20260927: 行政院9月17日公告两年试营运期间境外聘雇外籍漁工及眷属入住船员会馆免付费，费用由农業部与船东负担。；current_use=current_usable；date=2026-09-17；time_scope=2026-09-17公告记录，非完工证明
+- kh-housing-stock-20260927: 8月27日高雄住都中心原始消息称全市社宅兴办23055户。；current_use=current_usable；date=2026-08-27；time_scope=2026-08-27公告记录，非完工证明
+- kh-daliao-demand-20260927: 高雄住都中心8月27日公告，大寮社宅释出384户，截至8月26日收到1202件申请。；current_use=current_usable；date=2026-08-27；time_scope=2026-08-27公告记录，非完工证明
 
 ## 人物—组织—地区关系索引
 - 陈其迈 → public_endorsement → 赖瑞隆；region=高雄市；current_use=current_usable
@@ -146,8 +156,11 @@
 - 賴瑞隆 → office_holding → 立法院第11屆立法委員；region=高雄市；current_use=current_usable
 - 陳其邁 → other → 梓官區農會；region=高雄市；current_use=current_usable
 - 林逸昌 → office_holding → 梓官區農會；region=高雄市；current_use=current_usable
+- 林岱樺 → public_endorsement → 賴瑞隆；region=高雄市；current_use=historical_or_stale
+- 王金平 → campaign_cooperation → 柯志恩；region=高雄市；current_use=historical_or_stale
 
 ## 尚未解决的检索问题
+- 截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？（leads=25, verified=16）
 - 高雄市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
 - 高雄市 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？（leads=0, verified=0）
 - 高雄市 的行政区、立委选区与历届地方选举空间差异中，哪些结构需要结合边界版本解释？（leads=0, verified=0）

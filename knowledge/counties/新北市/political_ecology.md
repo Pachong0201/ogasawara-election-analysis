@@ -2,12 +2,15 @@
 
 > 本文件由结构化 knowledge/ 记录自动生成，只是索引，不新增因果判断或政治评价。
 
-生成时间：2026-09-26T15:17:53+00:00
+生成时间：2026-09-27T11:12:48+00:00
 
 ## 历史政治知识（L2）
 - new-taipei-2010-upgrade-29-districts: 新北市政府公开资料记载，新北市自2010年12月25日起改制为直辖市，全市划分为29区。（2010-12-25—2026-09-26）
 - 新北市-population-2025: 截至2025年12月底，新北市户籍登记人口为4,044,831人，较2024年12月底减少2,170人。（2024-12-31—2025-12-31）
 - 新北市-primary-employment-industry-2021: 2021年工业及服务业普查按从业人数观察，新北市从业人数最多的行业为批发业。（2021-01-01—2021-12-31）
+- ntpc-li-ey-appointment-20140226: 行政院于2014年2月26日发布李四川接任行政院秘书长的消息。（2014-02-26人事公告）
+- ntpc-li-prior-ntpc-offices-2014: 2014年行政院人事公告记载李四川曾任台北县工务局长、台北县副县长及新北市副市长。（2014-02-26公告所记此前经历）
+- ntpc-chien-thesis-abstract-2016: 简以刚2016年新北市个案论文的公开摘要采用侍从关系转型观点，并描述经营对象由个人、宗亲、家族转向社团、组织、协会。（2016年出版论文的个案观察；实地研究起止unknown）
 
 ## 当前地方关系（L3）
 - ntpc-tsai-ingwen-su-chiaohui-20260820: 蔡英文 → campaign_cooperation → 苏巧慧竞选总部；status=active_verified；current_use=current_usable；time_scope=2026-08-20
@@ -25,6 +28,8 @@
 - ly11-office-新北市-廖先翔: 廖先翔 → office_holding → 立法院第11屆立法委員；status=active_verified；current_use=current_usable；time_scope=2024-02-01—current
 - official-event-20260926-4-0: 李美珍 → other → 新北市喜悅成長協會；status=active_verified；current_use=current_usable；time_scope=2026-09-22
 - official-event-20260926-4-1: 游伯湖 → office_holding → 新北市喜悅成長協會；status=active_verified；current_use=current_usable；time_scope=2026-09-22
+- ntpc-li-huang-public-cooperation-20260927: 李四川 → campaign_cooperation → 黄国昌；status=historical_only；current_use=historical_or_stale；time_scope=2026-08-21—2026-08-29公开表态
+- ntpc-hou-li-sept12-endorsement-20260927: 侯友宜 → public_endorsement → 李四川；status=historical_only；current_use=historical_or_stale；time_scope=2026-09-12公开支持
 
 ## 候选人地方档案（L3）
 - cec-reg-2026-c5eea051b105fed6: 蘇巧慧；current_use=current_usable；time_scope=2026-08-31—2026-09-04 candidate registration；last_verified_at=2026-09-26
@@ -145,6 +150,13 @@
 
 ## 当前地方议题（L3）
 - official-issue-20260926-4-0: 社會局記錄喜悅成長協會依社福中心需求捐贈約21萬元物資；可作公私合作服務紀錄，無法據此推論整體弱勢需求已被滿足。；current_use=current_usable；date=2026-09-22；time_scope=2026-09-22
+- ntpc-seven-metro-lines-20260927: 2026年9月4日新北市政府消息称当时有七条捷运路线同时施工。；current_use=current_usable；date=2026-09-04；time_scope=截至2026-09-04的公告或程序记录
+- ntpc-sanying-opening-20260927: 新北市捷运工程局公告三莺线于2026年6月30日通车，沿线十二座车站投入营运。；current_use=current_usable；date=2026-06-30；time_scope=截至2026-06-30的公告或程序记录
+- ntpc-sanying-charging-20260927: 新北捷运公司公告三莺线自2026年9月1日起收费营运。；current_use=current_usable；date=2026-08-28；time_scope=截至2026-08-28的公告或程序记录
+- ntpc-wenzizun-rights-20260927: 2026年4月17日市府公告塭仔圳第二期无异议土地完成权利变更登记。；current_use=current_usable；date=2026-04-17；time_scope=截至2026-04-17的公告或程序记录
+- ntpc-wenzizun-housing-920-20260927: 城发局2026年9月10日更新的社宅成果表在规划栏列塭仔圳青年社会住宅920户。；current_use=current_usable；date=2026-09-10；time_scope=截至2026-09-10的公告或程序记录
+- ntpc-wenzizun-housing-1180-20260927: 城发局2026年9月10日更新的社宅成果表列新泰塭仔圳重划区规划1180户，并注明含塭仔圳一期社会住宅。；current_use=current_usable；date=2026-09-10；time_scope=截至2026-09-10的公告或程序记录
+- ntpc-sixian-hearing-notice-20260927: 新北都市更新处2026年9月18日公告新庄思贤段988地号等12笔土地更新案公听会安排于9月24日。；current_use=current_usable；date=2026-09-18；time_scope=截至2026-09-18的公告或程序记录
 
 ## 人物—组织—地区关系索引
 - 蔡英文 → campaign_cooperation → 苏巧慧竞选总部；region=新北市；current_use=current_usable
@@ -162,8 +174,11 @@
 - 廖先翔 → office_holding → 立法院第11屆立法委員；region=新北市；current_use=current_usable
 - 李美珍 → other → 新北市喜悅成長協會；region=新北市；current_use=current_usable
 - 游伯湖 → office_holding → 新北市喜悅成長協會；region=新北市；current_use=current_usable
+- 李四川 → campaign_cooperation → 黄国昌；region=新北市；current_use=historical_or_stale
+- 侯友宜 → public_endorsement → 李四川；region=新北市；current_use=historical_or_stale
 
 ## 尚未解决的检索问题
+- 截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？（leads=20, verified=18）
 - 新北市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？（leads=0, verified=0）
 - 新北市 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？（leads=0, verified=0）
 - 学术或可靠公开资料如何描述 新北市 的历史派系或政治网络，其有效时间范围及当前可验证状态为何？（leads=0, verified=0）

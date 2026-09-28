@@ -1,0 +1,1129 @@
+{
+  "proposal_count": 17,
+  "counts": {
+    "promoted": 0,
+    "rejected": 5,
+    "requires_review": 0,
+    "dry_run_pass": 12
+  },
+  "results": [
+    {
+      "receipt": {
+        "receipt_id": "promotion-d33be93fed7285450b47bc82",
+        "proposal_id": "ntpc-pack-20260927-li-ey-appointment",
+        "county": "新北市",
+        "target_type": "historical_claim",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T11:11:56.876731+00:00",
+        "target_path": "",
+        "record_id": "ntpc-li-ey-appointment-20140226",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-05"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 已对照政大官职数据库检索结果及公视当年报道线索；正式生效日不以公告日替代。",
+        "record_sha256": "f2b86ab5e138ac8ed174ed90ccc7645a01e372a76985a689e230c29b68da8443",
+        "evidence_snapshot_sha256": "07b7566c26d98e53607d47d2bd1c202cffd4b9291dfbc41891f334f1a1338a4c",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "ntpc-li-ey-appointment-20140226",
+        "claim": "行政院于2014年2月26日发布李四川接任行政院秘书长的消息。",
+        "time_scope": "2014-02-26人事公告",
+        "topic": "administrative_career",
+        "region": "新北市",
+        "notes": "",
+        "uncertainty": {
+          "level": "medium",
+          "reason": "仅适用于证据的原始时间和明确范围。",
+          "competing_explanations": []
+        },
+        "layer_id": "L2",
+        "county": "新北市",
+        "source": "李四川接任行政院秘书长",
+        "source_grade": "A",
+        "source_reference": "https://www.ey.gov.tw/Page/9277F759E41CCD91/d3645835-d968-49d0-851f-126abf00f80a",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "scope_boundary": "仅确认2014年人事公告，不表示现任职位，也不推断基层选举组织或民意支持。",
+        "promotion_provenance": {
+          "proposal_id": "ntpc-pack-20260927-li-ey-appointment",
+          "promoted_at": "2026-09-27T11:11:56+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "ntpc-pack-20260927-url-05"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 已对照政大官职数据库检索结果及公视当年报道线索；正式生效日不以公告日替代。"
+        },
+        "record_type": "historical_claim",
+        "evidence": [
+          {
+            "source": "李四川接任行政院秘书长",
+            "source_grade": "A",
+            "reference": "https://www.ey.gov.tw/Page/9277F759E41CCD91/d3645835-d968-49d0-851f-126abf00f80a",
+            "date": "2014-02-26",
+            "retrieved_at": "2026-09-27T11:06:48Z",
+            "lead_id": "ntpc-pack-20260927-url-05",
+            "independence_key": "EY"
+          }
+        ]
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-636ae17044ece1c49466e4a5",
+        "proposal_id": "ntpc-pack-20260927-li-prior-offices",
+        "county": "新北市",
+        "target_type": "historical_claim",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T11:11:56.877367+00:00",
+        "target_path": "",
+        "record_id": "ntpc-li-prior-ntpc-offices-2014",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-05"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。",
+        "record_sha256": "b60b4384f8719947cf6d1d02753671292e53441406beb9aecd2f44773ba9c489",
+        "evidence_snapshot_sha256": "07b7566c26d98e53607d47d2bd1c202cffd4b9291dfbc41891f334f1a1338a4c",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "ntpc-li-prior-ntpc-offices-2014",
+        "claim": "2014年行政院人事公告记载李四川曾任台北县工务局长、台北县副县长及新北市副市长。",
+        "time_scope": "2014-02-26公告所记此前经历",
+        "topic": "administrative_career",
+        "region": "新北市",
+        "notes": "",
+        "uncertainty": {
+          "level": "medium",
+          "reason": "仅适用于证据的原始时间和明确范围。",
+          "competing_explanations": []
+        },
+        "layer_id": "L2",
+        "county": "新北市",
+        "source": "李四川接任行政院秘书长",
+        "source_grade": "A",
+        "source_reference": "https://www.ey.gov.tw/Page/9277F759E41CCD91/d3645835-d968-49d0-851f-126abf00f80a",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "scope_boundary": "只确认公告列出的职务经历；任期起止unknown；不能当作地方派系、基层经营或支持者转移的证据。",
+        "promotion_provenance": {
+          "proposal_id": "ntpc-pack-20260927-li-prior-offices",
+          "promoted_at": "2026-09-27T11:11:56+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "ntpc-pack-20260927-url-05"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。"
+        },
+        "record_type": "historical_claim",
+        "evidence": [
+          {
+            "source": "李四川接任行政院秘书长",
+            "source_grade": "A",
+            "reference": "https://www.ey.gov.tw/Page/9277F759E41CCD91/d3645835-d968-49d0-851f-126abf00f80a",
+            "date": "2014-02-26",
+            "retrieved_at": "2026-09-27T11:06:48Z",
+            "lead_id": "ntpc-pack-20260927-url-05",
+            "independence_key": "EY"
+          }
+        ]
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-96f7f3b1bfc1eb398d01280e",
+        "proposal_id": "ntpc-pack-20260927-chien-abstract",
+        "county": "新北市",
+        "target_type": "historical_claim",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T11:11:56.877636+00:00",
+        "target_path": "",
+        "record_id": "ntpc-chien-thesis-abstract-2016",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-16"
+        ],
+        "evidence_grades": [
+          "B"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 已检索完整论文题名加撤回、勘误，未检得撤回公告；摘要自身为转型而非原样持续。",
+        "record_sha256": "399ad1d90a7751eeb3200c5f0cc56ecddac82f6712acd0c5d23d36215e75df70",
+        "evidence_snapshot_sha256": "17f6a52c92ae3567029815a1ee14250b81647ff876d24a5d93df3da43388c36c",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "ntpc-chien-thesis-abstract-2016",
+        "claim": "简以刚2016年新北市个案论文的公开摘要采用侍从关系转型观点，并描述经营对象由个人、宗亲、家族转向社团、组织、协会。",
+        "time_scope": "2016年出版论文的个案观察；实地研究起止unknown",
+        "topic": "academic_abstract",
+        "region": "新北市",
+        "notes": "仅核验政大书目摘要。目录页码已核对，但具体论证页码及全文尚待复核；不将目录范围作为正文已读证明。",
+        "uncertainty": {
+          "level": "medium",
+          "reason": "仅适用于证据的原始时间和明确范围。",
+          "competing_explanations": []
+        },
+        "layer_id": "L2",
+        "county": "新北市",
+        "source": "简以刚2016论文摘要",
+        "source_grade": "B",
+        "source_reference": "https://thesis.lib.nccu.edu.tw/thesis/detail/d8f60d7b27b5a980f10a25d88aa271cb/",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "scope_boundary": "仅记录2016年论文摘要所表达的研究观点；不确认当前特定协会与候选人的利益关系，不外推2026网络持续性。",
+        "promotion_provenance": {
+          "proposal_id": "ntpc-pack-20260927-chien-abstract",
+          "promoted_at": "2026-09-27T11:11:56+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "ntpc-pack-20260927-url-16"
+          ],
+          "evidence_grades": [
+            "B"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 已检索完整论文题名加撤回、勘误，未检得撤回公告；摘要自身为转型而非原样持续。"
+        },
+        "record_type": "historical_claim",
+        "evidence": [
+          {
+            "source": "简以刚2016论文摘要",
+            "source_grade": "B",
+            "reference": "https://thesis.lib.nccu.edu.tw/thesis/detail/d8f60d7b27b5a980f10a25d88aa271cb/",
+            "date": null,
+            "retrieved_at": "2026-09-27T11:06:48Z",
+            "lead_id": "ntpc-pack-20260927-url-16",
+            "independence_key": "NCCU-Chien-2016"
+          }
+        ]
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-9ab2285c210b16753f565f52",
+        "proposal_id": "ntpc-pack-20260927-seven-metro-lines",
+        "county": "新北市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T11:11:56.883147+00:00",
+        "target_path": "",
+        "record_id": "ntpc-seven-metro-lines-20260927",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-17"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。",
+        "record_sha256": "e860c1295cda8f5cf8326557dae717b775399963b97fffb0698b68e3b4d3eddf",
+        "evidence_snapshot_sha256": "b24867416792771dd5dccff91c0dceb666397c2f168fa47db87c2761b8296f9b",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "ntpc-seven-metro-lines-20260927",
+        "claim_text": "2026年9月4日新北市政府消息称当时有七条捷运路线同时施工。",
+        "claim_type": "policy",
+        "speaker": "新北市政府相关主管机关",
+        "date": "2026-09-04",
+        "time_scope": "截至2026-09-04的公告或程序记录",
+        "last_verified_at": "2026-09-27",
+        "region": "新北市",
+        "verification_status": "official_record",
+        "notes": "核验日只代表原始公告仍可核对，不代表所有后续政策状态已更新。",
+        "layer_id": "L3",
+        "county": "新北市",
+        "source": "四环八线建设消息",
+        "source_grade": "A",
+        "source_reference": "https://www.ntpc.gov.tw/ch/home.jsp?dataserno=9a139984dd69141eb6315d1b34a4ff11&id=e8ca970cde5c00e1",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅保存官方当日报道的施工状态，不证明路线全数完工、政策绩效或候选人受益。",
+        "promotion_provenance": {
+          "proposal_id": "ntpc-pack-20260927-seven-metro-lines",
+          "promoted_at": "2026-09-27T11:11:56+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "ntpc-pack-20260927-url-17"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-2dd2966fce2ac0f0df45b320",
+        "proposal_id": "ntpc-pack-20260927-sanying-opening",
+        "county": "新北市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T11:11:56.887319+00:00",
+        "target_path": "",
+        "record_id": "ntpc-sanying-opening-20260927",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-18"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 后续8月28日运营公司收费公告再次确认6月30日通车；延长试运营时段不等于未通车。",
+        "record_sha256": "51efda46c6fc0bbc12e0269882d778d1eddea53fa831d9aa56e5b94baefc29f3",
+        "evidence_snapshot_sha256": "01b542fa7043587f596e6359711d88c2c68856c003a0ecbcf79fef9a979f97f8",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "ntpc-sanying-opening-20260927",
+        "claim_text": "新北市捷运工程局公告三莺线于2026年6月30日通车，沿线十二座车站投入营运。",
+        "claim_type": "policy",
+        "speaker": "新北市政府相关主管机关",
+        "date": "2026-06-30",
+        "time_scope": "截至2026-06-30的公告或程序记录",
+        "last_verified_at": "2026-09-27",
+        "region": "新北市土城、三峡、莺歌",
+        "verification_status": "official_record",
+        "notes": "核验日只代表原始公告仍可核对，不代表所有后续政策状态已更新。",
+        "layer_id": "L3",
+        "county": "新北市",
+        "source": "三莺线通车公告",
+        "source_grade": "A",
+        "source_reference": "https://www.dorts.ntpc.gov.tw/news/indexInfo/1AldpDkNdLK7",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅确认通车公告与线路车站范围，不包含桃园八德延伸段，不推断满意度或选举影响。",
+        "promotion_provenance": {
+          "proposal_id": "ntpc-pack-20260927-sanying-opening",
+          "promoted_at": "2026-09-27T11:11:56+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "ntpc-pack-20260927-url-18"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 后续8月28日运营公司收费公告再次确认6月30日通车；延长试运营时段不等于未通车。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-98d115b052a06bb485d04515",
+        "proposal_id": "ntpc-pack-20260927-sanying-charging",
+        "county": "新北市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T11:11:56.891147+00:00",
+        "target_path": "",
+        "record_id": "ntpc-sanying-charging-20260927",
+        "evidence_lead_ids": [
+          "ntpc-pack-metro-charge"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 已搜索延后及澄清，未发现收费安排被撤回的官方资料。",
+        "record_sha256": "6054e5ea44b94b9bc6b34a4d9182c37ebdd983c8de295408e64b43e5e7b0c12b",
+        "evidence_snapshot_sha256": "c30d9ae85ca8319c3d47364eaf89ff0524749a5348286d3bf826ab3ab2259765",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "ntpc-sanying-charging-20260927",
+        "claim_text": "新北捷运公司公告三莺线自2026年9月1日起收费营运。",
+        "claim_type": "policy",
+        "speaker": "新北市政府相关主管机关",
+        "date": "2026-08-28",
+        "time_scope": "截至2026-08-28的公告或程序记录",
+        "last_verified_at": "2026-09-27",
+        "region": "新北市土城、三峡、莺歌",
+        "verification_status": "official_record",
+        "notes": "核验日只代表原始公告仍可核对，不代表所有后续政策状态已更新。",
+        "layer_id": "L3",
+        "county": "新北市",
+        "source": "新北捷运公司三莺线收费公告",
+        "source_grade": "A",
+        "source_reference": "https://www.ntmetro.com.tw/basic/?mode=detail&node=893",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "保存收费公告和其生效安排，不据此评价运营效益、票价满意度或候选人表现。",
+        "promotion_provenance": {
+          "proposal_id": "ntpc-pack-20260927-sanying-charging",
+          "promoted_at": "2026-09-27T11:11:56+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "ntpc-pack-metro-charge"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 已搜索延后及澄清，未发现收费安排被撤回的官方资料。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-e076037e9cbe6fdbf401a0bf",
+        "proposal_id": "ntpc-pack-20260927-wenzizun-rights",
+        "county": "新北市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T11:11:56.895340+00:00",
+        "target_path": "",
+        "record_id": "ntpc-wenzizun-rights-20260927",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-20"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。",
+        "record_sha256": "929d39b9371e57128294693caacb2c6eade60a41e6f8a259f115814ce356f00b",
+        "evidence_snapshot_sha256": "2b5d2b172dfc110b29390c464bb0e8f67a9e5074718c1db1b7d848f965f3d876",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "ntpc-wenzizun-rights-20260927",
+        "claim_text": "2026年4月17日市府公告塭仔圳第二期无异议土地完成权利变更登记。",
+        "claim_type": "policy",
+        "speaker": "新北市政府相关主管机关",
+        "date": "2026-04-17",
+        "time_scope": "截至2026-04-17的公告或程序记录",
+        "last_verified_at": "2026-09-27",
+        "region": "新北市",
+        "verification_status": "official_record",
+        "notes": "核验日只代表原始公告仍可核对，不代表所有后续政策状态已更新。",
+        "layer_id": "L3",
+        "county": "新北市",
+        "source": "塭仔圳第二期产权登记",
+        "source_grade": "A",
+        "source_reference": "https://www.ntpc.gov.tw/ch/home.jsp?dataserno=202604170011&id=28",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅限无异议土地；公告仍提到异议处理，不表示全部权利争议或重划工程已经完成。",
+        "promotion_provenance": {
+          "proposal_id": "ntpc-pack-20260927-wenzizun-rights",
+          "promoted_at": "2026-09-27T11:11:56+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "ntpc-pack-20260927-url-20"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-e20d731f59fa4c2c17a285a5",
+        "proposal_id": "ntpc-pack-20260927-wenzizun-housing-920",
+        "county": "新北市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T11:11:56.899131+00:00",
+        "target_path": "",
+        "record_id": "ntpc-wenzizun-housing-920-20260927",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-21"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 3月公告已决标并预计2027上半年动工；这是同项目不同程序维度，不是920户已建成。",
+        "record_sha256": "8e6c3168afaf5d626a3b7033062c053121a7b571589a6846ed7d4dd83c3c845e",
+        "evidence_snapshot_sha256": "b31b193d187e01833ce3f4b3d21f8b8d5b28337a3c27e47a8ac38d7f0a8e3118",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "ntpc-wenzizun-housing-920-20260927",
+        "claim_text": "城发局2026年9月10日更新的社宅成果表在规划栏列塭仔圳青年社会住宅920户。",
+        "claim_type": "policy",
+        "speaker": "新北市政府相关主管机关",
+        "date": "2026-09-10",
+        "time_scope": "截至2026-09-10的公告或程序记录",
+        "last_verified_at": "2026-09-27",
+        "region": "新北市",
+        "verification_status": "official_record",
+        "notes": "核验日只代表原始公告仍可核对，不代表所有后续政策状态已更新。",
+        "layer_id": "L3",
+        "county": "新北市",
+        "source": "新北社会住宅成果表",
+        "source_grade": "A",
+        "source_reference": "https://www.planning.ntpc.gov.tw/home.jsp?id=f8ee73f4c438b4d4",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅记录规划表列数，不是已完工或已入住户数；不得与含一期的1180户直接相加。",
+        "promotion_provenance": {
+          "proposal_id": "ntpc-pack-20260927-wenzizun-housing-920",
+          "promoted_at": "2026-09-27T11:11:56+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "ntpc-pack-20260927-url-21"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 3月公告已决标并预计2027上半年动工；这是同项目不同程序维度，不是920户已建成。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-7b84767687fc8958a8c4bb56",
+        "proposal_id": "ntpc-pack-20260927-wenzizun-housing-1180",
+        "county": "新北市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T11:11:56.903382+00:00",
+        "target_path": "",
+        "record_id": "ntpc-wenzizun-housing-1180-20260927",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-21"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。",
+        "record_sha256": "1285608219bf96aeac76aba569c41ad9ff4849eb5acd96760cf083d66e3fb1e2",
+        "evidence_snapshot_sha256": "b31b193d187e01833ce3f4b3d21f8b8d5b28337a3c27e47a8ac38d7f0a8e3118",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "ntpc-wenzizun-housing-1180-20260927",
+        "claim_text": "城发局2026年9月10日更新的社宅成果表列新泰塭仔圳重划区规划1180户，并注明含塭仔圳一期社会住宅。",
+        "claim_type": "policy",
+        "speaker": "新北市政府相关主管机关",
+        "date": "2026-09-10",
+        "time_scope": "截至2026-09-10的公告或程序记录",
+        "last_verified_at": "2026-09-27",
+        "region": "新北市",
+        "verification_status": "official_record",
+        "notes": "核验日只代表原始公告仍可核对，不代表所有后续政策状态已更新。",
+        "layer_id": "L3",
+        "county": "新北市",
+        "source": "新北社会住宅成果表",
+        "source_grade": "A",
+        "source_reference": "https://www.planning.ntpc.gov.tw/home.jsp?id=f8ee73f4c438b4d4",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "1180为包含一期的规划口径；与920项存在包含关系，不能相加或视为建成数量。",
+        "promotion_provenance": {
+          "proposal_id": "ntpc-pack-20260927-wenzizun-housing-1180",
+          "promoted_at": "2026-09-27T11:11:56+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "ntpc-pack-20260927-url-21"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-2abe8fc953e4392b8e9383e1",
+        "proposal_id": "ntpc-pack-20260927-sixian-hearing-notice",
+        "county": "新北市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T11:11:56.907198+00:00",
+        "target_path": "",
+        "record_id": "ntpc-sixian-hearing-notice-20260927",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-23"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 已查案名加取消、撤回，未找到可核验取消公告，仍不以未检得取消替代实际举行证明。",
+        "record_sha256": "55a2b23dd4618b3e28f0f3b1d5a1211cba6aad504797c188832edf19889b861d",
+        "evidence_snapshot_sha256": "3a63591ec0b2e5a696e7227aace5ec95f327a734308026e44d24bf820714da58",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "ntpc-sixian-hearing-notice-20260927",
+        "claim_text": "新北都市更新处2026年9月18日公告新庄思贤段988地号等12笔土地更新案公听会安排于9月24日。",
+        "claim_type": "policy",
+        "speaker": "新北市政府相关主管机关",
+        "date": "2026-09-18",
+        "time_scope": "截至2026-09-18的公告或程序记录",
+        "last_verified_at": "2026-09-27",
+        "region": "新北市新庄区",
+        "verification_status": "official_record",
+        "notes": "核验日只代表原始公告仍可核对，不代表所有后续政策状态已更新。",
+        "layer_id": "L3",
+        "county": "新北市",
+        "source": "思贤段988等12笔公听会公告",
+        "source_grade": "A",
+        "source_reference": "https://www.planning.ntpc.gov.tw/home.jsp?act=be4f48068b2b0031&dataserno=86f56014b4cbd26716cd94a01fbe3929&id=3a22ad251d23c6c5",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "只证明公听会公告及预定日期；没有会议纪要，不声称已召开、核定、权利人同意或完成权利变换。",
+        "promotion_provenance": {
+          "proposal_id": "ntpc-pack-20260927-sixian-hearing-notice",
+          "promoted_at": "2026-09-27T11:11:56+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "ntpc-pack-20260927-url-23"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 已查案名加取消、撤回，未找到可核验取消公告，仍不以未检得取消替代实际举行证明。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-7e724e0bc728dc4f0a189939",
+        "proposal_id": "ntpc-pack-20260927-li-huang-public-cooperation",
+        "county": "新北市",
+        "target_type": "local_relationship",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T11:11:56.907483+00:00",
+        "target_path": "",
+        "record_id": "ntpc-li-huang-public-cooperation-20260927",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-11",
+          "ntpc-pack-20260927-url-24"
+        ],
+        "evidence_grades": [
+          "C",
+          "C"
+        ],
+        "independent_source_count": 2,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 主动检索新北合作决裂及澄清，发现竹北合作争议但不属于新北同一关系；UDN署名独立采访与中央社采访不同，未见转载署名。",
+        "record_sha256": "628e96d26a3d8ca01c3e47c79a459d4dd138a93a3f12b07f9a5060221eeb2f4a",
+        "evidence_snapshot_sha256": "610b7135a3baedd570db2ce1fce0ad0fcfedaa08a128a391994fec27f70d794c",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "relationship_id": "ntpc-li-huang-public-cooperation-20260927",
+        "subject": "李四川",
+        "subject_type": "person",
+        "object": "黄国昌",
+        "object_type": "person",
+        "relationship_type": "campaign_cooperation",
+        "region": "新北市",
+        "time_scope": "2026-08-21—2026-08-29公开表态",
+        "current_status": "historical_only",
+        "last_verified_at": "2026-09-27",
+        "notes": "只记录指定日期的公开表态，不冒充截至当前持续的有效联盟。",
+        "layer_id": "L3",
+        "county": "新北市",
+        "source": "李四川拜会蓝白党团",
+        "source_grade": "C",
+        "source_reference": "https://www.cna.com.tw/news/aipl/202608210085.aspx",
+        "independent_source_count": 2,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅说明双方在指定日期公开谈及支持或合作。协议全文、约束条款、后续持续性unknown；不把两党选票相加。",
+        "promotion_provenance": {
+          "proposal_id": "ntpc-pack-20260927-li-huang-public-cooperation",
+          "promoted_at": "2026-09-27T11:11:56+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "ntpc-pack-20260927-url-11",
+            "ntpc-pack-20260927-url-24"
+          ],
+          "evidence_grades": [
+            "C",
+            "C"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 主动检索新北合作决裂及澄清，发现竹北合作争议但不属于新北同一关系；UDN署名独立采访与中央社采访不同，未见转载署名。"
+        },
+        "record_type": "local_relationship",
+        "verification_evidence": [
+          {
+            "source": "李四川拜会蓝白党团",
+            "source_grade": "C",
+            "reference": "https://www.cna.com.tw/news/aipl/202608210085.aspx",
+            "date": "2026-08-21",
+            "retrieved_at": "2026-09-27T11:06:48Z",
+            "lead_id": "ntpc-pack-20260927-url-11",
+            "independence_key": "CNA"
+          },
+          {
+            "source": "李四川公开表示合作不变",
+            "source_grade": "C",
+            "reference": "https://udn.com/news/story/124652/9721866",
+            "date": "2026-08-29",
+            "retrieved_at": "2026-09-27T11:06:48Z",
+            "lead_id": "ntpc-pack-20260927-url-24",
+            "independence_key": "UDN-original-interview"
+          }
+        ],
+        "structural_use": "historical_background_only"
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-5059e66892f56361359a769d",
+        "proposal_id": "ntpc-pack-20260927-hou-li-sept12-endorsement",
+        "county": "新北市",
+        "target_type": "local_relationship",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T11:11:56.907719+00:00",
+        "target_path": "",
+        "record_id": "ntpc-hou-li-sept12-endorsement-20260927",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-13",
+          "ntpc-pack-hou-tvbs"
+        ],
+        "evidence_grades": [
+          "C",
+          "C"
+        ],
+        "independent_source_count": 2,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 已检索侯友宜反对、撤回支持；TVBS署名报道现场致词，中央社另一记者独立采访，未见互转稿标记；竞办供图不计作独立证据。",
+        "record_sha256": "434c5429f032e5f06b697046595a8242696e99c96329ab70a46490047d007c04",
+        "evidence_snapshot_sha256": "db2103d15b6625df4b5df08e43179327409d1f301af027727d9fae5b204a0102",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "relationship_id": "ntpc-hou-li-sept12-endorsement-20260927",
+        "subject": "侯友宜",
+        "subject_type": "person",
+        "object": "李四川",
+        "object_type": "person",
+        "relationship_type": "public_endorsement",
+        "region": "新北市",
+        "time_scope": "2026-09-12公开支持",
+        "current_status": "historical_only",
+        "last_verified_at": "2026-09-27",
+        "notes": "只记录指定日期的公开表态，不冒充截至当前持续的有效联盟。",
+        "layer_id": "L3",
+        "county": "新北市",
+        "source": "侯友宜9月12日支持表态",
+        "source_grade": "C",
+        "source_reference": "https://www.cna.com.tw/news/aloc/202609120198.aspx",
+        "independent_source_count": 2,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "只确认侯友宜该日公开支持，不推断侯支持者自动转移、组织集体立场或候选人治理能力。",
+        "promotion_provenance": {
+          "proposal_id": "ntpc-pack-20260927-hou-li-sept12-endorsement",
+          "promoted_at": "2026-09-27T11:11:56+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "ntpc-pack-20260927-url-13",
+            "ntpc-pack-hou-tvbs"
+          ],
+          "evidence_grades": [
+            "C",
+            "C"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。 已检索侯友宜反对、撤回支持；TVBS署名报道现场致词，中央社另一记者独立采访，未见互转稿标记；竞办供图不计作独立证据。"
+        },
+        "record_type": "local_relationship",
+        "verification_evidence": [
+          {
+            "source": "侯友宜9月12日支持表态",
+            "source_grade": "C",
+            "reference": "https://www.cna.com.tw/news/aloc/202609120198.aspx",
+            "date": "2026-09-12",
+            "retrieved_at": "2026-09-27T11:06:48Z",
+            "lead_id": "ntpc-pack-20260927-url-13",
+            "independence_key": "CNA"
+          },
+          {
+            "source": "TVBS侯友宜9月12日支持表态",
+            "source_grade": "C",
+            "reference": "https://news.tvbs.com.tw/politics/4021405",
+            "date": "2026-09-12",
+            "retrieved_at": "2026-09-27T11:06:48Z",
+            "lead_id": "ntpc-pack-hou-tvbs",
+            "independence_key": "TVBS-original-report"
+          }
+        ],
+        "structural_use": "historical_background_only"
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-c0c96e61cdddbaebd526fc04",
+        "proposal_id": "ntpc-pack-20260927-su-dpp-nomination",
+        "county": "新北市",
+        "target_type": "local_relationship",
+        "decision": "rejected",
+        "checked_at": "2026-09-27T11:11:56.907941+00:00",
+        "target_path": "",
+        "record_id": "",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-02"
+        ],
+        "evidence_grades": [
+          "C"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。",
+        "record_sha256": "",
+        "evidence_snapshot_sha256": "df5a18a617c576c869348bfea43142607133a79901288334d7e0c97a17601fa9",
+        "reasons": [
+          "C-grade evidence requires at least two verified independent sources"
+        ],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {}
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-cc55213314f70042436b8569",
+        "proposal_id": "ntpc-pack-20260927-li-kmt-nomination",
+        "county": "新北市",
+        "target_type": "local_relationship",
+        "decision": "rejected",
+        "checked_at": "2026-09-27T11:11:56.908147+00:00",
+        "target_path": "",
+        "record_id": "",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-07"
+        ],
+        "evidence_grades": [
+          "C"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。",
+        "record_sha256": "",
+        "evidence_snapshot_sha256": "b6b2c9c4999427356b60e18a24a8d42c19086b148fd8f57d93e43b76aa661cb8",
+        "reasons": [
+          "C-grade evidence requires at least two verified independent sources"
+        ],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {}
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-f07fbfd831b4d507d72a0b6b",
+        "proposal_id": "ntpc-pack-20260927-su-joint-registration",
+        "county": "新北市",
+        "target_type": "current_issue",
+        "decision": "rejected",
+        "checked_at": "2026-09-27T11:11:56.911849+00:00",
+        "target_path": "",
+        "record_id": "",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-03"
+        ],
+        "evidence_grades": [
+          "C"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。",
+        "record_sha256": "",
+        "evidence_snapshot_sha256": "a550a8fea7c7c80901a69f22d784b6ead6e28822074d26b25ac85fefa523b4e0",
+        "reasons": [
+          "C-grade evidence requires at least two verified independent sources"
+        ],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {}
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-091015aa05e48b6c082658ea",
+        "proposal_id": "ntpc-pack-20260927-su-ciyou-attendance",
+        "county": "新北市",
+        "target_type": "local_relationship",
+        "decision": "rejected",
+        "checked_at": "2026-09-27T11:11:56.912156+00:00",
+        "target_path": "",
+        "record_id": "",
+        "evidence_lead_ids": [
+          "ntpc-pack-20260927-url-14"
+        ],
+        "evidence_grades": [
+          "C"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。",
+        "record_sha256": "",
+        "evidence_snapshot_sha256": "632fd3cbdc30af0ff40a2e8384a14370fa3e952688e8a78d7c6e37ab4061bb3a",
+        "reasons": [
+          "C-grade evidence requires at least two verified independent sources"
+        ],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {}
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-d173545b63cca1be87dec7db",
+        "proposal_id": "ntpc-pack-20260927-li-kmt-secretary",
+        "county": "新北市",
+        "target_type": "historical_claim",
+        "decision": "rejected",
+        "checked_at": "2026-09-27T11:11:56.912364+00:00",
+        "target_path": "",
+        "record_id": "",
+        "evidence_lead_ids": [],
+        "evidence_grades": [],
+        "independent_source_count": 0,
+        "research_questions": [
+          "截至2026-09-27，新北市选举证据包中的行政经历、历史研究、公开关系和地方政策有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索同一命题的否认、澄清、更正、撤回等证据，未发现足以推翻以下限定命题的已核验资料；这不是不存在反证的证明。",
+        "record_sha256": "",
+        "evidence_snapshot_sha256": "",
+        "reasons": [
+          "D/E-grade evidence is not promotable to long-term knowledge",
+          "supporting leads do not cover the proposal research question"
+        ],
+        "warnings": [
+          "1 verified D/E support lead(s) were excluded from promotion evidence"
+        ],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {}
+    }
+  ],
+  "counties": [
+    "新北市"
+  ]
+}

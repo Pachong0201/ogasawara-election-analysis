@@ -20,7 +20,7 @@
   -> IntentRouter
   -> SkillService / AnalysisPipeline
   -> Analysis Context
-  -> OpenAIReportWriter 或确定性回退
+  -> DeepSeek Chat Completions Writer 或确定性回退
   -> 飞书线程回复
 ```
 
@@ -35,9 +35,9 @@
 - “民调怎么看”“给我看依据”优先复用当前线程 Context；
 - “最新民调怎么看”会刷新 Context；
 - 默认由独立多源采集器持续收集新闻，分析查询本地库；正文先经过证据摘录、候选人／地点实体识别与跨来源聚类，生成结构化 Campaign Event 后进入 Campaign State；
-- 没有 OpenAI API Key 时仍可运行，返回确定性结构化摘要；
-- 配置 OpenAI API Key 后，通过 Responses API 生成自然语言研判；
-- 飞书 App Secret / OpenAI API Key 只从环境变量读取，不写入仓库。
+- 没有 DeepSeek API Key 时仍可运行，返回确定性结构化摘要；
+- 配置 DeepSeek 官方 API Key 后，通过兼容 Chat Completions 接口生成自然语言研判；
+- 飞书 App Secret / DeepSeek API Key 只从环境变量读取，不写入仓库。
 
 ## 飞书侧准备
 
@@ -58,8 +58,9 @@
 ```bash
 export LARK_APP_ID="cli_xxx"
 export LARK_APP_SECRET="..."
-export OPENAI_API_KEY="..."        # 可选
-export OPENAI_WRITER_MODEL="gpt-5.6-sol"
+export DEEPSEEK_API_KEY="..."      # 可选，DeepSeek 官方密钥
+export DEEPSEEK_BASE_URL="https://api.deepseek.com"
+export DEEPSEEK_MODEL="deepseek-flash"
 export OGASAWARA_BOT_MODE="online"
 export OGASAWARA_BOT_RETRIEVAL="local"
 export OGASAWARA_MAX_ARTICLE_FETCHES="6"
@@ -68,9 +69,9 @@ export FEISHU_REQUIRE_MENTION="true"
 
 注意：
 
-- ChatGPT Plus 订阅不能替代 OpenAI API Key；
+- DeepSeek 网页版账户不能替代 DeepSeek API Key；
 - 不要把真实密钥写入 `.env.example`、README 或 Git；
-- 若未配置 `OPENAI_API_KEY`，机器人仍能运行，只是使用结构化模板回答。
+- 若未配置 `DEEPSEEK_API_KEY`，机器人仍能运行，只是使用结构化模板回答。
 - `OGASAWARA_BOT_RETRIEVAL=disabled` 可关闭新闻检索；`OGASAWARA_BOT_MODE=offline` 也不会调用检索接口。
 
 ## 实时新闻检索
@@ -109,7 +110,7 @@ Background RSS / Listing / Sitemap Discovery
 - 7/14/30 窗口会同时统计 verified event 与 corroborated media event；
 - Snapshot Delta 分别记录新增 event、poll、retrieval lead 与 corroborated event；
 - 地方知识检索会优先带入事件中识别出的行政区和候选人，减少泛化搜索；
-- 最终 OpenAI Writer 不再接收整篇正文，只接收结构化事件、有限证据摘录、来源和核验状态。
+- 最终 DeepSeek Writer 不再接收整篇正文，只接收结构化事件、有限证据摘录、来源和核验状态。
 
 ## 启动
 
@@ -209,14 +210,14 @@ cache/bot/conversations.sqlite3
 
 ## LLM 边界
 
-OpenAI 仅作为 Writer 使用：
+DeepSeek 仅作为 Writer 使用：
 
 ```text
 User
  -> Intent Router
  -> Skill
  -> Analysis Context
- -> OpenAI Responses API
+ -> DeepSeek Chat Completions API
  -> Feishu
 ```
 
@@ -266,4 +267,4 @@ python -m pytest -q
 - 更新重新调用 Skill；
 - 公开正文提取、重复检测与证据分级；
 - robots 禁止、私有地址、登录跳转和付费拒绝时停止读取；
-- 无 OpenAI API 时的回退输出。
+- 无 DeepSeek API 时的回退输出。

@@ -1,7 +1,7 @@
 version: 1.4.0
 county: 台北市
-generated_at: '2026-09-26T21:18:37+00:00'
-content_sha256: c8ef54dbc25eb639f8b3bef46619c558aa749f767cc73d0f581514b6a5fb8b5c
+generated_at: '2026-09-27T10:15:00+00:00'
+content_sha256: 8f587ec3c591861e98e0007c5468ccbd46e571749bead1e6e35e660e5d66e1f9
 builder: KnowledgePromotionBuilder
 authoritative_sources:
   historical_claim: knowledge/historical/台北市/claims.jsonl
@@ -15,15 +15,15 @@ generated_indexes:
   research_questions: knowledge/counties/台北市/research_questions.jsonl
   entity_relation_index: knowledge/counties/台北市/entity_relation_index.jsonl
 counts:
-  historical_claim: 2
+  historical_claim: 5
   local_relationship: 9
   candidate_profile: 104
-  current_issue: 1
-evidence_index_count: 116
+  current_issue: 5
+evidence_index_count: 123
 entity_relation_count: 9
 research_question_count: 10
 unresolved_question_count: 9
-promotion_receipt_count: 138
+promotion_receipt_count: 145
 rules:
   generated_files_are_indexes_not_new_facts: true
   source_files_are_authoritative: true

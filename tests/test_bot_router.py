@@ -21,6 +21,12 @@ class TestBotRouter(unittest.TestCase):
         self.assertEqual(request.focus.jurisdiction, "高雄市")
         self.assertEqual(request.focus.target_year, 2026)
 
+    def test_full_analysis_unwraps_feishu_plain_text_code_block(self):
+        request = self.router.parse("```plain_text\n 分析台北市选情\n\n```")
+        self.assertEqual(request.intent, FULL_ANALYSIS)
+        self.assertEqual(request.focus.jurisdiction, "台北市")
+        self.assertEqual(request.text, "分析台北市选情")
+
     def test_update_extracts_window(self):
         request = self.router.parse("高雄最近7天有什么变化")
         self.assertEqual(request.intent, CAMPAIGN_UPDATE)
