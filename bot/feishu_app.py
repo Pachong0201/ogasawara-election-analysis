@@ -118,6 +118,8 @@ def build_service(config: BotConfig) -> ElectionBotService:
         api_key=config.openai_api_key,
         model=config.openai_writer_model,
         base_url=config.openai_base_url,
+        validator_model=config.validator_model,
+        protocol=config.writer_protocol,
     )
     return ElectionBotService(
         config=config,
