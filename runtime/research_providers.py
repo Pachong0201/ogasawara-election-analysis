@@ -29,9 +29,9 @@ class ResearchConfig:
     enabled: bool = False
     api_key: str = field(default='', repr=False)
     search_key: str = field(default='', repr=False)
-    model: str = 'deepseek-flash'
-    planner_model: str = ''
-    base_url: str = 'https://api.deepseek.com'
+    model: str = 'deepseek-v4.1-flash'
+    planner_model: str = 'glm-5.3'
+    base_url: str = 'https://opencode.ai/zen/go/v1'
     foreground_seconds: float = 60
     job_seconds: float = 600
     cache_seconds: int = 1800
@@ -43,18 +43,19 @@ class ResearchConfig:
     @classmethod
     def from_env(cls):
         deepseek_model = os.getenv('DEEPSEEK_MODEL', '').strip()
+        opencode_go_key = os.getenv('OPENCODE_GO_API_KEY', '').strip()
         research_model = (
             os.getenv('RESEARCH_LLM_MODEL', '').strip()
             or deepseek_model
-            or 'deepseek-flash'
+            or ('deepseek-v4.1-flash' if opencode_go_key else 'deepseek-flash')
         )
         planner_model = (
             os.getenv('RESEARCH_PLANNER_MODEL', '').strip()
-            or research_model
+            or ('glm-5.3' if opencode_go_key else research_model)
         )
         api_key = (
-            os.getenv('DEEPSEEK_API_KEY', '').strip()
-            or os.getenv('OPENCODE_GO_API_KEY', '').strip()
+            opencode_go_key
+            or os.getenv('DEEPSEEK_API_KEY', '').strip()
         )
         search_key = os.getenv('TAVILY_API_KEY', '').strip()
         enabled_raw = os.getenv('OGASAWARA_AUTO_RESEARCH', 'auto').strip().lower()
@@ -68,9 +69,15 @@ class ResearchConfig:
             search_key=search_key,
             model=research_model,
             planner_model=planner_model,
-            base_url=(os.getenv('DEEPSEEK_BASE_URL', '').strip()
-                      or os.getenv('RESEARCH_LLM_BASE_URL', '').strip()
-                      or 'https://api.deepseek.com').rstrip('/'),
+            base_url=(
+                os.getenv('OPENCODE_GO_BASE_URL', '').strip()
+                if opencode_go_key
+                else (
+                    os.getenv('DEEPSEEK_BASE_URL', '').strip()
+                    or os.getenv('RESEARCH_LLM_BASE_URL', '').strip()
+                    or 'https://api.deepseek.com'
+                )
+            ).rstrip('/') or ('https://opencode.ai/zen/go/v1' if opencode_go_key else 'https://api.deepseek.com'),
             foreground_seconds=max(0, min(60, float(os.getenv('RESEARCH_FOREGROUND_SECONDS', '60')))),
             max_queries=max(4, min(12, int(os.getenv('RESEARCH_MAX_QUERIES', '8')))),
             max_bodies=max(8, min(40, int(os.getenv('RESEARCH_MAX_BODIES', '30')))),
