@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-09-28T15:32:10+00:00",
+  "generated_at": "2026-09-28T15:41:58+00:00",
   "county_count": 1,
   "covered_county_count": 0,
   "finding_count": 3,
-  "proposal_count": 3,
+  "proposal_count": 1,
   "promoted_count": 0,
-  "rejected_count": 0,
+  "rejected_count": 2,
   "failure_count": 0,
   "results": [
     {
@@ -13,15 +13,15 @@
       "primary_status": "completed",
       "counter_status": "completed",
       "primary_search_count": 8,
-      "primary_body_count": 16,
+      "primary_body_count": 17,
       "counter_search_count": 8,
-      "counter_body_count": 12,
+      "counter_body_count": 15,
       "finding_count": 3,
-      "proposal_count": 3,
+      "proposal_count": 1,
       "promoted_count": 0,
-      "rejected_count": 0,
+      "rejected_count": 2,
       "counter_check_completed": false,
-      "counter_update_finding_count": 3,
+      "counter_update_finding_count": 5,
       "last_error": "",
       "error_stage": ""
     }
