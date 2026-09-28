@@ -92,6 +92,11 @@ class TestDeterministicReportWriter(unittest.IsolatedAsyncioTestCase):
                         "evidence_excerpt": "保留的有限证据摘录",
                     }]
                 },
+                "assessment": {
+                    "version": 1,
+                    "current_dynamics": [{"kind": "research_finding", "statement": "结构化分析输入"}],
+                    "research_coverage": {"evidence_pack_count": 1, "finding_count": 1},
+                },
             },
             "analysis_manifest": {},
         }
@@ -102,6 +107,11 @@ class TestDeterministicReportWriter(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(
             payload["campaign_event_resolution"]["events"][0]["evidence_excerpt"],
             "保留的有限证据摘录",
+        )
+        self.assertEqual(payload["assessment"]["version"], 1)
+        self.assertEqual(
+            payload["assessment"]["current_dynamics"][0]["statement"],
+            "结构化分析输入",
         )
 
 
