@@ -581,11 +581,8 @@ class ChatCompletionsReportWriter(BaseReportWriter):
                 "model": model,
                 "store": False,
                 "stream": False,
+                "instructions": system,
                 "input": [
-                    {
-                        "role": "system",
-                        "content": [{"type": "input_text", "text": system}],
-                    },
                     {
                         "role": "user",
                         "content": [{"type": "input_text", "text": user}],
