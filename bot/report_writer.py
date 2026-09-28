@@ -36,15 +36,19 @@ SYSTEM_INSTRUCTIONS = """你是部署在飞书中的选情研究型分析机器�
 - 对具体数字、日期、人名、组织关系和民调，只能使用 Research Brief 或证据摘录中有依据的内容。
 - 默认使用简洁、连续、分析性中文；小标题必须承担判断，而不是栏目标签。"""
 
-VALIDATION_INSTRUCTIONS = """你是选情报告的证据校验器。请根据给定 Research Brief 和有限证据检查初稿，并直接返回修订后的完整报告，不要解释校验过程。
-必须修正：
+VALIDATION_INSTRUCTIONS = """你是选情报告的证据校验器。只输出 JSON，不重写整篇文章。
+格式：
+{"issues":[{"excerpt":"初稿中需要修正的连续原文片段","replacement":"只针对该片段的修订文本","reason":"依据不足、证据层级、民调可比性、组织推断或工程术语"}]}
+仅在确有问题时列出 issue；没有问题输出 {"issues":[]}。
+必须检查：
 1. Research Brief 中找不到依据的具体人名、日期、数字、组织关系、民调或事实；
-2. 把媒体报道、分析假设或历史残差写成确定事实的句子；
+2. 把媒体报道、分析假设或历史残差写成确定事实；
 3. 把组织动作直接推断为选票效果；
 4. 把不可比民调串成趋势；
 5. winner、ranking、win probability、投票建议等政治选择性结论；
 6. final_assessment、research_brief、partial_current_data、supported、unresolved、confidence、search_count、body_count 等工程术语泄漏。
-保留文章的分析主线和自然语言，只修正证据边界与表达。"""
+excerpt 必须逐字复制初稿中的连续片段；replacement 只修该片段，不改变其他段落和文章主线。"""
+
 
 
 
@@ -209,6 +213,29 @@ def _validation_context(payload: Dict[str, Any]) -> Dict[str, Any]:
         "sources": payload.get("sources") or [],
         "uncertainties": payload.get("uncertainties") or [],
     }
+
+
+def _apply_validation_issues(text: str, raw: str) -> str:
+    """Apply only exact-span validator corrections; never allow a full rewrite."""
+    try:
+        value = json.loads(str(raw or "").strip())
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return text
+    issues = value.get("issues") if isinstance(value, dict) else None
+    if not isinstance(issues, list):
+        return text
+    revised = text
+    for issue in issues[:8]:
+        if not isinstance(issue, dict):
+            continue
+        excerpt = str(issue.get("excerpt") or "")
+        replacement = str(issue.get("replacement") or "")
+        if not excerpt or not replacement or excerpt not in revised:
+            continue
+        if len(excerpt) > 1200 or len(replacement) > 1400:
+            continue
+        revised = revised.replace(excerpt, replacement, 1)
+    return revised
 
 
 class BaseReportWriter:
@@ -412,9 +439,9 @@ class OpenAIReportWriter(BaseReportWriter):
                     + json.dumps(_validation_context(payload), ensure_ascii=False)
                 ),
             )
-            revised = str(getattr(check, "output_text", "") or "").strip()
-            if revised:
-                text = revised
+            text = _apply_validation_issues(
+                text, str(getattr(check, "output_text", "") or "")
+            )
         return text
 
     async def write(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
@@ -498,20 +525,20 @@ class ChatCompletionsReportWriter(BaseReportWriter):
                         ),
                     },
                 ],
-                "max_tokens": 16000,
-                "temperature": 0.1,
+                "response_format": {"type": "json_object"},
+                "max_tokens": 3000,
+                "temperature": 0.0,
             }, ensure_ascii=False).encode("utf-8")
             validation_req = urllib.request.Request(
                 self.base_url + "/chat/completions", validation_body, headers
             )
             with urllib.request.urlopen(validation_req, timeout=120) as response:
                 validation_data = json.loads(response.read())
-            revised = str(
+            raw_validation = str(
                 (validation_data.get("choices") or [{}])[0]
                 .get("message", {}).get("content", "")
             ).strip()
-            if revised:
-                text = revised
+            text = _apply_validation_issues(text, raw_validation)
         return text
 
     async def write(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
