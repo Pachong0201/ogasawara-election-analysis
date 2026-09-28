@@ -111,6 +111,12 @@ def _analysis_payload(context: Dict[str, Any]) -> Dict[str, Any]:
             "available": raw_retrieval.get("available"),
         }
 
+    evidence_summary = dict(analysis.get("evidence_summary", {}))
+    if isinstance(evidence_summary.get("automatic_research"), dict):
+        research_summary = dict(evidence_summary["automatic_research"])
+        research_summary.pop("evidence_pack", None)
+        evidence_summary["automatic_research"] = research_summary
+
     campaign_state = _compact_campaign_state(analysis.get("campaign_state", {}))
     leads = campaign_state.get("retrieval_leads") or []
     if leads:
@@ -138,7 +144,7 @@ def _analysis_payload(context: Dict[str, Any]) -> Dict[str, Any]:
         "spatial_anomalies": analysis.get("spatial_anomalies", []),
         "local_knowledge": local_knowledge,
         "historical_baseline": analysis.get("historical_baseline", {}),
-        "evidence_summary": analysis.get("evidence_summary", {}),
+        "evidence_summary": evidence_summary,
         "assessment": analysis.get("assessment", {}),
         "unknowns": analysis.get("unknowns", []),
         "warnings": analysis.get("warnings", []),
