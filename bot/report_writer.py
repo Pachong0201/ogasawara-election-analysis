@@ -217,8 +217,16 @@ def _validation_context(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 def _apply_validation_issues(text: str, raw: str) -> str:
     """Apply only exact-span validator corrections; never allow a full rewrite."""
+    cleaned = str(raw or "").strip()
+    if cleaned.startswith("```"):
+        cleaned = cleaned.split("\n", 1)[1] if "\n" in cleaned else ""
+        if cleaned.endswith("```"):
+            cleaned = cleaned[:-3].rstrip()
+    start, end = cleaned.find("{"), cleaned.rfind("}")
+    if start >= 0 and end >= start:
+        cleaned = cleaned[start:end + 1]
     try:
-        value = json.loads(str(raw or "").strip())
+        value = json.loads(cleaned)
     except (TypeError, ValueError, json.JSONDecodeError):
         return text
     issues = value.get("issues") if isinstance(value, dict) else None
@@ -525,7 +533,6 @@ class ChatCompletionsReportWriter(BaseReportWriter):
                         ),
                     },
                 ],
-                "response_format": {"type": "json_object"},
                 "max_tokens": 3000,
                 "temperature": 0.0,
             }, ensure_ascii=False).encode("utf-8")
