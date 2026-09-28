@@ -96,6 +96,14 @@ class TestDeterministicReportWriter(unittest.IsolatedAsyncioTestCase):
                     "version": 1,
                     "current_dynamics": [{"kind": "research_finding", "statement": "结构化分析输入"}],
                     "research_coverage": {"evidence_pack_count": 1, "finding_count": 1},
+                    "evidence_pack": [{"evidence_id": "web-1", "excerpt": "正文证据"}],
+                },
+                "evidence_summary": {
+                    "automatic_research": {
+                        "status": "completed",
+                        "findings": [{"statement": "研究摘要"}],
+                        "evidence_pack": [{"url": "https://example.test/a", "content": "不应重复传入"}],
+                    }
                 },
             },
             "analysis_manifest": {},
@@ -112,6 +120,14 @@ class TestDeterministicReportWriter(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(
             payload["assessment"]["current_dynamics"][0]["statement"],
             "结构化分析输入",
+        )
+        self.assertNotIn(
+            "evidence_pack",
+            payload["evidence_summary"]["automatic_research"],
+        )
+        self.assertEqual(
+            payload["assessment"]["evidence_pack"][0]["excerpt"],
+            "正文证据",
         )
 
 
