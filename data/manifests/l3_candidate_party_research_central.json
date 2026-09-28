@@ -1,0 +1,142 @@
+{
+  "generated_at": "2026-09-27T02:49:42+00:00",
+  "county_count": 5,
+  "eligible_candidate_count": 11,
+  "proposal_count": 4,
+  "promoted_count": 4,
+  "unresolved_count": 7,
+  "failure_count": 0,
+  "results": [
+    {
+      "county": "苗栗縣",
+      "candidate_count": 2,
+      "eligible_candidate_count": 2,
+      "research_status": "completed",
+      "search_count": 5,
+      "body_count": 15,
+      "finding_count": 1,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "unresolved_count": 2,
+      "unresolved": [
+        {
+          "county": "苗栗縣",
+          "candidate": "陳品安",
+          "party": "民主進步黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年苗栗縣縣市長候選人陳品安是否由民主進步黨推薦登記？"
+        },
+        {
+          "county": "苗栗縣",
+          "candidate": "鍾東錦",
+          "party": "中國國民黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年苗栗縣縣市長候選人鍾東錦是否由中國國民黨推薦登記？"
+        }
+      ],
+      "last_error": "",
+      "error_stage": ""
+    },
+    {
+      "county": "台中市",
+      "candidate_count": 3,
+      "eligible_candidate_count": 3,
+      "research_status": "completed",
+      "search_count": 5,
+      "body_count": 10,
+      "finding_count": 1,
+      "proposal_count": 2,
+      "promoted_count": 2,
+      "unresolved_count": 1,
+      "unresolved": [
+        {
+          "county": "台中市",
+          "candidate": "洪麗華",
+          "party": "司法正義黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年台中市縣市長候選人洪麗華是否由司法正義黨推薦登記？"
+        }
+      ],
+      "last_error": "",
+      "error_stage": ""
+    },
+    {
+      "county": "彰化縣",
+      "candidate_count": 4,
+      "eligible_candidate_count": 2,
+      "research_status": "completed",
+      "search_count": 5,
+      "body_count": 12,
+      "finding_count": 1,
+      "proposal_count": 1,
+      "promoted_count": 1,
+      "unresolved_count": 1,
+      "unresolved": [
+        {
+          "county": "彰化縣",
+          "candidate": "魏平政",
+          "party": "中國國民黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年彰化縣縣市長候選人魏平政是否由中國國民黨推薦登記？"
+        }
+      ],
+      "last_error": "",
+      "error_stage": ""
+    },
+    {
+      "county": "南投縣",
+      "candidate_count": 2,
+      "eligible_candidate_count": 2,
+      "research_status": "completed",
+      "search_count": 5,
+      "body_count": 11,
+      "finding_count": 1,
+      "proposal_count": 1,
+      "promoted_count": 1,
+      "unresolved_count": 1,
+      "unresolved": [
+        {
+          "county": "南投縣",
+          "candidate": "温世政",
+          "party": "民主進步黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年南投縣縣市長候選人温世政是否由民主進步黨推薦登記？"
+        }
+      ],
+      "last_error": "",
+      "error_stage": ""
+    },
+    {
+      "county": "雲林縣",
+      "candidate_count": 4,
+      "eligible_candidate_count": 2,
+      "research_status": "completed",
+      "search_count": 5,
+      "body_count": 13,
+      "finding_count": 1,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "unresolved_count": 2,
+      "unresolved": [
+        {
+          "county": "雲林縣",
+          "candidate": "張嘉郡",
+          "party": "中國國民黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年雲林縣縣市長候選人張嘉郡是否由中國國民黨推薦登記？"
+        },
+        {
+          "county": "雲林縣",
+          "candidate": "劉建國",
+          "party": "民主進步黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年雲林縣縣市長候選人劉建國是否由民主進步黨推薦登記？"
+        }
+      ],
+      "last_error": "",
+      "error_stage": ""
+    }
+  ],
+  "failures": [],
+  "apply": true
+}

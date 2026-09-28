@@ -30,6 +30,9 @@ properties:
   official_jurisdiction:
     type: string
     description: 官方资料中的行政区名称，用于简繁体或别名对齐。
+  electoral_district:
+    type: string
+    description: 官方登记资料中的议员或其他分区选举区名称。
   candidate_status:
     type: string
     enum: [registered, qualified, nominated, announced, potential, withdrawn]

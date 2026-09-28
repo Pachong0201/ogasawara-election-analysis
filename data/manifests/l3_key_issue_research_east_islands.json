@@ -1,0 +1,89 @@
+{
+  "generated_at": "2026-09-27T04:01:38+00:00",
+  "county_count": 6,
+  "covered_county_count": 0,
+  "finding_count": 0,
+  "proposal_count": 0,
+  "promoted_count": 0,
+  "rejected_count": 0,
+  "failure_count": 2,
+  "results": [
+    {
+      "county": "宜蘭縣",
+      "primary_status": "completed",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "",
+      "error_stage": ""
+    },
+    {
+      "county": "花蓮縣",
+      "primary_status": "insufficient_evidence",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "",
+      "error_stage": ""
+    },
+    {
+      "county": "台東縣",
+      "primary_status": "completed",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "",
+      "error_stage": ""
+    },
+    {
+      "county": "澎湖縣",
+      "primary_status": "partial",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
+    },
+    {
+      "county": "金門縣",
+      "primary_status": "completed",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "",
+      "error_stage": ""
+    },
+    {
+      "county": "連江縣",
+      "primary_status": "partial",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
+    }
+  ],
+  "failures": [
+    {
+      "county": "澎湖縣",
+      "error": "provider_timeout"
+    },
+    {
+      "county": "連江縣",
+      "error": "provider_timeout"
+    }
+  ],
+  "apply": true
+}

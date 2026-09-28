@@ -198,12 +198,23 @@ def validate_record(
 
 
 def _group_key(record: Dict[str, Any]) -> tuple:
+    # Regional-legislator contests may split one administrative district across
+    # multiple electoral constituencies. Candidate votes from different contests
+    # must never be summed against one constituency's valid-vote denominator.
+    contest = ""
+    if record.get("election_type") == "regional_legislator":
+        codes = record.get("cec_codes") or {}
+        if isinstance(codes, dict):
+            contest = str(codes.get("election_district") or "")
+        if not contest:
+            contest = str(record.get("electoral_district") or "")
     return (
         record.get("election_type"),
         record.get("election_year"),
         record.get("parent_jurisdiction") or record.get("jurisdiction"),
         record.get("jurisdiction"),
         record.get("level"),
+        contest,
     )
 
 

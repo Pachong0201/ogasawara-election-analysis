@@ -22,7 +22,7 @@ from .host_retrieval import HostRetrievalBackend
 from .models import parse_date, utc_now_iso
 
 
-BUILDER_VERSION = "1.3.0"
+BUILDER_VERSION = "1.4.0"
 VALID_GRADES = {"A", "B", "C", "D", "E"}
 GRADE_ORDER = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4}
 
@@ -386,6 +386,14 @@ class KnowledgePromotionBuilder:
                 "party",
                 "electoral_support",
                 "organization_membership",
+                "office_holding",
+                "geographic_base",
+                "campaign_cooperation",
+                "civic_association",
+                "farmers_association",
+                "fishermen_association",
+                "religious_association",
+                "public_service_network",
                 "patron_client",
                 "business",
                 "public_endorsement",
@@ -617,6 +625,11 @@ class KnowledgePromotionBuilder:
             "warnings": warnings,
             "research_questions": research_questions,
             "scope_boundary": str(proposal.get("scope_boundary") or "").strip(),
+            "contradiction_check_completed": contradiction_check_completed,
+            "contradictory_lead_ids": contradiction_ids,
+            "contradiction_check_note": str(
+                proposal.get("contradiction_check_note") or ""
+            ).strip(),
             "independent_source_count": int(evidence.get("independent_source_count") or 0),
             "evidence_grades": list(evidence.get("grades") or []),
         }
@@ -642,6 +655,14 @@ class KnowledgePromotionBuilder:
         record["source_reference"] = source_descriptors[0]["reference"]
         record["independent_source_count"] = evaluation["independent_source_count"]
         record["research_questions"] = evaluation["research_questions"]
+        record.setdefault(
+            "uncertainty",
+            {
+                "level": "unknown",
+                "reason": "proposal did not assert a narrower uncertainty level",
+                "competing_explanations": [],
+            },
+        )
         if evaluation.get("scope_boundary"):
             record["scope_boundary"] = evaluation["scope_boundary"]
         record["promotion_provenance"] = {
@@ -652,6 +673,11 @@ class KnowledgePromotionBuilder:
                 lead.get("lead_id") or lead.get("url") for lead in support
             ),
             "evidence_grades": evaluation["evidence_grades"],
+            "contradiction_check_completed": evaluation.get(
+                "contradiction_check_completed", False
+            ),
+            "contradictory_lead_ids": evaluation.get("contradictory_lead_ids") or [],
+            "contradiction_check_note": evaluation.get("contradiction_check_note") or "",
         }
 
         if target_type == "historical_claim":
@@ -847,6 +873,11 @@ class KnowledgePromotionBuilder:
             "evidence_grades": evaluation["evidence_grades"],
             "independent_source_count": evaluation["independent_source_count"],
             "research_questions": evaluation["research_questions"],
+            "contradiction_check_completed": evaluation.get(
+                "contradiction_check_completed", False
+            ),
+            "contradictory_lead_ids": evaluation.get("contradictory_lead_ids") or [],
+            "contradiction_check_note": evaluation.get("contradiction_check_note") or "",
             "record_sha256": record_hash,
             "evidence_snapshot_sha256": evidence_hash,
             "reasons": evaluation["reasons"],
@@ -948,6 +979,11 @@ class KnowledgePromotionBuilder:
             "current_issue": load_jsonl(paths["issues"]) if paths["issues"].exists() else [],
         }
 
+        research_questions_path = package_root / "research_questions.jsonl"
+        research_plan = (
+            load_jsonl(research_questions_path) if research_questions_path.exists() else []
+        )
+
         evidence_index: List[Dict[str, Any]] = []
         for target_type, records in collections.items():
             for record in records:
@@ -960,6 +996,13 @@ class KnowledgePromotionBuilder:
                         "time_scope": record.get("time_scope", ""),
                         "current_status": record.get("current_status", ""),
                         "current_use_status": self._current_use_status(target_type, record),
+                        "subject": record.get("subject", ""),
+                        "subject_type": record.get("subject_type", ""),
+                        "object": record.get("object", ""),
+                        "object_type": record.get("object_type", ""),
+                        "relationship_type": record.get("relationship_type", ""),
+                        "uncertainty": record.get("uncertainty") or record.get("confidence") or "",
+                        "scope_boundary": record.get("scope_boundary", ""),
                         "source": record.get("source", ""),
                         "source_grade": record.get("source_grade") or record.get("evidence_grade") or "",
                         "independent_source_count": int(record.get("independent_source_count") or 0),
@@ -970,6 +1013,67 @@ class KnowledgePromotionBuilder:
 
         evidence_path = package_root / "evidence_index.jsonl"
         write_jsonl(evidence_path, evidence_index)
+
+        relation_index: List[Dict[str, Any]] = []
+        for record in collections["local_relationship"]:
+            relation_index.append(
+                {
+                    "relation_id": record.get("relationship_id"),
+                    "subject": record.get("subject"),
+                    "subject_type": record.get("subject_type") or "unknown",
+                    "relationship_type": record.get("relationship_type"),
+                    "object": record.get("object"),
+                    "object_type": record.get("object_type") or "unknown",
+                    "region": record.get("region") or county,
+                    "time_scope": record.get("time_scope"),
+                    "last_verified_at": record.get("last_verified_at"),
+                    "current_status": record.get("current_status"),
+                    "current_use_status": self._current_use_status("local_relationship", record),
+                    "uncertainty": record.get("uncertainty") or record.get("confidence") or "",
+                    "source_record_type": "local_relationship",
+                }
+            )
+        for candidate in collections["candidate_profile"]:
+            name = candidate.get("name")
+            candidate_id = candidate.get("candidate_id")
+            for item in candidate.get("known_organizations") or []:
+                relation_index.append(
+                    {
+                        "relation_id": f"{candidate_id}|organization|{item.get('organization')}",
+                        "subject": name,
+                        "subject_type": "person",
+                        "relationship_type": item.get("relationship_type") or "organization_membership",
+                        "object": item.get("organization"),
+                        "object_type": "organization",
+                        "region": candidate.get("jurisdiction") or county,
+                        "time_scope": item.get("time_scope") or candidate.get("time_scope"),
+                        "last_verified_at": item.get("last_verified_at") or candidate.get("last_verified_at"),
+                        "current_status": "derived_from_candidate_profile",
+                        "current_use_status": self._current_use_status("candidate_profile", candidate),
+                        "uncertainty": item.get("uncertainty") or "",
+                        "source_record_type": "candidate_profile",
+                    }
+                )
+            for item in candidate.get("long_term_operation_areas") or []:
+                relation_index.append(
+                    {
+                        "relation_id": f"{candidate_id}|region|{item.get('region')}",
+                        "subject": name,
+                        "subject_type": "person",
+                        "relationship_type": "geographic_base",
+                        "object": item.get("region"),
+                        "object_type": "region",
+                        "region": item.get("region") or county,
+                        "time_scope": item.get("time_scope") or candidate.get("time_scope"),
+                        "last_verified_at": candidate.get("last_verified_at"),
+                        "current_status": "derived_from_candidate_profile",
+                        "current_use_status": self._current_use_status("candidate_profile", candidate),
+                        "uncertainty": item.get("uncertainty") or "",
+                        "source_record_type": "candidate_profile",
+                    }
+                )
+        relation_path = package_root / "entity_relation_index.jsonl"
+        write_jsonl(relation_path, relation_index)
 
         promoted_ids = self._all_promoted_evidence_ids(county)
         leads = load_jsonl(paths["retrieval"]) if paths["retrieval"].exists() else []
@@ -1000,6 +1104,29 @@ class KnowledgePromotionBuilder:
             group["lead_ids"] = _dedupe_strings(group["lead_ids"])
             group["grades"] = _dedupe_strings(group["grades"])
             unresolved.append(group)
+
+        covered_questions = {
+            str(question)
+            for item in evidence_index
+            for question in (item.get("research_questions") or [])
+            if str(question).strip()
+        }
+        known_unresolved = {str(item.get("query") or "") for item in unresolved}
+        for planned in research_plan:
+            question = str(planned.get("question") or "").strip()
+            if not question or question in covered_questions or question in known_unresolved:
+                continue
+            unresolved.append(
+                {
+                    "question_id": planned.get("question_id"),
+                    "topic": planned.get("topic"),
+                    "query": question,
+                    "status": "unresolved_no_promoted_evidence",
+                    "lead_ids": [],
+                    "grades": [],
+                    "verified_count": 0,
+                }
+            )
         unresolved_path = package_root / "unresolved_questions.jsonl"
         write_jsonl(unresolved_path, unresolved)
 
@@ -1007,10 +1134,35 @@ class KnowledgePromotionBuilder:
         receipts = load_jsonl(receipts_path) if receipts_path.exists() else []
         counts = {target_type: len(records) for target_type, records in collections.items()}
 
+        content_snapshot = {
+            "county": county,
+            "collections": collections,
+            "evidence_index": evidence_index,
+            "relation_index": relation_index,
+            "unresolved": unresolved,
+            "research_plan": research_plan,
+            "receipt_count": len(receipts),
+        }
+        content_sha256 = hashlib.sha256(
+            json.dumps(content_snapshot, ensure_ascii=False, sort_keys=True, default=str).encode("utf-8")
+        ).hexdigest()
+        manifest_path = package_root / "package_manifest.yaml"
+        previous_manifest = (
+            yaml.safe_load(manifest_path.read_text(encoding="utf-8")) or {}
+            if manifest_path.exists()
+            else {}
+        )
+        generated_at = (
+            previous_manifest.get("generated_at")
+            if previous_manifest.get("content_sha256") == content_sha256
+            else utc_now_iso()
+        )
+
         manifest = {
             "version": BUILDER_VERSION,
             "county": county,
-            "generated_at": utc_now_iso(),
+            "generated_at": generated_at,
+            "content_sha256": content_sha256,
             "builder": "KnowledgePromotionBuilder",
             "authoritative_sources": {
                 target_type: str(
@@ -1022,9 +1174,13 @@ class KnowledgePromotionBuilder:
                 "evidence_index": str(evidence_path.relative_to(self.repo_root)),
                 "unresolved_questions": str(unresolved_path.relative_to(self.repo_root)),
                 "political_ecology": str((package_root / "political_ecology.md").relative_to(self.repo_root)),
+                "research_questions": str(research_questions_path.relative_to(self.repo_root)),
+                "entity_relation_index": str(relation_path.relative_to(self.repo_root)),
             },
             "counts": counts,
             "evidence_index_count": len(evidence_index),
+            "entity_relation_count": len(relation_index),
+            "research_question_count": len(research_plan),
             "unresolved_question_count": len(unresolved),
             "promotion_receipt_count": len(receipts),
             "rules": {
@@ -1033,7 +1189,6 @@ class KnowledgePromotionBuilder:
                 "historical_current_separation": True,
             },
         }
-        manifest_path = package_root / "package_manifest.yaml"
         manifest_path.write_text(
             yaml.safe_dump(manifest, allow_unicode=True, sort_keys=False),
             encoding="utf-8",
@@ -1079,6 +1234,15 @@ class KnowledgePromotionBuilder:
                 "",
                 "## 当前地方议题（L3）",
                 *(issue_lines or ["- 暂无已晋升地方议题。"]),
+                "",
+                "## 人物—组织—地区关系索引",
+                *(
+                    [
+                        f"- {item.get('subject')} → {item.get('relationship_type')} → {item.get('object')}；region={item.get('region')}；current_use={item.get('current_use_status')}"
+                        for item in relation_index
+                    ]
+                    or ["- 暂无可索引关系。"]
+                ),
                 "",
                 "## 尚未解决的检索问题",
                 *(unresolved_lines or ["- 暂无未解决检索问题。"]),

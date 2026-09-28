@@ -1,0 +1,950 @@
+{
+  "proposal_count": 14,
+  "counts": {
+    "promoted": 0,
+    "rejected": 2,
+    "requires_review": 2,
+    "dry_run_pass": 10
+  },
+  "results": [
+    {
+      "receipt": {
+        "receipt_id": "promotion-43088fd07cd92d98f8ef82d7",
+        "proposal_id": "kh-pack-20260927-yang-types",
+        "county": "高雄市",
+        "target_type": "historical_claim",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T12:33:29.493526+00:00",
+        "target_path": "",
+        "record_id": "kh-yang-types-20260927",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-yang-full"
+        ],
+        "evidence_grades": [
+          "B"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "cd5c826b16e6c7d4ed540c5a0cdb5b4dcee7837de6473f5b790e714125182547",
+        "evidence_snapshot_sha256": "553c74d7e1b5ff55a60473561169fe8fd8319440ad0f7a1a2ce74f7b9d708051",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "kh-yang-types-20260927",
+        "claim": "杨天杰2024年论文摘要提出农会传统垂直、里长相对水平、宫庙相对水平三种桩脚转型类型。",
+        "time_scope": "2024年3月出版；主要观察2014、2018，延伸2020、2022",
+        "topic": "academic_research",
+        "region": "高雄市",
+        "notes": "原论文印刷页69摘要观点，不是2026实证结论。",
+        "layer_id": "L2",
+        "county": "高雄市",
+        "source": "ntupsr.s3.amazonaws.com",
+        "source_grade": "B",
+        "source_reference": "https://ntupsr.s3.amazonaws.com/psr/wp-content/uploads/2024/04/99-3%E5%9C%B0%E6%96%B9%E6%B4%BE%E7%B3%BB%E8%88%87%E6%A8%81%E8%85%B3%E8%BD%89%E5%9E%8B%EF%BC%9A%E9%AB%98%E9%9B%84%E5%B8%82%E7%9A%84%E5%80%8B%E6%A1%88%E5%88%86%E6%9E%90-1.pdf",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅用于有日期的公告、研究观点或个人公开表态；不得推断2026派系延续、组织整体支持、政策实际效果、支持度或胜负。核验日不代表全部状态更新到当日。",
+        "promotion_provenance": {
+          "proposal_id": "kh-pack-20260927-yang-types",
+          "promoted_at": "2026-09-27T12:33:29+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "kh-pack-20260927-yang-full"
+          ],
+          "evidence_grades": [
+            "B"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。"
+        },
+        "record_type": "historical_claim",
+        "evidence": [
+          {
+            "source": "ntupsr.s3.amazonaws.com",
+            "source_grade": "B",
+            "reference": "https://ntupsr.s3.amazonaws.com/psr/wp-content/uploads/2024/04/99-3%E5%9C%B0%E6%96%B9%E6%B4%BE%E7%B3%BB%E8%88%87%E6%A8%81%E8%85%B3%E8%BD%89%E5%9E%8B%EF%BC%9A%E9%AB%98%E9%9B%84%E5%B8%82%E7%9A%84%E5%80%8B%E6%A1%88%E5%88%86%E6%9E%90-1.pdf",
+            "date": null,
+            "retrieved_at": "2026-09-27T12:31:37Z",
+            "lead_id": "kh-pack-20260927-yang-full",
+            "independence_key": "yang-2024-single-study"
+          }
+        ]
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-d5e94172395e059dfd0948cd",
+        "proposal_id": "kh-pack-20260927-yang-postmerger",
+        "county": "高雄市",
+        "target_type": "historical_claim",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T12:33:29.493828+00:00",
+        "target_path": "",
+        "record_id": "kh-yang-postmerger-20260927",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-yang-full"
+        ],
+        "evidence_grades": [
+          "B"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "afdc832e9108e40767f7eff373f71dc663a16803e5de72b11bcc4759d141c888",
+        "evidence_snapshot_sha256": "553c74d7e1b5ff55a60473561169fe8fd8319440ad0f7a1a2ce74f7b9d708051",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "kh-yang-postmerger-20260927",
+        "claim": "杨天杰2024年论文摘要认为县市合并后县派弱化，而市派通过吸纳县派存续。",
+        "time_scope": "2024年3月出版；主要观察2014、2018，延伸2020、2022",
+        "topic": "academic_research",
+        "region": "高雄市",
+        "notes": "原论文印刷页69摘要观点，不是2026实证结论。",
+        "layer_id": "L2",
+        "county": "高雄市",
+        "source": "ntupsr.s3.amazonaws.com",
+        "source_grade": "B",
+        "source_reference": "https://ntupsr.s3.amazonaws.com/psr/wp-content/uploads/2024/04/99-3%E5%9C%B0%E6%96%B9%E6%B4%BE%E7%B3%BB%E8%88%87%E6%A8%81%E8%85%B3%E8%BD%89%E5%9E%8B%EF%BC%9A%E9%AB%98%E9%9B%84%E5%B8%82%E7%9A%84%E5%80%8B%E6%A1%88%E5%88%86%E6%9E%90-1.pdf",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅用于有日期的公告、研究观点或个人公开表态；不得推断2026派系延续、组织整体支持、政策实际效果、支持度或胜负。核验日不代表全部状态更新到当日。",
+        "promotion_provenance": {
+          "proposal_id": "kh-pack-20260927-yang-postmerger",
+          "promoted_at": "2026-09-27T12:33:29+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "kh-pack-20260927-yang-full"
+          ],
+          "evidence_grades": [
+            "B"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。"
+        },
+        "record_type": "historical_claim",
+        "evidence": [
+          {
+            "source": "ntupsr.s3.amazonaws.com",
+            "source_grade": "B",
+            "reference": "https://ntupsr.s3.amazonaws.com/psr/wp-content/uploads/2024/04/99-3%E5%9C%B0%E6%96%B9%E6%B4%BE%E7%B3%BB%E8%88%87%E6%A8%81%E8%85%B3%E8%BD%89%E5%9E%8B%EF%BC%9A%E9%AB%98%E9%9B%84%E5%B8%82%E7%9A%84%E5%80%8B%E6%A1%88%E5%88%86%E6%9E%90-1.pdf",
+            "date": null,
+            "retrieved_at": "2026-09-27T12:31:37Z",
+            "lead_id": "kh-pack-20260927-yang-full",
+            "independence_key": "yang-2024-single-study"
+          }
+        ]
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-ed06424d586d569f8aee1d74",
+        "proposal_id": "kh-pack-20260927-dalinpu-eia",
+        "county": "高雄市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T12:33:29.498664+00:00",
+        "target_path": "",
+        "record_id": "kh-dalinpu-eia-20260927",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-url-23"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "37e47a0553d10669a7c0581ff91b5317207045114723ed028c1db1835b75396e",
+        "evidence_snapshot_sha256": "5d7bb830fa128a22129170739a907051fb3a8d3071f2a0516154ef5e31e6cb27",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "kh-dalinpu-eia-20260927",
+        "speaker": "相关主管机关",
+        "claim_text": "高雄都发局9月23日公告新材料循环产业园区通过环评，并说明都市计划及设园仍有后续程序。",
+        "claim_type": "policy",
+        "date": "2026-09-23",
+        "time_scope": "2026-09-23公告记录，非完工证明",
+        "last_verified_at": "2026-09-27",
+        "region": "高雄市",
+        "verification_status": "official_record",
+        "notes": "环保团体有污染与迁村前不得开工诉求，不理解为无争议。",
+        "layer_id": "L3",
+        "county": "高雄市",
+        "source": "urban-web.kcg.gov.tw",
+        "source_grade": "A",
+        "source_reference": "https://urban-web.kcg.gov.tw/KDA/web_page/KDAN030201.jsp?PK01=KDA070000001202609011",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅用于有日期的公告、研究观点或个人公开表态；不得推断2026派系延续、组织整体支持、政策实际效果、支持度或胜负。核验日不代表全部状态更新到当日。",
+        "promotion_provenance": {
+          "proposal_id": "kh-pack-20260927-dalinpu-eia",
+          "promoted_at": "2026-09-27T12:33:29+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "kh-pack-20260927-url-23"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-76d5055df18ef9c398826a3e",
+        "proposal_id": "kh-pack-20260927-dalinpu-scope",
+        "county": "高雄市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T12:33:29.502495+00:00",
+        "target_path": "",
+        "record_id": "kh-dalinpu-scope-20260927",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-url-24"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "40e95113ea2d56363b95bc3f24b48535b2288fc497b1fa27671705b5d1e37ac9",
+        "evidence_snapshot_sha256": "c96889af40042045f7e57e730414173a3b27197393119b2f585f1182509180a7",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "kh-dalinpu-scope-20260927",
+        "speaker": "相关主管机关",
+        "claim_text": "3月13日安置法规将小港大林蒲及凤鼻头沿海六里列为迁村范围，安置区涉及前镇明正及凤山南成、保安、中民。",
+        "claim_type": "policy",
+        "date": "2026-03-13",
+        "time_scope": "2026-03-13公告记录，非完工证明",
+        "last_verified_at": "2026-09-27",
+        "region": "高雄市",
+        "verification_status": "official_record",
+        "notes": "",
+        "layer_id": "L3",
+        "county": "高雄市",
+        "source": "outlaw.kcg.gov.tw",
+        "source_grade": "A",
+        "source_reference": "https://outlaw.kcg.gov.tw/LawContent.aspx?id=GL002121&media=print",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅用于有日期的公告、研究观点或个人公开表态；不得推断2026派系延续、组织整体支持、政策实际效果、支持度或胜负。核验日不代表全部状态更新到当日。",
+        "promotion_provenance": {
+          "proposal_id": "kh-pack-20260927-dalinpu-scope",
+          "promoted_at": "2026-09-27T12:33:29+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "kh-pack-20260927-url-24"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-f2b42c22232427649cc6a230",
+        "proposal_id": "kh-pack-20260927-fish-trial",
+        "county": "高雄市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T12:33:29.506071+00:00",
+        "target_path": "",
+        "record_id": "kh-fish-trial-20260927",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-ey-fish"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "9f691b95e6dce5eb29ba72b9e977d179b88583307c79749d81d8551545272d81",
+        "evidence_snapshot_sha256": "6502f3048dbfacce6a441ad42f162e40dc25b0a90bca2aff33e380d5abb3762e",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "kh-fish-trial-20260927",
+        "speaker": "相关主管机关",
+        "claim_text": "行政院9月17日公告前镇渔港两年试营运，期间攤商清洁管理费由中央补助。",
+        "claim_type": "policy",
+        "date": "2026-09-17",
+        "time_scope": "2026-09-17公告记录，非完工证明",
+        "last_verified_at": "2026-09-27",
+        "region": "高雄市",
+        "verification_status": "official_record",
+        "notes": "次日报道会勘日期不同，只保存原公告，不表示营运问题已解决。",
+        "layer_id": "L3",
+        "county": "高雄市",
+        "source": "www.ey.gov.tw",
+        "source_grade": "A",
+        "source_reference": "https://www.ey.gov.tw/Page/9277F759E41CCD91/81079623-c957-4d23-9bab-d4a0dc4af6e6",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅用于有日期的公告、研究观点或个人公开表态；不得推断2026派系延续、组织整体支持、政策实际效果、支持度或胜负。核验日不代表全部状态更新到当日。",
+        "promotion_provenance": {
+          "proposal_id": "kh-pack-20260927-fish-trial",
+          "promoted_at": "2026-09-27T12:33:29+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "kh-pack-20260927-ey-fish"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-765c2a6e48575232e10ca5bc",
+        "proposal_id": "kh-pack-20260927-fish-free",
+        "county": "高雄市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T12:33:29.509633+00:00",
+        "target_path": "",
+        "record_id": "kh-fish-free-20260927",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-ey-fish"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "568387ab4ad3a9cd8766704cf4db99044331a0890440b4800dfa8276d49613ea",
+        "evidence_snapshot_sha256": "6502f3048dbfacce6a441ad42f162e40dc25b0a90bca2aff33e380d5abb3762e",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "kh-fish-free-20260927",
+        "speaker": "相关主管机关",
+        "claim_text": "行政院9月17日公告两年试营运期间境外聘雇外籍漁工及眷属入住船员会馆免付费，费用由农業部与船东负担。",
+        "claim_type": "policy",
+        "date": "2026-09-17",
+        "time_scope": "2026-09-17公告记录，非完工证明",
+        "last_verified_at": "2026-09-27",
+        "region": "高雄市",
+        "verification_status": "official_record",
+        "notes": "",
+        "layer_id": "L3",
+        "county": "高雄市",
+        "source": "www.ey.gov.tw",
+        "source_grade": "A",
+        "source_reference": "https://www.ey.gov.tw/Page/9277F759E41CCD91/81079623-c957-4d23-9bab-d4a0dc4af6e6",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅用于有日期的公告、研究观点或个人公开表态；不得推断2026派系延续、组织整体支持、政策实际效果、支持度或胜负。核验日不代表全部状态更新到当日。",
+        "promotion_provenance": {
+          "proposal_id": "kh-pack-20260927-fish-free",
+          "promoted_at": "2026-09-27T12:33:29+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "kh-pack-20260927-ey-fish"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-a4e03e5c56622fc57ce9afc1",
+        "proposal_id": "kh-pack-20260927-housing-stock",
+        "county": "高雄市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T12:33:29.513286+00:00",
+        "target_path": "",
+        "record_id": "kh-housing-stock-20260927",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-housing-original"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "959f1bfe06807fa8bf6e48158d04360de9a93b0c49113044d55510257a4121d5",
+        "evidence_snapshot_sha256": "0b72651515f3eac6b39207530a77419adcb39e900827154bae0a483b7c6bb69c",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "kh-housing-stock-20260927",
+        "speaker": "相关主管机关",
+        "claim_text": "8月27日高雄住都中心原始消息称全市社宅兴办23055户。",
+        "claim_type": "policy",
+        "date": "2026-08-27",
+        "time_scope": "2026-08-27公告记录，非完工证明",
+        "last_verified_at": "2026-09-27",
+        "region": "高雄市",
+        "verification_status": "official_record",
+        "notes": "兴办不能解释为完工或入住23055户。",
+        "layer_id": "L3",
+        "county": "高雄市",
+        "source": "urban-web.kcg.gov.tw",
+        "source_grade": "A",
+        "source_reference": "https://urban-web.kcg.gov.tw/KDA/web_page/KDAN030201.jsp?PK01=KDA070000001202608017",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅用于有日期的公告、研究观点或个人公开表态；不得推断2026派系延续、组织整体支持、政策实际效果、支持度或胜负。核验日不代表全部状态更新到当日。",
+        "promotion_provenance": {
+          "proposal_id": "kh-pack-20260927-housing-stock",
+          "promoted_at": "2026-09-27T12:33:29+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "kh-pack-20260927-housing-original"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-be4201937481ae8ea712944b",
+        "proposal_id": "kh-pack-20260927-daliao-demand",
+        "county": "高雄市",
+        "target_type": "current_issue",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T12:33:29.517209+00:00",
+        "target_path": "",
+        "record_id": "kh-daliao-demand-20260927",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-housing-original"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "e860be282aed4e8dd9933cdba777037a62f16e659b8979e62080b7b78b4d268c",
+        "evidence_snapshot_sha256": "0b72651515f3eac6b39207530a77419adcb39e900827154bae0a483b7c6bb69c",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "claim_id": "kh-daliao-demand-20260927",
+        "speaker": "相关主管机关",
+        "claim_text": "高雄住都中心8月27日公告，大寮社宅释出384户，截至8月26日收到1202件申请。",
+        "claim_type": "policy",
+        "date": "2026-08-27",
+        "time_scope": "2026-08-27公告记录，非完工证明",
+        "last_verified_at": "2026-09-27",
+        "region": "高雄市",
+        "verification_status": "official_record",
+        "notes": "",
+        "layer_id": "L3",
+        "county": "高雄市",
+        "source": "urban-web.kcg.gov.tw",
+        "source_grade": "A",
+        "source_reference": "https://urban-web.kcg.gov.tw/KDA/web_page/KDAN030201.jsp?PK01=KDA070000001202608017",
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅用于有日期的公告、研究观点或个人公开表态；不得推断2026派系延续、组织整体支持、政策实际效果、支持度或胜负。核验日不代表全部状态更新到当日。",
+        "promotion_provenance": {
+          "proposal_id": "kh-pack-20260927-daliao-demand",
+          "promoted_at": "2026-09-27T12:33:29+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "kh-pack-20260927-housing-original"
+          ],
+          "evidence_grades": [
+            "A"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。"
+        },
+        "record_type": "political_claim",
+        "structural_use": "allowed_with_corroboration",
+        "independent_sources": []
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-bbe268c65004555f4dd596a9",
+        "proposal_id": "kh-pack-20260927-metro-yellow",
+        "county": "高雄市",
+        "target_type": "current_issue",
+        "decision": "requires_review",
+        "checked_at": "2026-09-27T12:33:29.520817+00:00",
+        "target_path": "",
+        "record_id": "",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-url-25"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [
+          "kh-pack-20260927-url-26"
+        ],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "",
+        "evidence_snapshot_sha256": "72f04fd9223487920da34cfc334bd9aa0655552d91da32deed68ca52d7c37b5f",
+        "reasons": [
+          "verified A/B/C contradictory evidence blocks automatic promotion"
+        ],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {}
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-f0c6449f5200b292c40d2229",
+        "proposal_id": "kh-pack-20260927-metro-linyuan",
+        "county": "高雄市",
+        "target_type": "current_issue",
+        "decision": "requires_review",
+        "checked_at": "2026-09-27T12:33:29.524413+00:00",
+        "target_path": "",
+        "record_id": "",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-url-25"
+        ],
+        "evidence_grades": [
+          "A"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [
+          "kh-pack-20260927-url-26"
+        ],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "",
+        "evidence_snapshot_sha256": "72f04fd9223487920da34cfc334bd9aa0655552d91da32deed68ca52d7c37b5f",
+        "reasons": [
+          "verified A/B/C contradictory evidence blocks automatic promotion"
+        ],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {}
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-49866f031a8dd904fd0cb3f7",
+        "proposal_id": "kh-pack-20260927-lin-lai",
+        "county": "高雄市",
+        "target_type": "local_relationship",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T12:33:29.524643+00:00",
+        "target_path": "",
+        "record_id": "kh-lin-lai-20260905",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-url-15",
+          "kh-pack-20260927-url-16"
+        ],
+        "evidence_grades": [
+          "C",
+          "C"
+        ],
+        "independent_source_count": 2,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "a771a5bb09fb89f3745942e10e9c9eebbd09f1cce2b2554a631cab5d2ee115df",
+        "evidence_snapshot_sha256": "3307cc7721290cc2b34aab0d508bf0887f0aafd1a55692a941154b0ac57cb168",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "relationship_id": "kh-lin-lai-20260905",
+        "subject": "林岱樺",
+        "object": "賴瑞隆",
+        "subject_type": "person",
+        "object_type": "person",
+        "relationship_type": "public_endorsement",
+        "current_status": "historical_only",
+        "structural_use": "historical_background_only",
+        "time_scope": "2026-09-05当天公开表态",
+        "last_verified_at": "2026-09-27",
+        "region": "高雄市",
+        "notes": "中央社活动报道及民视现场采访，仅本人表态。",
+        "layer_id": "L3",
+        "county": "高雄市",
+        "source": "www.cna.com.tw",
+        "source_grade": "C",
+        "source_reference": "https://www.cna.com.tw/news/aloc/202609050185.aspx",
+        "independent_source_count": 2,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅用于有日期的公告、研究观点或个人公开表态；不得推断2026派系延续、组织整体支持、政策实际效果、支持度或胜负。核验日不代表全部状态更新到当日。",
+        "promotion_provenance": {
+          "proposal_id": "kh-pack-20260927-lin-lai",
+          "promoted_at": "2026-09-27T12:33:29+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "kh-pack-20260927-url-15",
+            "kh-pack-20260927-url-16"
+          ],
+          "evidence_grades": [
+            "C",
+            "C"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。"
+        },
+        "record_type": "local_relationship",
+        "verification_evidence": [
+          {
+            "source": "www.cna.com.tw",
+            "source_grade": "C",
+            "reference": "https://www.cna.com.tw/news/aloc/202609050185.aspx",
+            "date": "2026-09-05",
+            "retrieved_at": "2026-09-27T12:31:37Z",
+            "lead_id": "kh-pack-20260927-url-15",
+            "independence_key": "www.cna.com.tw"
+          },
+          {
+            "source": "www.ftvnews.com.tw",
+            "source_grade": "C",
+            "reference": "https://www.ftvnews.com.tw/news/detail/2026906U04M1",
+            "date": "2026-09-06",
+            "retrieved_at": "2026-09-27T12:31:37Z",
+            "lead_id": "kh-pack-20260927-url-16",
+            "independence_key": "www.ftvnews.com.tw:southern-field-report"
+          }
+        ]
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-1778ac90f7e735aa5f7d70aa",
+        "proposal_id": "kh-pack-20260927-wang-ko",
+        "county": "高雄市",
+        "target_type": "local_relationship",
+        "decision": "dry_run_pass",
+        "checked_at": "2026-09-27T12:33:29.524873+00:00",
+        "target_path": "",
+        "record_id": "kh-wang-ko-20260913",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-url-17",
+          "kh-pack-20260927-url-18"
+        ],
+        "evidence_grades": [
+          "C",
+          "C"
+        ],
+        "independent_source_count": 2,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "43344a4a7b0aab7c04ad288c5e90de05d3c07f61e2e5d4ea4afbbbfa1c0be82f",
+        "evidence_snapshot_sha256": "68f4014cd6b9ff97b7bdee9924755f21bfbab660fc812e772f75935f2607fa1e",
+        "reasons": [],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {
+        "relationship_id": "kh-wang-ko-20260913",
+        "subject": "王金平",
+        "object": "柯志恩",
+        "subject_type": "person",
+        "object_type": "person",
+        "relationship_type": "campaign_cooperation",
+        "current_status": "historical_only",
+        "structural_use": "historical_background_only",
+        "time_scope": "2026-09-13当天公开表态",
+        "last_verified_at": "2026-09-27",
+        "region": "高雄市",
+        "notes": "本人接受引语及公视现场报道，不推断组织票转移。",
+        "layer_id": "L3",
+        "county": "高雄市",
+        "source": "www.cna.com.tw",
+        "source_grade": "C",
+        "source_reference": "https://www.cna.com.tw/news/aipl/202609130054.aspx",
+        "independent_source_count": 2,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "uncertainty": {
+          "level": "unknown",
+          "reason": "proposal did not assert a narrower uncertainty level",
+          "competing_explanations": []
+        },
+        "scope_boundary": "仅用于有日期的公告、研究观点或个人公开表态；不得推断2026派系延续、组织整体支持、政策实际效果、支持度或胜负。核验日不代表全部状态更新到当日。",
+        "promotion_provenance": {
+          "proposal_id": "kh-pack-20260927-wang-ko",
+          "promoted_at": "2026-09-27T12:33:29+00:00",
+          "builder_version": "1.4.0",
+          "evidence_lead_ids": [
+            "kh-pack-20260927-url-17",
+            "kh-pack-20260927-url-18"
+          ],
+          "evidence_grades": [
+            "C",
+            "C"
+          ],
+          "contradiction_check_completed": true,
+          "contradictory_lead_ids": [],
+          "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。"
+        },
+        "record_type": "local_relationship",
+        "verification_evidence": [
+          {
+            "source": "www.cna.com.tw",
+            "source_grade": "C",
+            "reference": "https://www.cna.com.tw/news/aipl/202609130054.aspx",
+            "date": "2026-09-13",
+            "retrieved_at": "2026-09-27T12:31:37Z",
+            "lead_id": "kh-pack-20260927-url-17",
+            "independence_key": "www.cna.com.tw"
+          },
+          {
+            "source": "news.pts.org.tw",
+            "source_grade": "C",
+            "reference": "https://news.pts.org.tw/article/826854",
+            "date": "2026-09-13",
+            "retrieved_at": "2026-09-27T12:31:37Z",
+            "lead_id": "kh-pack-20260927-url-18",
+            "independence_key": "news.pts.org.tw:local-field-report"
+          }
+        ]
+      }
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-93ba5bb9b5902779d851b5d7",
+        "proposal_id": "kh-pack-20260927-hsu-lai",
+        "county": "高雄市",
+        "target_type": "local_relationship",
+        "decision": "rejected",
+        "checked_at": "2026-09-27T12:33:29.525083+00:00",
+        "target_path": "",
+        "record_id": "",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-url-13",
+          "kh-pack-20260927-url-14"
+        ],
+        "evidence_grades": [
+          "C",
+          "C"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "",
+        "evidence_snapshot_sha256": "9d6df9f72928b0599c23952413c73006a81bc35027a6eae181fc32c96aecfd88",
+        "reasons": [
+          "C-grade promotion requires at least two explicit distinct independence_key values"
+        ],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {}
+    },
+    {
+      "receipt": {
+        "receipt_id": "promotion-c33f00013731f3065d67c74b",
+        "proposal_id": "kh-pack-20260927-renwu-demand",
+        "county": "高雄市",
+        "target_type": "current_issue",
+        "decision": "rejected",
+        "checked_at": "2026-09-27T12:33:29.528677+00:00",
+        "target_path": "",
+        "record_id": "",
+        "evidence_lead_ids": [
+          "kh-pack-20260927-url-29"
+        ],
+        "evidence_grades": [
+          "C"
+        ],
+        "independent_source_count": 1,
+        "research_questions": [
+          "截至2026-09-27，高雄市证据包的历史研究、公开关系和政策公告有哪些可核验事实？"
+        ],
+        "contradiction_check_completed": true,
+        "contradictory_lead_ids": [],
+        "contradiction_check_note": "2026-09-27检索关系否认撤回、论文勘误、政策更正反对延期；未检得不等于不存在。官网阶段冲突、漁港日期差异已记录。",
+        "record_sha256": "",
+        "evidence_snapshot_sha256": "5cc94ff65acf215a24a35edb21d422ffcdfed3472a22acf36867a307e64611a3",
+        "reasons": [
+          "C-grade evidence requires at least two verified independent sources"
+        ],
+        "warnings": [],
+        "knowledge_builder_version": "1.4.0"
+      },
+      "record": {}
+    }
+  ],
+  "counties": [
+    "高雄市"
+  ]
+}

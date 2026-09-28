@@ -117,6 +117,21 @@ class TestCoreContract(unittest.TestCase):
             self.assertEqual(str(load_yaml(rel)["version"]), "1.4.0")
         self.assertEqual(str(load_yaml("config/runtime.yaml")["skill_version"]), "1.4.0")
 
+    def test_campaign_event_schemas_keep_verified_and_media_contracts_separate(self):
+        canonical = load_yaml("schemas/campaign_event.yaml")
+        media = load_yaml("schemas/campaign_media_event.yaml")
+        canonical_required = set(canonical["required"])
+        for field in ("speaker", "subject", "affected_dimension", "source", "reference",
+                      "retrieved_at", "last_verified_at"):
+            self.assertIn(field, canonical_required)
+        canonical_status = set(canonical["properties"]["verification_status"]["enum"])
+        self.assertNotIn("corroborated_media", canonical_status)
+        self.assertNotIn("single_source_media", canonical_status)
+        media_status = set(media["properties"]["verification_status"]["enum"])
+        self.assertEqual(media_status, {"single_source_media", "corroborated_media", "requires_review"})
+        self.assertEqual(set(media["properties"]["structural_use"]["enum"]),
+                         {"context_only", "research_trigger_only"})
+
     def test_skill_frontmatter_name(self):
         text = read_text("SKILL.md")
         self.assertIn("name: ogasawara-election-analysis", text)

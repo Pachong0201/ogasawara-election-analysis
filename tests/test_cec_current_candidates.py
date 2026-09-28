@@ -15,6 +15,8 @@ from tests.fixtures.helpers import (
 PAGE_URL = "https://web.cec.gov.tw/central/article/64733"
 COUNTY_PDF = "https://web.cec.gov.tw/api/file/county.pdf"
 MUNICIPAL_PDF = "https://web.cec.gov.tw/api/file/municipal.pdf"
+COUNTY_COUNCILOR_PDF = "https://web.cec.gov.tw/api/file/county-councilor.pdf"
+MUNICIPAL_COUNCILOR_PDF = "https://web.cec.gov.tw/api/file/municipal-councilor.pdf"
 
 
 def fake_html():
@@ -22,8 +24,12 @@ def fake_html():
     <html><body>
       <a href="/api/file/municipal.pdf">1-1(115年直轄市長選舉候選人登記彙總表) pdf</a>
       <a href="/api/file/party.pdf">1-2(115年直轄市長選舉政黨推薦候選人登記情形彙總表) pdf</a>
+      <a href="/api/file/municipal-councilor.pdf">2-1(115年直轄市議員選舉候選人登記彙總表) pdf</a>
+      <a href="/api/file/municipal-councilor-party.pdf">2-2(115年直轄市議員選舉政黨推薦候選人登記情形彙總表) pdf</a>
       <a href="/api/file/county.pdf">3-1(115年縣市長選舉候選人登記彙總表) pdf</a>
       <a href="/api/file/county-party.pdf">3-2(115年縣市長選舉政黨推薦候選人登記情形彙總表) pdf</a>
+      <a href="/api/file/county-councilor.pdf">4-1(115年縣市議員選舉候選人登記彙總表) pdf</a>
+      <a href="/api/file/county-councilor-party.pdf">4-2(115年縣市議員選舉政黨推薦候選人登記情形彙總表) pdf</a>
     </body></html>
     """.encode("utf-8")
 
@@ -35,6 +41,10 @@ def fake_fetcher(url):
         return b"COUNTY"
     if url == MUNICIPAL_PDF:
         return b"MUNICIPAL"
+    if url == COUNTY_COUNCILOR_PDF:
+        return b"COUNTY_COUNCILOR"
+    if url == MUNICIPAL_COUNCILOR_PDF:
+        return b"MUNICIPAL_COUNCILOR"
     raise AssertionError(f"unexpected URL: {url}")
 
 
@@ -57,6 +67,24 @@ def fake_parser(pdf_bytes):
             + [
                 ["臺北市", "115/09/01", "甲候選人", "中國國民黨", ""],
                 ["高雄市", "115/09/02", "乙候選人", "民主進步黨", ""],
+            ]
+        ]
+    if pdf_bytes == b"MUNICIPAL_COUNCILOR":
+        return [
+            header
+            + [
+                ["臺北市第1選舉區", "115/09/01", "甲議員候選人", "中國國民黨", ""],
+                ["臺北市第2選舉區", "115/09/02", "乙議員候選人", "民主進步黨", ""],
+                ["新北市第1選舉區", "115/09/02", "丙議員候選人", "無", ""],
+            ]
+        ]
+    if pdf_bytes == b"COUNTY_COUNCILOR":
+        return [
+            header
+            + [
+                ["新竹縣第1選舉區", "115/09/01", "竹甲", "中國國民黨", ""],
+                ["新竹縣第2選舉區", "115/09/03", "竹乙", "民主進步黨", ""],
+                ["宜蘭縣第1選舉區", "115/09/04", "宜甲", "無", ""],
             ]
         ]
     return []
@@ -88,6 +116,23 @@ class TestCECCurrentCandidateAdapter(unittest.TestCase):
         taipei = self.adapter().fetch("台北市", "county_mayor", 2026)
         self.assertEqual([row["name"] for row in taipei.records], ["甲候選人"])
         self.assertEqual(taipei.records[0]["official_jurisdiction"], "臺北市")
+
+    def test_parses_councilor_registration_rows_by_county(self):
+        taipei = self.adapter().fetch("台北市", "councilor", 2026)
+        self.assertEqual(len(taipei.records), 2)
+        self.assertEqual(
+            {row["electoral_district"] for row in taipei.records},
+            {"臺北市第1選舉區", "臺北市第2選舉區"},
+        )
+        self.assertTrue(all(row["election_type"] == "councilor" for row in taipei.records))
+        self.assertTrue(all(row["candidate_status"] == "registered" for row in taipei.records))
+
+        hsinchu = self.adapter().fetch("新竹縣", "councilor", 2026)
+        self.assertEqual({row["name"] for row in hsinchu.records}, {"竹甲", "竹乙"})
+        self.assertEqual(
+            {row["electoral_district"] for row in hsinchu.records},
+            {"新竹縣第1選舉區", "新竹縣第2選舉區"},
+        )
 
     def test_loader_refreshes_and_persists_candidate_cache(self):
         with temp_repo() as root:

@@ -1,4 +1,4 @@
-version: 1.0.0
+version: 1.4.0
 schema_name: local_relationship
 description: >
   地方政治关系记录。任何关系都必须有 time_scope 与 last_verified_at；
@@ -20,8 +20,14 @@ properties:
   subject:
     type: string
     description: 人物、派系、组织或公职。
+  subject_type:
+    type: string
+    enum: [person, organization, political_network, office, region, issue, unknown]
   object:
     type: string
+  object_type:
+    type: string
+    enum: [person, organization, political_network, office, region, issue, unknown]
   relationship_type:
     type: string
     enum:
@@ -30,6 +36,14 @@ properties:
       - party
       - electoral_support
       - organization_membership
+      - office_holding
+      - geographic_base
+      - campaign_cooperation
+      - civic_association
+      - farmers_association
+      - fishermen_association
+      - religious_association
+      - public_service_network
       - patron_client
       - business
       - public_endorsement
@@ -80,6 +94,33 @@ properties:
       - historical_background_only
       - lead_only
       - not_allowed
+  uncertainty:
+    type: object
+    properties:
+      level: {type: string, enum: [low, medium, high, unknown]}
+      reason: {type: string}
+      competing_explanations:
+        type: array
+        items: {type: string}
+  scope_boundary:
+    type: string
+  promotion_provenance:
+    type: object
+    properties:
+      proposal_id: {type: string}
+      promoted_at: {type: string}
+      builder_version: {type: string}
+      evidence_lead_ids:
+        type: array
+        items: {type: string}
+      evidence_grades:
+        type: array
+        items: {type: string}
+      contradiction_check_completed: {type: boolean}
+      contradictory_lead_ids:
+        type: array
+        items: {type: string}
+      contradiction_check_note: {type: string}
   notes:
     type: string
 

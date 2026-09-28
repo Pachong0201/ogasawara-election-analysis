@@ -1,0 +1,28 @@
+{
+  "protected_files_unchanged": 14,
+  "all_prior_new_taipei_records_preserved": true,
+  "other_counties_unchanged": true,
+  "promoted_only_dry_run_pass": true,
+  "persisted_receipts_validated": 12,
+  "counts": {
+    "historical_claim": 6,
+    "local_relationship": 17,
+    "candidate_profile": 115,
+    "current_issue": 8
+  },
+  "original_urls_audited": 27,
+  "original_items_accounted_for": 26,
+  "related_tests": {
+    "command": "python3 -m unittest tests.test_knowledge_builder tests.test_knowledge_coverage tests.test_cli_knowledge tests.test_host_retrieval tests.test_freshness",
+    "passed": 32,
+    "failed": 0
+  },
+  "schema_validation": {
+    "retrieval": 32,
+    "normalized_records": 12
+  },
+  "diff_check": "passed",
+  "dry_run_no_knowledge_writes": true,
+  "manual_requires_review_count": 3,
+  "builder_requires_review_count": 0
+}

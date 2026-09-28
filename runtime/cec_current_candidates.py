@@ -15,7 +15,7 @@ from .models import SourceFetchResult, utc_now_iso
 from .source_registry import CurrentCandidateSource
 
 
-CEC_2026_REGISTRATION_PAGE = "https://web.cec.gov.tw/central/article/64733"
+CEC_2026_REGISTRATION_PAGE = "https://web.cec.gov.tw/central/article/64709"
 CEC_2026_ELECTION_DATE = "2026-11-28"
 CEC_2026_PUBLISHED_DATE = "2026-09-07"
 
@@ -56,7 +56,7 @@ def _download_bytes(url: str) -> bytes:
     request = urllib.request.Request(
         encoded,
         headers={
-            "User-Agent": "ogasawara-election-analysis/1.3",
+            "User-Agent": "ogasawara-election-analysis/1.4",
             "Accept": "text/html,application/pdf,*/*",
         },
     )
@@ -102,14 +102,21 @@ class CECCurrentCandidateAdapter(CurrentCandidateSource):
         self.pdf_table_parser = pdf_table_parser or self._extract_pdf_tables
 
     def supports(self, jurisdiction: str, election_type: str, target_year: int) -> bool:
-        return election_type == "county_mayor" and int(target_year) == 2026 and bool(jurisdiction)
+        return (
+            election_type in {"county_mayor", "councilor"}
+            and int(target_year) == 2026
+            and bool(jurisdiction)
+        )
 
     def metadata(self) -> Dict[str, Any]:
         base = super().metadata()
         base.update(
             {
                 "page_url": self.page_url,
-                "supported_elections": {"county_mayor": [2026]},
+                "supported_elections": {
+                    "county_mayor": [2026],
+                    "councilor": [2026],
+                },
                 "candidate_status": "registered",
             }
         )
@@ -129,7 +136,7 @@ class CECCurrentCandidateAdapter(CurrentCandidateSource):
             html = page_bytes.decode("utf-8")
         except UnicodeDecodeError:
             html = page_bytes.decode("utf-8", errors="replace")
-        links = self._candidate_pdf_links(html)
+        links = self._candidate_pdf_links(html, election_type)
         if not links:
             return SourceFetchResult(
                 source_id=self.source_id,
@@ -161,6 +168,7 @@ class CECCurrentCandidateAdapter(CurrentCandidateSource):
                 official_jurisdiction=official_jurisdiction,
                 source_url=link,
                 verified_at=now,
+                election_type=election_type,
             )
             if records:
                 all_records.extend(records)
@@ -187,19 +195,25 @@ class CECCurrentCandidateAdapter(CurrentCandidateSource):
             raw_reference=";".join(used_links) or self.page_url,
         )
 
-    def _candidate_pdf_links(self, html: str) -> List[str]:
+    def _candidate_pdf_links(self, html: str, election_type: str) -> List[str]:
         parser = _AnchorCollector()
         parser.feed(html)
+        prefixes = {
+            "county_mayor": ("1-1", "3-1"),
+            "councilor": ("2-1", "4-1"),
+        }.get(election_type, ())
         links: List[str] = []
         for href, text in parser.anchors:
             label = _clean_cell(text)
             if not href or ".pdf" not in href.lower():
                 continue
-            if "市長選舉候選人登記彙總表" not in label:
-                continue
             if "政黨推薦候選人登記情形" in label:
                 continue
-            if not (label.startswith("1-1") or label.startswith("3-1")):
+            if prefixes and not label.startswith(prefixes):
+                continue
+            if election_type == "county_mayor" and "市長選舉候選人登記彙總表" not in label:
+                continue
+            if election_type == "councilor" and "議員選舉候選人登記彙總表" not in label:
                 continue
             links.append(urllib.parse.urljoin(self.page_url, href))
         return sorted(set(links))
@@ -241,6 +255,7 @@ class CECCurrentCandidateAdapter(CurrentCandidateSource):
         official_jurisdiction: str,
         source_url: str,
         verified_at: str,
+        election_type: str = "county_mayor",
     ) -> List[Dict[str, Any]]:
         records: List[Dict[str, Any]] = []
         for row in rows:
@@ -254,24 +269,33 @@ class CECCurrentCandidateAdapter(CurrentCandidateSource):
 
             if region in {"選舉區", "选举区"}:
                 continue
-            if region != official_jurisdiction:
+            if election_type == "county_mayor":
+                if region != official_jurisdiction:
+                    continue
+                electoral_district = official_jurisdiction
+            elif election_type == "councilor":
+                if not region.startswith(official_jurisdiction) or "選舉區" not in region:
+                    continue
+                electoral_district = region
+            else:
                 continue
             if not registration_date or not name:
                 continue
 
             recommended_by = recommendation if recommendation and recommendation != "無" else ""
             digest = hashlib.sha1(
-                f"2026|county_mayor|{official_jurisdiction}|{name}|{registration_date}".encode("utf-8")
+                f"2026|{election_type}|{electoral_district}|{name}|{registration_date}".encode("utf-8")
             ).hexdigest()[:16]
             records.append(
                 {
                     "candidate_id": f"cec-reg-2026-{digest}",
                     "name": name,
                     "candidate_name": name,
-                    "election_type": "county_mayor",
+                    "election_type": election_type,
                     "election_year": 2026,
                     "jurisdiction": requested_jurisdiction,
                     "official_jurisdiction": official_jurisdiction,
+                    "electoral_district": electoral_district,
                     "candidate_status": "registered",
                     "registration_date": registration_date,
                     "recommended_by_party": recommended_by,

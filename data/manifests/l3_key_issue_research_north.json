@@ -1,0 +1,105 @@
+{
+  "generated_at": "2026-09-27T02:31:27+00:00",
+  "county_count": 6,
+  "covered_county_count": 0,
+  "finding_count": 0,
+  "proposal_count": 0,
+  "promoted_count": 0,
+  "rejected_count": 0,
+  "failure_count": 6,
+  "results": [
+    {
+      "county": "基隆市",
+      "primary_status": "partial",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "model_output_truncated",
+      "error_stage": "model_review"
+    },
+    {
+      "county": "台北市",
+      "primary_status": "partial",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
+    },
+    {
+      "county": "新北市",
+      "primary_status": "partial",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
+    },
+    {
+      "county": "桃園市",
+      "primary_status": "partial",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
+    },
+    {
+      "county": "新竹市",
+      "primary_status": "partial",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
+    },
+    {
+      "county": "新竹縣",
+      "primary_status": "partial",
+      "counter_status": "not_needed",
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "rejected_count": 0,
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
+    }
+  ],
+  "failures": [
+    {
+      "county": "基隆市",
+      "error": "model_output_truncated"
+    },
+    {
+      "county": "台北市",
+      "error": "provider_timeout"
+    },
+    {
+      "county": "新北市",
+      "error": "provider_timeout"
+    },
+    {
+      "county": "桃園市",
+      "error": "provider_timeout"
+    },
+    {
+      "county": "新竹市",
+      "error": "provider_timeout"
+    },
+    {
+      "county": "新竹縣",
+      "error": "provider_timeout"
+    }
+  ],
+  "apply": true
+}

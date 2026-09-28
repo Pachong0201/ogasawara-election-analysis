@@ -56,6 +56,14 @@ def _timestamp_for_kind(record: Dict[str, Any], kind: str) -> Optional[dt.date]:
             if parsed is not None:
                 return parsed
         return None
+    if kind == "campaign_event" and str(record.get("verification_status") or "") in {
+        "single_source_media", "corroborated_media"
+    }:
+        for field in ("event_date", "date", "page_date", "first_seen_at"):
+            parsed = parse_date(record.get(field))
+            if parsed is not None:
+                return parsed
+        return None
     return _timestamp(record)
 
 

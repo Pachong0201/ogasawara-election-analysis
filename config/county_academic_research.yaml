@@ -1,0 +1,260 @@
+version: 1.0.0
+as_of: 2026-09-26
+purpose: >
+  补充原22县市基线中尚缺的19县市地方政治、派系、农渔会及组织动员学术研究。
+  本文件默认只产生B级 retrieval lead，不直接晋升为2026年当前政治事实。
+coverage_policy:
+  expected_counties:
+    - 基隆市
+    - 台北市
+    - 桃園市
+    - 新竹市
+    - 新竹縣
+    - 苗栗縣
+    - 台中市
+    - 彰化縣
+    - 南投縣
+    - 雲林縣
+    - 嘉義市
+    - 嘉義縣
+    - 屏東縣
+    - 宜蘭縣
+    - 花蓮縣
+    - 台東縣
+    - 澎湖縣
+    - 金門縣
+    - 連江縣
+  excluded_existing_baseline_counties: [新北市, 台南市, 高雄市]
+  default_promote: false
+  note: >
+    论文中的派系边界、人物关系、组织动员能力均受研究年代和个案范围限制；
+    未经近期独立来源复核，不得用于描述2026年当前关系或推断选举结果。
+
+academic_records:
+  - county: 基隆市
+    lead_id: academic-keelung-party-faction-elections-2002
+    source_id: nccu_thesis_keelung_2002
+    source_name: 政大硕士论文《政党、派系与选举三角关系之研究：2001年市长、立委选举以及2002年市议员选举基隆市个案分析》
+    source_grade: B
+    independence_key: nccu_thesis_keelung_2002
+    published_at: "2002"
+    url: https://thesis.lib.nccu.edu.tw/thesis/detail/d13d93803ef565bc9f7661a098df5397/
+    topic: political_networks
+    promote: false
+    summary: 论文以基隆市为个案，系统处理地方派系发展、2001至2002年市长、立委与市议员选举，以及政党轮替前后派系与政党关系变化。
+
+  - county: 台北市
+    lead_id: academic-taipei-shilin-beitou-election-2011
+    source_id: ndltd_taipei_099MCU05636030
+    source_name: 铭传大学硕士论文《政党的地方选战策略-以2010年台北市第11届士林北投区议员选举为例》
+    source_grade: B
+    independence_key: ndltd_099MCU05636030
+    published_at: "2011"
+    url: https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?extralimit=asc%3D%22%E9%8A%98%E5%82%B3%E5%A4%A7%E5%AD%B8%22&extralimitunit=%E9%8A%98%E5%82%B3%E5%A4%A7%E5%AD%B8&o=dnclcdr&s=id%3D%22099MCU05636030%22.&searchmode=basic
+    topic: political_networks
+    promote: false
+    summary: 论文以2010年士林北投市议员选举为个案，讨论政党、无党籍候选人与地方派系背景下的地方选战策略。
+
+  - county: 桃園市
+    lead_id: academic-taoyuan-council-local-power-2015
+    source_id: ntu_thesis_taoyuan_council_2015
+    source_name: 台大硕士论文《桃园县（市）议会民主进步党党团之研究（1945-2015）》
+    source_grade: B
+    independence_key: ntu_thesis_taoyuan_council_2015
+    published_at: "2015"
+    url: https://tdr.lib.ntu.edu.tw/jspui/handle/123456789/17801
+    topic: political_networks
+    promote: false
+    summary: 论文从桃园县市议会历史、地方权力组织、地方派系与宗亲会等角度讨论议员选举和地方政治权力结构。
+
+  - county: 新竹市
+    lead_id: academic-hsinchu-city-urbanization-factions-2000
+    source_id: ndltd_hsinchu_county_city_urbanization_2000
+    source_name: 政大硕士论文《“都市化”、“派系得票率”及“选举投票率”关系之研究：新竹县（市）的个案分析》
+    source_grade: B
+    independence_key: ndltd_hsinchu_county_city_urbanization_2000
+    published_at: "2000"
+    url: https://ndltd.ncl.edu.tw/r/28c89k
+    topic: political_networks
+    promote: false
+    summary: 论文比较新竹县市地方派系发展，并以1994至1998年多层级选举分析都市化、派系得票与投票率之间的关系。
+
+  - county: 新竹縣
+    lead_id: academic-hsinchu-county-party-faction-2002
+    source_id: ndltd_hsinchu_091PCCU1227015
+    source_name: 文化大学硕士论文《新竹县政党与派系的互动之研究--以1993年以后的县长选举为例》
+    source_grade: B
+    independence_key: ndltd_091PCCU1227015
+    published_at: "2002"
+    url: https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd%3Dvzrjcm/search?s=id%3D%22091PCCU1227015%22.&searchmode=basic
+    topic: political_networks
+    promote: false
+    summary: 论文以1993、1997、2001年新竹县长选举为重点，研究政党组织、地方派系、候选人组织动员及派系整合。
+
+  - county: 苗栗縣
+    lead_id: academic-miaoli-election-mobilization-study
+    source_id: hakka_miaoli_mobilization_study
+    source_name: 客委会研究资料中的苗栗县选举动员与地方派系研究
+    source_grade: B
+    independence_key: hakka_miaoli_mobilization_study
+    published_at: "2000s"
+    url: https://cloud.hakka.gov.tw/Attachment/1/912141673771.pdf
+    topic: political_networks
+    promote: false
+    summary: 研究资料设有苗栗县选举动员效果分析，讨论行政、农会、妇女、政党与社团等组织动员，并引用徐芳玉关于1991至2001年苗栗地方派系与选举的学位研究。
+
+  - county: 台中市
+    lead_id: academic-taichung-farmers-association-leadership
+    source_id: ndltd_taichung_farmers_association
+    source_name: 学位论文《农会领导系统与农会经营人产生方式之研究-以台中县为例》
+    source_grade: B
+    independence_key: ndltd_taichung_farmers_association
+    published_at: "2000s"
+    url: https://ndltd.ncl.edu.tw/handle/61522844601352968870
+    topic: farmers_fishermen_associations
+    promote: false
+    summary: 论文以原台中县农会领导体系与经营人产生方式为核心，并系统引用台中县地方派系、农会与选举动员研究。
+
+  - county: 彰化縣
+    lead_id: academic-changhua-factions-origin-2009
+    source_id: tci_A09061975
+    source_name: 期刊论文《战后彰化地方派系的起源与组织结构》
+    source_grade: B
+    independence_key: tci_A09061975
+    published_at: "2009"
+    url: https://tci.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dnclresource&s=id%3D%22A09061975%22.&searchmode=basic&tcihsspage=tcisearch_opt1_search
+    topic: political_networks
+    promote: false
+    summary: 论文从历史角度讨论战后彰化地方派系的起源、组织结构及乡镇与农会派系关系，适合作为历史网络底稿。
+
+  - county: 南投縣
+    lead_id: academic-nantou-renai-factions-2012
+    source_id: ndltd_100NCUE5636006
+    source_name: 彰师大硕士论文《南投县仁爱乡地方派系之研究》
+    source_grade: B
+    independence_key: ndltd_100NCUE5636006
+    published_at: "2012"
+    url: https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dnclcdr&s=id%3D%22100NCUE5636006%22.&searchmode=basic
+    topic: political_networks
+    promote: false
+    summary: 论文以南投县仁爱乡为个案研究地方派系，提供原住民族地区地方政治网络的个案资料。
+
+  - county: 雲林縣
+    lead_id: academic-yunlin-parties-factions-2010
+    source_id: ndltd_098CCU05227004
+    source_name: 中正大学硕士论文《云林县政党与派系之变迁》
+    source_grade: B
+    independence_key: ndltd_098CCU05227004
+    published_at: "2010"
+    url: https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?extralimit=asc%3D%22%E5%9C%8B%E7%AB%8B%E4%B8%AD%E6%AD%A3%E5%A4%A7%E5%AD%B8%22&extralimitunit=%E5%9C%8B%E7%AB%8B%E4%B8%AD%E6%AD%A3%E5%A4%A7%E5%AD%B8&o=dnclcdr&s=id%3D%22098CCU05227004%22.&searchmode=basic
+    topic: political_networks
+    promote: false
+    summary: 论文研究云林县政党与地方派系变化，并整理云林地方派系、农会和选举关系的相关研究脉络。
+
+  - county: 嘉義市
+    lead_id: academic-chiayi-city-resource-support-2023
+    source_id: ndltd_111CCU00227004
+    source_name: 中正大学硕士论文《主要政党、地方派系的资源分配与政治支持——以嘉义市为个案分析》
+    source_grade: B
+    independence_key: ndltd_111CCU00227004
+    published_at: "2023"
+    url: https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/login?o=dnclcdr&s=id%3D%22111CCU00227004%22.&searchmode=basic
+    topic: political_networks
+    promote: false
+    summary: 论文以嘉义市为研究范围，讨论政党、地方派系、政治家族、社会团体、地方山头与组织动员所构成的地方政治生态。
+
+  - county: 嘉義縣
+    lead_id: academic-chiayi-county-lin-huang-2025
+    source_id: ndltd_113CCU01227010
+    source_name: 中正大学硕士论文《地方派系的权力竞争与政治流动探讨：以嘉义县林黄派为例》
+    source_grade: B
+    independence_key: ndltd_113CCU01227010
+    published_at: "2025"
+    url: https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/login?o=dnclcdr&s=id%3D%22113CCU01227010%22.&searchmode=basic
+    topic: political_networks
+    promote: false
+    summary: 论文以嘉义县林、黄两派的历史发展、组织运作、资源分配、人物流动与选举结果为研究对象，时间上较接近当前但仍只作历史研究依据。
+
+  - county: 屏東縣
+    lead_id: academic-pingtung-yanpu-factions-2019
+    source_id: nsysu_thesis_etd_0712119_135309
+    source_name: 中山大学硕士论文《地方派系与民主政治：以屏东县盐埔乡为例》
+    source_grade: B
+    independence_key: nsysu_etd_0712119_135309
+    published_at: "2019"
+    url: https://etd.lis.nsysu.edu.tw/ETD-db/ETD-search-c/view_etd?URN=etd-0712119-135309
+    topic: political_networks
+    promote: false
+    summary: 论文以盐埔乡地方派系与选举参与为个案，讨论政党政治、农会变化和地方派系延续问题。
+
+  - county: 宜蘭縣
+    lead_id: academic-yilan-factional-politics-1996
+    source_id: nccu_thesis_yilan_1996
+    source_name: 政大硕士论文《宜兰县派系政治之研究》
+    source_grade: B
+    independence_key: nccu_thesis_yilan_1996
+    published_at: "1996"
+    url: https://thesis.lib.nccu.edu.tw/thesis/detail/21f4dc87b16102b452e05615f63dc5a0/
+    topic: political_networks
+    promote: false
+    summary: 论文研究1949年至1992年宜兰派系政治的形成、发展、组织结构与动员基础，可作为长期历史脉络来源。
+
+  - county: 花蓮縣
+    lead_id: academic-hualien-county-mayor-strategy-2003
+    source_id: nccu_thesis_hualien_2003
+    source_name: 政大硕士论文《政党轮替后的竞选策略：2001年花莲县长选举个案研究》
+    source_grade: B
+    independence_key: nccu_thesis_hualien_2003
+    published_at: "2003"
+    url: https://thesis.lib.nccu.edu.tw/thesis/detail/d788b8001ebd0ceca5762c650b6bcbbd/
+    topic: historical_political_structure
+    promote: false
+    summary: 论文以2001年花莲县长选举为个案，包含花莲政治版图、竞选组织、后援会及原住民组织等历史材料。
+
+  - county: 台東縣
+    lead_id: academic-taitung-factions-development-2007
+    source_id: nttu_thesis_luo_shaoping_2007
+    source_name: 台东大学硕士论文《台东县地方派系竞合对地方建设影响之研究》
+    source_grade: B
+    independence_key: nttu_thesis_luo_shaoping_2007
+    published_at: "2007"
+    url: https://pca.nttu.edu.tw/p/16-1028-2040.php?Lang=zh-tw
+    topic: political_networks
+    promote: false
+    summary: 台东大学历届论文目录确认该研究以台东县地方派系竞合及其对地方建设的影响为主题，适合作为后续取得全文的B级研究线索。
+
+  - county: 澎湖縣
+    lead_id: academic-penghu-factions-rise-fall-2002
+    source_id: election_study_penghu_2002
+    source_name: 《选举研究》论文《战后澎湖地方派系兴衰之研究》
+    source_grade: B
+    independence_key: election_study_penghu_2002
+    published_at: "2002"
+    url: https://jestw.nccu.edu.tw/web/issue/issue_info.jsp?lang=tw&pd_id=PD1717644424421
+    topic: political_networks
+    promote: false
+    summary: 论文以历史结构、深度访谈与文献分析研究澎湖地方派系的形成、分裂重组与民主化时期的变化。
+
+  - county: 金門縣
+    lead_id: academic-kinmen-political-ecology-2020
+    source_id: tci_108THU00227008
+    source_name: 学位论文《民主化下金门政治生态变迁之研究》
+    source_grade: B
+    independence_key: tci_108THU00227008
+    published_at: "2020"
+    url: https://tci.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dnclresource&s=id%3D%22108THU00227008%22.&searchmode=basic&tcihsspage=tcisearch_opt1_search
+    topic: political_networks
+    promote: false
+    summary: 论文从政治发展、菁英、制度与地方派系途径研究民主化后的金门政治生态，并讨论宗亲会、旅台同乡会与地方选举的历史关系。
+
+  - county: 連江縣
+    lead_id: academic-matsu-political-ecology-2017
+    source_id: ntu_thesis_matsu_2017
+    source_name: 台大硕士论文《民主化后的马祖地方政治生态与地方政治菁英的动员、经营与结盟》
+    source_grade: B
+    independence_key: ntu_thesis_matsu_2017
+    published_at: "2017"
+    url: https://tdr.lib.ntu.edu.tw/handle/123456789/2673
+    topic: political_networks
+    promote: false
+    summary: 论文以1992至2017年马祖为范围，通过深度访谈、文献分析和参与观察研究地方政治生态、菁英动员、经营与结盟。

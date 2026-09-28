@@ -143,3 +143,9 @@ metrics:
 campaign_state:
   enabled: true
   policy_file: config/campaign_state.yaml
+
+campaign_event_resolution:
+  corroboration_min_sources: 2
+  max_excerpt_chars: 900
+  evidence_boundary: research_trigger_only
+  date_policy: publisher_page_date_then_first_seen

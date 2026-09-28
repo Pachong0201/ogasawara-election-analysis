@@ -23,9 +23,13 @@ class AnalysisContextBuilder:
         local_knowledge: Optional[Dict[str, Any]] = None,
         current_candidates: Optional[List[Dict[str, Any]]] = None,
         current_events: Optional[List[Dict[str, Any]]] = None,
+        campaign_event_resolution: Optional[Dict[str, Any]] = None,
+        event_importance_signals: Optional[List[Dict[str, Any]]] = None,
         campaign_state: Optional[Dict[str, Any]] = None,
         polls: Optional[List[Dict[str, Any]]] = None,
         evidence_summary: Optional[Dict[str, Any]] = None,
+        assessment: Optional[Dict[str, Any]] = None,
+        research_brief: Optional[Dict[str, Any]] = None,
         unknowns: Optional[List[str]] = None,
         warnings: Optional[List[str]] = None,
         sources: Optional[List[Dict[str, Any]]] = None,
@@ -38,15 +42,51 @@ class AnalysisContextBuilder:
         local_knowledge = local_knowledge or {}
         current_candidates = current_candidates or []
         current_events = current_events or []
+        campaign_event_resolution = campaign_event_resolution or {}
+        event_importance_signals = event_importance_signals or []
         campaign_state = campaign_state or {}
         polls = polls or []
         evidence_summary = evidence_summary or {}
+        assessment = assessment or {}
+        research_brief = research_brief or {}
         unknowns = unknowns or []
         warnings = warnings or []
         sources = sources or []
         files_used = files_used or []
         web_sources_used = web_sources_used or []
         baseline_methods = baseline_methods or {}
+
+        knowledge_views = {
+            "stable_local_baseline": {
+                "includes": [
+                    "historical_baseline",
+                    "local_knowledge.stable_local_baseline",
+                ],
+                "available": bool(
+                    records_by_type.get("historical_baseline")
+                    or local_knowledge.get("stable_local_baseline")
+                ),
+                "rule": (
+                    "read this view first for election history, boundaries, spatial matrices, "
+                    "historical claims and official social context"
+                ),
+            },
+            "dynamic_campaign_state": {
+                "includes": [
+                    "local_knowledge.dynamic_local_state",
+                    "current_candidates",
+                    "current_events",
+                    "campaign_state",
+                    "polls",
+                ],
+                "as_of": campaign_state.get("as_of"),
+                "status": campaign_state.get("campaign_state_status"),
+                "rule": (
+                    "use only time-valid current evidence; retrieval leads stay unverified, "
+                    "and dynamic evidence must not be converted into a winner prediction"
+                ),
+            },
+        }
 
         context: Dict[str, Any] = {
             "task": task.to_dict(),
@@ -57,8 +97,11 @@ class AnalysisContextBuilder:
             "candidate_residuals": metrics.get("candidate_residuals", []),
             "spatial_anomalies": metrics.get("spatial_anomalies", []),
             "local_knowledge": local_knowledge,
+            "knowledge_views": knowledge_views,
             "current_candidates": current_candidates,
             "current_events": current_events,
+            "campaign_event_resolution": campaign_event_resolution,
+            "event_importance_signals": event_importance_signals,
             "campaign_state": campaign_state,
             "as_of": campaign_state.get("as_of"),
             "campaign_state_status": campaign_state.get("campaign_state_status"),
@@ -70,6 +113,8 @@ class AnalysisContextBuilder:
             "same_series_poll_changes": campaign_state.get("same_series_poll_changes", []),
             "polls": polls,
             "evidence_summary": evidence_summary,
+            "assessment": assessment,
+            "research_brief": research_brief,
             "unknowns": unknowns,
             "warnings": warnings,
             "sources": sources,
@@ -91,6 +136,19 @@ class AnalysisContextBuilder:
             "missing_data": readiness.missing,
             "unknowns": unknowns,
             "warnings": warnings,
+            "campaign_event_resolution": campaign_event_resolution.get("stats", {}),
+            "event_importance_signal_count": len(event_importance_signals),
+            "assessment": {
+                "version": assessment.get("version"),
+                "dynamic_count": len(assessment.get("current_dynamics") or []),
+                "evidence_pack_count": len(assessment.get("evidence_pack") or []),
+            },
+            "research_brief": {
+                "version": research_brief.get("version"),
+                "core_fact_count": len(research_brief.get("core_facts") or []),
+                "regional_pattern_count": len(research_brief.get("regional_patterns") or []),
+                "hypothesis_count": len(research_brief.get("key_hypotheses") or []),
+            },
         }
         return AnalysisContext(analysis_context=context, analysis_manifest=manifest)
 

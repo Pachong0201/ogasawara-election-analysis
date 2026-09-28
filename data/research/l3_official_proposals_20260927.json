@@ -1,0 +1,1318 @@
+[
+  {
+    "proposal_id": "promote-official-issue-20260927-0-0",
+    "county": "台南市",
+    "target_type": "current_issue",
+    "research_questions": [
+      "台南市 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-0"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对官方正文、日期与活动范围；反向搜索未取得推翻该日活动事实的正文。若主办机关后续更正、撤回或说明活动取消，则立即停用并复核。 反證查詢：site:tainan.gov.tw 2026商圈樂活購 澄清 OR 更正 OR 撤回 OR 取消；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-0-0",
+      "claim_text": "2026-09-19 臺南市政府正文记录全台特色商圈与逾 85 家店家在台南交流展售，并表达串联行销与地方商业的政策期待；这里只确认活动及官方期待，不把参与规模推定为营业额成长或长期成效。",
+      "title": "商圈交流与地方商业活络",
+      "claim_type": "local_event",
+      "date": "2026-09-19",
+      "time_scope": "2026-09-19",
+      "last_verified_at": "2026-09-27",
+      "region": "台南市",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "臺南市政府新聞及國際關係處",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-1-0",
+    "county": "桃園市",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "桃園市 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-1"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对市府新闻处正文与上版日期；反向搜索未取得推翻该日质询事实的正文。此记录只能表达议会质询与行政答复，若后续更正或撤回则停用并复核。 反證查詢：site:tycg.gov.tw 李柏坊 9月9日 市政總質詢 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-1-0",
+      "subject": "李柏坊",
+      "subject_type": "person",
+      "object": "桃園市政府市政團隊",
+      "object_type": "organization",
+      "relationship_type": "public_service_network",
+      "description": "2026-09-09 桃園市政府原始记录确认市议员李柏坊就大溪建设、交通、观光、农业与长者健康等事项质询，市府团队列席并由相关局处答复；仅确认该日制度性问答，不推定双方合作、支持或政治结盟。",
+      "evidence_summary": "2026-09-09 桃園市政府原始记录确认市议员李柏坊就大溪建设、交通、观光、农业与长者健康等事项质询，市府团队列席并由相关局处答复；仅确认该日制度性问答，不推定双方合作、支持或政治结盟。",
+      "region": "桃園市",
+      "time_scope": "2026-09-09",
+      "event_date": "2026-09-09",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "桃園市政府新聞處",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-2-0",
+    "county": "彰化縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "彰化縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-2"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对官方正文、活动日期与参与者；反向搜索未取得推翻座谈事实的正文。若县府后续更正、撤回或参与方否认，则停用并复核。 反證查詢：site:chcg.gov.tw 彰化縣長與工會有約 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-2-0",
+      "subject": "王惠美",
+      "subject_type": "person",
+      "object": "彰化縣各業工會代表",
+      "object_type": "organization",
+      "relationship_type": "public_service_network",
+      "description": "2026-09-07 彰化县政府劳工处正文确认王惠美与各总工会、企业工会、产业工会及职业工会代表座谈；仅确认该日劳政沟通，不推定政治支持或长期联盟。",
+      "evidence_summary": "2026-09-07 彰化县政府劳工处正文确认王惠美与各总工会、企业工会、产业工会及职业工会代表座谈；仅确认该日劳政沟通，不推定政治支持或长期联盟。",
+      "region": "彰化縣",
+      "time_scope": "2026-09-07",
+      "event_date": "2026-09-07",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "彰化縣政府勞工處",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-2-0",
+    "county": "彰化縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "彰化縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-2"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对官方正文、活动日期与参与者；反向搜索未取得推翻座谈事实的正文。若县府后续更正、撤回或参与方否认，则停用并复核。 反證查詢：site:chcg.gov.tw 彰化縣長與工會有約 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-2-0",
+      "claim_text": "2026-09-07 彰化县政府正文把工会座谈、劳工意见沟通及劳工大学职能课程列为当日劳动治理事项；这里只确认议题与官方办理内容，不推定劳权改善或就业成效已经发生。",
+      "title": "劳工沟通与职能培力",
+      "claim_type": "policy",
+      "date": "2026-09-07",
+      "time_scope": "2026-09-07",
+      "last_verified_at": "2026-09-27",
+      "region": "彰化縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "彰化縣政府勞工處",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-3-0",
+    "county": "南投縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "南投縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-3"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对县府正文与活动日期；反向搜索未取得取消、更正或推翻活动事实的正文。若主办单位后续更正或撤回，则停用并复核。 反證查詢：site:nantou.gov.tw 紀念921 用愛報平安 國姓 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-3-0",
+      "subject": "許淑華",
+      "subject_type": "person",
+      "object": "素行生命能量協會",
+      "object_type": "organization",
+      "relationship_type": "other",
+      "description": "2026-09-19 南投县政府正文确认县长许淑华参加由县府指导、素行生命能量协会等共同办理的纪念活动；仅确认当日同场及办理关系，不推定持续合作或政治支持。",
+      "evidence_summary": "2026-09-19 南投县政府正文确认县长许淑华参加由县府指导、素行生命能量协会等共同办理的纪念活动；仅确认当日同场及办理关系，不推定持续合作或政治支持。",
+      "region": "南投縣",
+      "time_scope": "2026-09-19",
+      "event_date": "2026-09-19",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "南投縣政府",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-3-0",
+    "county": "南投縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "南投縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-3"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对县府正文与活动日期；反向搜索未取得取消、更正或推翻活动事实的正文。若主办单位后续更正或撤回，则停用并复核。 反證查詢：site:nantou.gov.tw 紀念921 用愛報平安 國姓 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-3-0",
+      "claim_text": "2026-09-19 南投县政府正文记录国姓乡九二一纪念活动，将灾难记忆、生命教育与地方创生并置为活动主题；这里只确认当日公共议题，不推定教育或观光成效。",
+      "title": "九二一记忆、生命教育与地方创生",
+      "claim_type": "local_event",
+      "date": "2026-09-19",
+      "time_scope": "2026-09-19",
+      "last_verified_at": "2026-09-27",
+      "region": "南投縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "南投縣政府",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-4-0",
+    "county": "雲林縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "雲林縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-4"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对官方正文、日期及组织名称；反向搜索未取得更正、撤回或否认互动的正文。若官方后续更正或撤回则停用并复核。 反證查詢：site:yunlin.gov.tw 羽球社區聯誼賽 張麗善 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-4-0",
+      "subject": "張麗善",
+      "subject_type": "person",
+      "object": "雲林縣體育會",
+      "object_type": "organization",
+      "relationship_type": "public_service_network",
+      "description": "2026-09-06 云林县政府教育处正文说明县府与云林县体育会及单项运动委员会推动全民运动，并记录张丽善到场；仅确认该日公开活动及官方所述协作，不推定政治支持或活动成效。",
+      "evidence_summary": "2026-09-06 云林县政府教育处正文说明县府与云林县体育会及单项运动委员会推动全民运动，并记录张丽善到场；仅确认该日公开活动及官方所述协作，不推定政治支持或活动成效。",
+      "region": "雲林縣",
+      "time_scope": "2026-09-06",
+      "event_date": "2026-09-06",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "雲林縣政府教育處",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-4-0",
+    "county": "雲林縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "雲林縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-4"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对官方正文、日期及组织名称；反向搜索未取得更正、撤回或否认互动的正文。若官方后续更正或撤回则停用并复核。 反證查詢：site:yunlin.gov.tw 羽球社區聯誼賽 張麗善 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-4-0",
+      "claim_text": "2026-09-06 云林县政府正文记录社区羽球联谊赛、县府与体育组织推动全民运动及民间器材捐赠；这里只确认政策与资源互动，不推定参与率或健康成效。",
+      "title": "全民运动与民间体育资源",
+      "claim_type": "policy",
+      "date": "2026-09-06",
+      "time_scope": "2026-09-06",
+      "last_verified_at": "2026-09-27",
+      "region": "雲林縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "雲林縣政府教育處",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-5-0",
+    "county": "苗栗縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "苗栗縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-5"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对县府正文、活动日期及主办组织；反向搜索未取得更正、撤回或否认到场的正文。若后续更正则停用并复核。 反證查詢：site:miaoli.gov.tw 忠孝社區 敬老 鍾東錦 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-5-0",
+      "subject": "鍾東錦",
+      "subject_type": "person",
+      "object": "頭份市忠孝社區發展協會",
+      "object_type": "organization",
+      "relationship_type": "other",
+      "description": "2026-09-20 苗栗县政府正文确认钟东锦出席头份市忠孝社区发展协会敬老活动；仅确认当日公开互动，不推定持续合作、组织动员或政治支持。",
+      "evidence_summary": "2026-09-20 苗栗县政府正文确认钟东锦出席头份市忠孝社区发展协会敬老活动；仅确认当日公开互动，不推定持续合作、组织动员或政治支持。",
+      "region": "苗栗縣",
+      "time_scope": "2026-09-20",
+      "event_date": "2026-09-20",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "苗栗縣政府",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-5-0",
+    "county": "苗栗縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "苗栗縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-5"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对县府正文、活动日期及主办组织；反向搜索未取得更正、撤回或否认到场的正文。若后续更正则停用并复核。 反證查詢：site:miaoli.gov.tw 忠孝社區 敬老 鍾東錦 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-5-0",
+      "claim_text": "2026-09-20 苗栗县政府正文记录忠孝社区敬老活动及对在地长者的关怀；这里只确认社区照顾议题与单次活动，不推定服务覆盖率或长期照顾成效。",
+      "title": "社区长者照顾",
+      "claim_type": "local_event",
+      "date": "2026-09-20",
+      "time_scope": "2026-09-20",
+      "last_verified_at": "2026-09-27",
+      "region": "苗栗縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "苗栗縣政府",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-6-0",
+    "county": "基隆市",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "基隆市 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-6"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对官方正文、日期与人数；反向搜索未取得撤回聘书或更正活动事实的正文。若后续名单或事实更正则停用并复核。 反證查詢：site:klcg.gov.tw 謝國樑 72位 調解委員 聘書 2026 更正 OR 撤回 OR 澄清；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-6-0",
+      "subject": "謝國樑",
+      "subject_type": "person",
+      "object": "基隆市各區調解委員",
+      "object_type": "organization",
+      "relationship_type": "public_service_network",
+      "description": "2026-09-14 基隆市政府正文确认谢国梁向 72 位调解委员颁发聘书；仅确认当日法定公共服务网络与公开互动，不推定私人或政治关系。",
+      "evidence_summary": "2026-09-14 基隆市政府正文确认谢国梁向 72 位调解委员颁发聘书；仅确认当日法定公共服务网络与公开互动，不推定私人或政治关系。",
+      "region": "基隆市",
+      "time_scope": "2026-09-14",
+      "event_date": "2026-09-14",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "基隆市政府綜合發展處新聞科",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-6-0",
+    "county": "基隆市",
+    "target_type": "current_issue",
+    "research_questions": [
+      "基隆市 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-6"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对官方正文、日期与人数；反向搜索未取得撤回聘书或更正活动事实的正文。若后续名单或事实更正则停用并复核。 反證查詢：site:klcg.gov.tw 謝國樑 72位 調解委員 聘書 2026 更正 OR 撤回 OR 澄清；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-6-0",
+      "claim_text": "2026-09-14 基隆市政府正文记录 72 位调解委员受聘及协助地方纠纷调解；这里只确认制度安排与服务议题，不推定案件化解率或社会成效。",
+      "title": "地方调解服务",
+      "claim_type": "policy",
+      "date": "2026-09-14",
+      "time_scope": "2026-09-14",
+      "last_verified_at": "2026-09-27",
+      "region": "基隆市",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "基隆市政府綜合發展處新聞科",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-7-0",
+    "county": "連江縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "連江縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-7"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对官方报正文、活动日期与主办者；反向搜索未取得更正、撤回或否认互动的正文。若官方报后续更正则停用并复核。 反證查詢：site:matsu-news.gov.tw 新移民女性關懷協會 王忠銘 共同開鑼 2026 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-7-0",
+      "subject": "王忠銘",
+      "subject_type": "person",
+      "object": "連江縣新移民女性關懷協會",
+      "object_type": "organization",
+      "relationship_type": "other",
+      "description": "2026-09-13 连江县新移民女性关怀协会主办活动，官方报于 2026-09-14 记录王忠铭与协会理事长共同开锣；仅确认该次公开互动，不推定长期合作或政治支持。",
+      "evidence_summary": "2026-09-13 连江县新移民女性关怀协会主办活动，官方报于 2026-09-14 记录王忠铭与协会理事长共同开锣；仅确认该次公开互动，不推定长期合作或政治支持。",
+      "region": "連江縣",
+      "time_scope": "2026-09-14",
+      "event_date": "2026-09-14",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "馬祖日報（連江縣政府官方報）",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-7-0",
+    "county": "連江縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "連江縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-7"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对官方报正文、活动日期与主办者；反向搜索未取得更正、撤回或否认互动的正文。若官方报后续更正则停用并复核。 反證查詢：site:matsu-news.gov.tw 新移民女性關懷協會 王忠銘 共同開鑼 2026 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-7-0",
+      "claim_text": "连江县政府官方报于 2026-09-14 记录前一日新住民多元文化市集及社会福利宣传；这里只确认活动与新住民公共议题，不推定族群融合或福利触达成效。",
+      "title": "多元文化与新住民社会参与",
+      "claim_type": "local_event",
+      "date": "2026-09-14",
+      "time_scope": "2026-09-14",
+      "last_verified_at": "2026-09-27",
+      "region": "連江縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "馬祖日報（連江縣政府官方報）",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-8-0",
+    "county": "花蓮縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "花蓮縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-8"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对县府社会处正文、日期与获奖社区；反向搜索未取得更正、撤回或否认互动的正文。若奖项或参与者后续更正则停用并复核。 反證查詢：site:hl.gov.tw 樂合社區 徐榛蔚 張貼紅榜 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-8-0",
+      "subject": "徐榛蔚",
+      "subject_type": "person",
+      "object": "玉里鎮樂合社區發展協會",
+      "object_type": "organization",
+      "relationship_type": "other",
+      "description": "2026-09-22 花莲县政府社会处正文确认徐榛蔚赴乐合社区张贴红榜，并由社区发展协会理事长陪同；仅确认当日公开互动，不推定持续合作或政治支持。",
+      "evidence_summary": "2026-09-22 花莲县政府社会处正文确认徐榛蔚赴乐合社区张贴红榜，并由社区发展协会理事长陪同；仅确认当日公开互动，不推定持续合作或政治支持。",
+      "region": "花蓮縣",
+      "time_scope": "2026-09-22",
+      "event_date": "2026-09-22",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "花蓮縣政府社會處",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-8-0",
+    "county": "花蓮縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "花蓮縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-8"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对县府社会处正文、日期与获奖社区；反向搜索未取得更正、撤回或否认互动的正文。若奖项或参与者后续更正则停用并复核。 反證查詢：site:hl.gov.tw 樂合社區 徐榛蔚 張貼紅榜 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-8-0",
+      "claim_text": "2026-09-22 花莲县政府正文以乐合社区获奖为背景，记录社区对阿美族文化传承与社区营造的公共议题；这里只确认官方记录与获奖事项，不独立推定长期治理成效。",
+      "title": "原民文化传承与社区发展",
+      "claim_type": "policy",
+      "date": "2026-09-22",
+      "time_scope": "2026-09-22",
+      "last_verified_at": "2026-09-27",
+      "region": "花蓮縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "花蓮縣政府社會處",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-9-0",
+    "county": "新竹市",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "新竹市 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-9"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对市府正文、日期与出席组织；反向搜索未取得计划撤回或否认启动互动的正文。若试办点或进度后续更正则更新记录。 反證查詢：site:hccg.gov.tw 竹健康 旗艦計畫 診所協會 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-9-0",
+      "subject": "高虹安",
+      "subject_type": "person",
+      "object": "新竹市診所協會",
+      "object_type": "organization",
+      "relationship_type": "public_service_network",
+      "description": "2026-09-08 新竹市政府正文确认高虹安与新竹市诊所协会理事长等共同启动「竹健康」计划；仅确认当日公共卫生计划互动，不推定政治支持或计划成效。",
+      "evidence_summary": "2026-09-08 新竹市政府正文确认高虹安与新竹市诊所协会理事长等共同启动「竹健康」计划；仅确认当日公共卫生计划互动，不推定政治支持或计划成效。",
+      "region": "新竹市",
+      "time_scope": "2026-09-08",
+      "event_date": "2026-09-08",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "新竹市政府數位發展處",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-9-0",
+    "county": "新竹市",
+    "target_type": "current_issue",
+    "research_questions": [
+      "新竹市 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-9"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对市府正文、日期与出席组织；反向搜索未取得计划撤回或否认启动互动的正文。若试办点或进度后续更正则更新记录。 反證查詢：site:hccg.gov.tw 竹健康 旗艦計畫 診所協會 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-9-0",
+      "claim_text": "2026-09-08 新竹市政府正文记录「竹健康」计划先在 10 处社区据点启动，并提出后续扩展至 88 处的规划；这里只确认启动与规划，不把规划数视为已经完成，也不推定健康成效。",
+      "title": "社区智慧健康",
+      "claim_type": "policy",
+      "date": "2026-09-08",
+      "time_scope": "2026-09-08",
+      "last_verified_at": "2026-09-27",
+      "region": "新竹市",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "新竹市政府數位發展處",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-10-0",
+    "county": "台北市",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "台北市 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-10"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对市府正文、发布日期与活动时程；反向搜索未取得取消、更正或撤回正文。若活动或合作内容后续更正则停用并复核。 反證查詢：site:gov.taipei 加蚋文化節 萬華嘉年華 2026 澄清 OR 更正 OR 撤回 OR 取消；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-10-0",
+      "subject": "臺北市商業處",
+      "subject_type": "organization",
+      "object": "台北市加蚋商圈協會",
+      "object_type": "organization",
+      "relationship_type": "public_service_network",
+      "description": "臺北市商业处于 2026-09-11 公布其辅导加蚋商圈协会办理 9 月 12 日活动，并记载双方后续共同推出商圈活动；仅确认公告所列时段的组织互动，不推定长期联盟或商业成效。",
+      "evidence_summary": "臺北市商业处于 2026-09-11 公布其辅导加蚋商圈协会办理 9 月 12 日活动，并记载双方后续共同推出商圈活动；仅确认公告所列时段的组织互动，不推定长期联盟或商业成效。",
+      "region": "台北市",
+      "time_scope": "2026-09-11",
+      "event_date": "2026-09-11",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "臺北市商業處",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-10-0",
+    "county": "台北市",
+    "target_type": "current_issue",
+    "research_questions": [
+      "台北市 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-10"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对市府正文、发布日期与活动时程；反向搜索未取得取消、更正或撤回正文。若活动或合作内容后续更正则停用并复核。 反證查詢：site:gov.taipei 加蚋文化節 萬華嘉年華 2026 澄清 OR 更正 OR 撤回 OR 取消；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-10-0",
+      "claim_text": "臺北市商业处于 2026-09-11 公布加蚋文化节、商圈消费及社区体验活动；这里只确认活动与地方商业议题，不推定来客数、营业额或长期发展成效。",
+      "title": "加蚋商圈地方经济与社区活动",
+      "claim_type": "local_event",
+      "date": "2026-09-11",
+      "time_scope": "2026-09-11",
+      "last_verified_at": "2026-09-27",
+      "region": "台北市",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "臺北市商業處",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-11-0",
+    "county": "屏東縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "屏東縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-11"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对中央政府平台正文及其屏东县政府资料来源；反向搜索未取得取消、更正或否认活动的正文。此官方转载不另计为独立第二来源，若原机关更正则同步停用。 反證查詢：site:gov.tw 屏東 發酵 職人 周春米 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-11-0",
+      "subject": "周春米",
+      "subject_type": "person",
+      "object": "屏東在地釀醬職人",
+      "object_type": "organization",
+      "relationship_type": "other",
+      "description": "2026-09-13 农业部官方平台所载屏东县政府资料确认周春米出席台湾客家、日韩发酵职人交流活动；仅确认当日同场互动，不推定长期合作或政治支持。",
+      "evidence_summary": "2026-09-13 农业部官方平台所载屏东县政府资料确认周春米出席台湾客家、日韩发酵职人交流活动；仅确认当日同场互动，不推定长期合作或政治支持。",
+      "region": "屏東縣",
+      "time_scope": "2026-09-13",
+      "event_date": "2026-09-13",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "農業部食農教育資訊整合平臺（資料來源：屏東縣政府客家事務處）",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-11-0",
+    "county": "屏東縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "屏東縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-11"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对中央政府平台正文及其屏东县政府资料来源；反向搜索未取得取消、更正或否认活动的正文。此官方转载不另计为独立第二来源，若原机关更正则同步停用。 反證查詢：site:gov.tw 屏東 發酵 職人 周春米 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-11-0",
+      "claim_text": "2026-09-13 官方正文记录屏东以跨国发酵职人交流呈现客家酿酱文化及地方饮食观光；这里只确认活动主题，不推定观光收益、产业成长或文化保存成效。",
+      "title": "客庄发酵饮食文化与地方观光",
+      "claim_type": "local_event",
+      "date": "2026-09-13",
+      "time_scope": "2026-09-13",
+      "last_verified_at": "2026-09-27",
+      "region": "屏東縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "農業部食農教育資訊整合平臺（資料來源：屏東縣政府客家事務處）",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-12-0",
+    "county": "宜蘭縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "宜蘭縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-12"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对环保局正文、日期、参与组织与捐赠金额；反向搜索未取得更正、撤回或否认互动的正文。若金额或参与者后续更正则停用并复核。 反證查詢：site:ilepb.gov.tw 新群水環境巡守隊 臺灣湯淺 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-12-0",
+      "subject": "新群水環境巡守隊",
+      "subject_type": "organization",
+      "object": "臺灣湯淺電池股份有限公司",
+      "object_type": "organization",
+      "relationship_type": "other",
+      "description": "2026-09-05 宜兰县环保局正文确认新群水环境巡守队与台湾汤浅电池公司、县府共同净溪，并记录企业捐赠；仅确认当日公私互动，不推定持续合作或环保成效。",
+      "evidence_summary": "2026-09-05 宜兰县环保局正文确认新群水环境巡守队与台湾汤浅电池公司、县府共同净溪，并记录企业捐赠；仅确认当日公私互动，不推定持续合作或环保成效。",
+      "region": "宜蘭縣",
+      "time_scope": "2026-09-05",
+      "event_date": "2026-09-05",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "宜蘭縣政府環境保護局",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-12-0",
+    "county": "宜蘭縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "宜蘭縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-12"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对环保局正文、日期、参与组织与捐赠金额；反向搜索未取得更正、撤回或否认互动的正文。若金额或参与者后续更正则停用并复核。 反證查詢：site:ilepb.gov.tw 新群水環境巡守隊 臺灣湯淺 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-12-0",
+      "claim_text": "2026-09-05 宜兰县环保局正文记录亲子净溪、企业捐赠与水环境巡守；这里只确认当日活动和公私协力议题，不推定水质改善或长期参与成效。",
+      "title": "水环境巡守与公私协力",
+      "claim_type": "policy",
+      "date": "2026-09-05",
+      "time_scope": "2026-09-05",
+      "last_verified_at": "2026-09-27",
+      "region": "宜蘭縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "宜蘭縣政府環境保護局",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-13-0",
+    "county": "新竹縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "新竹縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-13"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对县府正文、日期、协助组织与组织改制说明；反向搜索未取得推翻典礼互动或改制事实的正文。若县府后续更正则更新或停用。 反證查詢：site:hsinchu.gov.tw 2026 元旦 楊文科 荷松協會 組織改制 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-13-0",
+      "subject": "新竹縣政府",
+      "subject_type": "organization",
+      "object": "新竹縣後備憲兵荷松協會",
+      "object_type": "organization",
+      "relationship_type": "other",
+      "description": "2026-01-01 新竹县政府正文确认新竹县后备宪兵荷松协会协助县府元旦典礼仪式；仅确认当日组织互动，不推定持续合作、政治支持或动员关系。",
+      "evidence_summary": "2026-01-01 新竹县政府正文确认新竹县后备宪兵荷松协会协助县府元旦典礼仪式；仅确认当日组织互动，不推定持续合作、政治支持或动员关系。",
+      "region": "新竹縣",
+      "time_scope": "2026-01-01",
+      "event_date": "2026-01-01",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "新竹縣政府社會處",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-13-0",
+    "county": "新竹縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "新竹縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-13"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对县府正文、日期、协助组织与组织改制说明；反向搜索未取得推翻典礼互动或改制事实的正文。若县府后续更正则更新或停用。 反證查詢：site:hsinchu.gov.tw 2026 元旦 楊文科 荷松協會 組織改制 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-13-0",
+      "claim_text": "2026-01-01 新竹县政府正文公布联合服务中心运作，并说明数位发展处与高龄长照处等组织调整；这里只确认官方当日公布的制度事项，不推定行政效率或服务成效。",
+      "title": "县府行政组织改制",
+      "claim_type": "policy",
+      "date": "2026-01-01",
+      "time_scope": "2026-01-01",
+      "last_verified_at": "2026-09-27",
+      "region": "新竹縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "新竹縣政府社會處",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-14-0",
+    "county": "嘉義縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "嘉義縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-14",
+      "official-support-20260927-14-0"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对县府正文，并以联合新闻网正文交叉核对活动与物资银行时间；两者对核心事实一致。反向搜索未取得更正或撤回正文。若官方后续更正则停用并复核。 反證查詢：site:cyhg.gov.tw 嘉義 慈善公益 感恩活動 物資銀行 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-14-0",
+      "subject": "嘉義縣社會局",
+      "subject_type": "organization",
+      "object": "社團法人嘉義縣慈善團體聯合協會",
+      "object_type": "organization",
+      "relationship_type": "public_service_network",
+      "description": "2026-09-18 嘉义县政府与联合新闻网正文均确认县社会局与嘉义县慈善团体联合协会举办公益感恩活动；仅确认该日组织互动，不推定长期政治关系或服务成效。",
+      "evidence_summary": "2026-09-18 嘉义县政府与联合新闻网正文均确认县社会局与嘉义县慈善团体联合协会举办公益感恩活动；仅确认该日组织互动，不推定长期政治关系或服务成效。",
+      "region": "嘉義縣",
+      "time_scope": "2026-09-18",
+      "event_date": "2026-09-18",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "嘉義縣政府社會局",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-14-0",
+    "county": "嘉義縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "嘉義縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-14",
+      "official-support-20260927-14-0"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对县府正文，并以联合新闻网正文交叉核对活动与物资银行时间；两者对核心事实一致。反向搜索未取得更正或撤回正文。若官方后续更正则停用并复核。 反證查詢：site:cyhg.gov.tw 嘉義 慈善公益 感恩活動 物資銀行 2026 澄清 OR 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-14-0",
+      "claim_text": "2026-09-18 官方正文及独立媒体正文记录嘉义县物资银行已运作近 14 年，并由政府与民间慈善团体共同办理公益活动；这里只确认制度与活动存在，不推定涵盖率或脱贫成效。",
+      "title": "物资银行与弱势家庭支持",
+      "claim_type": "policy",
+      "date": "2026-09-18",
+      "time_scope": "2026-09-18",
+      "last_verified_at": "2026-09-27",
+      "region": "嘉義縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "嘉義縣政府社會局",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-15-0",
+    "county": "嘉義市",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "嘉義市 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-15"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对中央政府页面正文及所标嘉义市政府资料；反向搜索未取得更正、撤回或否认合作举办的正文。此政府转载不另计为独立来源，若原机关更正则停用。 反證查詢：site:gov.tw 嘉義市 現代婦女基金會 台灣女童軍 STEM 2026 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-15-0",
+      "subject": "嘉義市政府",
+      "subject_type": "organization",
+      "object": "財團法人現代婦女基金會",
+      "object_type": "organization",
+      "relationship_type": "other",
+      "description": "2026-03-18 中央政府页面所载嘉义市政府资料确认市府与现代妇女基金会及台湾女童军总会合作举办两场分享；仅确认所列活动互动，不推定长期联盟或成效。",
+      "evidence_summary": "2026-03-18 中央政府页面所载嘉义市政府资料确认市府与现代妇女基金会及台湾女童军总会合作举办两场分享；仅确认所列活动互动，不推定长期联盟或成效。",
+      "region": "嘉義市",
+      "time_scope": "2026-03-18",
+      "event_date": "2026-03-18",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "行政院國家永續發展委員會（嘉義市政府資料）",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-15-0",
+    "county": "嘉義市",
+    "target_type": "current_issue",
+    "research_questions": [
+      "嘉義市 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-15"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对中央政府页面正文及所标嘉义市政府资料；反向搜索未取得更正、撤回或否认合作举办的正文。此政府转载不另计为独立来源，若原机关更正则停用。 反證查詢：site:gov.tw 嘉義市 現代婦女基金會 台灣女童軍 STEM 2026 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-15-0",
+      "claim_text": "2026-03-18 官方正文记录嘉义市以两场分享推动女性培力、STEM 学习及青年公共参与；这里只确认活动与政策主题，不推定性别平等或学习成果已改善。",
+      "title": "女性培力、STEM与青年公共参与",
+      "claim_type": "policy",
+      "date": "2026-03-18",
+      "time_scope": "2026-03-18",
+      "last_verified_at": "2026-09-27",
+      "region": "嘉義市",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "行政院國家永續發展委員會（嘉義市政府資料）",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-16-0",
+    "county": "台東縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "台東縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-16"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对监察院正文、巡察日期及社区组织；反向搜索未取得更正、撤回或否认辅导事实的正文。若监察院或县府后续更正则停用并复核。 反證查詢：site:cy.gov.tw 臺東 中福社區發展協會 2025 巡察 更正 OR 撤回 OR 澄清；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-16-0",
+      "subject": "臺東縣政府",
+      "subject_type": "organization",
+      "object": "中福社區發展協會",
+      "object_type": "organization",
+      "relationship_type": "public_service_network",
+      "description": "2025-12-23 监察院正文记录台东县政府对中福社区发展协会提供辅导与协助；仅确认巡察记录所述公共服务互动，不推定政治支持或超出该范围的持续关系。",
+      "evidence_summary": "2025-12-23 监察院正文记录台东县政府对中福社区发展协会提供辅导与协助；仅确认巡察记录所述公共服务互动，不推定政治支持或超出该范围的持续关系。",
+      "region": "台東縣",
+      "time_scope": "2025-12-23",
+      "event_date": "2025-12-23",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "監察院綜合業務處",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-16-0",
+    "county": "台東縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "台東縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-16"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对监察院正文、巡察日期及社区组织；反向搜索未取得更正、撤回或否认辅导事实的正文。若监察院或县府后续更正则停用并复核。 反證查詢：site:cy.gov.tw 臺東 中福社區發展協會 2025 巡察 更正 OR 撤回 OR 澄清；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-16-0",
+      "claim_text": "2025-12-23 监察院巡察正文把偏乡长者照顾、社区关怀据点及性别平等列为台东县受巡察公共议题；这里只确认巡察关注与官方记录，不推定问题已经解决或服务成效。",
+      "title": "偏乡长者社区照顾与性别平等",
+      "claim_type": "policy",
+      "date": "2025-12-23",
+      "time_scope": "2025-12-23",
+      "last_verified_at": "2026-09-27",
+      "region": "台東縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "監察院綜合業務處",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-17-0",
+    "county": "澎湖縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "澎湖縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-17"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对县府正文、日期与社区组织；反向搜索未取得更正、撤回或否认到场的正文。若县府后续更正或揭牌事实撤回则停用并复核。 反證查詢：site:penghu.gov.tw 光明里 關懷據點 光明社區發展協會 陳光復 2025 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-17-0",
+      "subject": "陳光復",
+      "subject_type": "person",
+      "object": "光明社區發展協會",
+      "object_type": "organization",
+      "relationship_type": "other",
+      "description": "2025-10-18 澎湖县政府正文确认陈光复出席光明社区发展协会揭牌及照顾关怀据点周年活动；仅确认当日公开互动，不推定持续合作或政治支持。",
+      "evidence_summary": "2025-10-18 澎湖县政府正文确认陈光复出席光明社区发展协会揭牌及照顾关怀据点周年活动；仅确认当日公开互动，不推定持续合作或政治支持。",
+      "region": "澎湖縣",
+      "time_scope": "2025-10-18",
+      "event_date": "2025-10-18",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "澎湖縣政府新聞科",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-17-0",
+    "county": "澎湖縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "澎湖縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-17"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对县府正文、日期与社区组织；反向搜索未取得更正、撤回或否认到场的正文。若县府后续更正或揭牌事实撤回则停用并复核。 反證查詢：site:penghu.gov.tw 光明里 關懷據點 光明社區發展協會 陳光復 2025 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-17-0",
+      "claim_text": "2025-10-18 澎湖县政府正文记录光明里照顾关怀据点成立 20 周年及社区发展协会揭牌；这里只确认在地安老与社区照顾议题，不推定照顾品质或覆盖成效。",
+      "title": "社区照顾关怀据点与在地安老",
+      "claim_type": "policy",
+      "date": "2025-10-18",
+      "time_scope": "2025-10-18",
+      "last_verified_at": "2026-09-27",
+      "region": "澎湖縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "澎湖縣政府新聞科",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-event-20260927-18-0",
+    "county": "金門縣",
+    "target_type": "local_relationship",
+    "research_questions": [
+      "金門縣 有哪些與地方公共事務相關、且能由公開正文確認的人物—組織或組織—組織互動？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-18"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对环保局正文、日期与社区志工队名称；反向搜索未取得更正、撤回或否认参与的正文。若官方后续更正参与名单则更新或停用。 反證查詢：site:kinmen.gov.tw 國家清潔週 新市社區 武德新莊 下莊 2026 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+    "target_record": {
+      "relationship_id": "official-event-20260927-18-0",
+      "subject": "金門縣環境保護局",
+      "subject_type": "organization",
+      "object": "新市、武德新莊及下莊社區志工隊",
+      "object_type": "organization",
+      "relationship_type": "public_service_network",
+      "description": "2026-02-06 金门县环保局正文确认环保局与新市、武德新庄及下庄社区志工队共同响应国家清洁周；仅确认当日公共环境互动，不推定持续联盟或清洁成效。",
+      "evidence_summary": "2026-02-06 金门县环保局正文确认环保局与新市、武德新庄及下庄社区志工队共同响应国家清洁周；仅确认当日公共环境互动，不推定持续联盟或清洁成效。",
+      "region": "金門縣",
+      "time_scope": "2026-02-06",
+      "event_date": "2026-02-06",
+      "last_verified_at": "2026-09-27",
+      "current_status": "active_verified",
+      "source_grade": "A",
+      "source": "金門縣環境保護局",
+      "scope_boundary": "僅確認來源所列日期的公開互動、共同辦理或職務行為；不得推定持續合作、派系歸屬、選舉支持、動員效果或選舉結果。",
+      "structural_use": "dated_interaction_only_no_continuity_inference",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "正文只確認特定日期的公開互動，不確認關係延續或政治意涵",
+        "competing_explanations": []
+      }
+    }
+  },
+  {
+    "proposal_id": "promote-official-issue-20260927-18-0",
+    "county": "金門縣",
+    "target_type": "current_issue",
+    "research_questions": [
+      "金門縣 當前有哪些地方治理、建設、環境、社福或產業議題具近期公開正文證據？"
+    ],
+    "evidence_lead_ids": [
+      "official-body-20260927-18"
+    ],
+    "contradiction_check_completed": true,
+    "contradictory_lead_ids": [],
+    "contradiction_check_note": "已核对环保局正文、日期与社区志工队名称；反向搜索未取得更正、撤回或否认参与的正文。若官方后续更正参与名单则更新或停用。 反證查詢：site:kinmen.gov.tw 國家清潔週 新市社區 武德新莊 下莊 2026 更正 OR 撤回；查核日期：2026-09-27",
+    "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+    "target_record": {
+      "claim_id": "official-issue-20260927-18-0",
+      "claim_text": "2026-02-06 金门县环保局正文记录全县五乡镇响应国家清洁周及社区志工参与；这里只确认活动与环境维护议题，不推定垃圾减量、环境品质或长期参与成效。",
+      "title": "国家清洁周与公私协力环境维护",
+      "claim_type": "local_event",
+      "date": "2026-02-06",
+      "time_scope": "2026-02-06",
+      "last_verified_at": "2026-09-27",
+      "region": "金門縣",
+      "verification_status": "official_record",
+      "source_grade": "A",
+      "source": "金門縣環境保護局",
+      "scope_boundary": "僅確認來源所列日期的政策、活動或公開說法；不得把規劃、申請或單次活動解讀為已完成、具長期成效或已獲社會共識。",
+      "uncertainty": {
+        "level": "medium",
+        "reason": "近期正文確認議題存在，但不據此判定長期成效、民意強度或選舉重要性",
+        "competing_explanations": []
+      }
+    }
+  }
+]

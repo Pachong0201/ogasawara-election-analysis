@@ -1,0 +1,35 @@
+version: 1.4.0
+name: county_knowledge_production
+county_count: 22
+default_election_year: 2026
+
+production:
+  research_results_destination: cache/retrieval/<county>.jsonl
+  promotion_entrypoint: KnowledgePromotionBuilder
+  default_incremental: true
+  resumable_state: knowledge/counties/<county>/production_state.yaml
+  idempotence_key: input_sha256
+  generated_files_are_indexes_not_facts: true
+
+required_topics:
+  - historical_political_structure
+  - people
+  - organizations
+  - political_networks
+  - electoral_geography
+  - civil_associations
+  - farmers_fishermen_associations
+  - religious_organizations
+  - key_issues
+  - demographics_industry
+
+rules:
+  require_time_scope: true
+  require_last_verified_at_for_current: true
+  require_source_evidence: true
+  require_relationship_type: true
+  require_uncertainty: true
+  require_scope_boundary: true
+  search_results_may_auto_promote: false
+  historical_relationships_may_be_assumed_current: false
+  allow_prediction_scoring_or_recommendation: false

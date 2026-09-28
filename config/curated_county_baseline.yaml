@@ -1,0 +1,169 @@
+version: 1.0.0
+as_of: 2026-09-26
+description: >
+  经 chat/web 人工核验的县市知识基线。这里只收录可由明确来源支撑的字段；
+  中选会原始 CSV/ZIP 未成功读取的项目只生成 retrieval lead，不晋升具体边界或票数结论。
+
+sources:
+  moi_population_2025:
+    source_id: moi_household_registration
+    source_name: 内政部户政司《人口统计资料季刊 2025 冬季号》
+    source_grade: A
+    independence_key: moi_household_registration
+    published_at: 2026-01-01
+    url: https://www.ris.gov.tw/documents/data/5/2/DemographicQuarterly_Winter2025.pdf
+  dgbas_industry_2021:
+    source_id: dgbas_industry_census
+    source_name: 行政院主计总处 110年工业及服务业普查初步统计结果
+    source_grade: A
+    independence_key: dgbas_industry_census
+    published_at: 2023-05-31
+    url: https://www.stat.gov.tw/News_Content.aspx?n=3703&s=232166
+  cec_legislative_boundaries:
+    source_id: cec_legislative_boundaries
+    source_name: 中央选举委员会「立法委员选举区范围」开放资料
+    source_grade: A
+    independence_key: cec
+    published_at: 2024-09-02
+    url: https://data.gov.tw/dataset/170247
+    data_url: https://data.cec.gov.tw/第11屆立法委員選舉區範圍/立法委員選舉區範圍.csv
+  cec_county_mayor_history:
+    source_id: cec_election_database
+    source_name: 中央选举委员会选举资料库（县市长）
+    source_grade: A
+    independence_key: cec
+    published_at: 2022-12-03
+    url: https://db.cec.gov.tw/Visual/CountyMayor?dataLevel=C&legisId=00&subjectId=C2&themeId=63615098f5afa8ec53159c4a86fc01d3&typeId=ELC
+
+population_2025:
+  基隆市: {population: 359836, annual_change: -1605}
+  台北市: {population: 2439507, annual_change: -51362}
+  新北市: {population: 4044831, annual_change: -2170}
+  桃園市: {population: 2355106, annual_change: 16458}
+  新竹市: {population: 455740, annual_change: -1502}
+  新竹縣: {population: 597235, annual_change: 2594}
+  苗栗縣: {population: 531172, annual_change: -1682}
+  台中市: {population: 2868465, annual_change: 7864}
+  彰化縣: {population: 1210206, annual_change: -15469}
+  南投縣: {population: 467881, annual_change: -4418}
+  雲林縣: {population: 650989, annual_change: -7438}
+  嘉義市: {population: 261592, annual_change: -585}
+  嘉義縣: {population: 473181, annual_change: -5605}
+  台南市: {population: 1852477, annual_change: -6174}
+  高雄市: {population: 2718545, annual_change: -12867}
+  屏東縣: {population: 782256, annual_change: -6983}
+  宜蘭縣: {population: 449336, annual_change: 124}
+  花蓮縣: {population: 312807, annual_change: -2567}
+  台東縣: {population: 208320, annual_change: -1899}
+  澎湖縣: {population: 106716, annual_change: -1185}
+  金門縣: {population: 139313, annual_change: -4288}
+  連江縣: {population: 13621, annual_change: -329}
+
+primary_employment_industry_2021:
+  基隆市: 零售业
+  台北市: 批发业
+  新北市: 批发业
+  桃園市: 电子零组件制造业
+  新竹市: 电子零组件制造业
+  新竹縣: 电子零组件制造业
+  苗栗縣: 电子零组件制造业
+  台中市: 批发业
+  彰化縣: 金属制品制造业
+  南投縣: 零售业
+  雲林縣: 零售业
+  嘉義市: 零售业
+  嘉義縣: 零售业
+  台南市: 零售业
+  高雄市: 批发业
+  屏東縣: 零售业
+  宜蘭縣: 零售业
+  花蓮縣: 零售业
+  台東縣: 零售业
+  澎湖縣: 零售业
+  金門縣: 零售业
+  連江縣: 零售业
+
+academic_records:
+  - county: 高雄市
+    lead_id: academic-kaohsiung-factions-2018
+    source_id: nsysu_thesis_106NSYS5227006
+    source_name: 国立中山大学硕士论文《台湾县市合并改制后对地方派系存续的影响—以原高雄县为例》
+    source_grade: B
+    independence_key: nsysu_thesis_106NSYS5227006
+    published_at: 2018-01-01
+    url: https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/login?o=dnclcdr&s=id%3D%22106NSYS5227006%22.&searchmode=basic
+    topic: political_networks
+    promote: true
+    target_type: historical_claim
+    record_id: kh-academic-factions-2018
+    claim: 该论文对县市合并后的原高雄县地方派系进行研究，认为派系并未因合并而消失，但红、白、黑等网络呈现分化、跨党移动或政党化等不同变化。
+    time_scope: 2010-2018
+    scope_boundary: 仅作为该论文研究时段内的历史解释；不得外推为2026年仍维持同一派系边界、动员能力或候选人支持效果。
+  - county: 台南市
+    lead_id: academic-tainan-council-2005
+    source_id: ncku_thesis_093NCKU5635007
+    source_name: 国立成功大学硕士论文《地方府会关系中的政党政治—以台南为例（1998-2001）》
+    source_grade: B
+    independence_key: ncku_thesis_093NCKU5635007
+    published_at: 2005-01-01
+    url: https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd%3DFHl9GY/search?s=id%3D%22093NCKU5635007%22.&searchmode=basic
+    topic: political_networks
+    promote: true
+    target_type: historical_claim
+    record_id: tn-academic-council-1998-2001
+    claim: 该论文对1998至2001年台南府会关系的研究指出，府会由不同政党控制并非冲突的充分条件，政治领导与党团互动也是解释当时关系的重要因素。
+    time_scope: 1998-2001
+    scope_boundary: 仅限论文所研究的1998至2001年府会互动，不用于推断当前党团关系或任何选举结果。
+  - county: 新北市
+    lead_id: academic-newtaipei-farmers-factions
+    source_id: nccu_thesis_099NCCU5011014
+    source_name: 国立政治大学学位论文《台湾农会、派系与地方选举之关系：以新北市为例》
+    source_grade: B
+    independence_key: nccu_thesis_099NCCU5011014
+    published_at: 2011-01-01
+    url: https://tci.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dnclresource&s=id%3D%22099NCCU5011014%22.&searchmode=basic&tcihsspage=tcisearch_opt1_search
+    topic: political_networks
+    promote: false
+    summary: 该研究题名与索引确认其处理新北市农会、派系与地方选举关系；本轮未取得足以支持具体关系陈述的全文段落，故只保留为B级线索。
+
+current_relationships:
+  - county: 新北市
+    relationship_id: ntpc-tsai-ingwen-su-chiaohui-20260820
+    subject: 蔡英文
+    object: 苏巧慧竞选总部
+    relationship_type: campaign_cooperation
+    time_scope: 2026-08-20
+    last_verified_at: 2026-08-20
+    region: 新北市
+    scope_boundary: 仅确认2026年8月20日前后公开报道的竞选总部职务与助选行动；不推断组织动员成效、选票转移或胜负。
+    contradiction_check_note: 以“蔡英文 否认／辞任／非竞总主委 苏巧慧”等反向词检索；截至2026-09-26未发现直接否认该公开职务的A/B/C级资料。此结果不证明未来不会变更。
+    sources:
+      - {lead_id: ntpc-tsai-su-cna, source_id: cna, source_name: 中央通讯社, independence_key: cna, published_at: 2026-08-20, url: https://www.cna.com.tw/news/aloc/202608200314.aspx}
+      - {lead_id: ntpc-tsai-su-pts, source_id: pts, source_name: 公视新闻网, independence_key: pts, published_at: 2026-08-20, url: https://news.pts.org.tw/article/826854}
+  - county: 台南市
+    relationship_id: tainan-lin-chunhsien-chen-tingfei-20260115
+    subject: 林俊宪
+    object: 陈亭妃
+    relationship_type: public_endorsement
+    time_scope: 2026-01-15
+    last_verified_at: 2026-01-15
+    region: 台南市
+    scope_boundary: 仅确认林俊宪在初选结果后于该日公开表达支持；不等同长期结盟，不推断派系整体行动、选票转移或胜负。
+    contradiction_check_note: 以“林俊宪 否认／撤回支持／不支持 陈亭妃”等反向词检索；截至2026-09-26发现的是竞争与派系张力报道，未发现直接撤回该日公开表态的A/B/C级资料。
+    sources:
+      - {lead_id: tainan-lin-chen-cna, source_id: cna, source_name: 中央通讯社, independence_key: cna, published_at: 2026-01-15, url: https://www.cna.com.tw/news/aipl/202601150110.aspx}
+      - {lead_id: tainan-lin-chen-udn, source_id: udn, source_name: 联合新闻网, independence_key: udn, published_at: 2026-01-15, url: https://udn.com/news/story/124652/9266842}
+  - county: 高雄市
+    relationship_id: kh-chen-chimai-lai-juilung-20260902
+    subject: 陈其迈
+    object: 赖瑞隆
+    relationship_type: public_endorsement
+    time_scope: 2026-09-02
+    last_verified_at: 2026-09-02
+    region: 高雄市
+    scope_boundary: 仅确认2026年9月2日登记活动中的公开陪同与支持表态；不确认竞总主委等未获本人接受验证的职务，也不推断选票转移或胜负。
+    contradiction_check_note: 以“陈其迈 否认／未支持／撤回支持 赖瑞隆”等反向词检索；截至2026-09-26未发现直接否认当日陪同与公开支持行为的A/B/C级资料。
+    sources:
+      - {lead_id: kh-chen-lai-cna, source_id: cna, source_name: 中央通讯社, independence_key: cna, published_at: 2026-09-02, url: https://www.cna.com.tw/news/aipl/202609020114.aspx}
+      - {lead_id: kh-chen-lai-nexttv, source_id: nexttv, source_name: 壹电视新闻网, independence_key: nexttv, published_at: 2026-09-02, url: https://www.nexttv.com.tw/NextTV/News/Home/Politics/2026-09-02/2455454.html}
+

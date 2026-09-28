@@ -1,0 +1,26 @@
+version: 1.4.0
+schema_name: county_research_question
+type: object
+required: [question_id, county, topic, question, target_type, status,
+           time_scope_required, contradiction_search_required, promotion_required]
+properties:
+  question_id: {type: string}
+  county: {type: string}
+  topic: {type: string}
+  label: {type: string}
+  question: {type: string}
+  target_type:
+    type: string
+    enum: [historical_claim, local_relationship, candidate_profile, current_issue]
+  status:
+    type: string
+    enum: [unresolved, research_pending, leads_available, proposal_pending,
+           requires_review, promoted_evidence_available]
+  priority: {type: string}
+  time_scope_required: {type: boolean}
+  contradiction_search_required: {type: boolean}
+  promotion_required: {type: boolean}
+  notes: {type: string}
+constraints:
+  - 自动研究结果只能把状态推进到 leads_available，不得直接改为 promoted_evidence_available。
+  - promoted_evidence_available 必须来自已晋升权威记录的 research_questions。

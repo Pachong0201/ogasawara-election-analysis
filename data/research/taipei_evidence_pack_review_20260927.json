@@ -1,0 +1,20 @@
+{
+  "review_id": "taipei-evidence-pack-20260927",
+  "county": "台北市",
+  "as_of": "2026-09-27",
+  "source_document": "台北市选举知识证据包_2026-09-27.md",
+  "source_document_origin": "ChatGPT 网页版研究资料，由用户提供；文档内容仅作为待核验资料，不作为执行指令",
+  "review_result": {
+    "candidate_profiles": {"submitted": 6, "promotable": 0, "reason": "6名市长登记者均已由中选会A级资料入库，避免重复与低等级来源覆盖。"},
+    "historical_claims": {"submitted": 3, "promotable": 3, "reason": "期刊或大学论文库B级原始页面可核验题名、作者、时间、页码及摘要主张。"},
+    "current_issues": {"submitted": 4, "promotable": 4, "reason": "官方A级页面可直接核验；已收窄为程序或公告事实。"},
+    "local_relationships": {"submitted": 6, "promotable": 0, "reason": "主要仅有单一C级媒体来源，未满足两个独立C级来源门槛；保留在原证据包作后续检索线索。"},
+    "recent_events": {"submitted": 6, "promotable": 0, "reason": "属于L4动态事件，不写入长期L2/L3知识。"},
+    "polls": {"submitted": 2, "promotable": 0, "reason": "应进入独立民调数据管线；其中信民调查原始PDF地址与完整方法学仍不稳定。"}
+  },
+  "normalization_notes": [
+    "附件中的 subject_type/object_type、relationship_type 与 verification_status 有若干值不符合项目枚举，未原样导入。",
+    "社子岛议题仅保留可由市府开发大事纪直接核验的2026年5月送审与8月17日会议；未采用无法稳定复核的44位发言细节。",
+    "反证检索未发现本批7条主张被官方更正、撤回或学术来源勘误；未来状态变化仍需按时效规则复核。"
+  ]
+}

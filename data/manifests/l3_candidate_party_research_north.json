@@ -1,0 +1,232 @@
+{
+  "generated_at": "2026-09-27T02:31:00+00:00",
+  "county_count": 6,
+  "eligible_candidate_count": 14,
+  "proposal_count": 0,
+  "promoted_count": 0,
+  "unresolved_count": 14,
+  "failure_count": 6,
+  "results": [
+    {
+      "county": "基隆市",
+      "candidate_count": 3,
+      "eligible_candidate_count": 2,
+      "research_status": "partial",
+      "search_count": 4,
+      "body_count": 9,
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "unresolved_count": 2,
+      "unresolved": [
+        {
+          "county": "基隆市",
+          "candidate": "謝國樑",
+          "party": "中國國民黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年基隆市縣市長候選人謝國樑是否由中國國民黨推薦登記？"
+        },
+        {
+          "county": "基隆市",
+          "candidate": "童子瑋",
+          "party": "民主進步黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年基隆市縣市長候選人童子瑋是否由民主進步黨推薦登記？"
+        }
+      ],
+      "last_error": "model_output_truncated",
+      "error_stage": "model_review"
+    },
+    {
+      "county": "台北市",
+      "candidate_count": 6,
+      "eligible_candidate_count": 5,
+      "research_status": "partial",
+      "search_count": 4,
+      "body_count": 15,
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "unresolved_count": 5,
+      "unresolved": [
+        {
+          "county": "台北市",
+          "candidate": "郭璽",
+          "party": "台灣麻將最大黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年台北市縣市長候選人郭璽是否由台灣麻將最大黨推薦登記？"
+        },
+        {
+          "county": "台北市",
+          "candidate": "沈伯洋",
+          "party": "民主進步黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年台北市縣市長候選人沈伯洋是否由民主進步黨推薦登記？"
+        },
+        {
+          "county": "台北市",
+          "candidate": "蕭文乾",
+          "party": "臺灣SoR無法黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年台北市縣市長候選人蕭文乾是否由臺灣SoR無法黨推薦登記？"
+        },
+        {
+          "county": "台北市",
+          "candidate": "唐新民",
+          "party": "三勢團結促進聯盟",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年台北市縣市長候選人唐新民是否由三勢團結促進聯盟推薦登記？"
+        },
+        {
+          "county": "台北市",
+          "candidate": "蔣萬安",
+          "party": "中國國民黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年台北市縣市長候選人蔣萬安是否由中國國民黨推薦登記？"
+        }
+      ],
+      "last_error": "model_output_truncated",
+      "error_stage": "model_review"
+    },
+    {
+      "county": "新北市",
+      "candidate_count": 3,
+      "eligible_candidate_count": 2,
+      "research_status": "partial",
+      "search_count": 4,
+      "body_count": 13,
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "unresolved_count": 2,
+      "unresolved": [
+        {
+          "county": "新北市",
+          "candidate": "蘇巧慧",
+          "party": "民主進步黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年新北市縣市長候選人蘇巧慧是否由民主進步黨推薦登記？"
+        },
+        {
+          "county": "新北市",
+          "candidate": "李四川",
+          "party": "中國國民黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年新北市縣市長候選人李四川是否由中國國民黨推薦登記？"
+        }
+      ],
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
+    },
+    {
+      "county": "桃園市",
+      "candidate_count": 2,
+      "eligible_candidate_count": 2,
+      "research_status": "partial",
+      "search_count": 4,
+      "body_count": 9,
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "unresolved_count": 2,
+      "unresolved": [
+        {
+          "county": "桃園市",
+          "candidate": "張善政",
+          "party": "中國國民黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年桃園市縣市長候選人張善政是否由中國國民黨推薦登記？"
+        },
+        {
+          "county": "桃園市",
+          "candidate": "黃世杰",
+          "party": "民主進步黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年桃園市縣市長候選人黃世杰是否由民主進步黨推薦登記？"
+        }
+      ],
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
+    },
+    {
+      "county": "新竹市",
+      "candidate_count": 3,
+      "eligible_candidate_count": 1,
+      "research_status": "partial",
+      "search_count": 4,
+      "body_count": 12,
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "unresolved_count": 1,
+      "unresolved": [
+        {
+          "county": "新竹市",
+          "candidate": "莊競程",
+          "party": "民主進步黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年新竹市縣市長候選人莊競程是否由民主進步黨推薦登記？"
+        }
+      ],
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
+    },
+    {
+      "county": "新竹縣",
+      "candidate_count": 3,
+      "eligible_candidate_count": 2,
+      "research_status": "partial",
+      "search_count": 4,
+      "body_count": 16,
+      "finding_count": 0,
+      "proposal_count": 0,
+      "promoted_count": 0,
+      "unresolved_count": 2,
+      "unresolved": [
+        {
+          "county": "新竹縣",
+          "candidate": "鄭朝方",
+          "party": "民主進步黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年新竹縣縣市長候選人鄭朝方是否由民主進步黨推薦登記？"
+        },
+        {
+          "county": "新竹縣",
+          "candidate": "徐欣瑩",
+          "party": "中國國民黨",
+          "reason": "missing independent C-grade body-grounded media confirmation",
+          "research_question": "2026年新竹縣縣市長候選人徐欣瑩是否由中國國民黨推薦登記？"
+        }
+      ],
+      "last_error": "provider_timeout",
+      "error_stage": "model_review"
+    }
+  ],
+  "failures": [
+    {
+      "county": "基隆市",
+      "error": "model_output_truncated"
+    },
+    {
+      "county": "台北市",
+      "error": "model_output_truncated"
+    },
+    {
+      "county": "新北市",
+      "error": "provider_timeout"
+    },
+    {
+      "county": "桃園市",
+      "error": "provider_timeout"
+    },
+    {
+      "county": "新竹市",
+      "error": "provider_timeout"
+    },
+    {
+      "county": "新竹縣",
+      "error": "provider_timeout"
+    }
+  ],
+  "apply": true
+}

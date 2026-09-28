@@ -1,0 +1,186 @@
+{
+  "schema_version": "1.0.0",
+  "county_count": 1,
+  "counties": [
+    {
+      "county": "高雄市",
+      "stable_local_baseline": {
+        "cec_elections": {
+          "state": "row_data_available",
+          "files": [
+            {
+              "election_type": "county_mayor",
+              "year": 2014,
+              "record_count": 114,
+              "path": "data/elections/county_mayor/2014/高雄市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2018,
+              "record_count": 152,
+              "path": "data/elections/county_mayor/2018/高雄市.jsonl"
+            },
+            {
+              "election_type": "county_mayor",
+              "year": 2022,
+              "record_count": 152,
+              "path": "data/elections/county_mayor/2022/高雄市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2016,
+              "record_count": 114,
+              "path": "data/elections/president/2016/高雄市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2020,
+              "record_count": 114,
+              "path": "data/elections/president/2020/高雄市.jsonl"
+            },
+            {
+              "election_type": "president",
+              "year": 2024,
+              "record_count": 114,
+              "path": "data/elections/president/2024/高雄市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2016,
+              "record_count": 172,
+              "path": "data/elections/regional_legislator/2016/高雄市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2020,
+              "record_count": 211,
+              "path": "data/elections/regional_legislator/2020/高雄市.jsonl"
+            },
+            {
+              "election_type": "regional_legislator",
+              "year": 2024,
+              "record_count": 129,
+              "path": "data/elections/regional_legislator/2024/高雄市.jsonl"
+            }
+          ]
+        },
+        "term11_legislative_boundaries": {
+          "state": "row_data_available",
+          "path": "data/geography/electoral_districts/cec_legislator_term11/高雄市.jsonl"
+        },
+        "cec_spatial_matrix": {
+          "state": "row_data_available",
+          "path": "data/matrices/cec/高雄市.json"
+        },
+        "academic_research": {
+          "state": "not_targeted_by_19_county_supplement",
+          "lead_count": 0,
+          "lead_ids": [],
+          "rule": "B-grade academic catalog entries remain research leads until the relevant claims are extracted and promoted with time/scope boundaries"
+        },
+        "official_social_context": {
+          "files": [
+            {
+              "kind": "age_structure",
+              "path": "data/context/高雄市/age_structure.jsonl",
+              "record_count": 1,
+              "source_ids": [
+                "dgbas_census_age_structure_2020"
+              ]
+            },
+            {
+              "kind": "civil_associations",
+              "path": "data/context/高雄市/civil_associations.jsonl",
+              "record_count": 1707,
+              "source_ids": [
+                "moi_national_social_groups_by_area"
+              ]
+            },
+            {
+              "kind": "farmers_fishermen_associations",
+              "path": "data/context/高雄市/farmers_fishermen_associations.jsonl",
+              "record_count": 175,
+              "source_ids": [
+                "moa_farmers_association_members",
+                "moa_fishermen_association_members"
+              ]
+            }
+          ],
+          "imported_source_ids": [
+            "dgbas_census_age_structure_2020",
+            "moa_farmers_association_members",
+            "moa_fishermen_association_members",
+            "moi_national_social_groups_by_area"
+          ],
+          "sources": [
+            {
+              "source_id": "dgbas_census_age_structure_2020",
+              "kind": "age_structure",
+              "source_name": "行政院主计总处「常住人口之年龄结构（不含移工）」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moi_religion_temples",
+              "kind": "religious_organizations",
+              "source_name": "内政部宗教及礼制司「全国宗教资讯系统资料-寺庙」",
+              "state": "source_catalog_only"
+            },
+            {
+              "source_id": "moi_national_social_groups_by_area",
+              "kind": "civil_associations",
+              "source_name": "内政部合作及人民团体司「全国性社会团体名册-按地区」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_farmers_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部「农会会员数」",
+              "state": "row_data_available"
+            },
+            {
+              "source_id": "moa_fishermen_association_members",
+              "kind": "farmers_fishermen_associations",
+              "source_name": "农业部渔业署「每年渔会会员数统计资料」",
+              "state": "row_data_available"
+            }
+          ],
+          "row_data_source_count": 4,
+          "catalog_only_source_count": 1
+        }
+      },
+      "dynamic_local_state": {
+        "candidate_profile_count": 106,
+        "mayor_2026_candidate_count": 5,
+        "councilor_2026_candidate_count": 101,
+        "active_verified_relationship_count": 11,
+        "dual_source_relationship_count": 9,
+        "relationship_types": {
+          "office_holding": 9,
+          "other": 1,
+          "public_endorsement": 1
+        },
+        "current_issue_count": 7,
+        "candidate_path": "knowledge/local/高雄市/candidates.jsonl",
+        "relationship_path": "knowledge/local/高雄市/relationships.jsonl",
+        "issue_path": "knowledge/local/高雄市/issues.jsonl"
+      },
+      "unresolved_question_count": 7,
+      "gaps": [
+        "context_catalog_only:moi_religion_temples"
+      ]
+    }
+  ],
+  "summary": {
+    "with_cec_election_rows": 1,
+    "with_term11_boundaries": 1,
+    "with_spatial_matrix": 1,
+    "with_2026_mayor_candidate_profiles": 1,
+    "with_2026_councilor_candidate_profiles": 1,
+    "total_candidate_profiles": 106,
+    "total_2026_mayor_candidates": 5,
+    "total_2026_councilor_candidates": 101,
+    "with_active_verified_relationships": 1,
+    "with_current_issue_records": 1
+  },
+  "interpretation_boundary": "coverage states describe repository artifacts only; source_catalog_only and research_leads_only are not equivalent to verified row-level knowledge"
+}

@@ -1,0 +1,365 @@
+{
+  "generated_at": "2026-09-27",
+  "auto_research_status": {
+    "enabled": false,
+    "configuration_error": "missing_research_credentials",
+    "pending_jobs_not_counted_as_success": true,
+    "backoff": "ProviderError.retryable with attempts<3 and retry_after; pending/retry_pending never counted as success"
+  },
+  "external_fulltext_status": "not_read_in_this_run: local .gov.tw / NDLTD network unavailable and auto-research credentials absent",
+  "samples": [
+    {
+      "county": "台北市",
+      "inventory": {
+        "questions": 10,
+        "unresolved_questions": 9,
+        "promoted_evidence_records": 116,
+        "historical_claims": 2,
+        "relationships": 9,
+        "candidate_profiles": 104,
+        "current_issues": 1,
+        "candidate_counts": {
+          "county_mayor": 6,
+          "councilor": 98
+        },
+        "promotion_receipts": {
+          "total": 138,
+          "promoted": 138,
+          "rejected": 0,
+          "requires_review": 0,
+          "contradiction_checked": 138
+        }
+      },
+      "topic_evidence_records": {
+        "historical_political_structure": 0,
+        "people": 0,
+        "organizations": 0,
+        "political_networks": 0,
+        "electoral_geography": 0,
+        "civil_associations": 0,
+        "farmers_fishermen_associations": 0,
+        "religious_organizations": 0,
+        "key_issues": 0,
+        "demographics_industry": 2
+      },
+      "unresolved_detail": [
+        {
+          "topic": "historical_political_structure",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "台北市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？"
+        },
+        {
+          "topic": "people",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "台北市 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？"
+        },
+        {
+          "topic": "organizations",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "台北市 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？"
+        },
+        {
+          "topic": "political_networks",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "学术或可靠公开资料如何描述 台北市 的历史派系或政治网络，其有效时间范围及当前可验证状态为何？"
+        },
+        {
+          "topic": "electoral_geography",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "台北市 的行政区、立委选区与历届地方选举空间差异中，哪些结构需要结合边界版本解释？"
+        },
+        {
+          "topic": "civil_associations",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "台北市 有哪些地方社团与公共事务网络可由可靠资料确认，且不得据其存在推断政治支持？"
+        },
+        {
+          "topic": "farmers_fishermen_associations",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "台北市 农会、渔会的组织分布与公开政治互动有哪些可核实记录，其时间范围为何？"
+        },
+        {
+          "topic": "religious_organizations",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "台北市 宗教组织参与地方公共事务或公开政治活动的可验证记录有哪些，证据边界为何？"
+        },
+        {
+          "topic": "key_issues",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "台北市 当前与近十年哪些地方治理、建设、环境或产业议题具有持续公开证据？"
+        }
+      ],
+      "academic_leads": [
+        {
+          "lead_id": "academic-taipei-shilin-beitou-election-2011",
+          "source_name": "铭传大学硕士论文《政党的地方选战策略-以2010年台北市第11届士林北投区议员选举为例》",
+          "source_grade": "B",
+          "published_at": "2011",
+          "url": "https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?extralimit=asc%3D%22%E9%8A%98%E5%82%B3%E5%A4%A7%E5%AD%B8%22&extralimitunit=%E9%8A%98%E5%82%B3%E5%A4%A7%E5%AD%B8&o=dnclcdr&s=id%3D%22099MCU05636030%22.&searchmode=basic",
+          "topic": "political_networks",
+          "promote": false,
+          "full_text_read": false,
+          "required_before_promotion": [
+            "read article/PDF body from an accessible copy",
+            "record page numbers for each promoted claim",
+            "record applicable time_scope and geographic scope",
+            "run contradiction check and store proposal_id/receipt"
+          ]
+        }
+      ],
+      "depth_actions": [
+        "補候選人經歷、地方經營區域與組織互動：只以可核 A/B 或雙 C 正文產生 proposal。",
+        "補歷史政治結構：先讀学术线索全文，逐页記錄時間與地理範圍。",
+        "关键治理议题與相反证据：检索时同时导出反证/更正报道，矛盾进入 requires_review。"
+      ]
+    },
+    {
+      "county": "宜蘭縣",
+      "inventory": {
+        "questions": 10,
+        "unresolved_questions": 11,
+        "promoted_evidence_records": 70,
+        "historical_claims": 2,
+        "relationships": 3,
+        "candidate_profiles": 64,
+        "current_issues": 1,
+        "candidate_counts": {
+          "county_mayor": 5,
+          "councilor": 59
+        },
+        "promotion_receipts": {
+          "total": 77,
+          "promoted": 77,
+          "rejected": 0,
+          "requires_review": 0,
+          "contradiction_checked": 77
+        }
+      },
+      "topic_evidence_records": {
+        "historical_political_structure": 0,
+        "people": 0,
+        "organizations": 0,
+        "political_networks": 0,
+        "electoral_geography": 0,
+        "civil_associations": 0,
+        "farmers_fishermen_associations": 0,
+        "religious_organizations": 0,
+        "key_issues": 0,
+        "demographics_industry": 2
+      },
+      "unresolved_detail": [
+        {
+          "topic": null,
+          "status": "unresolved_retrieval_leads",
+          "lead_ids": [
+            "cec-party-rec-宜蘭縣-吳宗憲"
+          ],
+          "grades": [
+            "A"
+          ],
+          "query": "2026年宜蘭縣縣市長候選人吳宗憲是否由中國國民黨推薦登記？"
+        },
+        {
+          "topic": null,
+          "status": "unresolved_retrieval_leads",
+          "lead_ids": [
+            "media-party-rec-f73a34844e0ad56c5e9c"
+          ],
+          "grades": [
+            "C"
+          ],
+          "query": "2026年宜蘭縣縣市長候選人林國漳是否由民主進步黨推薦登記？"
+        },
+        {
+          "topic": "historical_political_structure",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "宜蘭縣 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？"
+        },
+        {
+          "topic": "people",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "宜蘭縣 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？"
+        },
+        {
+          "topic": "organizations",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "宜蘭縣 有哪些与地方政治相关、且能由公开资料确认的人物—组织关系？"
+        },
+        {
+          "topic": "political_networks",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "学术或可靠公开资料如何描述 宜蘭縣 的历史派系或政治网络，其有效时间范围及当前可验证状态为何？"
+        },
+        {
+          "topic": "electoral_geography",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "宜蘭縣 的行政区、立委选区与历届地方选举空间差异中，哪些结构需要结合边界版本解释？"
+        },
+        {
+          "topic": "civil_associations",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "宜蘭縣 有哪些地方社团与公共事务网络可由可靠资料确认，且不得据其存在推断政治支持？"
+        },
+        {
+          "topic": "farmers_fishermen_associations",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "宜蘭縣 农会、渔会的组织分布与公开政治互动有哪些可核实记录，其时间范围为何？"
+        },
+        {
+          "topic": "religious_organizations",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "宜蘭縣 宗教组织参与地方公共事务或公开政治活动的可验证记录有哪些，证据边界为何？"
+        },
+        {
+          "topic": "key_issues",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "宜蘭縣 当前与近十年哪些地方治理、建设、环境或产业议题具有持续公开证据？"
+        }
+      ],
+      "academic_leads": [
+        {
+          "lead_id": "academic-yilan-factional-politics-1996",
+          "source_name": "政大硕士论文《宜兰县派系政治之研究》",
+          "source_grade": "B",
+          "published_at": "1996",
+          "url": "https://thesis.lib.nccu.edu.tw/thesis/detail/21f4dc87b16102b452e05615f63dc5a0/",
+          "topic": "political_networks",
+          "promote": false,
+          "full_text_read": false,
+          "required_before_promotion": [
+            "read article/PDF body from an accessible copy",
+            "record page numbers for each promoted claim",
+            "record applicable time_scope and geographic scope",
+            "run contradiction check and store proposal_id/receipt"
+          ]
+        }
+      ],
+      "depth_actions": [
+        "補候選人經歷、地方經營區域與組織互動：只以可核 A/B 或雙 C 正文產生 proposal。",
+        "補歷史政治結構：先讀学术线索全文，逐页記錄時間與地理範圍。",
+        "关键治理议题與相反证据：检索时同时导出反证/更正报道，矛盾进入 requires_review。"
+      ]
+    },
+    {
+      "county": "高雄市",
+      "inventory": {
+        "questions": 10,
+        "unresolved_questions": 6,
+        "promoted_evidence_records": 122,
+        "historical_claims": 4,
+        "relationships": 11,
+        "candidate_profiles": 106,
+        "current_issues": 1,
+        "candidate_counts": {
+          "county_mayor": 5,
+          "councilor": 101
+        },
+        "promotion_receipts": {
+          "total": 144,
+          "promoted": 143,
+          "rejected": 1,
+          "requires_review": 0,
+          "contradiction_checked": 142
+        }
+      },
+      "topic_evidence_records": {
+        "historical_political_structure": 0,
+        "people": 0,
+        "organizations": 3,
+        "political_networks": 1,
+        "electoral_geography": 0,
+        "civil_associations": 0,
+        "farmers_fishermen_associations": 0,
+        "religious_organizations": 0,
+        "key_issues": 1,
+        "demographics_industry": 2
+      },
+      "unresolved_detail": [
+        {
+          "topic": "historical_political_structure",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "高雄市 自 1990 年代以来的政党竞争、地方首长更替与政治结构经历了哪些可证实变化？"
+        },
+        {
+          "topic": "people",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "高雄市 当前与近二十年有哪些可由公开资料确认的关键地方政治人物，其公职与经营地区为何？"
+        },
+        {
+          "topic": "electoral_geography",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "高雄市 的行政区、立委选区与历届地方选举空间差异中，哪些结构需要结合边界版本解释？"
+        },
+        {
+          "topic": "civil_associations",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "高雄市 有哪些地方社团与公共事务网络可由可靠资料确认，且不得据其存在推断政治支持？"
+        },
+        {
+          "topic": "farmers_fishermen_associations",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "高雄市 农会、渔会的组织分布与公开政治互动有哪些可核实记录，其时间范围为何？"
+        },
+        {
+          "topic": "religious_organizations",
+          "status": "unresolved_no_promoted_evidence",
+          "lead_ids": [],
+          "grades": [],
+          "query": "高雄市 宗教组织参与地方公共事务或公开政治活动的可验证记录有哪些，证据边界为何？"
+        }
+      ],
+      "academic_leads": [],
+      "depth_actions": [
+        "補候選人經歷、地方經營區域與組織互動：只以可核 A/B 或雙 C 正文產生 proposal。",
+        "補歷史政治結構：先讀学术线索全文，逐页記錄時間與地理範圍。",
+        "关键治理议题與相反证据：检索时同时导出反证/更正报道，矛盾进入 requires_review。"
+      ]
+    }
+  ]
+}

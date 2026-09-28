@@ -1,0 +1,84 @@
+version: 1
+# Seed endpoints, not a claim of complete county or historical coverage.
+# Respect publisher terms; configure only endpoints permitted for your deployment.
+sources:
+  - id: cna_politics
+    adapter: rss
+    url: https://feeds.feedburner.com/rsscna/politics
+    article_pattern: '/news/aipl/[0-9]+\.aspx'
+    article_domains: [cna.com.tw]
+    publisher_id: cna
+    source_kind: media
+    source_grade: C
+    interval_seconds: 900
+    max_links: 100
+  - id: cna_politics_listing
+    adapter: listing
+    url: https://www.cna.com.tw/list/aipl.aspx
+    article_domains: [cna.com.tw]
+    article_pattern: '/news/aipl/[0-9]+\.aspx'
+    publisher_id: cna
+    source_kind: media
+    source_grade: C
+    interval_seconds: 900
+    max_links: 100
+  - id: pts_news
+    adapter: rss
+    url: https://news.pts.org.tw/xml/newsfeed.xml
+    article_pattern: '/article/[0-9]+'
+    article_domains: [pts.org.tw]
+    publisher_id: pts
+    source_kind: media
+    source_grade: C
+    interval_seconds: 900
+    max_links: 100
+  - id: udn_politics
+    adapter: listing
+    url: https://udn.com/news/cate/2/6638
+    article_pattern: '/news/story/[0-9]+/[0-9]+'
+    article_domains: [udn.com]
+    publisher_id: udn
+    source_kind: media
+    source_grade: C
+    interval_seconds: 900
+    max_links: 100
+  - id: ltn_politics
+    enabled: false  # HTTP 403 in deployment probe; do not bypass it.
+    adapter: rss
+    url: https://news.ltn.com.tw/rss/politics.xml
+    article_domains: [ltn.com.tw]
+    publisher_id: ltn
+    source_kind: media
+    source_grade: C
+    interval_seconds: 900
+  # County-level coverage seeds (2026 county-mayor races).
+  - id: cna_local_listing
+    adapter: listing
+    url: https://www.cna.com.tw/list/aloc.aspx
+    article_domains: [cna.com.tw]
+    article_pattern: '/news/aloc/[0-9]+\.aspx'
+    publisher_id: cna
+    source_kind: media
+    source_grade: C
+    interval_seconds: 900
+    max_links: 100
+  - id: cna_kaohsiung_listing
+    adapter: listing
+    url: https://www.cna.com.tw/list/aik-s.aspx
+    article_domains: [cna.com.tw]
+    article_pattern: '/news/(aloc|aipl|acn)/[0-9]+\.aspx'
+    publisher_id: cna
+    source_kind: media
+    source_grade: C
+    interval_seconds: 900
+    max_links: 100
+  - id: udn_local
+    adapter: listing
+    url: https://udn.com/news/cate/2/6641
+    article_pattern: '/news/story/[0-9]+/[0-9]+'
+    article_domains: [udn.com]
+    publisher_id: udn
+    source_kind: media
+    source_grade: C
+    interval_seconds: 900
+    max_links: 100

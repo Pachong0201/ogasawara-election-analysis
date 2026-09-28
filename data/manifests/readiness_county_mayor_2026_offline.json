@@ -1,0 +1,902 @@
+{
+  "version": "1.4.0",
+  "generated_at": "2026-09-27T08:59:21+00:00",
+  "mode": "offline",
+  "election_type": "county_mayor",
+  "target_year": 2026,
+  "as_of": "2026-09-27",
+  "summary": {
+    "county_count": 22,
+    "ready": 22,
+    "partial": 0,
+    "insufficient": 0,
+    "current_candidates_satisfied": 22,
+    "runtime_read_promoted_knowledge": 22,
+    "registration_confirmed": 22,
+    "cache_empty_but_knowledge_usable": [
+      "基隆市",
+      "新北市",
+      "桃園市",
+      "新竹市",
+      "新竹縣",
+      "苗栗縣",
+      "台中市",
+      "彰化縣",
+      "南投縣",
+      "雲林縣",
+      "嘉義市",
+      "嘉義縣",
+      "台南市",
+      "高雄市",
+      "屏東縣",
+      "宜蘭縣",
+      "花蓮縣",
+      "台東縣",
+      "澎湖縣",
+      "金門縣",
+      "連江縣"
+    ]
+  },
+  "counties": [
+    {
+      "county": "基隆市",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 3,
+        "verified_count": 3,
+        "registered_count": 3,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 3
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 3
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 68
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=60"
+      ]
+    },
+    {
+      "county": "台北市",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 12,
+        "verified_count": 6,
+        "registered_count": 6,
+        "registration_confirmed": true,
+        "source_counts": {
+          "cache": 6,
+          "knowledge_local": 6
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 6
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 116
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=98"
+      ]
+    },
+    {
+      "county": "新北市",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 3,
+        "verified_count": 3,
+        "registered_count": 3,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 3
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 3
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 134
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=112"
+      ]
+    },
+    {
+      "county": "桃園市",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 2,
+        "verified_count": 2,
+        "registered_count": 2,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 2
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 2
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 122
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=109"
+      ]
+    },
+    {
+      "county": "新竹市",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 3,
+        "verified_count": 3,
+        "registered_count": 3,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 3
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 3
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 64
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=56"
+      ]
+    },
+    {
+      "county": "新竹縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 3,
+        "verified_count": 3,
+        "registered_count": 3,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 3
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 3
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 77
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=68"
+      ]
+    },
+    {
+      "county": "苗栗縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 2,
+        "verified_count": 2,
+        "registered_count": 2,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 2
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 2
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 64
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=56"
+      ]
+    },
+    {
+      "county": "台中市",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 3,
+        "verified_count": 3,
+        "registered_count": 3,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 3
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 3
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 121
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=102"
+      ]
+    },
+    {
+      "county": "彰化縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 4,
+        "verified_count": 4,
+        "registered_count": 4,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 4
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 4
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 99
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=86"
+      ]
+    },
+    {
+      "county": "南投縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 2,
+        "verified_count": 2,
+        "registered_count": 2,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 2
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 2
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 70
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=61"
+      ]
+    },
+    {
+      "county": "雲林縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 4,
+        "verified_count": 4,
+        "registered_count": 4,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 4
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 4
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 83
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=73"
+      ]
+    },
+    {
+      "county": "嘉義市",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 5,
+        "verified_count": 5,
+        "registered_count": 5,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 5
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 5
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 47
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=37"
+      ]
+    },
+    {
+      "county": "嘉義縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 2,
+        "verified_count": 2,
+        "registered_count": 2,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 2
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 2
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 61
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=53"
+      ]
+    },
+    {
+      "county": "台南市",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 4,
+        "verified_count": 4,
+        "registered_count": 4,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 4
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 4
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 106
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=88"
+      ]
+    },
+    {
+      "county": "高雄市",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 5,
+        "verified_count": 5,
+        "registered_count": 5,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 5
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 5
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 122
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=101"
+      ]
+    },
+    {
+      "county": "屏東縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 2,
+        "verified_count": 2,
+        "registered_count": 2,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 2
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 2
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 95
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=87"
+      ]
+    },
+    {
+      "county": "宜蘭縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 5,
+        "verified_count": 5,
+        "registered_count": 5,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 5
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 5
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 70
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=59"
+      ]
+    },
+    {
+      "county": "花蓮縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 4,
+        "verified_count": 4,
+        "registered_count": 4,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 4
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 4
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 66
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=55"
+      ]
+    },
+    {
+      "county": "台東縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 4,
+        "verified_count": 4,
+        "registered_count": 4,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 4
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 4
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 66
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=56"
+      ]
+    },
+    {
+      "county": "澎湖縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 6,
+        "verified_count": 6,
+        "registered_count": 6,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 6
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 6
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 50
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=36"
+      ]
+    },
+    {
+      "county": "金門縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 7,
+        "verified_count": 7,
+        "registered_count": 7,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 7
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 7
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 48
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=35"
+      ]
+    },
+    {
+      "county": "連江縣",
+      "status": "READY",
+      "hard_unsatisfied": [],
+      "historical_years": [
+        2014,
+        2018,
+        2022
+      ],
+      "current_candidate_list": {
+        "satisfied": true,
+        "count": 2,
+        "verified_count": 2,
+        "registered_count": 2,
+        "registration_confirmed": true,
+        "source_counts": {
+          "knowledge_local": 2
+        },
+        "rejection_reasons": {},
+        "runtime_read_promoted_knowledge": true
+      },
+      "candidate_profiles": {
+        "satisfied": false,
+        "count": 2
+      },
+      "current_polls": {
+        "count": 0,
+        "fresh_count": 0
+      },
+      "local_knowledge": {
+        "satisfied": true,
+        "count": 21
+      },
+      "missing": [],
+      "warnings": [
+        "current candidate cache is not used; runtime read promoted knowledge/local candidate profiles (cache can be rebuilt with sync-candidates)",
+        "candidate records for other election types were excluded from this county_mayor check: councilor=14"
+      ]
+    }
+  ],
+  "interpretation_boundary": "upstream官方事實、候選人登記或已晉升地方知識被讀取，不代表當選機率、支持度、動員能力或選舉結果；缺口以 unknown 保留。"
+}

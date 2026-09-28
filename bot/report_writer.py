@@ -1,0 +1,693 @@
+"""Turn a validated Analysis Context into a Feishu-friendly answer."""
+
+from __future__ import annotations
+
+import asyncio
+import json
+from typing import Any, Dict
+
+from .models import ParsedRequest
+from .router import CAMPAIGN_UPDATE, FULL_ANALYSIS, HELP, POLL_ANALYSIS, SOURCES, VERSION
+
+
+SYSTEM_INSTRUCTIONS = """你是部署在飞书中的选情研究型分析机器人。
+你只能根据提供的 Research Brief、有限证据摘录和用户问题回答，不得自行补充上下文外的政治事实。
+
+你的工作不是复述结构化字段，而是像研究员一样完成综合分析：
+问题定义 → 历史参照 → 当前变化 → 地方差异 → 解释假设 → 支持证据与反证 → 有边界的判断。
+
+【核心方法】
+1. Research Brief 是研究底稿，不是半篇文章。你可以自行决定文章结构、标题、段落数量和论证顺序。
+2. 判断前置：先回答当前最值得关注的变化或结构问题，再展开证据。
+3. 新闻只能作为论据，禁止按日期或新闻逐条机械汇总。
+4. 历史残差、跨层级差异、空间异常只能作为研究入口，不得直接称为个人票、组织票、派系票或选票转移。
+5. 重要判断尽量连接“历史—当前—地方”三个维度，并呈现重要反证或替代解释。
+6. 单次到访、合影、宫庙参拜、市场活动不等于基层组织支持；组织协作也不等于选票效果。
+7. 第三党政治合作、组织合作、支持者偏好和实际投票行为必须分开处理。
+8. 民调只用于校准。只有方法和题型可比的同系列调查才能讨论变化；误差范围内不得描述为明确领先。
+9. 采集覆盖不足时，不得把零条结果写成“没有变化”；应把不确定性嵌入相关判断附近。
+10. 不得输出自主胜负预测、当选概率、候选人排名、政治推荐或投票建议。
+
+【正式成文要求】
+- 不要出现 final_assessment、research_brief、partial_current_data、supported、unresolved、confidence、search_count、body_count 等内部工程字段。
+- 将内部状态翻译成人类语言，例如“现有资料仍不足”“已有多项公开证据支持”“这一判断仍需继续观察”。
+- 不要求固定写成历史、地区、组织、议题等模板。根据本次材料选择最有解释力的主线。
+- 完整分析应形成连续文章，而不是数据库说明书。
+- 对具体数字、日期、人名、组织关系和民调，只能使用 Research Brief 或证据摘录中有依据的内容。
+- 默认使用简洁、连续、分析性中文；小标题必须承担判断，而不是栏目标签。"""
+
+VALIDATION_INSTRUCTIONS = """你是选情报告的证据校验器。只输出 JSON，不重写整篇文章。
+格式：
+{"issues":[{"excerpt":"初稿中需要修正的连续原文片段","replacement":"只针对该片段的修订文本","reason":"依据不足、证据层级、民调可比性、组织推断或工程术语"}]}
+仅在确有问题时列出 issue；没有问题输出 {"issues":[]}。
+必须检查：
+1. Research Brief 中找不到依据的具体人名、日期、数字、组织关系、民调或事实；
+2. 把媒体报道、分析假设或历史残差写成确定事实；
+3. 把组织动作直接推断为选票效果；
+4. 把不可比民调串成趋势；
+5. winner、ranking、win probability、投票建议等政治选择性结论；
+6. final_assessment、research_brief、partial_current_data、supported、unresolved、confidence、search_count、body_count 等工程术语泄漏。
+excerpt 必须逐字复制初稿中的连续片段；replacement 只修该片段，不改变其他段落和文章主线。"""
+
+
+
+
+def help_text() -> str:
+    return (
+        "**小笠原选情分析机器人**\n\n"
+        "可以直接问：\n"
+        "- 分析高雄选情：运行完整 V1.4 结构分析\n"
+        "- 高雄最近7天有什么变化：更新 Campaign State\n"
+        "- 高雄最新民调怎么看：查看民调校准\n"
+        "- 回复上一条分析问“为什么凤山重要？”：沿用线程上下文\n"
+        "- 查看来源：列出当前分析使用的来源\n\n"
+        "群聊默认需要 @机器人；私聊可直接提问。"
+    )
+
+
+def _compact_campaign_state(state: Dict[str, Any]) -> Dict[str, Any]:
+    compact = dict(state or {})
+    compact_leads = []
+    for lead in compact.get("retrieval_leads") or []:
+        if not isinstance(lead, dict):
+            continue
+        compact_leads.append(
+            {
+                "lead_id": lead.get("lead_id"),
+                "title": lead.get("title"),
+                "url": lead.get("url"),
+                "source_name": lead.get("source_name"),
+                "source_grade": lead.get("source_grade"),
+                "verification_status": lead.get("verification_status"),
+                "body_status": lead.get("body_status"),
+                "page_date": lead.get("page_date"),
+                "first_seen_at": lead.get("first_seen_at"),
+                "content_sha256": lead.get("content_sha256"),
+                "duplicate_of": lead.get("duplicate_of"),
+            }
+        )
+    compact["retrieval_leads"] = compact_leads
+    return compact
+
+
+def _trim_lead(lead: Dict[str, Any]) -> Dict[str, Any]:
+    keep = {
+        key: lead.get(key)
+        for key in ("lead_id", "title", "url", "publisher_id", "body_status",
+                    "content_sha256", "page_date", "first_seen_at",
+                    "jurisdictions", "verification_status", "duplicate_of")
+        if lead.get(key) is not None
+    }
+    excerpt = str(lead.get("evidence_excerpt") or lead.get("content") or "")
+    if excerpt:
+        keep["evidence_excerpt"] = excerpt[:300]
+    return keep
+
+
+def _trim_event(event: Dict[str, Any]) -> Dict[str, Any]:
+    trimmed = dict(event)
+    excerpt = str(trimmed.get("evidence_excerpt") or "")
+    if excerpt:
+        trimmed["evidence_excerpt"] = excerpt[:420]
+    return trimmed
+
+
+def _compact_local_knowledge(value: Dict[str, Any]) -> Dict[str, Any]:
+    local = dict(value or {})
+    compact = {
+        "county": local.get("county"),
+        "regions": list(local.get("regions") or [])[:16],
+        "sufficient": bool(local.get("sufficient")),
+        "missing": list(local.get("missing") or [])[:8],
+        "warnings": list(local.get("warnings") or [])[:8],
+        "relationships": list(local.get("relationships") or [])[:12],
+        "historical_claims": list(local.get("historical_claims") or [])[:8],
+        "candidates": list(local.get("candidates") or [])[:8],
+        "issues": list(local.get("issues") or [])[:8],
+    }
+    if isinstance(local.get("retrieval"), dict):
+        compact["retrieval_summary"] = {
+            key: local["retrieval"].get(key)
+            for key in ("status", "lead_count", "available")
+        }
+    return compact
+
+
+def _analysis_payload(context: Dict[str, Any]) -> Dict[str, Any]:
+    analysis = context.get("analysis_context", {}) if isinstance(context, dict) else {}
+    manifest = context.get("analysis_manifest", {}) if isinstance(context, dict) else {}
+
+    # The writer only needs structured events, evidence excerpts and status
+    # metadata — raw retrieval dumps (article bodies etc.) would exceed the
+    # model's context window and burn tokens without improving the prose.
+    local_knowledge = _compact_local_knowledge(analysis.get("local_knowledge", {}))
+
+    evidence_summary = dict(analysis.get("evidence_summary", {}))
+    if isinstance(evidence_summary.get("automatic_research"), dict):
+        research_summary = dict(evidence_summary["automatic_research"])
+        research_summary.pop("evidence_pack", None)
+        evidence_summary["automatic_research"] = research_summary
+
+    campaign_state = _compact_campaign_state(analysis.get("campaign_state", {}))
+    leads = campaign_state.get("retrieval_leads") or []
+    if leads:
+        campaign_state["retrieval_leads"] = [_trim_lead(lead) for lead in leads[:8]]
+
+    events = [_trim_event(e) for e in (analysis.get("current_events") or [])[:16]]
+    resolution = dict(analysis.get("campaign_event_resolution", {}))
+    resolved = resolution.get("events")
+    if resolved:
+        resolution["events"] = [_trim_event(e) for e in resolved[:24]]
+
+    return {
+        "research_brief": analysis.get("research_brief", {}),
+        "final_assessment": analysis.get("assessment", {}),
+        "historical_baseline": analysis.get("historical_baseline", {}),
+        "bounded_evidence_excerpts": {
+            "current_events": events,
+            "campaign_event_resolution": resolution,
+        },
+        "local_knowledge_summary": local_knowledge,
+        "polls": list(analysis.get("polls") or [])[:12],
+        "uncertainties": list(analysis.get("unknowns") or [])[:12],
+        "task": analysis.get("task", {}),
+        "readiness": analysis.get("readiness", {}),
+        "campaign_state": campaign_state,
+        "campaign_event_resolution": resolution,
+        "current_candidates": analysis.get("current_candidates", []),
+        "current_events": events,
+        "electoral_swing": analysis.get("electoral_swing", []),
+        "split_ticket": analysis.get("split_ticket", []),
+        "candidate_residuals": analysis.get("candidate_residuals", []),
+        "spatial_anomalies": analysis.get("spatial_anomalies", []),
+        "local_knowledge": local_knowledge,
+        "evidence_summary": evidence_summary,
+        "assessment": analysis.get("assessment", {}),
+        "unknowns": analysis.get("unknowns", []),
+        "warnings": analysis.get("warnings", []),
+        "sources": analysis.get("sources", []),
+        "manifest": {
+            "skill_version": manifest.get("skill_version"),
+            "created_at": manifest.get("created_at"),
+        },
+    }
+
+
+def _reader_payload(context: Dict[str, Any]) -> Dict[str, Any]:
+    """Minimal payload for the analyst writer; legacy assessment stays out."""
+    payload = _analysis_payload(context)
+    return {
+        "research_brief": payload.get("research_brief") or {},
+        "bounded_evidence_excerpts": payload.get("bounded_evidence_excerpts") or {},
+        "sources": payload.get("sources") or [],
+        "uncertainties": payload.get("uncertainties") or [],
+        "task": payload.get("task") or {},
+    }
+
+
+def _validation_context(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """Keep the second-pass validator bounded to evidence-bearing inputs."""
+    return {
+        "research_brief": payload.get("research_brief") or {},
+        "bounded_evidence_excerpts": payload.get("bounded_evidence_excerpts") or {},
+        "sources": payload.get("sources") or [],
+        "uncertainties": payload.get("uncertainties") or [],
+    }
+
+
+def _apply_validation_issues(text: str, raw: str) -> str:
+    """Apply only exact-span validator corrections; never allow a full rewrite."""
+    cleaned = str(raw or "").strip()
+    if cleaned.startswith("```"):
+        cleaned = cleaned.split("\n", 1)[1] if "\n" in cleaned else ""
+        if cleaned.endswith("```"):
+            cleaned = cleaned[:-3].rstrip()
+    start, end = cleaned.find("{"), cleaned.rfind("}")
+    if start >= 0 and end >= start:
+        cleaned = cleaned[start:end + 1]
+    try:
+        value = json.loads(cleaned)
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return text
+    issues = value.get("issues") if isinstance(value, dict) else None
+    if not isinstance(issues, list):
+        return text
+    revised = text
+    for issue in issues[:8]:
+        if not isinstance(issue, dict):
+            continue
+        excerpt = str(issue.get("excerpt") or "")
+        replacement = str(issue.get("replacement") or "")
+        if not excerpt or not replacement or excerpt not in revised:
+            continue
+        if len(excerpt) > 1200 or len(replacement) > 1400:
+            continue
+        revised = revised.replace(excerpt, replacement, 1)
+    return revised
+
+
+def _writer_protocol(model: str, requested: str = "auto") -> str:
+    """Route OpenCode Go models to the endpoint documented for that model."""
+    requested = str(requested or "auto").strip().lower()
+    if requested in {"responses", "chat"}:
+        return requested
+    model_id = str(model or "").strip().lower().split("/")[-1]
+    if model_id in {
+        "gpt-5.6-luna",
+        "grok-4.6",
+        "muse-spark-1.3-contributor",
+        "muse-spark-1.2-contributor",
+    }:
+        return "responses"
+    return "chat"
+
+
+def _responses_text(data: Dict[str, Any]) -> str:
+    """Extract concatenated output_text blocks from a raw Responses API object."""
+    direct = data.get("output_text") if isinstance(data, dict) else None
+    if isinstance(direct, str) and direct.strip():
+        return direct.strip()
+    parts = []
+    for item in (data.get("output") or []) if isinstance(data, dict) else []:
+        if not isinstance(item, dict) or item.get("type") != "message":
+            continue
+        for block in item.get("content") or []:
+            if isinstance(block, dict) and block.get("type") == "output_text":
+                value = block.get("text")
+                if isinstance(value, str) and value.strip():
+                    parts.append(value.strip())
+    return "\n".join(parts).strip()
+
+
+class BaseReportWriter:
+    async def write(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
+        raise NotImplementedError
+
+
+class DeterministicReportWriter(BaseReportWriter):
+    """Useful fallback when no model API key is configured."""
+
+    async def write(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
+        if request.intent == HELP:
+            return help_text()
+        if request.intent == VERSION:
+            version = context.get("analysis_manifest", {}).get("skill_version") or "1.4.0"
+            return f"小笠原选情分析 Skill：**v{version}**。飞书机器人统一整合版：**v1.4-integration**。"
+
+        payload = _analysis_payload(context)
+        state = payload.get("campaign_state") or {}
+        readiness = payload.get("readiness") or {}
+        focus = request.focus
+        lines = [
+            f"**{focus.jurisdiction or '选情'}｜结构化分析摘要**",
+            f"截至：{state.get('as_of') or payload.get('manifest', {}).get('created_at') or 'unknown'}",
+            f"数据状态：{readiness.get('status') or 'unknown'}",
+        ]
+        windows = state.get("windows") or {}
+        if windows:
+            lines.append(
+                "近期事件："
+                + "；".join(
+                    f"{key} {value.get('event_count', 0)}项"
+                    for key, value in windows.items()
+                    if isinstance(value, dict)
+                )
+            )
+        candidates = payload.get("current_candidates") or []
+        if candidates:
+            lines.append(f"当前候选人记录：{len(candidates)}条")
+        assessment = payload.get("assessment") or {}
+        coverage = assessment.get("research_coverage") or {}
+        if assessment:
+            lines.append(
+                "分析层："
+                f"动态证据{len(assessment.get('current_dynamics') or [])}项；"
+                f"研究正文包{coverage.get('evidence_pack_count', 0)}篇；"
+                f"研究发现{coverage.get('finding_count', 0)}项。"
+            )
+        polls = payload.get("polls") or []
+        retrieval = (payload.get("evidence_summary") or {}).get("retrieval") or {}
+        research = (payload.get('evidence_summary') or {}).get('automatic_research') or {}
+        if research.get('status') not in (None, 'disabled', 'historical_replay'):
+            labels = {'completed': '已完成自动补查', 'insufficient_evidence': '已搜索，证据仍不足',
+                      'pending': '已排队', 'running': '后台补查中', 'retry_pending': '等待重试',
+                      'partial': '部分完成', 'failed': '补查失败', 'configuration_error': '配置不完整'}
+            lines.append(f"自动 Web Search：{labels.get(research['status'], research['status'])}；"
+                         f"查询{research.get('search_count', 0)}次，取得正文{research.get('body_count', 0)}篇。")
+            if research.get('completed_at') or research.get('updated_at'):
+                lines.append('研究更新时间：' + str(research.get('completed_at') or research.get('updated_at')))
+            for finding in research.get('findings', [])[:5]:
+                lines.append('补查摘要（仍待独立核实）：' + finding['statement'])
+                for citation in finding.get('citations', [])[:3]:
+                    lines.append(f"- [{citation.get('source_grade', 'E')}] {citation.get('title') or citation['url']}："
+                                 f"{citation['quote']}\n{citation['url']}")
+            if research.get('unresolved'):
+                lines.append('尚未解决：' + '；'.join(research['unresolved'][:4]))
+            if research.get('last_error'):
+                lines.append('补查状态说明：' + str(research['last_error']))
+            if research.get('status') in ('pending', 'running', 'retry_pending'):
+                lines.append('本次先返回已有资料；后续重新查询可读取补查结果。')
+        if retrieval.get("backend") == "local_news":
+            lines.append(f"新闻采集覆盖：{retrieval.get('coverage_status', 'unknown')}；历史窗口尚未证明完整。")
+            for source in retrieval.get("sources", []):
+                lines.append(f"- {source['source_id']}：{source['status']}，最近成功 {source.get('last_success') or '尚无'}")
+            if retrieval.get("coverage_status") == "degraded":
+                lines.append("采集存在缺口，零条事件不代表没有选情变化。")
+        event_resolution = payload.get("campaign_event_resolution") or {}
+        resolved_events = event_resolution.get("events") or []
+        leads = state.get("retrieval_leads") or []
+        if resolved_events:
+            corroborated = [
+                item for item in resolved_events
+                if item.get("verification_status") == "corroborated_media"
+            ]
+            single = [
+                item for item in resolved_events
+                if item.get("verification_status") == "single_source_media"
+            ]
+            lines.append(
+                f"正文事件解析：{len(resolved_events)}项；"
+                f"跨来源相互印证{len(corroborated)}项，单一来源{len(single)}项。"
+            )
+            for item in resolved_events[:5]:
+                status = (
+                    "多来源相互印证，仍待高等级来源确认"
+                    if item.get("verification_status") == "corroborated_media"
+                    else "存在澄清、更正或冲突，待复核" if item.get("verification_status") == "requires_review"
+                    else "单一媒体报道"
+                )
+                lines.append(
+                    f"- {item.get('date') or '日期未知'}｜{item.get('event_type') or 'campaign_update'}"
+                    f"｜{status}｜涉及：{','.join(item.get('candidate_entities') or []) or '未识别'}"
+                )
+                if item.get("evidence_excerpt"):
+                    lines.append("证据摘录：" + str(item.get("evidence_excerpt"))[:420])
+        if retrieval.get("backend") == "gdelt_doc_news":
+            if not retrieval.get("available", True):
+                reason = next(
+                    (
+                        warning
+                        for warning in payload.get("warnings") or []
+                        if "GDELT news retrieval unavailable" in str(warning)
+                    ),
+                    None,
+                )
+                if reason:
+                    lines.append(f"实时新闻检索失败（{reason}）；以下不代表最新选情。")
+                else:
+                    lines.append("实时新闻检索：本次未成功；以下不代表最新选情。")
+            if leads:
+                read_count = sum(item.get("body_status") == "read" for item in leads)
+                lines.append(f"检索线索{len(leads)}条，已读取正文{read_count}条；报道内容仍待交叉核实。")
+                for item in leads[:5]:
+                    if item.get("duplicate_of"):
+                        continue
+                    lines.append(
+                        f"- {item.get('title') or '无标题'}｜正文：{item.get('body_status') or '未读取'}"
+                        f"｜页面日期：{item.get('page_date') or '未知'}"
+                        f"｜首次发现：{item.get('first_seen_at') or '未知'}｜{item.get('url') or ''}"
+                    )
+            elif retrieval.get("available", True):
+                lines.append("实时新闻检索：未发现匹配线索；不能据此断定近期没有选战变化。")
+        elif retrieval.get("backend") == "disabled":
+            lines.append("实时新闻检索：未启用；当前摘要不能代表最新新闻全貌。")
+        if request.intent == POLL_ANALYSIS:
+            lines.append(f"民调记录：{len(polls)}份")
+            lines.append(
+                "当前民调校准可用："
+                + str((payload.get("evidence_summary") or {}).get("current_poll_calibration_available", False))
+            )
+        if request.intent == SOURCES:
+            sources = payload.get("sources") or []
+            if not sources:
+                lines.append("当前 Context 未记录可展示来源。")
+            else:
+                lines.append("来源：")
+                for item in sources[:12]:
+                    lines.append(
+                        f"- {item.get('source_id') or 'unknown'} "
+                        f"[{item.get('source_grade') or '?'}] "
+                        f"{item.get('reference') or ''}"
+                    )
+        unknowns = payload.get("unknowns") or []
+        if unknowns:
+            lines.append("资料限制：" + "；".join(str(value) for value in unknowns[:4]))
+        lines.append(
+            "说明：当前未配置可用的大模型 API Key，因此显示确定性的结构化摘要；"
+            "配置模型 API 后将由 LLM 基于同一 Analysis Context 生成自然语言研判。"
+        )
+        return "\n\n".join(lines)
+
+
+class OpenAIReportWriter(BaseReportWriter):
+    def __init__(self, api_key: str, model: str):
+        self.api_key = api_key
+        self.model = model
+
+    def _write_sync(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
+        from openai import OpenAI
+
+        client = OpenAI(api_key=self.api_key)
+        payload = _reader_payload(context)
+        mode_hint = {
+            FULL_ANALYSIS: "完整分析。以 research_brief 为主要研究底稿，自主选择最有解释力的主线和文章结构；判断前置，串联历史、当前与地方证据，并呈现反证和边界。不要套固定六栏目。控制在约1800—3000字。",
+            CAMPAIGN_UPDATE: "重点回答近期发生了什么变化、哪些人物/组织/议题参与其中，以及这些变化可如何解释；同时写明证据边界。控制在约800—1500字。",
+            POLL_ANALYSIS: "只重点解释民调方法、可比性、未决定比例及其与结构的关系。",
+            SOURCES: "简要说明判断依据，并列出最关键来源。",
+        }.get(request.intent, "回答用户追问，优先复用现有 Context，不重复整篇报告。")
+
+        response = client.responses.create(
+            model=self.model,
+            store=False,
+            instructions=SYSTEM_INSTRUCTIONS,
+            input=(
+                f"用户问题：{request.text}\n"
+                f"任务模式：{mode_hint}\n"
+                "Research Context(JSON)：\n"
+                + json.dumps(payload, ensure_ascii=False)
+            ),
+        )
+        text = str(getattr(response, "output_text", "") or "").strip()
+        if not text:
+            raise RuntimeError("OpenAI Responses API returned empty output_text")
+        if request.intent in {FULL_ANALYSIS, CAMPAIGN_UPDATE, POLL_ANALYSIS}:
+            check = client.responses.create(
+                model=self.model,
+                store=False,
+                instructions=VALIDATION_INSTRUCTIONS,
+                input=(
+                    "初稿：\n" + text + "\n\n证据上下文(JSON)：\n"
+                    + json.dumps(_validation_context(payload), ensure_ascii=False)
+                ),
+            )
+            text = _apply_validation_issues(
+                text, str(getattr(check, "output_text", "") or "")
+            )
+        return text
+
+    async def write(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
+        if request.intent == HELP:
+            return help_text()
+        return await asyncio.to_thread(self._write_sync, request, context)
+
+
+class ChatCompletionsReportWriter(BaseReportWriter):
+    """Report writer with per-model routing for OpenAI-compatible providers."""
+
+    def __init__(
+        self,
+        api_key: str,
+        model: str,
+        base_url: str,
+        session: str = "",
+        validator_model: str = "",
+        protocol: str = "auto",
+    ):
+        self.api_key = api_key
+        self.model = model
+        self.validator_model = validator_model or model
+        self.base_url = base_url.rstrip("/")
+        self.session = session or "ogasawara-writer"
+        self.protocol = _writer_protocol(model, protocol)
+
+    @staticmethod
+    def _mode_hint(request: ParsedRequest) -> str:
+        return {
+            FULL_ANALYSIS: "完整分析。以 research_brief 为主要研究底稿，自主选择最有解释力的主线和文章结构；判断前置，串联历史、当前与地方证据，并呈现反证和边界。不要套固定六栏目。控制在约1800—3000字。",
+            CAMPAIGN_UPDATE: "重点回答近期发生了什么变化、哪些人物/组织/议题参与其中，以及这些变化可如何解释；同时写明证据边界。控制在约800—1500字。",
+            POLL_ANALYSIS: "只重点解释民调方法、可比性、未决定比例及其与结构的关系。",
+            SOURCES: "简要说明判断依据，并列出最关键来源。",
+        }.get(request.intent, "回答用户追问，优先复用现有 Context，不重复整篇报告。")
+
+    def _headers(self, session: str) -> Dict[str, str]:
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.api_key}",
+            "User-Agent": "ogasawara-election-research/0.1",
+        }
+        if "opencode.ai" in self.base_url:
+            headers["x-opencode-session"] = session
+        return headers
+
+    def _post(self, path: str, payload: Dict[str, Any], headers: Dict[str, str]) -> Dict[str, Any]:
+        import urllib.request
+
+        body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        request = urllib.request.Request(self.base_url + path, body, headers)
+        with urllib.request.urlopen(request, timeout=120) as response:
+            return json.loads(response.read())
+
+    def _call_chat(
+        self,
+        *,
+        model: str,
+        system: str,
+        user: str,
+        headers: Dict[str, str],
+        max_tokens: int,
+        temperature: float,
+    ) -> str:
+        data = self._post(
+            "/chat/completions",
+            {
+                "model": model,
+                "messages": [
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+                "max_tokens": max_tokens,
+                "temperature": temperature,
+            },
+            headers,
+        )
+        return str(
+            (data.get("choices") or [{}])[0]
+            .get("message", {})
+            .get("content", "")
+        ).strip()
+
+    def _call_responses(
+        self,
+        *,
+        model: str,
+        system: str,
+        user: str,
+        headers: Dict[str, str],
+        max_tokens: int,
+    ) -> str:
+        data = self._post(
+            "/responses",
+            {
+                "model": model,
+                "store": False,
+                "stream": False,
+                "instructions": system,
+                "input": [
+                    {
+                        "role": "user",
+                        "content": [{"type": "input_text", "text": user}],
+                    },
+                ],
+                "max_output_tokens": max_tokens,
+            },
+            headers,
+        )
+        return _responses_text(data)
+
+    def _call_model(
+        self,
+        *,
+        model: str,
+        protocol: str,
+        system: str,
+        user: str,
+        headers: Dict[str, str],
+        max_tokens: int,
+        temperature: float = 0.0,
+    ) -> str:
+        if protocol == "responses":
+            return self._call_responses(
+                model=model,
+                system=system,
+                user=user,
+                headers=headers,
+                max_tokens=max_tokens,
+            )
+        return self._call_chat(
+            model=model,
+            system=system,
+            user=user,
+            headers=headers,
+            max_tokens=max_tokens,
+            temperature=temperature,
+        )
+
+    def _write_sync(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
+        import hashlib
+
+        session = (
+            "ogasawara-writer-"
+            + hashlib.md5(self.model.encode("utf-8")).hexdigest()[:16]
+        )
+        headers = self._headers(session)
+        payload = _reader_payload(context)
+        user_prompt = (
+            f"用户问题：{request.text}\n"
+            f"任务模式：{self._mode_hint(request)}\n"
+            "Research Context(JSON)：\n"
+            + json.dumps(payload, ensure_ascii=False)
+        )
+        text = self._call_model(
+            model=self.model,
+            protocol=self.protocol,
+            system=SYSTEM_INSTRUCTIONS,
+            user=user_prompt,
+            headers=headers,
+            max_tokens=16000,
+            temperature=0.3,
+        )
+        if not text:
+            raise RuntimeError(f"{self.protocol} writer returned empty content")
+
+        if request.intent in {FULL_ANALYSIS, CAMPAIGN_UPDATE, POLL_ANALYSIS}:
+            validator_protocol = _writer_protocol(self.validator_model, "auto")
+            validation_prompt = (
+                "初稿：\n" + text + "\n\n证据上下文(JSON)：\n"
+                + json.dumps(_validation_context(payload), ensure_ascii=False)
+            )
+            raw_validation = self._call_model(
+                model=self.validator_model,
+                protocol=validator_protocol,
+                system=VALIDATION_INSTRUCTIONS,
+                user=validation_prompt,
+                headers=headers,
+                max_tokens=3000,
+                temperature=0.0,
+            )
+            text = _apply_validation_issues(text, raw_validation)
+        return text
+
+    async def write(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
+        if request.intent == HELP:
+            return help_text()
+        return await asyncio.to_thread(self._write_sync, request, context)
+
+
+def build_report_writer(
+    api_key: str = "",
+    model: str = "deepseek-flash",
+    base_url: str = "",
+    validator_model: str = "",
+    protocol: str = "auto",
+) -> BaseReportWriter:
+    if api_key and base_url:
+        return ChatCompletionsReportWriter(
+            api_key=api_key,
+            model=model,
+            base_url=base_url,
+            validator_model=validator_model,
+            protocol=protocol,
+        )
+    if api_key:
+        return OpenAIReportWriter(api_key=api_key, model=model)
+    return DeterministicReportWriter()
