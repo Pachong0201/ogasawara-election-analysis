@@ -71,6 +71,24 @@ class Body:
                 'page_date': (dt.datetime.now(dt.timezone.utc) - dt.timedelta(minutes=1)).isoformat()}
 
 
+
+
+
+def test_research_config_auto_enables_with_credentials(monkeypatch):
+    monkeypatch.setenv('OGASAWARA_AUTO_RESEARCH', 'auto')
+    monkeypatch.setenv('OPENCODE_GO_API_KEY', 'model-key')
+    monkeypatch.setenv('TAVILY_API_KEY', 'search-key')
+    monkeypatch.setenv('RESEARCH_MAX_QUERIES', '9')
+    monkeypatch.setenv('RESEARCH_MAX_BODIES', '32')
+    cfg = ResearchConfig.from_env()
+    assert cfg.enabled is True
+    assert cfg.max_queries == 9
+    assert cfg.max_bodies == 32
+
+    monkeypatch.setenv('OGASAWARA_AUTO_RESEARCH', 'false')
+    assert ResearchConfig.from_env().enabled is False
+
+
 def test_deepseek_protocol_no_native_web_search():
     calls = []
     def transport(*args):
