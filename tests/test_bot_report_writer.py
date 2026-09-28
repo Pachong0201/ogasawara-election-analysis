@@ -6,6 +6,7 @@ from bot.report_writer import (
     DeterministicReportWriter,
     _analysis_payload,
     _reader_payload,
+    _apply_validation_issues,
     build_report_writer,
 )
 from bot.router import FULL_ANALYSIS
@@ -149,6 +150,21 @@ class TestDeterministicReportWriter(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn("final_assessment", payload)
         self.assertNotIn("historical_baseline", payload)
         self.assertIn("bounded_evidence_excerpts", payload)
+
+
+    async def test_validator_only_replaces_flagged_exact_span(self):
+        draft = "第一段保持不变。\n\n第二段称该活动已经转化为选票优势。\n\n第三段保持不变。"
+        raw = """{"issues":[{"excerpt":"第二段称该活动已经转化为选票优势。","replacement":"第二段只能说明出现了公开活动，尚不能据此判断选票效果。","reason":"组织活动不能直接推断选票效果"}]}"""
+        revised = _apply_validation_issues(draft, raw)
+        self.assertIn("第一段保持不变。", revised)
+        self.assertIn("第三段保持不变。", revised)
+        self.assertIn("尚不能据此判断选票效果", revised)
+        self.assertNotIn("已经转化为选票优势", revised)
+
+    async def test_validator_ignores_non_exact_or_full_rewrite_attempt(self):
+        draft = "原文甲。原文乙。"
+        raw = """{"issues":[{"excerpt":"不存在的片段","replacement":"整篇重写内容","reason":"test"}]}"""
+        self.assertEqual(_apply_validation_issues(draft, raw), draft)
 
 
 
