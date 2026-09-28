@@ -29,6 +29,7 @@ class AnalysisContextBuilder:
         polls: Optional[List[Dict[str, Any]]] = None,
         evidence_summary: Optional[Dict[str, Any]] = None,
         assessment: Optional[Dict[str, Any]] = None,
+        research_brief: Optional[Dict[str, Any]] = None,
         unknowns: Optional[List[str]] = None,
         warnings: Optional[List[str]] = None,
         sources: Optional[List[Dict[str, Any]]] = None,
@@ -47,6 +48,7 @@ class AnalysisContextBuilder:
         polls = polls or []
         evidence_summary = evidence_summary or {}
         assessment = assessment or {}
+        research_brief = research_brief or {}
         unknowns = unknowns or []
         warnings = warnings or []
         sources = sources or []
@@ -112,6 +114,7 @@ class AnalysisContextBuilder:
             "polls": polls,
             "evidence_summary": evidence_summary,
             "assessment": assessment,
+            "research_brief": research_brief,
             "unknowns": unknowns,
             "warnings": warnings,
             "sources": sources,
@@ -139,6 +142,12 @@ class AnalysisContextBuilder:
                 "version": assessment.get("version"),
                 "dynamic_count": len(assessment.get("current_dynamics") or []),
                 "evidence_pack_count": len(assessment.get("evidence_pack") or []),
+            },
+            "research_brief": {
+                "version": research_brief.get("version"),
+                "core_fact_count": len(research_brief.get("core_facts") or []),
+                "regional_pattern_count": len(research_brief.get("regional_patterns") or []),
+                "hypothesis_count": len(research_brief.get("key_hypotheses") or []),
             },
         }
         return AnalysisContext(analysis_context=context, analysis_manifest=manifest)
