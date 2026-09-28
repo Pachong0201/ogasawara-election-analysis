@@ -75,8 +75,9 @@ class BotConfig:
                 or "deepseek-flash"
             ),
             openai_writer_model=(
-                deepseek_model
+                os.getenv("ANALYST_WRITER_MODEL", "").strip()
                 or os.getenv("OPENAI_WRITER_MODEL", "").strip()
+                or deepseek_model
                 or "deepseek-flash"
             ),
             skill_mode=os.getenv("OGASAWARA_BOT_MODE", "online").strip().lower(),
