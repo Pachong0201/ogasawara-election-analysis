@@ -82,8 +82,11 @@ class BotConfig:
             ),
             openai_router_model=(
                 os.getenv("OPENAI_ROUTER_MODEL", "").strip()
-                or deepseek_model
-                or ("deepseek-v4.1-flash" if opencode_go_key else "deepseek-flash")
+                or (
+                    "deepseek-v4.1-flash"
+                    if opencode_go_key
+                    else (deepseek_model or "deepseek-flash")
+                )
             ),
             openai_writer_model=(
                 os.getenv("ANALYST_WRITER_MODEL", "").strip()
