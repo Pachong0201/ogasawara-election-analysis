@@ -33,6 +33,8 @@ CORROBORATED_STATUSES = {"corroborated_media"}
 
 
 def _strings(values: Iterable[Any], limit: int = 24) -> List[str]:
+    if isinstance(values, str):
+        values = [values]
     output: List[str] = []
     for value in values or []:
         text = str(value or "").strip()
