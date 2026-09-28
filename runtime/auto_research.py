@@ -426,7 +426,18 @@ class ResearchWorker:
                 state['unresolved'] = strings(state['review'].get('unresolved'))
                 self.store.checkpoint(job, state)
             remaining_queries = max(0, self.config.max_queries - len(state['completed_queries']))
-            followups = queries(state['review'].get('queries'), task['jurisdiction'])[:min(2, remaining_queries)]
+            followups = queries(
+                state['review'].get('queries'), task['jurisdiction']
+            )[:min(2, remaining_queries)]
+            if not followups and remaining_queries:
+                hypothesis_queries = [
+                    {"query": row.get("followup_question"), "purpose": "news"}
+                    for row in state.get("hypothesis_review") or []
+                    if isinstance(row, dict) and str(row.get("followup_question") or "").strip()
+                ]
+                followups = queries(
+                    hypothesis_queries, task['jurisdiction']
+                )[:min(2, remaining_queries)]
             self._search_round(job, state, task, followups)
             final = state['review']
             if followups:
