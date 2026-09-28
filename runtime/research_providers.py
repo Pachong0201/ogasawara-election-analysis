@@ -46,8 +46,11 @@ class ResearchConfig:
         opencode_go_key = os.getenv('OPENCODE_GO_API_KEY', '').strip()
         research_model = (
             os.getenv('RESEARCH_LLM_MODEL', '').strip()
-            or deepseek_model
-            or ('deepseek-v4.1-flash' if opencode_go_key else 'deepseek-flash')
+            or (
+                'deepseek-v4.1-flash'
+                if opencode_go_key
+                else (deepseek_model or 'deepseek-flash')
+            )
         )
         planner_model = (
             os.getenv('RESEARCH_PLANNER_MODEL', '').strip()
