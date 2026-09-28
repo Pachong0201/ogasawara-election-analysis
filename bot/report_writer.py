@@ -189,6 +189,18 @@ def _analysis_payload(context: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
+def _reader_payload(context: Dict[str, Any]) -> Dict[str, Any]:
+    """Minimal payload for the analyst writer; legacy assessment stays out."""
+    payload = _analysis_payload(context)
+    return {
+        "research_brief": payload.get("research_brief") or {},
+        "bounded_evidence_excerpts": payload.get("bounded_evidence_excerpts") or {},
+        "sources": payload.get("sources") or [],
+        "uncertainties": payload.get("uncertainties") or [],
+        "task": payload.get("task") or {},
+    }
+
+
 def _validation_context(payload: Dict[str, Any]) -> Dict[str, Any]:
     """Keep the second-pass validator bounded to evidence-bearing inputs."""
     return {
@@ -368,7 +380,7 @@ class OpenAIReportWriter(BaseReportWriter):
         from openai import OpenAI
 
         client = OpenAI(api_key=self.api_key)
-        payload = _analysis_payload(context)
+        payload = _reader_payload(context)
         mode_hint = {
             FULL_ANALYSIS: "完整分析。以 research_brief 为主要研究底稿，自主选择最有解释力的主线和文章结构；判断前置，串联历史、当前与地方证据，并呈现反证和边界。不要套固定六栏目。控制在约1800—3000字。",
             CAMPAIGN_UPDATE: "重点回答近期发生了什么变化、哪些人物/组织/议题参与其中，以及这些变化可如何解释；同时写明证据边界。控制在约800—1500字。",
@@ -430,7 +442,7 @@ class ChatCompletionsReportWriter(BaseReportWriter):
             "ogasawara-writer-"
             + hashlib.md5(self.model.encode("utf-8")).hexdigest()[:16]
         )
-        payload = _analysis_payload(context)
+        payload = _reader_payload(context)
         mode_hint = {
             FULL_ANALYSIS: "完整分析。以 research_brief 为主要研究底稿，自主选择最有解释力的主线和文章结构；判断前置，串联历史、当前与地方证据，并呈现反证和边界。不要套固定六栏目。控制在约1800—3000字。",
             CAMPAIGN_UPDATE: "重点回答近期发生了什么变化、哪些人物/组织/议题参与其中，以及这些变化可如何解释；同时写明证据边界。控制在约800—1500字。",
