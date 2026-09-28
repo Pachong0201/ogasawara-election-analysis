@@ -407,6 +407,14 @@ class ResearchCoordinator:
         self.worker_factory = worker_factory or (lambda: ResearchWorker(root, store, self.config))
 
     def research(self, task, questions, candidate_names):
+        return self._research(task, questions, candidate_names, round_name="initial")
+
+    def research_assessment_followup(self, task, questions, candidate_names):
+        """Run the single, smaller round requested by a draft assessment."""
+        return self._research(task, list(questions or [])[:6], candidate_names,
+                              round_name="assessment_follow_up")
+
+    def _research(self, task, questions, candidate_names, round_name):
         if not self.config.enabled:
             return {'status': 'disabled'}
         if self.config.problem():
@@ -414,6 +422,7 @@ class ResearchCoordinator:
         payload = {'jurisdiction': task.jurisdiction, 'target_year': task.target_year,
                    'election_type': task.election_type, 'questions': sorted(strings(questions)),
                    'candidate_names': sorted(strings(candidate_names, 30)),
+                   'round_name': round_name,
                    'research_dimensions': [
                        '候選人近期活動與競選策略',
                        '地方政治人物、組織與公開支持互動',
@@ -425,7 +434,7 @@ class ResearchCoordinator:
                    'objective': ('更新近30日競選動態，並補查地方政治研究問題。'
                                  '研究規劃應覆蓋 research_dimensions，優先查找政府機關原始公告，'
                                  '再以獨立媒體正文補充或交叉核驗。')}
-        key = 'auto-v1-' + hashlib.sha256(dumps({**payload, 'model': self.config.model, 'base_url': self.config.base_url}).encode()).hexdigest()
+        key = 'auto-v2-' + hashlib.sha256(dumps({**payload, 'model': self.config.model, 'base_url': self.config.base_url}).encode()).hexdigest()
         payload['end_date'] = dt.datetime.now(dt.timezone(dt.timedelta(hours=8))).date().isoformat()
         job_id = self.store.schedule(key, payload, self.config.cache_seconds)
         worker = self.worker_factory()
@@ -442,6 +451,7 @@ class ResearchCoordinator:
         thread.join(self.config.foreground_seconds)
         result = public_result(self.store.result(job_id))
         result['cache_ttl_seconds'] = self.config.cache_seconds
+        result['round_name'] = round_name
         return result
 
 

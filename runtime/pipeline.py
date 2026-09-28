@@ -436,13 +436,48 @@ class AnalysisPipeline:
         importance_signals = event_importance_signals(events, local_knowledge)
         local_knowledge["event_importance_signals"] = importance_signals
         if research_prepass:
+            draft_assessment = self.assessment_builder.build(
+                campaign_state=campaign_state,
+                current_events=events,
+                campaign_event_resolution=campaign_event_resolution,
+                metrics=metrics,
+                polls=polls,
+                research_result={"status": "not_started", "round_name": "draft"},
+                unknowns=[],
+                warnings=list(campaign_retrieval_warnings),
+                local_knowledge=local_knowledge,
+                historical_baseline={
+                    "historical_matrix": historical_matrix,
+                    "cross_level_matrix": cross_level_matrix,
+                },
+                current_candidates=current_candidates,
+                task=task.to_dict(),
+            )
+            assessment_questions = [
+                str(item.get("question") or "")
+                for item in draft_assessment.get("follow_up_questions") or []
+                if str(item.get("question") or "").strip()
+            ]
+            bounded_questions = list(dict.fromkeys(assessment_questions + questions))[:6]
             try:
-                result = coordinator.research(task, questions, [
+                candidate_names = [
                     str(row.get('candidate_name') or row.get('name') or row.get('姓名') or '')
                     for row in current_candidates
-                ])
+                ]
+                assessment_research = getattr(coordinator, "research_assessment_followup", None)
+                if callable(assessment_research):
+                    result = assessment_research(task, bounded_questions, candidate_names)
+                else:
+                    result = coordinator.research(task, bounded_questions, candidate_names)
+                result = dict(result or {})
+                result["round_name"] = "assessment_follow_up"
+                result["follow_up_questions"] = bounded_questions
             except Exception as exc:
-                result = {'status': 'failed', 'last_error': type(exc).__name__}
+                result = {
+                    'status': 'failed', 'last_error': type(exc).__name__,
+                    'round_name': 'assessment_follow_up',
+                    'follow_up_questions': bounded_questions,
+                }
             # Freeze the evidence cutoff only AFTER bounded collection. Explicit
             # as_of replays never enter this branch and never advance their cutoff.
             return self.run(task, allow_online=allow_online, write_manifest=write_manifest,
@@ -507,6 +542,32 @@ class AnalysisPipeline:
             research_result=research_result,
             unknowns=unknowns,
             warnings=warnings,
+            local_knowledge=local_knowledge,
+            historical_baseline={
+                "historical_matrix": historical_matrix,
+                "cross_level_matrix": cross_level_matrix,
+            },
+            current_candidates=current_candidates,
+            task=task.to_dict(),
+            draft_assessment=(
+                self.assessment_builder.build(
+                    campaign_state=campaign_state,
+                    current_events=events,
+                    campaign_event_resolution=campaign_event_resolution,
+                    metrics=metrics,
+                    polls=polls,
+                    research_result={"status": "not_started", "round_name": "draft"},
+                    unknowns=unknowns,
+                    warnings=warnings,
+                    local_knowledge=local_knowledge,
+                    historical_baseline={
+                        "historical_matrix": historical_matrix,
+                        "cross_level_matrix": cross_level_matrix,
+                    },
+                    current_candidates=current_candidates,
+                    task=task.to_dict(),
+                ) if research_result.get("round_name") == "assessment_follow_up" else None
+            ),
         )
 
         context = self.context_builder.build(

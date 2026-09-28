@@ -22,7 +22,7 @@ SYSTEM_INSTRUCTIONS = """你是“小笠原选情分析机器人”的报告写�
 5. 采集覆盖不足或来源失败时，不得把零条结果写成“没有变化”，必须说明覆盖缺口和数据截止时间。
 
 【完整分析写法】
-完整分析应优先使用 assessment，而不是逐条复述原始 JSON。先提出3—5个当前最值得解释的结构性观察，再分别写清：
+完整分析必须优先使用 final_assessment，不得由写作层重新完成证据综合。先提出3—5个当前最值得解释的结构性观察，再分别写清：
 - 观察：近期公开资料显示了什么变化或互动；
 - 证据链：哪些事件、正文、人物、组织、议题或地区材料支持这一观察；
 - 结构解释：它与历史选举结构、地方政治网络、空间差异或既有议题有什么联系；
@@ -32,7 +32,8 @@ SYSTEM_INSTRUCTIONS = """你是“小笠原选情分析机器人”的报告写�
 
 不得输出自主胜负预测、当选概率、候选人排名、政治推荐、投票建议，或用其他方式替用户作政治选择。
 不得把“更积极、更有利、更强”等评价当作自主结论；如需描述竞选动作，只描述已观察到的频率、范围、参与主体和议题变化。
-默认使用简洁、连续、分析性中文；完整分析可使用有信息量的小标题，但避免模板化新闻汇总。"""
+按照“关键变量→整体结构→地区差异→组织网络→议题变化→证据缺口”组织。
+默认使用简洁、连续、分析性中文；完整分析可使用有信息量的小标题，禁止按日期或新闻逐条机械汇总。"""
 
 
 def help_text() -> str:
@@ -95,6 +96,27 @@ def _trim_event(event: Dict[str, Any]) -> Dict[str, Any]:
     return trimmed
 
 
+def _compact_local_knowledge(value: Dict[str, Any]) -> Dict[str, Any]:
+    local = dict(value or {})
+    compact = {
+        "county": local.get("county"),
+        "regions": list(local.get("regions") or [])[:16],
+        "sufficient": bool(local.get("sufficient")),
+        "missing": list(local.get("missing") or [])[:8],
+        "warnings": list(local.get("warnings") or [])[:8],
+        "relationships": list(local.get("relationships") or [])[:12],
+        "historical_claims": list(local.get("historical_claims") or [])[:8],
+        "candidates": list(local.get("candidates") or [])[:8],
+        "issues": list(local.get("issues") or [])[:8],
+    }
+    if isinstance(local.get("retrieval"), dict):
+        compact["retrieval_summary"] = {
+            key: local["retrieval"].get(key)
+            for key in ("status", "lead_count", "available")
+        }
+    return compact
+
+
 def _analysis_payload(context: Dict[str, Any]) -> Dict[str, Any]:
     analysis = context.get("analysis_context", {}) if isinstance(context, dict) else {}
     manifest = context.get("analysis_manifest", {}) if isinstance(context, dict) else {}
@@ -102,14 +124,7 @@ def _analysis_payload(context: Dict[str, Any]) -> Dict[str, Any]:
     # The writer only needs structured events, evidence excerpts and status
     # metadata — raw retrieval dumps (article bodies etc.) would exceed the
     # model's context window and burn tokens without improving the prose.
-    local_knowledge = dict(analysis.get("local_knowledge", {}))
-    if isinstance(local_knowledge.get("retrieval"), dict):
-        raw_retrieval = local_knowledge.pop("retrieval")
-        local_knowledge["retrieval_summary"] = {
-            "status": raw_retrieval.get("status"),
-            "lead_count": raw_retrieval.get("lead_count"),
-            "available": raw_retrieval.get("available"),
-        }
+    local_knowledge = _compact_local_knowledge(analysis.get("local_knowledge", {}))
 
     evidence_summary = dict(analysis.get("evidence_summary", {}))
     if isinstance(evidence_summary.get("automatic_research"), dict):
@@ -122,28 +137,33 @@ def _analysis_payload(context: Dict[str, Any]) -> Dict[str, Any]:
     if leads:
         campaign_state["retrieval_leads"] = [_trim_lead(lead) for lead in leads[:8]]
 
-    events = analysis.get("current_events", [])
-    if events:
-        analysis["current_events"] = [_trim_event(e) for e in events[:24]]
-    resolution = analysis.get("campaign_event_resolution", {})
+    events = [_trim_event(e) for e in (analysis.get("current_events") or [])[:16]]
+    resolution = dict(analysis.get("campaign_event_resolution", {}))
     resolved = resolution.get("events")
     if resolved:
         resolution["events"] = [_trim_event(e) for e in resolved[:24]]
 
     return {
+        "final_assessment": analysis.get("assessment", {}),
+        "historical_baseline": analysis.get("historical_baseline", {}),
+        "bounded_evidence_excerpts": {
+            "current_events": events,
+            "campaign_event_resolution": resolution,
+        },
+        "local_knowledge_summary": local_knowledge,
+        "polls": list(analysis.get("polls") or [])[:12],
+        "uncertainties": list(analysis.get("unknowns") or [])[:12],
         "task": analysis.get("task", {}),
         "readiness": analysis.get("readiness", {}),
         "campaign_state": campaign_state,
-        "campaign_event_resolution": analysis.get("campaign_event_resolution", {}),
+        "campaign_event_resolution": resolution,
         "current_candidates": analysis.get("current_candidates", []),
-        "current_events": analysis.get("current_events", []),
-        "polls": analysis.get("polls", []),
+        "current_events": events,
         "electoral_swing": analysis.get("electoral_swing", []),
         "split_ticket": analysis.get("split_ticket", []),
         "candidate_residuals": analysis.get("candidate_residuals", []),
         "spatial_anomalies": analysis.get("spatial_anomalies", []),
         "local_knowledge": local_knowledge,
-        "historical_baseline": analysis.get("historical_baseline", {}),
         "evidence_summary": evidence_summary,
         "assessment": analysis.get("assessment", {}),
         "unknowns": analysis.get("unknowns", []),
@@ -327,7 +347,7 @@ class OpenAIReportWriter(BaseReportWriter):
         client = OpenAI(api_key=self.api_key)
         payload = _analysis_payload(context)
         mode_hint = {
-            FULL_ANALYSIS: "完整分析。以 assessment 为主线，提炼3—5个结构性观察，串联当前证据、地方知识与历史结构，并写出反证和不确定性；不要逐条罗列资料。控制在约1800—3000字。",
+            FULL_ANALYSIS: "完整分析。只以 final_assessment 为分析主线，按关键变量、整体结构、地区差异、组织网络、议题变化、证据缺口展开；不要按新闻或日期逐条罗列。控制在约1800—3000字。",
             CAMPAIGN_UPDATE: "重点回答近期发生了什么变化、哪些人物/组织/议题参与其中，以及这些变化可如何解释；同时写明证据边界。控制在约800—1500字。",
             POLL_ANALYSIS: "只重点解释民调方法、可比性、未决定比例及其与结构的关系。",
             SOURCES: "简要说明判断依据，并列出最关键来源。",
@@ -376,7 +396,7 @@ class ChatCompletionsReportWriter(BaseReportWriter):
         )
         payload = _analysis_payload(context)
         mode_hint = {
-            FULL_ANALYSIS: "完整分析。以 assessment 为主线，提炼3—5个结构性观察，串联当前证据、地方知识与历史结构，并写出反证和不确定性；不要逐条罗列资料。控制在约1800—3000字。",
+            FULL_ANALYSIS: "完整分析。只以 final_assessment 为分析主线，按关键变量、整体结构、地区差异、组织网络、议题变化、证据缺口展开；不要按新闻或日期逐条罗列。控制在约1800—3000字。",
             CAMPAIGN_UPDATE: "重点回答近期发生了什么变化、哪些人物/组织/议题参与其中，以及这些变化可如何解释；同时写明证据边界。控制在约800—1500字。",
             POLL_ANALYSIS: "只重点解释民调方法、可比性、未决定比例及其与结构的关系。",
             SOURCES: "简要说明判断依据，并列出最关键来源。",
