@@ -33,8 +33,10 @@ class BotConfig:
     lark_app_secret: str = ""
     openai_api_key: str = ""
     openai_base_url: str = "https://api.deepseek.com"
-    openai_router_model: str = "deepseek-flash"
-    openai_writer_model: str = "deepseek-flash"
+    openai_router_model: str = "deepseek-v4.1-flash"
+    openai_writer_model: str = "gpt-5.6-luna"
+    validator_model: str = "deepseek-v4.1-flash"
+    writer_protocol: str = "auto"
     skill_mode: str = "online"
     retrieval_provider: str = "local"
     max_article_fetches: int = 6
@@ -54,6 +56,10 @@ class BotConfig:
             db_path = repo_root / db_path
 
         deepseek_model = os.getenv("DEEPSEEK_MODEL", "").strip()
+        opencode_go_key = os.getenv("OPENCODE_GO_API_KEY", "").strip()
+        opencode_go_base = os.getenv(
+            "OPENCODE_GO_BASE_URL", "https://opencode.ai/zen/go/v1"
+        ).strip().rstrip("/")
         config = cls(
             repo_root=repo_root,
             lark_app_id=os.getenv("LARK_APP_ID", "").strip(),
@@ -61,25 +67,36 @@ class BotConfig:
             # Keep the old OPENAI_* names as a compatibility fallback for
             # existing deployments, but prefer the official DeepSeek config.
             openai_api_key=(
-                os.getenv("DEEPSEEK_API_KEY", "").strip()
+                opencode_go_key
+                or os.getenv("DEEPSEEK_API_KEY", "").strip()
                 or os.getenv("OPENAI_API_KEY", "").strip()
             ),
             openai_base_url=(
-                os.getenv("DEEPSEEK_BASE_URL", "").strip()
-                or os.getenv("OPENAI_BASE_URL", "").strip()
-                or "https://api.deepseek.com"
+                opencode_go_base
+                if opencode_go_key
+                else (
+                    os.getenv("DEEPSEEK_BASE_URL", "").strip()
+                    or os.getenv("OPENAI_BASE_URL", "").strip()
+                    or "https://api.deepseek.com"
+                )
             ),
             openai_router_model=(
-                deepseek_model
-                or os.getenv("OPENAI_ROUTER_MODEL", "").strip()
-                or "deepseek-flash"
+                os.getenv("OPENAI_ROUTER_MODEL", "").strip()
+                or deepseek_model
+                or ("deepseek-v4.1-flash" if opencode_go_key else "deepseek-flash")
             ),
             openai_writer_model=(
                 os.getenv("ANALYST_WRITER_MODEL", "").strip()
                 or os.getenv("OPENAI_WRITER_MODEL", "").strip()
-                or deepseek_model
+                or ("gpt-5.6-luna" if opencode_go_key else deepseek_model)
                 or "deepseek-flash"
             ),
+            validator_model=(
+                os.getenv("VALIDATOR_MODEL", "").strip()
+                or ("deepseek-v4.1-flash" if opencode_go_key else deepseek_model)
+                or "deepseek-flash"
+            ),
+            writer_protocol=os.getenv("ANALYST_WRITER_PROTOCOL", "auto").strip().lower(),
             skill_mode=os.getenv("OGASAWARA_BOT_MODE", "online").strip().lower(),
             retrieval_provider=os.getenv("OGASAWARA_BOT_RETRIEVAL", "local").strip().lower(),
             max_article_fetches=int(os.getenv("OGASAWARA_MAX_ARTICLE_FETCHES", "6")),
@@ -92,6 +109,8 @@ class BotConfig:
             raise ValueError("OGASAWARA_BOT_MODE must be online, offline, or auto")
         if config.retrieval_provider not in {"local", "gdelt", "disabled"}:
             raise ValueError("OGASAWARA_BOT_RETRIEVAL must be local, gdelt, or disabled")
+        if config.writer_protocol not in {"auto", "responses", "chat"}:
+            raise ValueError("ANALYST_WRITER_PROTOCOL must be auto, responses, or chat")
         if not 0 <= config.max_article_fetches <= 12:
             raise ValueError("OGASAWARA_MAX_ARTICLE_FETCHES must be between 0 and 12")
         if require_feishu and (not config.lark_app_id or not config.lark_app_secret):
