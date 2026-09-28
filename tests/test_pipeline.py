@@ -26,6 +26,8 @@ class TestAnalysisPipeline(unittest.TestCase):
             self.assertIn("campaign_state", analysis)
             self.assertIn("as_of", analysis["campaign_state"])
             self.assertIn("knowledge_views", analysis)
+            self.assertIn("assessment", analysis)
+            self.assertEqual(analysis["assessment"]["version"], 1)
             self.assertEqual(
                 analysis["knowledge_views"]["stable_local_baseline"]["includes"],
                 ["historical_baseline", "local_knowledge.stable_local_baseline"],
