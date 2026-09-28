@@ -29,9 +29,9 @@ class ResearchConfig:
     enabled: bool = False
     api_key: str = field(default='', repr=False)
     search_key: str = field(default='', repr=False)
-    model: str = 'deepseek-v4.1-flash'
-    planner_model: str = 'glm-5.3'
-    base_url: str = 'https://opencode.ai/zen/go/v1'
+    model: str = 'deepseek-flash'
+    planner_model: str = ''
+    base_url: str = 'https://api.deepseek.com'
     foreground_seconds: float = 60
     job_seconds: float = 600
     cache_seconds: int = 1800
