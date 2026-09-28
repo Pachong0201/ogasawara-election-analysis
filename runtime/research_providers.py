@@ -30,6 +30,7 @@ class ResearchConfig:
     api_key: str = field(default='', repr=False)
     search_key: str = field(default='', repr=False)
     model: str = 'deepseek-flash'
+    planner_model: str = ''
     base_url: str = 'https://api.deepseek.com'
     foreground_seconds: float = 60
     job_seconds: float = 600
@@ -42,6 +43,15 @@ class ResearchConfig:
     @classmethod
     def from_env(cls):
         deepseek_model = os.getenv('DEEPSEEK_MODEL', '').strip()
+        research_model = (
+            os.getenv('RESEARCH_LLM_MODEL', '').strip()
+            or deepseek_model
+            or 'deepseek-flash'
+        )
+        planner_model = (
+            os.getenv('RESEARCH_PLANNER_MODEL', '').strip()
+            or research_model
+        )
         api_key = (
             os.getenv('DEEPSEEK_API_KEY', '').strip()
             or os.getenv('OPENCODE_GO_API_KEY', '').strip()
@@ -56,8 +66,8 @@ class ResearchConfig:
             enabled=enabled,
             api_key=api_key,
             search_key=search_key,
-            model=(deepseek_model or os.getenv('RESEARCH_LLM_MODEL', '').strip()
-                   or 'deepseek-flash'),
+            model=research_model,
+            planner_model=planner_model,
             base_url=(os.getenv('DEEPSEEK_BASE_URL', '').strip()
                       or os.getenv('RESEARCH_LLM_BASE_URL', '').strip()
                       or 'https://api.deepseek.com').rstrip('/'),
@@ -138,10 +148,12 @@ class GoModel:
     def complete(self, payload, session, timeout=20):
         # Respect the caller's remaining deadline and stay below the 120s lease.
         timeout = max(1, min(105, timeout))
+        model_name = str(payload.get('_model') or self.config.model)
+        user_payload = {key: value for key, value in payload.items() if key != '_model'}
         request_payload = {
-            'model': self.config.model, 'messages': [
+            'model': model_name, 'messages': [
                 {'role': 'system', 'content': SYSTEM},
-                {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)},
+                {'role': 'user', 'content': json.dumps(user_payload, ensure_ascii=False)},
             ], 'temperature': 0.1,
             'response_format': {'type': 'json_object'},
         }
