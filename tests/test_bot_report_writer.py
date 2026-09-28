@@ -36,7 +36,7 @@ class TestDeterministicReportWriter(unittest.IsolatedAsyncioTestCase):
         self.assertIn("高雄市", text)
         self.assertIn("READY", text)
         self.assertIn("7d 3项", text)
-        self.assertIn("DEEPSEEK_API_KEY", text)
+        self.assertIn("大模型 API Key", text)
 
 
     async def test_resolved_campaign_event_is_presented_with_evidence_boundary(self):
