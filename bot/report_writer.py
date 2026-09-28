@@ -433,8 +433,8 @@ class DeterministicReportWriter(BaseReportWriter):
         if unknowns:
             lines.append("资料限制：" + "；".join(str(value) for value in unknowns[:4]))
         lines.append(
-            "说明：当前未配置 DEEPSEEK_API_KEY，因此显示确定性的结构化摘要；"
-            "配置 API 后将由 LLM 基于同一 Analysis Context 生成自然语言研判。"
+            "说明：当前未配置可用的大模型 API Key，因此显示确定性的结构化摘要；"
+            "配置模型 API 后将由 LLM 基于同一 Analysis Context 生成自然语言研判。"
         )
         return "\n\n".join(lines)
 
@@ -492,92 +492,181 @@ class OpenAIReportWriter(BaseReportWriter):
 
 
 class ChatCompletionsReportWriter(BaseReportWriter):
-    """Report writer for OpenAI-compatible chat/completions endpoints."""
+    """Report writer with per-model routing for OpenAI-compatible providers."""
 
-    def __init__(self, api_key: str, model: str, base_url: str, session: str = ""):
+    def __init__(
+        self,
+        api_key: str,
+        model: str,
+        base_url: str,
+        session: str = "",
+        validator_model: str = "",
+        protocol: str = "auto",
+    ):
         self.api_key = api_key
         self.model = model
+        self.validator_model = validator_model or model
         self.base_url = base_url.rstrip("/")
         self.session = session or "ogasawara-writer"
+        self.protocol = _writer_protocol(model, protocol)
 
-    def _write_sync(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
-        import hashlib
-        import urllib.request
-
-        # Stable per-conversation-ish session; deterministic hash keeps
-        # routing/prompt-caching effective across worker restarts.
-        session = (
-            "ogasawara-writer-"
-            + hashlib.md5(self.model.encode("utf-8")).hexdigest()[:16]
-        )
-        payload = _reader_payload(context)
-        mode_hint = {
+    @staticmethod
+    def _mode_hint(request: ParsedRequest) -> str:
+        return {
             FULL_ANALYSIS: "完整分析。以 research_brief 为主要研究底稿，自主选择最有解释力的主线和文章结构；判断前置，串联历史、当前与地方证据，并呈现反证和边界。不要套固定六栏目。控制在约1800—3000字。",
             CAMPAIGN_UPDATE: "重点回答近期发生了什么变化、哪些人物/组织/议题参与其中，以及这些变化可如何解释；同时写明证据边界。控制在约800—1500字。",
             POLL_ANALYSIS: "只重点解释民调方法、可比性、未决定比例及其与结构的关系。",
             SOURCES: "简要说明判断依据，并列出最关键来源。",
         }.get(request.intent, "回答用户追问，优先复用现有 Context，不重复整篇报告。")
 
-        body = json.dumps({
-            "model": self.model,
-            "messages": [
-                {"role": "system", "content": SYSTEM_INSTRUCTIONS},
-                {
-                    "role": "user",
-                    "content": (
-                        f"用户问题：{request.text}\n"
-                        f"任务模式：{mode_hint}\n"
-                        "Research Context(JSON)：\n"
-                        + json.dumps(payload, ensure_ascii=False)
-                    ),
-                },
-            ],
-            "max_tokens": 16000,
-            "temperature": 0.3,
-        }, ensure_ascii=False).encode("utf-8")
+    def _headers(self, session: str) -> Dict[str, str]:
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {self.api_key}",
             "User-Agent": "ogasawara-election-research/0.1",
         }
-        # This legacy header is only valid for OpenCode deployments.
         if "opencode.ai" in self.base_url:
             headers["x-opencode-session"] = session
-        req = urllib.request.Request(
-            self.base_url + "/chat/completions", body, headers
-        )
-        with urllib.request.urlopen(req, timeout=120) as response:
-            data = json.loads(response.read())
-        text = str(
-            (data.get("choices") or [{}])[0].get("message", {}).get("content", "")
-        ).strip()
-        if not text:
-            raise RuntimeError("chat/completions returned empty content")
-        if request.intent in {FULL_ANALYSIS, CAMPAIGN_UPDATE, POLL_ANALYSIS}:
-            validation_body = json.dumps({
-                "model": self.model,
+        return headers
+
+    def _post(self, path: str, payload: Dict[str, Any], headers: Dict[str, str]) -> Dict[str, Any]:
+        import urllib.request
+
+        body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        request = urllib.request.Request(self.base_url + path, body, headers)
+        with urllib.request.urlopen(request, timeout=120) as response:
+            return json.loads(response.read())
+
+    def _call_chat(
+        self,
+        *,
+        model: str,
+        system: str,
+        user: str,
+        headers: Dict[str, str],
+        max_tokens: int,
+        temperature: float,
+    ) -> str:
+        data = self._post(
+            "/chat/completions",
+            {
+                "model": model,
                 "messages": [
-                    {"role": "system", "content": VALIDATION_INSTRUCTIONS},
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+                "max_tokens": max_tokens,
+                "temperature": temperature,
+            },
+            headers,
+        )
+        return str(
+            (data.get("choices") or [{}])[0]
+            .get("message", {})
+            .get("content", "")
+        ).strip()
+
+    def _call_responses(
+        self,
+        *,
+        model: str,
+        system: str,
+        user: str,
+        headers: Dict[str, str],
+        max_tokens: int,
+    ) -> str:
+        data = self._post(
+            "/responses",
+            {
+                "model": model,
+                "store": False,
+                "stream": False,
+                "input": [
+                    {
+                        "role": "system",
+                        "content": [{"type": "input_text", "text": system}],
+                    },
                     {
                         "role": "user",
-                        "content": (
-                            "初稿：\n" + text + "\n\n证据上下文(JSON)：\n"
-                            + json.dumps(_validation_context(payload), ensure_ascii=False)
-                        ),
+                        "content": [{"type": "input_text", "text": user}],
                     },
                 ],
-                "max_tokens": 3000,
-                "temperature": 0.0,
-            }, ensure_ascii=False).encode("utf-8")
-            validation_req = urllib.request.Request(
-                self.base_url + "/chat/completions", validation_body, headers
+                "max_output_tokens": max_tokens,
+            },
+            headers,
+        )
+        return _responses_text(data)
+
+    def _call_model(
+        self,
+        *,
+        model: str,
+        protocol: str,
+        system: str,
+        user: str,
+        headers: Dict[str, str],
+        max_tokens: int,
+        temperature: float = 0.0,
+    ) -> str:
+        if protocol == "responses":
+            return self._call_responses(
+                model=model,
+                system=system,
+                user=user,
+                headers=headers,
+                max_tokens=max_tokens,
             )
-            with urllib.request.urlopen(validation_req, timeout=120) as response:
-                validation_data = json.loads(response.read())
-            raw_validation = str(
-                (validation_data.get("choices") or [{}])[0]
-                .get("message", {}).get("content", "")
-            ).strip()
+        return self._call_chat(
+            model=model,
+            system=system,
+            user=user,
+            headers=headers,
+            max_tokens=max_tokens,
+            temperature=temperature,
+        )
+
+    def _write_sync(self, request: ParsedRequest, context: Dict[str, Any]) -> str:
+        import hashlib
+
+        session = (
+            "ogasawara-writer-"
+            + hashlib.md5(self.model.encode("utf-8")).hexdigest()[:16]
+        )
+        headers = self._headers(session)
+        payload = _reader_payload(context)
+        user_prompt = (
+            f"用户问题：{request.text}\n"
+            f"任务模式：{self._mode_hint(request)}\n"
+            "Research Context(JSON)：\n"
+            + json.dumps(payload, ensure_ascii=False)
+        )
+        text = self._call_model(
+            model=self.model,
+            protocol=self.protocol,
+            system=SYSTEM_INSTRUCTIONS,
+            user=user_prompt,
+            headers=headers,
+            max_tokens=16000,
+            temperature=0.3,
+        )
+        if not text:
+            raise RuntimeError(f"{self.protocol} writer returned empty content")
+
+        if request.intent in {FULL_ANALYSIS, CAMPAIGN_UPDATE, POLL_ANALYSIS}:
+            validator_protocol = _writer_protocol(self.validator_model, "auto")
+            validation_prompt = (
+                "初稿：\n" + text + "\n\n证据上下文(JSON)：\n"
+                + json.dumps(_validation_context(payload), ensure_ascii=False)
+            )
+            raw_validation = self._call_model(
+                model=self.validator_model,
+                protocol=validator_protocol,
+                system=VALIDATION_INSTRUCTIONS,
+                user=validation_prompt,
+                headers=headers,
+                max_tokens=3000,
+                temperature=0.0,
+            )
             text = _apply_validation_issues(text, raw_validation)
         return text
 
@@ -591,10 +680,16 @@ def build_report_writer(
     api_key: str = "",
     model: str = "deepseek-flash",
     base_url: str = "",
+    validator_model: str = "",
+    protocol: str = "auto",
 ) -> BaseReportWriter:
     if api_key and base_url:
         return ChatCompletionsReportWriter(
-            api_key=api_key, model=model, base_url=base_url
+            api_key=api_key,
+            model=model,
+            base_url=base_url,
+            validator_model=validator_model,
+            protocol=protocol,
         )
     if api_key:
         return OpenAIReportWriter(api_key=api_key, model=model)
