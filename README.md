@@ -8,9 +8,9 @@
 
 分析路径固定为：
 
-`历史基准 → 当前候选人格局 → Campaign State Snapshot(as_of) → 最近30／14／7日变化 → 历史／当前双触发地方知识检索 → 同源民调校准 → 当前竞争结构`
+`历史基准 → 当前候选人格局 → Campaign State Snapshot(as_of) → 本地新闻库 → 实时 Web Search 与正文读取 → Evidence Pack → Election Assessment → 历史／地方结构解释 → 同源民调校准 → 分析报告`
 
-自动研究已支持 **OpenCode Go / GLM-5.3 Flash + Tavily Web Search**：研究问题可自动执行搜索、读取正文、补搜、校验引用并回存本地证据库。飞书摘要展示执行状态与来源；显式历史回看和离线模式不触发 API。默认关闭，配置两项密钥并启用后生效，详见 [自动研究部署与证据边界](docs/automatic-research.md)。
+自动研究已支持 **OpenCode Go / GLM-5.3 Flash + Tavily Web Search**：在线模式下，只要模型与搜索密钥均已配置，`OGASAWARA_AUTO_RESEARCH=auto` 会自动启用实时研究；显式设为 `false` 才关闭。研究链会执行搜索、正文读取、来源多样化证据选择、补搜和逐字引用校验，并形成 bounded Evidence Pack。其后由 `ElectionAssessmentBuilder` 将当前事件、人物/组织互动、地方议题、空间信号、历史异常、民调与不确定性组织为结构化 Assessment，再交给报告写作层。显式历史回看和离线模式不触发 API。详见 [自动研究部署与证据边界](docs/automatic-research.md)。
 
 禁止把“最新民调 → 直接判断当前选情”当作主要路径，也禁止只用历史票型解释本轮选战而忽略最新变化。
 
@@ -96,6 +96,7 @@ ogasawara-election-analysis/
 │  ├─ host_retrieval.py  # 宿主Web检索JSON/JSONL桥
 │  ├─ freshness.py
 │  ├─ analysis_context.py
+│  ├─ election_assessment.py # Evidence → Assessment 中间分析层
 │  ├─ pipeline.py
 │  └─ cli.py
 ├─ data/                # 稳定历史选举事实与行政区版本
