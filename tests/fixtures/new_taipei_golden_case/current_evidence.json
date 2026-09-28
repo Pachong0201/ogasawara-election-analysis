@@ -1,0 +1,25 @@
+{
+  "events": [
+    {"event_id":"visit-1","date":"2026-09-10","event_type":"campaign_org","relation_type":"single_visit","verification_status":"single_source_media","candidate_entities":["候選人甲"],"organizations":["地方組織甲"],"locations":["甲區"],"source_urls":["https://example.test/visit"]},
+    {"event_id":"hq-1","date":"2026-09-18","event_type":"campaign_headquarters","relation_type":"joint_headquarters","verification_status":"corroborated_media","candidate_entities":["候選人乙"],"organizations":["地方組織乙"],"locations":["乙區"],"source_urls":["https://example.test/hq-a","https://example.test/hq-b"]},
+    {"event_id":"third-1","date":"2026-09-20","event_type":"party_cooperation","relation_type":"party_cooperation","verification_status":"requires_review","candidate_entities":["候選人甲"],"organizations":["第三政黨"],"locations":["甲區"],"source_urls":["https://example.test/cooperation"]},
+    {"event_id":"issue-1","date":"2026-09-22","event_type":"major_issue","verification_status":"corroborated_media","candidate_entities":["候選人甲","候選人乙"],"locations":["甲區"],"summary":"交通議題出現不同公開主張。","source_urls":["https://example.test/issue-a","https://example.test/issue-b"]}
+  ],
+  "polls": [
+    {"poll_id":"poll-a","pollster":"甲機構","method":"telephone_landline","field_end":"2026-09-20","moe":3.0,"moe_applicable":true,"freshness_status":"fresh","results":{"候選人甲":0.40,"候選人乙":0.42}},
+    {"poll_id":"poll-b","pollster":"乙機構","method":"online_closed","field_end":"2026-09-21","moe_applicable":false,"freshness_status":"fresh","results":{"候選人甲":0.44,"候選人乙":0.38}}
+  ],
+  "local_knowledge": {
+    "relationships":[
+      {"relationship_id":"rel-1","relationship_type":"organization_membership","subject":"地方人士甲","object":"地方組織甲","region":"甲區","current_status":"active_verified","source_grade":"A","independent_source_count":1},
+      {"relationship_id":"rel-2","relationship_type":"public_endorsement","subject":"地方人士乙","object":"候選人乙","region":"乙區","current_status":"active_verified","source_grade":"C","independent_source_count":2}
+    ],
+    "issues":[{"issue_id":"traffic-1","region":"甲區","title":"交通建設","verification_status":"verified"}]
+  },
+  "research_result": {
+    "status":"completed","round_name":"assessment_follow_up","search_count":1,"body_count":2,
+    "findings":[{"question":"甲區地方組織甲與候選人甲在近30日是否有重複協調？","statement":"現有正文僅確認一次共同活動，未確認重複協調。","verification_status":"body_grounded_unverified","citations":[{"url":"https://example.test/followup","source_grade":"C","publisher_id":"fixture","independence_key":"fixture"}]}],
+    "unresolved":["第三政黨支持者偏好與實際票流仍未知"],
+    "evidence_pack":[{"url":"https://example.test/followup","title":"定向補查資料","source_grade":"C","publisher_id":"fixture","independence_key":"fixture","content":"正文只確認一次共同活動，無法據此確認基層動員或實際票流。"}]
+  }
+}

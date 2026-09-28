@@ -29,3 +29,6 @@ cache/**/*.log
 
 # SQLite WAL sidecars are runtime data too.
 cache/**/*.sqlite3-*
+
+# Windows download metadata is never project content.
+*:Zone.Identifier
