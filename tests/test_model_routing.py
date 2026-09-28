@@ -14,7 +14,7 @@ def test_opencode_go_defaults_split_model_roles(monkeypatch, tmp_path):
     monkeypatch.setenv("OGASAWARA_REPO_ROOT", str(tmp_path))
     monkeypatch.setenv("OPENCODE_GO_API_KEY", "go-test-key")
     monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
-    monkeypatch.delenv("DEEPSEEK_MODEL", raising=False)
+    monkeypatch.setenv("DEEPSEEK_MODEL", "legacy-deepseek-model")
     monkeypatch.delenv("ANALYST_WRITER_MODEL", raising=False)
     monkeypatch.delenv("VALIDATOR_MODEL", raising=False)
     monkeypatch.delenv("RESEARCH_LLM_MODEL", raising=False)
@@ -93,7 +93,7 @@ def test_routed_writer_calls_expected_paths_without_network():
     calls = []
 
     def fake_post(path, payload, headers):
-        calls.append((path, payload["model"]))
+        calls.append((path, payload["model"], payload))
         if path == "/responses":
             return {
                 "output": [{
@@ -124,7 +124,7 @@ def test_routed_writer_calls_expected_paths_without_network():
 
     assert answer == "writer-output"
     assert json.loads(review) == {"issues": []}
-    assert calls == [
-        ("/responses", "gpt-5.6-luna"),
-        ("/chat/completions", "deepseek-v4.1-flash"),
-    ]
+    assert calls[0][0:2] == ("/responses", "gpt-5.6-luna")
+    assert calls[0][2]["instructions"] == "system"
+    assert calls[0][2]["input"][0]["role"] == "user"
+    assert calls[1][0:2] == ("/chat/completions", "deepseek-v4.1-flash")
