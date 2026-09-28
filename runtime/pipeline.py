@@ -19,6 +19,7 @@ from .campaign_events import CampaignEventLoader
 from .campaign_state import CampaignStateBuilder, campaign_research_questions
 from .data_readiness import DataReadinessGate
 from .election_loader import ElectionLoader, election_file_path
+from .election_assessment import ElectionAssessmentBuilder
 from .freshness import evaluate_records
 from .knowledge_loader import KnowledgeLoader
 from .event_importance import event_importance_signals
@@ -65,6 +66,7 @@ class AnalysisPipeline:
             mode=mode,
         )
         self.context_builder = AnalysisContextBuilder(self.repo_root, skill_version="1.4.0")
+        self.assessment_builder = ElectionAssessmentBuilder()
         self.campaign_event_loader = CampaignEventLoader(self.repo_root)
         self.runtime_config = self._load_runtime_config()
         policy_path = self.repo_root / self.runtime_config.get("campaign_state", {}).get("policy_file", "config/campaign_state.yaml")
@@ -492,6 +494,21 @@ class AnalysisPipeline:
                     research_urls.append(citation['url'])
                     sources.append({'source_id': citation.get('publisher_id'),
                                     'source_grade': citation.get('source_grade'), 'reference': citation['url']})
+
+        research_result = _research_result or {
+            'status': 'historical_replay' if coordinator and not live_request else 'disabled'
+        }
+        assessment = self.assessment_builder.build(
+            campaign_state=campaign_state,
+            current_events=events,
+            campaign_event_resolution=campaign_event_resolution,
+            metrics=metrics,
+            polls=polls,
+            research_result=research_result,
+            unknowns=unknowns,
+            warnings=warnings,
+        )
+
         context = self.context_builder.build(
             task=task,
             readiness=readiness,
@@ -521,13 +538,14 @@ class AnalysisPipeline:
                 "event_importance_signal_count": len(importance_signals),
                 "campaign_retrieval_lead_count": len(campaign_leads),
                 "retrieval": retrieval_metadata,
-                "automatic_research": _research_result or {'status': 'historical_replay' if coordinator and not live_request else 'disabled'},
+                "automatic_research": research_result,
                 "local_knowledge_sufficient": bool(local_knowledge.get("sufficient")),
                 "poll_freshness": poll_freshness,
                 "current_poll_calibration_available": int(campaign_state.get("fresh_verified_poll_count", 0)) > 0,
                 "fresh_poll_count": int(campaign_state.get("fresh_verified_poll_count", 0)),
                 "stale_poll_count": int(poll_freshness.get("stale", 0)),
             },
+            assessment=assessment,
             unknowns=unknowns,
             warnings=warnings,
             sources=sources,
