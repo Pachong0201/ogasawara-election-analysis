@@ -24,6 +24,8 @@ from .host_retrieval import HostRetrievalBackend
 from .knowledge_builder import KnowledgePromotionBuilder
 from .models import ElectionTask
 from .pipeline import AnalysisPipeline
+from .report_validator import ReportValidator
+from .report_writer import OpenAICompatibleBackend, ReportWriter, build_report_brief
 
 
 def _task_from_args(args: argparse.Namespace) -> ElectionTask:
@@ -152,6 +154,63 @@ def _cmd_run(args: argparse.Namespace) -> int:
 
 
 
+def _cmd_report(args: argparse.Namespace) -> int:
+    task = _task_from_args(args)
+    repo_root = Path(args.repo_root).resolve() if args.repo_root else None
+    retrieval_backend = None
+    if getattr(args, "retrieval_inbox", ""):
+        retrieval_backend = HostRetrievalBackend(inbox_path=Path(args.retrieval_inbox).resolve())
+    pipeline = AnalysisPipeline(repo_root=repo_root, mode=args.mode, retrieval_backend=retrieval_backend)
+    context = pipeline.run(task, allow_online=args.mode != "offline")
+    brief = build_report_brief(context)
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    brief_path = out.with_suffix(".brief.json")
+    brief_path.write_text(json.dumps(brief, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    backend = None
+    if args.backend == "openai":
+        backend = OpenAICompatibleBackend(model=args.model or None)
+    writer = ReportWriter(backend=backend, repo_root=repo_root, max_rounds=args.max_rounds or None)
+    messages = writer.build_messages(brief, language=args.language)
+    prompt_path = out.with_suffix(".prompt.md")
+    prompt_path.write_text(
+        "# SYSTEM\n\n" + messages["system"] + "\n\n# USER\n\n" + messages["user"], encoding="utf-8"
+    )
+    summary: Dict[str, Any] = {
+        "status": brief.get("readiness_status"),
+        "as_of": brief.get("as_of"),
+        "finding_count": len(brief.get("findings", [])),
+        "brief": str(brief_path),
+        "prompt": str(prompt_path),
+    }
+    if backend is None:
+        summary["next_step"] = (
+            "host agent: write the report from the prompt file, save it to --out, then run "
+            f"`python -m runtime.cli validate-report --report {out} --brief {brief_path}`"
+        )
+        print(json.dumps(summary, ensure_ascii=False, indent=2))
+        return 0
+    result = writer.write(brief, language=args.language)
+    out.write_text(result.report, encoding="utf-8")
+    validation_path = out.with_suffix(".validation.json")
+    validation_path.write_text(
+        json.dumps({"rounds": result.rounds, "history": result.history, **result.validation.to_dict()}, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    summary.update({"report": str(out), "validation": str(validation_path), "passed": result.validation.passed, "rounds": result.rounds})
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
+    return 0 if result.validation.passed else 2
+
+
+def _cmd_validate_report(args: argparse.Namespace) -> int:
+    brief = json.loads(Path(args.brief).read_text(encoding="utf-8"))
+    report = Path(args.report).read_text(encoding="utf-8")
+    result = ReportValidator().validate(report, brief)
+    print(json.dumps(result.to_dict(), ensure_ascii=False, indent=2))
+    return 0 if result.passed else 2
+
+
 def _cmd_knowledge_ingest(args: argparse.Namespace) -> int:
     builder = KnowledgePromotionBuilder(
         Path(args.repo_root).resolve() if args.repo_root else None
@@ -257,6 +316,31 @@ def build_parser() -> argparse.ArgumentParser:
         help="JSON/JSONL host-web retrieval inbox for local-knowledge research questions",
     )
     run.set_defaults(func=_cmd_run)
+
+    report = sub.add_parser("report", help="run the pipeline and write/validate a findings-based report")
+    report.add_argument("--county", required=True)
+    report.add_argument("--year", required=True, type=int)
+    report.add_argument("--type", required=True)
+    report.add_argument("--level", default="township_district")
+    report.add_argument("--candidates", default="")
+    report.add_argument("--mode", choices=["auto", "online", "offline"], default="auto")
+    report.add_argument("--retrieval-inbox", default="")
+    report.add_argument("--out", required=True, help="Markdown report path; brief/prompt/validation are written beside it")
+    report.add_argument("--language", choices=["zh-CN", "zh-TW"], default="zh-CN")
+    report.add_argument(
+        "--backend",
+        choices=["none", "openai"],
+        default="none",
+        help="none: only write brief + prompt for the host agent; openai: call an OpenAI-compatible API",
+    )
+    report.add_argument("--model", default="")
+    report.add_argument("--max-rounds", type=int, default=0)
+    report.set_defaults(func=_cmd_report)
+
+    validate = sub.add_parser("validate-report", help="validate a written report against its brief")
+    validate.add_argument("--report", required=True)
+    validate.add_argument("--brief", required=True)
+    validate.set_defaults(func=_cmd_validate_report)
 
     ingest = sub.add_parser(
         "knowledge-ingest",
