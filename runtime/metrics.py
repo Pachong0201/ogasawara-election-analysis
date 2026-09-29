@@ -9,7 +9,7 @@ from __future__ import annotations
 import math
 import statistics
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Dict, Iterable, List, Optional
 
 import yaml
 
@@ -59,10 +59,15 @@ def electoral_swing(
     region: str = "",
     baseline_method: str = "previous_same_type_election",
     thresholds: Optional[Dict[str, float]] = None,
+    screen: bool = True,
 ) -> MetricResult:
+    """Raw swing. With ``screen=False`` it is descriptive only; use ``local_swing`` to trigger research."""
     thresholds = thresholds or _load_thresholds()
     residual = float(vote_share_t) - float(vote_share_previous)
-    status = _threshold_status_pp(residual, thresholds.get("swing_gap_observe"), thresholds.get("swing_gap_strong_trigger"))
+    if screen:
+        status = _threshold_status_pp(residual, thresholds.get("swing_gap_observe"), thresholds.get("swing_gap_strong_trigger"))
+    else:
+        status = "descriptive"
     return MetricResult(
         metric="electoral_swing",
         region=region,
@@ -153,8 +158,14 @@ def spatial_variance(
     method: str = "standard_deviation",
     region: str = "",
     thresholds: Optional[Dict[str, float]] = None,
+    weights: Optional[Iterable[float]] = None,
 ) -> MetricResult:
-    values = [float(value) for value in vote_shares if value is not None]
+    raw_values = list(vote_shares)
+    raw_weights = list(weights) if weights is not None else [1.0] * len(raw_values)
+    if len(raw_weights) != len(raw_values):
+        raise ValueError("weights must have the same length as vote_shares")
+    pairs = [(float(v), float(w)) for v, w in zip(raw_values, raw_weights) if v is not None and w is not None and float(w) > 0]
+    values = [value for value, _ in pairs]
     if not values:
         return MetricResult(
             metric="spatial_variance",
@@ -164,8 +175,13 @@ def spatial_variance(
         )
     thresholds = thresholds or _load_thresholds()
     warnings: List[str] = []
-    mean = statistics.fmean(values)
-    sd = statistics.pstdev(values) if len(values) > 1 else 0.0
+    total_weight = sum(weight for _, weight in pairs)
+    mean = sum(value * weight for value, weight in pairs) / total_weight
+    sd = (
+        math.sqrt(sum(weight * (value - mean) ** 2 for value, weight in pairs) / total_weight)
+        if len(values) > 1
+        else 0.0
+    )
     sorted_values = sorted(values)
     if len(sorted_values) >= 4:
         q1, _, q3 = statistics.quantiles(sorted_values, n=4, method="inclusive")
@@ -203,7 +219,40 @@ def spatial_variance(
         local_explanation_required=_local_explanation(status),
         metric_method=metric_method,
         warnings=warnings,
-        details={"sd": _round(sd), "cv": _round(None if mean == 0 else sd / mean), "iqr": _round(iqr), "mean": _round(mean)},
+        details={
+            "sd": _round(sd),
+            "cv": _round(None if mean == 0 else sd / mean),
+            "iqr": _round(iqr),
+            "mean": _round(mean),
+            "weighted": weights is not None,
+        },
+    )
+
+
+def turnout_change(
+    turnout_change_region: float,
+    turnout_change_reference: float,
+    region: str = "",
+    baseline_method: str = "county_turnout_change",
+    thresholds: Optional[Dict[str, float]] = None,
+) -> MetricResult:
+    """Regional turnout change relative to the county-wide turnout change."""
+    thresholds = thresholds or _load_thresholds()
+    residual = float(turnout_change_region) - float(turnout_change_reference)
+    status = _threshold_status_pp(
+        residual,
+        thresholds.get("turnout_gap_observe", 5.0),
+        thresholds.get("turnout_gap_strong_trigger", 8.0),
+    )
+    return MetricResult(
+        metric="turnout_change",
+        region=region,
+        observed_value=_round(turnout_change_region),
+        baseline_value=_round(turnout_change_reference),
+        residual=_round(residual),
+        baseline_method=baseline_method,
+        threshold_status=status,
+        local_explanation_required=_local_explanation(status),
     )
 
 

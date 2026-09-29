@@ -110,6 +110,39 @@ banned_expressions:
   - 某族群都支持某候选人
   - 某年龄层都支持某候选人
 
+# Machine-checkable forms of the banned expressions, applied by
+# runtime/report_validator.py to every generated report.
+banned_patterns:
+  - pattern: "基本盘(就是|为|是)\\s*\\d"
+    reason: 把历史区间写成固定基本盘数字
+  - pattern: "基本盤(就是|為|是)\\s*\\d"
+    reason: 把历史区间写成固定基本盘数字
+  - pattern: "个人票|個人票"
+    reason: 统计残差不等于个人票
+  - pattern: "(蓝白|藍白)(合作|合流|相加|加起来|加起來)"
+    reason: 不得机械相加蓝白票
+  - pattern: "一定(当选|當選|胜选|勝選)|稳赢|穩贏|必胜|必勝"
+    reason: 禁止胜负预测
+  - pattern: "胜率|勝率|当选概率|當選機率|当选机率|胜负概率|勝負機率"
+    reason: 禁止胜率与概率
+  - pattern: "综合评分|綜合評分|候选人排名|候選人排名"
+    reason: 禁止评分与排名
+  - pattern: "买票|買票|做票"
+    reason: 不得依票型推断违法行为
+  - pattern: "(族群|年龄层|年齡層|客家人|外省人|原住民)都(支持|投给|投給)"
+    reason: 不得将群体整体归属某候选人
+  - pattern: "一方面[^。]{0,40}另一方面"
+    reason: 套句
+  - pattern: "值得注意的是|不难看出|不難看出|众所周知|眾所周知|综上所述|綜上所述"
+    reason: 空洞套话
+
+report_contract:
+  citation_format: "[F-001] 引用 findings；[S-cec-county_mayor-2022] 引用来源"
+  max_core_numbers_per_paragraph: 3
+  percentage_tolerance_pp: 0.15
+  max_rewrite_rounds: 3
+  paragraph_pattern: 判断句 → 核心数字/地名/人名 → 机制或可能解释 → 不确定性边界
+
 quality_checks:
   - 核心判断是否先回答截至 as_of 的当前选战状态，而不是从历史沿革或民调数字开始。
   - 是否明确区分最近7/14/30天变化与长期历史基准。

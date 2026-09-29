@@ -135,6 +135,41 @@ as_of
 - same-series delta 只描述点估计变化，不代表胜负趋势，也不自行宣告统计显著；
 - Snapshot 只存入 `cache/campaign_state/`，属于 L4/L5 动态索引，不是新的知识层。
 
+### 报告生成层（findings → 写作 → 校验）
+
+`runtime.cli run` 只产出分析上下文；要得到可读报告，使用 `report` 命令：
+
+```text
+AnalysisPipeline.run
+→ 指标（LocalSwing / 相对残差 / 加权离散 / 投票率 / 地理集中度）
+→ FindingsBuilder：排序、去噪、可引用的 [F-xxx] 发现 + 3–5 条主线 + 具体研究问题
+→ report brief（精简 JSON，取代十万字符原始上下文）
+→ prompts/report_writer.md + examples/reports/ 范文 + writing_rules.yaml
+→ LLM（宿主 Agent 或 OpenAI 兼容 API）
+→ ReportValidator（as_of、禁用表达、数字核对、引用、过期民调、unknown）
+→ 未通过则带问题清单重写，最多 3 轮
+```
+
+```bash
+# 只生成 brief 与提示词，由宿主 Agent 写作，然后校验
+python -m runtime.cli report --county "宜蘭縣" --year 2026 --type county_mayor --mode online \
+  --out reports/yilan-2026.md
+python -m runtime.cli validate-report --report reports/yilan-2026.md --brief reports/yilan-2026.brief.json
+
+# 直接调用 OpenAI 兼容 API 写作（需设置 REPORT_LLM_API_KEY，可选 REPORT_LLM_BASE_URL / REPORT_LLM_MODEL）
+python -m runtime.cli report --county "宜蘭縣" --year 2026 --type county_mayor --mode online \
+  --backend openai --out reports/yilan-2026.md
+```
+
+指标口径要点：
+
+- 原始 `electoral_swing` 只作描述；只有相对全县加权平均摆动的 `local_swing` 才触发地方研究；
+- 无党籍候选人按“同一人”跨届比较，不再合并成一个虚拟政党；
+- 候选人残差与分裂投票都扣除全县共同落差，用 `relative_residual` 定位真正特殊的乡镇；
+- 有效票低于 `min_valid_votes_for_strong_trigger` 的乡镇最多只到 `observe`；
+- 立委与总统有效票差异超过 15%（如山地原住民乡另有原住民立委选举）时，分裂投票标记为 `not_comparable`；
+- 邻区差异需要 `data/geography/adjacency/<县市>.yaml`，缺失时写入 `unknowns`。
+
 ### V1.3 数据、运行与知识晋升层
 
 ```text

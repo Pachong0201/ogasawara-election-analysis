@@ -19,7 +19,6 @@ import csv
 import hashlib
 import io
 import re
-import shutil
 import ssl
 import urllib.parse
 import urllib.request
@@ -71,6 +70,32 @@ PATH_FAMILIES: Dict[Tuple[str, int], Sequence[str]] = {
         "2022-111年地方公職人員選舉/C1/city",
     ),
 }
+
+ZIP_UTF8_FLAG = 0x800
+
+
+def open_cp950_zip(path: Path) -> zipfile.ZipFile:
+    """Open a ZIP whose non-UTF-8 member names are CP950 on every Python version.
+
+    ``metadata_encoding`` exists only on Python 3.11+. Older interpreters decode
+    such names as CP437, which silently breaks every member-path lookup.
+    """
+    try:
+        return zipfile.ZipFile(path, "r", metadata_encoding="cp950")
+    except TypeError:
+        pass
+    zf = zipfile.ZipFile(path, "r")
+    name_to_info: Dict[str, zipfile.ZipInfo] = {}
+    for info in zf.infolist():
+        if not info.flag_bits & ZIP_UTF8_FLAG:
+            try:
+                info.filename = info.orig_filename.encode("cp437").decode("cp950")
+            except (UnicodeEncodeError, UnicodeDecodeError):
+                pass
+        name_to_info[info.filename] = info
+    zf.NameToInfo = name_to_info
+    return zf
+
 
 ZERO_TOKENS = {"", "0", "00", "000", "0000", "00000"}
 
@@ -231,11 +256,7 @@ class CECArchive:
             if written == 0:
                 raise CECOpenDataError("CEC archive download returned zero bytes")
             try:
-                with zipfile.ZipFile(tmp, "r", metadata_encoding="cp950") as zf:
-                    if zf.testzip() is not None:
-                        raise CECOpenDataError("CEC archive failed ZIP CRC validation")
-            except TypeError:
-                with zipfile.ZipFile(tmp, "r") as zf:
+                with open_cp950_zip(tmp) as zf:
                     if zf.testzip() is not None:
                         raise CECOpenDataError("CEC archive failed ZIP CRC validation")
             except zipfile.BadZipFile as exc:
@@ -249,10 +270,7 @@ class CECArchive:
 
     @staticmethod
     def open(path: Path) -> zipfile.ZipFile:
-        try:
-            return zipfile.ZipFile(path, "r", metadata_encoding="cp950")
-        except TypeError:
-            return zipfile.ZipFile(path, "r")
+        return open_cp950_zip(path)
 
 
 class CECOpenDataAdapter(ElectionDataSource):

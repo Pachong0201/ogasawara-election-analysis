@@ -120,6 +120,8 @@ metrics:
     candidate_residual_strong_trigger: 12.0
     cross_level_gap_observe: 8.0
     cross_level_gap_strong_trigger: 12.0
+    turnout_gap_observe: 5.0
+    turnout_gap_strong_trigger: 8.0
 
     # Method-specific spatial thresholds. SD/IQR values are vote-share decimals;
     # CV is unitless. Do not apply one threshold family to all three metrics.
@@ -137,6 +139,12 @@ metrics:
   spatial_variance_primary_method: standard_deviation
   spatial_variance_low_share_threshold: 0.20
   concentration_top_n: 3
+  # Areas with fewer valid votes are downgraded from strong_trigger to observe:
+  # a small denominator makes percentage-point gaps unstable.
+  min_valid_votes_for_strong_trigger: 5000
+  # Parties/candidates below this county-wide share are excluded from swing,
+  # dispersion and residual screening to avoid noise from minor lists.
+  min_county_share_for_screening: 0.05
 
 
 campaign_state:
